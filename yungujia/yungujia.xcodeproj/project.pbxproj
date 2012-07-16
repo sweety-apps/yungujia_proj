@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3842FB5215B4483000DA889E /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3842FB5115B4483000DA889E /* LoginViewController.xib */; };
+		3842FB5415B44C3000DA889E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3842FB5315B44C3000DA889E /* Localizable.strings */; };
 		BE85B50015B3293E0010E0F5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE85B4FF15B3293E0010E0F5 /* UIKit.framework */; };
 		BE85B50215B3293E0010E0F5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE85B50115B3293E0010E0F5 /* Foundation.framework */; };
 		BE85B50415B3293E0010E0F5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE85B50315B3293E0010E0F5 /* CoreGraphics.framework */; };
@@ -16,7 +18,7 @@
 		BE85B52F15B330140010E0F5 /* README in Resources */ = {isa = PBXBuildFile; fileRef = BE85B52C15B330140010E0F5 /* README */; };
 		BE85B53215B330F80010E0F5 /* BaseDBOperator.m in Sources */ = {isa = PBXBuildFile; fileRef = BE85B53115B330F80010E0F5 /* BaseDBOperator.m */; };
 		BE85B53515B3311D0010E0F5 /* DataParser.m in Sources */ = {isa = PBXBuildFile; fileRef = BE85B53415B3311D0010E0F5 /* DataParser.m */; };
-		BE85B53815B3313E0010E0F5 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE85B53715B3313E0010E0F5 /* LoginView.m */; };
+		BE85B53815B3313E0010E0F5 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE85B53715B3313E0010E0F5 /* LoginViewController.m */; };
 		BE85B53B15B331590010E0F5 /* BaseHTTPRequester.m in Sources */ = {isa = PBXBuildFile; fileRef = BE85B53A15B331590010E0F5 /* BaseHTTPRequester.m */; };
 		BE85B53E15B332760010E0F5 /* 手机云估价Demo.pdf in Resources */ = {isa = PBXBuildFile; fileRef = BE85B53D15B332760010E0F5 /* 手机云估价Demo.pdf */; };
 		BE85B54715B3373A0010E0F5 /* SwichTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE85B54515B3373A0010E0F5 /* SwichTabBarViewController.m */; };
@@ -32,6 +34,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3842FB5115B4483000DA889E /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		3842FB5315B44C3000DA889E /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		BE85B4FB15B3293E0010E0F5 /* yungujia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = yungujia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE85B4FF15B3293E0010E0F5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BE85B50115B3293E0010E0F5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -47,8 +51,8 @@
 		BE85B53115B330F80010E0F5 /* BaseDBOperator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseDBOperator.m; sourceTree = "<group>"; };
 		BE85B53315B3311D0010E0F5 /* DataParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataParser.h; sourceTree = "<group>"; };
 		BE85B53415B3311D0010E0F5 /* DataParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataParser.m; sourceTree = "<group>"; };
-		BE85B53615B3313E0010E0F5 /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginView.h; sourceTree = "<group>"; };
-		BE85B53715B3313E0010E0F5 /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginView.m; sourceTree = "<group>"; };
+		BE85B53615B3313E0010E0F5 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		BE85B53715B3313E0010E0F5 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		BE85B53915B331590010E0F5 /* BaseHTTPRequester.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseHTTPRequester.h; sourceTree = "<group>"; };
 		BE85B53A15B331590010E0F5 /* BaseHTTPRequester.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseHTTPRequester.m; sourceTree = "<group>"; };
 		BE85B53D15B332760010E0F5 /* 手机云估价Demo.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "手机云估价Demo.pdf"; sourceTree = "<group>"; };
@@ -167,8 +171,9 @@
 		BE85B52E15B330140010E0F5 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				BE85B53615B3313E0010E0F5 /* LoginView.h */,
-				BE85B53715B3313E0010E0F5 /* LoginView.m */,
+				BE85B53615B3313E0010E0F5 /* LoginViewController.h */,
+				BE85B53715B3313E0010E0F5 /* LoginViewController.m */,
+				3842FB5115B4483000DA889E /* LoginViewController.xib */,
 				BE85B54415B3373A0010E0F5 /* SwichTabBarViewController.h */,
 				BE85B54515B3373A0010E0F5 /* SwichTabBarViewController.m */,
 				BE85B54615B3373A0010E0F5 /* SwichTabBarViewController.xib */,
@@ -184,6 +189,7 @@
 				BE85B55D15B33BE50010E0F5 /* GuJiaShiViewController.h */,
 				BE85B55E15B33BE50010E0F5 /* GuJiaShiViewController.m */,
 				BE85B55F15B33BE50010E0F5 /* GuJiaShiViewController.xib */,
+				3842FB5315B44C3000DA889E /* Localizable.strings */,
 			);
 			path = UI;
 			sourceTree = SOURCE_ROOT;
@@ -254,6 +260,8 @@
 				BE85B55215B3378C0010E0F5 /* GuanZhuViewController.xib in Resources */,
 				BE85B55C15B337B60010E0F5 /* GengDuoViewController.xib in Resources */,
 				BE85B56115B33BE50010E0F5 /* GuJiaShiViewController.xib in Resources */,
+				3842FB5215B4483000DA889E /* LoginViewController.xib in Resources */,
+				3842FB5415B44C3000DA889E /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,7 +276,7 @@
 				BE85B51015B3293E0010E0F5 /* AppDelegate.m in Sources */,
 				BE85B53215B330F80010E0F5 /* BaseDBOperator.m in Sources */,
 				BE85B53515B3311D0010E0F5 /* DataParser.m in Sources */,
-				BE85B53815B3313E0010E0F5 /* LoginView.m in Sources */,
+				BE85B53815B3313E0010E0F5 /* LoginViewController.m in Sources */,
 				BE85B53B15B331590010E0F5 /* BaseHTTPRequester.m in Sources */,
 				BE85B54715B3373A0010E0F5 /* SwichTabBarViewController.m in Sources */,
 				BE85B54C15B3375E0010E0F5 /* XunJiaViewController.m in Sources */,

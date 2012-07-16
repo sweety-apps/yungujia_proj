@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LoginView : UIView
+@interface LoginViewController : UIViewController
+{
+    
+}
 
+@property (nonatomic,retain) IBOutlet UITextField* inputusername;
+@property (nonatomic,retain) IBOutlet UITextField* inputpassword;
+-(IBAction)actionNormalLogin:(id)sender;
 @end

@@ -5,3 +5,9 @@
   Created by 波 徐 on 12-7-16.
   Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
 */
+"str_logining" = "登录中";
+"str_input_password"			= "请输入密码";
+"str_empty_username_info" = "请输入账号";
+"str_back"						= "返回";
+"str_remind_msg_title" = "提示";
+"str_ok" = "确定";

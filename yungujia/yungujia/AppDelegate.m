@@ -11,12 +11,13 @@
 @implementation AppDelegate
 
 @synthesize window = _window;
-@synthesize tabBarController = _tabBarController;
-
+@synthesize rootTabBarController;
+@synthesize loginViewController;
 - (void)dealloc
 {
     [_window release];
-    [_tabBarController release];
+    [rootTabBarController release];
+    [loginViewController release];
     [super dealloc];
 }
 
@@ -24,13 +25,7 @@
 {
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
-    UIViewController *viewController1 = [[[XunJiaViewController alloc] initWithNibName:@"XunJiaViewController" bundle:nil] autorelease];
-    UIViewController *viewController2 = [[[GuanZhuViewController alloc] initWithNibName:@"GuanZhuViewController" bundle:nil] autorelease];
-    UIViewController *viewController3 = [[[GuJiaShiViewController alloc] initWithNibName:@"GuJiaShiViewController" bundle:nil] autorelease];
-    UIViewController *viewController4 = [[[GengDuoViewController alloc] initWithNibName:@"GengDuoViewController" bundle:nil] autorelease];
-    self.tabBarController = [[[SwichTabBarViewController alloc] initWithNibName:@"SwichTabBarViewController" bundle:nil] autorelease];
-    self.tabBarController.viewControllers = [NSArray arrayWithObjects:viewController1, viewController2,viewController3, viewController4, nil];
-    self.window.rootViewController = self.tabBarController;
+    [self ShowLoginView];
     [self.window makeKeyAndVisible];
     
     NSLog(@"I TMD test 1 xia!\n");
@@ -78,5 +73,52 @@
 {
 }
 */
+
+-(void)ShowMainView:(NSString*)nickname weiboaccount:(NSString*)account
+{	
+	if(loginViewController!=nil)
+	{
+		//[loginViewController endTimer];
+		[loginViewController.view removeFromSuperview];
+		self.loginViewController =nil;
+	}
+    if(rootTabBarController==nil)
+	{
+        UIViewController *viewController1 = [[[XunJiaViewController alloc] initWithNibName:@"XunJiaViewController" bundle:nil] autorelease];
+        UIViewController *viewController2 = [[[GuanZhuViewController alloc] initWithNibName:@"GuanZhuViewController" bundle:nil] autorelease];
+        UIViewController *viewController3 = [[[GuJiaShiViewController alloc] initWithNibName:@"GuJiaShiViewController" bundle:nil] autorelease];
+        UIViewController *viewController4 = [[[GengDuoViewController alloc] initWithNibName:@"GengDuoViewController" bundle:nil] autorelease];
+        
+        self.rootTabBarController = [[[SwichTabBarViewController alloc] initWithNibName:@"SwichTabBarViewController" bundle:nil] autorelease];
+        self.rootTabBarController.viewControllers = [NSArray arrayWithObjects:viewController1, viewController2,viewController3, viewController4, nil];
+	}
+
+    
+    [UIView beginAnimations:@"transToMain" context:nil];
+    [UIView setAnimationDuration:0.75f];
+    [UIView setAnimationDelegate:self];
+    [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp
+                           forView:self.window 
+                             cache:YES];
+    
+	[self.window addSubview:rootTabBarController.view];
+    
+    [UIView commitAnimations];
+}
+
+-(void)ShowLoginView
+{
+    if(rootTabBarController!=nil)
+	{
+		[rootTabBarController.view removeFromSuperview];
+		self.rootTabBarController =nil;
+	}
+	//创建新的并显示 
+	if(loginViewController==nil)
+	{
+        loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+	}
+	[self.window addSubview:loginViewController.view];
+}
 
 @end

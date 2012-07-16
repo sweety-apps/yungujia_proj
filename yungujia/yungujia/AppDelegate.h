@@ -8,11 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "SwichTabBarViewController.h"
+#import "LoginViewController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate>
-
+{
+    LoginViewController* loginviewcontroller;
+    SwichTabBarViewController* rootTabBarController;
+}
 @property (strong, nonatomic) UIWindow *window;
-
-@property (strong, nonatomic) UITabBarController *tabBarController;
-
+@property (nonatomic, retain) IBOutlet SwichTabBarViewController* rootTabBarController;
+@property (nonatomic, retain) IBOutlet LoginViewController *loginViewController;
+-(void)ShowMainView:(NSString*)nickname weiboaccount:(NSString*)account;
+-(void)ShowLoginView;
 @end
