@@ -1,0 +1,392 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BE85B50015B3293E0010E0F5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE85B4FF15B3293E0010E0F5 /* UIKit.framework */; };
+		BE85B50215B3293E0010E0F5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE85B50115B3293E0010E0F5 /* Foundation.framework */; };
+		BE85B50415B3293E0010E0F5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE85B50315B3293E0010E0F5 /* CoreGraphics.framework */; };
+		BE85B50A15B3293E0010E0F5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BE85B50815B3293E0010E0F5 /* InfoPlist.strings */; };
+		BE85B50C15B3293E0010E0F5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BE85B50B15B3293E0010E0F5 /* main.m */; };
+		BE85B51015B3293E0010E0F5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BE85B50F15B3293E0010E0F5 /* AppDelegate.m */; };
+		BE85B52F15B330140010E0F5 /* README in Resources */ = {isa = PBXBuildFile; fileRef = BE85B52C15B330140010E0F5 /* README */; };
+		BE85B53215B330F80010E0F5 /* BaseDBOperator.m in Sources */ = {isa = PBXBuildFile; fileRef = BE85B53115B330F80010E0F5 /* BaseDBOperator.m */; };
+		BE85B53515B3311D0010E0F5 /* DataParser.m in Sources */ = {isa = PBXBuildFile; fileRef = BE85B53415B3311D0010E0F5 /* DataParser.m */; };
+		BE85B53815B3313E0010E0F5 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE85B53715B3313E0010E0F5 /* LoginView.m */; };
+		BE85B53B15B331590010E0F5 /* BaseHTTPRequester.m in Sources */ = {isa = PBXBuildFile; fileRef = BE85B53A15B331590010E0F5 /* BaseHTTPRequester.m */; };
+		BE85B53E15B332760010E0F5 /* 手机云估价Demo.pdf in Resources */ = {isa = PBXBuildFile; fileRef = BE85B53D15B332760010E0F5 /* 手机云估价Demo.pdf */; };
+		BE85B54715B3373A0010E0F5 /* SwichTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE85B54515B3373A0010E0F5 /* SwichTabBarViewController.m */; };
+		BE85B54815B3373A0010E0F5 /* SwichTabBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE85B54615B3373A0010E0F5 /* SwichTabBarViewController.xib */; };
+		BE85B54C15B3375E0010E0F5 /* XunJiaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE85B54A15B3375E0010E0F5 /* XunJiaViewController.m */; };
+		BE85B54D15B3375E0010E0F5 /* XunJiaViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE85B54B15B3375E0010E0F5 /* XunJiaViewController.xib */; };
+		BE85B55115B3378C0010E0F5 /* GuanZhuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE85B54F15B3378C0010E0F5 /* GuanZhuViewController.m */; };
+		BE85B55215B3378C0010E0F5 /* GuanZhuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE85B55015B3378C0010E0F5 /* GuanZhuViewController.xib */; };
+		BE85B55B15B337B60010E0F5 /* GengDuoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE85B55915B337B60010E0F5 /* GengDuoViewController.m */; };
+		BE85B55C15B337B60010E0F5 /* GengDuoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE85B55A15B337B60010E0F5 /* GengDuoViewController.xib */; };
+		BE85B56015B33BE50010E0F5 /* GuJiaShiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE85B55E15B33BE50010E0F5 /* GuJiaShiViewController.m */; };
+		BE85B56115B33BE50010E0F5 /* GuJiaShiViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE85B55F15B33BE50010E0F5 /* GuJiaShiViewController.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		BE85B4FB15B3293E0010E0F5 /* yungujia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = yungujia.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE85B4FF15B3293E0010E0F5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		BE85B50115B3293E0010E0F5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		BE85B50315B3293E0010E0F5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		BE85B50715B3293E0010E0F5 /* yungujia-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "yungujia-Info.plist"; sourceTree = "<group>"; };
+		BE85B50915B3293E0010E0F5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		BE85B50B15B3293E0010E0F5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		BE85B50D15B3293E0010E0F5 /* yungujia-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "yungujia-Prefix.pch"; sourceTree = "<group>"; };
+		BE85B50E15B3293E0010E0F5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		BE85B50F15B3293E0010E0F5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		BE85B52C15B330140010E0F5 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = SOURCE_ROOT; };
+		BE85B53015B330F80010E0F5 /* BaseDBOperator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseDBOperator.h; sourceTree = "<group>"; };
+		BE85B53115B330F80010E0F5 /* BaseDBOperator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseDBOperator.m; sourceTree = "<group>"; };
+		BE85B53315B3311D0010E0F5 /* DataParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataParser.h; sourceTree = "<group>"; };
+		BE85B53415B3311D0010E0F5 /* DataParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataParser.m; sourceTree = "<group>"; };
+		BE85B53615B3313E0010E0F5 /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginView.h; sourceTree = "<group>"; };
+		BE85B53715B3313E0010E0F5 /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginView.m; sourceTree = "<group>"; };
+		BE85B53915B331590010E0F5 /* BaseHTTPRequester.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseHTTPRequester.h; sourceTree = "<group>"; };
+		BE85B53A15B331590010E0F5 /* BaseHTTPRequester.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseHTTPRequester.m; sourceTree = "<group>"; };
+		BE85B53D15B332760010E0F5 /* 手机云估价Demo.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "手机云估价Demo.pdf"; sourceTree = "<group>"; };
+		BE85B54415B3373A0010E0F5 /* SwichTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwichTabBarViewController.h; sourceTree = "<group>"; };
+		BE85B54515B3373A0010E0F5 /* SwichTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwichTabBarViewController.m; sourceTree = "<group>"; };
+		BE85B54615B3373A0010E0F5 /* SwichTabBarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SwichTabBarViewController.xib; sourceTree = "<group>"; };
+		BE85B54915B3375E0010E0F5 /* XunJiaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XunJiaViewController.h; sourceTree = "<group>"; };
+		BE85B54A15B3375E0010E0F5 /* XunJiaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XunJiaViewController.m; sourceTree = "<group>"; };
+		BE85B54B15B3375E0010E0F5 /* XunJiaViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XunJiaViewController.xib; sourceTree = "<group>"; };
+		BE85B54E15B3378C0010E0F5 /* GuanZhuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuanZhuViewController.h; sourceTree = "<group>"; };
+		BE85B54F15B3378C0010E0F5 /* GuanZhuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuanZhuViewController.m; sourceTree = "<group>"; };
+		BE85B55015B3378C0010E0F5 /* GuanZhuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GuanZhuViewController.xib; sourceTree = "<group>"; };
+		BE85B55815B337B60010E0F5 /* GengDuoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GengDuoViewController.h; sourceTree = "<group>"; };
+		BE85B55915B337B60010E0F5 /* GengDuoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GengDuoViewController.m; sourceTree = "<group>"; };
+		BE85B55A15B337B60010E0F5 /* GengDuoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GengDuoViewController.xib; sourceTree = "<group>"; };
+		BE85B55D15B33BE50010E0F5 /* GuJiaShiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuJiaShiViewController.h; sourceTree = "<group>"; };
+		BE85B55E15B33BE50010E0F5 /* GuJiaShiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuJiaShiViewController.m; sourceTree = "<group>"; };
+		BE85B55F15B33BE50010E0F5 /* GuJiaShiViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GuJiaShiViewController.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BE85B4F815B3293E0010E0F5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE85B50015B3293E0010E0F5 /* UIKit.framework in Frameworks */,
+				BE85B50215B3293E0010E0F5 /* Foundation.framework in Frameworks */,
+				BE85B50415B3293E0010E0F5 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BE85B4F015B3293E0010E0F5 = {
+			isa = PBXGroup;
+			children = (
+				BE85B53C15B332760010E0F5 /* Documents */,
+				BE85B50515B3293E0010E0F5 /* yungujia */,
+				BE85B4FE15B3293E0010E0F5 /* Frameworks */,
+				BE85B4FC15B3293E0010E0F5 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BE85B4FC15B3293E0010E0F5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BE85B4FB15B3293E0010E0F5 /* yungujia.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BE85B4FE15B3293E0010E0F5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BE85B4FF15B3293E0010E0F5 /* UIKit.framework */,
+				BE85B50115B3293E0010E0F5 /* Foundation.framework */,
+				BE85B50315B3293E0010E0F5 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BE85B50515B3293E0010E0F5 /* yungujia */ = {
+			isa = PBXGroup;
+			children = (
+				BE85B52A15B330140010E0F5 /* Data */,
+				BE85B52B15B330140010E0F5 /* Parser */,
+				BE85B52C15B330140010E0F5 /* README */,
+				BE85B52D15B330140010E0F5 /* Request */,
+				BE85B52E15B330140010E0F5 /* UI */,
+				BE85B50E15B3293E0010E0F5 /* AppDelegate.h */,
+				BE85B50F15B3293E0010E0F5 /* AppDelegate.m */,
+				BE85B50615B3293E0010E0F5 /* Supporting Files */,
+			);
+			path = yungujia;
+			sourceTree = "<group>";
+		};
+		BE85B50615B3293E0010E0F5 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BE85B50715B3293E0010E0F5 /* yungujia-Info.plist */,
+				BE85B50815B3293E0010E0F5 /* InfoPlist.strings */,
+				BE85B50B15B3293E0010E0F5 /* main.m */,
+				BE85B50D15B3293E0010E0F5 /* yungujia-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BE85B52A15B330140010E0F5 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				BE85B53015B330F80010E0F5 /* BaseDBOperator.h */,
+				BE85B53115B330F80010E0F5 /* BaseDBOperator.m */,
+			);
+			path = Data;
+			sourceTree = SOURCE_ROOT;
+		};
+		BE85B52B15B330140010E0F5 /* Parser */ = {
+			isa = PBXGroup;
+			children = (
+				BE85B53315B3311D0010E0F5 /* DataParser.h */,
+				BE85B53415B3311D0010E0F5 /* DataParser.m */,
+			);
+			path = Parser;
+			sourceTree = SOURCE_ROOT;
+		};
+		BE85B52D15B330140010E0F5 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				BE85B53915B331590010E0F5 /* BaseHTTPRequester.h */,
+				BE85B53A15B331590010E0F5 /* BaseHTTPRequester.m */,
+			);
+			path = Request;
+			sourceTree = SOURCE_ROOT;
+		};
+		BE85B52E15B330140010E0F5 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				BE85B53615B3313E0010E0F5 /* LoginView.h */,
+				BE85B53715B3313E0010E0F5 /* LoginView.m */,
+				BE85B54415B3373A0010E0F5 /* SwichTabBarViewController.h */,
+				BE85B54515B3373A0010E0F5 /* SwichTabBarViewController.m */,
+				BE85B54615B3373A0010E0F5 /* SwichTabBarViewController.xib */,
+				BE85B54915B3375E0010E0F5 /* XunJiaViewController.h */,
+				BE85B54A15B3375E0010E0F5 /* XunJiaViewController.m */,
+				BE85B54B15B3375E0010E0F5 /* XunJiaViewController.xib */,
+				BE85B54E15B3378C0010E0F5 /* GuanZhuViewController.h */,
+				BE85B54F15B3378C0010E0F5 /* GuanZhuViewController.m */,
+				BE85B55015B3378C0010E0F5 /* GuanZhuViewController.xib */,
+				BE85B55815B337B60010E0F5 /* GengDuoViewController.h */,
+				BE85B55915B337B60010E0F5 /* GengDuoViewController.m */,
+				BE85B55A15B337B60010E0F5 /* GengDuoViewController.xib */,
+				BE85B55D15B33BE50010E0F5 /* GuJiaShiViewController.h */,
+				BE85B55E15B33BE50010E0F5 /* GuJiaShiViewController.m */,
+				BE85B55F15B33BE50010E0F5 /* GuJiaShiViewController.xib */,
+			);
+			path = UI;
+			sourceTree = SOURCE_ROOT;
+		};
+		BE85B53C15B332760010E0F5 /* Documents */ = {
+			isa = PBXGroup;
+			children = (
+				BE85B53D15B332760010E0F5 /* 手机云估价Demo.pdf */,
+			);
+			path = Documents;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BE85B4FA15B3293E0010E0F5 /* yungujia */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BE85B52715B3293E0010E0F5 /* Build configuration list for PBXNativeTarget "yungujia" */;
+			buildPhases = (
+				BE85B4F715B3293E0010E0F5 /* Sources */,
+				BE85B4F815B3293E0010E0F5 /* Frameworks */,
+				BE85B4F915B3293E0010E0F5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = yungujia;
+			productName = yungujia;
+			productReference = BE85B4FB15B3293E0010E0F5 /* yungujia.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BE85B4F215B3293E0010E0F5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+			};
+			buildConfigurationList = BE85B4F515B3293E0010E0F5 /* Build configuration list for PBXProject "yungujia" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = BE85B4F015B3293E0010E0F5;
+			productRefGroup = BE85B4FC15B3293E0010E0F5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BE85B4FA15B3293E0010E0F5 /* yungujia */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BE85B4F915B3293E0010E0F5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE85B50A15B3293E0010E0F5 /* InfoPlist.strings in Resources */,
+				BE85B52F15B330140010E0F5 /* README in Resources */,
+				BE85B53E15B332760010E0F5 /* 手机云估价Demo.pdf in Resources */,
+				BE85B54815B3373A0010E0F5 /* SwichTabBarViewController.xib in Resources */,
+				BE85B54D15B3375E0010E0F5 /* XunJiaViewController.xib in Resources */,
+				BE85B55215B3378C0010E0F5 /* GuanZhuViewController.xib in Resources */,
+				BE85B55C15B337B60010E0F5 /* GengDuoViewController.xib in Resources */,
+				BE85B56115B33BE50010E0F5 /* GuJiaShiViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BE85B4F715B3293E0010E0F5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE85B50C15B3293E0010E0F5 /* main.m in Sources */,
+				BE85B51015B3293E0010E0F5 /* AppDelegate.m in Sources */,
+				BE85B53215B330F80010E0F5 /* BaseDBOperator.m in Sources */,
+				BE85B53515B3311D0010E0F5 /* DataParser.m in Sources */,
+				BE85B53815B3313E0010E0F5 /* LoginView.m in Sources */,
+				BE85B53B15B331590010E0F5 /* BaseHTTPRequester.m in Sources */,
+				BE85B54715B3373A0010E0F5 /* SwichTabBarViewController.m in Sources */,
+				BE85B54C15B3375E0010E0F5 /* XunJiaViewController.m in Sources */,
+				BE85B55115B3378C0010E0F5 /* GuanZhuViewController.m in Sources */,
+				BE85B55B15B337B60010E0F5 /* GengDuoViewController.m in Sources */,
+				BE85B56015B33BE50010E0F5 /* GuJiaShiViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		BE85B50815B3293E0010E0F5 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BE85B50915B3293E0010E0F5 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		BE85B52515B3293E0010E0F5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		BE85B52615B3293E0010E0F5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BE85B52815B3293E0010E0F5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: JINXIN LI (DJJ4XT349N)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: JINXIN LI (DJJ4XT349N)";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "yungujia/yungujia-Prefix.pch";
+				INFOPLIST_FILE = "yungujia/yungujia-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "52F9DCD3-B960-438D-8DAB-2342EBB5DCAE";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "52F9DCD3-B960-438D-8DAB-2342EBB5DCAE";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		BE85B52915B3293E0010E0F5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: JINXIN LI (DJJ4XT349N)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: JINXIN LI (DJJ4XT349N)";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "yungujia/yungujia-Prefix.pch";
+				INFOPLIST_FILE = "yungujia/yungujia-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "52F9DCD3-B960-438D-8DAB-2342EBB5DCAE";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "52F9DCD3-B960-438D-8DAB-2342EBB5DCAE";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BE85B4F515B3293E0010E0F5 /* Build configuration list for PBXProject "yungujia" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BE85B52515B3293E0010E0F5 /* Debug */,
+				BE85B52615B3293E0010E0F5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BE85B52715B3293E0010E0F5 /* Build configuration list for PBXNativeTarget "yungujia" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BE85B52815B3293E0010E0F5 /* Debug */,
+				BE85B52915B3293E0010E0F5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BE85B4F215B3293E0010E0F5 /* Project object */;
+}
