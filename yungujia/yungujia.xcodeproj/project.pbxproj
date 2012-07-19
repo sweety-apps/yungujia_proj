@@ -220,13 +220,10 @@
 		BE85B52E15B330140010E0F5 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< HEAD
 				38D2A33415B8187C000C5D6D /* RegisterViewController.h */,
 				38D2A33515B8187C000C5D6D /* RegisterViewController.m */,
 				38D2A33615B8187D000C5D6D /* RegisterViewController.xib */,
-=======
 				F3D9CC7115B8179C00FA63AE /* Xunjia */,
->>>>>>> 一些UI
 				BE85B53615B3313E0010E0F5 /* LoginViewController.h */,
 				BE85B53715B3313E0010E0F5 /* LoginViewController.m */,
 				3842FB5115B4483000DA889E /* LoginViewController.xib */,
@@ -352,9 +349,7 @@
 				BE85B56115B33BE50010E0F5 /* GuJiaShiViewController.xib in Resources */,
 				3842FB5215B4483000DA889E /* LoginViewController.xib in Resources */,
 				3842FB5415B44C3000DA889E /* Localizable.strings in Resources */,
-<<<<<<< HEAD
 				38D2A33815B8187D000C5D6D /* RegisterViewController.xib in Resources */,
-=======
 				F3D9CC7715B819DE00FA63AE /* DetailViewController.xib in Resources */,
 				F3D9CC7D15B81AD100FA63AE /* KaishixunjiaViewController.xib in Resources */,
 				F3D9CC8215B81B8F00FA63AE /* XunjiajieguoViewController.xib in Resources */,
@@ -362,7 +357,6 @@
 				F3D9CC8C15B81D3800FA63AE /* YinhangkedaichaxunViewController.xib in Resources */,
 				F3D9CC9615B8207C00FA63AE /* YinhangKedaieDetailViewController.xib in Resources */,
 				F3D9CCA415B8230E00FA63AE /* LoupanCell.xib in Resources */,
->>>>>>> 一些UI
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -384,9 +378,7 @@
 				BE85B55115B3378C0010E0F5 /* GuanZhuViewController.m in Sources */,
 				BE85B55B15B337B60010E0F5 /* GengDuoViewController.m in Sources */,
 				BE85B56015B33BE50010E0F5 /* GuJiaShiViewController.m in Sources */,
-<<<<<<< HEAD
 				38D2A33715B8187D000C5D6D /* RegisterViewController.m in Sources */,
-=======
 				F3D9CC7615B819DE00FA63AE /* DetailViewController.m in Sources */,
 				F3D9CC7C15B81AD100FA63AE /* KaishixunjiaViewController.m in Sources */,
 				F3D9CC8115B81B8F00FA63AE /* XunjiajieguoViewController.m in Sources */,
@@ -397,7 +389,6 @@
 				F3D9CC9C15B8228700FA63AE /* LoucengCell.m in Sources */,
 				F3D9CC9F15B8229800FA63AE /* LoudongCell.m in Sources */,
 				F3D9CCA215B822BD00FA63AE /* FanghaoCell.m in Sources */,
->>>>>>> 一些UI
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
