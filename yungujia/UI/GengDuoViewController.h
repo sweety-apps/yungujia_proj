@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface GengDuoViewController : UIViewController
-<UITableViewDataSource,UITableViewDelegate>
+<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate>
 {
     NSMutableArray* datasource;
     UINavigationBar* navigation;

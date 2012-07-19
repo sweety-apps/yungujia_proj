@@ -87,6 +87,16 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    switch (indexPath.row) {
+        case 0:
+            
+            break;
+        case 7:
+            [self showActionSheet];
+            break;
+        default:
+            break;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -99,4 +109,25 @@
     [(AppDelegate*)[[UIApplication sharedApplication] delegate] ShowLoginView]; 
 }
 
+-(void)showActionSheet
+{
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"检测到新的版本，是否要进行升级?" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
+	if(actionSheet!=nil)
+	{
+		[actionSheet addButtonWithTitle:@"暂不升级"];
+        [actionSheet addButtonWithTitle:@"立即升级"];			
+        actionSheet.cancelButtonIndex = 0;
+		
+		[actionSheet showInView:((AppDelegate*)[[UIApplication sharedApplication] delegate]).rootTabBarController.view];
+		//[actionSheet showInView:self.view];
+		[actionSheet release];
+	}
+
+}
+
+#pragma mark - UIActionSheetDelegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    
+}
 @end
