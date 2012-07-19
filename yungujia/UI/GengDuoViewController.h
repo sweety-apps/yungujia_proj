@@ -9,5 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface GengDuoViewController : UIViewController
+<UITableViewDataSource,UITableViewDelegate>
+{
+    NSMutableArray* datasource;
+}
 
+@property (nonatomic,retain) NSMutableArray* datasource;
+-(IBAction)actionLogout:(id)sender;
 @end
