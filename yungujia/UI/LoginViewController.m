@@ -8,6 +8,7 @@
 
 #import "LoginViewController.h"
 #import "AppDelegate.h"
+#import "RegisterViewController.h"
 
 @implementation LoginViewController
 @synthesize inputpassword;
@@ -70,6 +71,13 @@
         return false;
     }
     return true;
+}
+
+-(void)actionRegist:(id)sender
+{
+    RegisterViewController* regist = [[RegisterViewController alloc] initWithNibName:@"RegisterViewController" bundle:nil];
+    [self.navigationController pushViewController:regist animated:YES];
+    [regist release];
 }
 
 @end

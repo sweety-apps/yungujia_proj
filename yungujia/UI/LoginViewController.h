@@ -16,4 +16,5 @@
 @property (nonatomic,retain) IBOutlet UITextField* inputusername;
 @property (nonatomic,retain) IBOutlet UITextField* inputpassword;
 -(IBAction)actionNormalLogin:(id)sender;
+-(IBAction)actionRegist:(id)sender;
 @end

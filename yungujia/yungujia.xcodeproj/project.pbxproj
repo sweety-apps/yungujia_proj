@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		3842FB5215B4483000DA889E /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3842FB5115B4483000DA889E /* LoginViewController.xib */; };
 		3842FB5415B44C3000DA889E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3842FB5315B44C3000DA889E /* Localizable.strings */; };
+		38D2A33715B8187D000C5D6D /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D2A33515B8187C000C5D6D /* RegisterViewController.m */; };
+		38D2A33815B8187D000C5D6D /* RegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38D2A33615B8187D000C5D6D /* RegisterViewController.xib */; };
 		BE85B50015B3293E0010E0F5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE85B4FF15B3293E0010E0F5 /* UIKit.framework */; };
 		BE85B50215B3293E0010E0F5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE85B50115B3293E0010E0F5 /* Foundation.framework */; };
 		BE85B50415B3293E0010E0F5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE85B50315B3293E0010E0F5 /* CoreGraphics.framework */; };
@@ -36,6 +38,9 @@
 /* Begin PBXFileReference section */
 		3842FB5115B4483000DA889E /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		3842FB5315B44C3000DA889E /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		38D2A33415B8187C000C5D6D /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
+		38D2A33515B8187C000C5D6D /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
+		38D2A33615B8187D000C5D6D /* RegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisterViewController.xib; sourceTree = "<group>"; };
 		BE85B4FB15B3293E0010E0F5 /* yungujia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = yungujia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE85B4FF15B3293E0010E0F5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BE85B50115B3293E0010E0F5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -171,6 +176,9 @@
 		BE85B52E15B330140010E0F5 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				38D2A33415B8187C000C5D6D /* RegisterViewController.h */,
+				38D2A33515B8187C000C5D6D /* RegisterViewController.m */,
+				38D2A33615B8187D000C5D6D /* RegisterViewController.xib */,
 				BE85B53615B3313E0010E0F5 /* LoginViewController.h */,
 				BE85B53715B3313E0010E0F5 /* LoginViewController.m */,
 				3842FB5115B4483000DA889E /* LoginViewController.xib */,
@@ -262,6 +270,7 @@
 				BE85B56115B33BE50010E0F5 /* GuJiaShiViewController.xib in Resources */,
 				3842FB5215B4483000DA889E /* LoginViewController.xib in Resources */,
 				3842FB5415B44C3000DA889E /* Localizable.strings in Resources */,
+				38D2A33815B8187D000C5D6D /* RegisterViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,6 +292,7 @@
 				BE85B55115B3378C0010E0F5 /* GuanZhuViewController.m in Sources */,
 				BE85B55B15B337B60010E0F5 /* GengDuoViewController.m in Sources */,
 				BE85B56015B33BE50010E0F5 /* GuJiaShiViewController.m in Sources */,
+				38D2A33715B8187D000C5D6D /* RegisterViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

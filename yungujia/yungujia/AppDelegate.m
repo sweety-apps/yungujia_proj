@@ -116,7 +116,10 @@
 	//创建新的并显示 
 	if(loginViewController==nil)
 	{
-        loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+        LoginViewController* controller = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+        loginViewController = [[UINavigationController alloc] initWithRootViewController:controller];
+        [controller release];
+        
 	}
 	[self.window addSubview:loginViewController.view];
 }

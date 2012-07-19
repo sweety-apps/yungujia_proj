@@ -12,12 +12,12 @@
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate>
 {
-    LoginViewController* loginviewcontroller;
+    UINavigationController* loginviewcontroller;
     SwichTabBarViewController* rootTabBarController;
 }
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic, retain) IBOutlet SwichTabBarViewController* rootTabBarController;
-@property (nonatomic, retain) IBOutlet LoginViewController *loginViewController;
+@property (nonatomic, retain) IBOutlet UINavigationController *loginViewController;
 -(void)ShowMainView:(NSString*)nickname weiboaccount:(NSString*)account;
 -(void)ShowLoginView;
 @end
