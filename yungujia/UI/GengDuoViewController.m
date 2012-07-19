@@ -15,14 +15,10 @@
 
 @implementation GengDuoViewController
 @synthesize datasource;
-
+@synthesize navigation;
 -(void)buildDataSource
 {
-    self.datasource = [[NSMutableArray alloc] init];
-    NSMutableArray* array1 = [NSMutableArray arrayWithObjects:@"我的询价记录", nil];
-    NSMutableArray* array2 = [NSMutableArray arrayWithObjects:@"关于",@"系统消息",@"检查新版本",@"银行可贷额计算公式与说明",nil];
-    [self.datasource addObject:array1];
-    [self.datasource addObject:array2];
+    self.datasource = [[NSMutableArray alloc] initWithObjects:@"我的询价记录",@"修改密码",@"个人认证",@"邀请好友",@"意见反馈",@"关于",@"系统消息",@"检查新版本",@"银行可贷额计算公式与说明",nil];
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -64,12 +60,7 @@
 #pragma mark -tabledatasource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == 0) {
-        return 1;
-    }
-    else {
-        return 4;
-    }
+    return 9;
 }
 
 // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
@@ -83,13 +74,13 @@
     {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:dequeueIdentifer] autorelease];
     }
-    cell.textLabel.text = [[self.datasource objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    cell.textLabel.text = [self.datasource objectAtIndex:indexPath.row];
     return cell;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView              // Default is 1 if not implemented
 {
-    return 2;
+    return 1;
 }
 
 #pragma mark - tabledelegate
@@ -100,7 +91,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 44;
+    return 25;
 }
 
 -(IBAction)actionLogout:(id)sender

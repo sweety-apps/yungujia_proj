@@ -136,6 +136,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3852DDD815B8402600ADB7C8 /* more */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = more;
+			sourceTree = "<group>";
+		};
 		BE85B4F015B3293E0010E0F5 = {
 			isa = PBXGroup;
 			children = (
@@ -220,6 +227,7 @@
 		BE85B52E15B330140010E0F5 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				3852DDD815B8402600ADB7C8 /* more */,
 				38D2A33415B8187C000C5D6D /* RegisterViewController.h */,
 				38D2A33515B8187C000C5D6D /* RegisterViewController.m */,
 				38D2A33615B8187D000C5D6D /* RegisterViewController.xib */,
