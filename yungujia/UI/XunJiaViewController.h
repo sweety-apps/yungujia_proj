@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface XunJiaViewController : UIViewController
+@interface XunJiaViewController : UINavigationController
+@property UINavigationBar* navbar;
 
 @end

@@ -1,27 +1,24 @@
 //
-//  XunJiaViewController.m
+//  RengongxunjiaViewController.m
 //  yungujia
 //
-//  Created by lijinxin on 12-7-16.
+//  Created by Justin Lee on 12-7-19.
 //  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
 //
 
-#import "XunJiaViewController.h"
+#import "RengongxunjiaViewController.h"
 
-@interface XunJiaViewController ()
+@interface RengongxunjiaViewController ()
 
 @end
 
-@implementation XunJiaViewController
-@synthesize navbar = _navbar;
+@implementation RengongxunjiaViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title = @"询价";
-        //self.tabBarItem.image = [UIImage imageNamed:@"second"];
     }
     return self;
 }

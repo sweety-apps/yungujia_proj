@@ -1,27 +1,24 @@
 //
-//  XunJiaViewController.m
+//  YinhangKedaieDetailViewController.m
 //  yungujia
 //
-//  Created by lijinxin on 12-7-16.
+//  Created by Justin Lee on 12-7-19.
 //  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
 //
 
-#import "XunJiaViewController.h"
+#import "YinhangKedaieDetailViewController.h"
 
-@interface XunJiaViewController ()
+@interface YinhangKedaieDetailViewController ()
 
 @end
 
-@implementation XunJiaViewController
-@synthesize navbar = _navbar;
+@implementation YinhangKedaieDetailViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title = @"询价";
-        //self.tabBarItem.image = [UIImage imageNamed:@"second"];
     }
     return self;
 }
