@@ -9,6 +9,24 @@
 /* Begin PBXBuildFile section */
 		3842FB5215B4483000DA889E /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3842FB5115B4483000DA889E /* LoginViewController.xib */; };
 		3842FB5415B44C3000DA889E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3842FB5315B44C3000DA889E /* Localizable.strings */; };
+		3887890915BACD7D00B919B5 /* InviteFriendController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3887890715BACD7D00B919B5 /* InviteFriendController.m */; };
+		3887890A15BACD7D00B919B5 /* InviteFriendController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3887890815BACD7D00B919B5 /* InviteFriendController.xib */; };
+		3887890E15BAD06500B919B5 /* GongshiController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3887890C15BAD06500B919B5 /* GongshiController.m */; };
+		3887890F15BAD06500B919B5 /* GongshiController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3887890D15BAD06500B919B5 /* GongshiController.xib */; };
+		3887891815BAD0EA00B919B5 /* SystemMsgDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3887891615BAD0E900B919B5 /* SystemMsgDetailViewController.m */; };
+		3887891915BAD0EA00B919B5 /* SystemMsgDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3887891715BAD0E900B919B5 /* SystemMsgDetailViewController.xib */; };
+		3887891D15BAD10000B919B5 /* SystemMsgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3887891B15BAD10000B919B5 /* SystemMsgViewController.m */; };
+		3887891E15BAD10000B919B5 /* SystemMsgViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3887891C15BAD10000B919B5 /* SystemMsgViewController.xib */; };
+		3887892215BAD12D00B919B5 /* AboutSystemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3887892015BAD12C00B919B5 /* AboutSystemViewController.m */; };
+		3887892315BAD12D00B919B5 /* AboutSystemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3887892115BAD12D00B919B5 /* AboutSystemViewController.xib */; };
+		3887892715BAD14000B919B5 /* ModifyPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3887892515BAD13F00B919B5 /* ModifyPwdViewController.m */; };
+		3887892815BAD14000B919B5 /* ModifyPwdViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3887892615BAD14000B919B5 /* ModifyPwdViewController.xib */; };
+		3887892C15BAD3BB00B919B5 /* XunJiaHisViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3887892A15BAD3B600B919B5 /* XunJiaHisViewController.m */; };
+		3887892D15BAD3BB00B919B5 /* XunJiaHisViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3887892B15BAD3B900B919B5 /* XunJiaHisViewController.xib */; };
+		3887893115BAD3D600B919B5 /* PersonIdentifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3887892F15BAD3D500B919B5 /* PersonIdentifyViewController.m */; };
+		3887893215BAD3D600B919B5 /* PersonIdentifyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3887893015BAD3D500B919B5 /* PersonIdentifyViewController.xib */; };
+		3887893615BAD3E600B919B5 /* FeedBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3887893415BAD3E400B919B5 /* FeedBackViewController.m */; };
+		3887893715BAD3E600B919B5 /* FeedBackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3887893515BAD3E500B919B5 /* FeedBackViewController.xib */; };
 		38D2A33715B8187D000C5D6D /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D2A33515B8187C000C5D6D /* RegisterViewController.m */; };
 		38D2A33815B8187D000C5D6D /* RegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38D2A33615B8187D000C5D6D /* RegisterViewController.xib */; };
 		BE85B50015B3293E0010E0F5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE85B4FF15B3293E0010E0F5 /* UIKit.framework */; };
@@ -55,6 +73,33 @@
 /* Begin PBXFileReference section */
 		3842FB5115B4483000DA889E /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		3842FB5315B44C3000DA889E /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		3887890615BACD7D00B919B5 /* InviteFriendController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteFriendController.h; sourceTree = "<group>"; };
+		3887890715BACD7D00B919B5 /* InviteFriendController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteFriendController.m; sourceTree = "<group>"; };
+		3887890815BACD7D00B919B5 /* InviteFriendController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteFriendController.xib; sourceTree = "<group>"; };
+		3887890B15BAD06500B919B5 /* GongshiController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GongshiController.h; sourceTree = "<group>"; };
+		3887890C15BAD06500B919B5 /* GongshiController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GongshiController.m; sourceTree = "<group>"; };
+		3887890D15BAD06500B919B5 /* GongshiController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GongshiController.xib; sourceTree = "<group>"; };
+		3887891515BAD0E900B919B5 /* SystemMsgDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemMsgDetailViewController.h; sourceTree = "<group>"; };
+		3887891615BAD0E900B919B5 /* SystemMsgDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemMsgDetailViewController.m; sourceTree = "<group>"; };
+		3887891715BAD0E900B919B5 /* SystemMsgDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SystemMsgDetailViewController.xib; sourceTree = "<group>"; };
+		3887891A15BAD10000B919B5 /* SystemMsgViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemMsgViewController.h; sourceTree = "<group>"; };
+		3887891B15BAD10000B919B5 /* SystemMsgViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemMsgViewController.m; sourceTree = "<group>"; };
+		3887891C15BAD10000B919B5 /* SystemMsgViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SystemMsgViewController.xib; sourceTree = "<group>"; };
+		3887891F15BAD12C00B919B5 /* AboutSystemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutSystemViewController.h; sourceTree = "<group>"; };
+		3887892015BAD12C00B919B5 /* AboutSystemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutSystemViewController.m; sourceTree = "<group>"; };
+		3887892115BAD12D00B919B5 /* AboutSystemViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutSystemViewController.xib; sourceTree = "<group>"; };
+		3887892415BAD13F00B919B5 /* ModifyPwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModifyPwdViewController.h; sourceTree = "<group>"; };
+		3887892515BAD13F00B919B5 /* ModifyPwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModifyPwdViewController.m; sourceTree = "<group>"; };
+		3887892615BAD14000B919B5 /* ModifyPwdViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ModifyPwdViewController.xib; sourceTree = "<group>"; };
+		3887892915BAD3B600B919B5 /* XunJiaHisViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XunJiaHisViewController.h; sourceTree = "<group>"; };
+		3887892A15BAD3B600B919B5 /* XunJiaHisViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XunJiaHisViewController.m; sourceTree = "<group>"; };
+		3887892B15BAD3B900B919B5 /* XunJiaHisViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XunJiaHisViewController.xib; sourceTree = "<group>"; };
+		3887892E15BAD3D400B919B5 /* PersonIdentifyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonIdentifyViewController.h; sourceTree = "<group>"; };
+		3887892F15BAD3D500B919B5 /* PersonIdentifyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonIdentifyViewController.m; sourceTree = "<group>"; };
+		3887893015BAD3D500B919B5 /* PersonIdentifyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonIdentifyViewController.xib; sourceTree = "<group>"; };
+		3887893315BAD3E400B919B5 /* FeedBackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedBackViewController.h; sourceTree = "<group>"; };
+		3887893415BAD3E400B919B5 /* FeedBackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedBackViewController.m; sourceTree = "<group>"; };
+		3887893515BAD3E500B919B5 /* FeedBackViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedBackViewController.xib; sourceTree = "<group>"; };
 		38D2A33415B8187C000C5D6D /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
 		38D2A33515B8187C000C5D6D /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
 		38D2A33615B8187D000C5D6D /* RegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisterViewController.xib; sourceTree = "<group>"; };
@@ -139,6 +184,36 @@
 		3852DDD815B8402600ADB7C8 /* more */ = {
 			isa = PBXGroup;
 			children = (
+				BE85B55815B337B60010E0F5 /* GengDuoViewController.h */,
+				BE85B55915B337B60010E0F5 /* GengDuoViewController.m */,
+				BE85B55A15B337B60010E0F5 /* GengDuoViewController.xib */,
+				3887890615BACD7D00B919B5 /* InviteFriendController.h */,
+				3887890715BACD7D00B919B5 /* InviteFriendController.m */,
+				3887890815BACD7D00B919B5 /* InviteFriendController.xib */,
+				3887890B15BAD06500B919B5 /* GongshiController.h */,
+				3887890C15BAD06500B919B5 /* GongshiController.m */,
+				3887890D15BAD06500B919B5 /* GongshiController.xib */,
+				3887891515BAD0E900B919B5 /* SystemMsgDetailViewController.h */,
+				3887891615BAD0E900B919B5 /* SystemMsgDetailViewController.m */,
+				3887891715BAD0E900B919B5 /* SystemMsgDetailViewController.xib */,
+				3887891A15BAD10000B919B5 /* SystemMsgViewController.h */,
+				3887891B15BAD10000B919B5 /* SystemMsgViewController.m */,
+				3887891C15BAD10000B919B5 /* SystemMsgViewController.xib */,
+				3887891F15BAD12C00B919B5 /* AboutSystemViewController.h */,
+				3887892015BAD12C00B919B5 /* AboutSystemViewController.m */,
+				3887892115BAD12D00B919B5 /* AboutSystemViewController.xib */,
+				3887892415BAD13F00B919B5 /* ModifyPwdViewController.h */,
+				3887892515BAD13F00B919B5 /* ModifyPwdViewController.m */,
+				3887892615BAD14000B919B5 /* ModifyPwdViewController.xib */,
+				3887892915BAD3B600B919B5 /* XunJiaHisViewController.h */,
+				3887892A15BAD3B600B919B5 /* XunJiaHisViewController.m */,
+				3887892B15BAD3B900B919B5 /* XunJiaHisViewController.xib */,
+				3887892E15BAD3D400B919B5 /* PersonIdentifyViewController.h */,
+				3887892F15BAD3D500B919B5 /* PersonIdentifyViewController.m */,
+				3887893015BAD3D500B919B5 /* PersonIdentifyViewController.xib */,
+				3887893315BAD3E400B919B5 /* FeedBackViewController.h */,
+				3887893415BAD3E400B919B5 /* FeedBackViewController.m */,
+				3887893515BAD3E500B919B5 /* FeedBackViewController.xib */,
 			);
 			name = more;
 			sourceTree = "<group>";
@@ -241,9 +316,6 @@
 				BE85B54E15B3378C0010E0F5 /* GuanZhuViewController.h */,
 				BE85B54F15B3378C0010E0F5 /* GuanZhuViewController.m */,
 				BE85B55015B3378C0010E0F5 /* GuanZhuViewController.xib */,
-				BE85B55815B337B60010E0F5 /* GengDuoViewController.h */,
-				BE85B55915B337B60010E0F5 /* GengDuoViewController.m */,
-				BE85B55A15B337B60010E0F5 /* GengDuoViewController.xib */,
 				BE85B55D15B33BE50010E0F5 /* GuJiaShiViewController.h */,
 				BE85B55E15B33BE50010E0F5 /* GuJiaShiViewController.m */,
 				BE85B55F15B33BE50010E0F5 /* GuJiaShiViewController.xib */,
@@ -365,6 +437,15 @@
 				F3D9CC8C15B81D3800FA63AE /* YinhangkedaichaxunViewController.xib in Resources */,
 				F3D9CC9615B8207C00FA63AE /* YinhangKedaieDetailViewController.xib in Resources */,
 				F3D9CCA415B8230E00FA63AE /* LoupanCell.xib in Resources */,
+				3887890A15BACD7D00B919B5 /* InviteFriendController.xib in Resources */,
+				3887890F15BAD06500B919B5 /* GongshiController.xib in Resources */,
+				3887891915BAD0EA00B919B5 /* SystemMsgDetailViewController.xib in Resources */,
+				3887891E15BAD10000B919B5 /* SystemMsgViewController.xib in Resources */,
+				3887892315BAD12D00B919B5 /* AboutSystemViewController.xib in Resources */,
+				3887892815BAD14000B919B5 /* ModifyPwdViewController.xib in Resources */,
+				3887892D15BAD3BB00B919B5 /* XunJiaHisViewController.xib in Resources */,
+				3887893215BAD3D600B919B5 /* PersonIdentifyViewController.xib in Resources */,
+				3887893715BAD3E600B919B5 /* FeedBackViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -397,6 +478,15 @@
 				F3D9CC9C15B8228700FA63AE /* LoucengCell.m in Sources */,
 				F3D9CC9F15B8229800FA63AE /* LoudongCell.m in Sources */,
 				F3D9CCA215B822BD00FA63AE /* FanghaoCell.m in Sources */,
+				3887890915BACD7D00B919B5 /* InviteFriendController.m in Sources */,
+				3887890E15BAD06500B919B5 /* GongshiController.m in Sources */,
+				3887891815BAD0EA00B919B5 /* SystemMsgDetailViewController.m in Sources */,
+				3887891D15BAD10000B919B5 /* SystemMsgViewController.m in Sources */,
+				3887892215BAD12D00B919B5 /* AboutSystemViewController.m in Sources */,
+				3887892715BAD14000B919B5 /* ModifyPwdViewController.m in Sources */,
+				3887892C15BAD3BB00B919B5 /* XunJiaHisViewController.m in Sources */,
+				3887893115BAD3D600B919B5 /* PersonIdentifyViewController.m in Sources */,
+				3887893615BAD3E600B919B5 /* FeedBackViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

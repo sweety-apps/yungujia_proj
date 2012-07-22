@@ -8,6 +8,14 @@
 
 #import "GengDuoViewController.h"
 #import "AppDelegate.h"
+#import "InviteFriendController.h"
+#import "ModifyPwdViewController.h"
+#import "GongshiController.h"
+#import "AboutSystemViewController.h"
+#import "SystemMsgViewController.h"
+#import "XunJiaHisViewController.h"
+#import "FeedBackViewController.h"
+#import "PersonIdentifyViewController.h"
 
 @interface GengDuoViewController ()
 -(void)buildDataSource;
@@ -15,7 +23,7 @@
 
 @implementation GengDuoViewController
 @synthesize datasource;
-@synthesize navigation;
+//@synthesize navigation;
 -(void)buildDataSource
 {
     self.datasource = [[NSMutableArray alloc] initWithObjects:@"我的询价记录",@"修改密码",@"个人认证",@"邀请好友",@"意见反馈",@"关于",@"系统消息",@"检查新版本",@"银行可贷额计算公式与说明",nil];
@@ -89,10 +97,31 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     switch (indexPath.row) {
         case 0:
-            
+            [self showXunjiaHis];
+            break;
+        case 1:
+            [self showModifyPwd];
+            break;
+        case 2:
+            [self showPersonIdentify];
+            break;
+        case 3:
+            [self showInvite];
+            break;
+        case 4:
+            [self showfeedback];
+            break;
+        case 5:
+            [self showAbout];
+            break;
+        case 6:
+            [self showSystemMsg];
             break;
         case 7:
             [self showActionSheet];
+            break;
+        case 8:
+            [self showGongshi];
             break;
         default:
             break;
@@ -107,6 +136,60 @@
 -(IBAction)actionLogout:(id)sender
 {
     [(AppDelegate*)[[UIApplication sharedApplication] delegate] ShowLoginView]; 
+}
+
+-(void)showInvite
+{
+//    self.navigation push
+    InviteFriendController* controller = [[InviteFriendController alloc] initWithNibName:@"InviteFriendController" bundle:nil];
+    [((UINavigationController*)self.parentViewController) pushViewController:controller animated:YES];
+    [controller release];
+}
+
+-(void)showXunjiaHis
+{
+    XunJiaHisViewController* controller = [[XunJiaHisViewController alloc] initWithNibName:@"XunJiaHisViewController" bundle:nil];
+    [((UINavigationController*)self.parentViewController) pushViewController:controller animated:YES];
+    [controller release];
+}
+
+-(void)showModifyPwd
+{
+    ModifyPwdViewController* controller = [[ModifyPwdViewController alloc] initWithNibName:@"ModifyPwdViewController" bundle:nil];
+    [((UINavigationController*)self.parentViewController) pushViewController:controller animated:YES];
+    [controller release];
+}
+
+-(void)showPersonIdentify
+{
+    PersonIdentifyViewController* controller = [[PersonIdentifyViewController alloc] initWithNibName:@"PersonIdentifyViewController" bundle:nil];
+    [((UINavigationController*)self.parentViewController) pushViewController:controller animated:YES];
+    [controller release];
+}
+-(void)showfeedback
+{
+    FeedBackViewController* controller = [[FeedBackViewController alloc] initWithNibName:@"FeedBackViewController" bundle:nil];
+    [((UINavigationController*)self.parentViewController) pushViewController:controller animated:YES];
+    [controller release];
+}
+-(void)showAbout
+{
+    AboutSystemViewController* controller = [[AboutSystemViewController alloc] initWithNibName:@"AboutSystemViewController" bundle:nil];
+    [((UINavigationController*)self.parentViewController) pushViewController:controller animated:YES];
+    [controller release];
+}
+-(void)showSystemMsg
+{
+    SystemMsgViewController* controller = [[SystemMsgViewController alloc] initWithNibName:@"SystemMsgViewController" bundle:nil];
+    [((UINavigationController*)self.parentViewController) pushViewController:controller animated:YES];
+    [controller release];
+}
+
+-(void)showGongshi
+{
+    GongshiController* controller = [[GongshiController alloc] initWithNibName:@"GongshiController" bundle:nil];
+    [((UINavigationController*)self.parentViewController) pushViewController:controller animated:YES];
+    [controller release];
 }
 
 -(void)showActionSheet

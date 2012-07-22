@@ -12,9 +12,9 @@
 <UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate>
 {
     NSMutableArray* datasource;
-    UINavigationBar* navigation;
+//    UINavigationBar* navigation;
 }
-@property (nonatomic,retain) IBOutlet UINavigationBar* navigation;
+//@property (nonatomic,retain) IBOutlet UINavigationBar* navigation;
 @property (nonatomic,retain) NSMutableArray* datasource;
 -(IBAction)actionLogout:(id)sender;
 @end
