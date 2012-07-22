@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AboutSystemViewController : UIViewController
-
+@interface AboutSystemViewController : UITableViewController
+{
+    NSMutableArray* _arraykeys;
+    NSMutableArray* _arrayvalues;
+}
 @end

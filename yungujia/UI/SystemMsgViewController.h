@@ -10,6 +10,6 @@
 
 @interface SystemMsgViewController : UITableViewController
 {
-    
+    NSMutableArray* _msgList;
 }
 @end

@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ModifyPwdViewController : UIViewController
-
+@interface ModifyPwdViewController : UITableViewController
+<UITextFieldDelegate>
+{
+    NSMutableArray* _arraykeys;
+    NSMutableArray* _arrayPlaceHolder;
+}
 @end
