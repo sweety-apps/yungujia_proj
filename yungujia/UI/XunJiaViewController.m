@@ -14,6 +14,12 @@
 
 @implementation XunJiaViewController
 @synthesize navbar = _navbar;
+@synthesize segment = _segment;
+
+
+@synthesize navctrl = _navctrl;
+@synthesize sousuoloupanctrl = _sousuoloupanctrl;
+@synthesize fujinloupanctrl = _fujinloupanctrl;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -30,10 +36,48 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [self.view addSubview:_navctrl.view];
+    [self PushSegement0:nil];
+}
+
+- (IBAction)SelectedSegement:(id)sender
+{
+    if (self.segment.selectedSegmentIndex == 0)
+    {
+        [self PushSegement0:nil];
+    }
+    else if(self.segment.selectedSegmentIndex == 1)
+    {
+        [self PushSegement1:nil];
+    }
+}
+
+- (IBAction)PushSegement0:(id)sender
+{
+    self.segment.selectedSegmentIndex = 0;
+    if (_sousuoloupanctrl == nil)
+    {
+        self.sousuoloupanctrl = [[SousuoloupanViewController alloc]initWithNibName:@"SousuoloupanViewController" bundle:nil];
+    }
+    [_sousuoloupanctrl.view removeFromSuperview];
+    [_navctrl.topViewController.view addSubview:_sousuoloupanctrl.view]; 
+    //[_navctrl pushViewController:self.sousuoloupanctrl animated:NO];
+}
+
+- (IBAction)PushSegement1:(id)sender
+{
+    self.segment.selectedSegmentIndex = 1;
+    if (_fujinloupanctrl == nil)
+    {
+        self.fujinloupanctrl = [[FunjinloupanViewController alloc]initWithNibName:@"FunjinloupanViewController" bundle:nil];
+    }
+    [_fujinloupanctrl.view removeFromSuperview];
+    [_navctrl.topViewController.view addSubview:_fujinloupanctrl.view]; 
 }
 
 - (void)viewDidUnload
 {
+    [_navbar removeFromSuperview];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

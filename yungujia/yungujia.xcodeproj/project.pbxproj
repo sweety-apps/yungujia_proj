@@ -59,6 +59,23 @@
 		BE85B55C15B337B60010E0F5 /* GengDuoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE85B55A15B337B60010E0F5 /* GengDuoViewController.xib */; };
 		BE85B56015B33BE50010E0F5 /* GuJiaShiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE85B55E15B33BE50010E0F5 /* GuJiaShiViewController.m */; };
 		BE85B56115B33BE50010E0F5 /* GuJiaShiViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE85B55F15B33BE50010E0F5 /* GuJiaShiViewController.xib */; };
+		BEB5439C15BC55AE00C6CDAD /* SousuoloupanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB5439A15BC55AC00C6CDAD /* SousuoloupanViewController.m */; };
+		BEB5439D15BC55AE00C6CDAD /* SousuoloupanViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEB5439B15BC55AD00C6CDAD /* SousuoloupanViewController.xib */; };
+		BEB543A615BC618E00C6CDAD /* FunjinloupanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB543A415BC618D00C6CDAD /* FunjinloupanViewController.m */; };
+		BEB543A715BC618E00C6CDAD /* FunjinloupanViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEB543A515BC618E00C6CDAD /* FunjinloupanViewController.xib */; };
+		BEB543AC15BC662500C6CDAD /* GujiashihuijiaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB543AA15BC662500C6CDAD /* GujiashihuijiaViewController.m */; };
+		BEB543AD15BC662500C6CDAD /* GujiashihuijiaViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEB543AB15BC662500C6CDAD /* GujiashihuijiaViewController.xib */; };
+		BEB543B115BC66CA00C6CDAD /* PinggujigouViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB543AF15BC66C900C6CDAD /* PinggujigouViewController.m */; };
+		BEB543B215BC66CA00C6CDAD /* PinggujigouViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEB543B015BC66CA00C6CDAD /* PinggujigouViewController.xib */; };
+		BEB543C215BC79B400C6CDAD /* HuijiaLV1CellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB543C015BC79B400C6CDAD /* HuijiaLV1CellViewController.m */; };
+		BEB543C315BC79B400C6CDAD /* HuijiaLV1CellViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEB543C115BC79B400C6CDAD /* HuijiaLV1CellViewController.xib */; };
+		BEB543D215BC80DA00C6CDAD /* HuijiaLV1Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB543D115BC80DA00C6CDAD /* HuijiaLV1Cell.m */; };
+		BEB543D615BC877200C6CDAD /* HuijiaxiangqingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB543D415BC877100C6CDAD /* HuijiaxiangqingViewController.m */; };
+		BEB543D715BC877200C6CDAD /* HuijiaxiangqingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEB543D515BC877200C6CDAD /* HuijiaxiangqingViewController.xib */; };
+		BEB543DB15BC889A00C6CDAD /* HuijiaxiangqingCellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB543D915BC889800C6CDAD /* HuijiaxiangqingCellViewController.m */; };
+		BEB543DC15BC889A00C6CDAD /* HuijiaxiangqingCellViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEB543DA15BC889900C6CDAD /* HuijiaxiangqingCellViewController.xib */; };
+		BEB543DE15BC895F00C6CDAD /* shilian.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB543DD15BC895F00C6CDAD /* shilian.png */; };
+		BEB543E115BC8A7700C6CDAD /* HuijiaxiangqingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB543E015BC8A7600C6CDAD /* HuijiaxiangqingCell.m */; };
 		F3D9CC7615B819DE00FA63AE /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3D9CC7415B819DD00FA63AE /* DetailViewController.m */; };
 		F3D9CC7715B819DE00FA63AE /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3D9CC7515B819DE00FA63AE /* DetailViewController.xib */; };
 		F3D9CC7C15B81AD100FA63AE /* KaishixunjiaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3D9CC7A15B81AD100FA63AE /* KaishixunjiaViewController.m */; };
@@ -155,6 +172,32 @@
 		BE85B55D15B33BE50010E0F5 /* GuJiaShiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuJiaShiViewController.h; sourceTree = "<group>"; };
 		BE85B55E15B33BE50010E0F5 /* GuJiaShiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuJiaShiViewController.m; sourceTree = "<group>"; };
 		BE85B55F15B33BE50010E0F5 /* GuJiaShiViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GuJiaShiViewController.xib; sourceTree = "<group>"; };
+		BEB5439915BC55AC00C6CDAD /* SousuoloupanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SousuoloupanViewController.h; sourceTree = "<group>"; };
+		BEB5439A15BC55AC00C6CDAD /* SousuoloupanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SousuoloupanViewController.m; sourceTree = "<group>"; };
+		BEB5439B15BC55AD00C6CDAD /* SousuoloupanViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SousuoloupanViewController.xib; sourceTree = "<group>"; };
+		BEB543A315BC618D00C6CDAD /* FunjinloupanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FunjinloupanViewController.h; sourceTree = "<group>"; };
+		BEB543A415BC618D00C6CDAD /* FunjinloupanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FunjinloupanViewController.m; sourceTree = "<group>"; };
+		BEB543A515BC618E00C6CDAD /* FunjinloupanViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FunjinloupanViewController.xib; sourceTree = "<group>"; };
+		BEB543A915BC662500C6CDAD /* GujiashihuijiaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GujiashihuijiaViewController.h; sourceTree = "<group>"; };
+		BEB543AA15BC662500C6CDAD /* GujiashihuijiaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GujiashihuijiaViewController.m; sourceTree = "<group>"; };
+		BEB543AB15BC662500C6CDAD /* GujiashihuijiaViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GujiashihuijiaViewController.xib; sourceTree = "<group>"; };
+		BEB543AE15BC66C900C6CDAD /* PinggujigouViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinggujigouViewController.h; sourceTree = "<group>"; };
+		BEB543AF15BC66C900C6CDAD /* PinggujigouViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinggujigouViewController.m; sourceTree = "<group>"; };
+		BEB543B015BC66CA00C6CDAD /* PinggujigouViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PinggujigouViewController.xib; sourceTree = "<group>"; };
+		BEB543BF15BC79B400C6CDAD /* HuijiaLV1CellViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HuijiaLV1CellViewController.h; sourceTree = "<group>"; };
+		BEB543C015BC79B400C6CDAD /* HuijiaLV1CellViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HuijiaLV1CellViewController.m; sourceTree = "<group>"; };
+		BEB543C115BC79B400C6CDAD /* HuijiaLV1CellViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HuijiaLV1CellViewController.xib; sourceTree = "<group>"; };
+		BEB543D015BC80D900C6CDAD /* HuijiaLV1Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HuijiaLV1Cell.h; sourceTree = "<group>"; };
+		BEB543D115BC80DA00C6CDAD /* HuijiaLV1Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HuijiaLV1Cell.m; sourceTree = "<group>"; };
+		BEB543D315BC877000C6CDAD /* HuijiaxiangqingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HuijiaxiangqingViewController.h; sourceTree = "<group>"; };
+		BEB543D415BC877100C6CDAD /* HuijiaxiangqingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HuijiaxiangqingViewController.m; sourceTree = "<group>"; };
+		BEB543D515BC877200C6CDAD /* HuijiaxiangqingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HuijiaxiangqingViewController.xib; sourceTree = "<group>"; };
+		BEB543D815BC889700C6CDAD /* HuijiaxiangqingCellViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HuijiaxiangqingCellViewController.h; sourceTree = "<group>"; };
+		BEB543D915BC889800C6CDAD /* HuijiaxiangqingCellViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HuijiaxiangqingCellViewController.m; sourceTree = "<group>"; };
+		BEB543DA15BC889900C6CDAD /* HuijiaxiangqingCellViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HuijiaxiangqingCellViewController.xib; sourceTree = "<group>"; };
+		BEB543DD15BC895F00C6CDAD /* shilian.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shilian.png; sourceTree = "<group>"; };
+		BEB543DF15BC8A7600C6CDAD /* HuijiaxiangqingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HuijiaxiangqingCell.h; sourceTree = "<group>"; };
+		BEB543E015BC8A7600C6CDAD /* HuijiaxiangqingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HuijiaxiangqingCell.m; sourceTree = "<group>"; };
 		F3D9CC7315B819DD00FA63AE /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		F3D9CC7415B819DD00FA63AE /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		F3D9CC7515B819DE00FA63AE /* DetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
@@ -238,6 +281,7 @@
 		38E2F9A515BB9D6E00EB72D0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				BEB543DD15BC895F00C6CDAD /* shilian.png */,
 				38E2F9BA15BBB83500EB72D0 /* logo.png */,
 				38E2F9B215BBB4D900EB72D0 /* topbar_button_back_hover.png */,
 				38E2F9B315BBB4D900EB72D0 /* topbar_button_back_hover@2x.png */,
@@ -336,6 +380,7 @@
 		BE85B52E15B330140010E0F5 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				BEB543A815BC65F200C6CDAD /* Gujiashi */,
 				3852DDD815B8402600ADB7C8 /* more */,
 				38D2A33415B8187C000C5D6D /* RegisterViewController.h */,
 				38D2A33515B8187C000C5D6D /* RegisterViewController.m */,
@@ -350,9 +395,6 @@
 				BE85B54E15B3378C0010E0F5 /* GuanZhuViewController.h */,
 				BE85B54F15B3378C0010E0F5 /* GuanZhuViewController.m */,
 				BE85B55015B3378C0010E0F5 /* GuanZhuViewController.xib */,
-				BE85B55D15B33BE50010E0F5 /* GuJiaShiViewController.h */,
-				BE85B55E15B33BE50010E0F5 /* GuJiaShiViewController.m */,
-				BE85B55F15B33BE50010E0F5 /* GuJiaShiViewController.xib */,
 				3842FB5315B44C3000DA889E /* Localizable.strings */,
 			);
 			path = UI;
@@ -366,13 +408,42 @@
 			path = Documents;
 			sourceTree = "<group>";
 		};
+		BEB543A815BC65F200C6CDAD /* Gujiashi */ = {
+			isa = PBXGroup;
+			children = (
+				BE85B55D15B33BE50010E0F5 /* GuJiaShiViewController.h */,
+				BE85B55E15B33BE50010E0F5 /* GuJiaShiViewController.m */,
+				BE85B55F15B33BE50010E0F5 /* GuJiaShiViewController.xib */,
+				BEB543A915BC662500C6CDAD /* GujiashihuijiaViewController.h */,
+				BEB543AA15BC662500C6CDAD /* GujiashihuijiaViewController.m */,
+				BEB543AB15BC662500C6CDAD /* GujiashihuijiaViewController.xib */,
+				BEB543AE15BC66C900C6CDAD /* PinggujigouViewController.h */,
+				BEB543AF15BC66C900C6CDAD /* PinggujigouViewController.m */,
+				BEB543B015BC66CA00C6CDAD /* PinggujigouViewController.xib */,
+				BEB543BF15BC79B400C6CDAD /* HuijiaLV1CellViewController.h */,
+				BEB543C015BC79B400C6CDAD /* HuijiaLV1CellViewController.m */,
+				BEB543C115BC79B400C6CDAD /* HuijiaLV1CellViewController.xib */,
+				BEB543D015BC80D900C6CDAD /* HuijiaLV1Cell.h */,
+				BEB543D115BC80DA00C6CDAD /* HuijiaLV1Cell.m */,
+				BEB543D315BC877000C6CDAD /* HuijiaxiangqingViewController.h */,
+				BEB543D415BC877100C6CDAD /* HuijiaxiangqingViewController.m */,
+				BEB543D515BC877200C6CDAD /* HuijiaxiangqingViewController.xib */,
+				BEB543D815BC889700C6CDAD /* HuijiaxiangqingCellViewController.h */,
+				BEB543D915BC889800C6CDAD /* HuijiaxiangqingCellViewController.m */,
+				BEB543DA15BC889900C6CDAD /* HuijiaxiangqingCellViewController.xib */,
+				BEB543DF15BC8A7600C6CDAD /* HuijiaxiangqingCell.h */,
+				BEB543E015BC8A7600C6CDAD /* HuijiaxiangqingCell.m */,
+			);
+			name = Gujiashi;
+			sourceTree = "<group>";
+		};
 		F3D9CC7115B8179C00FA63AE /* Xunjia */ = {
 			isa = PBXGroup;
 			children = (
-				BE85B54915B3375E0010E0F5 /* XunJiaViewController.h */,
 				F3D9CC7315B819DD00FA63AE /* DetailViewController.h */,
 				F3D9CC7415B819DD00FA63AE /* DetailViewController.m */,
 				F3D9CC7515B819DE00FA63AE /* DetailViewController.xib */,
+				BE85B54915B3375E0010E0F5 /* XunJiaViewController.h */,
 				BE85B54A15B3375E0010E0F5 /* XunJiaViewController.m */,
 				BE85B54B15B3375E0010E0F5 /* XunJiaViewController.xib */,
 				F3D9CC7915B81AD100FA63AE /* KaishixunjiaViewController.h */,
@@ -399,6 +470,12 @@
 				F3D9CCA015B822BC00FA63AE /* FanghaoCell.h */,
 				F3D9CCA115B822BC00FA63AE /* FanghaoCell.m */,
 				F3D9CCA315B8230E00FA63AE /* LoupanCell.xib */,
+				BEB5439915BC55AC00C6CDAD /* SousuoloupanViewController.h */,
+				BEB5439A15BC55AC00C6CDAD /* SousuoloupanViewController.m */,
+				BEB5439B15BC55AD00C6CDAD /* SousuoloupanViewController.xib */,
+				BEB543A315BC618D00C6CDAD /* FunjinloupanViewController.h */,
+				BEB543A415BC618D00C6CDAD /* FunjinloupanViewController.m */,
+				BEB543A515BC618E00C6CDAD /* FunjinloupanViewController.xib */,
 			);
 			name = Xunjia;
 			sourceTree = "<group>";
@@ -487,6 +564,14 @@
 				38E2F9B815BBB4D900EB72D0 /* topbar_button_back.png in Resources */,
 				38E2F9B915BBB4D900EB72D0 /* topbar_button_back@2x.png in Resources */,
 				38E2F9BB15BBB83500EB72D0 /* logo.png in Resources */,
+				BEB5439D15BC55AE00C6CDAD /* SousuoloupanViewController.xib in Resources */,
+				BEB543A715BC618E00C6CDAD /* FunjinloupanViewController.xib in Resources */,
+				BEB543AD15BC662500C6CDAD /* GujiashihuijiaViewController.xib in Resources */,
+				BEB543B215BC66CA00C6CDAD /* PinggujigouViewController.xib in Resources */,
+				BEB543C315BC79B400C6CDAD /* HuijiaLV1CellViewController.xib in Resources */,
+				BEB543D715BC877200C6CDAD /* HuijiaxiangqingViewController.xib in Resources */,
+				BEB543DC15BC889A00C6CDAD /* HuijiaxiangqingCellViewController.xib in Resources */,
+				BEB543DE15BC895F00C6CDAD /* shilian.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -529,6 +614,15 @@
 				3887893115BAD3D600B919B5 /* PersonIdentifyViewController.m in Sources */,
 				3887893615BAD3E600B919B5 /* FeedBackViewController.m in Sources */,
 				38E2F9AD15BBA00500EB72D0 /* SystemMsgRecord.m in Sources */,
+				BEB5439C15BC55AE00C6CDAD /* SousuoloupanViewController.m in Sources */,
+				BEB543A615BC618E00C6CDAD /* FunjinloupanViewController.m in Sources */,
+				BEB543AC15BC662500C6CDAD /* GujiashihuijiaViewController.m in Sources */,
+				BEB543B115BC66CA00C6CDAD /* PinggujigouViewController.m in Sources */,
+				BEB543C215BC79B400C6CDAD /* HuijiaLV1CellViewController.m in Sources */,
+				BEB543D215BC80DA00C6CDAD /* HuijiaLV1Cell.m in Sources */,
+				BEB543D615BC877200C6CDAD /* HuijiaxiangqingViewController.m in Sources */,
+				BEB543DB15BC889A00C6CDAD /* HuijiaxiangqingCellViewController.m in Sources */,
+				BEB543E115BC8A7700C6CDAD /* HuijiaxiangqingCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
