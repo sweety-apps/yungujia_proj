@@ -7,13 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PinggujigouLV1CellViewController.h"
+#import "PinggujigouxiangqingViewController.h"
 
-@interface PinggujigouViewController : UIViewController
+@interface PinggujigouViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
 {
     
 }
 
 //controllers
 @property (nonatomic,retain) IBOutlet UINavigationController* navctrl;
+@property (nonatomic,retain) IBOutlet PinggujigouxiangqingViewController* xiangqingctrl;
 
 @end

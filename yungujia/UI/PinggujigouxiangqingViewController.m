@@ -1,21 +1,24 @@
 //
-//  PinggujigouViewController.m
+//  PinggujigouxiangqingViewController.m
 //  yungujia
 //
-//  Created by lijinxin on 12-7-23.
+//  Created by Justin Lee on 12-7-23.
 //  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
 //
 
-#import "PinggujigouViewController.h"
+#import "PinggujigouxiangqingViewController.h"
 
-@interface PinggujigouViewController ()
+@interface PinggujigouxiangqingViewController ()
 
 @end
 
-@implementation PinggujigouViewController
+@implementation PinggujigouxiangqingViewController
+
+@synthesize logo = _logo;
+@synthesize xiangqing = _xiangqing;
 
 @synthesize navctrl = _navctrl;
-@synthesize xiangqingctrl = _xiangqingctrl;
+@synthesize yinhangctrl = _yinhangctrl;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -26,16 +29,17 @@
     return self;
 }
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.xiangqingctrl = [[PinggujigouxiangqingViewController alloc] initWithNibName:@"PinggujigouxiangqingViewController" bundle:nil];
+    self.yinhangctrl = [[PinggujigouyinhangViewController alloc] initWithNibName:@"PinggujigouyinhangViewController" bundle:nil];
 }
 
 - (void)viewDidUnload
 {
-    [self.xiangqingctrl release];
+    [self.yinhangctrl release];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -50,11 +54,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Pinggujigoulv1Cell *cell = (Pinggujigoulv1Cell*)[tableView cellForRowAtIndexPath:indexPath];
+    PinggujigouyinhangCell *cell = (PinggujigouyinhangCell*)[tableView cellForRowAtIndexPath:indexPath];
     if (cell.accessoryType != UITableViewCellAccessoryNone)
     {
-        _xiangqingctrl.title = cell.xxpinggu.text;
-        [_navctrl pushViewController:_xiangqingctrl animated:YES];
+        _yinhangctrl.title = @"入围银行";
+        [self.navigationController pushViewController:_yinhangctrl animated:YES];
     }
 }
 
@@ -62,7 +66,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 12;
+    return 2;
 }
 
 // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
@@ -72,32 +76,34 @@
 {
     int row = indexPath.row;
     
-    static NSString* reuseID = @"pgjglv1cell";
+    static NSString* reuseID = @"pgjgyhcell";
     
-    Pinggujigoulv1Cell *cell = (Pinggujigoulv1Cell*)[tableView dequeueReusableCellWithIdentifier:reuseID];
+    PinggujigouyinhangCell *cell = (PinggujigouyinhangCell*)[tableView dequeueReusableCellWithIdentifier:reuseID];
     if (cell == nil)
     {
         // Create a temporary UIViewController to instantiate the custom cell.
-        PinggujigouLV1CellViewController* temporaryController = [[PinggujigouLV1CellViewController alloc] initWithNibName:@"PinggujigouLV1CellViewController" bundle:nil];
+        PinggujigouyinhangCellViewController* temporaryController = [[PinggujigouyinhangCellViewController alloc] initWithNibName:@"PinggujigouyinhangCellViewController" bundle:nil];
         // Grab a pointer to the custom cell.
-        cell = (Pinggujigoulv1Cell *)temporaryController.view;
+        cell = (PinggujigouyinhangCell *)temporaryController.view;
         [temporaryController release];
     }
     
-    if (row%2 == 0)
+    if (row == 0)
     {
-        cell.xxpinggu.text = @"世联评估";
-        //cell.xxpinggu.textColor = [UIColor blueColor];
-        //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.left.text = @"机构资质";
+        cell.right.text = @"国家土地一级,房地产一级";
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        
     }
     else
     {
-        cell.xxpinggu.text = @"同志城";
-        //cell.xxpinggu.textColor = [UIColor darkGrayColor];
-        //cell.accessoryType = UITableViewCellAccessoryNone;
+        cell.left.text = @"入围银行";
+        cell.right.text = @"24家";
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
     return cell;
 }
 
 @end
+

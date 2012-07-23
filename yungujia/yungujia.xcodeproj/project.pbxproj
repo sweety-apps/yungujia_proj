@@ -76,6 +76,17 @@
 		BEB543DC15BC889A00C6CDAD /* HuijiaxiangqingCellViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEB543DA15BC889900C6CDAD /* HuijiaxiangqingCellViewController.xib */; };
 		BEB543DE15BC895F00C6CDAD /* shilian.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB543DD15BC895F00C6CDAD /* shilian.png */; };
 		BEB543E115BC8A7700C6CDAD /* HuijiaxiangqingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB543E015BC8A7600C6CDAD /* HuijiaxiangqingCell.m */; };
+		F302BD0115BCE4A300FB1663 /* Pinggujigoulv1Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = F302BD0015BCE4A300FB1663 /* Pinggujigoulv1Cell.m */; };
+		F302BD0515BCE4CF00FB1663 /* PinggujigouLV1CellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F302BD0315BCE4CF00FB1663 /* PinggujigouLV1CellViewController.m */; };
+		F302BD0615BCE4CF00FB1663 /* PinggujigouLV1CellViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F302BD0415BCE4CF00FB1663 /* PinggujigouLV1CellViewController.xib */; };
+		F302BD0A15BCEFCA00FB1663 /* PinggujigouxiangqingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F302BD0815BCEFC800FB1663 /* PinggujigouxiangqingViewController.m */; };
+		F302BD0B15BCEFCA00FB1663 /* PinggujigouxiangqingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F302BD0915BCEFC900FB1663 /* PinggujigouxiangqingViewController.xib */; };
+		F302BD0D15BCF6BD00FB1663 /* shilian_long.png in Resources */ = {isa = PBXBuildFile; fileRef = F302BD0C15BCF6BD00FB1663 /* shilian_long.png */; };
+		F302BD1115BCF78700FB1663 /* PinggujigouyinhangViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F302BD0F15BCF78500FB1663 /* PinggujigouyinhangViewController.m */; };
+		F302BD1215BCF78700FB1663 /* PinggujigouyinhangViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F302BD1015BCF78600FB1663 /* PinggujigouyinhangViewController.xib */; };
+		F302BD1515BCF89200FB1663 /* PinggujigouyinhangCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F302BD1415BCF89100FB1663 /* PinggujigouyinhangCell.m */; };
+		F302BD1C15BCF91C00FB1663 /* PinggujigouyinhangCellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F302BD1A15BCF91A00FB1663 /* PinggujigouyinhangCellViewController.m */; };
+		F302BD1D15BCF91C00FB1663 /* PinggujigouyinhangCellViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F302BD1B15BCF91B00FB1663 /* PinggujigouyinhangCellViewController.xib */; };
 		F3D9CC7615B819DE00FA63AE /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3D9CC7415B819DD00FA63AE /* DetailViewController.m */; };
 		F3D9CC7715B819DE00FA63AE /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3D9CC7515B819DE00FA63AE /* DetailViewController.xib */; };
 		F3D9CC7C15B81AD100FA63AE /* KaishixunjiaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3D9CC7A15B81AD100FA63AE /* KaishixunjiaViewController.m */; };
@@ -198,6 +209,23 @@
 		BEB543DD15BC895F00C6CDAD /* shilian.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shilian.png; sourceTree = "<group>"; };
 		BEB543DF15BC8A7600C6CDAD /* HuijiaxiangqingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HuijiaxiangqingCell.h; sourceTree = "<group>"; };
 		BEB543E015BC8A7600C6CDAD /* HuijiaxiangqingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HuijiaxiangqingCell.m; sourceTree = "<group>"; };
+		F302BCFF15BCE4A300FB1663 /* Pinggujigoulv1Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pinggujigoulv1Cell.h; sourceTree = "<group>"; };
+		F302BD0015BCE4A300FB1663 /* Pinggujigoulv1Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pinggujigoulv1Cell.m; sourceTree = "<group>"; };
+		F302BD0215BCE4CF00FB1663 /* PinggujigouLV1CellViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinggujigouLV1CellViewController.h; sourceTree = "<group>"; };
+		F302BD0315BCE4CF00FB1663 /* PinggujigouLV1CellViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinggujigouLV1CellViewController.m; sourceTree = "<group>"; };
+		F302BD0415BCE4CF00FB1663 /* PinggujigouLV1CellViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PinggujigouLV1CellViewController.xib; sourceTree = "<group>"; };
+		F302BD0715BCEFC800FB1663 /* PinggujigouxiangqingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinggujigouxiangqingViewController.h; sourceTree = "<group>"; };
+		F302BD0815BCEFC800FB1663 /* PinggujigouxiangqingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinggujigouxiangqingViewController.m; sourceTree = "<group>"; };
+		F302BD0915BCEFC900FB1663 /* PinggujigouxiangqingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PinggujigouxiangqingViewController.xib; sourceTree = "<group>"; };
+		F302BD0C15BCF6BD00FB1663 /* shilian_long.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shilian_long.png; sourceTree = "<group>"; };
+		F302BD0E15BCF78500FB1663 /* PinggujigouyinhangViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinggujigouyinhangViewController.h; sourceTree = "<group>"; };
+		F302BD0F15BCF78500FB1663 /* PinggujigouyinhangViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinggujigouyinhangViewController.m; sourceTree = "<group>"; };
+		F302BD1015BCF78600FB1663 /* PinggujigouyinhangViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PinggujigouyinhangViewController.xib; sourceTree = "<group>"; };
+		F302BD1315BCF89000FB1663 /* PinggujigouyinhangCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinggujigouyinhangCell.h; sourceTree = "<group>"; };
+		F302BD1415BCF89100FB1663 /* PinggujigouyinhangCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinggujigouyinhangCell.m; sourceTree = "<group>"; };
+		F302BD1915BCF91A00FB1663 /* PinggujigouyinhangCellViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinggujigouyinhangCellViewController.h; sourceTree = "<group>"; };
+		F302BD1A15BCF91A00FB1663 /* PinggujigouyinhangCellViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinggujigouyinhangCellViewController.m; sourceTree = "<group>"; };
+		F302BD1B15BCF91B00FB1663 /* PinggujigouyinhangCellViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PinggujigouyinhangCellViewController.xib; sourceTree = "<group>"; };
 		F3D9CC7315B819DD00FA63AE /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		F3D9CC7415B819DD00FA63AE /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		F3D9CC7515B819DE00FA63AE /* DetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
@@ -281,6 +309,7 @@
 		38E2F9A515BB9D6E00EB72D0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F302BD0C15BCF6BD00FB1663 /* shilian_long.png */,
 				BEB543DD15BC895F00C6CDAD /* shilian.png */,
 				38E2F9BA15BBB83500EB72D0 /* logo.png */,
 				38E2F9B215BBB4D900EB72D0 /* topbar_button_back_hover.png */,
@@ -411,15 +440,18 @@
 		BEB543A815BC65F200C6CDAD /* Gujiashi */ = {
 			isa = PBXGroup;
 			children = (
+				F302BD1F15BD2C8300FB1663 /* Pinggujigou */,
+				F302BD1E15BD2C7800FB1663 /* Gujiashihuijia */,
 				BE85B55D15B33BE50010E0F5 /* GuJiaShiViewController.h */,
 				BE85B55E15B33BE50010E0F5 /* GuJiaShiViewController.m */,
 				BE85B55F15B33BE50010E0F5 /* GuJiaShiViewController.xib */,
-				BEB543A915BC662500C6CDAD /* GujiashihuijiaViewController.h */,
-				BEB543AA15BC662500C6CDAD /* GujiashihuijiaViewController.m */,
-				BEB543AB15BC662500C6CDAD /* GujiashihuijiaViewController.xib */,
-				BEB543AE15BC66C900C6CDAD /* PinggujigouViewController.h */,
-				BEB543AF15BC66C900C6CDAD /* PinggujigouViewController.m */,
-				BEB543B015BC66CA00C6CDAD /* PinggujigouViewController.xib */,
+			);
+			name = Gujiashi;
+			sourceTree = "<group>";
+		};
+		F302BD1E15BD2C7800FB1663 /* Gujiashihuijia */ = {
+			isa = PBXGroup;
+			children = (
 				BEB543BF15BC79B400C6CDAD /* HuijiaLV1CellViewController.h */,
 				BEB543C015BC79B400C6CDAD /* HuijiaLV1CellViewController.m */,
 				BEB543C115BC79B400C6CDAD /* HuijiaLV1CellViewController.xib */,
@@ -433,8 +465,37 @@
 				BEB543DA15BC889900C6CDAD /* HuijiaxiangqingCellViewController.xib */,
 				BEB543DF15BC8A7600C6CDAD /* HuijiaxiangqingCell.h */,
 				BEB543E015BC8A7600C6CDAD /* HuijiaxiangqingCell.m */,
+				BEB543A915BC662500C6CDAD /* GujiashihuijiaViewController.h */,
+				BEB543AA15BC662500C6CDAD /* GujiashihuijiaViewController.m */,
+				BEB543AB15BC662500C6CDAD /* GujiashihuijiaViewController.xib */,
 			);
-			name = Gujiashi;
+			name = Gujiashihuijia;
+			sourceTree = "<group>";
+		};
+		F302BD1F15BD2C8300FB1663 /* Pinggujigou */ = {
+			isa = PBXGroup;
+			children = (
+				BEB543AE15BC66C900C6CDAD /* PinggujigouViewController.h */,
+				BEB543AF15BC66C900C6CDAD /* PinggujigouViewController.m */,
+				BEB543B015BC66CA00C6CDAD /* PinggujigouViewController.xib */,
+				F302BD0715BCEFC800FB1663 /* PinggujigouxiangqingViewController.h */,
+				F302BD0815BCEFC800FB1663 /* PinggujigouxiangqingViewController.m */,
+				F302BD0915BCEFC900FB1663 /* PinggujigouxiangqingViewController.xib */,
+				F302BD0E15BCF78500FB1663 /* PinggujigouyinhangViewController.h */,
+				F302BD0F15BCF78500FB1663 /* PinggujigouyinhangViewController.m */,
+				F302BD1015BCF78600FB1663 /* PinggujigouyinhangViewController.xib */,
+				F302BD1315BCF89000FB1663 /* PinggujigouyinhangCell.h */,
+				F302BD1415BCF89100FB1663 /* PinggujigouyinhangCell.m */,
+				F302BD1915BCF91A00FB1663 /* PinggujigouyinhangCellViewController.h */,
+				F302BD1A15BCF91A00FB1663 /* PinggujigouyinhangCellViewController.m */,
+				F302BD1B15BCF91B00FB1663 /* PinggujigouyinhangCellViewController.xib */,
+				F302BCFF15BCE4A300FB1663 /* Pinggujigoulv1Cell.h */,
+				F302BD0015BCE4A300FB1663 /* Pinggujigoulv1Cell.m */,
+				F302BD0215BCE4CF00FB1663 /* PinggujigouLV1CellViewController.h */,
+				F302BD0315BCE4CF00FB1663 /* PinggujigouLV1CellViewController.m */,
+				F302BD0415BCE4CF00FB1663 /* PinggujigouLV1CellViewController.xib */,
+			);
+			name = Pinggujigou;
 			sourceTree = "<group>";
 		};
 		F3D9CC7115B8179C00FA63AE /* Xunjia */ = {
@@ -572,6 +633,11 @@
 				BEB543D715BC877200C6CDAD /* HuijiaxiangqingViewController.xib in Resources */,
 				BEB543DC15BC889A00C6CDAD /* HuijiaxiangqingCellViewController.xib in Resources */,
 				BEB543DE15BC895F00C6CDAD /* shilian.png in Resources */,
+				F302BD0615BCE4CF00FB1663 /* PinggujigouLV1CellViewController.xib in Resources */,
+				F302BD0B15BCEFCA00FB1663 /* PinggujigouxiangqingViewController.xib in Resources */,
+				F302BD0D15BCF6BD00FB1663 /* shilian_long.png in Resources */,
+				F302BD1215BCF78700FB1663 /* PinggujigouyinhangViewController.xib in Resources */,
+				F302BD1D15BCF91C00FB1663 /* PinggujigouyinhangCellViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -623,6 +689,12 @@
 				BEB543D615BC877200C6CDAD /* HuijiaxiangqingViewController.m in Sources */,
 				BEB543DB15BC889A00C6CDAD /* HuijiaxiangqingCellViewController.m in Sources */,
 				BEB543E115BC8A7700C6CDAD /* HuijiaxiangqingCell.m in Sources */,
+				F302BD0115BCE4A300FB1663 /* Pinggujigoulv1Cell.m in Sources */,
+				F302BD0515BCE4CF00FB1663 /* PinggujigouLV1CellViewController.m in Sources */,
+				F302BD0A15BCEFCA00FB1663 /* PinggujigouxiangqingViewController.m in Sources */,
+				F302BD1115BCF78700FB1663 /* PinggujigouyinhangViewController.m in Sources */,
+				F302BD1515BCF89200FB1663 /* PinggujigouyinhangCell.m in Sources */,
+				F302BD1C15BCF91C00FB1663 /* PinggujigouyinhangCellViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
