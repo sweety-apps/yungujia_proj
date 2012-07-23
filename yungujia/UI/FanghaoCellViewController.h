@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FanghaoCell.h"
 
 @interface FanghaoCellViewController : UIViewController
 

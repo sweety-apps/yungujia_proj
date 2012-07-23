@@ -9,5 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface KaishixunjiaCell1Cell : UITableViewCell
+{
+    
+}
+
+//views
+@property (nonatomic,retain) IBOutlet UILabel* title;
+@property (nonatomic,retain) IBOutlet UITextField* detail;
 
 @end

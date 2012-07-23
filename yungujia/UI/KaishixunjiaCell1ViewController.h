@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "KaishixunjiaCell1Cell.h"
 
 @interface KaishixunjiaCell1ViewController : UIViewController
 

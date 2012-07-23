@@ -10,6 +10,10 @@
 
 @implementation LoudongCell
 
+@synthesize xxdong = _xxdong;
+@synthesize gongxxcengxxhu = _gongxxcengxxhu;
+@synthesize danjia = _danjia;
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];

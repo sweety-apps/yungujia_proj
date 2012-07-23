@@ -7,7 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LoupanTableViewController.h"
 
 @interface FunjinloupanViewController : UIViewController
+{
+    
+}
+
+//infos
+
+//views
+@property (nonatomic,retain) IBOutlet UINavigationBar* navbar;
+
+//controllers
+@property (nonatomic,retain) IBOutlet UINavigationController* navctrl;
+@property (nonatomic,retain) IBOutlet LoupanTableViewController* loupanctrl;
 
 @end

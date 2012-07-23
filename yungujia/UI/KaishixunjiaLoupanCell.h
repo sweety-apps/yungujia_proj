@@ -9,5 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface KaishixunjiaLoupanCell : UITableViewCell
+{
+    
+}
+
+//views
+@property (nonatomic,retain) IBOutlet UILabel* title;
+@property (nonatomic,retain) IBOutlet UILabel* value;
 
 @end

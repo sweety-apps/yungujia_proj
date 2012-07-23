@@ -9,5 +9,15 @@
 #import <UIKit/UIKit.h>
 
 @interface LoupanCell : UITableViewCell
+{
+    
+}
+
+//views
+@property (nonatomic,retain) IBOutlet UILabel* xxhuayuan;
+@property (nonatomic,retain) IBOutlet UILabel* xxdiduan;
+@property (nonatomic,retain) IBOutlet UILabel* gongxxdongxxhu;
+@property (nonatomic,retain) IBOutlet UILabel* danjia;
+@property (nonatomic,retain) IBOutlet UILabel* xxminei;
 
 @end

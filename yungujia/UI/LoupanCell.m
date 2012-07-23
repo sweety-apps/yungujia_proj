@@ -10,6 +10,12 @@
 
 @implementation LoupanCell
 
+@synthesize xxhuayuan = _xxhuayuan;
+@synthesize xxdiduan = _xxdiduan;
+@synthesize gongxxdongxxhu = _gongxxdongxxhu;
+@synthesize danjia = _danjia;
+@synthesize xxminei = _xxminei;
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];

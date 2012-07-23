@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "KaishixunjiaLoupanCell.h"
 
 @interface KaishixunjiaLoupanCellViewController : UIViewController
 

@@ -10,6 +10,9 @@
 
 @implementation KaishixunjiaLoupanCell
 
+@synthesize title = _title;
+@synthesize value = _value;
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];

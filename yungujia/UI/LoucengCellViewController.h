@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LoucengCell.h"
 
 @interface LoucengCellViewController : UIViewController
 

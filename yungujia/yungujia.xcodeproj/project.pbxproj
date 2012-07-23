@@ -59,6 +59,28 @@
 		BE85B55C15B337B60010E0F5 /* GengDuoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE85B55A15B337B60010E0F5 /* GengDuoViewController.xib */; };
 		BE85B56015B33BE50010E0F5 /* GuJiaShiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE85B55E15B33BE50010E0F5 /* GuJiaShiViewController.m */; };
 		BE85B56115B33BE50010E0F5 /* GuJiaShiViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE85B55F15B33BE50010E0F5 /* GuJiaShiViewController.xib */; };
+		BEB0DD1C15BDC15B00AAB4B7 /* LoupanCellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB0DD1A15BDC15B00AAB4B7 /* LoupanCellViewController.m */; };
+		BEB0DD1D15BDC15B00AAB4B7 /* LoupanCellViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEB0DD1B15BDC15B00AAB4B7 /* LoupanCellViewController.xib */; };
+		BEB0DD2115BDC17800AAB4B7 /* LoucengCellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB0DD1F15BDC17800AAB4B7 /* LoucengCellViewController.m */; };
+		BEB0DD2215BDC17800AAB4B7 /* LoucengCellViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEB0DD2015BDC17800AAB4B7 /* LoucengCellViewController.xib */; };
+		BEB0DD2615BDC1A700AAB4B7 /* LoudongCellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB0DD2415BDC1A700AAB4B7 /* LoudongCellViewController.m */; };
+		BEB0DD2715BDC1A700AAB4B7 /* LoudongCellViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEB0DD2515BDC1A700AAB4B7 /* LoudongCellViewController.xib */; };
+		BEB0DD2F15BDC22600AAB4B7 /* FanghaoCellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB0DD2D15BDC22600AAB4B7 /* FanghaoCellViewController.m */; };
+		BEB0DD3015BDC22600AAB4B7 /* FanghaoCellViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEB0DD2E15BDC22600AAB4B7 /* FanghaoCellViewController.xib */; };
+		BEB0DD3415BDC26300AAB4B7 /* LoupanTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB0DD3215BDC26300AAB4B7 /* LoupanTableViewController.m */; };
+		BEB0DD3515BDC26300AAB4B7 /* LoupanTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEB0DD3315BDC26300AAB4B7 /* LoupanTableViewController.xib */; };
+		BEB0DD3A15BDC28800AAB4B7 /* LoucengTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB0DD3815BDC28800AAB4B7 /* LoucengTableViewController.m */; };
+		BEB0DD3B15BDC28800AAB4B7 /* LoucengTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEB0DD3915BDC28800AAB4B7 /* LoucengTableViewController.xib */; };
+		BEB0DD3F15BDC29D00AAB4B7 /* LoudongTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB0DD3D15BDC29D00AAB4B7 /* LoudongTableViewController.m */; };
+		BEB0DD4015BDC29D00AAB4B7 /* LoudongTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEB0DD3E15BDC29D00AAB4B7 /* LoudongTableViewController.xib */; };
+		BEB0DD4415BDC2B100AAB4B7 /* FanghaoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB0DD4215BDC2B100AAB4B7 /* FanghaoTableViewController.m */; };
+		BEB0DD4515BDC2B100AAB4B7 /* FanghaoTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEB0DD4315BDC2B100AAB4B7 /* FanghaoTableViewController.xib */; };
+		BEB0DD4A15BDE5C800AAB4B7 /* KaishixunjiaLoupanCellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB0DD4815BDE5C800AAB4B7 /* KaishixunjiaLoupanCellViewController.m */; };
+		BEB0DD4B15BDE5C800AAB4B7 /* KaishixunjiaLoupanCellViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEB0DD4915BDE5C800AAB4B7 /* KaishixunjiaLoupanCellViewController.xib */; };
+		BEB0DD4F15BDE60000AAB4B7 /* KaishixunjiaCell1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB0DD4D15BDE60000AAB4B7 /* KaishixunjiaCell1ViewController.m */; };
+		BEB0DD5015BDE60000AAB4B7 /* KaishixunjiaCell1ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEB0DD4E15BDE60000AAB4B7 /* KaishixunjiaCell1ViewController.xib */; };
+		BEB0DD5315BDE63C00AAB4B7 /* KaishixunjiaLoupanCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB0DD5215BDE63B00AAB4B7 /* KaishixunjiaLoupanCell.m */; };
+		BEB0DD5615BDE65300AAB4B7 /* KaishixunjiaCell1Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB0DD5515BDE65300AAB4B7 /* KaishixunjiaCell1Cell.m */; };
 		BEB5439C15BC55AE00C6CDAD /* SousuoloupanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB5439A15BC55AC00C6CDAD /* SousuoloupanViewController.m */; };
 		BEB5439D15BC55AE00C6CDAD /* SousuoloupanViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEB5439B15BC55AD00C6CDAD /* SousuoloupanViewController.xib */; };
 		BEB543A615BC618E00C6CDAD /* FunjinloupanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB543A415BC618D00C6CDAD /* FunjinloupanViewController.m */; };
@@ -87,8 +109,6 @@
 		F302BD1515BCF89200FB1663 /* PinggujigouyinhangCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F302BD1415BCF89100FB1663 /* PinggujigouyinhangCell.m */; };
 		F302BD1C15BCF91C00FB1663 /* PinggujigouyinhangCellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F302BD1A15BCF91A00FB1663 /* PinggujigouyinhangCellViewController.m */; };
 		F302BD1D15BCF91C00FB1663 /* PinggujigouyinhangCellViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F302BD1B15BCF91B00FB1663 /* PinggujigouyinhangCellViewController.xib */; };
-		F3D9CC7615B819DE00FA63AE /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3D9CC7415B819DD00FA63AE /* DetailViewController.m */; };
-		F3D9CC7715B819DE00FA63AE /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3D9CC7515B819DE00FA63AE /* DetailViewController.xib */; };
 		F3D9CC7C15B81AD100FA63AE /* KaishixunjiaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3D9CC7A15B81AD100FA63AE /* KaishixunjiaViewController.m */; };
 		F3D9CC7D15B81AD100FA63AE /* KaishixunjiaViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3D9CC7B15B81AD100FA63AE /* KaishixunjiaViewController.xib */; };
 		F3D9CC8115B81B8F00FA63AE /* XunjiajieguoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3D9CC7F15B81B8F00FA63AE /* XunjiajieguoViewController.m */; };
@@ -103,7 +123,6 @@
 		F3D9CC9C15B8228700FA63AE /* LoucengCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F3D9CC9B15B8228700FA63AE /* LoucengCell.m */; };
 		F3D9CC9F15B8229800FA63AE /* LoudongCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F3D9CC9E15B8229700FA63AE /* LoudongCell.m */; };
 		F3D9CCA215B822BD00FA63AE /* FanghaoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F3D9CCA115B822BC00FA63AE /* FanghaoCell.m */; };
-		F3D9CCA415B8230E00FA63AE /* LoupanCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3D9CCA315B8230E00FA63AE /* LoupanCell.xib */; };
 		F3DBEADC15BD31690040CDED /* GuanzhuLV1CellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3DBEADA15BD31690040CDED /* GuanzhuLV1CellViewController.m */; };
 		F3DBEADD15BD31690040CDED /* GuanzhuLV1CellViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3DBEADB15BD31690040CDED /* GuanzhuLV1CellViewController.xib */; };
 		F3DBEAE015BD31910040CDED /* GuanzhuLV1Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = F3DBEADF15BD31910040CDED /* GuanzhuLV1Cell.m */; };
@@ -186,6 +205,40 @@
 		BE85B55D15B33BE50010E0F5 /* GuJiaShiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuJiaShiViewController.h; sourceTree = "<group>"; };
 		BE85B55E15B33BE50010E0F5 /* GuJiaShiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuJiaShiViewController.m; sourceTree = "<group>"; };
 		BE85B55F15B33BE50010E0F5 /* GuJiaShiViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GuJiaShiViewController.xib; sourceTree = "<group>"; };
+		BEB0DD1915BDC15B00AAB4B7 /* LoupanCellViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoupanCellViewController.h; sourceTree = "<group>"; };
+		BEB0DD1A15BDC15B00AAB4B7 /* LoupanCellViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoupanCellViewController.m; sourceTree = "<group>"; };
+		BEB0DD1B15BDC15B00AAB4B7 /* LoupanCellViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoupanCellViewController.xib; sourceTree = "<group>"; };
+		BEB0DD1E15BDC17800AAB4B7 /* LoucengCellViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoucengCellViewController.h; sourceTree = "<group>"; };
+		BEB0DD1F15BDC17800AAB4B7 /* LoucengCellViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoucengCellViewController.m; sourceTree = "<group>"; };
+		BEB0DD2015BDC17800AAB4B7 /* LoucengCellViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoucengCellViewController.xib; sourceTree = "<group>"; };
+		BEB0DD2315BDC1A700AAB4B7 /* LoudongCellViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoudongCellViewController.h; sourceTree = "<group>"; };
+		BEB0DD2415BDC1A700AAB4B7 /* LoudongCellViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoudongCellViewController.m; sourceTree = "<group>"; };
+		BEB0DD2515BDC1A700AAB4B7 /* LoudongCellViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoudongCellViewController.xib; sourceTree = "<group>"; };
+		BEB0DD2C15BDC22600AAB4B7 /* FanghaoCellViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FanghaoCellViewController.h; sourceTree = "<group>"; };
+		BEB0DD2D15BDC22600AAB4B7 /* FanghaoCellViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FanghaoCellViewController.m; sourceTree = "<group>"; };
+		BEB0DD2E15BDC22600AAB4B7 /* FanghaoCellViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FanghaoCellViewController.xib; sourceTree = "<group>"; };
+		BEB0DD3115BDC26300AAB4B7 /* LoupanTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoupanTableViewController.h; sourceTree = "<group>"; };
+		BEB0DD3215BDC26300AAB4B7 /* LoupanTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoupanTableViewController.m; sourceTree = "<group>"; };
+		BEB0DD3315BDC26300AAB4B7 /* LoupanTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoupanTableViewController.xib; sourceTree = "<group>"; };
+		BEB0DD3715BDC28800AAB4B7 /* LoucengTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoucengTableViewController.h; sourceTree = "<group>"; };
+		BEB0DD3815BDC28800AAB4B7 /* LoucengTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoucengTableViewController.m; sourceTree = "<group>"; };
+		BEB0DD3915BDC28800AAB4B7 /* LoucengTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoucengTableViewController.xib; sourceTree = "<group>"; };
+		BEB0DD3C15BDC29D00AAB4B7 /* LoudongTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoudongTableViewController.h; sourceTree = "<group>"; };
+		BEB0DD3D15BDC29D00AAB4B7 /* LoudongTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoudongTableViewController.m; sourceTree = "<group>"; };
+		BEB0DD3E15BDC29D00AAB4B7 /* LoudongTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoudongTableViewController.xib; sourceTree = "<group>"; };
+		BEB0DD4115BDC2B000AAB4B7 /* FanghaoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FanghaoTableViewController.h; sourceTree = "<group>"; };
+		BEB0DD4215BDC2B100AAB4B7 /* FanghaoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FanghaoTableViewController.m; sourceTree = "<group>"; };
+		BEB0DD4315BDC2B100AAB4B7 /* FanghaoTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FanghaoTableViewController.xib; sourceTree = "<group>"; };
+		BEB0DD4715BDE5C800AAB4B7 /* KaishixunjiaLoupanCellViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KaishixunjiaLoupanCellViewController.h; sourceTree = "<group>"; };
+		BEB0DD4815BDE5C800AAB4B7 /* KaishixunjiaLoupanCellViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KaishixunjiaLoupanCellViewController.m; sourceTree = "<group>"; };
+		BEB0DD4915BDE5C800AAB4B7 /* KaishixunjiaLoupanCellViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KaishixunjiaLoupanCellViewController.xib; sourceTree = "<group>"; };
+		BEB0DD4C15BDE60000AAB4B7 /* KaishixunjiaCell1ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KaishixunjiaCell1ViewController.h; sourceTree = "<group>"; };
+		BEB0DD4D15BDE60000AAB4B7 /* KaishixunjiaCell1ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KaishixunjiaCell1ViewController.m; sourceTree = "<group>"; };
+		BEB0DD4E15BDE60000AAB4B7 /* KaishixunjiaCell1ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KaishixunjiaCell1ViewController.xib; sourceTree = "<group>"; };
+		BEB0DD5115BDE63B00AAB4B7 /* KaishixunjiaLoupanCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KaishixunjiaLoupanCell.h; sourceTree = "<group>"; };
+		BEB0DD5215BDE63B00AAB4B7 /* KaishixunjiaLoupanCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KaishixunjiaLoupanCell.m; sourceTree = "<group>"; };
+		BEB0DD5415BDE65200AAB4B7 /* KaishixunjiaCell1Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KaishixunjiaCell1Cell.h; sourceTree = "<group>"; };
+		BEB0DD5515BDE65300AAB4B7 /* KaishixunjiaCell1Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KaishixunjiaCell1Cell.m; sourceTree = "<group>"; };
 		BEB5439915BC55AC00C6CDAD /* SousuoloupanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SousuoloupanViewController.h; sourceTree = "<group>"; };
 		BEB5439A15BC55AC00C6CDAD /* SousuoloupanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SousuoloupanViewController.m; sourceTree = "<group>"; };
 		BEB5439B15BC55AD00C6CDAD /* SousuoloupanViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SousuoloupanViewController.xib; sourceTree = "<group>"; };
@@ -229,9 +282,6 @@
 		F302BD1915BCF91A00FB1663 /* PinggujigouyinhangCellViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinggujigouyinhangCellViewController.h; sourceTree = "<group>"; };
 		F302BD1A15BCF91A00FB1663 /* PinggujigouyinhangCellViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinggujigouyinhangCellViewController.m; sourceTree = "<group>"; };
 		F302BD1B15BCF91B00FB1663 /* PinggujigouyinhangCellViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PinggujigouyinhangCellViewController.xib; sourceTree = "<group>"; };
-		F3D9CC7315B819DD00FA63AE /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
-		F3D9CC7415B819DD00FA63AE /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
-		F3D9CC7515B819DE00FA63AE /* DetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
 		F3D9CC7915B81AD100FA63AE /* KaishixunjiaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KaishixunjiaViewController.h; sourceTree = "<group>"; };
 		F3D9CC7A15B81AD100FA63AE /* KaishixunjiaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KaishixunjiaViewController.m; sourceTree = "<group>"; };
 		F3D9CC7B15B81AD100FA63AE /* KaishixunjiaViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KaishixunjiaViewController.xib; sourceTree = "<group>"; };
@@ -255,7 +305,6 @@
 		F3D9CC9E15B8229700FA63AE /* LoudongCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoudongCell.m; sourceTree = "<group>"; };
 		F3D9CCA015B822BC00FA63AE /* FanghaoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FanghaoCell.h; sourceTree = "<group>"; };
 		F3D9CCA115B822BC00FA63AE /* FanghaoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FanghaoCell.m; sourceTree = "<group>"; };
-		F3D9CCA315B8230E00FA63AE /* LoupanCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoupanCell.xib; sourceTree = "<group>"; };
 		F3DBEAD915BD31690040CDED /* GuanzhuLV1CellViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuanzhuLV1CellViewController.h; sourceTree = "<group>"; };
 		F3DBEADA15BD31690040CDED /* GuanzhuLV1CellViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuanzhuLV1CellViewController.m; sourceTree = "<group>"; };
 		F3DBEADB15BD31690040CDED /* GuanzhuLV1CellViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GuanzhuLV1CellViewController.xib; sourceTree = "<group>"; };
@@ -443,6 +492,86 @@
 			path = Documents;
 			sourceTree = "<group>";
 		};
+		BEB0DD2815BDC1D100AAB4B7 /* Loupan */ = {
+			isa = PBXGroup;
+			children = (
+				F3D9CC9715B8225800FA63AE /* LoupanCell.h */,
+				F3D9CC9815B8225800FA63AE /* LoupanCell.m */,
+				BEB0DD1915BDC15B00AAB4B7 /* LoupanCellViewController.h */,
+				BEB0DD1A15BDC15B00AAB4B7 /* LoupanCellViewController.m */,
+				BEB0DD1B15BDC15B00AAB4B7 /* LoupanCellViewController.xib */,
+				BEB0DD3115BDC26300AAB4B7 /* LoupanTableViewController.h */,
+				BEB0DD3215BDC26300AAB4B7 /* LoupanTableViewController.m */,
+				BEB0DD3315BDC26300AAB4B7 /* LoupanTableViewController.xib */,
+			);
+			name = Loupan;
+			sourceTree = "<group>";
+		};
+		BEB0DD2915BDC1DB00AAB4B7 /* Loudong */ = {
+			isa = PBXGroup;
+			children = (
+				F3D9CC9D15B8229700FA63AE /* LoudongCell.h */,
+				F3D9CC9E15B8229700FA63AE /* LoudongCell.m */,
+				BEB0DD2315BDC1A700AAB4B7 /* LoudongCellViewController.h */,
+				BEB0DD2415BDC1A700AAB4B7 /* LoudongCellViewController.m */,
+				BEB0DD2515BDC1A700AAB4B7 /* LoudongCellViewController.xib */,
+				BEB0DD3C15BDC29D00AAB4B7 /* LoudongTableViewController.h */,
+				BEB0DD3D15BDC29D00AAB4B7 /* LoudongTableViewController.m */,
+				BEB0DD3E15BDC29D00AAB4B7 /* LoudongTableViewController.xib */,
+			);
+			name = Loudong;
+			sourceTree = "<group>";
+		};
+		BEB0DD2A15BDC1E300AAB4B7 /* Louceng */ = {
+			isa = PBXGroup;
+			children = (
+				F3D9CC9A15B8228600FA63AE /* LoucengCell.h */,
+				F3D9CC9B15B8228700FA63AE /* LoucengCell.m */,
+				BEB0DD1E15BDC17800AAB4B7 /* LoucengCellViewController.h */,
+				BEB0DD1F15BDC17800AAB4B7 /* LoucengCellViewController.m */,
+				BEB0DD2015BDC17800AAB4B7 /* LoucengCellViewController.xib */,
+				BEB0DD3715BDC28800AAB4B7 /* LoucengTableViewController.h */,
+				BEB0DD3815BDC28800AAB4B7 /* LoucengTableViewController.m */,
+				BEB0DD3915BDC28800AAB4B7 /* LoucengTableViewController.xib */,
+			);
+			name = Louceng;
+			sourceTree = "<group>";
+		};
+		BEB0DD2B15BDC1EB00AAB4B7 /* Fanghao */ = {
+			isa = PBXGroup;
+			children = (
+				F3D9CCA015B822BC00FA63AE /* FanghaoCell.h */,
+				F3D9CCA115B822BC00FA63AE /* FanghaoCell.m */,
+				BEB0DD2C15BDC22600AAB4B7 /* FanghaoCellViewController.h */,
+				BEB0DD2D15BDC22600AAB4B7 /* FanghaoCellViewController.m */,
+				BEB0DD2E15BDC22600AAB4B7 /* FanghaoCellViewController.xib */,
+				BEB0DD4115BDC2B000AAB4B7 /* FanghaoTableViewController.h */,
+				BEB0DD4215BDC2B100AAB4B7 /* FanghaoTableViewController.m */,
+				BEB0DD4315BDC2B100AAB4B7 /* FanghaoTableViewController.xib */,
+			);
+			name = Fanghao;
+			sourceTree = "<group>";
+		};
+		BEB0DD4615BDE58600AAB4B7 /* Kaishixunjia */ = {
+			isa = PBXGroup;
+			children = (
+				F3D9CC7915B81AD100FA63AE /* KaishixunjiaViewController.h */,
+				F3D9CC7A15B81AD100FA63AE /* KaishixunjiaViewController.m */,
+				F3D9CC7B15B81AD100FA63AE /* KaishixunjiaViewController.xib */,
+				BEB0DD4715BDE5C800AAB4B7 /* KaishixunjiaLoupanCellViewController.h */,
+				BEB0DD4815BDE5C800AAB4B7 /* KaishixunjiaLoupanCellViewController.m */,
+				BEB0DD4915BDE5C800AAB4B7 /* KaishixunjiaLoupanCellViewController.xib */,
+				BEB0DD4C15BDE60000AAB4B7 /* KaishixunjiaCell1ViewController.h */,
+				BEB0DD4D15BDE60000AAB4B7 /* KaishixunjiaCell1ViewController.m */,
+				BEB0DD4E15BDE60000AAB4B7 /* KaishixunjiaCell1ViewController.xib */,
+				BEB0DD5115BDE63B00AAB4B7 /* KaishixunjiaLoupanCell.h */,
+				BEB0DD5215BDE63B00AAB4B7 /* KaishixunjiaLoupanCell.m */,
+				BEB0DD5415BDE65200AAB4B7 /* KaishixunjiaCell1Cell.h */,
+				BEB0DD5515BDE65300AAB4B7 /* KaishixunjiaCell1Cell.m */,
+			);
+			name = Kaishixunjia;
+			sourceTree = "<group>";
+		};
 		BEB543A815BC65F200C6CDAD /* Gujiashi */ = {
 			isa = PBXGroup;
 			children = (
@@ -453,6 +582,37 @@
 				BE85B55F15B33BE50010E0F5 /* GuJiaShiViewController.xib */,
 			);
 			name = Gujiashi;
+			sourceTree = "<group>";
+		};
+		BEB543E615BDBD4100C6CDAD /* LouPan */ = {
+			isa = PBXGroup;
+			children = (
+				BEB0DD2B15BDC1EB00AAB4B7 /* Fanghao */,
+				BEB0DD2A15BDC1E300AAB4B7 /* Louceng */,
+				BEB0DD2915BDC1DB00AAB4B7 /* Loudong */,
+				BEB0DD2815BDC1D100AAB4B7 /* Loupan */,
+			);
+			name = LouPan;
+			sourceTree = "<group>";
+		};
+		BEB543E815BDBD8E00C6CDAD /* Xunjia */ = {
+			isa = PBXGroup;
+			children = (
+				BEB0DD4615BDE58600AAB4B7 /* Kaishixunjia */,
+				F3D9CC7E15B81B8F00FA63AE /* XunjiajieguoViewController.h */,
+				F3D9CC7F15B81B8F00FA63AE /* XunjiajieguoViewController.m */,
+				F3D9CC8015B81B8F00FA63AE /* XunjiajieguoViewController.xib */,
+				F3D9CC8315B81C5000FA63AE /* RengongxunjiaViewController.h */,
+				F3D9CC8415B81C5000FA63AE /* RengongxunjiaViewController.m */,
+				F3D9CC8515B81C5000FA63AE /* RengongxunjiaViewController.xib */,
+				F3D9CC8815B81D3700FA63AE /* YinhangkedaichaxunViewController.h */,
+				F3D9CC8915B81D3700FA63AE /* YinhangkedaichaxunViewController.m */,
+				F3D9CC8A15B81D3700FA63AE /* YinhangkedaichaxunViewController.xib */,
+				F3D9CC9215B8207B00FA63AE /* YinhangKedaieDetailViewController.h */,
+				F3D9CC9315B8207B00FA63AE /* YinhangKedaieDetailViewController.m */,
+				F3D9CC9415B8207B00FA63AE /* YinhangKedaieDetailViewController.xib */,
+			);
+			name = Xunjia;
 			sourceTree = "<group>";
 		};
 		F302BD1E15BD2C7800FB1663 /* Gujiashihuijia */ = {
@@ -507,36 +667,11 @@
 		F3D9CC7115B8179C00FA63AE /* Xunjia */ = {
 			isa = PBXGroup;
 			children = (
-				F3D9CC7315B819DD00FA63AE /* DetailViewController.h */,
-				F3D9CC7415B819DD00FA63AE /* DetailViewController.m */,
-				F3D9CC7515B819DE00FA63AE /* DetailViewController.xib */,
+				BEB543E815BDBD8E00C6CDAD /* Xunjia */,
+				BEB543E615BDBD4100C6CDAD /* LouPan */,
 				BE85B54915B3375E0010E0F5 /* XunJiaViewController.h */,
 				BE85B54A15B3375E0010E0F5 /* XunJiaViewController.m */,
 				BE85B54B15B3375E0010E0F5 /* XunJiaViewController.xib */,
-				F3D9CC7915B81AD100FA63AE /* KaishixunjiaViewController.h */,
-				F3D9CC7A15B81AD100FA63AE /* KaishixunjiaViewController.m */,
-				F3D9CC7B15B81AD100FA63AE /* KaishixunjiaViewController.xib */,
-				F3D9CC7E15B81B8F00FA63AE /* XunjiajieguoViewController.h */,
-				F3D9CC7F15B81B8F00FA63AE /* XunjiajieguoViewController.m */,
-				F3D9CC8015B81B8F00FA63AE /* XunjiajieguoViewController.xib */,
-				F3D9CC8315B81C5000FA63AE /* RengongxunjiaViewController.h */,
-				F3D9CC8415B81C5000FA63AE /* RengongxunjiaViewController.m */,
-				F3D9CC8515B81C5000FA63AE /* RengongxunjiaViewController.xib */,
-				F3D9CC8815B81D3700FA63AE /* YinhangkedaichaxunViewController.h */,
-				F3D9CC8915B81D3700FA63AE /* YinhangkedaichaxunViewController.m */,
-				F3D9CC8A15B81D3700FA63AE /* YinhangkedaichaxunViewController.xib */,
-				F3D9CC9215B8207B00FA63AE /* YinhangKedaieDetailViewController.h */,
-				F3D9CC9315B8207B00FA63AE /* YinhangKedaieDetailViewController.m */,
-				F3D9CC9415B8207B00FA63AE /* YinhangKedaieDetailViewController.xib */,
-				F3D9CC9715B8225800FA63AE /* LoupanCell.h */,
-				F3D9CC9815B8225800FA63AE /* LoupanCell.m */,
-				F3D9CC9A15B8228600FA63AE /* LoucengCell.h */,
-				F3D9CC9B15B8228700FA63AE /* LoucengCell.m */,
-				F3D9CC9D15B8229700FA63AE /* LoudongCell.h */,
-				F3D9CC9E15B8229700FA63AE /* LoudongCell.m */,
-				F3D9CCA015B822BC00FA63AE /* FanghaoCell.h */,
-				F3D9CCA115B822BC00FA63AE /* FanghaoCell.m */,
-				F3D9CCA315B8230E00FA63AE /* LoupanCell.xib */,
 				BEB5439915BC55AC00C6CDAD /* SousuoloupanViewController.h */,
 				BEB5439A15BC55AC00C6CDAD /* SousuoloupanViewController.m */,
 				BEB5439B15BC55AD00C6CDAD /* SousuoloupanViewController.xib */,
@@ -623,13 +758,11 @@
 				3842FB5215B4483000DA889E /* LoginViewController.xib in Resources */,
 				3842FB5415B44C3000DA889E /* Localizable.strings in Resources */,
 				38D2A33815B8187D000C5D6D /* RegisterViewController.xib in Resources */,
-				F3D9CC7715B819DE00FA63AE /* DetailViewController.xib in Resources */,
 				F3D9CC7D15B81AD100FA63AE /* KaishixunjiaViewController.xib in Resources */,
 				F3D9CC8215B81B8F00FA63AE /* XunjiajieguoViewController.xib in Resources */,
 				F3D9CC8715B81C5000FA63AE /* RengongxunjiaViewController.xib in Resources */,
 				F3D9CC8C15B81D3800FA63AE /* YinhangkedaichaxunViewController.xib in Resources */,
 				F3D9CC9615B8207C00FA63AE /* YinhangKedaieDetailViewController.xib in Resources */,
-				F3D9CCA415B8230E00FA63AE /* LoupanCell.xib in Resources */,
 				3887890A15BACD7D00B919B5 /* InviteFriendController.xib in Resources */,
 				3887890F15BAD06500B919B5 /* GongshiController.xib in Resources */,
 				3887891915BAD0EA00B919B5 /* SystemMsgDetailViewController.xib in Resources */,
@@ -660,6 +793,16 @@
 				F302BD1215BCF78700FB1663 /* PinggujigouyinhangViewController.xib in Resources */,
 				F302BD1D15BCF91C00FB1663 /* PinggujigouyinhangCellViewController.xib in Resources */,
 				F3DBEADD15BD31690040CDED /* GuanzhuLV1CellViewController.xib in Resources */,
+				BEB0DD1D15BDC15B00AAB4B7 /* LoupanCellViewController.xib in Resources */,
+				BEB0DD2215BDC17800AAB4B7 /* LoucengCellViewController.xib in Resources */,
+				BEB0DD2715BDC1A700AAB4B7 /* LoudongCellViewController.xib in Resources */,
+				BEB0DD3015BDC22600AAB4B7 /* FanghaoCellViewController.xib in Resources */,
+				BEB0DD3515BDC26300AAB4B7 /* LoupanTableViewController.xib in Resources */,
+				BEB0DD3B15BDC28800AAB4B7 /* LoucengTableViewController.xib in Resources */,
+				BEB0DD4015BDC29D00AAB4B7 /* LoudongTableViewController.xib in Resources */,
+				BEB0DD4515BDC2B100AAB4B7 /* FanghaoTableViewController.xib in Resources */,
+				BEB0DD4B15BDE5C800AAB4B7 /* KaishixunjiaLoupanCellViewController.xib in Resources */,
+				BEB0DD5015BDE60000AAB4B7 /* KaishixunjiaCell1ViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -682,7 +825,6 @@
 				BE85B55B15B337B60010E0F5 /* GengDuoViewController.m in Sources */,
 				BE85B56015B33BE50010E0F5 /* GuJiaShiViewController.m in Sources */,
 				38D2A33715B8187D000C5D6D /* RegisterViewController.m in Sources */,
-				F3D9CC7615B819DE00FA63AE /* DetailViewController.m in Sources */,
 				F3D9CC7C15B81AD100FA63AE /* KaishixunjiaViewController.m in Sources */,
 				F3D9CC8115B81B8F00FA63AE /* XunjiajieguoViewController.m in Sources */,
 				F3D9CC8615B81C5000FA63AE /* RengongxunjiaViewController.m in Sources */,
@@ -719,6 +861,18 @@
 				F302BD1C15BCF91C00FB1663 /* PinggujigouyinhangCellViewController.m in Sources */,
 				F3DBEADC15BD31690040CDED /* GuanzhuLV1CellViewController.m in Sources */,
 				F3DBEAE015BD31910040CDED /* GuanzhuLV1Cell.m in Sources */,
+				BEB0DD1C15BDC15B00AAB4B7 /* LoupanCellViewController.m in Sources */,
+				BEB0DD2115BDC17800AAB4B7 /* LoucengCellViewController.m in Sources */,
+				BEB0DD2615BDC1A700AAB4B7 /* LoudongCellViewController.m in Sources */,
+				BEB0DD2F15BDC22600AAB4B7 /* FanghaoCellViewController.m in Sources */,
+				BEB0DD3415BDC26300AAB4B7 /* LoupanTableViewController.m in Sources */,
+				BEB0DD3A15BDC28800AAB4B7 /* LoucengTableViewController.m in Sources */,
+				BEB0DD3F15BDC29D00AAB4B7 /* LoudongTableViewController.m in Sources */,
+				BEB0DD4415BDC2B100AAB4B7 /* FanghaoTableViewController.m in Sources */,
+				BEB0DD4A15BDE5C800AAB4B7 /* KaishixunjiaLoupanCellViewController.m in Sources */,
+				BEB0DD4F15BDE60000AAB4B7 /* KaishixunjiaCell1ViewController.m in Sources */,
+				BEB0DD5315BDE63C00AAB4B7 /* KaishixunjiaLoupanCell.m in Sources */,
+				BEB0DD5615BDE65300AAB4B7 /* KaishixunjiaCell1Cell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

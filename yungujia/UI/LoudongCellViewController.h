@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LoudongCell.h"
 
 @interface LoudongCellViewController : UIViewController
 

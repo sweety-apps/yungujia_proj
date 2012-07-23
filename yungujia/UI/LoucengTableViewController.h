@@ -7,7 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LoucengCellViewController.h"
+#import "FanghaoTableViewController.h"
 
-@interface LoucengTableViewController : UIViewController
+@interface LoucengTableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+{
+    
+}
+
+//infos
+@property (nonatomic,retain) NSString* headinfo;
+
+//views
+@property (nonatomic,retain) IBOutlet UINavigationBar* navbar;
+
+//controllers
+@property (nonatomic,retain) IBOutlet UINavigationController* navctrl;
+@property (nonatomic,retain) IBOutlet FanghaoTableViewController* fanghaoctrl;
 
 @end

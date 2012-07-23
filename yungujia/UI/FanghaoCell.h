@@ -9,5 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface FanghaoCell : UITableViewCell
+{
+    
+}
+
+//views
+@property (nonatomic,retain) IBOutlet UILabel* xxhao;
+@property (nonatomic,retain) IBOutlet UILabel* mianji;
 
 @end

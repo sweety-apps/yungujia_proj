@@ -14,11 +14,18 @@
 
 @implementation LoupanTableViewController
 
+@synthesize navbar = _navbar;
+@synthesize navctrl =_navctrl;
+
+@synthesize headinfo = _headinfo;
+@synthesize loudongctrl = _loudongctrl;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        self.title = @"选择楼盘";
     }
     return self;
 }
@@ -39,6 +46,54 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    LoupanCell *cell = (LoupanCell*)[tableView cellForRowAtIndexPath:indexPath];
+    if (cell.accessoryType != UITableViewCellAccessoryNone)
+    {
+        _loudongctrl.title = @"选择楼栋";
+        _loudongctrl.headinfo = cell.xxhuayuan.text;
+        [_navctrl pushViewController:_loudongctrl animated:YES];
+    }
+}
+
+#pragma mark - UITableViewDataSource
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 3;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return _headinfo;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    int row = indexPath.row;
+    
+    static NSString* reuseID = @"LoupanCell";
+    
+    LoupanCell *cell = (LoupanCell*)[tableView dequeueReusableCellWithIdentifier:reuseID];
+    if (cell == nil)
+    {
+        // Create a temporary UIViewController to instantiate the custom cell.
+        LoupanCellViewController* temporaryController = [[LoupanCellViewController alloc] initWithNibName:@"LoupanCellViewController" bundle:nil];
+        // Grab a pointer to the custom cell.
+        cell = (LoupanCell *)temporaryController.view;
+        [temporaryController release];
+    }
+    
+    
+    //cell.xxhuayuan.text = @"万科金色家园";
+    //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    
+    return cell;
 }
 
 @end

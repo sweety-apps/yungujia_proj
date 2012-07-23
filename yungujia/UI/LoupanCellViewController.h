@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LoupanCell.h"
 
 @interface LoupanCellViewController : UIViewController
 

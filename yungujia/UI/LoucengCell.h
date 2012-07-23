@@ -9,5 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface LoucengCell : UITableViewCell
+{
+    
+}
+
+//views
+@property (nonatomic,retain) IBOutlet UILabel* xxceng;
+@property (nonatomic,retain) IBOutlet UILabel* gongxxhu;
 
 @end

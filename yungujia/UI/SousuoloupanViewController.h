@@ -7,7 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LoupanTableViewController.h"
 
 @interface SousuoloupanViewController : UIViewController
+{
+    
+}
+
+//infos
+
+//views
+@property (nonatomic,retain) IBOutlet UINavigationBar* navbar;
+@property (nonatomic,retain) IBOutlet UISearchBar* searchbar;
+
+//controllers
+@property (nonatomic,retain) IBOutlet UINavigationController* navctrl;
+@property (nonatomic,retain) IBOutlet LoupanTableViewController* loupanctrl;
 
 @end

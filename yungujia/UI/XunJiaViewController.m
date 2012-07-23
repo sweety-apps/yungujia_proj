@@ -61,6 +61,10 @@
     }
     [_sousuoloupanctrl.view removeFromSuperview];
     [_navctrl.topViewController.view addSubview:_sousuoloupanctrl.view]; 
+    _sousuoloupanctrl.navctrl = _navctrl;
+    _sousuoloupanctrl.navbar = _navbar;
+    _sousuoloupanctrl.loupanctrl.navctrl = _navctrl;
+    _sousuoloupanctrl.loupanctrl.navbar = _navbar;
     //[_navctrl pushViewController:self.sousuoloupanctrl animated:NO];
 }
 
@@ -73,6 +77,10 @@
     }
     [_fujinloupanctrl.view removeFromSuperview];
     [_navctrl.topViewController.view addSubview:_fujinloupanctrl.view]; 
+    _fujinloupanctrl.navctrl = _navctrl;
+    _fujinloupanctrl.navbar = _navbar;
+    _fujinloupanctrl.loupanctrl.navctrl = _navctrl;
+    _fujinloupanctrl.loupanctrl.navbar = _navbar;
 }
 
 - (void)viewDidUnload

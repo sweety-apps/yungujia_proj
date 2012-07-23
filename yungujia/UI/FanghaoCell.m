@@ -10,6 +10,9 @@
 
 @implementation FanghaoCell
 
+@synthesize xxhao = _xxhao;
+@synthesize mianji = _mianji;
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];

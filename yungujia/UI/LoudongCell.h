@@ -9,5 +9,13 @@
 #import <UIKit/UIKit.h>
 
 @interface LoudongCell : UITableViewCell
+{
+    
+}
+
+//views
+@property (nonatomic,retain) IBOutlet UILabel* xxdong;
+@property (nonatomic,retain) IBOutlet UILabel* gongxxcengxxhu;
+@property (nonatomic,retain) IBOutlet UILabel* danjia;
 
 @end

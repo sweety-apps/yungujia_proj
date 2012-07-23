@@ -7,7 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LoupanCellViewController.h"
+#import "LoudongTableViewController.h"
 
-@interface LoupanTableViewController : UIViewController
+@interface LoupanTableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+{
+    
+}
+
+//infos
+@property (nonatomic,retain) NSString* headinfo;
+
+//views
+@property (nonatomic,retain) IBOutlet UINavigationBar* navbar;
+
+//controllers
+@property (nonatomic,retain) IBOutlet UINavigationController* navctrl;
+@property (nonatomic,retain) IBOutlet LoudongTableViewController* loudongctrl;
 
 @end
