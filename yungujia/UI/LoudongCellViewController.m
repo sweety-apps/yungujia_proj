@@ -1,18 +1,18 @@
 //
-//  DetailViewController.m
+//  LoudongCellViewController.m
 //  yungujia
 //
-//  Created by Justin Lee on 12-7-19.
+//  Created by lijinxin on 12-7-24.
 //  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
 //
 
-#import "DetailViewController.h"
+#import "LoudongCellViewController.h"
 
-@interface DetailViewController ()
+@interface LoudongCellViewController ()
 
 @end
 
-@implementation DetailViewController
+@implementation LoudongCellViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
