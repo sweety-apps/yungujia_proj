@@ -7,7 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GuanzhuLV1CellViewController.h"
 
-@interface GuanZhuViewController : UIViewController
+@interface GuanZhuViewController : UIViewController  <UITableViewDelegate, UITableViewDataSource>
+{
+    
+}
+
+//infos
+
+
+//views
+@property (nonatomic,retain) IBOutlet UINavigationBar* navbar;
+
+//controllers
+@property (nonatomic,retain) IBOutlet UINavigationController* navctrl;
 
 @end

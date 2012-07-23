@@ -53,6 +53,7 @@
     HuijiaLV1Cell *cell = (HuijiaLV1Cell*)[tableView cellForRowAtIndexPath:indexPath];
     if (cell.accessoryType != UITableViewCellAccessoryNone)
     {
+        _xiangqingctrl.title = [NSString stringWithFormat:@"回价详情 (%d)",12];
         _xiangqingctrl.headinfo = [NSString stringWithFormat:@"%@%@",cell.xxhuayuan.text,cell.xdongxcengxxx.text];
         [_navctrl pushViewController:_xiangqingctrl animated:YES];
     }
