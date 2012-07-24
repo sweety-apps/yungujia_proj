@@ -124,4 +124,21 @@
 	[self.window addSubview:loginViewController.view];
 }
 
+- (void)makeTabBarHidden:(BOOL)hide
+{
+    CGRect newRect = rootTabBarController.view.frame;
+    if (hide)
+    {
+        newRect.size.height += rootTabBarController.tabBar.frame.size.height;
+        rootTabBarController.tabBar.hidden = YES;
+    }
+    else
+    {
+        newRect.size.height -= rootTabBarController.tabBar.frame.size.height;
+        rootTabBarController.tabBar.hidden = NO;
+    }
+    rootTabBarController.view.frame = newRect;
+    
+}
+
 @end

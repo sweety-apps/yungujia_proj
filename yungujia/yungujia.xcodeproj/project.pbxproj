@@ -59,6 +59,11 @@
 		BE85B55C15B337B60010E0F5 /* GengDuoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE85B55A15B337B60010E0F5 /* GengDuoViewController.xib */; };
 		BE85B56015B33BE50010E0F5 /* GuJiaShiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE85B55E15B33BE50010E0F5 /* GuJiaShiViewController.m */; };
 		BE85B56115B33BE50010E0F5 /* GuJiaShiViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE85B55F15B33BE50010E0F5 /* GuJiaShiViewController.xib */; };
+		BEA11F6A15BF16DA00F9D93F /* GeyinhangkedaieViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA11F6815BF16CF00F9D93F /* GeyinhangkedaieViewController.m */; };
+		BEA11F6B15BF16DA00F9D93F /* GeyinhangkedaieViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEA11F6915BF16D000F9D93F /* GeyinhangkedaieViewController.xib */; };
+		BEA11F7015BF17B000F9D93F /* GeyinhangkedaieCellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA11F6E15BF17B000F9D93F /* GeyinhangkedaieCellViewController.m */; };
+		BEA11F7115BF17B000F9D93F /* GeyinhangkedaieCellViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEA11F6F15BF17B000F9D93F /* GeyinhangkedaieCellViewController.xib */; };
+		BEA11F7415BF17D800F9D93F /* GeyinhangkedaieCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA11F7315BF17D800F9D93F /* GeyinhangkedaieCell.m */; };
 		BEB0DD1C15BDC15B00AAB4B7 /* LoupanCellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB0DD1A15BDC15B00AAB4B7 /* LoupanCellViewController.m */; };
 		BEB0DD1D15BDC15B00AAB4B7 /* LoupanCellViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEB0DD1B15BDC15B00AAB4B7 /* LoupanCellViewController.xib */; };
 		BEB0DD2115BDC17800AAB4B7 /* LoucengCellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB0DD1F15BDC17800AAB4B7 /* LoucengCellViewController.m */; };
@@ -205,6 +210,14 @@
 		BE85B55D15B33BE50010E0F5 /* GuJiaShiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuJiaShiViewController.h; sourceTree = "<group>"; };
 		BE85B55E15B33BE50010E0F5 /* GuJiaShiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuJiaShiViewController.m; sourceTree = "<group>"; };
 		BE85B55F15B33BE50010E0F5 /* GuJiaShiViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GuJiaShiViewController.xib; sourceTree = "<group>"; };
+		BEA11F6715BF16CD00F9D93F /* GeyinhangkedaieViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeyinhangkedaieViewController.h; sourceTree = "<group>"; };
+		BEA11F6815BF16CF00F9D93F /* GeyinhangkedaieViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeyinhangkedaieViewController.m; sourceTree = "<group>"; };
+		BEA11F6915BF16D000F9D93F /* GeyinhangkedaieViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GeyinhangkedaieViewController.xib; sourceTree = "<group>"; };
+		BEA11F6D15BF17B000F9D93F /* GeyinhangkedaieCellViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeyinhangkedaieCellViewController.h; sourceTree = "<group>"; };
+		BEA11F6E15BF17B000F9D93F /* GeyinhangkedaieCellViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeyinhangkedaieCellViewController.m; sourceTree = "<group>"; };
+		BEA11F6F15BF17B000F9D93F /* GeyinhangkedaieCellViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GeyinhangkedaieCellViewController.xib; sourceTree = "<group>"; };
+		BEA11F7215BF17D800F9D93F /* GeyinhangkedaieCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeyinhangkedaieCell.h; sourceTree = "<group>"; };
+		BEA11F7315BF17D800F9D93F /* GeyinhangkedaieCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeyinhangkedaieCell.m; sourceTree = "<group>"; };
 		BEB0DD1915BDC15B00AAB4B7 /* LoupanCellViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoupanCellViewController.h; sourceTree = "<group>"; };
 		BEB0DD1A15BDC15B00AAB4B7 /* LoupanCellViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoupanCellViewController.m; sourceTree = "<group>"; };
 		BEB0DD1B15BDC15B00AAB4B7 /* LoupanCellViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoupanCellViewController.xib; sourceTree = "<group>"; };
@@ -492,6 +505,31 @@
 			path = Documents;
 			sourceTree = "<group>";
 		};
+		BEA11F6515BEFDF000F9D93F /* Xunjiajieguo */ = {
+			isa = PBXGroup;
+			children = (
+				F3D9CC7E15B81B8F00FA63AE /* XunjiajieguoViewController.h */,
+				F3D9CC7F15B81B8F00FA63AE /* XunjiajieguoViewController.m */,
+				F3D9CC8015B81B8F00FA63AE /* XunjiajieguoViewController.xib */,
+			);
+			name = Xunjiajieguo;
+			sourceTree = "<group>";
+		};
+		BEA11F6C15BF174E00F9D93F /* Geyinhangkedaie */ = {
+			isa = PBXGroup;
+			children = (
+				BEA11F6715BF16CD00F9D93F /* GeyinhangkedaieViewController.h */,
+				BEA11F6815BF16CF00F9D93F /* GeyinhangkedaieViewController.m */,
+				BEA11F6915BF16D000F9D93F /* GeyinhangkedaieViewController.xib */,
+				BEA11F6D15BF17B000F9D93F /* GeyinhangkedaieCellViewController.h */,
+				BEA11F6E15BF17B000F9D93F /* GeyinhangkedaieCellViewController.m */,
+				BEA11F6F15BF17B000F9D93F /* GeyinhangkedaieCellViewController.xib */,
+				BEA11F7215BF17D800F9D93F /* GeyinhangkedaieCell.h */,
+				BEA11F7315BF17D800F9D93F /* GeyinhangkedaieCell.m */,
+			);
+			name = Geyinhangkedaie;
+			sourceTree = "<group>";
+		};
 		BEB0DD2815BDC1D100AAB4B7 /* Loupan */ = {
 			isa = PBXGroup;
 			children = (
@@ -598,10 +636,9 @@
 		BEB543E815BDBD8E00C6CDAD /* Xunjia */ = {
 			isa = PBXGroup;
 			children = (
+				BEA11F6C15BF174E00F9D93F /* Geyinhangkedaie */,
+				BEA11F6515BEFDF000F9D93F /* Xunjiajieguo */,
 				BEB0DD4615BDE58600AAB4B7 /* Kaishixunjia */,
-				F3D9CC7E15B81B8F00FA63AE /* XunjiajieguoViewController.h */,
-				F3D9CC7F15B81B8F00FA63AE /* XunjiajieguoViewController.m */,
-				F3D9CC8015B81B8F00FA63AE /* XunjiajieguoViewController.xib */,
 				F3D9CC8315B81C5000FA63AE /* RengongxunjiaViewController.h */,
 				F3D9CC8415B81C5000FA63AE /* RengongxunjiaViewController.m */,
 				F3D9CC8515B81C5000FA63AE /* RengongxunjiaViewController.xib */,
@@ -803,6 +840,8 @@
 				BEB0DD4515BDC2B100AAB4B7 /* FanghaoTableViewController.xib in Resources */,
 				BEB0DD4B15BDE5C800AAB4B7 /* KaishixunjiaLoupanCellViewController.xib in Resources */,
 				BEB0DD5015BDE60000AAB4B7 /* KaishixunjiaCell1ViewController.xib in Resources */,
+				BEA11F6B15BF16DA00F9D93F /* GeyinhangkedaieViewController.xib in Resources */,
+				BEA11F7115BF17B000F9D93F /* GeyinhangkedaieCellViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -873,6 +912,9 @@
 				BEB0DD4F15BDE60000AAB4B7 /* KaishixunjiaCell1ViewController.m in Sources */,
 				BEB0DD5315BDE63C00AAB4B7 /* KaishixunjiaLoupanCell.m in Sources */,
 				BEB0DD5615BDE65300AAB4B7 /* KaishixunjiaCell1Cell.m in Sources */,
+				BEA11F6A15BF16DA00F9D93F /* GeyinhangkedaieViewController.m in Sources */,
+				BEA11F7015BF17B000F9D93F /* GeyinhangkedaieCellViewController.m in Sources */,
+				BEA11F7415BF17D800F9D93F /* GeyinhangkedaieCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

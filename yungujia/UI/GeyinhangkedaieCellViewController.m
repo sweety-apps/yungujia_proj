@@ -1,23 +1,18 @@
 //
-//  YinhangkedaichaxunViewController.m
+//  GeyinhangkedaieCellViewController.m
 //  yungujia
 //
-//  Created by Justin Lee on 12-7-19.
+//  Created by lijinxin on 12-7-25.
 //  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
 //
 
-#import "YinhangkedaichaxunViewController.h"
+#import "GeyinhangkedaieCellViewController.h"
 
-@interface YinhangkedaichaxunViewController ()
+@interface GeyinhangkedaieCellViewController ()
 
 @end
 
-@implementation YinhangkedaichaxunViewController
-
-@synthesize navbar = _navbar;
-@synthesize navctrl =_navctrl;
-
-@synthesize gyhkdectrl = _gyhkdectrl;
+@implementation GeyinhangkedaieCellViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -44,14 +39,6 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
-#pragma mark - YinhangkedaichaxunViewController
-
-- (IBAction)push_Kaishijisuan:(id)sender
-{
-    _gyhkdectrl.title = @"人工询价";
-    [self.navigationController pushViewController:_gyhkdectrl animated:YES];
 }
 
 @end

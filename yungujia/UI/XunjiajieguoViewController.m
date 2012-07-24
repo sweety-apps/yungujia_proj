@@ -14,6 +14,13 @@
 
 @implementation XunjiajieguoViewController
 
+@synthesize navbar = _navbar;
+@synthesize navctrl =_navctrl;
+
+
+@synthesize rengongctrl = _rengongctrl;
+@synthesize yinhangctrl = _yinhangctrl;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -39,6 +46,25 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+#pragma mark - XunjiajieguoViewController
+
+- (IBAction)push_Pinggujigou:(id)sender
+{
+    
+}
+
+- (IBAction)push_RengongxunjiaBtn:(id)sender
+{
+    _rengongctrl.title = @"人工询价";
+    [self.navigationController pushViewController:_rengongctrl animated:YES];
+}
+
+- (IBAction)push_KedaijineBtn:(id)sender
+{
+    _yinhangctrl.title = @"银行可贷金额查询";
+    [self.navigationController pushViewController:_yinhangctrl animated:YES];
 }
 
 @end

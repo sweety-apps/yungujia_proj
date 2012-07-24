@@ -20,4 +20,7 @@
 @property (nonatomic, retain) IBOutlet UINavigationController *loginViewController;
 -(void)ShowMainView:(NSString*)nickname weiboaccount:(NSString*)account;
 -(void)ShowLoginView;
+
+- (void)makeTabBarHidden:(BOOL)hide;
+
 @end

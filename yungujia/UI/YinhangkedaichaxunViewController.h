@@ -7,7 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GeyinhangkedaieViewController.h"
 
 @interface YinhangkedaichaxunViewController : UIViewController
+
+{
+    
+}
+
+//views
+@property (nonatomic,retain) IBOutlet UINavigationBar* navbar;
+
+//controllers
+@property (nonatomic,retain) IBOutlet UINavigationController* navctrl;
+@property (nonatomic,retain) IBOutlet GeyinhangkedaieViewController* gyhkdectrl;
+
+- (IBAction)push_Kaishijisuan:(id)sender;
 
 @end
