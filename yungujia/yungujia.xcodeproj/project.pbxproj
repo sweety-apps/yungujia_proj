@@ -64,6 +64,8 @@
 		BEA11F7015BF17B000F9D93F /* GeyinhangkedaieCellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA11F6E15BF17B000F9D93F /* GeyinhangkedaieCellViewController.m */; };
 		BEA11F7115BF17B000F9D93F /* GeyinhangkedaieCellViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEA11F6F15BF17B000F9D93F /* GeyinhangkedaieCellViewController.xib */; };
 		BEA11F7415BF17D800F9D93F /* GeyinhangkedaieCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA11F7315BF17D800F9D93F /* GeyinhangkedaieCell.m */; };
+		BEA11F7D15BF212F00F9D93F /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BEA11F7B15BF212C00F9D93F /* Icon.png */; };
+		BEA11F7E15BF212F00F9D93F /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEA11F7C15BF212C00F9D93F /* Icon@2x.png */; };
 		BEB0DD1C15BDC15B00AAB4B7 /* LoupanCellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB0DD1A15BDC15B00AAB4B7 /* LoupanCellViewController.m */; };
 		BEB0DD1D15BDC15B00AAB4B7 /* LoupanCellViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEB0DD1B15BDC15B00AAB4B7 /* LoupanCellViewController.xib */; };
 		BEB0DD2115BDC17800AAB4B7 /* LoucengCellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB0DD1F15BDC17800AAB4B7 /* LoucengCellViewController.m */; };
@@ -218,6 +220,8 @@
 		BEA11F6F15BF17B000F9D93F /* GeyinhangkedaieCellViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GeyinhangkedaieCellViewController.xib; sourceTree = "<group>"; };
 		BEA11F7215BF17D800F9D93F /* GeyinhangkedaieCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeyinhangkedaieCell.h; sourceTree = "<group>"; };
 		BEA11F7315BF17D800F9D93F /* GeyinhangkedaieCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeyinhangkedaieCell.m; sourceTree = "<group>"; };
+		BEA11F7B15BF212C00F9D93F /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		BEA11F7C15BF212C00F9D93F /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		BEB0DD1915BDC15B00AAB4B7 /* LoupanCellViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoupanCellViewController.h; sourceTree = "<group>"; };
 		BEB0DD1A15BDC15B00AAB4B7 /* LoupanCellViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoupanCellViewController.m; sourceTree = "<group>"; };
 		BEB0DD1B15BDC15B00AAB4B7 /* LoupanCellViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoupanCellViewController.xib; sourceTree = "<group>"; };
@@ -395,6 +399,8 @@
 		BE85B4F015B3293E0010E0F5 = {
 			isa = PBXGroup;
 			children = (
+				BEA11F7B15BF212C00F9D93F /* Icon.png */,
+				BEA11F7C15BF212C00F9D93F /* Icon@2x.png */,
 				BE85B53C15B332760010E0F5 /* Documents */,
 				BE85B50515B3293E0010E0F5 /* yungujia */,
 				BE85B4FE15B3293E0010E0F5 /* Frameworks */,
@@ -842,6 +848,8 @@
 				BEB0DD5015BDE60000AAB4B7 /* KaishixunjiaCell1ViewController.xib in Resources */,
 				BEA11F6B15BF16DA00F9D93F /* GeyinhangkedaieViewController.xib in Resources */,
 				BEA11F7115BF17B000F9D93F /* GeyinhangkedaieCellViewController.xib in Resources */,
+				BEA11F7D15BF212F00F9D93F /* Icon.png in Resources */,
+				BEA11F7E15BF212F00F9D93F /* Icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -937,7 +945,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: JINXIN LI (DJJ4XT349N)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: JINXIN LI (DJJ4XT349N)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -952,6 +961,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				PROVISIONING_PROFILE = "B32E83C8-BAAC-4941-9BC0-CCAEA9808626";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B32E83C8-BAAC-4941-9BC0-CCAEA9808626";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -961,7 +972,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: JINXIN LI (DJJ4XT349N)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: JINXIN LI (DJJ4XT349N)";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -970,6 +982,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "B32E83C8-BAAC-4941-9BC0-CCAEA9808626";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B32E83C8-BAAC-4941-9BC0-CCAEA9808626";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -984,8 +998,8 @@
 				GCC_PREFIX_HEADER = "yungujia/yungujia-Prefix.pch";
 				INFOPLIST_FILE = "yungujia/yungujia-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "52F9DCD3-B960-438D-8DAB-2342EBB5DCAE";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "52F9DCD3-B960-438D-8DAB-2342EBB5DCAE";
+				PROVISIONING_PROFILE = "B32E83C8-BAAC-4941-9BC0-CCAEA9808626";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B32E83C8-BAAC-4941-9BC0-CCAEA9808626";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -999,8 +1013,8 @@
 				GCC_PREFIX_HEADER = "yungujia/yungujia-Prefix.pch";
 				INFOPLIST_FILE = "yungujia/yungujia-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "52F9DCD3-B960-438D-8DAB-2342EBB5DCAE";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "52F9DCD3-B960-438D-8DAB-2342EBB5DCAE";
+				PROVISIONING_PROFILE = "B32E83C8-BAAC-4941-9BC0-CCAEA9808626";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B32E83C8-BAAC-4941-9BC0-CCAEA9808626";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
