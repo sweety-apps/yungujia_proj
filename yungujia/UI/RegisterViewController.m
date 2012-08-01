@@ -34,7 +34,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title = @"注册";
+        self.title = @"新用户注册";
         [self buildDataSource];
         [self.lblUserStyle setText:[self.arrayUserStyle objectAtIndex:0]];
     }

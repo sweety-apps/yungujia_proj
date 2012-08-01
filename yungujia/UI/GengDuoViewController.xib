@@ -65,11 +65,11 @@
 						<int key="IBUITextAlignment">1</int>
 						<object class="IBUIFontDescription" key="IBUIFontDescription">
 							<int key="type">1</int>
-							<double key="pointSize">17</double>
+							<double key="pointSize">28</double>
 						</object>
 						<object class="NSFont" key="IBUIFont">
 							<string key="NSName">Helvetica</string>
-							<double key="NSSize">17</double>
+							<double key="NSSize">28</double>
 							<int key="NSfFlags">16</int>
 						</object>
 					</object>
@@ -83,7 +83,7 @@
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MC44ODYyNzQ1MDk4IDAuOTI1NDkwMTk2MSAwLjk0NTA5ODAzOTIAA</bytes>
+							<bytes key="NSRGB">MC44MTE3NjQ3MDU5IDAuODM5MjE1Njg2MyAwLjg2Mjc0NTA5OAA</bytes>
 						</object>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -92,7 +92,7 @@
 						<int key="IBUISeparatorStyle">2</int>
 						<object class="NSColor" key="IBUISeparatorColor">
 							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MC44ODYyNzQ1MDk4IDAuOTI1NDkwMTk2MSAwLjk0NTA5ODAzOTIAA</bytes>
+							<bytes key="NSRGB">MC43MjE1Njg2Mjc1IDAuNzIxNTY4NjI3NSAwLjcyOTQxMTc2NDcAA</bytes>
 						</object>
 						<int key="IBUISectionIndexMinimumDisplayRowCount">0</int>
 						<bool key="IBUIShowsSelectionImmediatelyOnTouchBegin">YES</bool>
@@ -139,10 +139,9 @@
 				<string key="NSFrame">{{0, 20}, {320, 460}}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">1</int>
-					<bytes key="NSRGB">MC44ODYyNzQ1MDk4IDAuOTI1NDkwMTk2MSAwLjk0NTA5ODAzOTIAA</bytes>
+					<bytes key="NSRGB">MC44MTE3NjQ3MDU5IDAuODM5MjE1Njg2MyAwLjg2Mjc0NTA5OAA</bytes>
 				</object>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>

@@ -119,10 +119,7 @@
             [imgIsRead release];
         }
 
-        UIImageView* imgDetail = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail"]];
-        [imgDetail setFrame:CGRectMake(300, 20, 11, 18)];
-        [cell addSubview:imgDetail];
-        [imgDetail release];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         
     }
     else {

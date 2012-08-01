@@ -88,33 +88,74 @@
         return cell;
     }
     else {
-        static NSString* dequeueIdentifer = @"introcell";
-        UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:dequeueIdentifer];
-        if(cell == nil)
+        if (indexPath.row == 2) 
         {
-            NSLog(@"%d",indexPath.row);
-            cell = [[[UITableViewCell alloc] init]autorelease];
-            UILabel* lblkey = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 60, 35)];
-            lblkey.text = [_arraykeys objectAtIndex:indexPath.row];
-            [cell addSubview:lblkey];
-//            [lblkey setBackgroundColor:[UIColor redColor]];
-            lblkey.textAlignment = UITextAlignmentLeft;
-            [lblkey release];
-            
-            UILabel* lblvalue = [[UILabel alloc] initWithFrame:CGRectMake(80, 5, 220, indexPath.row == 2?129:35)];
-            lblvalue.text = [_arrayvalues objectAtIndex:indexPath.row];
-            lblvalue.textAlignment = UITextAlignmentRight;
-            lblvalue.textColor =[UIColor blueColor];
-//            [lblvalue setBackgroundColor:[UIColor blackColor]];
-            [cell addSubview:lblvalue];
-            [lblvalue setFont:[UIFont systemFontOfSize:14]];
-            lblvalue.numberOfLines = 8;
-            [lblvalue release];
+            static NSString* dequeueIdentifer = @"introcellwithlogo";
+            UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:dequeueIdentifer];
+            if(cell == nil)
+            {
+                NSLog(@"%d",indexPath.row);
+                cell = [[[UITableViewCell alloc] init]autorelease];
+                UILabel* lblkey = [[UILabel alloc] initWithFrame:CGRectMake(20, 5, 60, 35)];
+                lblkey.text = [_arraykeys objectAtIndex:indexPath.row];
+                [cell addSubview:lblkey];
+                [lblkey setBackgroundColor:[UIColor clearColor]];
+                lblkey.textAlignment = UITextAlignmentLeft;
+                lblkey.font = [UIFont boldSystemFontOfSize:17.0];
+                [lblkey release];
+                
+                UILabel* lblvalue = [[UILabel alloc] initWithFrame:CGRectMake(80, 5, 220, 79)];
+                lblvalue.text = [_arrayvalues objectAtIndex:indexPath.row];
+                lblvalue.textAlignment = UITextAlignmentLeft;
+                lblvalue.textColor =[UIColor colorWithRed:82.0/255.0 green:105.0/255.0 blue:155.0/255.0 alpha:1.0];
+                [lblvalue setBackgroundColor:[UIColor clearColor]];
+                [cell addSubview:lblvalue];
+                [lblvalue setFont:[UIFont systemFontOfSize:14]];
+                lblvalue.numberOfLines = 8;
+                [lblvalue release];
+                
+                UIImage* imagehezuologo = [UIImage imageNamed:@"hezuologo"];
+                UIImageView* imageview = [[[UIImageView alloc] initWithImage:imagehezuologo] autorelease];
+                [imageview setFrame:CGRectMake(80, 90, 220, 175)];
+                [cell addSubview:imageview];
+            }
+            else {
+                
+            }
+            return cell;
+
         }
-        else {
-            
+        else 
+        {
+            static NSString* dequeueIdentifer = @"introcell";
+            UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:dequeueIdentifer];
+            if(cell == nil)
+            {
+                NSLog(@"%d",indexPath.row);
+                cell = [[[UITableViewCell alloc] init]autorelease];
+                UILabel* lblkey = [[UILabel alloc] initWithFrame:CGRectMake(20, 5, 60, 35)];
+                lblkey.text = [_arraykeys objectAtIndex:indexPath.row];
+                [cell addSubview:lblkey];
+                [lblkey setBackgroundColor:[UIColor clearColor]];
+                lblkey.textAlignment = UITextAlignmentLeft;
+                lblkey.font = [UIFont boldSystemFontOfSize:17.0];
+                [lblkey release];
+                
+                UILabel* lblvalue = [[UILabel alloc] initWithFrame:CGRectMake(80, 5, 220, indexPath.row == 2?129:35)];
+                lblvalue.text = [_arrayvalues objectAtIndex:indexPath.row];
+                lblvalue.textAlignment = UITextAlignmentRight;
+                lblvalue.textColor =[UIColor colorWithRed:82.0/255.0 green:105.0/255.0 blue:155.0/255.0 alpha:1.0];
+                [lblvalue setBackgroundColor:[UIColor clearColor]];
+                [cell addSubview:lblvalue];
+                [lblvalue setFont:[UIFont systemFontOfSize:14]];
+                lblvalue.numberOfLines = 8;
+                [lblvalue release];
+            }
+            else {
+                
+            }
+            return cell;
         }
-        return cell;
     }
         
 }
@@ -131,7 +172,7 @@
     }
     else {
         if (indexPath.row == 2) {
-            return 144;
+            return 280;
         }
         else {
             return 44;
