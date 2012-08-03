@@ -132,6 +132,7 @@
 #pragma mark -UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField;              // called when 'return' key pressed. return NO to ignore.
 {
+
     if ([[textField text] length] != 0) {
         switch ([textField tag]) {
             case 0://电话
@@ -154,6 +155,40 @@
         }
     }
     
+    [textField resignFirstResponder];
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.3];
+    CGPoint center = CGPointMake(160.0,208.0);
+    self.view.center = center;
+    [UIView commitAnimations];
+    return YES;
+}
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField        // return NO to disallow editing
+{
+    CGPoint center = CGPointMake(160.0,208.0);
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.3];
+    switch ([textField tag]) {
+        case 0://电话
+            self.view.center = center;
+            break;
+        case 1://验证码
+            self.view.center = center;
+            break;
+        case 2://姓名
+            self.view.center = CGPointMake(center.x, center.y - 70);
+            break;
+        case 3://密码
+            self.view.center = CGPointMake(center.x, center.y - 100);
+            break;
+        case 4://确认密码
+            self.view.center = CGPointMake(center.x, center.y - 130);
+            break;
+        default:
+            break;
+    }
+    [UIView commitAnimations];
     [textField resignFirstResponder];
     return YES;
 }
