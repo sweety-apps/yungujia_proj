@@ -10,7 +10,7 @@
 
 @interface LoginViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 {
-    
+    UIActivityIndicatorView*    _progressInd;
 }
 
 @property (nonatomic,retain) IBOutlet UITextField* inputusername;

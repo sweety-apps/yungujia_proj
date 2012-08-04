@@ -1,0 +1,101 @@
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/ipc/ipc_i18nhant_rep/!svn/ver/8841/Mobile_HK_Weibo_proj/trunk/iphone/iphoneClient/HKWeibo/Classes/ASIHTTP
+END
+ASIHTTPRequest.m
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/ipc/ipc_i18nhant_rep/!svn/ver/8841/Mobile_HK_Weibo_proj/trunk/iphone/iphoneClient/HKWeibo/Classes/ASIHTTP/ASIHTTPRequest.m
+END
+ASINetworkQueue.h
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/ipc/ipc_i18nhant_rep/!svn/ver/8841/Mobile_HK_Weibo_proj/trunk/iphone/iphoneClient/HKWeibo/Classes/ASIHTTP/ASINetworkQueue.h
+END
+ASICacheDelegate.h
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/ipc/ipc_i18nhant_rep/!svn/ver/8841/Mobile_HK_Weibo_proj/trunk/iphone/iphoneClient/HKWeibo/Classes/ASIHTTP/ASICacheDelegate.h
+END
+ASIProgressDelegate.h
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/ipc/ipc_i18nhant_rep/!svn/ver/8841/Mobile_HK_Weibo_proj/trunk/iphone/iphoneClient/HKWeibo/Classes/ASIHTTP/ASIProgressDelegate.h
+END
+ASIAuthenticationDialog.h
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/ipc/ipc_i18nhant_rep/!svn/ver/8841/Mobile_HK_Weibo_proj/trunk/iphone/iphoneClient/HKWeibo/Classes/ASIHTTP/ASIAuthenticationDialog.h
+END
+Reachability.h
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/ipc/ipc_i18nhant_rep/!svn/ver/8841/Mobile_HK_Weibo_proj/trunk/iphone/iphoneClient/HKWeibo/Classes/ASIHTTP/Reachability.h
+END
+ASINetworkQueue.m
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/ipc/ipc_i18nhant_rep/!svn/ver/8841/Mobile_HK_Weibo_proj/trunk/iphone/iphoneClient/HKWeibo/Classes/ASIHTTP/ASINetworkQueue.m
+END
+ASIAuthenticationDialog.m
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/ipc/ipc_i18nhant_rep/!svn/ver/8841/Mobile_HK_Weibo_proj/trunk/iphone/iphoneClient/HKWeibo/Classes/ASIHTTP/ASIAuthenticationDialog.m
+END
+ASIFormDataRequest.h
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/ipc/ipc_i18nhant_rep/!svn/ver/8841/Mobile_HK_Weibo_proj/trunk/iphone/iphoneClient/HKWeibo/Classes/ASIHTTP/ASIFormDataRequest.h
+END
+Reachability.m
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/ipc/ipc_i18nhant_rep/!svn/ver/8841/Mobile_HK_Weibo_proj/trunk/iphone/iphoneClient/HKWeibo/Classes/ASIHTTP/Reachability.m
+END
+ASIInputStream.h
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/ipc/ipc_i18nhant_rep/!svn/ver/8841/Mobile_HK_Weibo_proj/trunk/iphone/iphoneClient/HKWeibo/Classes/ASIHTTP/ASIInputStream.h
+END
+ASIFormDataRequest.m
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/ipc/ipc_i18nhant_rep/!svn/ver/8841/Mobile_HK_Weibo_proj/trunk/iphone/iphoneClient/HKWeibo/Classes/ASIHTTP/ASIFormDataRequest.m
+END
+ASIHTTPRequestConfig.h
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/ipc/ipc_i18nhant_rep/!svn/ver/8841/Mobile_HK_Weibo_proj/trunk/iphone/iphoneClient/HKWeibo/Classes/ASIHTTP/ASIHTTPRequestConfig.h
+END
+ASIInputStream.m
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/ipc/ipc_i18nhant_rep/!svn/ver/8841/Mobile_HK_Weibo_proj/trunk/iphone/iphoneClient/HKWeibo/Classes/ASIHTTP/ASIInputStream.m
+END
+ASIHTTPRequestDelegate.h
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/ipc/ipc_i18nhant_rep/!svn/ver/8841/Mobile_HK_Weibo_proj/trunk/iphone/iphoneClient/HKWeibo/Classes/ASIHTTP/ASIHTTPRequestDelegate.h
+END
+ASIHTTPRequest.h
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/ipc/ipc_i18nhant_rep/!svn/ver/8841/Mobile_HK_Weibo_proj/trunk/iphone/iphoneClient/HKWeibo/Classes/ASIHTTP/ASIHTTPRequest.h
+END

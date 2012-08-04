@@ -16,6 +16,7 @@
 #import "XunJiaHisViewController.h"
 #import "FeedBackViewController.h"
 #import "PersonIdentifyViewController.h"
+#import "Config.h"
 
 @interface GengDuoViewController ()
 -(void)buildDataSource;
@@ -23,6 +24,7 @@
 
 @implementation GengDuoViewController
 @synthesize datasource;
+@synthesize labelName = _labelName;
 //@synthesize navigation;
 -(void)buildDataSource
 {
@@ -45,6 +47,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.labelName.text = [Config getUsername];
 }
 
 - (void)viewDidUnload

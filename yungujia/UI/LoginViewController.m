@@ -9,6 +9,9 @@
 #import "LoginViewController.h"
 #import "AppDelegate.h"
 #import "RegisterViewController.h"
+#import "PublicHeader.h"
+#import "LoginManager.h"
+#import "Config.h"
 
 @implementation LoginViewController
 @synthesize inputpassword;
@@ -20,9 +23,17 @@
     if (self) {
         // Custom initialization
         self.title = @"登陆手机云估价";
-        //self.tabBarItem.image = [UIImage imageNamed:@"second"];
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(SuccessStateNoti:) name:NotificationLoginSuccess object:nil];
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(FailedStateNoti:) name:NotificationLoginFailed object:nil];
     }
     return self;
+}
+
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [_progressInd release];
+    [super dealloc];
 }
 /*
 // Only override drawRect: if you perform custom drawing.
@@ -59,25 +70,28 @@
 
 -(IBAction)actionNormalLogin:(id)sender
 {
-    [self startNormalLogin];
-}
-
--(void)startNormalLogin
-{
     if([self checkNormalLoginInput]!=true)
     {
         return;
     }
-    NSString* msg = NSLocalizedString(@"str_logining",@"登陸中");
-//    [self ShowLoadingView:msg];
+    self.view.center=CGPointMake(160,208);
+//    NSString* msg = NSLocalizedString(@"str_logining",@"登陸中");
+    //    [self ShowLoadingView:msg];
+    _progressInd=[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:
+                 
+                 UIActivityIndicatorViewStyleWhiteLarge];
+    
+    _progressInd.center=CGPointMake(self.view.center.x,240);
+    
+    [self.view addSubview:_progressInd];
+    [_progressInd startAnimating];
     
     NSString* username = inputusername.text;
     NSString* password = inputpassword.text;
     [inputusername resignFirstResponder];
     [inputpassword resignFirstResponder];
-    [(AppDelegate*)[[UIApplication sharedApplication] delegate] ShowMainView:@"NickName" weiboaccount:username];
+    [[LoginManager shareInstance] login:username password:password];
 }
-
 
 -(BOOL)checkNormalLoginInput
 {
@@ -103,6 +117,21 @@
     RegisterViewController* regist = [[RegisterViewController alloc] initWithNibName:@"RegisterViewController" bundle:nil];
     [self.navigationController pushViewController:regist animated:YES];
     [regist release];
+}
+
+-(void)SuccessStateNoti:(NSNotification*)notification
+{
+    [_progressInd stopAnimating];
+    [_progressInd hidesWhenStopped];
+    [Config saveUserName:inputusername.text];
+    [(AppDelegate*)[[UIApplication sharedApplication] delegate] ShowMainView:@"NickName" weiboaccount:inputusername.text];
+}
+
+-(void)FailedStateNoti:(NSNotification*)notification
+{
+    [_progressInd stopAnimating];
+    [_progressInd hidesWhenStopped];
+    NSLog(@"登陆失败");
 }
 
 #pragma mark -table delegate
@@ -140,8 +169,8 @@
 #pragma mark -UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField;              // called when 'return' key pressed. return NO to ignore.
 {
-    if ([[textField text] length] != 0) {
-        
+    if ([[inputusername text] length] != 0 && [[inputpassword text] length] != 0) {
+        [self actionNormalLogin:nil];
     }
     
     [textField resignFirstResponder];
