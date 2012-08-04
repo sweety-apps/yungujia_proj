@@ -54,6 +54,11 @@
                                              selector:@selector(keyboardWillShow:)
                                                  name:UIKeyboardWillShowNotification
                                                object:nil];   
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil]; 
+    
 }
 
 -(void)viewDidUnload
@@ -62,19 +67,34 @@
     [super viewDidUnload];
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    NSLog(@"%f %f",self.view.center.x,self.view.center.y);
+}
+
 - (void)keyboardWillShow:(NSNotification*)aNotification
 {
     NSLog(@"%f %f",self.view.center.x,self.view.center.y);
-    self.view.center=CGPointMake(self.view.center.x,80);
+
+    [self moveviewsup:-128];
+    NSLog(@"%f %f",self.view.center.x,self.view.center.y);
 }
 
+- (void)keyboardWillHide:(NSNotification*)aNotification
+{
+    NSLog(@"%f %f",self.view.center.x,self.view.center.y);
+    //    self.view.center=CGPointMake(self.view.center.x,80);
+    [self moveviewsup:128];
+    NSLog(@"%f %f",self.view.center.x,self.view.center.y);
+}
 -(IBAction)actionNormalLogin:(id)sender
 {
     if([self checkNormalLoginInput]!=true)
     {
         return;
     }
-    self.view.center=CGPointMake(160,208);
+//    self.view.center=CGPointMake(160,208);
 //    NSString* msg = NSLocalizedString(@"str_logining",@"登陸中");
     //    [self ShowLoadingView:msg];
     _progressInd=[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:
@@ -134,6 +154,18 @@
     NSLog(@"登陆失败");
 }
 
+-(void)moveviewsup:(int)distance
+{
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.3];
+    for (int i = 0; i<[self.view.subviews count]; i++) {
+        UIView* view = [self.view.subviews objectAtIndex:i];
+        view.frame = CGRectMake(view.frame.origin.x, view.frame.origin.y + distance, view.frame.size.width, view.frame.size.height);
+    }
+    [UIView commitAnimations];
+}
+
+
 #pragma mark -table delegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -174,7 +206,7 @@
     }
     
     [textField resignFirstResponder];
-    self.view.center=CGPointMake(160,208); 
+//    self.view.center=CGPointMake(160,208); 
     return YES;
 }
 @end
