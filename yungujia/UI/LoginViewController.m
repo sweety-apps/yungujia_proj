@@ -46,6 +46,17 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    
+    CGRect rect = self.navigationController.navigationBar.frame;
+    UIImage* navBgImg = [UIImage imageNamed:@"tabbarBg.png"];
+    navBgImg = [navBgImg stretchableImageWithLeftCapWidth:0 topCapHeight:0];
+    [Utils setAtNavigationBar:self.navigationController.navigationBar withBgImage:navBgImg];
+    self.navigationController.navigationBar.clipsToBounds = YES;
+    self.navigationController.navigationBar.frame = rect;
+    //self.navigationController.navigationBar.bounds = rect;
+    
+    
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"注册" style:UIBarButtonItemStylePlain target:self action:@selector(actionRegist:)];
     self.navigationController.navigationBar.topItem.rightBarButtonItem = item;
     [item release];
@@ -58,6 +69,8 @@
                                              selector:@selector(keyboardWillHide:)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil]; 
+    
+    
     
 }
 

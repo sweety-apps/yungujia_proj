@@ -48,6 +48,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.labelName.text = [Config getUsername];
+    
+    UIImage* navBgImg = [UIImage imageNamed:@"tabbarBg.png"];
+    navBgImg = [navBgImg stretchableImageWithLeftCapWidth:0 topCapHeight:0];
+    [Utils setAtNavigationBar:self.navigationController.navigationBar withBgImage:navBgImg];
+    self.navigationController.navigationBar.clipsToBounds = YES;
 }
 
 - (void)viewDidUnload

@@ -10,4 +10,6 @@
 
 @interface Utils : NSObject
 +(NSString*)getRequestUrlByRequestName:(NSString*)requestName;
++(void)setAtNavigationBar:(UINavigationBar*)navbar
+              withBgImage:(UIImage *)backgroundImage;
 @end

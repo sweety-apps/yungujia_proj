@@ -7,6 +7,7 @@
 //
 
 #import "Utils.h"
+#import <QuartzCore/QuartzCore.h>
 
 #define REQUESTPLISTNAME @"RequestUrl"
 
@@ -16,6 +17,16 @@
     NSString* plistPath = [[NSBundle mainBundle] pathForResource:REQUESTPLISTNAME ofType:@"plist"];
     NSDictionary *urlList = [NSDictionary dictionaryWithContentsOfFile:plistPath];
     return [urlList objectForKey:requestName];
+}
+
++(void)setAtNavigationBar:(UINavigationBar*)navbar
+              withBgImage:(UIImage *)backgroundImage
+{  
+    if ([navbar respondsToSelector:@selector(setBackgroundImage:forBarMetrics:)]) {  
+        [navbar setBackgroundImage:backgroundImage forBarMetrics:UIBarMetricsDefault];  
+        return;  
+    }  
+    navbar.layer.contents = (id)backgroundImage.CGImage;  
 }
 
 @end

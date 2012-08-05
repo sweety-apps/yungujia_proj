@@ -38,6 +38,10 @@
     // Do any additional setup after loading the view from its nib.
     [self.view addSubview:_navctrl.view];
     [self PushSegement0:nil];
+    
+    UIImage* navBgImg = [UIImage imageNamed:@"tabbarBg.png"];
+    navBgImg = [navBgImg stretchableImageWithLeftCapWidth:0 topCapHeight:0];
+    [Utils setAtNavigationBar:self.navbar withBgImage:navBgImg];
 }
 
 - (IBAction)SelectedSegement:(id)sender
