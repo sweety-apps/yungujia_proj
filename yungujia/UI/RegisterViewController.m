@@ -180,10 +180,10 @@
             self.view.center = CGPointMake(center.x, center.y - 70);
             break;
         case 3://密码
-            self.view.center = CGPointMake(center.x, center.y - 100);
+            self.view.center = CGPointMake(center.x, center.y - 190);
             break;
         case 4://确认密码
-            self.view.center = CGPointMake(center.x, center.y - 130);
+            self.view.center = CGPointMake(center.x, center.y - 190);
             break;
         default:
             break;
