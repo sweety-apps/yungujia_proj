@@ -14,8 +14,12 @@
 
 @implementation YinhangkedaichaxunViewController
 
+@synthesize contentView = _contentView;
+
 @synthesize navbar = _navbar;
 @synthesize navctrl =_navctrl;
+
+@synthesize pickerView = _pickerView;
 
 @synthesize gyhkdectrl = _gyhkdectrl;
 
@@ -32,6 +36,10 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    ((UIScrollView*)(self.view)).contentSize = _contentView.frame.size;
+    
+    _pickerContents = [NSMutableArray arrayWithObjects:@"421809123元(世联评估)",@"1809123元(自动评估)",@"409123元(同致城)", nil];
 }
 
 - (void)viewDidUnload
@@ -39,6 +47,8 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+    
+    [_pickerContents release];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -52,6 +62,81 @@
 {
     _gyhkdectrl.title = @"人工询价";
     [self.navigationController pushViewController:_gyhkdectrl animated:YES];
+}
+
+- (IBAction)push_Pinggujia:(id)sender
+{
+    ((UIScrollView*)self.view).scrollEnabled = NO;
+    _pickerView.hidden = NO;
+}
+
+#pragma mark - UIPickerViewDataSource
+
+// returns the number of 'columns' to display.
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+
+// returns the # of rows in each component..
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return [_pickerContents count];
+}
+
+#pragma mark - UIPickerViewDelegate
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    if (row < 0 || row > [_pickerContents count])
+    {
+        return @"";
+    }
+    return (NSString*)[_pickerContents objectAtIndex:row];
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    _pickerView.hidden = YES;
+    ((UIScrollView*)self.view).scrollEnabled = YES;
+}
+
+-(void)moveviewsup:(int)distance
+{
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.3];
+    for (int i = 0; i<[self.view.subviews count]; i++) {
+        UIView* view = [self.view.subviews objectAtIndex:i];
+        view.frame = CGRectMake(view.frame.origin.x, view.frame.origin.y + distance, view.frame.size.width, view.frame.size.height);
+    }
+    [UIView commitAnimations];
+}
+
+#pragma mark -UITextFieldDelegate
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    NSLog(@"%f %f",self.view.center.x,self.view.center.y);
+    [self moveviewsup:-200];
+    NSLog(@"%f %f",self.view.center.x,self.view.center.y);
+    
+    return YES;
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
+{
+    NSLog(@"%f %f",self.view.center.x,self.view.center.y);
+    [self moveviewsup:200];
+    NSLog(@"%f %f",self.view.center.x,self.view.center.y);
+    
+    return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField;              // called when 'return' key pressed. return NO to ignore.
+{
+    [textField resignFirstResponder];
+    //    self.view.center=CGPointMake(160,208); 
+    return YES;
 }
 
 @end

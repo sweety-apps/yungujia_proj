@@ -35,7 +35,7 @@
     [self.view addSubview:_navctrl.view];
     _navctrl.topViewController.title = @"关注";
     
-    UIImage* navBgImg = [UIImage imageNamed:@"tabbarBg.png"];
+    UIImage* navBgImg = [UIImage imageNamed:@"naviBarBg.png"];
     navBgImg = [navBgImg stretchableImageWithLeftCapWidth:0 topCapHeight:0];
     [Utils setAtNavigationBar:self.navbar withBgImage:navBgImg];
 }

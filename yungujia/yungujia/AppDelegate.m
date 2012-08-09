@@ -91,6 +91,8 @@
         
         self.rootTabBarController = [[[SwichTabBarViewController alloc] initWithNibName:@"SwichTabBarViewController" bundle:nil] autorelease];
         self.rootTabBarController.viewControllers = [NSArray arrayWithObjects:viewController1, viewController2,viewController3, viewController4, nil];
+        
+        [self.rootTabBarController customTabBarItems];
 	}
 
     

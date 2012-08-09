@@ -14,6 +14,8 @@
 
 @implementation PinggujigouxiangqingViewController
 
+@synthesize contentView = _contentView;
+
 @synthesize logo = _logo;
 @synthesize xiangqing = _xiangqing;
 
@@ -35,6 +37,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.yinhangctrl = [[PinggujigouyinhangViewController alloc] initWithNibName:@"PinggujigouyinhangViewController" bundle:nil];
+    
+    ((UIScrollView*)(self.view)).contentSize = _contentView.frame.size;
 }
 
 - (void)viewDidUnload

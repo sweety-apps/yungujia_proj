@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RengongxunjiaViewController : UIViewController
+@interface RengongxunjiaViewController : UIViewController <UITextFieldDelegate>
+
+//views
+@property (nonatomic,retain) IBOutlet UIView* contentView;
 
 @end

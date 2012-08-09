@@ -11,7 +11,7 @@
 #import "KaishixunjiaLoupanCellViewController.h"
 #import "KaishixunjiaCell1ViewController.h"
 
-@interface KaishixunjiaViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface KaishixunjiaViewController : UIViewController <UITableViewDelegate, UITableViewDataSource,UITextFieldDelegate>
 {
     
 }
@@ -23,6 +23,7 @@
 @property (nonatomic,retain) NSString* fanghao;
 
 //views
+@property (nonatomic,retain) IBOutlet UIView* contentView;
 @property (nonatomic,retain) IBOutlet UINavigationBar* navbar;
 
 //controllers

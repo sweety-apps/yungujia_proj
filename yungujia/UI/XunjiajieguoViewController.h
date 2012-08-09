@@ -16,6 +16,7 @@
 }
 
 //views
+@property (nonatomic,retain) IBOutlet UIView* contentView;
 @property (nonatomic,retain) IBOutlet UINavigationBar* navbar;
 
 //controllers

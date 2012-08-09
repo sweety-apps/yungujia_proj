@@ -16,6 +16,7 @@
 }
 
 //views
+@property (nonatomic,retain) IBOutlet UIView* contentView;
 @property (nonatomic,retain) IBOutlet UIImageView* logo;
 @property (nonatomic,retain) IBOutlet UILabel* xiangqing;
 

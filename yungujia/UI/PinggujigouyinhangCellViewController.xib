@@ -79,7 +79,6 @@
 								<string key="NSFrame">{{116, 15}, {159, 21}}</string>
 								<reference key="NSSuperview" ref="112732538"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -88,8 +87,8 @@
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<string key="IBUIText">国家土地一级</string>
 								<object class="NSColor" key="IBUITextColor">
-									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MCAwIDEAA</bytes>
+									<int key="NSColorSpace">2</int>
+									<bytes key="NSRGB">MC4yNzA1ODgyNDkgMC4zODQzMTM3NjIyIDAuNTg4MjM1MzE4NwA</bytes>
 								</object>
 								<reference key="IBUIHighlightedColor" ref="252309967"/>
 								<int key="IBUIBaselineAdjustment">0</int>

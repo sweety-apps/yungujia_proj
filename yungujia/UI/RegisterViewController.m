@@ -46,7 +46,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     CGRect rect = self.navigationController.navigationBar.frame;
-    UIImage* navBgImg = [UIImage imageNamed:@"tabbarBg.png"];
+    UIImage* navBgImg = [UIImage imageNamed:@"naviBarBg.png"];
     navBgImg = [navBgImg stretchableImageWithLeftCapWidth:0 topCapHeight:0];
     [Utils setAtNavigationBar:self.navigationController.navigationBar withBgImage:navBgImg];
     self.navigationController.navigationBar.frame = rect;

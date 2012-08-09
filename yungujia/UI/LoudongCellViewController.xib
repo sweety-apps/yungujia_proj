@@ -79,7 +79,6 @@
 								<string key="NSFrame">{{20, 41}, {187, 21}}</string>
 								<reference key="NSSuperview" ref="847949677"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -119,8 +118,8 @@
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<string key="IBUIText">73,165元/平米</string>
 								<object class="NSColor" key="IBUITextColor">
-									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MCAwIDEAA</bytes>
+									<int key="NSColorSpace">2</int>
+									<bytes key="NSRGB">MC4yNzA1ODgyNDkgMC4zODQzMTM3NjIyIDAuNTg4MjM1MzE4NwA</bytes>
 								</object>
 								<reference key="IBUIHighlightedColor" ref="757203804"/>
 								<int key="IBUIBaselineAdjustment">0</int>

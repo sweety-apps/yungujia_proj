@@ -9,19 +9,23 @@
 #import <UIKit/UIKit.h>
 #import "GeyinhangkedaieViewController.h"
 
-@interface YinhangkedaichaxunViewController : UIViewController
+@interface YinhangkedaichaxunViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate,UITextFieldDelegate>
 
 {
-    
+    NSMutableArray* _pickerContents;
 }
 
 //views
+@property (nonatomic,retain) IBOutlet UIView* contentView;
 @property (nonatomic,retain) IBOutlet UINavigationBar* navbar;
+@property (nonatomic,retain) IBOutlet UIPickerView* pickerView;
 
 //controllers
 @property (nonatomic,retain) IBOutlet UINavigationController* navctrl;
 @property (nonatomic,retain) IBOutlet GeyinhangkedaieViewController* gyhkdectrl;
 
+
 - (IBAction)push_Kaishijisuan:(id)sender;
+- (IBAction)push_Pinggujia:(id)sender;
 
 @end

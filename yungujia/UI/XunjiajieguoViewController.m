@@ -14,6 +14,8 @@
 
 @implementation XunjiajieguoViewController
 
+@synthesize contentView = _contentView;
+
 @synthesize navbar = _navbar;
 @synthesize navctrl =_navctrl;
 
@@ -34,6 +36,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    ((UIScrollView*)(self.view)).contentSize = _contentView.frame.size;
 }
 
 - (void)viewDidUnload
