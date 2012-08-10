@@ -51,7 +51,8 @@ static LoginManager* g_Manager = nil;
     request = [ASIHTTPRequest requestWithURL:url];
     [request setUseCookiePersistence:YES];
     [request setDelegate:self];
-    [request startAsynchronous];
+//    [request startAsynchronous];
+    [self requestFinished:nil];
     return true;
 }
 
