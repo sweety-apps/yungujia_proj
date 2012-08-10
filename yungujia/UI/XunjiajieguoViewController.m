@@ -62,6 +62,7 @@
 - (IBAction)push_RengongxunjiaBtn:(id)sender
 {
     _rengongctrl.title = @"人工询价";
+    _rengongctrl.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:_rengongctrl animated:YES];
 }
 

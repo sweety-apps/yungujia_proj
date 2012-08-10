@@ -72,51 +72,51 @@
     tbi.badgeValue = @"3";
 }
 
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    UITabBarItem* tbi = nil;
-    
-    tbi = ((UITabBarItem*)[self.tabBar.items objectAtIndex:0]);
-    tbi.title = @"";
-    [tbi setFinishedSelectedImage:[UIImage imageNamed:@"xunjia_pushed"] withFinishedUnselectedImage:[UIImage imageNamed:@"xunjia_normal"]];
-    
-    tbi = ((UITabBarItem*)[self.tabBar.items objectAtIndex:1]);
-    tbi.title = @"";
-    [tbi setFinishedSelectedImage:[UIImage imageNamed:@"guanzhu_pushed"] withFinishedUnselectedImage:[UIImage imageNamed:@"guanzhu_normal"]];
-    
-    tbi = ((UITabBarItem*)[self.tabBar.items objectAtIndex:2]);
-    tbi.title = @"";
-    [tbi setFinishedSelectedImage:[UIImage imageNamed:@"gujiashi_pushed"] withFinishedUnselectedImage:[UIImage imageNamed:@"gujiashi_normal"]];
-    
-    tbi = ((UITabBarItem*)[self.tabBar.items objectAtIndex:3]);
-    tbi.title = @"";
-    [tbi setFinishedSelectedImage:[UIImage imageNamed:@"gengduo_pushed"] withFinishedUnselectedImage:[UIImage imageNamed:@"gengduo_normal"]];
-    
-    [super touchesBegan:touches withEvent:event];
-}
-
--(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    UITabBarItem* tbi = nil;
-    
-    tbi = ((UITabBarItem*)[self.tabBar.items objectAtIndex:0]);
-    tbi.title = @"";
-    [tbi setFinishedSelectedImage:[UIImage imageNamed:@"xunjia_actived"] withFinishedUnselectedImage:[UIImage imageNamed:@"xunjia_normal"]];
-    
-    tbi = ((UITabBarItem*)[self.tabBar.items objectAtIndex:1]);
-    tbi.title = @"";
-    [tbi setFinishedSelectedImage:[UIImage imageNamed:@"guanzhu_actived"] withFinishedUnselectedImage:[UIImage imageNamed:@"guanzhu_normal"]];
-    
-    tbi = ((UITabBarItem*)[self.tabBar.items objectAtIndex:2]);
-    tbi.title = @"";
-    [tbi setFinishedSelectedImage:[UIImage imageNamed:@"gujiashi_actived"] withFinishedUnselectedImage:[UIImage imageNamed:@"gujiashi_normal"]];
-    
-    tbi = ((UITabBarItem*)[self.tabBar.items objectAtIndex:3]);
-    tbi.title = @"";
-    [tbi setFinishedSelectedImage:[UIImage imageNamed:@"gengduo_actived"] withFinishedUnselectedImage:[UIImage imageNamed:@"gengduo_normal"]];
-    
-    [super touchesEnded:touches withEvent:event];
-}
+//-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+//{
+//    UITabBarItem* tbi = nil;
+//    
+//    tbi = ((UITabBarItem*)[self.tabBar.items objectAtIndex:0]);
+//    tbi.title = @"";
+//    [tbi setFinishedSelectedImage:[UIImage imageNamed:@"xunjia_pushed@2x"] withFinishedUnselectedImage:[UIImage imageNamed:@"xunjia_normal@2x"]];
+//    
+//    tbi = ((UITabBarItem*)[self.tabBar.items objectAtIndex:1]);
+//    tbi.title = @"";
+//    [tbi setFinishedSelectedImage:[UIImage imageNamed:@"guanzhu_pushed"] withFinishedUnselectedImage:[UIImage imageNamed:@"guanzhu_normal"]];
+//    
+//    tbi = ((UITabBarItem*)[self.tabBar.items objectAtIndex:2]);
+//    tbi.title = @"";
+//    [tbi setFinishedSelectedImage:[UIImage imageNamed:@"gujiashi_pushed"] withFinishedUnselectedImage:[UIImage imageNamed:@"gujiashi_normal"]];
+//    
+//    tbi = ((UITabBarItem*)[self.tabBar.items objectAtIndex:3]);
+//    tbi.title = @"";
+//    [tbi setFinishedSelectedImage:[UIImage imageNamed:@"gengduo_pushed"] withFinishedUnselectedImage:[UIImage imageNamed:@"gengduo_normal"]];
+//    
+//    [super touchesBegan:touches withEvent:event];
+//}
+//
+//-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+//{
+//    UITabBarItem* tbi = nil;
+//    
+//    tbi = ((UITabBarItem*)[self.tabBar.items objectAtIndex:0]);
+//    tbi.title = @"";
+//    [tbi setFinishedSelectedImage:[UIImage imageNamed:@"xunjia_actived@2x"] withFinishedUnselectedImage:[UIImage imageNamed:@"xunjia_normal@2x"]];
+//    
+//    tbi = ((UITabBarItem*)[self.tabBar.items objectAtIndex:1]);
+//    tbi.title = @"";
+//    [tbi setFinishedSelectedImage:[UIImage imageNamed:@"guanzhu_actived"] withFinishedUnselectedImage:[UIImage imageNamed:@"guanzhu_normal"]];
+//    
+//    tbi = ((UITabBarItem*)[self.tabBar.items objectAtIndex:2]);
+//    tbi.title = @"";
+//    [tbi setFinishedSelectedImage:[UIImage imageNamed:@"gujiashi_actived"] withFinishedUnselectedImage:[UIImage imageNamed:@"gujiashi_normal"]];
+//    
+//    tbi = ((UITabBarItem*)[self.tabBar.items objectAtIndex:3]);
+//    tbi.title = @"";
+//    [tbi setFinishedSelectedImage:[UIImage imageNamed:@"gengduo_actived"] withFinishedUnselectedImage:[UIImage imageNamed:@"gengduo_normal"]];
+//    
+//    [super touchesEnded:touches withEvent:event];
+//}
 
 
 @end

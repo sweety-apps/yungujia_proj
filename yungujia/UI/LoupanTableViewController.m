@@ -59,7 +59,9 @@
         //[(AppDelegate*)[UIApplication sharedApplication].delegate makeTabBarHidden:YES];
         _loudongctrl.title = @"选择楼栋";
         _loudongctrl.headinfo = cell.xxhuayuan.text;
+        _loudongctrl.hidesBottomBarWhenPushed = YES;
         [_navctrl pushViewController:_loudongctrl animated:YES];
+        
     }
 }
 

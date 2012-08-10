@@ -57,6 +57,7 @@
     if (cell.accessoryType != UITableViewCellAccessoryNone)
     {
         _kaishixunjiactrl.title = @"开始询价";
+        _kaishixunjiactrl.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:_kaishixunjiactrl animated:YES];
     }
 }

@@ -9,5 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface PersonIdentifyViewController : UIViewController
-
+<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+{
+    UIImageView* imageview;
+    UIImagePickerController *imagePickerController;
+}
+@property (nonatomic,retain) IBOutlet UIImageView* imageview;
+@property (nonatomic, retain) 	UIImagePickerController *imagePickerController;
+-(IBAction)onClickCamera:(id)sender;
 @end

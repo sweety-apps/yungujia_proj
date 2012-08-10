@@ -152,6 +152,7 @@
 {
 //    self.navigation push
     InviteFriendController* controller = [[InviteFriendController alloc] initWithNibName:@"InviteFriendController" bundle:nil];
+    controller.hidesBottomBarWhenPushed = YES;
     [((UINavigationController*)self.parentViewController) pushViewController:controller animated:YES];
     [controller release];
 }
@@ -159,6 +160,7 @@
 -(void)showXunjiaHis
 {
     XunJiaHisViewController* controller = [[XunJiaHisViewController alloc] initWithNibName:@"XunJiaHisViewController" bundle:nil];
+    controller.hidesBottomBarWhenPushed = YES;
     [((UINavigationController*)self.parentViewController) pushViewController:controller animated:YES];
     [controller release];
 }
@@ -166,6 +168,7 @@
 -(void)showModifyPwd
 {
     ModifyPwdViewController* controller = [[ModifyPwdViewController alloc] initWithNibName:@"ModifyPwdViewController" bundle:nil];
+    controller.hidesBottomBarWhenPushed = YES;
     [((UINavigationController*)self.parentViewController) pushViewController:controller animated:YES];
     [controller release];
 }
@@ -173,24 +176,28 @@
 -(void)showPersonIdentify
 {
     PersonIdentifyViewController* controller = [[PersonIdentifyViewController alloc] initWithNibName:@"PersonIdentifyViewController" bundle:nil];
+    controller.hidesBottomBarWhenPushed = YES;
     [((UINavigationController*)self.parentViewController) pushViewController:controller animated:YES];
     [controller release];
 }
 -(void)showfeedback
 {
     FeedBackViewController* controller = [[FeedBackViewController alloc] initWithNibName:@"FeedBackViewController" bundle:nil];
+    controller.hidesBottomBarWhenPushed = YES;
     [((UINavigationController*)self.parentViewController) pushViewController:controller animated:YES];
     [controller release];
 }
 -(void)showAbout
 {
     AboutSystemViewController* controller = [[AboutSystemViewController alloc] initWithNibName:@"AboutSystemViewController" bundle:nil];
+    controller.hidesBottomBarWhenPushed = YES;
     [((UINavigationController*)self.parentViewController) pushViewController:controller animated:YES];
     [controller release];
 }
 -(void)showSystemMsg
 {
     SystemMsgViewController* controller = [[SystemMsgViewController alloc] initWithNibName:@"SystemMsgViewController" bundle:nil];
+    controller.hidesBottomBarWhenPushed = YES;
     [((UINavigationController*)self.parentViewController) pushViewController:controller animated:YES];
     [controller release];
 }
@@ -198,6 +205,7 @@
 -(void)showGongshi
 {
     GongshiController* controller = [[GongshiController alloc] initWithNibName:@"GongshiController" bundle:nil];
+    controller.hidesBottomBarWhenPushed = YES;
     [((UINavigationController*)self.parentViewController) pushViewController:controller animated:YES];
     [controller release];
 }
@@ -223,4 +231,5 @@
 {
     
 }
+
 @end

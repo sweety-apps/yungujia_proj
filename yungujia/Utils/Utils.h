@@ -12,4 +12,6 @@
 +(NSString*)getRequestUrlByRequestName:(NSString*)requestName;
 +(void)setAtNavigationBar:(UINavigationBar*)navbar
               withBgImage:(UIImage *)backgroundImage;
++(UIImage*)scaleToSize:(CGSize)size image:(UIImage*)image;
 @end
+
