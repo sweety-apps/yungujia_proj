@@ -9,5 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface FeedBackViewController : UIViewController
-
+<UITextViewDelegate>
+{
+    UITextView* textEdit;
+    UILabel* wordLeftLabel;
+}
+@property (nonatomic,retain) IBOutlet UITextView* textEdit;
+@property (nonatomic,retain) IBOutlet UILabel* wordLeftLabel;
 @end

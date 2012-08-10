@@ -89,8 +89,9 @@
 - (void)keyboardWillShow:(NSNotification*)aNotification
 {
     NSLog(@"%f %f",self.view.center.x,self.view.center.y);
-
-    [self moveviewsup:-128];
+    if (self.view.frame.origin.y == 0) {
+        [self moveviewsup:-128];
+    }
     NSLog(@"%f %f",self.view.center.x,self.view.center.y);
 }
 
@@ -171,10 +172,10 @@
 {
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.3];
-    for (int i = 0; i<[self.view.subviews count]; i++) {
-        UIView* view = [self.view.subviews objectAtIndex:i];
+//    for (int i = 0; i<[self.view.subviews count]; i++) {
+    UIView* view = self.view;//[self.view.subviews objectAtIndex:i];
         view.frame = CGRectMake(view.frame.origin.x, view.frame.origin.y + distance, view.frame.size.width, view.frame.size.height);
-    }
+//    }
     [UIView commitAnimations];
 }
 
