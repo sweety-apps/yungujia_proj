@@ -42,6 +42,8 @@
 		38CB044015CCDCD200FF4F86 /* LoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 38CB043F15CCDCD200FF4F86 /* LoginManager.m */; };
 		38CB044615CCE09300FF4F86 /* RequestUrl.plist in Resources */ = {isa = PBXBuildFile; fileRef = 38CB044515CCE09300FF4F86 /* RequestUrl.plist */; };
 		38CB044A15CCE0FE00FF4F86 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 38CB044915CCE0FE00FF4F86 /* Utils.m */; };
+		38D2503715D553A600535744 /* buttona.png in Resources */ = {isa = PBXBuildFile; fileRef = 38D2503515D553A600535744 /* buttona.png */; };
+		38D2503815D553A600535744 /* buttonn.png in Resources */ = {isa = PBXBuildFile; fileRef = 38D2503615D553A600535744 /* buttonn.png */; };
 		38D2A33715B8187D000C5D6D /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D2A33515B8187C000C5D6D /* RegisterViewController.m */; };
 		38D2A33815B8187D000C5D6D /* RegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38D2A33615B8187D000C5D6D /* RegisterViewController.xib */; };
 		38E2F9A715BB9D6E00EB72D0 /* isRead.png in Resources */ = {isa = PBXBuildFile; fileRef = 38E2F9A615BB9D6E00EB72D0 /* isRead.png */; };
@@ -242,6 +244,8 @@
 		38CB044515CCE09300FF4F86 /* RequestUrl.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = RequestUrl.plist; path = Resources/RequestUrl.plist; sourceTree = SOURCE_ROOT; };
 		38CB044815CCE0FE00FF4F86 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utils.h; path = Utils/Utils.h; sourceTree = SOURCE_ROOT; };
 		38CB044915CCE0FE00FF4F86 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Utils.m; path = Utils/Utils.m; sourceTree = SOURCE_ROOT; };
+		38D2503515D553A600535744 /* buttona.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttona.png; sourceTree = "<group>"; };
+		38D2503615D553A600535744 /* buttonn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonn.png; sourceTree = "<group>"; };
 		38D2A33415B8187C000C5D6D /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
 		38D2A33515B8187C000C5D6D /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
 		38D2A33615B8187D000C5D6D /* RegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisterViewController.xib; sourceTree = "<group>"; };
@@ -571,6 +575,8 @@
 		38E2F9A515BB9D6E00EB72D0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				38D2503515D553A600535744 /* buttona.png */,
+				38D2503615D553A600535744 /* buttonn.png */,
 				BEE87C3215D44A8800967BCD /* naviBarBg@2x.png */,
 				BEE87C1715D445EB00967BCD /* gengduo_actived@2x.png */,
 				BEE87C1815D445EB00967BCD /* gengduo_normal@2x.png */,
@@ -1117,6 +1123,8 @@
 				BEE87C2F15D445EB00967BCD /* xunjia_normal@2x.png in Resources */,
 				BEE87C3015D445EB00967BCD /* xunjia_pushed@2x.png in Resources */,
 				BEE87C3315D44A8800967BCD /* naviBarBg@2x.png in Resources */,
+				38D2503715D553A600535744 /* buttona.png in Resources */,
+				38D2503815D553A600535744 /* buttonn.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
