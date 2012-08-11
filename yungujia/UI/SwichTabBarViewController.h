@@ -13,7 +13,14 @@
 #import "GengDuoViewController.h"
 
 @interface SwichTabBarViewController : UITabBarController
+{
+    UIImageView* _tabBarBg;
+    NSArray* _tabBarItemBtns;
+    UIButton* _lastPushedBtn;
+}
 
 -(void) customTabBarItems;
+-(IBAction)OnItemHovered:(id)sender;
+-(IBAction)OnItemPushed:(id)sender;
 
 @end
