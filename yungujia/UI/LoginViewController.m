@@ -17,6 +17,8 @@
 @synthesize inputpassword;
 @synthesize inputusername;
 @synthesize tablebackground;
+@synthesize loginBtn;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -55,6 +57,24 @@
     self.navigationController.navigationBar.clipsToBounds = YES;
     self.navigationController.navigationBar.frame = rect;
     //self.navigationController.navigationBar.bounds = rect;
+    
+    UIImage* btn_img = nil;
+    
+    btn_img = [UIImage imageNamed:@"buttonn"];
+    btn_img = [btn_img stretchableImageWithLeftCapWidth:65 topCapHeight:30];
+    [self.loginBtn setBackgroundImage:btn_img forState:UIControlStateNormal];
+    
+    btn_img = [UIImage imageNamed:@"buttona"];
+    btn_img = [btn_img stretchableImageWithLeftCapWidth:65 topCapHeight:30];
+    [self.loginBtn setBackgroundImage:btn_img forState:UIControlStateHighlighted];
+    
+    btn_img = [UIImage imageNamed:@"buttona"];
+    btn_img = [btn_img stretchableImageWithLeftCapWidth:65 topCapHeight:30];
+    [self.loginBtn setBackgroundImage:btn_img forState:UIControlStateSelected];
+    
+    btn_img = [UIImage imageNamed:@"buttonn"];
+    btn_img = [btn_img stretchableImageWithLeftCapWidth:65 topCapHeight:30];
+    [self.loginBtn setBackgroundImage:btn_img forState:UIControlStateDisabled];
     
     
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"注册" style:UIBarButtonItemStylePlain target:self action:@selector(actionRegist:)];

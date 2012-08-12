@@ -8,11 +8,19 @@
 
 #import "AppDelegate.h"
 
+static AppDelegate* gDel = nil;
+
 @implementation AppDelegate
 
 @synthesize window = _window;
 @synthesize rootTabBarController;
 @synthesize loginViewController;
+
++ (AppDelegate*)sharedInstance
+{
+    return gDel;
+}
+
 - (void)dealloc
 {
     [_window release];
@@ -23,6 +31,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    gDel = self;
+    
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
     [self ShowLoginView];
@@ -92,7 +102,6 @@
         self.rootTabBarController = [[[SwichTabBarViewController alloc] initWithNibName:@"SwichTabBarViewController" bundle:nil] autorelease];
         self.rootTabBarController.viewControllers = [NSArray arrayWithObjects:viewController1, viewController2,viewController3, viewController4, nil];
         
-        [self.rootTabBarController customTabBarItems];
 	}
 
     
@@ -128,19 +137,7 @@
 
 - (void)makeTabBarHidden:(BOOL)hide
 {
-    CGRect newRect = rootTabBarController.view.frame;
-    if (hide)
-    {
-        newRect.size.height += rootTabBarController.tabBar.frame.size.height;
-        rootTabBarController.tabBar.hidden = YES;
-    }
-    else
-    {
-        newRect.size.height -= rootTabBarController.tabBar.frame.size.height;
-        rootTabBarController.tabBar.hidden = NO;
-    }
-    rootTabBarController.view.frame = newRect;
-    
+    [rootTabBarController hideTabbar:hide];
 }
 
 @end

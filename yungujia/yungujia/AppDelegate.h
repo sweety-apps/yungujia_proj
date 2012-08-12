@@ -22,5 +22,6 @@
 -(void)ShowLoginView;
 
 - (void)makeTabBarHidden:(BOOL)hide;
++ (AppDelegate*)sharedInstance;
 
 @end

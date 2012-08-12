@@ -16,6 +16,7 @@
 @property (nonatomic,retain) IBOutlet UITextField* inputusername;
 @property (nonatomic,retain) IBOutlet UITextField* inputpassword;
 @property (nonatomic,retain) IBOutlet UITableView* tablebackground;
+@property (nonatomic,retain) IBOutlet UIButton* loginBtn;
 -(IBAction)actionNormalLogin:(id)sender;
 -(IBAction)actionRegist:(id)sender;
 @end

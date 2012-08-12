@@ -160,6 +160,7 @@
 		BEE87C3F15D5E62A00967BCD /* top2Btn_leftActived@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEE87C3A15D5E62A00967BCD /* top2Btn_leftActived@2x.png */; };
 		BEE87C4015D5E62A00967BCD /* topBtn_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEE87C3B15D5E62A00967BCD /* topBtn_normal@2x.png */; };
 		BEE87C4115D5E62A00967BCD /* topBtn_pushed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEE87C3C15D5E62A00967BCD /* topBtn_pushed@2x.png */; };
+		BEE87C4515D75D5900967BCD /* UIBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE87C4415D75D5800967BCD /* UIBadgeView.m */; };
 		F302BD0115BCE4A300FB1663 /* Pinggujigoulv1Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = F302BD0015BCE4A300FB1663 /* Pinggujigoulv1Cell.m */; };
 		F302BD0515BCE4CF00FB1663 /* PinggujigouLV1CellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F302BD0315BCE4CF00FB1663 /* PinggujigouLV1CellViewController.m */; };
 		F302BD0615BCE4CF00FB1663 /* PinggujigouLV1CellViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F302BD0415BCE4CF00FB1663 /* PinggujigouLV1CellViewController.xib */; };
@@ -406,6 +407,8 @@
 		BEE87C3A15D5E62A00967BCD /* top2Btn_leftActived@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "top2Btn_leftActived@2x.png"; sourceTree = "<group>"; };
 		BEE87C3B15D5E62A00967BCD /* topBtn_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "topBtn_normal@2x.png"; sourceTree = "<group>"; };
 		BEE87C3C15D5E62A00967BCD /* topBtn_pushed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "topBtn_pushed@2x.png"; sourceTree = "<group>"; };
+		BEE87C4315D75D5600967BCD /* UIBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBadgeView.h; sourceTree = "<group>"; };
+		BEE87C4415D75D5800967BCD /* UIBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBadgeView.m; sourceTree = "<group>"; };
 		F302BCFF15BCE4A300FB1663 /* Pinggujigoulv1Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pinggujigoulv1Cell.h; sourceTree = "<group>"; };
 		F302BD0015BCE4A300FB1663 /* Pinggujigoulv1Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pinggujigoulv1Cell.m; sourceTree = "<group>"; };
 		F302BD0215BCE4CF00FB1663 /* PinggujigouLV1CellViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinggujigouLV1CellViewController.h; sourceTree = "<group>"; };
@@ -738,6 +741,8 @@
 		BE85B52E15B330140010E0F5 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				BEE87C4315D75D5600967BCD /* UIBadgeView.h */,
+				BEE87C4415D75D5800967BCD /* UIBadgeView.m */,
 				F3DBEAD715BD31270040CDED /* Guanzhu */,
 				BEB543A815BC65F200C6CDAD /* Gujiashi */,
 				3852DDD815B8402600ADB7C8 /* more */,
@@ -1227,6 +1232,7 @@
 				38CB043315CCDAAA00FF4F86 /* Reachability.m in Sources */,
 				38CB044015CCDCD200FF4F86 /* LoginManager.m in Sources */,
 				38CB044A15CCE0FE00FF4F86 /* Utils.m in Sources */,
+				BEE87C4515D75D5900967BCD /* UIBadgeView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

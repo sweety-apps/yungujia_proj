@@ -10,7 +10,7 @@
 #import "PinggujigouLV1CellViewController.h"
 #import "PinggujigouxiangqingViewController.h"
 
-@interface PinggujigouViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
+@interface PinggujigouViewController : UIViewController<UITableViewDelegate, UITableViewDataSource,UINavigationBarDelegate>
 {
     
 }

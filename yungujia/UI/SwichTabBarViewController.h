@@ -11,16 +11,21 @@
 #import "GuanZhuViewController.h"
 #import "GuJiaShiViewController.h"
 #import "GengDuoViewController.h"
+#import "UIBadgeView.h"
 
 @interface SwichTabBarViewController : UITabBarController
 {
     UIImageView* _tabBarBg;
     NSArray* _tabBarItemBtns;
+    NSArray* _btnImagesNormal;
+    NSArray* _btnImagesHighlighted;
+    NSArray* _btnImagesSelected;
     UIButton* _lastPushedBtn;
+    UIBadgeView* _badge;
+    BOOL _tabBarHasHide;
 }
 
--(void) customTabBarItems;
 -(IBAction)OnItemHovered:(id)sender;
 -(IBAction)OnItemPushed:(id)sender;
-
+-(void) hideTabbar:(BOOL)enable;
 @end

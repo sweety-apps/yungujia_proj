@@ -6,7 +6,9 @@
 //  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
 //
 
+#import "GuJiaShiViewController.h"
 #import "PinggujigouViewController.h"
+#import "AppDelegate.h"
 
 @interface PinggujigouViewController ()
 
@@ -54,6 +56,8 @@
     if (cell.accessoryType != UITableViewCellAccessoryNone)
     {
         _xiangqingctrl.title = cell.xxpinggu.text;
+        [[AppDelegate sharedInstance] makeTabBarHidden:YES];
+        [_navctrl setDelegate:self];
         [_navctrl pushViewController:_xiangqingctrl animated:YES];
     }
 }
@@ -98,6 +102,21 @@
     }
     
     return cell;
+}
+
+#pragma mark - UINavigationControllerDelegate
+
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    
+}
+
+- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    if (![viewController isKindOfClass:[PinggujigouxiangqingViewController class]])
+    {
+        [[AppDelegate sharedInstance] makeTabBarHidden:NO];
+    }
 }
 
 @end

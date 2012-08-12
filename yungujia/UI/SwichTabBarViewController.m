@@ -47,7 +47,11 @@
     
     CGPoint pt = CGPointMake(_tabBarBg.frame.origin.x, _tabBarBg.frame.origin.y) ;
     
-    UIImage* firstImg = [UIImage imageNamed:@"xunjia_normal"];
+    _btnImagesNormal = [[NSArray arrayWithObjects:@"xunjia_normal",@"guanzhu_normal",@"gujiashi_normal",@"gengduo_normal", nil]retain];
+    _btnImagesHighlighted = [[NSArray arrayWithObjects:@"xunjia_pushed",@"guanzhu_pushed",@"gujiashi_pushed",@"gengduo_pushed", nil]retain];
+    _btnImagesSelected = [[NSArray arrayWithObjects:@"xunjia_actived",@"guanzhu_actived",@"gujiashi_actived",@"gengduo_actived", nil]retain];
+    
+    UIImage* firstImg = [UIImage imageNamed:(NSString*)[_btnImagesNormal objectAtIndex:0]];
     rect.origin = pt;
     rect.size = firstImg.size;
     UIButton* xunjia = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -89,6 +93,10 @@
     {
         UIButton* btn = [_tabBarItemBtns objectAtIndex:i];
         btn.tag = i;
+        [btn setTitleShadowColor:[UIColor clearColor] forState:UIControlStateNormal];
+        [btn setTitleShadowColor:[UIColor clearColor] forState:UIControlStateHighlighted];
+        [btn setTitleShadowColor:[UIColor clearColor] forState:UIControlStateDisabled];
+        [btn setTitleShadowColor:[UIColor clearColor] forState:UIControlStateSelected];
         [btn addTarget:self action:@selector(OnItemHovered:) forControlEvents:UIControlEventTouchDown];
         [btn addTarget:self action:@selector(OnItemPushed:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:btn];
@@ -97,6 +105,15 @@
     //init
     [self OnItemHovered:xunjia];
     [self OnItemPushed:xunjia];
+
+    //badge
+    _badge = [[[UIBadgeView alloc] initWithFrame:CGRectMake(gengduo.frame.size.width - 25, 0, 25, 25) ] autorelease ];
+    [gengduo addSubview:_badge];
+    _badge.shadowEnabled = YES;
+    _badge.badgeString = @"3";
+
+    //hide raw tabbar
+    self.tabBar.hidden = YES;
 }
 
 - (void)viewDidUnload
@@ -104,6 +121,9 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+    [_btnImagesNormal release];
+    [_btnImagesSelected release];
+    [_btnImagesHighlighted release];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -111,33 +131,9 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
--(void) customTabBarItems
-{
-    /*
-    UITabBarItem* tbi = nil;
-    
-    tbi = ((UITabBarItem*)[self.tabBar.items objectAtIndex:0]);
-    tbi.title = @"";
-    [tbi setFinishedSelectedImage:[UIImage imageNamed:@"xunjia_actived"] withFinishedUnselectedImage:[UIImage imageNamed:@"xunjia_normal"]];
-    
-    tbi = ((UITabBarItem*)[self.tabBar.items objectAtIndex:1]);
-    tbi.title = @"";
-    [tbi setFinishedSelectedImage:[UIImage imageNamed:@"guanzhu_actived"] withFinishedUnselectedImage:[UIImage imageNamed:@"guanzhu_normal"]];
-    
-    tbi = ((UITabBarItem*)[self.tabBar.items objectAtIndex:2]);
-    tbi.title = @"";
-    [tbi setFinishedSelectedImage:[UIImage imageNamed:@"gujiashi_actived"] withFinishedUnselectedImage:[UIImage imageNamed:@"gujiashi_normal"]];
-    
-    tbi = ((UITabBarItem*)[self.tabBar.items objectAtIndex:3]);
-    tbi.title = @"";
-    [tbi setFinishedSelectedImage:[UIImage imageNamed:@"gengduo_actived"] withFinishedUnselectedImage:[UIImage imageNamed:@"gengduo_normal"]];
-    tbi.badgeValue = @"3";
-     */
-}
 
 -(IBAction)OnItemHovered:(id)sender
 {
-    
 }
 
 -(IBAction)OnItemPushed:(id)sender
@@ -146,11 +142,107 @@
     for (int i = 0; i < [_tabBarItemBtns count]; ++i)
     {
         btn = [_tabBarItemBtns objectAtIndex:i];
-        btn.selected = NO;
+        [btn setImage:[UIImage imageNamed:((NSString*)[_btnImagesNormal objectAtIndex:i])] forState:UIControlStateNormal];
     }
     btn = sender;
-    btn.selected = !btn.selected;
     self.selectedIndex = btn.tag;
+    
+    [btn setImage:[UIImage imageNamed:((NSString*)[_btnImagesSelected objectAtIndex:btn.tag])] forState:UIControlStateNormal];
+}
+
+-(void) hideTabbar:(BOOL)enable
+{
+    if (_tabBarHasHide == enable)
+    {
+        return;
+    }
+    
+    for (int i = 0; i < [[self.view subviews] count]; ++i)
+    {
+        CGRect subRct = ((UIView*)[[self.view subviews] objectAtIndex:i]).frame;
+        NSLog(@"Subviews %i [ %f, %f, %f, %f ]",i, subRct.origin.x, subRct.origin.y, subRct.size.width, subRct.size.height);
+    }
+    
+    UIView* contentView = [[self.view subviews] objectAtIndex:0];
+    
+    CGRect newRect = contentView.frame;
+    if (enable)
+    {
+        newRect.size.height += self.tabBar.frame.size.height;
+        contentView.frame = newRect;
+        
+        [UIView beginAnimations:@"hideTabbar" context:nil];
+        [UIView setAnimationDuration:0.3f];
+        [UIView setAnimationDelegate:self];
+        [UIView setAnimationTransition:UIViewAnimationOptionTransitionFlipFromBottom
+                               forView:self.view 
+                                 cache:YES];
+        
+        
+        CGRect rct = _tabBarBg.frame;
+        rct.origin.y += _tabBarBg.frame.size.height;
+        _tabBarBg.frame = rct;
+        
+        for (int i = 0; i < [_tabBarItemBtns count]; ++i)
+        {
+            UIButton* btn = [_tabBarItemBtns objectAtIndex:i];
+            rct = btn.frame;
+            rct.origin.y += _tabBarBg.frame.size.height;
+            btn.frame = rct;
+        }
+        
+        /*
+        _tabBarBg.hidden = enable;
+        for (int i = 0; i < [_tabBarItemBtns count]; ++i)
+        {
+            UIButton* btn = [_tabBarItemBtns objectAtIndex:i];
+            btn.hidden = enable;
+        }*/
+        
+        [UIView commitAnimations];
+        
+        
+    }
+    else
+    {
+        [UIView beginAnimations:@"showTabbar" context:nil];
+        [UIView setAnimationDuration:0.3f];
+        [UIView setAnimationDelegate:self];
+        [UIView setAnimationTransition:UIViewAnimationOptionTransitionFlipFromBottom
+                               forView:self.view 
+                                 cache:YES];
+        
+        
+        
+        CGRect rct = _tabBarBg.frame;
+        rct.origin.y -= _tabBarBg.frame.size.height;
+        _tabBarBg.frame = rct;
+        
+        for (int i = 0; i < [_tabBarItemBtns count]; ++i)
+        {
+            UIButton* btn = [_tabBarItemBtns objectAtIndex:i];
+            rct = btn.frame;
+            rct.origin.y -= _tabBarBg.frame.size.height;
+            btn.frame = rct;
+        }
+        
+        /*
+        _tabBarBg.hidden = enable;
+        for (int i = 0; i < [_tabBarItemBtns count]; ++i)
+        {
+            UIButton* btn = [_tabBarItemBtns objectAtIndex:i];
+            btn.hidden = enable;
+        }
+         */
+        
+        newRect.size.height -= self.tabBar.frame.size.height;
+        contentView.frame = newRect;
+        
+        [UIView commitAnimations];
+        
+    }
+    
+    _tabBarHasHide = enable;
 }
 
 
