@@ -97,4 +97,37 @@
     return cell;
 }
 
+- (void)popSelf
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)customBackBtn
+{
+    UINavigationBar* navbar = _navctrl.navigationBar;
+    UINavigationItem* bi = self.navigationItem;
+    
+    UIImage* btnImage = [UIImage imageNamed:@"returnBtn_normal"];
+    UIButton* btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.frame = CGRectMake(0, 0, btnImage.size.width, btnImage.size.height);
+    
+    UILabel* lbl = [[[UILabel alloc] initWithFrame:btn.frame] autorelease];
+    lbl.text = @"返回";
+    lbl.font = [UIFont boldSystemFontOfSize:15];
+    lbl.textAlignment = UITextAlignmentCenter;
+    lbl.textColor = [UIColor whiteColor];
+    lbl.shadowOffset = CGSizeMake(1, 1);
+    lbl.shadowColor = [UIColor colorWithWhite:0.f alpha:0.7];
+    lbl.backgroundColor = [UIColor clearColor];
+    //lbl.shadowColor = [UI]
+    
+    UIBarButtonItem* bbi = [[[UIBarButtonItem alloc] initWithCustomView:btn]autorelease];
+    //bi.backBarButtonItem = bbi;
+    [btn setImage:btnImage forState:UIControlStateNormal];
+    [btn setImage:[UIImage imageNamed:@"returnBtn_pushed"] forState:UIControlStateHighlighted];
+    [btn addTarget:self action:@selector(popSelf) forControlEvents:UIControlEventTouchUpInside];
+    [btn addSubview:lbl];
+    bi.leftBarButtonItem = bbi;
+}
+
 @end

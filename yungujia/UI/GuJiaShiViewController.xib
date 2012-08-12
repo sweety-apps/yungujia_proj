@@ -41,6 +41,7 @@
 				<string key="NSFrame">{{0, 20}, {320, 460}}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
+				<reference key="NSNextKeyView"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MQA</bytes>
@@ -84,6 +85,7 @@
 										<string key="NSFrame">{{18, 2}, {233, 30}}</string>
 										<reference key="NSSuperview" ref="610305351"/>
 										<reference key="NSWindow"/>
+										<reference key="NSNextKeyView"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<bool key="IBUIOpaque">NO</bool>
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -256,6 +258,7 @@
 				<string key="-2.CustomClassName">UIResponder</string>
 				<string key="-2.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="1.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="19.CustomClassName">CustomNavigationController</string>
 				<string key="19.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="20.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="21.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -272,6 +275,14 @@
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<object class="IBPartialClassDescription">
+					<string key="className">CustomNavigationController</string>
+					<string key="superclassName">UINavigationController</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/CustomNavigationController.h</string>
+					</object>
+				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">GuJiaShiViewController</string>
 					<string key="superclassName">UIViewController</string>
@@ -331,17 +342,120 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">GujiashihuijiaViewController</string>
 					<string key="superclassName">UIViewController</string>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="navctrl">UINavigationController</string>
+						<string key="xiangqingctrl">HuijiaxiangqingViewController</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="navctrl">
+							<string key="name">navctrl</string>
+							<string key="candidateClassName">UINavigationController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="xiangqingctrl">
+							<string key="name">xiangqingctrl</string>
+							<string key="candidateClassName">HuijiaxiangqingViewController</string>
+						</object>
+					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/GujiashihuijiaViewController.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
+					<string key="className">HuijiaxiangqingViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">navctrl</string>
+						<string key="NS.object.0">UINavigationController</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">navctrl</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">navctrl</string>
+							<string key="candidateClassName">UINavigationController</string>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/HuijiaxiangqingViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
 					<string key="className">PinggujigouViewController</string>
 					<string key="superclassName">UIViewController</string>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="navctrl">UINavigationController</string>
+						<string key="xiangqingctrl">PinggujigouxiangqingViewController</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="navctrl">
+							<string key="name">navctrl</string>
+							<string key="candidateClassName">UINavigationController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="xiangqingctrl">
+							<string key="name">xiangqingctrl</string>
+							<string key="candidateClassName">PinggujigouxiangqingViewController</string>
+						</object>
+					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/PinggujigouViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">PinggujigouxiangqingViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="contentView">UIView</string>
+						<string key="logo">UIImageView</string>
+						<string key="navctrl">UINavigationController</string>
+						<string key="xiangqing">UILabel</string>
+						<string key="yinhangctrl">PinggujigouyinhangViewController</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="contentView">
+							<string key="name">contentView</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="logo">
+							<string key="name">logo</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="navctrl">
+							<string key="name">navctrl</string>
+							<string key="candidateClassName">UINavigationController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="xiangqing">
+							<string key="name">xiangqing</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="yinhangctrl">
+							<string key="name">yinhangctrl</string>
+							<string key="candidateClassName">PinggujigouyinhangViewController</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/PinggujigouxiangqingViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">PinggujigouyinhangViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">navctrl</string>
+						<string key="NS.object.0">UINavigationController</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">navctrl</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">navctrl</string>
+							<string key="candidateClassName">UINavigationController</string>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/PinggujigouyinhangViewController.h</string>
 					</object>
 				</object>
 			</array>

@@ -61,21 +61,8 @@
     UIImage* btn_img = nil;
     
     btn_img = [UIImage imageNamed:@"buttonn"];
-    btn_img = [btn_img stretchableImageWithLeftCapWidth:65 topCapHeight:30];
+    btn_img = [btn_img stretchableImageWithLeftCapWidth:14 topCapHeight:23];
     [self.loginBtn setBackgroundImage:btn_img forState:UIControlStateNormal];
-    
-    btn_img = [UIImage imageNamed:@"buttona"];
-    btn_img = [btn_img stretchableImageWithLeftCapWidth:65 topCapHeight:30];
-    [self.loginBtn setBackgroundImage:btn_img forState:UIControlStateHighlighted];
-    
-    btn_img = [UIImage imageNamed:@"buttona"];
-    btn_img = [btn_img stretchableImageWithLeftCapWidth:65 topCapHeight:30];
-    [self.loginBtn setBackgroundImage:btn_img forState:UIControlStateSelected];
-    
-    btn_img = [UIImage imageNamed:@"buttonn"];
-    btn_img = [btn_img stretchableImageWithLeftCapWidth:65 topCapHeight:30];
-    [self.loginBtn setBackgroundImage:btn_img forState:UIControlStateDisabled];
-    
     
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"注册" style:UIBarButtonItemStylePlain target:self action:@selector(actionRegist:)];
     self.navigationController.navigationBar.topItem.rightBarButtonItem = item;

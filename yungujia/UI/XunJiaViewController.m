@@ -42,6 +42,7 @@
     UIImage* navBgImg = [UIImage imageNamed:@"naviBarBg.png"];
     navBgImg = [navBgImg stretchableImageWithLeftCapWidth:0 topCapHeight:0];
     [Utils setAtNavigationBar:self.navbar withBgImage:navBgImg];
+
 }
 
 - (IBAction)SelectedSegement:(id)sender

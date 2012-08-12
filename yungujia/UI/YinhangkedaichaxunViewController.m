@@ -7,6 +7,7 @@
 //
 
 #import "YinhangkedaichaxunViewController.h"
+#import "Utils.h"
 
 @interface YinhangkedaichaxunViewController ()
 
@@ -15,10 +16,12 @@
 @implementation YinhangkedaichaxunViewController
 
 @synthesize contentView = _contentView;
+@synthesize textField = _textField;
 
 @synthesize navbar = _navbar;
 @synthesize navctrl =_navctrl;
 
+@synthesize pickerContents = _pickerContents;
 @synthesize pickerView = _pickerView;
 
 @synthesize gyhkdectrl = _gyhkdectrl;
@@ -39,7 +42,7 @@
     
     ((UIScrollView*)(self.view)).contentSize = _contentView.frame.size;
     
-    _pickerContents = [NSMutableArray arrayWithObjects:@"421809123元(世联评估)",@"1809123元(自动评估)",@"409123元(同致城)", nil];
+    _pickerContents = [[NSMutableArray arrayWithObjects:@"421809123元(世联评估)",@"1809123元(自动评估)",@"409123元(同致城)", nil] retain];
 }
 
 - (void)viewDidUnload
@@ -55,6 +58,10 @@
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
+
+#pragma mark - UIResponder
+
+//自动隐藏输入键盘
 
 #pragma mark - YinhangkedaichaxunViewController
 
@@ -119,6 +126,8 @@
     NSLog(@"%f %f",self.view.center.x,self.view.center.y);
     [self moveviewsup:-200];
     NSLog(@"%f %f",self.view.center.x,self.view.center.y);
+    
+    [Utils enableKeyboardAutoHideFor:_contentView forTextField:_textField];
     
     return YES;
 }

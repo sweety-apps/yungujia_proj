@@ -61,6 +61,7 @@
         _loudongctrl.headinfo = cell.xxhuayuan.text;
         _loudongctrl.hidesBottomBarWhenPushed = YES;
         [_navctrl pushViewController:_loudongctrl animated:YES];
+        //[_loudongctrl customBackBtn];
         
     }
 }

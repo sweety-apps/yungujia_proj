@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "CustomNavigationController.h"
 
 static AppDelegate* gDel = nil;
 
@@ -97,10 +98,11 @@ static AppDelegate* gDel = nil;
         UIViewController *viewController1 = [[[XunJiaViewController alloc] initWithNibName:@"XunJiaViewController" bundle:nil] autorelease];
         UIViewController *viewController2 = [[[GuanZhuViewController alloc] initWithNibName:@"GuanZhuViewController" bundle:nil] autorelease];
         UIViewController *viewController3 = [[[GuJiaShiViewController alloc] initWithNibName:@"GuJiaShiViewController" bundle:nil] autorelease];
-        UINavigationController *viewController4 = [[UINavigationController alloc] initWithRootViewController:[[[GengDuoViewController alloc] initWithNibName:@"GengDuoViewController" bundle:nil] autorelease]];
+        UINavigationController *viewController4 = [[CustomNavigationController alloc] initWithRootViewController:[[[GengDuoViewController alloc] initWithNibName:@"GengDuoViewController" bundle:nil] autorelease]];
         
         self.rootTabBarController = [[[SwichTabBarViewController alloc] initWithNibName:@"SwichTabBarViewController" bundle:nil] autorelease];
         self.rootTabBarController.viewControllers = [NSArray arrayWithObjects:viewController1, viewController2,viewController3, viewController4, nil];
+        self.rootTabBarController.tabBar.hidden = YES;
         
 	}
 
@@ -128,7 +130,7 @@ static AppDelegate* gDel = nil;
 	if(loginViewController==nil)
 	{
         LoginViewController* controller = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
-        loginViewController = [[UINavigationController alloc] initWithRootViewController:controller];
+        loginViewController = [[CustomNavigationController alloc] initWithRootViewController:controller];
         [controller release];
         
 	}

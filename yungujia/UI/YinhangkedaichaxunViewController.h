@@ -19,11 +19,14 @@
 @property (nonatomic,retain) IBOutlet UIView* contentView;
 @property (nonatomic,retain) IBOutlet UINavigationBar* navbar;
 @property (nonatomic,retain) IBOutlet UIPickerView* pickerView;
+@property (nonatomic,retain) IBOutlet UITextField* textField;
 
 //controllers
 @property (nonatomic,retain) IBOutlet UINavigationController* navctrl;
 @property (nonatomic,retain) IBOutlet GeyinhangkedaieViewController* gyhkdectrl;
 
+
+@property (nonatomic,retain) NSMutableArray* pickerContents;
 
 - (IBAction)push_Kaishijisuan:(id)sender;
 - (IBAction)push_Pinggujia:(id)sender;

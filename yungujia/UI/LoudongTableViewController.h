@@ -25,4 +25,6 @@
 @property (nonatomic,retain) IBOutlet UINavigationController* navctrl;
 @property (nonatomic,retain) IBOutlet LoucengTableViewController* loucengctrl;
 
+- (void)customBackBtn;
+
 @end

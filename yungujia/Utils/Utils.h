@@ -9,9 +9,16 @@
 #import <UIKit/UIKit.h>
 
 @interface Utils : NSObject
+{
+    UIButton* _hideKeyboardBtn;
+}
+
 +(NSString*)getRequestUrlByRequestName:(NSString*)requestName;
 +(void)setAtNavigationBar:(UINavigationBar*)navbar
               withBgImage:(UIImage *)backgroundImage;
 +(UIImage*)scaleToSize:(CGSize)size image:(UIImage*)image;
++(Utils*)sharedInstance;
++(void)enableKeyboardAutoHideFor:(UIView*)view forTextField:(UITextField*)tf;
+
 @end
 

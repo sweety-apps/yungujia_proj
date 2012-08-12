@@ -261,6 +261,7 @@
 				<string key="11.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="12.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="13.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="16.CustomClassName">CustomNavigationController</string>
 				<string key="16.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="17.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="18.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -275,6 +276,14 @@
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<object class="IBPartialClassDescription">
+					<string key="className">CustomNavigationController</string>
+					<string key="superclassName">UINavigationController</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/CustomNavigationController.h</string>
+					</object>
+				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">GuanZhuViewController</string>
 					<string key="superclassName">UIViewController</string>
