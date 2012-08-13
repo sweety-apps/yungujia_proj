@@ -9,5 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface YinhangKedaieDetailViewController : UIViewController
-
+<UITableViewDelegate,UITableViewDataSource,UIPickerViewDelegate,UIPickerViewDataSource>
+{
+    NSDictionary* _section0Dict;
+    NSDictionary* _section1Dict;
+    NSArray*    _daikuanchengshuarray;
+    
+}
 @end
