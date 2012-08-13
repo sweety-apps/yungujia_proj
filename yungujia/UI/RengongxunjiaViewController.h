@@ -8,9 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RengongxunjiaViewController : UIViewController <UITextFieldDelegate>
+@interface RengongxunjiaViewController : UIViewController <UITextFieldDelegate, UITableViewDataSource,UITableViewDelegate>
 
 //views
 @property (nonatomic,retain) IBOutlet UIView* contentView;
+@property (nonatomic,retain) IBOutlet UIButton* btn;
+@property (nonatomic,retain) IBOutlet UIButton* btnPinggujigou;
+
+@property (nonatomic,retain) IBOutlet UITableView* chakanpinggujigou;
+@property (nonatomic,retain) IBOutlet UITableViewCell* chakanCell;
 
 @end

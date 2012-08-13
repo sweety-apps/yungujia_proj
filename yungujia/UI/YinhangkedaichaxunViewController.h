@@ -20,6 +20,7 @@
 @property (nonatomic,retain) IBOutlet UINavigationBar* navbar;
 @property (nonatomic,retain) IBOutlet UIPickerView* pickerView;
 @property (nonatomic,retain) IBOutlet UITextField* textField;
+@property (nonatomic,retain) IBOutlet UIButton* btn;
 
 //controllers
 @property (nonatomic,retain) IBOutlet UINavigationController* navctrl;

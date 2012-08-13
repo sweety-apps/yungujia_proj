@@ -18,4 +18,7 @@
 @property (nonatomic,retain) NSMutableArray* datasource;
 @property (nonatomic,retain) IBOutlet UILabel* labelName;
 -(IBAction)actionLogout:(id)sender;
+
+@property (nonatomic,retain) IBOutlet UIButton* btn;
+
 @end

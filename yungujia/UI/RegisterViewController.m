@@ -23,6 +23,8 @@
 @synthesize txtConfirmPassword;
 @synthesize pickUserStyle;
 @synthesize arrayUserStyle;
+@synthesize btn;
+@synthesize btnSend;
 
 -(void)buildDataSource
 {
@@ -50,6 +52,16 @@
     navBgImg = [navBgImg stretchableImageWithLeftCapWidth:0 topCapHeight:0];
     [Utils setAtNavigationBar:self.navigationController.navigationBar withBgImage:navBgImg];
     self.navigationController.navigationBar.frame = rect;
+    
+    UIImage* btn_img = nil;
+    
+    btn_img = [UIImage imageNamed:@"buttonn"];
+    btn_img = [btn_img stretchableImageWithLeftCapWidth:14 topCapHeight:23];
+    [self.btn setBackgroundImage:btn_img forState:UIControlStateNormal];
+    
+    btn_img = [UIImage imageNamed:@"btnGray"];
+    btn_img = [btn_img stretchableImageWithLeftCapWidth:14 topCapHeight:23];
+    [self.btnSend setBackgroundImage:btn_img forState:UIControlStateNormal];
 
 }
 

@@ -25,6 +25,8 @@
 @implementation GengDuoViewController
 @synthesize datasource;
 @synthesize labelName = _labelName;
+@synthesize btn = _btn;
+
 //@synthesize navigation;
 -(void)buildDataSource
 {
@@ -53,6 +55,12 @@
     navBgImg = [navBgImg stretchableImageWithLeftCapWidth:0 topCapHeight:0];
     [Utils setAtNavigationBar:self.navigationController.navigationBar withBgImage:navBgImg];
     self.navigationController.navigationBar.clipsToBounds = YES;
+    
+    UIImage* btn_img = nil;
+    
+    btn_img = [UIImage imageNamed:@"btnRed"];
+    btn_img = [btn_img stretchableImageWithLeftCapWidth:14 topCapHeight:23];
+    [self.btn setBackgroundImage:btn_img forState:UIControlStateNormal];
 }
 
 - (void)viewDidUnload

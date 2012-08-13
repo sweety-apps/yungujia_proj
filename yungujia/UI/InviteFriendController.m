@@ -66,6 +66,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [lblInfo setBackgroundColor:[UIColor clearColor]];
+    
+    UIImage* btn_img = nil;
+    
+    btn_img = [UIImage imageNamed:@"btnGray"];
+    btn_img = [btn_img stretchableImageWithLeftCapWidth:14 topCapHeight:23];
+    [self.btnSend setBackgroundImage:btn_img forState:UIControlStateNormal];
 }
 
 - (void)viewDidUnload

@@ -15,6 +15,8 @@
 
 @implementation YinhangkedaichaxunViewController
 
+@synthesize btn = _btn;
+
 @synthesize contentView = _contentView;
 @synthesize textField = _textField;
 
@@ -43,6 +45,12 @@
     ((UIScrollView*)(self.view)).contentSize = _contentView.frame.size;
     
     _pickerContents = [[NSMutableArray arrayWithObjects:@"421809123元(世联评估)",@"1809123元(自动评估)",@"409123元(同致城)", nil] retain];
+    
+    UIImage* btn_img = nil;
+    
+    btn_img = [UIImage imageNamed:@"buttonn"];
+    btn_img = [btn_img stretchableImageWithLeftCapWidth:14 topCapHeight:23];
+    [self.btn setBackgroundImage:btn_img forState:UIControlStateNormal];
 }
 
 - (void)viewDidUnload

@@ -25,6 +25,7 @@
 //views
 @property (nonatomic,retain) IBOutlet UIView* contentView;
 @property (nonatomic,retain) IBOutlet UINavigationBar* navbar;
+@property (nonatomic,retain) IBOutlet UIButton* btn;
 
 //controllers
 @property (nonatomic,retain) IBOutlet UINavigationController* navctrl;

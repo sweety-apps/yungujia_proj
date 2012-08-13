@@ -23,6 +23,10 @@
 @synthesize rengongctrl = _rengongctrl;
 @synthesize yinhangctrl = _yinhangctrl;
 
+@synthesize btnRngong = _btnRngong;
+@synthesize btnKde = _btnKde;
+@synthesize btnShilian = _btnShilian;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -38,6 +42,16 @@
     // Do any additional setup after loading the view from its nib.
     
     ((UIScrollView*)(self.view)).contentSize = _contentView.frame.size;
+    
+    UIImage* btn_img = nil;
+    
+    btn_img = [UIImage imageNamed:@"btnGray"];
+    btn_img = [btn_img stretchableImageWithLeftCapWidth:14 topCapHeight:23];
+    [self.btnRngong setBackgroundImage:btn_img forState:UIControlStateNormal];
+    
+    btn_img = [UIImage imageNamed:@"buttonn"];
+    btn_img = [btn_img stretchableImageWithLeftCapWidth:14 topCapHeight:23];
+    [self.btnKde setBackgroundImage:btn_img forState:UIControlStateNormal];
 }
 
 - (void)viewDidUnload

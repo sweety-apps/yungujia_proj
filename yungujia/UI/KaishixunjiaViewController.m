@@ -24,6 +24,8 @@
 @synthesize louceng = _louceng;
 @synthesize fanghao = _fanghao;
 
+@synthesize btn = _btn;
+
 @synthesize jieguoctrl = _jieguoctrl;
 
 #pragma mark - UIViewController
@@ -43,6 +45,12 @@
     // Do any additional setup after loading the view from its nib.
     
     ((UIScrollView*)(self.view)).contentSize = _contentView.frame.size;
+    
+    UIImage* btn_img = nil;
+    
+    btn_img = [UIImage imageNamed:@"buttonn"];
+    btn_img = [btn_img stretchableImageWithLeftCapWidth:14 topCapHeight:23];
+    [self.btn setBackgroundImage:btn_img forState:UIControlStateNormal];
 }
 
 - (void)viewDidUnload

@@ -29,6 +29,8 @@
 @property (nonatomic,retain) IBOutlet UILabel* lblUserStyle;
 @property (nonatomic,retain) IBOutlet UIPickerView* pickUserStyle;
 @property (nonatomic,retain) NSMutableArray* arrayUserStyle;
+@property (nonatomic,retain) IBOutlet UIButton* btn;
+@property (nonatomic,retain) IBOutlet UIButton* btnSend;
 
 -(IBAction)actionSendIdentifyCode:(id)sender;
 -(IBAction)actionRegist:(id)sender;

@@ -15,6 +15,11 @@
 @implementation RengongxunjiaViewController
 
 @synthesize contentView = _contentView;
+@synthesize btn = _btn;
+@synthesize btnPinggujigou = _btnPinggujigou;
+
+@synthesize chakanpinggujigou = _chakanpinggujigou;
+@synthesize chakanCell = _chakanCell;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -31,6 +36,12 @@
     // Do any additional setup after loading the view from its nib.
     
     ((UIScrollView*)(self.view)).contentSize = _contentView.frame.size;
+    
+    UIImage* btn_img = nil;
+    
+    btn_img = [UIImage imageNamed:@"buttonn"];
+    btn_img = [btn_img stretchableImageWithLeftCapWidth:14 topCapHeight:23];
+    [self.btn setBackgroundImage:btn_img forState:UIControlStateNormal];
 }
 
 - (void)viewDidUnload
@@ -81,6 +92,29 @@
     [textField resignFirstResponder];
     //    self.view.center=CGPointMake(160,208); 
     return YES;
+}
+
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = (UITableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
+    if (cell.accessoryType != UITableViewCellAccessoryNone)
+    {
+        //[self.navigationController pushViewController:_kaishixunjiactrl animated:YES];
+    }
+}
+
+#pragma mark - UITableViewDataSource
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 1;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return self.chakanCell;
 }
 
 @end
