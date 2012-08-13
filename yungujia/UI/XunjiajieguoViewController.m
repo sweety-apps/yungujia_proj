@@ -26,6 +26,7 @@
 @synthesize btnRngong = _btnRngong;
 @synthesize btnKde = _btnKde;
 @synthesize btnShilian = _btnShilian;
+@synthesize btnDuanxin = _btnDuanxin;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -52,6 +53,10 @@
     btn_img = [UIImage imageNamed:@"buttonn"];
     btn_img = [btn_img stretchableImageWithLeftCapWidth:14 topCapHeight:23];
     [self.btnKde setBackgroundImage:btn_img forState:UIControlStateNormal];
+    
+    btn_img = [UIImage imageNamed:@"btnGray"];
+    btn_img = [btn_img stretchableImageWithLeftCapWidth:14 topCapHeight:23];
+    [self.btnDuanxin setBackgroundImage:btn_img forState:UIControlStateNormal];
 }
 
 - (void)viewDidUnload

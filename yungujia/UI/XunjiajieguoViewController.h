@@ -21,6 +21,7 @@
 @property (nonatomic,retain) IBOutlet UIButton* btnRngong;
 @property (nonatomic,retain) IBOutlet UIButton* btnKde;
 @property (nonatomic,retain) IBOutlet UIButton* btnShilian;
+@property (nonatomic,retain) IBOutlet UIButton* btnDuanxin;
 
 //controllers
 @property (nonatomic,retain) IBOutlet UINavigationController* navctrl;

@@ -1,18 +1,14 @@
 //
-//  Pinggujigoulv1Cell.m
+//  YuegongCell.m
 //  yungujia
 //
-//  Created by Justin Lee on 12-7-23.
+//  Created by lijinxin on 12-8-14.
 //  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
 //
 
-#import "Pinggujigoulv1Cell.h"
+#import "YuegongCell.h"
 
-@implementation Pinggujigoulv1Cell
-
-@synthesize icon = _icon;
-@synthesize xxpinggu = _xxpinggu;
-@synthesize ruweiyinhang = _ruweiyinhang;
+@implementation YuegongCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

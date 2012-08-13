@@ -16,5 +16,6 @@
 //views
 @property (nonatomic,retain) IBOutlet UIImageView* icon;
 @property (nonatomic,retain) IBOutlet UILabel* xxpinggu;
+@property (nonatomic,retain) IBOutlet UILabel* ruweiyinhang;
 
 @end
