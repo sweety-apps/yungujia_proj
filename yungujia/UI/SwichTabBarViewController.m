@@ -172,9 +172,9 @@
         contentView.frame = newRect;
         
         [UIView beginAnimations:@"hideTabbar" context:nil];
-        [UIView setAnimationDuration:0.3f];
+        [UIView setAnimationDuration:0.15f];
         [UIView setAnimationDelegate:self];
-        [UIView setAnimationTransition:UIViewAnimationOptionTransitionFlipFromBottom
+        [UIView setAnimationTransition:UIViewAnimationOptionTransitionFlipFromLeft
                                forView:self.view 
                                  cache:YES];
         
@@ -206,9 +206,9 @@
     else
     {
         [UIView beginAnimations:@"showTabbar" context:nil];
-        [UIView setAnimationDuration:0.3f];
+        [UIView setAnimationDuration:0.15f];
         [UIView setAnimationDelegate:self];
-        [UIView setAnimationTransition:UIViewAnimationOptionTransitionFlipFromBottom
+        [UIView setAnimationTransition:UIViewAnimationOptionTransitionFlipFromLeft
                                forView:self.view 
                                  cache:YES];
         

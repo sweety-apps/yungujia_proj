@@ -85,7 +85,7 @@ static Utils* gUtl = nil;
               withBgImage:(UIImage *)backgroundImage
 {  
     if ([navbar respondsToSelector:@selector(setBackgroundImage:forBarMetrics:)]) {  
-        [navbar setBackgroundImage:backgroundImage forBarMetrics:UIBarMetricsDefault];  
+        [navbar setBackgroundImage:backgroundImage forBarMetrics:0/*UIBarMetricsDefault*/];
         return;  
     }  
     navbar.layer.contents = (id)backgroundImage.CGImage;  
