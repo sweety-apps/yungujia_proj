@@ -7,6 +7,7 @@
 //
 
 #import "XunJiaViewController.h"
+#import "Utils.h"
 
 @interface XunJiaViewController ()
 
@@ -71,6 +72,8 @@
     _sousuoloupanctrl.navbar = _navbar;
     _sousuoloupanctrl.loupanctrl.navctrl = _navctrl;
     _sousuoloupanctrl.loupanctrl.navbar = _navbar;
+    _sousuoloupanctrl.loupanctrl.loudongctrl.loucengctrl.fanghaoctrl.kaishixunjiactrl.xunjiaCtrl = self;
+    xjctrl = _navctrl.topViewController;
     //[_navctrl pushViewController:self.sousuoloupanctrl animated:NO];
 }
 
@@ -88,6 +91,9 @@
     _fujinloupanctrl.navbar = _navbar;
     _fujinloupanctrl.loupanctrl.navctrl = _navctrl;
     _fujinloupanctrl.loupanctrl.navbar = _navbar;
+    _fujinloupanctrl.loupanctrl.loudongctrl.loucengctrl.fanghaoctrl.kaishixunjiactrl.xunjiaCtrl = self;
+    
+    xjctrl = _navctrl.topViewController;
 }
 
 - (void)viewDidUnload

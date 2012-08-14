@@ -7,6 +7,7 @@
 //
 
 #import "LoucengTableViewController.h"
+#import "Utils.h"
 
 @interface LoucengTableViewController ()
 
@@ -34,6 +35,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    _fanghaoctrl.kaishixunjiactrl.loucengCtrl = self;
+    lcctrl = self;
 }
 
 - (void)viewDidUnload

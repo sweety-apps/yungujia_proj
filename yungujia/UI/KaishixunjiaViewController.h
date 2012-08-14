@@ -11,9 +11,22 @@
 #import "KaishixunjiaLoupanCellViewController.h"
 #import "KaishixunjiaCell1ViewController.h"
 
+@class XunJiaViewController;
+@class LoudongTableViewController;
+@class LoucengTableViewController;
+@class FanghaoTableViewController;
+
 @interface KaishixunjiaViewController : UIViewController <UITableViewDelegate, UITableViewDataSource,UITextFieldDelegate>
 {
+    NSArray* _titles0;
+    NSArray* _titles1;
+    NSArray* _values0;
+    NSArray* _values1;
     
+    XunJiaViewController* _xunjiaCtrl;
+    LoudongTableViewController* _loudongCtrl;
+    LoucengTableViewController* _loucengCtrl;
+    FanghaoTableViewController* _fanghaoCtrl;
 }
 
 //infos
@@ -30,6 +43,11 @@
 //controllers
 @property (nonatomic,retain) IBOutlet UINavigationController* navctrl;
 @property (nonatomic,retain) IBOutlet XunjiajieguoViewController* jieguoctrl;
+
+@property (nonatomic,retain) XunJiaViewController* xunjiaCtrl;
+@property (nonatomic,retain) LoudongTableViewController* loudongCtrl;
+@property (nonatomic,retain) LoucengTableViewController* loucengCtrl;
+@property (nonatomic,retain) FanghaoTableViewController* fanghaoCtrl;
 
 - (IBAction)push_XunjiaBtn:(id)sender;
 

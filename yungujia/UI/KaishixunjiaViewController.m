@@ -7,6 +7,7 @@
 //
 
 #import "KaishixunjiaViewController.h"
+#import "Utils.h"
 
 @interface KaishixunjiaViewController ()
 
@@ -27,6 +28,11 @@
 @synthesize btn = _btn;
 
 @synthesize jieguoctrl = _jieguoctrl;
+
+@synthesize xunjiaCtrl = _xunjiaCtrl;
+@synthesize loudongCtrl = _loudongCtrl;
+@synthesize loucengCtrl = _loucengCtrl;
+@synthesize fanghaoCtrl = _fanghaoCtrl;
 
 #pragma mark - UIViewController
 
@@ -51,6 +57,14 @@
     btn_img = [UIImage imageNamed:@"buttonn"];
     btn_img = [btn_img stretchableImageWithLeftCapWidth:14 topCapHeight:23];
     [self.btn setBackgroundImage:btn_img forState:UIControlStateNormal];
+    
+    self.loupan = @"万推花园城";
+    self.loudong = @"1栋";
+    self.louceng = @"6层";
+    self.fanghao = @"605";
+    _titles0 = [[NSArray arrayWithObjects:@"楼盘名",@"楼栋",@"楼层",@"房号", nil] retain];
+    _titles1 = [[NSArray arrayWithObjects:@"面积（平方米）",@"成交价（万元）", nil] retain];
+    
 }
 
 - (void)viewDidUnload
@@ -58,6 +72,8 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+    [_titles0 release];
+    [_titles1 release];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -82,6 +98,22 @@
         UITableViewCell *cell = (UITableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
         if (cell.accessoryType != UITableViewCellAccessoryNone)
         {
+            if (indexPath.row == 0)
+            {
+                [self.navigationController popToViewController:xjctrl animated:YES];
+            }
+            if (indexPath.row == 1)
+            {
+                [self.navigationController popToViewController:ldctrl animated:YES];
+            }
+            if (indexPath.row == 2)
+            {
+                [self.navigationController popToViewController:lcctrl animated:YES];
+            }
+            if (indexPath.row == 3)
+            {
+                [self.navigationController popToViewController:fhctrl animated:YES];
+            }
             //[self.navigationController pushViewController:_kaishixunjiactrl animated:YES];
         }
     }
@@ -93,10 +125,14 @@
 {
     if (tableView.tag == 0)
     {
+        [_values0 release];
+        _values0 = [[NSArray arrayWithObjects:_loupan,_loudong,_louceng,_fanghao, nil] retain];
         return 4;
     }
     else
     {
+        [_values1 release];
+        _values1 = [[NSArray arrayWithObjects:@"",@"", nil]retain];
         return 2;
     }
     return 0;
@@ -117,6 +153,8 @@
             KaishixunjiaLoupanCellViewController* temporaryController = [[KaishixunjiaLoupanCellViewController alloc] initWithNibName:@"KaishixunjiaLoupanCellViewController" bundle:nil];
             // Grab a pointer to the custom cell.
             cell = (KaishixunjiaLoupanCell *)temporaryController.view;
+            cell.title.text = [_titles0 objectAtIndex:row];
+            cell.value.text = [_values0 objectAtIndex:row];
             [temporaryController release];
         }
         return cell;
@@ -132,6 +170,7 @@
             KaishixunjiaCell1ViewController* temporaryController = [[KaishixunjiaCell1ViewController alloc] initWithNibName:@"KaishixunjiaCell1ViewController" bundle:nil];
             // Grab a pointer to the custom cell.
             cell = (KaishixunjiaCell1Cell *)temporaryController.view;
+            cell.title.text = [_titles1 objectAtIndex:row];
             [temporaryController release];
         }
         

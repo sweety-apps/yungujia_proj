@@ -7,6 +7,7 @@
 //
 
 #import "LoudongTableViewController.h"
+#import "Utils.h"
 
 @interface LoudongTableViewController ()
 
@@ -34,6 +35,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    ldctrl = self;
 }
 
 - (void)viewDidUnload

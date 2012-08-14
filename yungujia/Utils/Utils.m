@@ -11,6 +11,11 @@
 
 #define REQUESTPLISTNAME @"RequestUrl"
 
+UIViewController* xjctrl = nil;
+UIViewController* ldctrl = nil;
+UIViewController* lcctrl = nil;
+UIViewController* fhctrl = nil;
+
 static Utils* gUtl = nil;
 
 @interface TextFieldHideBtn : UIButton

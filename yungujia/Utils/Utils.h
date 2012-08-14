@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+
+extern UIViewController* xjctrl;
+extern UIViewController* ldctrl;
+extern UIViewController* lcctrl;
+extern UIViewController* fhctrl;
+
 @interface Utils : NSObject
 {
     UIButton* _hideKeyboardBtn;

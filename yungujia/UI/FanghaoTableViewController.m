@@ -7,6 +7,7 @@
 //
 
 #import "FanghaoTableViewController.h"
+#import "Utils.h"
 
 @interface FanghaoTableViewController ()
 
@@ -34,6 +35,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    _kaishixunjiactrl.fanghaoCtrl = self;
+    fhctrl = self;
 }
 
 - (void)viewDidUnload
