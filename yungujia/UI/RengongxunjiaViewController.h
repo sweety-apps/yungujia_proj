@@ -18,4 +18,5 @@
 @property (nonatomic,retain) IBOutlet UITableView* chakanpinggujigou;
 @property (nonatomic,retain) IBOutlet UITableViewCell* chakanCell;
 
+-(IBAction)rengongxunjia:(id)sender;
 @end

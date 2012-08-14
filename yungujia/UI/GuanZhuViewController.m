@@ -7,6 +7,7 @@
 //
 
 #import "GuanZhuViewController.h"
+#import "HuijiaxiangqingViewController.h"
 
 @interface GuanZhuViewController ()
 
@@ -61,6 +62,10 @@
     if (cell.accessoryType != UITableViewCellAccessoryNone)
     {
         //[_navctrl pushViewController:_xiangqingctrl animated:YES];
+        HuijiaxiangqingViewController* controller = [[HuijiaxiangqingViewController alloc] initWithNibName:@"HuijiaxiangqingViewController" bundle:nil];
+        controller.title = @"回价详情";
+        [_navctrl pushViewController:controller animated:YES];
+        [controller release];
     }
 }
 

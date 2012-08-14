@@ -7,7 +7,8 @@
 //
 
 #import "RengongxunjiaViewController.h"
-
+#import "PinggujigouViewController.h"
+#import "YinhangkedaichaxunViewController.h"
 @interface RengongxunjiaViewController ()
 
 @end
@@ -20,7 +21,6 @@
 
 @synthesize chakanpinggujigou = _chakanpinggujigou;
 @synthesize chakanCell = _chakanCell;
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -102,7 +102,19 @@
     if (cell.accessoryType != UITableViewCellAccessoryNone)
     {
         //[self.navigationController pushViewController:_kaishixunjiactrl animated:YES];
+        PinggujigouViewController* controller = [[PinggujigouViewController alloc] initWithNibName:@"PinggujigouViewController" bundle:nil];
+        controller.title = @"评估机构";
+        [self.navigationController pushViewController:controller animated:YES];
+        [controller release];
     }
+}
+
+-(IBAction)rengongxunjia:(id)sender
+{
+    YinhangkedaichaxunViewController* controller = [[YinhangkedaichaxunViewController alloc] initWithNibName:@"YinhangkedaichaxunViewController" bundle:nil];
+    controller.title = @"银行可贷金额查询";
+    [self.navigationController pushViewController:controller animated:YES];
+    [controller release];
 }
 
 #pragma mark - UITableViewDataSource
