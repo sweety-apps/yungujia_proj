@@ -21,8 +21,6 @@
         // Custom initialization
         self.title = @"修改密码";
         UIBarButtonItem* rightbtn = [[UIBarButtonItem alloc] init];
-        rightbtn.action = @selector(onClickOK:);
-        rightbtn.target = self;
         rightbtn.title = @"确定";
         self.navigationItem.rightBarButtonItem = rightbtn;
         [rightbtn release];
@@ -34,7 +32,7 @@
     return self;
 }
 
--(void)onClickOK:(id)sender
+-(void)rightclick
 {
     NSLog(@"onClickOK");
     [(UINavigationController*)self.parentViewController popViewControllerAnimated:YES];

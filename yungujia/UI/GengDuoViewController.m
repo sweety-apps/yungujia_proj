@@ -102,9 +102,10 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:dequeueIdentifer] autorelease];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.textLabel.font = [UIFont boldSystemFontOfSize:17.0];
-        cell.textLabel.text = [self.datasource objectAtIndex:indexPath.row];
-        [cell.imageView setImage:[UIImage imageNamed:[self.imagearray objectAtIndex:indexPath.row]]]; 
+
     }
+    cell.textLabel.text = [self.datasource objectAtIndex:indexPath.row];
+    [cell.imageView setImage:[UIImage imageNamed:[self.imagearray objectAtIndex:indexPath.row]]]; 
     return cell;
 }
 

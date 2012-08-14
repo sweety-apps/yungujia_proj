@@ -25,6 +25,11 @@
     if (self) {
         // Custom initialization
         self.title = @"登陆手机云估价";
+        UIBarButtonItem* rightbtn = [[UIBarButtonItem alloc] init];
+        rightbtn.title = @"注册";
+        self.navigationItem.rightBarButtonItem = rightbtn;
+        [rightbtn release];
+        
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(SuccessStateNoti:) name:NotificationLoginSuccess object:nil];
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(FailedStateNoti:) name:NotificationLoginFailed object:nil];
     }
@@ -64,9 +69,9 @@
     btn_img = [btn_img stretchableImageWithLeftCapWidth:14 topCapHeight:23];
     [self.loginBtn setBackgroundImage:btn_img forState:UIControlStateNormal];
     
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"注册" style:UIBarButtonItemStylePlain target:self action:@selector(actionRegist:)];
-    self.navigationController.navigationBar.topItem.rightBarButtonItem = item;
-    [item release];
+//    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"注册" style:UIBarButtonItemStylePlain target:self action:@selector(actionRegist:)];
+//    self.navigationController.navigationBar.topItem.rightBarButtonItem = item;
+//    [item release];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
@@ -153,7 +158,7 @@
     return true;
 }
 
--(void)actionRegist:(id)sender
+-(void)rightclick
 {
     RegisterViewController* regist = [[RegisterViewController alloc] initWithNibName:@"RegisterViewController" bundle:nil];
     [self.navigationController pushViewController:regist animated:YES];

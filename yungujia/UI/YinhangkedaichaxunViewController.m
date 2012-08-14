@@ -75,7 +75,7 @@
 
 - (IBAction)push_Kaishijisuan:(id)sender
 {
-    _gyhkdectrl.title = @"人工询价";
+    _gyhkdectrl.title = @"各银行可贷额";
     [self.navigationController pushViewController:_gyhkdectrl animated:YES];
 }
 

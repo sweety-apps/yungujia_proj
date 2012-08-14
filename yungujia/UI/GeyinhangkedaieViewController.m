@@ -7,6 +7,7 @@
 //
 
 #import "GeyinhangkedaieViewController.h"
+#import "AppDelegate.h"
 
 @interface GeyinhangkedaieViewController ()
 
@@ -34,6 +35,11 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    UIBarButtonItem* rightbtn = [[UIBarButtonItem alloc] init];
+    rightbtn.title = @"声明";
+    self.navigationItem.rightBarButtonItem = rightbtn;
+    [rightbtn release];
+
 }
 
 - (void)viewDidUnload
@@ -75,8 +81,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    int row = indexPath.row;
-    
     static NSString* reuseID = @"GeyinhangkedaieCell";
     
     GeyinhangkedaieCell *cell = (GeyinhangkedaieCell*)[tableView dequeueReusableCellWithIdentifier:reuseID];
@@ -96,4 +100,34 @@
     return cell;
 }
 
+-(void)rightclick
+{
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"本软件中所涉及“银行可贷额”的数据由系统通过公式计算自动生成，并非出自银行口径或承诺，请谨慎参考。 \r\r\n云估价根据国家金融政策以及各商业银行业务模式变动，及时更新计算公式，以达到相对准确的参考价值。" delegate:nil cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
+//    for (int i =0; i<[[actionSheet subviews] count]; i++) {
+//        UIView* view = [[actionSheet subviews] objectAtIndex:i];
+//        view.frame = CGRectMake(view.frame.origin.x, view.frame.origin.y+30, view.frame.size.width, view.frame.size.height);
+//    }
+    
+//    UILabel* lbltitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 30)];
+//    lbltitle.text = @"关于“银行可贷额”的声明";
+//    lbltitle.font = [UIFont boldSystemFontOfSize:15];
+//    lbltitle.textAlignment = UITextAlignmentCenter;
+//    lbltitle.backgroundColor = [UIColor clearColor];
+//    lbltitle.textColor = [UIColor whiteColor];
+//    [actionSheet addSubview:lbltitle];
+//    [lbltitle release];
+    
+    ((UILabel*)[actionSheet.subviews objectAtIndex:0]).textAlignment = UITextAlignmentLeft;
+    ((UILabel*)[actionSheet.subviews objectAtIndex:0]).textColor = [UIColor whiteColor];
+	
+    if(actionSheet!=nil)
+	{
+		[actionSheet addButtonWithTitle:@"确定"];		
+        actionSheet.cancelButtonIndex = 0;
+		
+		[actionSheet showInView:((AppDelegate*)[[UIApplication sharedApplication] delegate]).rootTabBarController.view];
+		[actionSheet release];
+	}
+    
+}
 @end
