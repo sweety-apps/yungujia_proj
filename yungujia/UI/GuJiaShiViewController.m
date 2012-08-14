@@ -15,8 +15,8 @@
 @implementation GuJiaShiViewController
 
 @synthesize navbar = _navbar;
-@synthesize segment = _segment;
-
+@synthesize btngujiashi = _btngujiashi;
+@synthesize btnpinggujigou = _btnpinggujigou;
 
 @synthesize navctrl = _navctrl;
 @synthesize gujiashihuijiactrl = _gujiashihuijiactrl;
@@ -47,11 +47,11 @@
 
 - (IBAction)SelectedSegement:(id)sender
 {
-    if (self.segment.selectedSegmentIndex == 0)
+    if ([sender isEqual:self.btngujiashi] )
     {
         [self PushSegement0:nil];
     }
-    else if(self.segment.selectedSegmentIndex == 1)
+    else if([sender isEqual:self.btnpinggujigou])
     {
         [self PushSegement1:nil];
     }
@@ -59,7 +59,8 @@
 
 - (IBAction)PushSegement0:(id)sender
 {
-    self.segment.selectedSegmentIndex = 0;
+    self.btngujiashi.selected = true;
+    self.btnpinggujigou.selected = false;
     if (_gujiashihuijiactrl == nil)
     {
         self.gujiashihuijiactrl = [[GujiashihuijiaViewController alloc]initWithNibName:@"GujiashihuijiaViewController" bundle:nil];
@@ -72,7 +73,8 @@
 
 - (IBAction)PushSegement1:(id)sender
 {
-    self.segment.selectedSegmentIndex = 1;
+    self.btngujiashi.selected = false;
+    self.btnpinggujigou.selected = true;
     if (_pinggujigouctrl == nil)
     {
         self.pinggujigouctrl = [[PinggujigouViewController alloc]initWithNibName:@"PinggujigouViewController" bundle:nil];

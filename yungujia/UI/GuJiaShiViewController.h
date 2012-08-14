@@ -17,13 +17,14 @@
 
 //views
 @property (nonatomic,retain) IBOutlet UINavigationBar* navbar;
-@property (nonatomic,retain) IBOutlet UISegmentedControl* segment;
 
 
 //controllers
 @property (nonatomic,retain) IBOutlet UINavigationController* navctrl;
 @property (nonatomic,retain) IBOutlet GujiashihuijiaViewController* gujiashihuijiactrl;
 @property (nonatomic,retain) IBOutlet PinggujigouViewController* pinggujigouctrl;
+@property (nonatomic,retain) IBOutlet UIButton* btngujiashi;
+@property (nonatomic,retain) IBOutlet UIButton* btnpinggujigou;
 
 - (IBAction)SelectedSegement:(id)sender;
 - (IBAction)PushSegement0:(id)sender;
