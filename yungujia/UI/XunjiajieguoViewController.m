@@ -7,6 +7,7 @@
 //
 
 #import "XunjiajieguoViewController.h"
+#import "PinggujigouViewController.h"
 
 @interface XunjiajieguoViewController ()
 
@@ -75,7 +76,10 @@
 
 - (IBAction)push_Pinggujigou:(id)sender
 {
-    
+    PinggujigouxiangqingViewController* controller = [[PinggujigouxiangqingViewController alloc] initWithNibName:@"PinggujigouxiangqingViewController" bundle:nil];
+    controller.title = @"评估机构";
+    [self.navigationController pushViewController:controller animated:YES];
+    [controller release];
 }
 
 - (IBAction)push_RengongxunjiaBtn:(id)sender
