@@ -24,6 +24,7 @@
 
 @implementation GengDuoViewController
 @synthesize datasource;
+@synthesize imagearray;
 @synthesize labelName = _labelName;
 @synthesize btn = _btn;
 
@@ -31,6 +32,7 @@
 -(void)buildDataSource
 {
     self.datasource = [[NSMutableArray alloc] initWithObjects:@"我的询价记录",@"修改密码",@"个人认证",@"邀请好友",@"意见反馈",@"关于",@"系统消息",@"检查新版本",@"银行可贷额计算公式与说明",nil];
+    self.imagearray = [[NSMutableArray alloc] initWithObjects:@"icon_wodexunjiajilu",@"icon_xiugaimima",@"icon_gerenrenzheng",@"icon_yaoqinghaoyou",@"icon_yijianfankui",@"icon_guanyu",@"icon_xitongxiaoxi",@"icon_jianchaxinbanben",@"icon_yinhangkedaiejisuangongshi",nil];
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -77,7 +79,8 @@
 
 -(void)dealloc
 {
-    [self.datasource release];
+    self.datasource = nil;
+    self.imagearray = nil;
     [super dealloc];
 }
 
@@ -99,8 +102,9 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:dequeueIdentifer] autorelease];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.textLabel.font = [UIFont boldSystemFontOfSize:17.0];
+        cell.textLabel.text = [self.datasource objectAtIndex:indexPath.row];
+        [cell.imageView setImage:[UIImage imageNamed:[self.imagearray objectAtIndex:indexPath.row]]]; 
     }
-    cell.textLabel.text = [self.datasource objectAtIndex:indexPath.row];
     return cell;
 }
 
