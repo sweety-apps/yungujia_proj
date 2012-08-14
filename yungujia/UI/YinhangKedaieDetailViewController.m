@@ -14,6 +14,19 @@
 
 @implementation YinhangKedaieDetailViewController
 
+//part1
+@synthesize keaijineCell;
+@synthesize pinggujiaCell;
+@synthesize jingzhiCell;
+@synthesize daikuangchengshuCell;
+@synthesize shuifeiCell;
+
+//part2
+@synthesize huankuanfangshiCell;
+@synthesize daikuannianxianCell;
+@synthesize nianlilvCell;
+@synthesize yuegongCell;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -27,8 +40,13 @@
 -(void)dealloc
 {
     [_daikuanchengshuarray release];
-    [_section0Dict release];
-    [_section1Dict release];
+    [_section0Titles release];
+    [_section1Titles release];
+    [_section0Values release];
+    [_section1Values release];
+    
+    [_section0Cells release];
+    [_section1Cells release];
     [super dealloc];
 }
 
@@ -36,11 +54,20 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    _section0Dict = [[NSDictionary alloc] initWithObjects:[NSArray arrayWithObjects:@"1可贷金额",@"2评估价",@"3净值",@"4税费",@"5贷款成数",nil] forKeys:[NSArray arrayWithObjects:@"234万",@"320万",@"298万",@"23万",@"七成",nil]];
     
-    _section1Dict = [[NSDictionary alloc] initWithObjects:[NSArray arrayWithObjects:@"还款方式",@"贷款年限",@"年利率",@"月供",nil] forKeys:[NSArray arrayWithObjects:@"等额",@"20年",@"2012/5/21基准6.80%",@"7.633.40",nil]];
+    _section0Titles = [[NSArray arrayWithObjects:@"可贷金额",@"评估价",@"净值",@"税费",@"贷款成数",nil] retain];
+    _section0Values = [[NSArray arrayWithObjects:@"234万",@"320万",@"298万",@"23万",@"七成",nil] retain];
+    
+    _section1Titles = [[NSArray arrayWithObjects:@"还款方式",@"贷款年限",@"年利率",@"月供",nil] retain];
+    _section1Values = [[NSArray arrayWithObjects:@"等额",@"20年",@"2012/5/21基准6.80%",@"7.633.40",nil] retain];
+    
+    _section0Cells = [[NSArray alloc] initWithObjects:keaijineCell,pinggujiaCell,jingzhiCell,shuifeiCell,daikuangchengshuCell, nil ];
+    
+    _section1Cells = [[NSArray alloc] initWithObjects:huankuanfangshiCell,daikuannianxianCell,nianlilvCell,yuegongCell, nil ];
     
     _daikuanchengshuarray = [[NSArray alloc] initWithObjects:@"9成",@"8成",@"7成",nil];
+    
+    
 }
 
 - (void)viewDidUnload
@@ -55,9 +82,23 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+#pragma mark - UITableViewDataSource
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView              // Default is 1 if not implemented
 {
     return 2;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    if (section == 0)
+    {
+        return nil;
+    }
+    if (section == 1)
+    {
+        return @"按还款计算";
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -72,62 +113,39 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    int row = indexPath.row;
     if (indexPath.section == 0) {
-        static NSString* dequeueIdentifer = @"section0cell";
-        UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:dequeueIdentifer];
-        if(cell == nil)
-        {
-            cell = [[[UITableViewCell alloc] init]autorelease];
-            cell.textLabel.text = [[_section0Dict allValues] objectAtIndex:indexPath.row];
-            NSLog(@"%@",[[_section0Dict allValues] objectAtIndex:indexPath.row]);
-            UILabel* lbl = [[UILabel alloc] initWithFrame:CGRectMake(100, 10, 120, 20)];
-            lbl.text = [[_section0Dict allKeys] objectAtIndex:indexPath.row];
-            lbl.textAlignment = UITextAlignmentRight;
-            [cell addSubview:lbl];
-            [lbl release];
-            [cell setBackgroundColor:[UIColor clearColor]];
-            if (indexPath.row == 4) {
-                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            }
-        }
-        else {
-            
-        }
+        YinhangkedaieDetailCell* cell = [_section0Cells objectAtIndex:row];
+        cell.lblTitle.text = [_section0Titles objectAtIndex:row];
+        cell.lblValue.text = [_section0Values objectAtIndex:row];
         return cell;
     }
     else {
-        static NSString* dequeueIdentifer = @"section1cell";
-        UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:dequeueIdentifer];
-        if(cell == nil)
+        YinhangkedaieDetailCell* cell = [_section1Cells objectAtIndex:row];
+        cell.lblTitle.text = [_section1Titles objectAtIndex:row];
+        if (row == 0)
         {
-            cell = [[[UITableViewCell alloc] init]autorelease];
-            cell.textLabel.text = [[_section1Dict allValues] objectAtIndex:indexPath.row];
-            UILabel* lbl = [[UILabel alloc] initWithFrame:CGRectMake(200, 0, 120, 10)];
-            lbl.text = [[_section1Dict allKeys] objectAtIndex:indexPath.row];
-            [cell addSubview:lbl];
-            [lbl release];
-            [cell setBackgroundColor:[UIColor clearColor]];
-            if (indexPath.row == 3 || indexPath.row == 2) {
-                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            }
         }
-        else {
-            
+        else
+        {
+            cell.lblValue.text = [_section1Values objectAtIndex:row];
         }
         return cell;
     }
     
 }
 
+#pragma mark - UITableViewDelegate
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath 
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+/*- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 44;
-}
+    return 50;
+}*/
 
 #pragma mark -pickdelegate 
 // returns width of column and height of row for each component. 

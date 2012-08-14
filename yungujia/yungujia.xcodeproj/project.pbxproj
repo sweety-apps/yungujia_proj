@@ -232,6 +232,7 @@
 		F3DBEADC15BD31690040CDED /* GuanzhuLV1CellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3DBEADA15BD31690040CDED /* GuanzhuLV1CellViewController.m */; };
 		F3DBEADD15BD31690040CDED /* GuanzhuLV1CellViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3DBEADB15BD31690040CDED /* GuanzhuLV1CellViewController.xib */; };
 		F3DBEAE015BD31910040CDED /* GuanzhuLV1Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = F3DBEADF15BD31910040CDED /* GuanzhuLV1Cell.m */; };
+		F3F8334515DA8AF0001DA1AC /* YinhangkedaieDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F3F8334415DA8AEB001DA1AC /* YinhangkedaieDetailCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -544,6 +545,8 @@
 		F3DBEADB15BD31690040CDED /* GuanzhuLV1CellViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GuanzhuLV1CellViewController.xib; sourceTree = "<group>"; };
 		F3DBEADE15BD31910040CDED /* GuanzhuLV1Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuanzhuLV1Cell.h; sourceTree = "<group>"; };
 		F3DBEADF15BD31910040CDED /* GuanzhuLV1Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuanzhuLV1Cell.m; sourceTree = "<group>"; };
+		F3F8334315DA8AE8001DA1AC /* YinhangkedaieDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YinhangkedaieDetailCell.h; sourceTree = "<group>"; };
+		F3F8334415DA8AEB001DA1AC /* YinhangkedaieDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YinhangkedaieDetailCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1029,6 +1032,7 @@
 		BEB543E815BDBD8E00C6CDAD /* Xunjia */ = {
 			isa = PBXGroup;
 			children = (
+				F3F8334715DA8B02001DA1AC /* YinhangkedaieDetail */,
 				BEE5CDB215D96FB00081D347 /* Yuegong */,
 				BEA11F6C15BF174E00F9D93F /* Geyinhangkedaie */,
 				BEA11F6515BEFDF000F9D93F /* Xunjiajieguo */,
@@ -1039,9 +1043,6 @@
 				F3D9CC8815B81D3700FA63AE /* YinhangkedaichaxunViewController.h */,
 				F3D9CC8915B81D3700FA63AE /* YinhangkedaichaxunViewController.m */,
 				F3D9CC8A15B81D3700FA63AE /* YinhangkedaichaxunViewController.xib */,
-				F3D9CC9215B8207B00FA63AE /* YinhangKedaieDetailViewController.h */,
-				F3D9CC9315B8207B00FA63AE /* YinhangKedaieDetailViewController.m */,
-				F3D9CC9415B8207B00FA63AE /* YinhangKedaieDetailViewController.xib */,
 			);
 			name = Xunjia;
 			sourceTree = "<group>";
@@ -1141,6 +1142,18 @@
 				F3DBEADF15BD31910040CDED /* GuanzhuLV1Cell.m */,
 			);
 			name = Guanzhu;
+			sourceTree = "<group>";
+		};
+		F3F8334715DA8B02001DA1AC /* YinhangkedaieDetail */ = {
+			isa = PBXGroup;
+			children = (
+				F3D9CC9215B8207B00FA63AE /* YinhangKedaieDetailViewController.h */,
+				F3D9CC9315B8207B00FA63AE /* YinhangKedaieDetailViewController.m */,
+				F3D9CC9415B8207B00FA63AE /* YinhangKedaieDetailViewController.xib */,
+				F3F8334315DA8AE8001DA1AC /* YinhangkedaieDetailCell.h */,
+				F3F8334415DA8AEB001DA1AC /* YinhangkedaieDetailCell.m */,
+			);
+			name = YinhangkedaieDetail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1421,6 +1434,7 @@
 				BEE5CDA715D96F3E0081D347 /* YuegongViewController.m in Sources */,
 				BEE5CDAD15D96F830081D347 /* YuegongCellViewController.m in Sources */,
 				BEE5CDB115D96FA90081D347 /* YuegongCell.m in Sources */,
+				F3F8334515DA8AF0001DA1AC /* YinhangkedaieDetailCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
