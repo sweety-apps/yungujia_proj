@@ -14,8 +14,8 @@
 
 @implementation XunJiaViewController
 @synthesize navbar = _navbar;
-@synthesize segment = _segment;
-
+@synthesize btnfujinloupan = _btnfujinloupan;
+@synthesize btnsousuoloupan = _btnsousuoloupan;
 
 @synthesize navctrl = _navctrl;
 @synthesize sousuoloupanctrl = _sousuoloupanctrl;
@@ -47,11 +47,11 @@
 
 - (IBAction)SelectedSegement:(id)sender
 {
-    if (self.segment.selectedSegmentIndex == 0)
+    if ([sender isEqual:self.btnsousuoloupan] )
     {
         [self PushSegement0:nil];
     }
-    else if(self.segment.selectedSegmentIndex == 1)
+    else if([sender isEqual:self.btnfujinloupan])
     {
         [self PushSegement1:nil];
     }
@@ -59,7 +59,8 @@
 
 - (IBAction)PushSegement0:(id)sender
 {
-    self.segment.selectedSegmentIndex = 0;
+    self.btnsousuoloupan.selected = true;
+    self.btnfujinloupan.selected = false;
     if (_sousuoloupanctrl == nil)
     {
         self.sousuoloupanctrl = [[SousuoloupanViewController alloc]initWithNibName:@"SousuoloupanViewController" bundle:nil];
@@ -75,7 +76,8 @@
 
 - (IBAction)PushSegement1:(id)sender
 {
-    self.segment.selectedSegmentIndex = 1;
+    self.btnsousuoloupan.selected = false;
+    self.btnfujinloupan.selected = true;
     if (_fujinloupanctrl == nil)
     {
         self.fujinloupanctrl = [[FunjinloupanViewController alloc]initWithNibName:@"FunjinloupanViewController" bundle:nil];

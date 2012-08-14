@@ -17,14 +17,14 @@
 
 //views
 @property (nonatomic,retain) IBOutlet UINavigationBar* navbar;
-@property (nonatomic,retain) IBOutlet UISegmentedControl* segment;
 
 
 //controllers
 @property (nonatomic,retain) IBOutlet UINavigationController* navctrl;
 @property (nonatomic,retain) IBOutlet SousuoloupanViewController* sousuoloupanctrl;
 @property (nonatomic,retain) IBOutlet FunjinloupanViewController* fujinloupanctrl;
-
+@property (nonatomic,retain) IBOutlet UIButton* btnsousuoloupan;
+@property (nonatomic,retain) IBOutlet UIButton* btnfujinloupan;
 - (IBAction)SelectedSegement:(id)sender;
 - (IBAction)PushSegement0:(id)sender;
 - (IBAction)PushSegement1:(id)sender;

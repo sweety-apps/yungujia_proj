@@ -14,9 +14,9 @@
 			<string>IBProxyObject</string>
 			<string>IBUINavigationController</string>
 			<string>IBUIViewController</string>
+			<string>IBUIButton</string>
 			<string>IBUINavigationBar</string>
 			<string>IBUINavigationItem</string>
-			<string>IBUISegmentedControl</string>
 			<string>IBUIView</string>
 		</array>
 		<array key="IBDocument.PluginDependencies">
@@ -40,8 +40,6 @@
 				<int key="NSvFlags">274</int>
 				<string key="NSFrame">{{0, 20}, {320, 460}}</string>
 				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MQA</bytes>
@@ -74,50 +72,83 @@
 				<array class="NSMutableArray" key="IBUIViewControllers">
 					<object class="IBUIViewController" id="734054496">
 						<object class="IBUINavigationItem" key="IBUINavigationItem" id="287403385">
-							<reference key="IBUINavigationBar"/>
 							<object class="IBUIView" key="IBUITitleView" id="65653082">
 								<reference key="NSNextResponder"/>
 								<int key="NSvFlags">292</int>
 								<array class="NSMutableArray" key="NSSubviews">
-									<object class="IBUISegmentedControl" id="339437203">
+									<object class="IBUIButton" id="466232344">
 										<reference key="NSNextResponder" ref="65653082"/>
 										<int key="NSvFlags">292</int>
-										<string key="NSFrame">{{9, 2}, {228, 30}}</string>
+										<string key="NSFrame">{{10, 2}, {114, 28}}</string>
 										<reference key="NSSuperview" ref="65653082"/>
-										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView"/>
+										<reference key="NSNextKeyView" ref="657862327"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<bool key="IBUIOpaque">NO</bool>
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-										<int key="IBSegmentControlStyle">2</int>
-										<int key="IBNumberOfSegments">2</int>
-										<int key="IBSelectedSegmentIndex">0</int>
-										<array key="IBSegmentTitles">
-											<string>搜索楼盘</string>
-											<string>附近楼盘</string>
-										</array>
-										<array class="NSMutableArray" key="IBSegmentWidths">
-											<real value="0.0"/>
-											<real value="0.0"/>
-										</array>
-										<array class="NSMutableArray" key="IBSegmentEnabledStates">
-											<boolean value="YES"/>
-											<boolean value="YES"/>
-										</array>
-										<array class="NSMutableArray" key="IBSegmentContentOffsets">
-											<string>{0, 0}</string>
-											<string>{0, 0}</string>
-										</array>
-										<array class="NSMutableArray" key="IBSegmentImages">
-											<object class="NSNull" id="4"/>
-											<reference ref="4"/>
-										</array>
+										<int key="IBUIContentHorizontalAlignment">0</int>
+										<int key="IBUIContentVerticalAlignment">0</int>
+										<string key="IBUINormalTitle">搜索楼盘</string>
+										<object class="NSColor" key="IBUIHighlightedTitleColor" id="258993040">
+											<int key="NSColorSpace">3</int>
+											<bytes key="NSWhite">MQA</bytes>
+										</object>
+										<object class="NSColor" key="IBUINormalTitleColor" id="120402308">
+											<int key="NSColorSpace">1</int>
+											<bytes key="NSRGB">MSAxIDEAA</bytes>
+										</object>
+										<object class="NSColor" key="IBUINormalTitleShadowColor" id="118604916">
+											<int key="NSColorSpace">3</int>
+											<bytes key="NSWhite">MC41AA</bytes>
+										</object>
+										<object class="NSCustomResource" key="IBUIHighlightedBackgroundImage" id="276898748">
+											<string key="NSClassName">NSImage</string>
+											<string key="NSResourceName">topseglefta.png</string>
+										</object>
+										<reference key="IBUISelectedBackgroundImage" ref="276898748"/>
+										<object class="NSCustomResource" key="IBUINormalBackgroundImage">
+											<string key="NSClassName">NSImage</string>
+											<string key="NSResourceName">topsegleftn.png</string>
+										</object>
+										<object class="IBUIFontDescription" key="IBUIFontDescription" id="38602276">
+											<int key="type">2</int>
+											<double key="pointSize">15</double>
+										</object>
+										<object class="NSFont" key="IBUIFont" id="35780556">
+											<string key="NSName">Helvetica-Bold</string>
+											<double key="NSSize">15</double>
+											<int key="NSfFlags">16</int>
+										</object>
+									</object>
+									<object class="IBUIButton" id="657862327">
+										<reference key="NSNextResponder" ref="65653082"/>
+										<int key="NSvFlags">292</int>
+										<string key="NSFrame">{{124, 2}, {114, 28}}</string>
+										<reference key="NSSuperview" ref="65653082"/>
+										<string key="NSReuseIdentifierKey">_NS:9</string>
+										<bool key="IBUIOpaque">NO</bool>
+										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+										<int key="IBUIContentHorizontalAlignment">0</int>
+										<int key="IBUIContentVerticalAlignment">0</int>
+										<string key="IBUINormalTitle">附近楼盘</string>
+										<reference key="IBUIHighlightedTitleColor" ref="258993040"/>
+										<reference key="IBUINormalTitleColor" ref="120402308"/>
+										<reference key="IBUINormalTitleShadowColor" ref="118604916"/>
+										<object class="NSCustomResource" key="IBUIHighlightedBackgroundImage" id="53444549">
+											<string key="NSClassName">NSImage</string>
+											<string key="NSResourceName">topsegrighta.png</string>
+										</object>
+										<reference key="IBUISelectedBackgroundImage" ref="53444549"/>
+										<object class="NSCustomResource" key="IBUINormalBackgroundImage">
+											<string key="NSClassName">NSImage</string>
+											<string key="NSResourceName">topsegrightn.png</string>
+										</object>
+										<reference key="IBUIFontDescription" ref="38602276"/>
+										<reference key="IBUIFont" ref="35780556"/>
 									</object>
 								</array>
 								<string key="NSFrame">{{37, 6}, {246, 33}}</string>
 								<reference key="NSSuperview"/>
-								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="339437203"/>
+								<reference key="NSNextKeyView" ref="466232344"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">3</int>
@@ -169,20 +200,37 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">segment</string>
+						<string key="label">btnfujinloupan</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="339437203"/>
+						<reference key="destination" ref="657862327"/>
 					</object>
-					<int key="connectionID">76</int>
+					<int key="connectionID">86</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">btnsousuoloupan</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="466232344"/>
+					</object>
+					<int key="connectionID">87</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">SelectedSegement:</string>
-						<reference key="source" ref="339437203"/>
+						<reference key="source" ref="466232344"/>
 						<reference key="destination" ref="372490531"/>
-						<int key="IBEventType">13</int>
+						<int key="IBEventType">7</int>
 					</object>
-					<int key="connectionID">79</int>
+					<int key="connectionID">82</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">SelectedSegement:</string>
+						<reference key="source" ref="657862327"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">83</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -244,13 +292,19 @@
 						<int key="objectID">70</int>
 						<reference key="object" ref="65653082"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="339437203"/>
+							<reference ref="466232344"/>
+							<reference ref="657862327"/>
 						</array>
 						<reference key="parent" ref="287403385"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">73</int>
-						<reference key="object" ref="339437203"/>
+						<int key="objectID">80</int>
+						<reference key="object" ref="466232344"/>
+						<reference key="parent" ref="65653082"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">81</int>
+						<reference key="object" ref="657862327"/>
 						<reference key="parent" ref="65653082"/>
 					</object>
 				</array>
@@ -267,454 +321,18 @@
 				<string key="56.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="57.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="70.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="73.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<integer value="0" key="73.IUISegmentedControlInspectorSelectedSegmentMetadataKey"/>
+				<string key="80.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<real value="1" key="80.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
+				<string key="81.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<real value="2" key="81.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">79</int>
+			<int key="maxID">87</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes">
-			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
-				<object class="IBPartialClassDescription">
-					<string key="className">CustomNavigationController</string>
-					<string key="superclassName">UINavigationController</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/CustomNavigationController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">FanghaoTableViewController</string>
-					<string key="superclassName">UIViewController</string>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="kaishixunjiactrl">KaishixunjiaViewController</string>
-						<string key="navbar">UINavigationBar</string>
-						<string key="navctrl">UINavigationController</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="kaishixunjiactrl">
-							<string key="name">kaishixunjiactrl</string>
-							<string key="candidateClassName">KaishixunjiaViewController</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="navbar">
-							<string key="name">navbar</string>
-							<string key="candidateClassName">UINavigationBar</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="navctrl">
-							<string key="name">navctrl</string>
-							<string key="candidateClassName">UINavigationController</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/FanghaoTableViewController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">FunjinloupanViewController</string>
-					<string key="superclassName">UIViewController</string>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="loupanctrl">LoupanTableViewController</string>
-						<string key="navbar">UINavigationBar</string>
-						<string key="navctrl">UINavigationController</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="loupanctrl">
-							<string key="name">loupanctrl</string>
-							<string key="candidateClassName">LoupanTableViewController</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="navbar">
-							<string key="name">navbar</string>
-							<string key="candidateClassName">UINavigationBar</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="navctrl">
-							<string key="name">navctrl</string>
-							<string key="candidateClassName">UINavigationController</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/FunjinloupanViewController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">GeyinhangkedaieViewController</string>
-					<string key="superclassName">UIViewController</string>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="kdectrl">YinhangKedaieDetailViewController</string>
-						<string key="navbar">UINavigationBar</string>
-						<string key="navctrl">UINavigationController</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="kdectrl">
-							<string key="name">kdectrl</string>
-							<string key="candidateClassName">YinhangKedaieDetailViewController</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="navbar">
-							<string key="name">navbar</string>
-							<string key="candidateClassName">UINavigationBar</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="navctrl">
-							<string key="name">navctrl</string>
-							<string key="candidateClassName">UINavigationController</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/GeyinhangkedaieViewController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">KaishixunjiaViewController</string>
-					<string key="superclassName">UIViewController</string>
-					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">push_XunjiaBtn:</string>
-						<string key="NS.object.0">id</string>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<string key="NS.key.0">push_XunjiaBtn:</string>
-						<object class="IBActionInfo" key="NS.object.0">
-							<string key="name">push_XunjiaBtn:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</object>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="contentView">UIView</string>
-						<string key="jieguoctrl">XunjiajieguoViewController</string>
-						<string key="navbar">UINavigationBar</string>
-						<string key="navctrl">UINavigationController</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="contentView">
-							<string key="name">contentView</string>
-							<string key="candidateClassName">UIView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="jieguoctrl">
-							<string key="name">jieguoctrl</string>
-							<string key="candidateClassName">XunjiajieguoViewController</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="navbar">
-							<string key="name">navbar</string>
-							<string key="candidateClassName">UINavigationBar</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="navctrl">
-							<string key="name">navctrl</string>
-							<string key="candidateClassName">UINavigationController</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/KaishixunjiaViewController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">LoucengTableViewController</string>
-					<string key="superclassName">UIViewController</string>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="fanghaoctrl">FanghaoTableViewController</string>
-						<string key="navbar">UINavigationBar</string>
-						<string key="navctrl">UINavigationController</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="fanghaoctrl">
-							<string key="name">fanghaoctrl</string>
-							<string key="candidateClassName">FanghaoTableViewController</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="navbar">
-							<string key="name">navbar</string>
-							<string key="candidateClassName">UINavigationBar</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="navctrl">
-							<string key="name">navctrl</string>
-							<string key="candidateClassName">UINavigationController</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/LoucengTableViewController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">LoudongTableViewController</string>
-					<string key="superclassName">UIViewController</string>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="loucengctrl">LoucengTableViewController</string>
-						<string key="navbar">UINavigationBar</string>
-						<string key="navctrl">UINavigationController</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="loucengctrl">
-							<string key="name">loucengctrl</string>
-							<string key="candidateClassName">LoucengTableViewController</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="navbar">
-							<string key="name">navbar</string>
-							<string key="candidateClassName">UINavigationBar</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="navctrl">
-							<string key="name">navctrl</string>
-							<string key="candidateClassName">UINavigationController</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/LoudongTableViewController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">LoupanTableViewController</string>
-					<string key="superclassName">UIViewController</string>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="loudongctrl">LoudongTableViewController</string>
-						<string key="navbar">UINavigationBar</string>
-						<string key="navctrl">UINavigationController</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="loudongctrl">
-							<string key="name">loudongctrl</string>
-							<string key="candidateClassName">LoudongTableViewController</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="navbar">
-							<string key="name">navbar</string>
-							<string key="candidateClassName">UINavigationBar</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="navctrl">
-							<string key="name">navctrl</string>
-							<string key="candidateClassName">UINavigationController</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/LoupanTableViewController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">RengongxunjiaViewController</string>
-					<string key="superclassName">UIViewController</string>
-					<object class="NSMutableDictionary" key="outlets">
-						<string key="NS.key.0">contentView</string>
-						<string key="NS.object.0">UIView</string>
-					</object>
-					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<string key="NS.key.0">contentView</string>
-						<object class="IBToOneOutletInfo" key="NS.object.0">
-							<string key="name">contentView</string>
-							<string key="candidateClassName">UIView</string>
-						</object>
-					</object>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/RengongxunjiaViewController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">SousuoloupanViewController</string>
-					<string key="superclassName">UIViewController</string>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="loupanctrl">LoupanTableViewController</string>
-						<string key="navbar">UINavigationBar</string>
-						<string key="navctrl">UINavigationController</string>
-						<string key="searchbar">UISearchBar</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="loupanctrl">
-							<string key="name">loupanctrl</string>
-							<string key="candidateClassName">LoupanTableViewController</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="navbar">
-							<string key="name">navbar</string>
-							<string key="candidateClassName">UINavigationBar</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="navctrl">
-							<string key="name">navctrl</string>
-							<string key="candidateClassName">UINavigationController</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="searchbar">
-							<string key="name">searchbar</string>
-							<string key="candidateClassName">UISearchBar</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/SousuoloupanViewController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">XunJiaViewController</string>
-					<string key="superclassName">UIViewController</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="PushSegement0:">id</string>
-						<string key="PushSegement1:">id</string>
-						<string key="SelectedSegement:">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="PushSegement0:">
-							<string key="name">PushSegement0:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="PushSegement1:">
-							<string key="name">PushSegement1:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="SelectedSegement:">
-							<string key="name">SelectedSegement:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="fujinloupanctrl">FunjinloupanViewController</string>
-						<string key="navbar">UINavigationBar</string>
-						<string key="navctrl">UINavigationController</string>
-						<string key="segment">UISegmentedControl</string>
-						<string key="sousuoloupanctrl">SousuoloupanViewController</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="fujinloupanctrl">
-							<string key="name">fujinloupanctrl</string>
-							<string key="candidateClassName">FunjinloupanViewController</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="navbar">
-							<string key="name">navbar</string>
-							<string key="candidateClassName">UINavigationBar</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="navctrl">
-							<string key="name">navctrl</string>
-							<string key="candidateClassName">UINavigationController</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="segment">
-							<string key="name">segment</string>
-							<string key="candidateClassName">UISegmentedControl</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="sousuoloupanctrl">
-							<string key="name">sousuoloupanctrl</string>
-							<string key="candidateClassName">SousuoloupanViewController</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/XunJiaViewController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">XunjiajieguoViewController</string>
-					<string key="superclassName">UIViewController</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="push_KedaijineBtn:">id</string>
-						<string key="push_Pinggujigou:">id</string>
-						<string key="push_RengongxunjiaBtn:">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="push_KedaijineBtn:">
-							<string key="name">push_KedaijineBtn:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="push_Pinggujigou:">
-							<string key="name">push_Pinggujigou:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="push_RengongxunjiaBtn:">
-							<string key="name">push_RengongxunjiaBtn:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="contentView">UIView</string>
-						<string key="navbar">UINavigationBar</string>
-						<string key="navctrl">UINavigationController</string>
-						<string key="rengongctrl">RengongxunjiaViewController</string>
-						<string key="yinhangctrl">YinhangkedaichaxunViewController</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="contentView">
-							<string key="name">contentView</string>
-							<string key="candidateClassName">UIView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="navbar">
-							<string key="name">navbar</string>
-							<string key="candidateClassName">UINavigationBar</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="navctrl">
-							<string key="name">navctrl</string>
-							<string key="candidateClassName">UINavigationController</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="rengongctrl">
-							<string key="name">rengongctrl</string>
-							<string key="candidateClassName">RengongxunjiaViewController</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="yinhangctrl">
-							<string key="name">yinhangctrl</string>
-							<string key="candidateClassName">YinhangkedaichaxunViewController</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/XunjiajieguoViewController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">YinhangKedaieDetailViewController</string>
-					<string key="superclassName">UIViewController</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/YinhangKedaieDetailViewController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">YinhangkedaichaxunViewController</string>
-					<string key="superclassName">UIViewController</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="push_Kaishijisuan:">id</string>
-						<string key="push_Pinggujia:">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="push_Kaishijisuan:">
-							<string key="name">push_Kaishijisuan:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="push_Pinggujia:">
-							<string key="name">push_Pinggujia:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="contentView">UIView</string>
-						<string key="gyhkdectrl">GeyinhangkedaieViewController</string>
-						<string key="navbar">UINavigationBar</string>
-						<string key="navctrl">UINavigationController</string>
-						<string key="pickerView">UIPickerView</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="contentView">
-							<string key="name">contentView</string>
-							<string key="candidateClassName">UIView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="gyhkdectrl">
-							<string key="name">gyhkdectrl</string>
-							<string key="candidateClassName">GeyinhangkedaieViewController</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="navbar">
-							<string key="name">navbar</string>
-							<string key="candidateClassName">UINavigationBar</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="navctrl">
-							<string key="name">navctrl</string>
-							<string key="candidateClassName">UINavigationController</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="pickerView">
-							<string key="name">pickerView</string>
-							<string key="candidateClassName">UIPickerView</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/YinhangkedaichaxunViewController.h</string>
-					</object>
-				</object>
-			</array>
-		</object>
+		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">
@@ -723,6 +341,12 @@
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
+		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
+			<string key="topseglefta.png">{115, 28}</string>
+			<string key="topsegleftn.png">{114, 28}</string>
+			<string key="topsegrighta.png">{115, 28}</string>
+			<string key="topsegrightn.png">{114, 28}</string>
+		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">1181</string>
 	</data>
 </archive>
