@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "YinhangkedaieDetailCell.h"
+#import "YuegongViewController.h"
+
+enum YKDD_PICKER_TYPE {
+    eDaikuanchengshu = 0,
+    eNianlilv = 1,
+    };
 
 @interface YinhangKedaieDetailViewController : UIViewController
 <UITableViewDelegate,UITableViewDataSource,UIPickerViewDelegate,UIPickerViewDataSource>
@@ -19,7 +25,12 @@
     NSArray* _section1Titles;
     NSArray* _section1Values;
     NSArray*    _daikuanchengshuarray;
+    NSArray*    _nianlilvarray;
+    enum YKDD_PICKER_TYPE _curPicker;
 }
+
+//view
+@property (nonatomic,retain) IBOutlet UIPickerView* picker;
 
 //part1
 @property (nonatomic,retain) IBOutlet YinhangkedaieDetailCell* keaijineCell;
@@ -33,5 +44,8 @@
 @property (nonatomic,retain) IBOutlet YinhangkedaieDetailCell* daikuannianxianCell;
 @property (nonatomic,retain) IBOutlet YinhangkedaieDetailCell* nianlilvCell;
 @property (nonatomic,retain) IBOutlet YinhangkedaieDetailCell* yuegongCell;
+
+//controller
+@property (nonatomic,retain) IBOutlet YuegongViewController* yuegongCtrl;
 
 @end

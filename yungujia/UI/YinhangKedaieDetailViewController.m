@@ -14,6 +14,8 @@
 
 @implementation YinhangKedaieDetailViewController
 
+@synthesize picker = _picker;
+
 //part1
 @synthesize keaijineCell;
 @synthesize pinggujiaCell;
@@ -26,6 +28,8 @@
 @synthesize daikuannianxianCell;
 @synthesize nianlilvCell;
 @synthesize yuegongCell;
+
+@synthesize yuegongCtrl = _yuegongCtrl;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -40,6 +44,8 @@
 -(void)dealloc
 {
     [_daikuanchengshuarray release];
+    [_nianlilvarray release];
+    
     [_section0Titles release];
     [_section1Titles release];
     [_section0Values release];
@@ -65,8 +71,9 @@
     
     _section1Cells = [[NSArray alloc] initWithObjects:huankuanfangshiCell,daikuannianxianCell,nianlilvCell,yuegongCell, nil ];
     
-    _daikuanchengshuarray = [[NSArray alloc] initWithObjects:@"9成",@"8成",@"7成",nil];
+    _daikuanchengshuarray = [[NSArray alloc] initWithObjects:@"9成",@"8成",@"7成",@"6成",@"5成",@"4成",@"3成",@"2成",@"1成",nil];
     
+    _nianlilvarray = [[NSArray alloc] initWithObjects:@"上浮30%（7.40%）",@"上浮25%（6.20%）",@"上浮20%（5.20%）",@"2012/5/21基准6.80%",nil];
     
 }
 
@@ -99,6 +106,7 @@
     {
         return @"按还款计算";
     }
+    return nil;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -139,13 +147,33 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath 
 {
-    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    if (indexPath.section == 0 && indexPath.row == 4)
+    {
+        _curPicker = eDaikuanchengshu;
+        [_picker reloadAllComponents];
+        _picker.hidden = NO;
+    }
+    else if(indexPath.section == 1 && indexPath.row == 2)
+    {
+        _curPicker = eNianlilv;
+        [_picker reloadAllComponents];
+        _picker.hidden = NO;
+    }
+    else if(indexPath.section == 1 && indexPath.row == 3)
+    {
+        _yuegongCtrl.title = @"月供清单";
+        [self.navigationController pushViewController:_yuegongCtrl animated:YES];
+    }
+    else
+    {
+        [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    }
 }
 
-/*- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 50;
-}*/
+}
 
 #pragma mark -pickdelegate 
 // returns width of column and height of row for each component. 
@@ -163,7 +191,15 @@
 // If you return back a different object, the old one will be released. the view will be centered in the row rect  
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    return [_daikuanchengshuarray objectAtIndex:row];
+    if (_curPicker == eDaikuanchengshu)
+    {
+        return [_daikuanchengshuarray objectAtIndex:row];
+    }
+    if (_curPicker == eNianlilv)
+    {
+        return [_nianlilvarray objectAtIndex:row];
+    }
+    return @"";
 }
 
 //- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
@@ -174,6 +210,7 @@
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     NSLog(@"%d",row);
+    _picker.hidden = YES;
 //    [self.lblUserStyle setText:[self.arrayUserStyle objectAtIndex:row]];
 //    [self.pickUserStyle setHidden:true];
 }
@@ -189,7 +226,15 @@
 // returns the # of rows in each component..
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return 3;
+    if (_curPicker == eDaikuanchengshu)
+    {
+        return [_daikuanchengshuarray count];
+    }
+    if (_curPicker == eNianlilv)
+    {
+        return [_nianlilvarray count];
+    }
+    return 1;
 }
 
 @end

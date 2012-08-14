@@ -78,7 +78,14 @@
     else
     {
         lbl.text = lastCtrl.title;
-        [btn setTitle:[lastCtrl.title substringToIndex:4] forState:UIControlStateNormal];
+        if ([lastCtrl.title length] > 4)
+        {
+            [btn setTitle:[lastCtrl.title substringToIndex:4] forState:UIControlStateNormal];
+        }
+        else
+        {
+            [btn setTitle:lastCtrl.title forState:UIControlStateNormal];
+        }
     }
     
     btn.titleLabel.font = [UIFont boldSystemFontOfSize:13];

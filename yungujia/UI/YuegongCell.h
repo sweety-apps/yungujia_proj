@@ -9,5 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface YuegongCell : UITableViewCell
+{
+    
+}
+//view
+@property (nonatomic,retain) IBOutlet UILabel* dixxqi;
+@property (nonatomic,retain) IBOutlet UILabel* value;
+
 
 @end

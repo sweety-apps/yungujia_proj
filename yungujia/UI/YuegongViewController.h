@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YuegongCellViewController.h"
 
-@interface YuegongViewController : UIViewController
+
+@interface YuegongViewController : UIViewController <UITableViewDataSource,UITableViewDelegate>
+{
+    
+}
+
+//view
 
 @end
