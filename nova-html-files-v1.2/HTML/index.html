@@ -80,7 +80,14 @@
 		<!-- ENDS Fancybox -->
 		
 		
-
+<script type="text/javascript">
+function searchtext() 
+{
+	var keyword = document.getElementById("s").value;
+	var url = "http://www.baidu.com/s?wd="+keyword;
+	window.open(url);
+}
+</script>
 	</head>
 	
 	<body class="home">
@@ -92,10 +99,10 @@
 					<a href="index.html"><img id="logo" src="img/logo.png" alt="Nova" /></a>
 					<!-- search -->
 					<div class="top-search">
-						<form  method="get" id="searchform" action="#">
+						<form  method="get" id="searchform" action="http://www.google.com/search">
 							<div>
 								<input type="text" value="Search..." name="s" id="s" onfocus="defaultInput(this)" onblur="clearInput(this)" />
-								<input type="submit" id="searchsubmit" value=" " />
+								<a  id="searchsubmit" value=" "  onClick="searchtext()" />
 							</div>
 						</form>
 					</div>
