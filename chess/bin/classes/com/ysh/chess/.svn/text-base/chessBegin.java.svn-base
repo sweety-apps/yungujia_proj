@@ -1,0 +1,243 @@
+package com.ysh.chess;
+
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Rect;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.Handler;
+import android.os.Message;
+import android.telephony.TelephonyManager;
+import android.util.Log;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.Toast;
+import android.view.ViewGroup;
+
+//游戏的状态
+enum GAMESTATE
+{
+	GAME_UNKNOWN	,			// 未知
+	GAME_WAITING	,			// 等待开始, ->SETTING
+	GAME_SETTING	,			// 设置时间, ->STARTED
+	GAME_STARTED	,			// 游戏进行中, ->REQUEST, or OVER
+	GAME_REQUEST	,			// 游戏请求, ->STARTED, or OVER
+	GAME_OVER		,			// 游戏结束, ->WAITING
+	GAME_EXIT		;				// 游戏正在退出
+	
+	public static GAMESTATE getGAMESTATEFromIndex(int index) {
+		 switch (index) {
+		 case -1:
+		  return GAMESTATE.GAME_UNKNOWN;
+		 case 0:
+		  return GAMESTATE.GAME_WAITING;
+		 case 1:
+		  return GAMESTATE.GAME_SETTING;
+		 case 2:
+		  return GAMESTATE.GAME_STARTED;
+		 case 3:
+		  return GAMESTATE.GAME_REQUEST;
+		 case 4:
+		  return GAMESTATE.GAME_OVER;
+		 case 5:
+		  return GAMESTATE.GAME_EXIT;
+		 default:
+		  throw new RuntimeException("Unknown index:" + index);
+		 }
+		}
+
+
+};
+public class chessBegin extends ViewGroup {
+	
+	private chessBoard board_view;
+	private chess chessMain;
+	
+    private Bitmap beginBitmap;
+    private Bitmap aiPlay1_Bitmap;
+    private Bitmap aiPlay2_Bitmap;
+    private Bitmap netPlay1_Bitmap;
+    private Bitmap netPlay2_Bitmap;
+    private Bitmap quit1_Bitmap;
+    private Bitmap quit2_Bitmap;
+   
+    private int bg_width,bg_height;
+    private int btn_width,btn_height;
+	private int btn_y;
+	
+	
+	private Button btn_aiplay;
+	private Button btn_netplay;
+	private Button btn_quit;
+	
+    public chessBegin(Context context) {
+		super(context);
+		// TODO Auto-generated constructor stub
+		chessMain=(chess)context;
+		
+		board_view=new chessBoard(chessMain,this);
+		initBitmap(context);
+		
+		btn_aiplay = new Button(context);
+		btn_netplay = new Button(context);
+		btn_quit = new Button(context);
+		
+		bg_width = beginBitmap.getWidth();
+		bg_height = beginBitmap.getHeight();
+		btn_width = aiPlay1_Bitmap.getWidth();
+		btn_height = aiPlay1_Bitmap.getHeight();
+		Log.i("BitmapBtn_Size",": width="+btn_width+"; height="+btn_height);
+		btn_y = beginBitmap.getHeight()/5;//以1/5背景高度为第一个按钮的Y轴起点,之后顺序加上2倍的按钮自身高度
+		
+
+		btn_aiplay.layout((bg_width-btn_width)/2, btn_y, (bg_width-btn_width)/2 + btn_width, btn_y+btn_height);
+		btn_netplay.layout((bg_width-btn_width)/2, btn_y+3*btn_height/2, (bg_width-btn_width)/2 + btn_width, btn_y+3*btn_height/2 +btn_height);
+		btn_quit.layout((bg_width-btn_width)/2, btn_y+3*btn_height, (bg_width-btn_width)/2 + btn_width, btn_y+3*btn_height +btn_height);
+		
+		btn_aiplay.setBackgroundResource(R.drawable.ai_play_bkg);
+		btn_netplay.setBackgroundResource(R.drawable.net_play_bkg);
+		btn_quit.setBackgroundResource(R.drawable.quit_bkg);
+		
+		
+		btn_aiplay.setOnClickListener(new android.view.View.OnClickListener() {
+	
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+			    board_view.initStatusValue();
+		    	board_view.initChessBoard();
+		    	board_view.initPractice();
+		        chessMain.playSound(5);
+		    	chessMain.setContentView(board_view);
+		    	board_view.aithinkingStart();
+			}
+		});
+		
+
+		btn_netplay.setOnClickListener(new android.view.View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				
+			    int net_type = chessMain.checkNetworkType();
+			    if(net_type == 0 )//没有连接网络
+			    {
+					Toast t1 = Toast.makeText(chessMain, "网络未连通，请检测网络是否异常", Toast.LENGTH_LONG);
+					t1.show();
+				    return;
+			    }
+			    else if( net_type == 65538 )
+			    {
+			    	Toast t1 = Toast.makeText(chessMain, "暂不支持联通WAP网络，请尝试其它连接", Toast.LENGTH_LONG);
+					t1.show();
+				    return;
+			    }
+			    else if( net_type == 65537 )
+			    {
+			    	Toast t1 = Toast.makeText(chessMain, "暂不支持移动WAP网络，请尝试其它连接", Toast.LENGTH_LONG);
+					t1.show();
+				    return;
+			    }
+		    	//board_view=new chessBoard(chessMain,chessBegin.this);
+			    board_view.initStatusValue();
+			    board_view.initChessBoard();
+		    	board_view.initOnline();
+		    	chessMain.setContentView(board_view);
+
+			}
+		});
+		
+		btn_quit.setOnClickListener(new android.view.View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+		    	chessMain.exitGame();
+			}
+		});
+		
+	    addView(btn_aiplay);
+	    addView(btn_netplay);
+	    addView(btn_quit);
+	}
+
+    public void onLayout(boolean changed, int l, int t, int r, int b)
+    {
+        final int count = super.getChildCount();
+        for (int i = 0; i < count; i++) {
+            final View child = getChildAt(i);
+            if (child.getVisibility() != GONE) {
+                final int childLeft = child.getLeft();
+                final int childTop = child.getTop();
+                final int childright = childLeft + child.getWidth();
+                final int childbuttom = childTop +child.getHeight();
+                child.layout(childLeft, childTop,
+                        childright,childbuttom);
+
+            }
+        }
+    }
+    
+    public chessBoard getChessBoard(){
+    	return board_view;
+    }
+//  @Override
+//	protected void onDraw(Canvas canvas) {
+//		super.onDraw(canvas);
+//		canvas.drawBitmap(beginBitmap, 0,0, new Paint());
+//	}
+    
+    @Override
+    protected void dispatchDraw(Canvas canvas) {
+        canvas.drawBitmap(beginBitmap, 0,0, new Paint());
+//        final int count = super.getChildCount();
+//        for(int i = 0;i<count;i++)
+//        {
+//        	 final View child = getChildAt(i);
+//        	 child.draw(canvas);
+//        }
+        super.dispatchDraw(canvas);
+    }
+    
+//	@Override
+//	public boolean onTouchEvent(MotionEvent event) {
+		// TODO Auto-generated method stub
+//		if(event.getAction()==MotionEvent.ACTION_DOWN){
+//			int x=(int)event.getX();
+//			int y=(int)event.getY();
+//			
+//			if(aiPlayRect.contains(x,y)){
+//		
+//				pressAiPlay=true;
+//			}
+//			else if(netPlayRect.contains(x,y)){
+//				pressNetPlay=true;
+//			}
+//			else if(quitGameRect.contains(x, y)){
+//				pressQuitGame=true;
+//			}
+//		}
+//		return super.onTouchEvent(event);
+//	}
+
+
+	public void initBitmap(Context context){
+		beginBitmap=BitmapFactory.decodeResource(context.getResources(), R.drawable.begin);
+		beginBitmap = ((chess)context).zoomImage(beginBitmap,chessMain.screenWidth,chessMain.screenHeight);
+		aiPlay1_Bitmap=BitmapFactory.decodeResource(context.getResources(), R.drawable.ai_play1);
+		aiPlay2_Bitmap=BitmapFactory.decodeResource(context.getResources(), R.drawable.ai_play2);
+		netPlay1_Bitmap=BitmapFactory.decodeResource(context.getResources(), R.drawable.net_play1);
+		netPlay2_Bitmap=BitmapFactory.decodeResource(context.getResources(), R.drawable.net_play2);
+		quit1_Bitmap=BitmapFactory.decodeResource(context.getResources(), R.drawable.quit1);
+		quit2_Bitmap=BitmapFactory.decodeResource(context.getResources(), R.drawable.quit2);
+		
+	}
+
+}

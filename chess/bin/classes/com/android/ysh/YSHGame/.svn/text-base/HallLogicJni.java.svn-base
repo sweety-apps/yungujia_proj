@@ -1,0 +1,17 @@
+package com.android.ysh.XLGame;
+
+public class HallLogicJni {
+	public native void Init(String sIMEIID, Object objCallback);
+	public native void LoginAsGuest();
+	public native boolean GetDirInfo(int nGameClassID, int nGameID, int nZoneID);
+	public native void QuerySuitRoom(int nGameClassID, int nGameID);
+	public native void EnterRoom(int nGameID, int nZoneID, int nRoomID);
+	public native void AutoEnterGame(int nGameID);
+	public native void GameReady(int nGameID, int nTableID, int nSeatID);
+	public native void QuitGame(int nGameID, int nTableID);
+	public native void ExitRoom(int nGameID);
+	public native void SubmitGameAction(int nGameID, byte[] data, int nLen);
+	public native void SetConfig(String sSection, String sKey, String sValue);
+	public native void Replay(int nGameID);
+	public native void Uninit();
+}

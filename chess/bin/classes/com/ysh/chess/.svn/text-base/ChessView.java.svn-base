@@ -1,0 +1,38 @@
+package com.ysh.chess;
+
+
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Paint;
+import android.graphics.Canvas;
+import android.view.View;
+
+
+public class ChessView extends View{
+	
+	private Bitmap logoBitmap;
+	private chess chess_main;
+	public ChessView(Context context) {
+		super(context);	
+		// TODO Auto-generated constructor stub
+		chess_main = (chess)context;
+		initBitmap(context);
+		
+	}
+	
+	@Override
+	protected void onDraw(Canvas canvas) {
+		// TODO Auto-generated method stub
+		super.onDraw(canvas);
+		canvas.drawBitmap(logoBitmap,0,0, new Paint());
+		
+	}
+	
+	public void initBitmap(Context context){
+		logoBitmap=BitmapFactory.decodeResource(context.getResources(), R.drawable.cnchess_logo_big);
+		logoBitmap=((chess)context).zoomImage(logoBitmap,chess_main.screenWidth,chess_main.screenHeight);
+		
+	}
+	
+}

@@ -1,0 +1,422 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<samples>
+
+<!-- 本文档中响应消息result字段统一用0表示操作成功，其他值表示各种失败情况 -->
+
+<!-- 获取游戏种类列表 -->
+<methodCall>
+  <methodName>getClass</methodName>
+  <params>
+      <dirEncode>GBK</dirEncode>
+      <IsLogVersion>0</IsLogVersion>                   <!-- 0：非日志版本，1：日志版本 -->
+      <!--begin game 使用的字段 -->
+	  <MaskFlag>-1</MaskFlag>                          <!-- 是否过滤分区标志，可选，-1表示不过滤，gamesvr使用 -->
+	  <GamesvrPort>18084</GamesvrPort>                 <!-- gamesvr对外服务端口，gamesvr使用 --> 
+	  <!--end game 使用的字段 ---->
+  </params>
+</methodCall>
+<!-- 返回的游戏种类信息 -->
+<methodResponse>
+  <params>
+    <result>0</result>
+    <rootName>迅雷游戏</rootName>
+    <hallVersion>1.1.1.1</hallVersion>                 <!-- 当前大厅版本号 -->
+	<hallLogVersion>1.1.1.2</hallLogVersion>           <!-- 当前日志版本大厅版本号 -->
+    <gameClasses>
+      <item>
+        <className>休闲游戏</className>
+        <classId>10</classId>
+        <status>10</status>                            <!--(未使用) -->
+        <iconId>1000</iconId>                          <!-- (未使用) -->
+        <gameNum>100</gameNum>                         <!-- 下属游戏个数 -->
+        <onlineNum>100</onlineNum>                     <!-- 当前在线人数 -->
+        <games detail="1">                             <!-- 1：表示本结点已经包含所有下级结点列表；0：本列表为空，表示需要用 “getGames”命令进一步获取下级节点信息 -->
+          <item>
+            ...
+            <gameZones detail="1">                     <!-- 1：表示本结点已经包含所有下级结点列表；0：本列表为空，表示需要用 “getZones”命令进一步获取下级节点信息 -->
+              <item>
+                ...
+                <gameRooms detail="1">...</gameRooms>  <!-- 1：表示本结点已经包含所有下级结点列表；0：本列表为空，表示需要用 “getRooms”命令进一步获取下级节点信息 -->
+                ...
+              </item>
+              <item>...</item>
+            </gameZones>
+            ...
+          </item>
+          <item>...</item>
+        </games>
+      </item>
+      <item>...</item>
+    </gameClasses>
+  </params>
+</methodResponse>
+
+
+<!-- 获取某一种类下的游戏列表 -->
+<methodCall>
+  <methodName>getGames</methodName>
+  <params>
+      <gameClassId>123</gameClassId>
+  </params>
+</methodCall>
+<!-- 返回的游戏信息 -->
+<methodResponse>
+  <params>
+    <result>0</result>
+    <gameClassId>123</gameClassId>
+    <games>
+      <item>
+        <gameName>五子棋</gameName>
+        <status>1</status>                        <!-- (未使用) -->
+        <classId>10</classId>                     <!-- 所属分类id -->
+        <iconId>1000</iconId>                     <!-- 图标id -->
+        <tableNumPerRoom>100</tableNumPerRoom>    <!-- 每个房间的游戏桌个数 -->
+        <maxNumPerRoom>1000</maxNumPerRoom>       <!-- 每个房间允许进入的最大人数 -->
+        <gameVer>1</gameVer>                      <!-- 当前游戏版本, 0：非欢乐类，1欢乐类 -->
+        <checksum>1</checksum>                    <!-- 是否需要校验文件, 0：不需要，1需要 -->
+        <gameMaxVer>2</gameMaxVer>                <!-- 客户端游戏程序的最低版本 -->
+        <gameMinVer>2</gameMinVer>                <!-- 客户端游戏程序的最高版本 -->
+        <gameMaxMember>3</gameMaxMember>          <!-- 每个游戏桌允许开始游戏的最小人数 -->
+        <gameMinMember>4</gameMinMember>          <!-- 每个游戏桌允许开始游戏的最大人数 -->
+        <gameId>123</gameId>                      <!-- 游戏id -->
+        <downloadPath>http://a.b.c</downloadPath> <!-- 游戏exe 文件下载url -->
+        <exePath>a/b/c</exePath>                  <!-- 客户端游戏安装相对路径 -->
+        <reserve>http://ccc</reserve>             <!-- 大厅右边显示信息的url -->
+        <soPath>sj</soPath>                       <!-- 游戏动态库名称，不包括后缀名(.so/.dll) -->
+        <IconPath>a/b/c.icon<IconPath>            <!-- 客户端图标文件相对路径 -->
+        <ConfigPath>a/b/c.cnf</ConfigPath>        <!-- 客户端游戏配置文件相对路径 -->
+        <Exittablesign>0</Exittablesign>          <!-- 游戏有人退出时客户端的处理标志（是否结束游戏） -->
+        <gameDesc>推荐</gameDesc>                 <!-- 游戏描述信息 -->
+        <onlineNum>100</onlineNum>                <!-- 当前在线人数 -->
+        <zoneNum>10</zoneNum>                     <!-- 下属分区个数 -->
+        <gameZones detail="1">                    <!-- 1：表示本结点已经包含所有下级结点列表；0：本列表为空，表示需要用 “getZones”命令进一步获取下级节点信息 -->
+          <item>
+            ...
+            <gameRooms detail="1">...</gameRooms>  <!-- 1：表示本结点已经包含所有下级结点列表；0：本列表为空，表示需要用 “getRooms”命令进一步获取下级节点信息 -->
+            ...
+          </item>
+          <item>...</item>
+        </gameZones>
+      </item>
+      <item>...</item>
+    </games>
+  </params>
+</methodResponse>
+
+<!-- 获取某一游戏的分区列表 -->
+<methodCall>
+  <methodName>getZones</methodName>
+  <params>
+    <gameClassId>123</gameClassId>
+    <gameId>456</gameId>
+  </params>
+</methodCall>
+<!-- 返回的分区信息 -->
+<methodResponse>
+  <params>
+    <result>0</result>
+    <gameClassId>123</gameClassId>
+    <gameId>456</gameId>
+    <gameZones>
+      <item>
+        <zoneName>无禁手1区</zoneName>
+        <zoneId>10</zoneId>
+        <iconId>1000</iconId>
+        <serverId>123</serverId>
+        <status>10</status>                            <!-- (未使用) -->
+        <gameId>1</gameId>
+        <onlineNum>100</onlineNum>                     <!-- 当前在线人数 -->
+        <roomNum>10</roomNum>                          <!-- 下属房间个数 -->
+        <roomType>0</roomType>                         <!-- 房间类型，0表示不使用该字段，其他值表示各种限制类型(so使用), 对应t_vg_gamezone.cType 字段-->
+        <enterType>0</enterType>                       <!-- 房间模式, 0/4/5/6 无限制(普通房间)/防作弊房间/竞赛房间/约战房间, 对应t_vg_gamezone.nZoonType -->
+        <server ip="10.11.12.13" port="8000" dua_ip="10.11.12.14|10.11.12.15" flag="0"/>         <!-- gamesvr的ip和端口 -->
+        <flag>2</flag>                                 <!-- server 机房1/2/3表示电信/网通/双路 -->
+        <gameRooms detail="1">...</gameRooms>          <!-- 1：表示本结点已经包含所有下级结点列表；0：本列表为空，表示需要用 “getRooms”命令进一步获取下级节点信息 --> 
+        <userType>0</userType>                         <!-- 用户类型限制, 0/1/2 无限制/注册用户专用/游客专用/vip专区， 对应t_vg_gamezone.nUserType-->
+      </item>
+      <item>...</item>
+    </gameZones>
+  </params>
+</methodResponse>
+
+
+<!-- 自动选房间与座位 -->
+<methodCall>
+  <methodName>querySuitedZoons</methodName>
+  <params>
+      <dirEncode>GBK</dirEncode>
+      <gameClassId>1</gameClassId>
+      <gameId>2</gameId>            <!-- 要选择的游戏id -->
+      <chooseType>0</chooseType>    <!-- 20091010增加, 可选, 缺省为0,  0 - 不限制, 1 - 进游客房间, 其他以后扩展 -->
+      <userType>0</userType>        <!-- 20091010增加, 可选, 缺省为0,  0 - 未知, 1 - 游客, 2 - 登陆用户，3 - vip用户, 5 比赛房间 -->
+      <userScore>1234</userScore>     <!-- 20091010增加, 可选, 缺省为0,  表示用户在这个游戏中的分数  -->
+      <userBalance>1234</userBalance> <!-- 20091031增加, 可选, 缺省为0,  表示用户的雷豆数  -->
+      <fromWhere>0</fromWhere>        <!-- 20091010增加, 可选, 缺省为0,  0 - 大厅调用， 1 - 迅雷插件调用，其他以后扩展  -->
+      <param1>0</param1>              <!-- 20100129增加, 可选, 缺省为0,  chooseType为5时字段意义为compID  -->
+      <skipRooms>
+          <item><roomId>121</roomId></item>
+          <item><roomId>124</roomId></item>
+          ...
+      </skipRooms>
+      <invateKey>xxx</invateKey>    <!-- 20100205增加, 可选, 缺省为空,  约战识别码  -->
+      <checkKey>yyyy</checkKey>     <!-- 20100205增加, 可选, 缺省为空,  约战校验码  -->
+  </params>
+</methodCall>
+
+<!-- 返回的分区信息 -->
+<methodResponse>
+  <params>
+       <gameId>4</gameId>
+       <result>0</result>
+        <gameRooms>
+         <item>
+               <roomId>123</roomId>
+               <zoneId name="无禁手1区">10</zoneId>          <!-- zone的名称作为属性节点 -->
+               <onlineNum>100</onlineNum>                    <!-- 当前在线人数  -->
+               <server ip="10.11.12.13" port="8000" dua_ip="10.11.12.14|10.11.12.15" flag="0"/>        <!-- gamesvr的ip和端口 -->
+               <roomName>房间１</roomName>                   <!-- 显示的房间名称 -->
+        </item>
+        <item>...</item>
+     </gameRooms>        
+  </params>
+</methodResponse>
+
+<!-- 获取某一分区下的房间列表 --> 
+<methodCall>
+  <methodName>getRooms</methodName>
+  <params>
+    <gameClassId>123</gameClassId>
+    <gameId>456</gameId>
+    <zoneId>456</zoneId>
+  </params>
+</methodCall>
+<!-- 返回的房间信息 --> 
+<methodResponse>
+  <params>
+    <result>0</result>
+    <gameClassId>123</gameClassId>
+    <gameId>456</gameId>
+    <zoneId>456</zoneId>
+    <gameRooms>
+      <item>
+        <roomId>123</roomId>
+        <zoneId>10</zoneId>
+        <gameId>1000</gameId>
+        <status>10</status>                          <!-- (未使用) -->
+        <grade>1</grade>                             <!-- 进入房间的最低等级 -->
+        <onlineNum>100</onlineNum>                   <!-- 当前在线人数 -->
+        <server ip="10.11.12.13" dua_ip="10.11.12.14|10.11.12.15" port="8000" flag="0" />       <!-- gamesvr的ip和端口 -->
+        <roomName>房间１</roomName>                  <!-- 显示的房间名称 -->
+        <maxNum>1000</maxNum>                        <!-- 房间人数上限 -->
+        <maxPnt>100</maxPnt>                         <!-- 进入房间的最高分数 -->
+        <minPnt>10</minPnt>                          <!-- 进入房间的最低分数 -->
+        <highPnt>200</highPnt>                       <!-- 高于此值不扣分 -->
+        <lowPnt>5<lowPnt>                            <!-- 低于此值不扣分 -->
+        <rate>1.0</rate>                             <!-- 得分系数 -->
+        <enterType>0</enterType>                     <!-- 房间模式, 0/4/5/6 无限制(普通房间)/防作弊房间/竞赛房间/约战房间, 对应t_vg_gamerooms.nRoomType -->
+        <xlScore>5</xlScore>                         <!-- 每局游戏获胜后得到的迅雷经验值 -->
+        <maxLeiDou>12000</maxLeiDou>                 <!-- 进入的最大雷豆限制 -->
+        <minLeiDou>0</minLeiDou>                     <!-- 进入的最小雷豆限制 -->
+        <userType>0</userType>                       <!-- 用户类型限制, 0/1/2 无限制/注册用户专用/游客专用/vip专区，-->
+      </item>
+      <item>...</item>
+    </gameRooms>
+  </params>
+</methodResponse>
+
+
+<!-- 获取game server信息 -->
+<methodCall>
+  <methodName>getServers</methodName>
+</methodCall>
+<!-- 返回的server列表信息 --> 
+<methodResponse>
+  <params>
+    <result>0</result>
+    <servers>
+      <item>
+        <conection ip="10.11.12.13"  port="8000" dua_ip="10.11.12.14|10.11.12.15"/>
+        <zoneNum>10</zoneNum>                        
+        <stat>0</stat>
+        <flag>0</flag>  <!-- 1电信，2网通，3 双路，0未知 -->
+      </item>
+      <item>...</item>
+    </servers>
+  </params>
+</methodResponse>
+
+
+
+<!-- 修改房间在线人数 --> 
+<methodCall>
+  <methodName>modifyOnlineNum</methodName>
+  <params>
+    <rooms>
+      <item>
+        <gameClassId>1</gameClassId>  <!-- 要修改的游戏类型id -->
+      	<gameId>2</gameId>            <!-- 要修改的游戏id -->
+      	<zoneId>3</zoneId>            <!-- 要修改的地区id -->
+        <roomId>4</roomId>            <!-- 要修改的房间id -->
+        <onlineNum>5</onlineNum>      <!-- 在线人数 -->
+      </item>
+      <item>...</item>
+    </rooms>
+  </params>
+</methodCall>
+<!-- 响应消息 -->
+<methodResponse>
+  <params>
+    <result>0</result>               <!-- 0表示修改成功, 后续参数不出现; 1表示修改失败,后续参数为第一个修改失败的房间信息 -->
+    <gameClassId>1</gameClassId>
+    <gameId>2</gameId>
+    <zoneId>3</zoneId>  
+    <roomId>4</roomId> 
+  </params>
+</methodResponse>
+
+<!-- 获取在线人数 -->
+<methodCall>
+  <methodName>getOnlineNum</methodName>
+</methodCall>
+<!-- 返回的游戏种类信息 -->
+<methodResponse>
+  <params>
+    <result>0</result>
+    <hallNum>123456</hallNum>      <!-- 大厅总人数 -->
+    <onlineNum>100</onlineNum>
+    <gameClasses>
+      <item>
+        <classId>10</classId>
+        <onlineNum>100</onlineNum>                     <!-- 当前在线人数 -->
+        <games> 
+          <item>
+            <gameId>123</gameId>
+            <onlineNum>100</onlineNum> 
+            <gameZones>                     
+              <item>
+                <zoneId>10</zoneId>
+                <onlineNum>100</onlineNum>
+                <gameRooms>
+                   <item>
+                     <roomId>123</roomId>
+                     <onlineNum>100</onlineNum>
+                   </item>
+                   ..
+                </gameRooms>  
+              </item>
+              <item>...</item>
+            </gameZones>
+          </item>
+          <item>...</item>
+        </games>
+      </item>
+      <item>...</item>
+    </gameClasses>
+  </params>
+</methodResponse>
+
+
+
+<!-- 获取服务端的配置信息 -->
+<methodCall>
+  <methodName>getServerConfig</methodName>
+</methodCall>
+<!-- 返回的服务端配置信息 -->
+<methodResponse>
+  <params>
+    <result>0</result>
+    <cfgItems>
+		<item key="k1" value="..." />
+		...
+		<item key="kn" value="..." />
+    </cfgItems>
+  </params>
+</methodResponse>
+
+<!-- 查询大厅是否有新版本 -->
+<methodCall>
+  <methodName>queryNewHallVersion</methodName>
+  <params>
+      <currentVersion>1.0.0.1</currentVersion>
+      <isLogVersion>0</isLogVersion>  <!-- 0：非日志版本，1：日志版本 -->
+  </params>
+</methodCall>
+<!-- 返回是否有新版本 -->
+<methodResponse>
+  <params>
+    <result>0</result> <!-- 0表示存在新版本, url在后续参数里; 1表示无url,后续参数无效 -->
+    <queryNewHallVersionResult>0</queryNewHallVersionResult> <!-- 0表示ok,否则出错-->
+		<packages>
+			<package>  
+				<upgradeMode>0</upgradeMode>
+				<upgradePara>/S</upgradePara>
+				<packageId>12345</packageId>
+				<packageVer>1.0.0.0.1</packageVer>
+				<packageURL>http://a.b.c</packageURL>
+				<packageFeature>http://a.b.c</packageFeature>
+				<packageFilesize>1024</packageFilesize>
+				<packageCid>0D943E3F9289A0ADC81607D8B884C0912C9D3311</packageCid>
+    		</package>
+		</packages>
+  </params>
+</methodResponse>
+
+<!-- 上报服务器状态 --> 
+<methodCall>
+  <methodName>reportGameSvrStatus</methodName>
+  <params>
+        <serverid>1</serverid>                                             <!-- 服务器id -->
+      	<frontendVer>gamesvr-frontendxxx</frontendVer>                     <!-- 前端版本信息 -->
+      	<frontendStartTime>12345678</frontendStartTime>                    <!-- 前端启动时间（time(NULL)） -->
+      	<frontendDir>/usr/local/minigame_server/run/server4</frontendDir>  <!-- 前端当前运行目录 -->
+      	<backendVer>back_endXXX</backendVer>                               <!-- 后端版本信息 -->
+      	<backendStartTime>12345678</backendStartTime>                      <!-- 后端启动时间（time(NULL)） -->
+      	<backendDir>/usr/local/minigame_server/run/server4</backendDir>    <!-- 后端当前运行目录 -->
+        <soList>                                                           <!-- 加载的so具体名称列表 -->
+            <item>
+              <soName>ddz.so.09.12.31</soName>
+            </item>
+            <item>...</item>
+        </soList>
+  </params>
+</methodCall>
+<!-- 响应消息 -->
+<methodResponse>
+  <params>
+    <result>0</result>                            <!-- 0表示修改成功, 后续参数不出现; 1表示修改失败 -->
+    <serverid>1</serverid>                        <!-- 服务器id -->
+    <nextReportInterval>600</nextReportInterval>  <!-- 下次上报状态的时间间隔（秒） -->
+  </params>
+</methodResponse>
+
+
+</samples>
+
+
+<!-- 获取推荐游戏列表 -->
+<methodCall>
+  <methodName>getRecommendGames</methodName>
+  <params />  <!-- 暂无 -->
+</methodCall> 
+<!-- 返回的游戏信息 -->
+<methodResponse>
+	<methodName>getRecommendGames</methodName>
+  <params>
+    <result>0</result>            <!-- 0表示成功,1表示修改失败 -->
+    <rootName>推荐游戏</rootName>
+    <games>
+      <item>
+      	<gameid>1</gameid>     <!-- 区分各个游戏的id -->
+      	<channel>1</channel>   <!-- 表示gameid的来源，1：游戏大厅平台内部的休闲游戏 2：其他渠道的游戏，如网游 -->
+      </item>
+      ...
+    </games>
+  </params>  
+</methodResponse> 
+     
+
+
+
+
+
+

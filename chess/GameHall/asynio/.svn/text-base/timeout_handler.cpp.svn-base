@@ -1,0 +1,15 @@
+// timeout_handler.cpp: implementation of the timeout_handler class.
+//
+//////////////////////////////////////////////////////////////////////
+
+#include "timeout_handler.h"
+
+//////////////////////////////////////////////////////////////////////
+timeout_handler::timeout_handler()
+{
+	// TODO
+}
+
+timeout_handler::~timeout_handler()
+{
+}

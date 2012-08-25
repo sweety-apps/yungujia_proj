@@ -1,0 +1,358 @@
+/*
+ *  CnChessLogic.h
+ *  yshGameCnChess
+ *
+ *  Created by Tony Zhang on 10/28/10.
+ *  Copyright 2010 __MyCompanyName__. All rights reserved.
+ *
+ */
+
+#ifndef CnChessLogic_H_
+#define CnChessLogic_H_
+
+#include <vector>
+#include <map>
+#include <string>
+#include <jni.h>
+#include <android\log.h>
+
+
+#include "xqgame.h"
+#include "CnChess_PlayerInfo.h"
+#include "NetServer.h"
+
+#define LOGI(logtag,infoMsg) __android_log_print(4,logtag,infoMsg)
+
+#define nil 0
+class CCnChessAI;
+
+struct XLGAMESCOREEX : public XLGAMESCORE
+{
+	std::string LevelName;
+};
+
+typedef struct tagXLMAGICTOOL
+{
+	short ToolClassID;
+	int   ToolBatchID;
+	int   UsedTime;
+	int   Duration;
+} XLMAGICTOOL, *LPXLMAGICTOOL;
+
+struct XLGAMESCOREEXT : public XLGAMESCOREEX
+{
+	XLUSERID UserID;
+	long Score;  // 迅雷积分
+	std::string RankName; // 等级称号
+
+	std::vector<XLMAGICTOOL> vecMagicTool; // 道具列表
+};
+
+
+// 用户的游戏相关属性
+typedef struct tagXLUSERGAMEINFO
+{
+	short GameID; // 游戏ID
+	int	Points; // 积分
+	int WinNum; // 胜局数
+	int LoseNum; // 输局数
+	int EqualNum; // 平局数
+	int EscapeNum; // 逃跑局数
+	int OrgID;  // 所属帮派
+	int OrgPos;  // 帮派地位
+	int DropNum; // 掉线次数
+}XLUSERGAMEINFO;
+
+#pragma pack(pop)
+
+// 用户基本信息
+struct XLUSERINFOEX : public XLUSERINFO
+{
+	byte IsMale;  // 用户性别,是否为男性
+    long Score;  // 迅雷积分
+    std::string RankName; // 等级称号
+};
+
+
+
+
+// hhj+ 上3个结构的联合
+typedef union tagGAMEDATA
+{
+	GAMEROOM	GameRoom;
+	GAMETABLE	GameTable;
+	GAMESEAT	GameSeat;
+	struct
+	{
+		unsigned short GameID;
+		unsigned short ZoneID;
+		unsigned short RoomID;
+		unsigned short TableID;
+		unsigned short SeatID;
+		__int64 UserID;
+	};
+} GAMEDATA;
+
+
+class NSDate
+{
+	
+};
+
+enum NOTIFYTYPE
+{
+	NOTIFY_NOTYPE,
+	NOTIFY_CHOSED,
+	NOTIFY_UNCHOSED,
+	NOTIFY_WARNING,
+	NOTIFY_VIOLATIONMOVES,
+	NOTIFY_MOVEAPIECE,
+	NOTIFY_GAMEOVER,
+	NOTIFY_PRACTICEHANDLERESULT,
+	NOTIFY_NOCHOSED,
+	NOTIFY_CANNOTMOVE,
+	NOTIFY_SETTIME,
+	NOTIFY_CONFIRMTIME,
+	NOTIFY_GAMESTARTED,
+	NOTIFY_USERQUITGAME,
+	NOTIFY_RETRACTMOVES,
+	NOTIFY_CantSendRetractMoveThisTime,
+	NOTIFY_CantRetractToolMuchOnceTime,
+	NOTIFY_CantRetractForJustUse,
+	NOTIFY_CantRetractForMoreTimes,
+	NOTIFY_RequestRetractMoveInvalid,
+	NOTIFY_RequestRetractMoveRefused,
+	NOTIFY_RequestRetractMove,
+	NOTIFY_RequestDraw
+
+};
+class CCnChessLogic
+{
+public:
+	CCnChessLogic();
+	~CCnChessLogic();
+	vector<int> ParseDescribeStr(char ch[256]);
+	vector<int> ParseDescribeStr2(char ch[256]);
+	jstring stoJstring( JNIEnv* env, const char* pat );
+	uint32_t Fire_Notify(const char *method, int param1 = nil, int param2 = nil,NOTIFYTYPE type = NOTIFY_NOTYPE,vector<int>* Vec = 0);
+	uint32_t Call(const std::string &method, const void* param1 = NULL, const void* param2 = NULL,void* result = NULL);
+        bool isAttached;
+	JavaVM *_vm;
+       jclass jcls;
+	jobject _thiz;
+protected:
+	uint32_t m_lastHResult;
+	string m_lastError;
+	typedef uint32_t (CCnChessLogic::* CallPtr)(const void* param1, const void* param2, void* result);
+	typedef std::map<const std::string, CallPtr> CallMap;
+	CallMap m_mapCall;
+	void InitCallMap();
+	
+	uint32_t GetLastErrorInt(const void* param1, const void* param2, void* result);
+	uint32_t AiMove(const void* param1, const void* param2, void* result);
+	uint32_t GetLastErrorStr(const void* param1, const void* param2, void* result);
+	uint32_t GetVersionInt(const void* param1, const void* param2, void* result);
+	uint32_t GetVersionStr(const void* param1, const void* param2, void* result);
+	
+	uint32_t Init(const void* param1, const void* param2, void* result);				// 初始化
+	uint32_t GetReady(const void* param1, const void* param2, void* result);			// “开始”
+	uint32_t RequestSurrender(const void* param1, const void* param2, void* result);	// “认输”
+	uint32_t RequestDraw(const void* param1, const void* param2, void* result);			// “和棋”
+    uint32_t RequestRetractByGameProp(const void* param1, const void* param2, void* result);
+    uint32_t RequestRetractMove(const void* param1, const void* param2, void* result);	// “悔棋”
+	
+	uint32_t PracticeRetractMove(const void *param1, const void *param2, void *result);
+	uint32_t DoublePracticeRetractMove(const void *param1, const void *param2, void *result);
+	
+	uint32_t GetUserID(const void* param1, const void* param2, void* result);			// 得到用户性息
+	uint32_t UserClick(const void* param1, const void* param2, void* result);			// 界面点击事件
+	uint32_t ShowReplay(const void* param1, const void* param2, void* result);			// 打谱
+	uint32_t ConfirmMove(const void* param1, const void* param2, void* result);			// 确认走子
+	
+	uint32_t ReplyDraw(const void* param1, const void* param2, void* result);			// “和棋”的答复
+	uint32_t ReplyRetractMove(const void* param1, const void* param2, void* result);	// “悔棋”的答复
+	
+	
+	uint32_t ReplySetTime(const void* param1, const void* param2, void* result);		// 设置了时间
+	uint32_t ReplyConfirmTime(const void* param1, const void* param2, void* result);	// 确认了时间
+	
+	uint32_t IsCursorHand(const void* param1, const void* param2, void* result);		// 鼠标手型变换
+	uint32_t LoadReplayFile(const void* param1, const void* param2, void* result);		// 读取棋谱文件
+	uint32_t SaveReplayFile(const void* param1, const void* param2, void* result);		// 保存棋谱文件
+	uint32_t SetAutoSaveReplay(const void* param1, const void* param2, void* result);	// 是否自动保存棋谱
+	
+	uint32_t QuitGame(const void* param1, const void* param2, void* result);			// 发送退出游戏的命令
+	
+	uint32_t OnCommBtnClicked(const void* param1, const void* param2, void* result);	// 用户点击了道具等按钮
+    uint32_t IsPointStatusSafe(const void* param1, const void* param2, void* result);
+    uint32_t SetProtectMagicTool(const void* param1, const void* param2, void* result);
+    uint32_t GetUnSafeKingPos(const void* param1, const void* param2, void* result);
+    uint32_t HandleReplayReq(const std::string &method, const void* param1, const void* param2, void* result);
+    uint32_t HandlePracticeReq(const std::string &method, const void* param1, const void* param2, void* result);
+    uint32_t PrevExit(const void* param1, const void* param2, void* result);
+	
+    uint32_t StartGameHall(const void* param1, const void* param2, void* result);
+    uint32_t ReportCorpId(const void* param1, const void* param2, void* result);
+    uint32_t GetUserInfoByUserID(const void* param1, const void* param2, void* result);
+    uint32_t GetUserInfoByRoleID(const void* param1, const void* param2, void* result);
+    
+    uint32_t CanUseRetractPropNow(const void* param1, const void* param2, void* result);
+	
+    uint32_t MakeFriend(const void* param1, const void* param2, void* result);
+	
+    uint32_t IsPlayer(const void* param1, const void* param2, void* result);
+    uint32_t GetMySeat(const void* param1, const void* param2, void* result);
+    uint32_t GetTotalUserInfoByRoleID(const void* param1, const void* param2, void* result);
+	
+    uint32_t GetMyUserID(const void* param1, const void* param2, void* result);
+public:
+	// 服务器响应消息处理（通过NetServer回调）
+	void OnSvrRespIEnterGame(int nResult, const vector<PlayerInfoExt>& tablePlayers);		// 服务器响应: 我进入游戏
+	void OnSvrRespUserEnterGame(const PlayerInfoExt &PlayerInfo, bool isLookOnUser);	// 服务器响应: 有人进入游戏	
+	void OnSvrRespUserQuitGame(XLUSERID nQuitUserID);		// 服务器响应: 有人退出游戏	
+	
+	void OnSvrRespGetReady(XLUSERID nReadyUserID);			// 服务器响应: 有人已准备好
+	void OnSvrRespSideFlag(int iRedSide);					// 服务器响应: 双方颜色
+	void OnSvrRespGameStart(int nTime, int nTimeEx);		// 服务器响应: 游戏开始了
+	void OnSvrRespMovedAPiece(UserMoveChessRequest* pstMove);		// 服务器响应: 我（或对手）下了一个棋子
+	void OnSvrRespReqDraw(XLUSERID nUserID, int iData);						// 服务器响应: 请求和棋
+	void OnSvrRespAnswerDraw(XLUSERID nUserID, int iData);						// 服务器响应: 请求和棋的结果
+	void OnSvrRespReqRetractMove(XLUSERID nUserID, int iData, int mode);					// 服务器响应: 请求悔棋
+	void OnSvrRespAnswerRetractMove(XLUSERID nUserID, int iData, int iTime);			// 服务器响应: 请求悔棋的操作
+	
+	void OnSvrRespGameEndCode(unsigned char nEndCode, int nCodeEx);			// 服务器响应: 游戏结束的代码	
+	void OnSvrRespSetGameOver();			// 服务器响应: 游戏结束	
+	void OnSvrRespUserScoreChanged(const std::vector<XLGAMESCOREEXT>& scoreInfoArr);		// 服务器响应: 游戏得分	
+	
+	void OnSvrRespSetTime(int iRedSide);			// 服务器响应: 设置时间
+	void OnSvrRespConfirmTime(int iTime, int nTimeEx);			// 服务器响应: 确认时间
+	void OnSvrRespUserChoseAPiece(XLUSERID nSubmitUserID, int iData);				// 服务器响应: 对方选中/取消选中一颗棋子
+	
+	void OnSvrRespEnterGameFailed(int nResult);				// 服务器响应: 进入游戏失败OnPlayerStatusChanged
+	
+	void OnSvrRespReloadGameData(ResumeGameData *pGameData);				// 服务器响应: 重置数据
+	void OnSvrRespPlayerStatusChanged(XLUSERID nPlayerID, PLAYER_STATUS_ACTION_ENUM nStatusAction);	// 服务器响应: 用户状态改变
+	void OnSvrRespMagicToolInfo(XLUSERID nPlayerID, const IDataXNet &dx);		// 服务器响应: 用户道具信息
+	
+    void OnNotifyMyCnChessMagicToolsInfo(XLUSERID nPlayerID, IDataXNet *pDataXNet);
+    void OnSvrSetServerMode(long srvmode);   // 通知服务器端模式
+	
+    void SaveGameRecord(bool);
+    void NotifyWillBeKilledChesses();
+    
+	
+    const GAMEDATA& GetGameSeatInfo();
+	
+    void ondrawAchess(int srcindex, int destindex, CPoint from, CPoint to);
+    void onretractmove(int srcindex, int destindex, CPoint from, CPoint to);
+    void ReportUserAction(const std::string& bstrParam);
+    void HandleUserLevelChanged(IDataXNet* pDataX);
+	
+    void NotifyUseRetractToolSuccess(LONG Chair);
+	
+    void NotifyLeidouStat(void* data);
+	
+    void NotifyGameEndTime(void* data);
+	void practicehandleresult();
+private:
+	void checkClickResult(CPoint p, bool bWarn = true);			// 检验事件是否会引起棋子的状态变化（选中，移动，吃子，将军等）
+	void checkPracticeClickResult(CPoint p, bool needAi = true, bool bWarn = true);			// 检验事件是否会引起棋子的状态变化（选中，移动，吃子，将军等）
+	void retractMoves(bool bMyReq, int n, int iTime);	// 执行悔棋的具体操作
+	void submitGameAction(unsigned char cType, int iData);		// 提交命令请求
+	void submitGameActionEx(unsigned char cType, int iData, int iDataEx);
+	unsigned short GetSeatInfoFromHall();							// 从大厅获取桌子的相关信息
+	
+	void notifyUserInfo(int p, const PlayerInfoExt &info);
+	void checkGameScore();
+	int reportXlScore(bool bWin, XLUSERID userID);
+	
+	
+	
+public:
+    PlayerInfoExt m_PlayerInfo_Mine;
+    PlayerInfoExt m_PlayerInfo_Rival;
+	
+    int m_ReplayRetractMode; // 断线重连时获取到的悔棋模式
+	CXQGame m_XQGame;
+	bool GetFlagSide() {return m_bRedSide;}
+	bool GetIsMyTurn() {return m_bMyTurn;}
+	//bool GetIsReady() {return m_bReady;}
+	int GetGameStatus(){return (int)m_GameStatus;}
+	bool GetIsGameStarted() {return m_bGameSarted;}
+	void SetFlagRedSide(bool flagside) {m_bRedSide = flagside;}
+	void SwitchFlagSide()
+	{
+		if (m_bRedSide) {
+			m_bRedSide = false;
+		}
+		else {
+			m_bRedSide = true;
+		}
+	}
+	void ShowAlert(string type);
+private:
+	
+	CPoint m_pChosedPiece;
+	bool m_bRedSide;
+	bool m_bGameSarted;
+	bool m_bReady;
+	bool m_bMyTurn;
+	bool m_bPlayer;	// 是否是玩家（非旁观者）
+	int m_GameEndCode;
+	int m_GameEndCodeEx;	// 1，红胜；2，黑胜；3，和棋；4，对方逃跑
+	int m_MoveResult;
+	int m_nStepCount;
+	bool m_bNeedAi;
+	
+public:
+	int m_nRequestTimesCount_Draw;
+	int m_nRequestTimesCount_Retract;
+	
+	
+	GAMESTATE m_GameStatus;				// 现在只记录了GAME_EXIT，应该把m_bReady、m_bGameSarted也统一进来
+public:
+	GAMEDATA m_MyInfo;
+	CNetServer m_NetServer;				// 负责发送命令，并将服务器的响应以消息的形式发给本窗口
+private:	
+	std::vector<PlayerInfoExt> m_TablePlayerInfo;	// table上的各个player的信息
+	
+	
+	XLGAMESCOREEXT m_nUserScore[2];
+	bool m_bInATable;
+    bool m_bOpenProtectMagic; 
+    long m_lServerMode;   // 服务器端的模式， 目前就设置两种模式， 0表示正常房间，1表示道具免费使用房间
+	
+	//xxCCnChessReplay m_replay;
+	
+    bool m_bUserHandleProtect;
+    vector<XLMAGICTOOL> m_myMagicToolsVec;  // 我的道具列表
+	
+private:
+	CPoint m_TempPoint;
+	
+private:
+	int m_nRecvScoreCount;
+	bool m_bRecvGameEnd;
+    CCnChessAI* m_AiInterface;
+
+	
+    bool m_bPracticeStart;
+    NSDate *m_startTime;
+public:
+    bool m_bMiniHall;
+	bool isNeedMainThread;
+	
+private:
+    bool m_bJustRetractMove; // 是否刚刚悔了棋, 该变量会在用户走一步子时清掉, 用于判断是否是连续的悔棋
+	
+    bool m_bUseRetractTool;
+    LONG m_RetractSeqCount; // 连续悔棋的次数
+	
+    bool m_bCanRequestRetract; // 是否可以发送悔棋请求
+    long m_bRetractRefuseCount; // 拒绝次数
+	
+    bool m_bMyReqRetract; // 是否是我提出悔棋
+private:
+	DECL_LOGGER
+};
+#endif

@@ -1,0 +1,1 @@
+1打开cygwin，进入到对应的jni目录下，使用ndk-build命令编译即可。

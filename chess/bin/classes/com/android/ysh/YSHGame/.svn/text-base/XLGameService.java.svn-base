@@ -1,0 +1,333 @@
+/**
+ * 
+ */
+package com.android.ysh.XLGame;
+
+import android.app.Service;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.IBinder;
+import android.util.Log;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Properties;
+
+import android.os.Message;
+import android.os.Messenger;
+import android.os.Handler;
+import android.os.Bundle;
+import android.os.RemoteException;
+import android.content.Context;
+import android.telephony.TelephonyManager;
+
+/**
+ * @author Administrator
+ *
+ */
+public class XLGameService extends Service {
+	
+	private static final String LOGTAG = "XLGameService";
+	
+	HashMap<Object, Messenger> mGameClients = new HashMap<Object, Messenger>();
+	Messenger mHallClient = null;
+	HallLogicJni mHallLogic = null;
+	
+	boolean mIsInit = false;
+	
+	static final int MSG_REGISTER_GAME_CLIENT = 1;
+	static final int MSG_REGISTER_GAME_HALL = 2;
+	static final int MSG_UNREGISTER_GAME_CLIENT = 3;
+	static final int MSG_UNREGISTER_GAME_HALL = 4;
+	static final int MSG_CMD_GAME_TO_HALLS = 5;
+	static final int MSG_CMD_HALLS_TO_GAME = 6;
+	static final int MSG_CMD_HALLS_TO_HALL = 7;
+	static final int MSG_CMD_HALL_TO_HALLS = 8;
+	
+	static final int CMD_LOGIN_AS_GUEST = 0;
+	static final int CMD_QUERY_SUIT_ROOM = 1;
+	static final int CMD_ENTER_ROOM = 2;
+	static final int CMD_GAME_READY = 3;
+	static final int CMD_QUIT_GAME = 4;
+	static final int CMD_EXIT_ROOM = 5;
+	static final int CMD_AUTO_ENTER_GAME = 6;
+	static final int CMD_GAME_ACTION = 7;
+	static final int CMD_REPLAY = 8;
+	
+	/**
+     * Handler of incoming messages from clients(game or hall).
+     */
+    class IncomingHandler extends Handler {
+        @Override
+        public void handleMessage(Message msg) {
+        	Log.d(LOGTAG, "handleMessage: msg=" + msg.what);
+            switch (msg.what) {
+                case MSG_REGISTER_GAME_CLIENT:
+                	mGameClients.put(msg.arg2, msg.replyTo);
+                	Log.i(LOGTAG, "game client [" + msg.arg2 + "] connected");
+                    break;
+                    
+                case MSG_REGISTER_GAME_HALL:
+                	mHallClient = msg.replyTo;              	
+                	break;
+                	
+                case MSG_UNREGISTER_GAME_CLIENT:
+                	mGameClients.remove(msg.replyTo);
+                	checkShouldExit();
+                    break;
+                    
+                case MSG_UNREGISTER_GAME_HALL:                	
+                	mHallClient = null;
+                	checkShouldExit();
+                    break;
+                    
+                case MSG_CMD_GAME_TO_HALLS:
+                	Bundle buGame = msg.getData();
+                    onCmdGame(msg.arg1, msg.arg2, buGame);
+                    break;
+                    
+                case MSG_CMD_HALL_TO_HALLS:
+                	Bundle buHall = msg.getData();
+                    onCmdHall(buHall);
+                    break;
+                    
+                default:
+                    super.handleMessage(msg);
+            }
+        }
+    }
+    
+    /**
+     * Target we publish for clients to send messages to IncomingHandler.
+     */
+    final Messenger mMessenger = new Messenger(new IncomingHandler());
+	
+	@Override
+	public IBinder onBind(Intent intent) {
+		Log.i(LOGTAG, "onBind - action=" + intent.getAction());	
+		if( !mIsInit ) {
+			mHallLogic = new HallLogicJni();
+			Log.d(LOGTAG, "halllogic created");
+			
+			TelephonyManager tm = (TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE); 
+			String imei = tm.getDeviceId(); 
+			String tel = tm.getLine1Number();
+			
+			Log.i(LOGTAG, "onBind - imei=" + imei + ", tel=" + tel);
+			mHallLogic.Init(imei, this);
+			
+			mIsInit = true;
+			
+			// get config
+			Properties props = new Properties();
+			try {
+				FileInputStream stream = this.openFileInput("userConfig.cfg");
+				props.load(stream);
+				
+				Enumeration en = props.propertyNames();  
+		        
+		        while (en.hasMoreElements()) {  
+		            String key = (String)en.nextElement();  
+		            String value = props.getProperty(key);  
+		            
+		            mHallLogic.SetConfig("userConfig", key, value);
+		        }  
+			} catch(FileNotFoundException e) {
+				return mMessenger.getBinder();
+			} catch(IOException e) {
+				return mMessenger.getBinder();
+			}
+		}
+		return mMessenger.getBinder();
+	}
+	
+	@Override
+	public void onStart(Intent intent, int startId) {
+	    //handleCommand(intent);
+		Log.i(LOGTAG, "onStart");
+	}
+	
+	@Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        Log.i(LOGTAG, "Received start id " + startId + ": " + intent);        
+        return START_STICKY;
+    }
+	
+	@Override
+	public void onCreate() {
+		Log.i(LOGTAG, "onCreate");
+	}
+
+	@Override
+	public void onDestroy()	{
+		Log.i(LOGTAG, "onDestroy");
+		if(mIsInit) {
+			Log.i(LOGTAG, "Uninit halllogic");
+			mHallLogic.Uninit();
+		}
+		super.onDestroy();
+		System.exit(0);
+	}
+	
+	private void checkShouldExit() {
+		boolean shouldexit = false;
+		
+		if( mHallClient == null && mGameClients.isEmpty() )	{
+			shouldexit = true;
+		}
+		
+		Log.i(LOGTAG, "checkShouldExit = " + shouldexit + 
+				", client size=" + mGameClients.size());
+		if(shouldexit) {			
+			stopSelf();
+		}
+	}
+	
+	private void onCmdGame(int gameclassid, int gameid, Bundle data) {
+		int nCmdID = data.getInt("CmdID");
+		Log.i(LOGTAG, "OnCmdGame - cmdid=" + nCmdID + ", data=" + data);	
+		
+		if(!mIsInit) {
+			return;
+		}
+		
+		switch(nCmdID) {
+			case CMD_LOGIN_AS_GUEST:
+				mHallLogic.LoginAsGuest();
+				break;
+				
+			case CMD_QUERY_SUIT_ROOM:
+				mHallLogic.QuerySuitRoom(gameclassid, gameid);
+				break;
+				
+			case CMD_ENTER_ROOM:
+				int nGameID = data.getInt("GameID");
+				int nZoneID = data.getInt("ZoneID");
+				int nRoomID = data.getInt("RoomID");
+				mHallLogic.EnterRoom(nGameID, nZoneID, nRoomID);
+				break;
+				
+			case CMD_AUTO_ENTER_GAME:
+				mHallLogic.AutoEnterGame(gameid);
+				break;
+				
+			case CMD_GAME_READY:
+				int nTableID = data.getInt("TableID");
+				int nSeatID = data.getInt("SeatID");
+				mHallLogic.GameReady(gameid, nTableID, nSeatID);
+				break;
+				
+			case CMD_QUIT_GAME:
+				int tableid = data.getInt("TableID");
+				mHallLogic.QuitGame(gameid, tableid);
+				break;
+				
+			case CMD_EXIT_ROOM:
+				mHallLogic.ExitRoom(gameid);
+				break;
+				
+			case CMD_GAME_ACTION:
+				byte[] buf = data.getByteArray("Param1");
+				mHallLogic.SubmitGameAction(gameid, buf, buf.length);
+				break;
+				
+			case CMD_REPLAY:
+				mHallLogic.Replay(gameid);
+				break;
+			
+			default:
+				Log.w(LOGTAG, "unknown cmd");				
+		}
+	}
+	
+	private void onCmdHall(Bundle data)	{			
+		int nCmdID = data.getInt("CmdID");
+		Log.i(LOGTAG, "OnCmdHall - cmdid=" + nCmdID);
+		
+		if(!mIsInit) {
+			return;
+		}
+		
+		switch(nCmdID) {
+			case CMD_LOGIN_AS_GUEST:
+				mHallLogic.LoginAsGuest();
+				break;
+			
+			default: 
+				Log.w(LOGTAG, "unknown cmd");				
+		}
+	}
+	
+	private void OnJniToHallCallback(String cmdname, Bundle data) {		
+		Log.i(LOGTAG, "OnJniHallCallback, cmdname=" + cmdname);		
+		Log.i(LOGTAG, "OnJniHallCallback, data=" + data);
+		
+		if(mHallClient == null) { 
+			return;  
+		}
+        
+        try {
+        	// register hall client
+        	Message msg = Message.obtain(null,
+                    XLGameService.MSG_CMD_HALLS_TO_HALL);
+            msg.replyTo = mMessenger;
+            msg.setData(data);
+            mHallClient.send(msg);
+        } catch (RemoteException e) {
+        	mHallClient = null;
+        }
+	}	
+	
+	private void OnJniToGameCallback(int gameid, String cmdname, Bundle data) {
+		Log.i(LOGTAG, "OnJniToGameCallback, gameid=" + gameid + ", cmdname=" + cmdname);		
+		Log.i(LOGTAG, "OnJniToGameCallback, data=" + data);
+		
+		data.putString("_CmdName", cmdname);
+		
+		if( gameid <= 0 ) {
+			// to all game
+			Iterator iter = mGameClients.entrySet().iterator(); 
+			try {			
+				Message msg = Message.obtain(null,
+		                XLGameService.MSG_CMD_HALLS_TO_GAME);
+		        msg.replyTo = mMessenger;
+		        msg.setData(data);
+		        
+		        while (iter.hasNext()) { 
+				    Map.Entry entry = (Map.Entry) iter.next(); 
+				    Messenger client = (Messenger)entry.getValue(); 
+				    client.send(msg);
+				} 	
+			} catch (RemoteException e) {
+	        	Log.e(LOGTAG, "OnJniToGameCallback, send msg to gameid=" + gameid + " failed!");
+	        }
+			
+			return;			
+		}
+		
+		if( !mGameClients.containsKey(gameid) ) {
+			Log.w(LOGTAG, "OnJniToGameCallback, gameid not exist!");
+			return;
+		}		
+		
+		Messenger gameClient = mGameClients.get(gameid);
+		try {			
+			Message msg = Message.obtain(null,
+	                XLGameService.MSG_CMD_HALLS_TO_GAME);
+	        msg.replyTo = mMessenger;
+	        msg.setData(data);
+	        gameClient.send(msg);	
+		} catch (RemoteException e) {
+        	Log.e(LOGTAG, "OnJniToGameCallback, send msg to gameid=" + gameid + " failed!");
+        }
+	}		
+    
+    static {
+        System.loadLibrary("HallLogic");
+    }
+}

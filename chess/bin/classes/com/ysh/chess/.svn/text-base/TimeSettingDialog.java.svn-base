@@ -1,0 +1,227 @@
+package com.ysh.chess;
+
+import android.app.Activity;
+import android.app.Dialog;
+import android.content.Context;
+import android.content.res.Resources;
+import android.os.Bundle;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+import android.widget.TextView;
+enum DLGTYPE {
+	TIME_SET, TIME_CONFIRM
+};
+class TimeSettingDialog extends Dialog{
+	private Button btn_ok;
+	private Button btn_cancel;
+	private EditText txt_jushifen,txt_jushimiao;
+	private EditText txt_bushifen,txt_bushimiao;
+	private EditText txt_danbufen,txt_danbumiao;
+	private TextView txt_ErrMsg;
+    private Window window=null;
+	private android.view.View.OnClickListener ok_listener;
+	private android.view.View.OnClickListener cancel_listener;
+	private int m_flag;
+	private String m_strCmd;
+	private chessBoard m_cb;
+	private boolean m_btoast;
+	private Resources r;
+	DLGTYPE m_dlgtype;
+	public TimeSettingDialog(chessBoard cb,String cmd,int flag,boolean b_toast,DLGTYPE dlgtype){
+        super(cb.getChessMain());
+    	setContentView(R.layout.dialog);//设置对话框的布局
+    	txt_jushifen=(EditText)findViewById(R.id.jushifen);
+    	txt_jushimiao= (EditText)findViewById(R.id.jushimiao);
+    	txt_bushifen = (EditText)findViewById(R.id.bushifen);
+    	txt_bushimiao = (EditText)findViewById(R.id.bushimiao);
+    	txt_danbufen = (EditText)findViewById(R.id.danbufen);
+    	txt_danbumiao = (EditText)findViewById(R.id.danbumiao);
+    	btn_ok=(Button)findViewById(R.id.ok);
+    	btn_cancel=(Button)findViewById(R.id.cancel);
+    	txt_ErrMsg = (TextView)findViewById(R.id.txtmsg);
+    	m_flag = flag;
+    	m_strCmd = cmd;
+    	m_cb = cb;
+    	m_btoast = b_toast;
+    	m_dlgtype = dlgtype;
+    	this.ok_listener = new android.view.View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				//验证输入内容
+				switch(validate_input())
+				{
+				case 1:
+					txt_ErrMsg.setText(R.string.err_msg1);
+					txt_ErrMsg.setVisibility(View.VISIBLE);
+					return;
+				case 2:
+					txt_ErrMsg.setText(R.string.err_msg2);
+					txt_ErrMsg.setVisibility(View.VISIBLE);
+					return;
+				case 3:
+					txt_ErrMsg.setText(R.string.err_msg3);
+					txt_ErrMsg.setVisibility(View.VISIBLE);
+					return;
+				case 4:
+					txt_ErrMsg.setText(R.string.err_msg4);
+					txt_ErrMsg.setVisibility(View.VISIBLE);
+					return;
+				case 5:
+					txt_ErrMsg.setText(R.string.err_msg5);
+					txt_ErrMsg.setVisibility(View.VISIBLE);
+					return;
+				}
+				//设置自己的时间
+				m_cb.setGameTime(getjushi(), getbushi(), getdanbushi());
+		
+				//告诉逻辑层
+				m_cb.getChessLogic().Call(m_strCmd, m_flag, new int[]{getjushi(),getbushi(),getdanbushi()});	
+				dismiss();
+				if(m_btoast)
+				{
+					//弹出窗口正在等待
+					String s = m_cb.getResources().getString(R.string.waiting);
+					m_cb.showProgressMessagewithoutexit(s);
+				}
+				
+			}
+		};
+		
+		this.cancel_listener = new android.view.View.OnClickListener()
+		{
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				//告诉逻辑层
+				m_cb.getChessLogic().Call(m_strCmd, -1, new int[]{getjushi(),getbushi(),getdanbushi()});
+				dismiss();						
+			}
+		};
+		
+		if(dlgtype == DLGTYPE.TIME_CONFIRM)
+		{
+			setEditTextReadOnly(txt_jushifen);
+			setEditTextReadOnly(txt_jushimiao);
+			setEditTextReadOnly(txt_bushifen);
+			setEditTextReadOnly(txt_bushimiao);
+			setEditTextReadOnly(txt_danbufen);
+			setEditTextReadOnly(txt_danbumiao);
+		}
+    }
+    public void setDisplay(){
+    	
+    	if(m_cb.waitDlg !=null && m_cb.waitDlg.isShowing())
+    	{
+    		m_cb.waitDlg.hide();
+    	}
+    	btn_ok.setOnClickListener(ok_listener);
+    	btn_cancel.setOnClickListener(cancel_listener);
+    	setProperty();
+        setTitle("时间设置");//设定对话框的标题
+        
+        switch(m_dlgtype)
+        {
+        case TIME_SET:
+        	btn_cancel.setText("取消");
+        	break;
+        case TIME_CONFIRM:
+        	btn_cancel.setText("拒绝");
+        	break;
+        }
+        show();//显示对话框   
+    }
+    	//要显示这个对话框，只要创建该类对象．然后调用该函数即可．
+    public void setProperty(){
+         window=getWindow();//　　　得到对话框的窗口．
+         WindowManager.LayoutParams wl = window.getAttributes();
+         wl.x =0;//这两句设置了对话框的位置．0为中间
+         wl.y =0;
+         wl.alpha=0.6f;//这句设置了对话框的透明度
+         wl.gravity=Gravity.CENTER;         
+         window.setAttributes(wl); 
+    }
+    public int getjushi()
+    {
+    	String txt = txt_jushifen.getText().toString();
+    	int jushifen = Integer.parseInt(txt);
+    	txt = txt_jushimiao.getText().toString();
+    	int jushimiao = Integer.parseInt(txt);
+    	return jushifen*60+jushimiao;
+    }
+    
+    public int getbushi()
+    {
+    	String txt = txt_bushifen.getText().toString();
+    	int bufen = Integer.parseInt(txt);
+    	txt = txt_bushimiao.getText().toString();
+    	int bumiao = Integer.parseInt(txt);
+    	return bufen*60+bumiao;
+    }
+    
+    public int getdanbushi()
+    {
+    	String txt = txt_danbufen.getText().toString();
+    	int danbufen = Integer.parseInt(txt);
+    	txt = txt_danbumiao.getText().toString();
+    	int danbumiao = Integer.parseInt(txt);
+    	return danbufen*60+danbumiao;
+    }
+    
+    public void setTimeContent(int jushi,int bushi,int danbushi)
+    {
+    	this.txt_jushifen.setText(""+jushi/60);
+    	this.txt_jushimiao.setText(""+jushi%60);
+    	this.txt_bushifen.setText(""+bushi/60);
+    	this.txt_bushimiao.setText(""+bushi%60);
+    	this.txt_danbufen.setText(""+danbushi/60);
+    	this.txt_danbumiao.setText(""+danbushi%60);
+    }
+    
+    //验证输入是否合法
+    //局时>=10min,err return 1
+    //步时>=20s,err return 2
+    //局时+步时<=100min,err return 3
+    //单步时>=步时,err return 4
+    //1min<=单步时<=5min,err return 5
+    private int validate_input()
+    {
+    	if(getjushi()<10*60)
+    	{
+    		return 1;
+    	}
+    	if(getbushi()<20)
+    	{
+    		return 2;
+    	}
+    	if(getjushi()+getbushi()>100*60)
+    	{
+    		return 3;
+    	}
+    	if(getdanbushi()<getbushi())
+    	{
+    		return 4;
+    	}
+    	if(getdanbushi()<60 || getdanbushi()>5*60)
+    	{
+    		return 5;
+    	}
+    	return 0;
+    }
+    
+    private void setEditTextReadOnly(EditText et)
+    {
+    	et.setCursorVisible(false); 
+    	et.setFocusable(false); 
+    	et.setFocusableInTouchMode(false); 
+    	et.setEnabled(false); 
+    }
+}
+

@@ -1,0 +1,12 @@
+/**
+ * 
+ */
+package com.android.ysh.XLGame;
+
+/**
+ * @author Administrator
+ *
+ */
+public interface DownloadCompleteListener {
+	public abstract void onDownloadComplete(int result, String filepath);
+}

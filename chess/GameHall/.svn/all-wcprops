@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/code_svn/xl_download/!svn/ver/21512/xl_embed/ysh_mobile/ysh_game/chess/GameHall
+END
+HallLogicAdapter.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/code_svn/xl_download/!svn/ver/21119/xl_embed/ysh_mobile/ysh_game/chess/GameHall/HallLogicAdapter.cpp
+END
+JniHelper.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/code_svn/xl_download/!svn/ver/21151/xl_embed/ysh_mobile/ysh_game/chess/GameHall/JniHelper.cpp
+END
+JniHelper.h
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/code_svn/xl_download/!svn/ver/20587/xl_embed/ysh_mobile/ysh_game/chess/GameHall/JniHelper.h
+END
+com_android_ysh_XLGame_HallLogicJni.h
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/code_svn/xl_download/!svn/ver/21119/xl_embed/ysh_mobile/ysh_game/chess/GameHall/com_android_ysh_XLGame_HallLogicJni.h
+END

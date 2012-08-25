@@ -1,0 +1,1379 @@
+package com.ysh.chess;
+
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.res.Resources;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Rect;
+import android.graphics.Typeface;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import android.util.DisplayMetrics;
+import android.view.Gravity;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+
+enum GAMETYPE {
+	NOGAME, ONLINEGAME, PRACTICEGAME, DOUBLEPLAYGAME
+};
+
+
+public class chessBoard extends View{
+	
+	private chess chessMain;
+	private chessBegin begin_view;
+	
+	private Bitmap boardBitmap;
+	private Bitmap focusBitmap;
+	private Bitmap checkBitmap;
+	private Bitmap youWinBitmap;
+	private Bitmap youLoseBitmap;
+    private Bitmap head1_Bitmap;
+    private Bitmap head2_Bitmap;
+    private Bitmap leave1_Bitmap;
+    private Bitmap leave2_Bitmap;
+    private Bitmap retract1_Bitmap;
+    private Bitmap retract2_Bitmap;
+    private Bitmap retract3_Bitmap;
+    private Bitmap timerBitmap;
+    private Bitmap feedback_hBitmap;
+    private Bitmap feedback_wBitmap;
+    private Bitmap okBitmap;
+
+	private Bitmap manBitmap[];
+
+	
+    private int board[][];
+    public int screenWidth;//屏幕的宽
+    public int screenHeight;//屏幕的高
+    private int checkBp_Width;
+    private int checkBp_Height;
+    private int winORloseBp_Width;
+    private int winORloseBp_Height;
+    private int timerBp_Height;
+    private int timerBp_Width;
+    private int headHeight;
+    private int headWidth;
+    private int pieceSize;
+   
+    
+    private chessMan man[];
+    private Rect boardRect[];
+    private Rect retractRect;
+    private Rect leaveRect;
+    private ChessLogicJNI chesslogic;
+    private int oldFocusPos;
+    private int newFocusPos;
+    private int chosedMan;//存储当前选中的棋子的编号
+    private int whoWin;//值为0代表己方赢，1代表对方赢
+    private int sideFlag;//标志己方是红方还是黑方 (0为红方，1为黑方）
+    private int mRoundTime;//己方局时
+    private int yRoundTime;//对方局时
+    private int stepAddedTime;//步时
+    private int stepTimeLimit;//单步时
+    private int time_ready = 15;
+    private int timeLimit;//
+    private int feedbackPos;
+    private int dReady;//对面是否准备：1、 未准备，2 、准备
+    private int mReady;//己方是否准备：1、 未准备，2、准备
+    private long AIThreadId;
+   
+    private boolean AImove;
+    private boolean isGameOver;
+    private boolean isCheck;
+    private boolean ismOffline;
+    private boolean isdOffline;
+    private boolean enterGame;
+    private boolean pressRetract;
+    private boolean pressLeave;
+    private boolean dSeat;//对面座位是否有人
+    private boolean reconn;
+    private boolean displayTableID;
+    private boolean firstInitNetPlay;
+
+   
+	//private AIMOVE ai;
+	private Handler chessHandler;
+	private Runnable task;
+	private Runnable stepTimerTask;
+	private Runnable readyTimerTask;
+	private Runnable AIThinkingTask;
+	private NetServer nServer;
+    private Resources r;
+    public TimeSettingDialog timedlg;
+    public  ProgressDialog waitDlg;
+    
+    private String readyTimerMsg;
+    private boolean is_ready_timer;
+	/*
+    private int chessboardImageCodOriginX = 28-22;
+    private int chessboardImageCodOriginY = 100-22;
+    private int chessboardImageCodEndX = 451+22;
+    private int chessboardImageCodEndY = 597+22;
+    */
+    private int ai_animation_index = 0;//当前帧
+    
+
+	public GAMETYPE gameType = GAMETYPE.NOGAME;
+	
+
+	public chessBoard(chess context,chessBegin begin){
+		super(context);	
+		chessMain=context;
+		begin_view=begin;
+        
+	    DisplayMetrics dm=new DisplayMetrics();
+	    dm=context.getApplicationContext().getResources().getDisplayMetrics();
+	    screenWidth=dm.widthPixels;
+	    screenHeight=dm.heightPixels;
+
+	    r=getResources();
+	    pieceSize=convertPX((int)r.getDimension(R.dimen.pieceBaseSize));
+	    headWidth=convertPX((int)r.getDimension(R.dimen.headBp_Width));
+	    headHeight=convertPY((int)r.getDimension(R.dimen.headBp_Height));
+	    timerBp_Width=convertPX((int)r.getDimension(R.dimen.timerBp_Width));
+	    timerBp_Height=convertPY((int)r.getDimension(R.dimen.timerBp_Height));
+	    
+	    
+	    if(screenWidth==240&&screenHeight==320){
+	    	pieceSize=25;
+	    	headWidth=29;
+	    	headHeight=26;
+	    	timerBp_Width=72;
+	    	timerBp_Height=28;
+	    }
+	  	    
+	    initBitmap(context);
+        chesslogic=new ChessLogicJNI();
+        chesslogic.cb = this;
+        chesslogic.InitVM(context);
+		
+		boardRect=new Rect[90];
+		//board=new int[10][9];
+		man=new chessMan[32];
+		//ai = new AIMOVE(this);        
+		int bNum=1;
+		
+		dSeat=false;
+		enterGame=false;
+		
+		checkBp_Width=checkBitmap.getWidth();
+		checkBp_Height=checkBitmap.getHeight();
+		winORloseBp_Width=youWinBitmap.getWidth();
+		winORloseBp_Height=youWinBitmap.getHeight();
+		timerBp_Height=timerBitmap.getHeight();
+		headHeight=head1_Bitmap.getHeight();
+		
+		int retractBp_Width=retract1_Bitmap.getWidth();
+		int retractBp_Height=retract1_Bitmap.getHeight();
+		int leaveBp_Width=retract1_Bitmap.getWidth();
+		int leaveBp_Height=retract1_Bitmap.getHeight();
+		int x,y;
+		//初始化悔棋按钮的位置
+        x=convertPX((int)r.getDimension(R.dimen.retractBpPos_X));
+        y=convertPY((int)r.getDimension(R.dimen.retractBpPos_Y));
+		retractRect=new Rect(x,
+				             y,
+				             x+retractBp_Width,
+				             y+retractBp_Height);
+		//初始化离开按钮的位置
+		x=convertPX((int)r.getDimension(R.dimen.leaveBpPos_X));
+		y=convertPY((int)r.getDimension(R.dimen.leaveBpPos_Y));
+		leaveRect=new Rect(x,
+				           y,
+				           x+leaveBp_Width,
+				           y+leaveBp_Height);
+		
+
+		//初始化棋盘格子
+		
+		x=convertPX((int)r.getDimension(R.dimen.leftCornerOfBoard_left));
+		y=convertPY((int)r.getDimension(R.dimen.d_leftCornerOfBoard_top));
+		if(screenWidth==240&&screenHeight==320){
+	    	x=2;
+	    	y=53;
+	    }
+		boardRect[0]=new Rect(x,
+				              y,
+				              x+convertPX((int)r.getDimension(R.dimen.boardSquareSize)),
+				              y+convertPY((int)r.getDimension(R.dimen.boardSquareSize)));
+		
+		y=convertPY((int)r.getDimension(R.dimen.m_leftCornerOfBoard_top));
+		if(screenWidth==240&&screenHeight==320){
+	    	
+	    	y=164;
+	    }
+		boardRect[45]=new Rect(x,
+				               y,
+				               x+convertPX((int)r.getDimension(R.dimen.boardSquareSize)),
+				               y+convertPY((int)r.getDimension(R.dimen.boardSquareSize)));
+		
+		//根据480x800的棋子与棋盘格子的比例获取棋盘格子的大小
+		
+	    x=convertPX((int)r.getDimension(R.dimen.boardSquareSize));
+		y=convertPY((int)r.getDimension(R.dimen.boardSquareSize));
+		if(screenWidth==240&&screenHeight==320){
+	    	x=26;
+	    	y=22;
+	    }
+	    for(int i=0;i<10;i++){
+			for(int j=0;j<9;j++){				
+				//board[i][j]=-1;//初始化棋盘，-1表示该位置没有棋子
+				if(i==0&&j==0){				
+					continue;
+				}
+						
+				//初始化棋盘区域
+				
+				if(bNum<=44||bNum>=46){
+					boardRect[bNum]=new Rect();
+					if(bNum%9!=0){						
+						boardRect[bNum].left=boardRect[bNum-1].left+x;
+						boardRect[bNum].top=boardRect[bNum-1].top;
+						boardRect[bNum].right=boardRect[bNum-1].right+x;
+						boardRect[bNum].bottom=boardRect[bNum-1].bottom;
+					}
+					else{
+						boardRect[bNum].left=boardRect[bNum-9].left;
+						boardRect[bNum].top=boardRect[bNum-9].top+y;
+						boardRect[bNum].right=boardRect[bNum-9].right;
+						boardRect[bNum].bottom=boardRect[bNum-9].bottom+y;					
+					}
+				}
+								
+				bNum++;
+			}
+		}
+		
+	    
+		//initChessBoard();
+		
+		//游戏中的事件通知。。。。
+		
+	    chessHandler =new Handler(){
+	    	public void handleMessage(Message msg){
+	    		switch(msg.what){
+	    		case 1://AI走棋
+	    		{
+	    			//Message AImsg=new Message();
+	    	       // AImsg.what=1;
+	    	       // ai.getHandler().sendMessage(AImsg);
+	    			chesslogic.Call("AIMOVE", 0, null);
+	    		
+	    	        break;
+	    		}
+	    		case 2://延时显示将军提示
+	    			try{
+	    			    Thread.sleep(1500);
+	    			}catch(InterruptedException e){
+	    				System.out.print(e.toString());
+	    			}
+	    			isCheck=false;
+	    			chesslogic.cb.postInvalidate();
+	    			break;
+	    		case 3://是否重新开始对话框
+	    			try{
+	    				Thread.sleep(3000);
+	    			}catch(InterruptedException e){
+	    				System.out.print(e.toString());
+	    			}
+	    			
+	    			initStatusValue();
+	    			initChessBoard();
+	    			if(gameType == GAMETYPE.PRACTICEGAME)
+	    			{
+
+	    				chesslogic.Call("StartPractice",0,null);
+	    		     
+	    			}
+	    			else
+	    			{
+
+	    				chesslogic.Call("INIT",0,null);
+	    				nServer.gameReady();
+                    }
+	    			postInvalidate();
+	    			/*
+	    			new AlertDialog.Builder(chessMain)
+					.setMessage(R.string.restartMsg)
+					.setPositiveButton(R.string.confirm,new DialogInterface.OnClickListener() {					
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							// TODO Auto-generated method stub	
+							initChessBoard();
+			    			oldFocusPos=-1;
+			    			newFocusPos=-1;
+			    			
+			    			whoWin=-1;
+			    			if(gameType == GAMETYPE.PRACTICEGAME)
+			    			{
+
+			    				chesslogic.Call("StartPractice",0,null);
+			    		     
+			    				
+
+			    			}
+			    			else
+			    			{
+
+			    				chesslogic.Call("INIT",0,null);
+			    				nServer.gameReady();
+		                    }
+			    			chesslogic.cb.postInvalidate();
+			    			
+						    					
+						}
+					})
+					.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {				
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							exit();
+							// TODO Auto-generated method stub
+							
+						}
+					})
+					.show();
+	    			*/
+	    			break;
+	    		case 4: //悔棋
+	    	
+	    			timerStop();
+	    			if(gameType==GAMETYPE.PRACTICEGAME){
+	    				chesslogic.Call("PRACTICERETRACTMOVE", 0, null);
+	    			}
+	    			else if(gameType==GAMETYPE.ONLINEGAME){
+	    				String s = getResources().getString(R.string.waiting);
+	    				showProgressMessagewithoutexit(s);
+	    				chesslogic.Call("REQUESTRETRACTMOVE", 0, null);    				
+	    				
+	    			}
+	    			
+	    			
+	    			break;
+	    		case 5://离开
+	    			if(gameType==GAMETYPE.ONLINEGAME && chesslogic.GetIsGameStarted())
+	    			{
+	    				new AlertDialog.Builder(getChessMain())
+	    				.setMessage(R.string.force_exit)
+	    				.setPositiveButton(R.string.confirm,new DialogInterface.OnClickListener() {					
+	    					@Override
+	    					public void onClick(DialogInterface dialog, int which) {
+	    						// TODO Auto-generated method stub
+	    	                    exit();
+	    					}
+	    				})
+	    				.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {				
+	    					@Override
+	    					public void onClick(DialogInterface dialog, int which) {
+	    						// TODO Auto-generated method stub	
+	    					}
+	    				})
+	    				.show();
+	    			}
+	    			else
+	    			{
+	    				exit();
+	    			}
+                    break;
+	    		case 6://己方掉线提示
+                    String s=r.getString(R.string.mOffline);                  
+                   
+                    ShowToast(s);                   
+                    exit();
+		    	
+		    		break;
+	    		case 7://对方掉线提示
+	    			s=r.getString(R.string.dOffline);
+	    			
+	    			showProgressMessage(s);
+	    			
+	    			break;
+	    		case 8://对方恢复连接提示
+	    			releaseProgressMessage();
+	    			s=r.getString(R.string.resumeConn);
+	    			ShowToast(s);
+	    			break;
+	    		case 9://对方掉线超时
+	    		
+	    		    break;
+
+	    		}        
+	    	}
+	    };
+	    
+	    task=new Runnable(){
+	    	public void run(){
+	    		if(chosedMan>=0){
+	    			if(man[chosedMan].getX()>=0)
+	    				man[chosedMan].setX(-1);
+	    			else
+	    				man[chosedMan].restoreX();//恢复x坐标值
+	    		}
+	    		postInvalidate();
+	    		chessHandler.postDelayed(this, 500);
+	    	}
+	    };
+	    
+	    stepTimerTask=new Runnable(){
+	    	public void run(){
+	    		if(chesslogic.GetIsMyTurn()){
+	    			if(mRoundTime>0){
+	    				mRoundTime--;
+	    			}
+	    		}
+	    		else{
+	    			if(yRoundTime>0){
+	    				yRoundTime--;
+	    			}
+	    		}
+	    		if(stepTimeLimit>0){
+	    			stepTimeLimit--;
+	    		}
+	    		postInvalidate();
+	    		chessHandler.postDelayed(this, 1000);
+	    			    		
+	    	}
+	    };
+	    
+	    readyTimerTask = new Runnable(){
+	    	public void run()
+	    	{
+    			if(time_ready>0&&dReady<2&&dSeat){//在对面有人并且未准备情况下开始计时
+    				readyTimerMsg=String.valueOf(time_ready);
+    				showProgressMessage(readyTimerMsg+"等待对方准备...");
+    				time_ready--;
+    				//postInvalidate();
+    	    		chessHandler.postDelayed(this, 1000);
+    			}
+    			else
+    			{
+    				if(time_ready<15)
+    				   releaseProgressMessage();
+    				//倒计时结束离开游戏
+    				chessHandler.removeCallbacks(readyTimerTask);
+    
+    				
+    			}
+	    		
+	    	}
+	    };
+	    AIThinkingTask = new Runnable()
+	    {
+	    	public void run()
+	    	{
+	    		if(AImove)
+	    		{
+	    			ai_animation_index++;
+	    			postInvalidate();
+	    		}
+	    		chessHandler.postDelayed(this, 1000);
+	    	}
+	    };
+	}
+	
+	public void stepTimerStart(){
+		chessHandler.postDelayed(stepTimerTask, 1000);
+		
+	}
+	public void stepTimerStop(){
+        chessHandler.removeCallbacks(stepTimerTask);
+		    
+	}
+	//对手准备完毕倒计时
+	public void UserReadyTimerStart(){
+		time_ready=15;
+		chessHandler.postDelayed(readyTimerTask, 1000);
+		
+	}
+	public void UserReadyTimerStop(){
+		releaseProgressMessage();
+        chessHandler.removeCallbacks(readyTimerTask);
+		    
+	}
+	//开始AI思考时的计时提示
+	public void aithinkingStart()
+	{
+		ai_animation_index = 0;
+		chessHandler.postDelayed(AIThinkingTask, 1000);
+	}
+	//关闭AI思考时的计时提示
+	public void aithinkingStop()
+	{
+		chessHandler.removeCallbacks(task);
+	}
+	//开始定时器显示棋子选中动画
+	public void timerStart(){
+
+		chessHandler.postDelayed(task, 500);
+		
+	}
+	public void timerStop(){
+
+		chessHandler.removeCallbacks(task);
+		if(chosedMan>=0){			
+			man[chosedMan].restoreX();
+			chosedMan=-1;
+		}
+		    
+	}
+	
+	public void initStatusValue(){
+		oldFocusPos=-1;
+		newFocusPos=-1;
+		chosedMan=-1;
+		whoWin=-1;
+		mRoundTime=-1;
+		yRoundTime=-1;
+		stepAddedTime=-1;
+		stepTimeLimit=-1;
+	    timeLimit=-1;
+        sideFlag=-1;
+	    feedbackPos=-1;
+        dReady=-1;
+        mReady=-1;
+   
+		displayTableID=false;
+	
+		ismOffline=false;
+		isdOffline=false;
+		
+		pressRetract=false;
+		pressLeave=false;
+		
+		firstInitNetPlay=true;      
+		AImove=false;
+		isGameOver=false;
+		isCheck=false;
+	}
+	
+	public void setGameTime(int roundTime,int stepAddedTime,int stepTimeLimit){
+		this.mRoundTime=roundTime;
+		this.yRoundTime=roundTime;
+		this.stepAddedTime=stepAddedTime;
+		this.stepTimeLimit=stepTimeLimit;
+		this.timeLimit=stepTimeLimit;
+		
+	}
+	
+	public void setAIThreadId(long threadId){
+		this.AIThreadId=threadId;
+	}
+	public void resetTimeLimit(){
+		
+		if(chesslogic.GetIsMyTurn()){
+			if(yRoundTime+stepAddedTime>=timeLimit){
+				stepTimeLimit=timeLimit;
+			}
+			else if(yRoundTime>0)
+				stepTimeLimit=yRoundTime+stepAddedTime;
+			else
+				stepTimeLimit=stepAddedTime;
+			
+		}
+		else{
+			if(mRoundTime+stepAddedTime>timeLimit){
+				stepTimeLimit=timeLimit;
+			}
+			else if(mRoundTime>0)
+				stepTimeLimit=mRoundTime+stepAddedTime;
+			else
+				stepTimeLimit=stepAddedTime;
+			
+		}
+		
+		/*
+		if((chesslogic.GetIsMyTurn()&&mRoundTime+stepAddedTime>timeLimit)
+		  ||(!chesslogic.GetIsMyTurn()&&yRoundTime+stepAddedTime>timeLimit))
+		{
+		
+		          stepTimeLimit=timeLimit;	
+			
+		}
+		else if(chesslogic.GetIsMyTurn()&&mRoundTime>0){
+			stepTimeLimit=mRoundTime+stepAddedTime;
+		}
+		else if(!chesslogic.GetIsMyTurn()&&yRoundTime>0){
+			stepTimeLimit=mRoundTime+stepAddedTime;
+		}
+		else
+			stepTimeLimit=stepAddedTime;
+		*/		  
+		
+		
+	}
+	
+	public void setmReady(int mReady){
+		this.mReady=mReady;
+	}
+	
+	public void setPressRetract(boolean pressRetract){
+		this.pressRetract=pressRetract;
+	}
+	public void setEnterGame(boolean enterGame){
+		this.enterGame=enterGame;
+	}
+    public void setdSeat(boolean dSeat){
+    	this.dSeat=dSeat;
+    }
+    public void setdReady(int dReady){
+    	this.dReady=dReady;
+    }
+	public void setDisplayTableID(boolean displayTableID){
+		this.displayTableID=displayTableID;
+	}
+	public void setOldFocusPos(int oldFocusPos){
+		this.oldFocusPos=oldFocusPos;
+	}
+	public void setNewFocusPos(int newFocusPos){
+		this.newFocusPos=newFocusPos;
+	}
+	public void setChosedMan(int chosedMan){
+		this.chosedMan=chosedMan;
+	}
+
+	public void setAIMove(boolean AImove){
+		this.AImove=AImove;
+	}
+
+	public void setGameOver(boolean isGameOver){
+		this.isGameOver=isGameOver;		
+	}
+	public void setIsCheck(boolean isCheck){
+		this.isCheck=isCheck;
+	}
+	public void setWhoWin(int whoWin){
+		this.whoWin=whoWin;
+	}
+	public void setSideFlag(int sideFlag){
+		this.sideFlag=sideFlag;
+	}
+    public void setIsmOffline(boolean ismOffline){
+    	this.ismOffline=ismOffline;
+    }
+    public void setIsdOffline(boolean isdOffline){
+    	this.isdOffline=isdOffline;
+    }
+	
+	public chess getChessMain(){
+		return chessMain;
+	}
+	
+	public chessMan getChessMan(int manIndex){
+		return man[manIndex];
+	}
+	public boolean getAIMove(){
+		return AImove;
+	}
+	public Handler getHandler(){
+		return chessHandler;
+	}
+	public ChessLogicJNI getChessLogic(){
+		return chesslogic;
+	}
+	public NetServer getnServer(){
+		return nServer;
+	}
+	public int getSideFlag(){
+		return sideFlag;
+	}
+
+	
+
+	
+	public void onDraw(Canvas canvas){
+		canvas.drawBitmap(boardBitmap,0,0,new Paint());
+		
+        //判断己方走棋是在否在3步以上，GetStepCount获取的是双方总的走步数
+		if(((sideFlag==0||gameType==GAMETYPE.PRACTICEGAME)&&chesslogic.GetStepCount()-2<3)
+ 			   ||((gameType==GAMETYPE.ONLINEGAME&&sideFlag==1)&&chesslogic.GetStepCount()-3<3)
+ 			   ||(gameType==GAMETYPE.PRACTICEGAME&&AImove)
+	           ||(gameType==GAMETYPE.ONLINEGAME&&!chesslogic.GetIsGameStarted()))
+			    canvas.drawBitmap(retract3_Bitmap, retractRect.left,retractRect.top,new Paint());			
+	    else{	   
+			if(pressRetract){
+				canvas.drawBitmap(retract2_Bitmap,retractRect.left,retractRect.top,new Paint());
+			}
+			else{
+				canvas.drawBitmap(retract1_Bitmap, retractRect.left,retractRect.top, new Paint());
+			}
+			
+		}
+				
+		
+		if(pressLeave){
+			canvas.drawBitmap(leave2_Bitmap,leaveRect.left,leaveRect.top,new Paint());
+		}		
+		else{
+			canvas.drawBitmap(leave1_Bitmap, leaveRect.left,leaveRect.top,new Paint());
+		}
+		if(gameType==GAMETYPE.ONLINEGAME){//显示对方和己方的头像
+			if(enterGame){
+				canvas.drawBitmap(head1_Bitmap,convertPX((int)r.getDimension(R.dimen.m_headBpPos_X)),convertPY((int)r.getDimension(R.dimen.m_headBpPos_Y)),new Paint());
+				if(dSeat){
+					canvas.drawBitmap(head1_Bitmap,convertPX((int)r.getDimension(R.dimen.d_headBpPos_X)),convertPY((int)r.getDimension(R.dimen.d_headBpPos_Y)),new Paint());
+				}
+				
+			}
+			if(dReady==2&&!chesslogic.GetIsGameStarted())
+			    canvas.drawBitmap(okBitmap, convertPX((int)r.getDimension(R.dimen.d_headBpPos_X)),convertPY((int)r.getDimension(R.dimen.d_headBpPos_Y))+ headHeight*2/3,new Paint());
+			if(mReady==2&&!chesslogic.GetIsGameStarted())
+				canvas.drawBitmap(okBitmap, convertPX((int)r.getDimension(R.dimen.m_headBpPos_X)),convertPY((int)r.getDimension(R.dimen.m_headBpPos_Y))+ headHeight*2/3,new Paint());
+		
+		}
+		
+		if(gameType==GAMETYPE.PRACTICEGAME){
+			//if(AImove == true)
+			//{
+				//绘制计时图片
+				canvas.drawBitmap(timerBitmap,convertPX((int)r.getDimension(R.dimen.timerBpPos_X)),convertPY((int)r.getDimension(R.dimen.timerBpPos_Y)),new Paint());
+				Paint timetxt=new Paint();
+				timetxt.setTextSize(convertPY((int)r.getDimension(R.dimen.timerTextSize)));
+				timetxt.setColor(Color.rgb(89,32,3));
+				if(screenWidth == 240 && screenHeight == 320)
+				{
+					timetxt.setTextSize(11);
+				}
+				else
+				{
+					timetxt.setFakeBoldText(true);	
+				}
+				//调整时间文本在计时图片里的位置
+				int roundY=convertPY((int)r.getDimension(R.dimen.timerBpPos_Y))+
+		           timerBp_Height*((int)r.getDimension(R.dimen.roundTimerTextPos_Y)-(int)r.getDimension(R.dimen.timerBpPos_Y))/
+		           (int)r.getDimension(R.dimen.timerBp_Height);
+				int stepY=convertPY((int)r.getDimension(R.dimen.timerBpPos_Y))+
+				            timerBp_Height*((int)r.getDimension(R.dimen.stepTimerTextPos_Y)-(int)r.getDimension(R.dimen.timerBpPos_Y))/
+		                    (int)r.getDimension(R.dimen.timerBp_Height);
+				canvas.drawText("电脑思考:", convertPX((int)r.getDimension(R.dimen.stepTimerTextPos_X)),roundY,timetxt);
+				int time=0;
+                    time=ai_animation_index;
+				canvas.drawText(Int2Time(time),
+				  	    convertPX((int)r.getDimension(R.dimen.stepTimerTextPos_X))+convertPX((int)r.getDimension(R.dimen.timerTextInterval)),
+				  	    stepY,
+				  	    timetxt);
+			//}
+		}
+		if(is_ready_timer)
+		{
+			//绘制计时图片
+			canvas.drawBitmap(timerBitmap,convertPX((int)r.getDimension(R.dimen.timerBpPos_X)),convertPY((int)r.getDimension(R.dimen.timerBpPos_Y)),new Paint());
+			Paint timetxt=new Paint();
+			timetxt.setTextSize(convertPY((int)r.getDimension(R.dimen.timerTextSize)));
+			timetxt.setColor(Color.rgb(89,32,3));		
+			timetxt.setFakeBoldText(true);
+			
+			//调整时间文本在计时图片里的位置
+			int roundY=convertPY((int)r.getDimension(R.dimen.timerBpPos_Y))+
+			           timerBp_Height*((int)r.getDimension(R.dimen.roundTimerTextPos_Y)-(int)r.getDimension(R.dimen.timerBpPos_Y))/
+			           (int)r.getDimension(R.dimen.timerBp_Height);
+			int stepY=convertPY((int)r.getDimension(R.dimen.timerBpPos_Y))+
+			            timerBp_Height*((int)r.getDimension(R.dimen.stepTimerTextPos_Y)-(int)r.getDimension(R.dimen.timerBpPos_Y))/
+	                    (int)r.getDimension(R.dimen.timerBp_Height);
+			//canvas.drawText("请举手:", convertPX((int)r.getDimension(R.dimen.roundTimerTextPos_X)),roundY, timetxt);
+			//int time=0;
+			//if(time_ready>0){
+            //    time=time_ready;
+
+			//}		
+			//canvas.drawText(Int2Time(time),
+			//		  	    convertPX((int)r.getDimension(R.dimen.stepTimerTextPos_X))+convertPX((int)r.getDimension(R.dimen.timerTextInterval)),
+			//		  	    stepY,
+			//		  	    timetxt);			
+		}
+		
+		if(displayTableID){
+			Paint txtpaint=new Paint();
+			txtpaint.setTextSize(30);
+			txtpaint.setColor(Color.RED);		
+			txtpaint.setFakeBoldText(true);
+			canvas.drawText(String.valueOf(nServer.mTableID), 50, 100, txtpaint);
+		}
+		if(chesslogic.GetIsGameStarted()||gameType==GAMETYPE.PRACTICEGAME)
+		{	
+			if(gameType==GAMETYPE.ONLINEGAME&&!isGameOver){
+				//绘制计时图片
+				canvas.drawBitmap(timerBitmap,convertPX((int)r.getDimension(R.dimen.timerBpPos_X)),convertPY((int)r.getDimension(R.dimen.timerBpPos_Y)),new Paint());
+				Paint timetxt=new Paint();
+				timetxt.setTextSize(convertPY((int)r.getDimension(R.dimen.timerTextSize)));
+				timetxt.setColor(Color.rgb(89,32,3));		
+				timetxt.setFakeBoldText(true);
+				
+				//调整时间文本在计时图片里的位置
+				int roundY=convertPY((int)r.getDimension(R.dimen.timerBpPos_Y))+
+				           timerBp_Height*((int)r.getDimension(R.dimen.roundTimerTextPos_Y)-(int)r.getDimension(R.dimen.timerBpPos_Y))/
+				           (int)r.getDimension(R.dimen.timerBp_Height);
+				int stepY=convertPY((int)r.getDimension(R.dimen.timerBpPos_Y))+
+				            timerBp_Height*((int)r.getDimension(R.dimen.stepTimerTextPos_Y)-(int)r.getDimension(R.dimen.timerBpPos_Y))/
+		                    (int)r.getDimension(R.dimen.timerBp_Height);
+				canvas.drawText("局时:", convertPX((int)r.getDimension(R.dimen.roundTimerTextPos_X)),roundY, timetxt);
+				canvas.drawText("步时:", convertPX((int)r.getDimension(R.dimen.stepTimerTextPos_X)),stepY,timetxt);
+				int time=0;
+				if(stepTimeLimit>0){
+                    time=stepTimeLimit;
+
+				}		
+				canvas.drawText(Int2Time(time),
+						  	    convertPX((int)r.getDimension(R.dimen.stepTimerTextPos_X))+convertPX((int)r.getDimension(R.dimen.timerTextInterval)),
+						  	    stepY,
+						  	    timetxt);
+                time=0;
+				if(chesslogic.GetIsMyTurn()){				
+					if(mRoundTime>0){
+						time=mRoundTime;
+					}
+					canvas.drawBitmap(head2_Bitmap,convertPX((int)r.getDimension(R.dimen.m_headBpPos_X)),convertPY((int)r.getDimension(R.dimen.m_headBpPos_Y)),new Paint());
+				}
+				else{
+
+					if(yRoundTime>0){
+						time=yRoundTime;
+						canvas.drawBitmap(head2_Bitmap,convertPX((int)r.getDimension(R.dimen.d_headBpPos_X)),convertPY((int)r.getDimension(R.dimen.d_headBpPos_Y)),new Paint());
+					}					
+				}
+				canvas.drawText(Int2Time(time),
+				        convertPX((int)r.getDimension(R.dimen.roundTimerTextPos_X))+convertPX((int)r.getDimension(R.dimen.timerTextInterval)),
+				        roundY,
+				         timetxt);
+				
+		
+					
+			}
+            //高亮显示点中区域
+			if(feedbackPos>=0){
+				canvas.drawBitmap(feedback_hBitmap, boardRect[feedbackPos].left,0,new Paint());
+				canvas.drawBitmap(feedback_wBitmap, 0,boardRect[feedbackPos].top,new Paint());
+			}
+			
+					
+			
+		for(int i=0;i<32;i++){
+			if(man[i].getX()>=0){
+				int boardNum = 0;
+				
+				if((sideFlag==0)||gameType==GAMETYPE.PRACTICEGAME)
+				{	
+					boardNum = 89 - (man[i].getX()+9*man[i].getY());
+				}
+				else
+				{
+					boardNum = man[i].getX()+9*man[i].getY();
+
+				}
+				canvas.drawBitmap(man[i].getBitmap(), boardRect[boardNum].left,boardRect[boardNum].top,new Paint());			    				
+			}
+			
+		}
+				
+		if(oldFocusPos>=0&&newFocusPos>=0){				
+			canvas.drawBitmap(focusBitmap, boardRect[oldFocusPos].left,boardRect[oldFocusPos].top, new Paint());
+		    canvas.drawBitmap(focusBitmap, boardRect[newFocusPos].left,boardRect[newFocusPos].top, new Paint());
+		}
+		
+		if(isCheck){
+		
+			canvas.drawBitmap(checkBitmap,
+					          screenWidth/2-checkBp_Width/2,
+					          screenHeight/2-checkBp_Height/2,
+					          new Paint());
+			
+			Message msg=new Message();
+			msg.what=2;
+			chessHandler.sendMessage(msg);
+		}
+
+		}
+		if(isGameOver&&(enterGame||gameType==GAMETYPE.PRACTICEGAME)){
+			//message:game over!
+		    
+			if(whoWin==0)
+				canvas.drawBitmap(youWinBitmap,
+						          screenWidth/2-winORloseBp_Width/2,
+						          screenHeight/2-winORloseBp_Height/2,
+						          new Paint());
+			else if(whoWin==1)
+				canvas.drawBitmap(youLoseBitmap, 
+						          screenWidth/2-winORloseBp_Width/2,
+						          screenHeight/2-winORloseBp_Height/2,
+						          new Paint());
+						
+			Message msg=new Message();
+			msg.what=3;
+			chessHandler.sendMessage(msg);
+			 			
+			postInvalidate();
+			
+		}			
+		
+	}
+	
+	
+
+	@Override
+	public boolean onTouchEvent(MotionEvent event){
+		// TODO Auto-generated method stub
+		super.onTouchEvent(event);
+		
+		int cx=(int)event.getX();
+     	int cy=(int)event.getY();
+     	int i;
+		
+        if(event.getAction()==MotionEvent.ACTION_MOVE){
+        	 if(!ismOffline&&!isdOffline&&((gameType == GAMETYPE.PRACTICEGAME&&!AImove)
+        	    ||(gameType==GAMETYPE.ONLINEGAME&&chesslogic.GetIsMyTurn()))){
+
+             	for(i=0;i<90;i++){
+     				if(boardRect[i].contains(cx,cy)){			
+     					break;
+     				}
+     			}
+             	if(i<90){
+             		feedbackPos=i;
+             		postInvalidate();
+             	}
+        	 }
+        	 else{
+        		 feedbackPos=-1;
+        		 postInvalidate();
+        	 }
+        	
+        	
+        	
+        }
+        else if(event.getAction()==MotionEvent.ACTION_UP){       
+        		feedbackPos=-1;
+               
+			/*
+			if (cx < chessboardImageCodOriginX || cx > chessboardImageCodEndX
+					|| cy < chessboardImageCodOriginY || cy > chessboardImageCodEndY) 
+			{
+				return super.onTouchEvent(event);
+			}
+			
+
+			
+			if (cx < chessboardImageCodOriginX || cx > chessboardImageCodEndX
+					|| cy < chessboardImageCodOriginY || cy > chessboardImageCodEndY) {
+				return super.onTouchEvent(event);
+			}*/
+			if(!ismOffline&&!isdOffline){
+				for(i=0;i<90;i++){
+					if(boardRect[i].contains(cx,cy)){			
+						break;
+					}
+				}
+				if(i<90){
+					//根据棋盘区域编号获得该区域坐标
+					
+				    if(gameType == GAMETYPE.PRACTICEGAME&&!AImove)
+				    {
+	                 
+				    	chesslogic.Call("PracticeClick", 89-i, null);
+				    	 //如果后台逻辑完成了走棋行为就换AI走棋
+				    	if(AImove){								                    
+							//AImove=true;						
+						          //通知AI走棋
+							Message msg=new Message();
+							msg.what=1;
+							chessHandler.sendMessage(msg);			
+
+						}
+				    }
+				    else 
+				    {///
+				    	
+				    	if(sideFlag==1){
+	                    	chesslogic.Call("USERCLICK", i, null);
+	                    }
+	                    else
+				    	    chesslogic.Call("USERCLICK", 89-i, null);	
+
+				    }
+			      		  					
+				    
+				}
+				
+			}
+			
+			postInvalidate();
+        }
+		
+        else if(event.getAction()==MotionEvent.ACTION_DOWN){
+		         
+             if(retractRect.contains(cx,cy)){      	    
+            	 if(((sideFlag==0||gameType==GAMETYPE.PRACTICEGAME)&&chesslogic.GetStepCount()-2<3)
+           			   ||((gameType==GAMETYPE.ONLINEGAME&&sideFlag==1)&&chesslogic.GetStepCount()-3<3)
+           			   ||(gameType==GAMETYPE.PRACTICEGAME&&AImove)
+           			   ||(gameType==GAMETYPE.ONLINEGAME&&!chesslogic.GetIsGameStarted()))
+            		 return true;
+            	 
+        	        pressRetract=true;
+        	    	Message retractMsg=new Message();
+        			retractMsg.what=4;
+        			chessHandler.sendMessage(retractMsg);
+        	          		       		
+             }	
+			else if(leaveRect.contains(cx,cy)){
+				pressLeave=true;
+				Message leaveMsg=new Message();
+				leaveMsg.what=5;
+				chessHandler.sendMessage(leaveMsg);
+				
+			}
+			else{
+				if(!ismOffline&&!isdOffline&&((gameType == GAMETYPE.PRACTICEGAME&&!AImove)
+		        	    ||(gameType==GAMETYPE.ONLINEGAME&&chesslogic.GetIsMyTurn()))){
+					for(i=0;i<90;i++){
+						if(boardRect[i].contains(cx,cy)){			
+							break;
+						}
+					}
+					if(i<90){
+						feedbackPos=i;
+					}
+					}
+					postInvalidate();	
+				}
+			
+						
+		}
+		
+		return true;
+	}
+	
+	public void initChessBoard(){
+			
+			
+		/*棋子编码manCode
+		 *0,		//红帅
+	      1,		//仕
+	      2,		//相
+	      3,		//马
+	      4,		//车
+	      5,		//炮
+	      6,		//兵
+
+	      8,		//非象棋子，
+	
+	     10,		//黑将
+	     11,		//士
+	     12,		//象
+	     13,		//马
+	     14,		//车
+	     15,		//炮
+	     16,		//卒
+		 
+		*/
+	          
+		int pieceType[]={4,3,2,1,0,1,2,3,4,5,5,6,6,6,6,6,16,16,16,16,16,15,15,14,13,12,11,10,11,12,13,14};
+		//按照pieceType顺序初始化棋子
+		for(int i=0;i<32;i++){
+			man[i]=new chessMan(manBitmap[pieceType[i]],pieceType[i]);
+			
+		}	
+		//defaultPos 存储棋盘初始时的棋子坐标，坐标X=defaultPos[0][]，坐标Y=defaultPos[1][]
+		int defaultPos[][] = {{0, 1, 2, 3, 4, 5, 6, 7, 8, 1, 7, 0, 2, 4, 6, 8, 0, 2, 4, 6, 8, 1, 7, 0, 1, 2, 3, 4, 5, 6, 7, 8},
+				{0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 3, 3, 3, 3, 3, 6, 6, 6, 6, 6, 7, 7, 9, 9, 9, 9, 9, 9, 9, 9, 9}};
+		
+		//将棋子的编号按照defaultPos坐标放入棋盘，根据棋子编号在man[]中得到对应的棋子
+		for(int i=0;i<32;i++){
+		
+			//board[defaultPos[1][i]][defaultPos[0][i]]=i;
+			man[i].setX(defaultPos[0][i]);
+			man[i].setY(defaultPos[1][i]);
+	
+		    
+       
+		}
+		
+		
+	}
+	public void initBitmap(Context context){
+        boardBitmap=BitmapFactory.decodeResource(context.getResources(), R.drawable.chessboard);
+        boardBitmap = ((chess)context).zoomImage(boardBitmap,screenWidth,screenHeight);
+        focusBitmap=BitmapFactory.decodeResource(context.getResources(), R.drawable.focus);
+        focusBitmap=((chess)context).zoomImage(focusBitmap, pieceSize, pieceSize);
+    	checkBitmap=BitmapFactory.decodeResource(context.getResources(), R.drawable.check);
+    	youWinBitmap=BitmapFactory.decodeResource(context.getResources(), R.drawable.youwin);
+    	youLoseBitmap=BitmapFactory.decodeResource(context.getResources(), R.drawable.youlose);
+        head1_Bitmap=BitmapFactory.decodeResource(context.getResources(), R.drawable.head1);
+        head1_Bitmap=((chess)context).zoomImage(head1_Bitmap, headWidth, headHeight);
+        head2_Bitmap=BitmapFactory.decodeResource(context.getResources(), R.drawable.head2);
+        head2_Bitmap=((chess)context).zoomImage(head2_Bitmap, headWidth, headHeight);
+        leave1_Bitmap=BitmapFactory.decodeResource(context.getResources(), R.drawable.leave1);
+        leave2_Bitmap=BitmapFactory.decodeResource(context.getResources(), R.drawable.leave2);
+        retract1_Bitmap=BitmapFactory.decodeResource(context.getResources(), R.drawable.retract1);
+        retract2_Bitmap=BitmapFactory.decodeResource(context.getResources(), R.drawable.retract2);
+        retract3_Bitmap=BitmapFactory.decodeResource(context.getResources(), R.drawable.retract3);
+        timerBitmap=BitmapFactory.decodeResource(context.getResources(), R.drawable.timer);
+        timerBitmap=((chess)context).zoomImage(timerBitmap, timerBp_Width, timerBp_Height);
+        feedback_hBitmap=BitmapFactory.decodeResource(context.getResources(), R.drawable.feedback_h);
+        feedback_wBitmap=BitmapFactory.decodeResource(context.getResources(), R.drawable.feedback_w);
+        okBitmap=BitmapFactory.decodeResource(context.getResources(),R.drawable.ok);
+	
+		manBitmap=new Bitmap[17];
+		manBitmap[0]=BitmapFactory.decodeResource(context.getResources(), R.drawable.king_r);
+		manBitmap[0]=((chess)context).zoomImage(manBitmap[0],pieceSize, pieceSize);
+		manBitmap[1]=BitmapFactory.decodeResource(context.getResources(), R.drawable.shi_r);
+		manBitmap[1]=((chess)context).zoomImage(manBitmap[1], pieceSize, pieceSize);
+		manBitmap[2]=BitmapFactory.decodeResource(context.getResources(), R.drawable.xiang_r);
+		manBitmap[2]=((chess)context).zoomImage(manBitmap[2], pieceSize, pieceSize);
+		manBitmap[3]=BitmapFactory.decodeResource(context.getResources(), R.drawable.horse_r);
+		manBitmap[3]=((chess)context).zoomImage(manBitmap[3], pieceSize, pieceSize);
+		manBitmap[4]=BitmapFactory.decodeResource(context.getResources(), R.drawable.ju_r);
+		manBitmap[4]=((chess)context).zoomImage(manBitmap[4], pieceSize, pieceSize);
+		manBitmap[5]=BitmapFactory.decodeResource(context.getResources(), R.drawable.pao_r);
+		manBitmap[5]=((chess)context).zoomImage(manBitmap[5], pieceSize, pieceSize);
+		manBitmap[6]=BitmapFactory.decodeResource(context.getResources(), R.drawable.bing_r);
+		manBitmap[6]=((chess)context).zoomImage(manBitmap[6], pieceSize, pieceSize);
+		manBitmap[10]=BitmapFactory.decodeResource(context.getResources(),R.drawable.king_b);
+		manBitmap[10]=((chess)context).zoomImage(manBitmap[10], pieceSize, pieceSize);
+		manBitmap[11]=BitmapFactory.decodeResource(context.getResources(),R.drawable.shi_b);
+		manBitmap[11]=((chess)context).zoomImage(manBitmap[11], pieceSize, pieceSize);
+		manBitmap[12]=BitmapFactory.decodeResource(context.getResources(),R.drawable.xiang_b);
+		manBitmap[12]=((chess)context).zoomImage(manBitmap[12], pieceSize, pieceSize);
+		manBitmap[13]=BitmapFactory.decodeResource(context.getResources(),R.drawable.horse_b);
+		manBitmap[13]=((chess)context).zoomImage(manBitmap[13], pieceSize, pieceSize);
+		manBitmap[14]=BitmapFactory.decodeResource(context.getResources(),R.drawable.ju_b);
+		manBitmap[14]=((chess)context).zoomImage(manBitmap[14], pieceSize, pieceSize);
+		manBitmap[15]=BitmapFactory.decodeResource(context.getResources(),R.drawable.pao_b);
+		manBitmap[15]=((chess)context).zoomImage(manBitmap[15], pieceSize, pieceSize);
+		manBitmap[16]=BitmapFactory.decodeResource(context.getResources(),R.drawable.bing_b);
+		manBitmap[16]=((chess)context).zoomImage(manBitmap[16], pieceSize, pieceSize);
+	}
+	
+	public void initPractice(){
+		gameType=GAMETYPE.PRACTICEGAME;
+		chesslogic.Call("StartPractice",0,null);
+
+		//ai.start();
+		chesslogic.cb.postInvalidate();
+	}
+	
+	public void initOnline(){
+		gameType=GAMETYPE.ONLINEGAME;
+
+		if(true){//firstInitNetPlay
+			nServer=new NetServer(chessMain,chesslogic.cb);
+			nServer.doBindService();
+			showProgressMessage("正在查询连接大厅...");
+			firstInitNetPlay=false;
+		}
+		else{
+			nServer.enterGame();
+		}
+		
+		//waitDlg=ProgressDialog.show(chessMain, "", "正在查询连接大厅...",true,true);
+		//ShowToast("正在查询连接大厅");
+	}
+	
+	public void exit(){	
+		
+		UserReadyTimerStop();
+		stepTimerStop();
+		aithinkingStop();
+		timerStop();
+	    releaseProgressMessage();
+	    
+		if(gameType==GAMETYPE.ONLINEGAME){
+			nServer.exitGame();
+			nServer.exitRoom();
+			nServer.doUnbindService();
+		}
+		if(gameType==GAMETYPE.ONLINEGAME&&chesslogic.GetIsGameStarted())
+		{
+		    chesslogic.OnSvrRespSetGameOver();
+		    
+		}
+		else if(gameType==GAMETYPE.PRACTICEGAME){
+			chesslogic.SetPracticeGameOver();
+                  
+		}
+		enterGame=false;
+		chessMain.setContentView(begin_view);
+	}
+	
+	
+	public String Int2Time(int data){
+		String time=" ";
+		int min=data/60;
+		int sec=data%60;
+		if(min!=0){
+			if(min/10!=0){
+				time+=String.valueOf(min);
+			}
+			else{
+				time+="0";
+				time+=String.valueOf(min);
+			}
+		}
+		else{
+			time+="00";
+		}
+		time+=":";
+		if(sec!=0){
+			if(sec/10!=0){
+				time+=String.valueOf(sec);
+			}
+			else{
+				time+="0";
+				time+=String.valueOf(sec);
+			}
+		}
+		else{
+		    time+="00";	
+		}
+		return time;
+		
+	}
+	
+	public void showProgressMessage(String s){
+		if(waitDlg==null){
+			waitDlg=ProgressDialog.show(chessMain, "", s,true,true);
+		}
+		else
+	    waitDlg.setMessage(s);
+		DialogInterface.OnKeyListener okl = new DialogInterface.OnKeyListener()
+		{
+			@Override
+			public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+				// TODO Auto-generated method stub
+				if(event.getAction()==KeyEvent.ACTION_DOWN){
+					if(keyCode==KeyEvent.KEYCODE_BACK)
+						exit();
+				}
+				return false;
+			}
+		} ;
+		waitDlg.setOnKeyListener(okl);	
+	}
+
+	
+	public void releaseProgressMessage(){
+		if(waitDlg!=null){
+			waitDlg.dismiss();
+			waitDlg.cancel();
+			waitDlg=null;
+		}
+	}
+
+	//不响应取消按钮
+	public void showProgressMessagewithoutexit(String s){
+		if(waitDlg==null){
+			waitDlg=ProgressDialog.show(chessMain, "", s,true,true);
+		}
+		else
+			waitDlg.setMessage(s);
+		DialogInterface.OnKeyListener okl = new DialogInterface.OnKeyListener()
+		{
+			@Override
+			public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+				// TODO Auto-generated method stub
+				if(event.getAction()==KeyEvent.ACTION_DOWN){
+					if(keyCode==KeyEvent.KEYCODE_BACK)
+						;
+				}
+				return true;
+			}
+		} ;
+		waitDlg.setOnKeyListener(okl);	
+	}
+	
+
+	public void ShowToast(String s)
+	{
+		Toast t1 = Toast.makeText(getChessMain(), s, Toast.LENGTH_LONG);
+		t1.show();
+	}
+	
+	//以480X800为基准将480x800下的坐标值转换为当前分辨率的坐标值
+	public int convertPX(int basePx){
+		return screenWidth*basePx/(int)r.getDimension(R.dimen.screenBaseWidth);
+	}
+	public int convertPY(int basePy){
+		return screenHeight*basePy/(int)r.getDimension(R.dimen.screenBaseHeight);
+	}
+	
+    public void SetReadyTimer(boolean b)
+    {
+    	if(b == true)
+    	{
+    		UserReadyTimerStart();
+    	}
+    	else
+    	{
+    		UserReadyTimerStop();
+    	}
+    	this.is_ready_timer = b;
+    }
+    
+    public chessBegin getBeginView()
+    {
+    	return this.begin_view;
+    }
+}
+
+/*
+class AIMOVE extends Thread {
+
+    private chessBoard cb;
+    private Looper myLooper;
+    private Handler AIHandler;
+    
+    public AIMOVE(chessBoard cb){                                        
+    	this.cb=cb;
+    }
+    
+    public Handler getHandler(){
+    	return AIHandler;
+    }
+    
+    public void quit(){
+    	myLooper.quit();
+    }
+    public void run() {
+    	Looper.prepare();
+    	myLooper=Looper.myLooper();
+    	AIHandler=new Handler(){
+    	
+        	public void handleMessage(Message msg){
+        		switch(msg.what){
+        		case 1:
+    			    if(cb.gameType == GAMETYPE.PRACTICEGAME)
+    			    {
+                      			    
+    	    			cb.getChessLogic().Call("AIMOVE", 0, null);
+
+    	    		 	cb.setAIMove(false);
+    			    }
+    			    else
+    			    {
+    			    	//等待对手走棋后
+    			    	//从服务器获取新的棋盘矩阵
+    			    }
+        			cb.postInvalidate();
+        		}
+        	}
+        };
+        
+    	Looper.loop(); 
+    	cb.releaseProgressMessage();
+    
+
+
+    }
+
+}
+*/
+

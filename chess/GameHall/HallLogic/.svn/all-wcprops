@@ -1,0 +1,101 @@
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/code_svn/xl_download/!svn/ver/21494/xl_embed/ysh_mobile/ysh_game/chess/GameHall/HallLogic
+END
+HallLogic.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/code_svn/xl_download/!svn/ver/21152/xl_embed/ysh_mobile/ysh_game/chess/GameHall/HallLogic/HallLogic.cpp
+END
+GameDirInfoMgr.h
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/code_svn/xl_download/!svn/ver/20587/xl_embed/ysh_mobile/ysh_game/chess/GameHall/HallLogic/GameDirInfoMgr.h
+END
+StatisticsMgr.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/code_svn/xl_download/!svn/ver/20587/xl_embed/ysh_mobile/ysh_game/chess/GameHall/HallLogic/StatisticsMgr.cpp
+END
+LoginUserStat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/code_svn/xl_download/!svn/ver/20587/xl_embed/ysh_mobile/ysh_game/chess/GameHall/HallLogic/LoginUserStat.cpp
+END
+HallLogic.h
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/code_svn/xl_download/!svn/ver/21119/xl_embed/ysh_mobile/ysh_game/chess/GameHall/HallLogic/HallLogic.h
+END
+StatisticsMgr.h
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/code_svn/xl_download/!svn/ver/20587/xl_embed/ysh_mobile/ysh_game/chess/GameHall/HallLogic/StatisticsMgr.h
+END
+LoginUserStat.h
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/code_svn/xl_download/!svn/ver/20587/xl_embed/ysh_mobile/ysh_game/chess/GameHall/HallLogic/LoginUserStat.h
+END
+GameSession.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/code_svn/xl_download/!svn/ver/21216/xl_embed/ysh_mobile/ysh_game/chess/GameHall/HallLogic/GameSession.cpp
+END
+GameNetEventHandler.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/code_svn/xl_download/!svn/ver/21494/xl_embed/ysh_mobile/ysh_game/chess/GameHall/HallLogic/GameNetEventHandler.cpp
+END
+GameSession.h
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/code_svn/xl_download/!svn/ver/21138/xl_embed/ysh_mobile/ysh_game/chess/GameHall/HallLogic/GameSession.h
+END
+GameSessionMgr.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/code_svn/xl_download/!svn/ver/20587/xl_embed/ysh_mobile/ysh_game/chess/GameHall/HallLogic/GameSessionMgr.cpp
+END
+HallContext.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/code_svn/xl_download/!svn/ver/21408/xl_embed/ysh_mobile/ysh_game/chess/GameHall/HallLogic/HallContext.cpp
+END
+GameNetEventHandler.h
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/code_svn/xl_download/!svn/ver/20587/xl_embed/ysh_mobile/ysh_game/chess/GameHall/HallLogic/GameNetEventHandler.h
+END
+GameSessionMgr.h
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/code_svn/xl_download/!svn/ver/20587/xl_embed/ysh_mobile/ysh_game/chess/GameHall/HallLogic/GameSessionMgr.h
+END
+HallContext.h
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/code_svn/xl_download/!svn/ver/20587/xl_embed/ysh_mobile/ysh_game/chess/GameHall/HallLogic/HallContext.h
+END
+GameDirInfoMgr.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/code_svn/xl_download/!svn/ver/20587/xl_embed/ysh_mobile/ysh_game/chess/GameHall/HallLogic/GameDirInfoMgr.cpp
+END
