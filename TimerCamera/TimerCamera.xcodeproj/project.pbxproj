@@ -1,0 +1,301 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BE19EBEE15F359B800065448 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE19EBED15F359B800065448 /* UIKit.framework */; };
+		BE19EBF015F359B800065448 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE19EBEF15F359B800065448 /* Foundation.framework */; };
+		BE19EBF215F359B800065448 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE19EBF115F359B800065448 /* CoreGraphics.framework */; };
+		BE19EBF815F359B800065448 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BE19EBF615F359B800065448 /* InfoPlist.strings */; };
+		BE19EBFA15F359B800065448 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BE19EBF915F359B800065448 /* main.m */; };
+		BE19EBFE15F359B800065448 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BE19EBFD15F359B800065448 /* AppDelegate.m */; };
+		BE19EC0115F359B800065448 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE19EC0015F359B800065448 /* ViewController.m */; };
+		BE19EC0415F359B800065448 /* ViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE19EC0215F359B800065448 /* ViewController_iPhone.xib */; };
+		BE19EC0715F359B800065448 /* ViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE19EC0515F359B800065448 /* ViewController_iPad.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		BE19EBE915F359B800065448 /* TimerCamera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimerCamera.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE19EBED15F359B800065448 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		BE19EBEF15F359B800065448 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		BE19EBF115F359B800065448 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		BE19EBF515F359B800065448 /* TimerCamera-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TimerCamera-Info.plist"; sourceTree = "<group>"; };
+		BE19EBF715F359B800065448 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		BE19EBF915F359B800065448 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		BE19EBFB15F359B800065448 /* TimerCamera-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TimerCamera-Prefix.pch"; sourceTree = "<group>"; };
+		BE19EBFC15F359B800065448 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		BE19EBFD15F359B800065448 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		BE19EBFF15F359B800065448 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		BE19EC0015F359B800065448 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		BE19EC0315F359B800065448 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPhone.xib; sourceTree = "<group>"; };
+		BE19EC0615F359B800065448 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPad.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BE19EBE615F359B700065448 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE19EBEE15F359B800065448 /* UIKit.framework in Frameworks */,
+				BE19EBF015F359B800065448 /* Foundation.framework in Frameworks */,
+				BE19EBF215F359B800065448 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BE19EBDE15F359B700065448 = {
+			isa = PBXGroup;
+			children = (
+				BE19EBF315F359B800065448 /* TimerCamera */,
+				BE19EBEC15F359B800065448 /* Frameworks */,
+				BE19EBEA15F359B800065448 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BE19EBEA15F359B800065448 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BE19EBE915F359B800065448 /* TimerCamera.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BE19EBEC15F359B800065448 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BE19EBED15F359B800065448 /* UIKit.framework */,
+				BE19EBEF15F359B800065448 /* Foundation.framework */,
+				BE19EBF115F359B800065448 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BE19EBF315F359B800065448 /* TimerCamera */ = {
+			isa = PBXGroup;
+			children = (
+				BE19EBFC15F359B800065448 /* AppDelegate.h */,
+				BE19EBFD15F359B800065448 /* AppDelegate.m */,
+				BE19EBFF15F359B800065448 /* ViewController.h */,
+				BE19EC0015F359B800065448 /* ViewController.m */,
+				BE19EC0215F359B800065448 /* ViewController_iPhone.xib */,
+				BE19EC0515F359B800065448 /* ViewController_iPad.xib */,
+				BE19EBF415F359B800065448 /* Supporting Files */,
+			);
+			path = TimerCamera;
+			sourceTree = "<group>";
+		};
+		BE19EBF415F359B800065448 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BE19EBF515F359B800065448 /* TimerCamera-Info.plist */,
+				BE19EBF615F359B800065448 /* InfoPlist.strings */,
+				BE19EBF915F359B800065448 /* main.m */,
+				BE19EBFB15F359B800065448 /* TimerCamera-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BE19EBE815F359B700065448 /* TimerCamera */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BE19EC0A15F359B800065448 /* Build configuration list for PBXNativeTarget "TimerCamera" */;
+			buildPhases = (
+				BE19EBE515F359B700065448 /* Sources */,
+				BE19EBE615F359B700065448 /* Frameworks */,
+				BE19EBE715F359B700065448 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TimerCamera;
+			productName = TimerCamera;
+			productReference = BE19EBE915F359B800065448 /* TimerCamera.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BE19EBE015F359B700065448 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+			};
+			buildConfigurationList = BE19EBE315F359B700065448 /* Build configuration list for PBXProject "TimerCamera" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = BE19EBDE15F359B700065448;
+			productRefGroup = BE19EBEA15F359B800065448 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BE19EBE815F359B700065448 /* TimerCamera */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BE19EBE715F359B700065448 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE19EBF815F359B800065448 /* InfoPlist.strings in Resources */,
+				BE19EC0415F359B800065448 /* ViewController_iPhone.xib in Resources */,
+				BE19EC0715F359B800065448 /* ViewController_iPad.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BE19EBE515F359B700065448 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE19EBFA15F359B800065448 /* main.m in Sources */,
+				BE19EBFE15F359B800065448 /* AppDelegate.m in Sources */,
+				BE19EC0115F359B800065448 /* ViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		BE19EBF615F359B800065448 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BE19EBF715F359B800065448 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		BE19EC0215F359B800065448 /* ViewController_iPhone.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BE19EC0315F359B800065448 /* en */,
+			);
+			name = ViewController_iPhone.xib;
+			sourceTree = "<group>";
+		};
+		BE19EC0515F359B800065448 /* ViewController_iPad.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BE19EC0615F359B800065448 /* en */,
+			);
+			name = ViewController_iPad.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		BE19EC0815F359B800065448 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: JINXIN LI (DJJ4XT349N)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: JINXIN LI (DJJ4XT349N)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				PROVISIONING_PROFILE = "D755C29F-9CCB-4582-BE91-806CB7EDAD4D";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D755C29F-9CCB-4582-BE91-806CB7EDAD4D";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BE19EC0915F359B800065448 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: JINXIN LI (DJJ4XT349N)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: JINXIN LI (DJJ4XT349N)";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "D755C29F-9CCB-4582-BE91-806CB7EDAD4D";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D755C29F-9CCB-4582-BE91-806CB7EDAD4D";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BE19EC0B15F359B800065448 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TimerCamera/TimerCamera-Prefix.pch";
+				INFOPLIST_FILE = "TimerCamera/TimerCamera-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		BE19EC0C15F359B800065448 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TimerCamera/TimerCamera-Prefix.pch";
+				INFOPLIST_FILE = "TimerCamera/TimerCamera-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BE19EBE315F359B700065448 /* Build configuration list for PBXProject "TimerCamera" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BE19EC0815F359B800065448 /* Debug */,
+				BE19EC0915F359B800065448 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BE19EC0A15F359B800065448 /* Build configuration list for PBXNativeTarget "TimerCamera" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BE19EC0B15F359B800065448 /* Debug */,
+				BE19EC0C15F359B800065448 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BE19EBE015F359B700065448 /* Project object */;
+}
