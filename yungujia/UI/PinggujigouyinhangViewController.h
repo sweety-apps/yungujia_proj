@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "PinggujigouyinhangCellViewController.h"
-#import "PinggujigouyinhangCell.h"
+#import "PinggujigouyinhangLV2ViewController.h"
 
 @interface PinggujigouyinhangViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 {
@@ -19,4 +19,10 @@
 
 //controllers
 @property (nonatomic,retain) IBOutlet UINavigationController* navctrl;
+@property (nonatomic,retain) IBOutlet PinggujigouyinhangLV2ViewController* lv2ctrl;
+
+//data
+@property (nonatomic,retain) NSMutableArray* yinhang;
+@property (nonatomic,retain) NSMutableArray* kehujingli;
+
 @end

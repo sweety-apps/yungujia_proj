@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "KaishixunjiaCell1ViewController.h"
 
 @interface RengongxunjiaViewController : UIViewController <UITextFieldDelegate, UITableViewDataSource,UITableViewDelegate>
 

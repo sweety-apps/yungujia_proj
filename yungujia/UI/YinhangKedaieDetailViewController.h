@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "YinhangkedaieDetailCell.h"
 #import "YuegongViewController.h"
+#import "PinggujigouyinhangLV2ViewController.h"
 
 enum YKDD_PICKER_TYPE {
     eDaikuanchengshu = 0,
@@ -20,16 +21,21 @@ enum YKDD_PICKER_TYPE {
 {
     NSArray* _section0Cells;
     NSArray* _section1Cells;
+    NSArray* _section2Cells;
     NSArray* _section0Titles;
     NSArray* _section0Values;
     NSArray* _section1Titles;
     NSArray* _section1Values;
+    NSArray* _section2Titles;
+    NSArray* _section2Values;
     NSArray*    _daikuanchengshuarray;
     NSArray*    _nianlilvarray;
     enum YKDD_PICKER_TYPE _curPicker;
 }
 
 //view
+@property (nonatomic,retain) IBOutlet UIScrollView* scrollView;
+@property (nonatomic,retain) IBOutlet UIView* contentView;
 @property (nonatomic,retain) IBOutlet UIPickerView* picker;
 
 //part1
@@ -45,7 +51,11 @@ enum YKDD_PICKER_TYPE {
 @property (nonatomic,retain) IBOutlet YinhangkedaieDetailCell* nianlilvCell;
 @property (nonatomic,retain) IBOutlet YinhangkedaieDetailCell* yuegongCell;
 
+//part3
+@property (nonatomic,retain) IBOutlet YinhangkedaieDetailCell* kehujingliCell;
+
 //controller
 @property (nonatomic,retain) IBOutlet YuegongViewController* yuegongCtrl;
+@property (nonatomic,retain) IBOutlet PinggujigouyinhangLV2ViewController* kehujingliCtrl;
 
 @end

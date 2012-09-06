@@ -1,24 +1,23 @@
 //
-//  PinggujigouyinhangViewController.m
+//  PinggujigouyinhangLV2ViewController.m
 //  yungujia
 //
-//  Created by Justin Lee on 12-7-23.
+//  Created by lijinxin on 12-9-6.
 //  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
 //
 
-#import "PinggujigouyinhangViewController.h"
+#import "PinggujigouyinhangLV2ViewController.h"
 
-@interface PinggujigouyinhangViewController ()
+@interface PinggujigouyinhangLV2ViewController ()
 
 @end
 
-@implementation PinggujigouyinhangViewController
+@implementation PinggujigouyinhangLV2ViewController
 
 @synthesize navctrl = _navctrl;
-@synthesize lv2ctrl = _lv2ctrl;
 
-@synthesize yinhang = _yinhang;
-@synthesize kehujingli = _kehujingli;
+@synthesize name = _name;
+@synthesize dianhua = _dianhua;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -29,26 +28,21 @@
     return self;
 }
 
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    //self.yinhangctrl = [[PinggujigouyinhangViewController alloc] initWithNibName:@"PinggujigouyinhangViewController" bundle:nil];
-    self.lv2ctrl = [[[PinggujigouyinhangLV2ViewController alloc] initWithNibName:@"PinggujigouyinhangLV2ViewController" bundle:nil] autorelease];
-    self.yinhang = [NSMutableArray arrayWithObjects:@"中国银行",@"农业银行",@"工商银行",@"建设银行",nil];
-    self.kehujingli = [NSMutableArray arrayWithObjects:@"3位客户经理",@"4位客户经理",@"3位客户经理",@"2位客户经理",nil];
+    self.name = [NSMutableArray arrayWithObjects:@"张先勇",@"刘明则",@"李丽",@"金科",nil];
+    self.dianhua = [NSMutableArray arrayWithObjects:@"13902332194(福田支行)",@"13902332194(龙岗支行)",@"13902332194(南山支行)",@"13902332194(福田支行)",nil];
 }
 
 - (void)viewDidUnload
 {
-    //[self.yinhangctrl release];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
-    self.lv2ctrl = nil;
-    self.yinhang = nil;
-    self.kehujingli = nil;
+    self.name = nil;
+    self.dianhua = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -63,8 +57,8 @@
     PinggujigouyinhangCell *cell = (PinggujigouyinhangCell*)[tableView cellForRowAtIndexPath:indexPath];
     if (cell.accessoryType != UITableViewCellAccessoryNone)
     {
-        _lv2ctrl.title = [_yinhang objectAtIndex:indexPath.row];
-        [self.navigationController pushViewController:_lv2ctrl animated:YES];
+        //_yinhangctrl.title = @"入围银行";
+        //[self.navigationController pushViewController:_yinhangctrl animated:YES];
     }
 }
 
@@ -72,7 +66,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [_yinhang count];
+    return [_name count];
 }
 
 // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
@@ -94,8 +88,9 @@
         [temporaryController release];
     }
     
-    cell.left.text = [_yinhang objectAtIndex:row];
-    cell.right.text = [_kehujingli objectAtIndex:row];
+    cell.left.text = [_name objectAtIndex:row];
+    cell.right.text = [_dianhua objectAtIndex:row];
+    cell.right.adjustsFontSizeToFitWidth = YES;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     

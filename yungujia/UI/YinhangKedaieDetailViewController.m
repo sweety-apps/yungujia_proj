@@ -14,6 +14,8 @@
 
 @implementation YinhangKedaieDetailViewController
 
+@synthesize scrollView = _scrollView;
+@synthesize contentView = _contentView;
 @synthesize picker = _picker;
 
 //part1
@@ -29,7 +31,12 @@
 @synthesize nianlilvCell;
 @synthesize yuegongCell;
 
+//part3
+@synthesize kehujingliCell;
+
+//controller
 @synthesize yuegongCtrl = _yuegongCtrl;
+@synthesize kehujingliCtrl = _kehujingliCtrl;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -43,16 +50,6 @@
 
 -(void)dealloc
 {
-    [_daikuanchengshuarray release];
-    [_nianlilvarray release];
-    
-    [_section0Titles release];
-    [_section1Titles release];
-    [_section0Values release];
-    [_section1Values release];
-    
-    [_section0Cells release];
-    [_section1Cells release];
     [super dealloc];
 }
 
@@ -60,6 +57,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    _scrollView.contentSize = _contentView.frame.size;
+    self.kehujingliCtrl = [[[PinggujigouyinhangLV2ViewController alloc] initWithNibName:@"PinggujigouyinhangLV2ViewController" bundle:nil] autorelease];
     
     _section0Titles = [[NSArray arrayWithObjects:@"可贷金额",@"评估价",@"净值",@"税费",@"贷款成数",nil] retain];
     _section0Values = [[NSArray arrayWithObjects:@"234万",@"320万",@"298万",@"23万",@"七成",nil] retain];
@@ -67,9 +66,14 @@
     _section1Titles = [[NSArray arrayWithObjects:@"还款方式",@"贷款年限",@"年利率",@"月供",nil] retain];
     _section1Values = [[NSArray arrayWithObjects:@"等额",@"20年",@"2012/5/21基准6.80%",@"7.633.40",nil] retain];
     
+    _section2Titles = [[NSArray arrayWithObjects:@"联系本行客户经理",nil] retain];
+    _section2Values = [[NSArray arrayWithObjects:@"3位",nil] retain];
+    
     _section0Cells = [[NSArray alloc] initWithObjects:keaijineCell,pinggujiaCell,jingzhiCell,shuifeiCell,daikuangchengshuCell, nil ];
     
     _section1Cells = [[NSArray alloc] initWithObjects:huankuanfangshiCell,daikuannianxianCell,nianlilvCell,yuegongCell, nil ];
+    
+    _section2Cells = [[NSArray alloc] initWithObjects:kehujingliCell, nil ];
     
     _daikuanchengshuarray = [[NSArray alloc] initWithObjects:@"9成",@"8成",@"7成",@"6成",@"5成",@"4成",@"3成",@"2成",@"1成",nil];
     
@@ -82,6 +86,22 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+    self.kehujingliCtrl = nil;
+    
+    [_daikuanchengshuarray release];
+    [_nianlilvarray release];
+    
+    [_section0Titles release];
+    [_section1Titles release];
+    [_section2Titles release];
+    
+    [_section0Values release];
+    [_section1Values release];
+    [_section2Values release];
+    
+    [_section0Cells release];
+    [_section1Cells release];
+    [_section2Cells release];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -93,7 +113,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView              // Default is 1 if not implemented
 {
-    return 2;
+    return 3;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
@@ -106,6 +126,10 @@
     {
         return @"按还款计算";
     }
+    if (section == 2)
+    {
+        return nil;
+    }
     return nil;
 }
 
@@ -114,9 +138,15 @@
     if (section == 0) {
         return 5;
     }
-    else {
+    else if(section == 1)
+    {
         return 4;
     }
+    else if(section == 2)
+    {
+        return 1;
+    }
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -128,7 +158,8 @@
         cell.lblValue.text = [_section0Values objectAtIndex:row];
         return cell;
     }
-    else {
+    else if (indexPath.section == 1)
+    {
         YinhangkedaieDetailCell* cell = [_section1Cells objectAtIndex:row];
         cell.lblTitle.text = [_section1Titles objectAtIndex:row];
         if (row == 0)
@@ -140,7 +171,15 @@
         }
         return cell;
     }
+    else if (indexPath.section == 2)
+    {
+        YinhangkedaieDetailCell* cell = [_section2Cells objectAtIndex:row];
+        cell.lblTitle.text = [_section2Titles objectAtIndex:row];
+        cell.lblValue.text = [_section2Values objectAtIndex:row];
+        return cell;
+    }
     
+    return nil;
 }
 
 #pragma mark - UITableViewDelegate
@@ -163,6 +202,11 @@
     {
         _yuegongCtrl.title = @"月供清单";
         [self.navigationController pushViewController:_yuegongCtrl animated:YES];
+    }
+    else if(indexPath.section == 2 && indexPath.row == 0)
+    {
+        _kehujingliCtrl.title = @"中国银行";
+        [self.navigationController pushViewController:_kehujingliCtrl animated:YES];
     }
     else
     {

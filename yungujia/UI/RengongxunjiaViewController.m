@@ -71,18 +71,24 @@
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-    NSLog(@"%f %f",self.view.center.x,self.view.center.y);
-    [self moveviewsup:-100];
-    NSLog(@"%f %f",self.view.center.x,self.view.center.y);
+    if (textField.tag != 1)
+    {
+        NSLog(@"%f %f",self.view.center.x,self.view.center.y);
+        [self moveviewsup:-160];
+        NSLog(@"%f %f",self.view.center.x,self.view.center.y);
+    }
     
     return YES;
 }
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
-    NSLog(@"%f %f",self.view.center.x,self.view.center.y);
-    [self moveviewsup:100];
-    NSLog(@"%f %f",self.view.center.x,self.view.center.y);
+    if (textField.tag != 1)
+    {
+        NSLog(@"%f %f",self.view.center.x,self.view.center.y);
+        [self moveviewsup:160];
+        NSLog(@"%f %f",self.view.center.x,self.view.center.y);
+    }
     
     return YES;
 }
@@ -99,13 +105,16 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = (UITableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
-    if (cell.accessoryType != UITableViewCellAccessoryNone)
+    if (tableView.tag == 0)
     {
-        //[self.navigationController pushViewController:_kaishixunjiactrl animated:YES];
-        PinggujigouViewController* controller = [[PinggujigouViewController alloc] initWithNibName:@"PinggujigouViewController" bundle:nil];
-        controller.title = @"评估机构";
-        [self.navigationController pushViewController:controller animated:YES];
-        [controller release];
+        if (cell.accessoryType != UITableViewCellAccessoryNone)
+        {
+            //[self.navigationController pushViewController:_kaishixunjiactrl animated:YES];
+            PinggujigouViewController* controller = [[PinggujigouViewController alloc] initWithNibName:@"PinggujigouViewController" bundle:nil];
+            controller.title = @"评估机构";
+            [self.navigationController pushViewController:controller animated:YES];
+            [controller release];
+        }
     }
 }
 
@@ -121,12 +130,52 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    if (tableView.tag == 0)
+    {
+        return 1;
+    }
+    return 2;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return self.chakanCell;
+    if(tableView.tag == 0)
+    {
+        return self.chakanCell;
+    }
+    
+    int row = indexPath.row;
+    
+    static NSString* reuseID = @"KaishixunjiaCell1Cell";
+    
+    KaishixunjiaCell1Cell *cell = (KaishixunjiaCell1Cell*)[tableView dequeueReusableCellWithIdentifier:reuseID];
+    if (cell == nil)
+    {
+        // Create a temporary UIViewController to instantiate the custom cell.
+        KaishixunjiaCell1ViewController* temporaryController = [[KaishixunjiaCell1ViewController alloc] initWithNibName:@"KaishixunjiaCell1ViewController" bundle:nil];
+        // Grab a pointer to the custom cell.
+        cell = (KaishixunjiaCell1Cell *)temporaryController.view;
+        [temporaryController release];
+    }
+    
+    switch (row) {
+        case 0:
+            cell.title.text = @"面积（平米）";
+            cell.detail.placeholder = @"40";
+            break;
+        case 1:
+            cell.title.text = @"成交价（万元）";
+            cell.detail.placeholder = @"52";
+            break;
+            
+        default:
+            break;
+    }
+    
+    cell.detail.delegate = self;
+    cell.detail.tag = 1;
+    
+    return cell;
 }
 
 @end
