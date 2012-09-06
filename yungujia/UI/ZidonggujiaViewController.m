@@ -1,28 +1,31 @@
 //
-//  HuijiaxiangqingViewController.m
+//  ZidonggujiaViewController.m
 //  yungujia
 //
-//  Created by lijinxin on 12-7-23.
-//  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
+//  Created by Lee Justin on 12-9-6.
+//
 //
 
-#import "HuijiaxiangqingViewController.h"
+#import "ZidonggujiaViewController.h"
 
-@interface HuijiaxiangqingViewController ()
+@interface ZidonggujiaViewController ()
 
 @end
 
-@implementation HuijiaxiangqingViewController
+@implementation ZidonggujiaViewController
 
 @synthesize headinfo = _headinfo;
+
 @synthesize navctrl = _navctrl;
-@synthesize xiangqingctrl = _xiangqingctrl;
+@synthesize xjjgctrl = _xjjgctrl;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        self.title = @"自动估价";
+        _headinfo = @"共询223次";
     }
     return self;
 }
@@ -31,7 +34,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.xiangqingctrl = [[PinggujigouxiangqingViewController alloc] initWithNibName:@"PinggujigouxiangqingViewController" bundle:nil];
+    self.xjjgctrl = [[XunjiajieguoViewController alloc] initWithNibName:@"XunjiajieguoViewController" bundle:nil];
 }
 
 - (void)viewDidUnload
@@ -39,7 +42,7 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
-    self.xiangqingctrl = nil;
+    self.xjjgctrl = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -51,18 +54,16 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    HuijiaxiangqingCell *cell = (HuijiaxiangqingCell*)[tableView cellForRowAtIndexPath:indexPath];
+    ZidonggujiaCell *cell = (ZidonggujiaCell*)[tableView cellForRowAtIndexPath:indexPath];
     if (cell.accessoryType != UITableViewCellAccessoryNone)
     {
-        _xiangqingctrl.title = cell.xxpinggu.text;
-        if (_navctrl)
-        {
-            [_navctrl pushViewController:_xiangqingctrl animated:YES];
-        }
-        else
-        {
-            [self.navigationController pushViewController:_xiangqingctrl animated:YES];
-        }
+        //[(AppDelegate*)[UIApplication sharedApplication].delegate makeTabBarHidden:YES];
+        _xjjgctrl.title = @"询价结果";
+        _xjjgctrl.hidesBottomBarWhenPushed = YES;
+        _xjjgctrl.navctrl = _navctrl;
+        [_navctrl pushViewController:_xjjgctrl animated:YES];
+        //[_loudongctrl customBackBtn];
+        
     }
 }
 
@@ -82,20 +83,24 @@
 {
     int row = indexPath.row;
     
-    static NSString* reuseID = @"hxqlv1cell";
+    static NSString* reuseID = @"ZidonggujiaCell";
     
-    HuijiaxiangqingCell *cell = (HuijiaxiangqingCell*)[tableView dequeueReusableCellWithIdentifier:reuseID];
+    ZidonggujiaCell *cell = (ZidonggujiaCell*)[tableView dequeueReusableCellWithIdentifier:reuseID];
     if (cell == nil)
     {
         // Create a temporary UIViewController to instantiate the custom cell.
-        HuijiaxiangqingCellViewController* temporaryController = [[HuijiaxiangqingCellViewController alloc] initWithNibName:@"HuijiaxiangqingCellViewController" bundle:nil];
+        ZidonggujiaCellViewController* temporaryController = [[ZidonggujiaCellViewController alloc] initWithNibName:@"ZidonggujiaCellViewController" bundle:nil];
         // Grab a pointer to the custom cell.
-        cell = (HuijiaxiangqingCell *)temporaryController.view;
+        cell = (ZidonggujiaCell *)temporaryController.view;
         [temporaryController release];
     }
     
     
+    //cell.xxhuayuan.text = @"万科金色家园";
+    //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    
     return cell;
 }
+
 
 @end

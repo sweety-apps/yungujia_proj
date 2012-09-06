@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "GuanzhuLV1CellViewController.h"
+#import "KaishixunjiaViewController.h"
 
 @interface GuanZhuViewController : UIViewController  <UITableViewDelegate, UITableViewDataSource>
 {
@@ -22,5 +23,6 @@
 
 //controllers
 @property (nonatomic,retain) IBOutlet UINavigationController* navctrl;
+@property (nonatomic,retain) IBOutlet KaishixunjiaViewController* xunjiactrl;
 
 @end

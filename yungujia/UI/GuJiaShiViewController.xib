@@ -3,21 +3,21 @@
 	<data>
 		<int key="IBDocument.SystemTarget">1296</int>
 		<string key="IBDocument.SystemVersion">11E53</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2182</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2549</string>
 		<string key="IBDocument.AppKitVersion">1138.47</string>
 		<string key="IBDocument.HIToolboxVersion">569.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">1181</string>
+			<string key="NS.object.0">1498</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBProxyObject</string>
-			<string>IBUINavigationController</string>
-			<string>IBUIViewController</string>
 			<string>IBUIButton</string>
 			<string>IBUINavigationBar</string>
+			<string>IBUINavigationController</string>
 			<string>IBUINavigationItem</string>
 			<string>IBUIView</string>
+			<string>IBUIViewController</string>
 		</array>
 		<array key="IBDocument.PluginDependencies">
 			<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -90,8 +90,7 @@
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 										<int key="IBUIContentHorizontalAlignment">0</int>
 										<int key="IBUIContentVerticalAlignment">0</int>
-										<string key="IBUIHighlightedTitle">估价师回价</string>
-										<string key="IBUINormalTitle">估价师回价</string>
+										<string key="IBUINormalTitle">自动估价</string>
 										<object class="NSColor" key="IBUIHighlightedTitleColor" id="405020236">
 											<int key="NSColorSpace">3</int>
 											<bytes key="NSWhite">MQA</bytes>
@@ -134,7 +133,7 @@
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 										<int key="IBUIContentHorizontalAlignment">0</int>
 										<int key="IBUIContentVerticalAlignment">0</int>
-										<string key="IBUINormalTitle">评估机构</string>
+										<string key="IBUINormalTitle">估价师询价</string>
 										<reference key="IBUIHighlightedTitleColor" ref="405020236"/>
 										<reference key="IBUINormalTitleColor" ref="896521229"/>
 										<reference key="IBUINormalTitleShadowColor" ref="1052703797"/>
@@ -203,19 +202,19 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">btngujiashi</string>
+						<string key="label">btnzidonggujia</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="1029827376"/>
 					</object>
-					<int key="connectionID">35</int>
+					<int key="connectionID">37</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">btnpinggujigou</string>
+						<string key="label">btngujiashi</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="571217923"/>
 					</object>
-					<int key="connectionID">36</int>
+					<int key="connectionID">38</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -325,15 +324,15 @@
 				<string key="22.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="23.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="31.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<real value="2" key="31.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
+				<real value="0.0" key="31.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 				<string key="32.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<real value="0.0" key="32.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
+				<real value="3" key="32.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">36</int>
+			<int key="maxID">38</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -369,19 +368,19 @@
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="btngujiashi">UIButton</string>
-						<string key="btnpinggujigou">UIButton</string>
+						<string key="btnzidonggujia">UIButton</string>
 						<string key="gujiashihuijiactrl">GujiashihuijiaViewController</string>
 						<string key="navbar">UINavigationBar</string>
 						<string key="navctrl">UINavigationController</string>
-						<string key="pinggujigouctrl">PinggujigouViewController</string>
+						<string key="zidonggujictrl">ZidonggujiaViewController</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<object class="IBToOneOutletInfo" key="btngujiashi">
 							<string key="name">btngujiashi</string>
 							<string key="candidateClassName">UIButton</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="btnpinggujigou">
-							<string key="name">btnpinggujigou</string>
+						<object class="IBToOneOutletInfo" key="btnzidonggujia">
+							<string key="name">btnzidonggujia</string>
 							<string key="candidateClassName">UIButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="gujiashihuijiactrl">
@@ -396,9 +395,9 @@
 							<string key="name">navctrl</string>
 							<string key="candidateClassName">UINavigationController</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="pinggujigouctrl">
-							<string key="name">pinggujigouctrl</string>
-							<string key="candidateClassName">PinggujigouViewController</string>
+						<object class="IBToOneOutletInfo" key="zidonggujictrl">
+							<string key="name">zidonggujictrl</string>
+							<string key="candidateClassName">ZidonggujiaViewController</string>
 						</object>
 					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
@@ -525,6 +524,28 @@
 						<string key="minorKey">./Classes/PinggujigouyinhangViewController.h</string>
 					</object>
 				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">ZidonggujiaViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="navctrl">UINavigationController</string>
+						<string key="pgjgctrl">PinggujigouViewController</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="navctrl">
+							<string key="name">navctrl</string>
+							<string key="candidateClassName">UINavigationController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="pgjgctrl">
+							<string key="name">pgjgctrl</string>
+							<string key="candidateClassName">PinggujigouViewController</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/ZidonggujiaViewController.h</string>
+					</object>
+				</object>
 			</array>
 		</object>
 		<int key="IBDocument.localizationMode">0</int>
@@ -541,6 +562,6 @@
 			<string key="topsegrighta.png">{115, 28}</string>
 			<string key="topsegrightn.png">{114, 28}</string>
 		</dictionary>
-		<string key="IBCocoaTouchPluginVersion">1181</string>
+		<string key="IBCocoaTouchPluginVersion">1498</string>
 	</data>
 </archive>

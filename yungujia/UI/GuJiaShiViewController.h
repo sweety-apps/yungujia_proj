@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "GujiashihuijiaViewController.h"
-#import "PinggujigouViewController.h"
+#import "ZidonggujiaViewController.h"
 
 @interface GuJiaShiViewController : UIViewController
 {
@@ -22,9 +22,9 @@
 //controllers
 @property (nonatomic,retain) IBOutlet UINavigationController* navctrl;
 @property (nonatomic,retain) IBOutlet GujiashihuijiaViewController* gujiashihuijiactrl;
-@property (nonatomic,retain) IBOutlet PinggujigouViewController* pinggujigouctrl;
+@property (nonatomic,retain) IBOutlet ZidonggujiaViewController* zidonggujictrl;
 @property (nonatomic,retain) IBOutlet UIButton* btngujiashi;
-@property (nonatomic,retain) IBOutlet UIButton* btnpinggujigou;
+@property (nonatomic,retain) IBOutlet UIButton* btnzidonggujia;
 
 - (IBAction)SelectedSegement:(id)sender;
 - (IBAction)PushSegement0:(id)sender;

@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "PinggujigouyinhangViewController.h"
 #import "PinggujigouyinhangCellViewController.h"
+#import "PinggujigoujianjieViewController.h"
+#import "YinhangkedaichaxunViewController.h"
 
 @interface PinggujigouxiangqingViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 {
@@ -23,5 +25,7 @@
 //controllers
 @property (nonatomic,retain) IBOutlet UINavigationController* navctrl;
 @property (nonatomic,retain) IBOutlet PinggujigouyinhangViewController* yinhangctrl;
+@property (nonatomic,retain) IBOutlet PinggujigoujianjieViewController* jianjiectrl;
+@property (nonatomic,retain) IBOutlet YinhangkedaichaxunViewController* yhkdectrl;
 
 @end

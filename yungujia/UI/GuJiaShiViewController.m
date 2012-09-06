@@ -16,18 +16,18 @@
 
 @synthesize navbar = _navbar;
 @synthesize btngujiashi = _btngujiashi;
-@synthesize btnpinggujigou = _btnpinggujigou;
+@synthesize btnzidonggujia = _btnzidonggujia;
 
 @synthesize navctrl = _navctrl;
 @synthesize gujiashihuijiactrl = _gujiashihuijiactrl;
-@synthesize pinggujigouctrl = _pinggujigouctrl;
+@synthesize zidonggujictrl = _zidonggujictrl;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title = @"估价师";
+        self.title = @"询价纪录";
         //self.tabBarItem.image = [UIImage imageNamed:@"second"];
     }
     return self;
@@ -47,11 +47,11 @@
 
 - (IBAction)SelectedSegement:(id)sender
 {
-    if ([sender isEqual:self.btngujiashi] )
+    if([sender isEqual:self.btnzidonggujia])
     {
         [self PushSegement0:nil];
     }
-    else if([sender isEqual:self.btnpinggujigou])
+    else if ([sender isEqual:self.btngujiashi] )
     {
         [self PushSegement1:nil];
     }
@@ -59,8 +59,21 @@
 
 - (IBAction)PushSegement0:(id)sender
 {
-    self.btngujiashi.selected = true;
-    self.btnpinggujigou.selected = false;
+    self.btngujiashi.selected = NO;
+    self.btnzidonggujia.selected = YES;
+    if (_zidonggujictrl == nil)
+    {
+        self.zidonggujictrl = [[ZidonggujiaViewController alloc]initWithNibName:@"ZidonggujiaViewController" bundle:nil];
+    }
+    [_zidonggujictrl.view removeFromSuperview];
+    _zidonggujictrl.navctrl = _navctrl;
+    [_navctrl.topViewController.view addSubview:_zidonggujictrl.view];
+}
+
+- (IBAction)PushSegement1:(id)sender
+{
+    self.btngujiashi.selected = YES;
+    self.btnzidonggujia.selected = NO;
     if (_gujiashihuijiactrl == nil)
     {
         self.gujiashihuijiactrl = [[GujiashihuijiaViewController alloc]initWithNibName:@"GujiashihuijiaViewController" bundle:nil];
@@ -71,18 +84,7 @@
     //[_navctrl pushViewController:self.sousuoloupanctrl animated:NO];
 }
 
-- (IBAction)PushSegement1:(id)sender
-{
-    self.btngujiashi.selected = false;
-    self.btnpinggujigou.selected = true;
-    if (_pinggujigouctrl == nil)
-    {
-        self.pinggujigouctrl = [[PinggujigouViewController alloc]initWithNibName:@"PinggujigouViewController" bundle:nil];
-    }
-    [_pinggujigouctrl.view removeFromSuperview];
-    _pinggujigouctrl.navctrl = _navctrl;
-    [_navctrl.topViewController.view addSubview:_pinggujigouctrl.view]; 
-}
+
 
 - (void)viewDidUnload
 {

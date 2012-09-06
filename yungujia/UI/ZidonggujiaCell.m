@@ -1,19 +1,19 @@
 //
-//  HuijiaxiangqingCell.m
+//  ZidonggujiaCell.m
 //  yungujia
 //
-//  Created by lijinxin on 12-7-23.
-//  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
+//  Created by Lee Justin on 12-9-6.
+//
 //
 
-#import "HuijiaxiangqingCell.h"
+#import "ZidonggujiaCell.h"
 
-@implementation HuijiaxiangqingCell
+@implementation ZidonggujiaCell
 
-@synthesize icon = _icon;
-@synthesize xxpinggu = _xxpinggu;
-@synthesize jiage = _jiage;
-@synthesize time = _time;
+@synthesize loupan;
+@synthesize xxdongxcengxx;
+@synthesize date;
+@synthesize xxrenhuijia;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

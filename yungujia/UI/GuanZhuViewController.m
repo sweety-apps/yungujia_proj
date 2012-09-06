@@ -17,6 +17,7 @@
 
 @synthesize navbar = _navbar;
 @synthesize navctrl =_navctrl;
+@synthesize xunjiactrl = _xunjiactrl;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -34,6 +35,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self.view addSubview:_navctrl.view];
+    _xunjiactrl = [[KaishixunjiaViewController alloc] initWithNibName:@"KaishixunjiaViewController" bundle:nil];
+    _xunjiactrl.disableLoupanXuanze = YES;
+    
     _navctrl.topViewController.title = @"关注";
     
     UIImage* navBgImg = [UIImage imageNamed:@"naviBarBg.png"];
@@ -47,6 +51,7 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+    self.xunjiactrl = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -62,10 +67,8 @@
     if (cell.accessoryType != UITableViewCellAccessoryNone)
     {
         //[_navctrl pushViewController:_xiangqingctrl animated:YES];
-        HuijiaxiangqingViewController* controller = [[HuijiaxiangqingViewController alloc] initWithNibName:@"HuijiaxiangqingViewController" bundle:nil];
-        controller.title = @"回价详情";
-        [_navctrl pushViewController:controller animated:YES];
-        [controller release];
+        _xunjiactrl.title = @"开始询价";
+        [_navctrl pushViewController:_xunjiactrl animated:YES];
     }
 }
 

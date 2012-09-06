@@ -47,9 +47,9 @@
     
     CGPoint pt = CGPointMake(_tabBarBg.frame.origin.x, _tabBarBg.frame.origin.y) ;
     
-    _btnImagesNormal = [[NSArray arrayWithObjects:@"xunjia_normal",@"guanzhu_normal",@"gujiashi_normal",@"gengduo_normal", nil]retain];
-    _btnImagesHighlighted = [[NSArray arrayWithObjects:@"xunjia_pushed",@"guanzhu_pushed",@"gujiashi_pushed",@"gengduo_pushed", nil]retain];
-    _btnImagesSelected = [[NSArray arrayWithObjects:@"xunjia_actived",@"guanzhu_actived",@"gujiashi_actived",@"gengduo_actived", nil]retain];
+    _btnImagesNormal = [[NSArray arrayWithObjects:@"xunjia_normal",@"gujiashi_normal",@"guanzhu_normal",@"gengduo_normal", nil]retain];
+    _btnImagesHighlighted = [[NSArray arrayWithObjects:@"xunjia_pushed",@"gujiashi_pushed",@"guanzhu_pushed",@"gengduo_pushed", nil]retain];
+    _btnImagesSelected = [[NSArray arrayWithObjects:@"xunjia_actived",@"gujiashi_actived",@"guanzhu_actived",@"gengduo_actived", nil]retain];
     
     UIImage* firstImg = [UIImage imageNamed:(NSString*)[_btnImagesNormal objectAtIndex:0]];
     rect.origin = pt;
@@ -63,20 +63,20 @@
     pt.x += btnInterlace;
     rect.origin = pt;
     rect.size = firstImg.size;
-    UIButton* guanzhu = [UIButton buttonWithType:UIButtonTypeCustom];
-    [guanzhu setImage:[UIImage imageNamed:@"guanzhu_normal"] forState:UIControlStateNormal];
-    [guanzhu setImage:[UIImage imageNamed:@"guanzhu_pushed"] forState:UIControlStateHighlighted];
-    [guanzhu setImage:[UIImage imageNamed:@"guanzhu_actived"] forState:UIControlStateSelected];
-    guanzhu.frame = rect;
-    
-    pt.x += btnInterlace;
-    rect.origin = pt;
-    rect.size = firstImg.size;
     UIButton* gujiashi = [UIButton buttonWithType:UIButtonTypeCustom];
     [gujiashi setImage:[UIImage imageNamed:@"gujiashi_normal"] forState:UIControlStateNormal];
     [gujiashi setImage:[UIImage imageNamed:@"gujiashi_pushed"] forState:UIControlStateHighlighted];
     [gujiashi setImage:[UIImage imageNamed:@"gujiashi_actived"] forState:UIControlStateSelected];
     gujiashi.frame = rect;
+    
+    pt.x += btnInterlace;
+    rect.origin = pt;
+    rect.size = firstImg.size;
+    UIButton* guanzhu = [UIButton buttonWithType:UIButtonTypeCustom];
+    [guanzhu setImage:[UIImage imageNamed:@"guanzhu_normal"] forState:UIControlStateNormal];
+    [guanzhu setImage:[UIImage imageNamed:@"guanzhu_pushed"] forState:UIControlStateHighlighted];
+    [guanzhu setImage:[UIImage imageNamed:@"guanzhu_actived"] forState:UIControlStateSelected];
+    guanzhu.frame = rect;
     
     pt.x += btnInterlace;
     rect.origin = pt;
@@ -87,7 +87,7 @@
     [gengduo setImage:[UIImage imageNamed:@"gengduo_actived"] forState:UIControlStateSelected];
     gengduo.frame = rect;
     
-    _tabBarItemBtns = [[NSArray arrayWithObjects:xunjia,guanzhu,gujiashi,gengduo, nil] retain];
+    _tabBarItemBtns = [[NSArray arrayWithObjects:xunjia,gujiashi,guanzhu,gengduo, nil] retain];
     
     for (int i = 0; i < [_tabBarItemBtns count]; ++i)
     {

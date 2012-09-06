@@ -16,8 +16,7 @@
 //views
 @property (nonatomic,retain) IBOutlet UIImageView* icon;
 @property (nonatomic,retain) IBOutlet UILabel* xxpinggu;
-@property (nonatomic,retain) IBOutlet UILabel* danjia;
-@property (nonatomic,retain) IBOutlet UILabel* zongjia;
+@property (nonatomic,retain) IBOutlet UILabel* jiage;
 @property (nonatomic,retain) IBOutlet UILabel* time;
 
 @end

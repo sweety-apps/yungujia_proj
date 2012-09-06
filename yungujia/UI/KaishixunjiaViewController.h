@@ -27,6 +27,8 @@
     LoudongTableViewController* _loudongCtrl;
     LoucengTableViewController* _loucengCtrl;
     FanghaoTableViewController* _fanghaoCtrl;
+    
+    BOOL _disableLoupanXuanze;
 }
 
 //infos
@@ -48,6 +50,9 @@
 @property (nonatomic,retain) LoudongTableViewController* loudongCtrl;
 @property (nonatomic,retain) LoucengTableViewController* loucengCtrl;
 @property (nonatomic,retain) FanghaoTableViewController* fanghaoCtrl;
+
+//disable loupan loudong louceng choosen
+@property (nonatomic,assign) BOOL disableLoupanXuanze;
 
 - (IBAction)push_XunjiaBtn:(id)sender;
 

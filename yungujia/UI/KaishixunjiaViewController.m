@@ -34,6 +34,8 @@
 @synthesize loucengCtrl = _loucengCtrl;
 @synthesize fanghaoCtrl = _fanghaoCtrl;
 
+@synthesize disableLoupanXuanze = _disableLoupanXuanze;
+
 #pragma mark - UIViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -156,6 +158,14 @@
             cell.title.text = [_titles0 objectAtIndex:row];
             cell.value.text = [_values0 objectAtIndex:row];
             [temporaryController release];
+        }
+        if (_disableLoupanXuanze)
+        {
+            cell.accessoryType = UITableViewCellAccessoryNone;
+        }
+        else
+        {
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
         return cell;
     }

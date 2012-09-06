@@ -37,10 +37,10 @@
 
 - (void)viewDidUnload
 {
-    [self.xiangqingctrl release];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+    self.xiangqingctrl = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

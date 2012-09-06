@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "HuijiaxiangqingCellViewController.h"
+#import "PinggujigouxiangqingViewController.h"
 
 @interface HuijiaxiangqingViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 {
@@ -19,5 +20,6 @@
 
 //controllers
 @property (nonatomic,retain) IBOutlet UINavigationController* navctrl;
+@property (nonatomic,retain) IBOutlet PinggujigouxiangqingViewController* xiangqingctrl;
 
 @end

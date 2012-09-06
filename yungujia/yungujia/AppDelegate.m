@@ -96,8 +96,8 @@ static AppDelegate* gDel = nil;
     if(rootTabBarController==nil)
 	{
         UIViewController *viewController1 = [[[XunJiaViewController alloc] initWithNibName:@"XunJiaViewController" bundle:nil] autorelease];
-        UIViewController *viewController2 = [[[GuanZhuViewController alloc] initWithNibName:@"GuanZhuViewController" bundle:nil] autorelease];
-        UIViewController *viewController3 = [[[GuJiaShiViewController alloc] initWithNibName:@"GuJiaShiViewController" bundle:nil] autorelease];
+        UIViewController *viewController2 = [[[GuJiaShiViewController alloc] initWithNibName:@"GuJiaShiViewController" bundle:nil] autorelease];
+        UIViewController *viewController3 = [[[GuanZhuViewController alloc] initWithNibName:@"GuanZhuViewController" bundle:nil] autorelease];
         UINavigationController *viewController4 = [[CustomNavigationController alloc] initWithRootViewController:[[[GengDuoViewController alloc] initWithNibName:@"GengDuoViewController" bundle:nil] autorelease]];
         
         self.rootTabBarController = [[[SwichTabBarViewController alloc] initWithNibName:@"SwichTabBarViewController" bundle:nil] autorelease];
