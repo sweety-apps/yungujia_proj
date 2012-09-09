@@ -3,20 +3,20 @@
 	<data>
 		<int key="IBDocument.SystemTarget">1296</int>
 		<string key="IBDocument.SystemVersion">11E53</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2549</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2182</string>
 		<string key="IBDocument.AppKitVersion">1138.47</string>
 		<string key="IBDocument.HIToolboxVersion">569.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">1498</string>
+			<string key="NS.object.0">1181</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
-			<string>IBProxyObject</string>
 			<string>IBUIButton</string>
-			<string>IBUIScrollView</string>
+			<string>IBUIViewController</string>
 			<string>IBUITableView</string>
 			<string>IBUIView</string>
-			<string>IBUIViewController</string>
+			<string>IBUIScrollView</string>
+			<string>IBProxyObject</string>
 		</array>
 		<array key="IBDocument.PluginDependencies">
 			<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -42,45 +42,6 @@
 						<reference key="NSNextResponder" ref="426705056"/>
 						<int key="NSvFlags">274</int>
 						<array class="NSMutableArray" key="NSSubviews">
-							<object class="IBUIButton" id="476605274">
-								<reference key="NSNextResponder" ref="191373211"/>
-								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{12, 361}, {297, 43}}</string>
-								<reference key="NSSuperview" ref="191373211"/>
-								<reference key="NSWindow"/>
-								<string key="NSReuseIdentifierKey">_NS:9</string>
-								<bool key="IBUIOpaque">NO</bool>
-								<object class="IBUIAccessibilityConfiguration" key="IBUIAccessibilityConfiguration">
-									<string key="IBUIAccessibilityLabel">立即询价</string>
-								</object>
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<int key="IBUIContentHorizontalAlignment">0</int>
-								<int key="IBUIContentVerticalAlignment">0</int>
-								<string key="IBUIDisabledTitle">立即询价</string>
-								<string key="IBUINormalTitle">立即询价</string>
-								<object class="NSColor" key="IBUIHighlightedTitleColor" id="623129919">
-									<int key="NSColorSpace">3</int>
-									<bytes key="NSWhite">MQA</bytes>
-								</object>
-								<reference key="IBUINormalTitleColor" ref="623129919"/>
-								<object class="NSColor" key="IBUINormalTitleShadowColor">
-									<int key="NSColorSpace">3</int>
-									<bytes key="NSWhite">MC41AA</bytes>
-								</object>
-								<object class="NSCustomResource" key="IBUINormalBackgroundImage">
-									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">buttonn.png</string>
-								</object>
-								<object class="IBUIFontDescription" key="IBUIFontDescription">
-									<int key="type">2</int>
-									<double key="pointSize">15</double>
-								</object>
-								<object class="NSFont" key="IBUIFont">
-									<string key="NSName">Helvetica-Bold</string>
-									<double key="NSSize">15</double>
-									<int key="NSfFlags">16</int>
-								</object>
-							</object>
 							<object class="IBUITableView" id="939854019">
 								<reference key="NSNextResponder" ref="191373211"/>
 								<int key="NSvFlags">274</int>
@@ -131,6 +92,46 @@
 								<float key="IBUIRowHeight">44</float>
 								<float key="IBUISectionHeaderHeight">10</float>
 								<float key="IBUISectionFooterHeight">10</float>
+							</object>
+							<object class="IBUIButton" id="476605274">
+								<reference key="NSNextResponder" ref="191373211"/>
+								<int key="NSvFlags">292</int>
+								<string key="NSFrame">{{12, 328}, {297, 45}}</string>
+								<reference key="NSSuperview" ref="191373211"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
+								<string key="NSReuseIdentifierKey">_NS:9</string>
+								<bool key="IBUIOpaque">NO</bool>
+								<object class="IBUIAccessibilityConfiguration" key="IBUIAccessibilityConfiguration">
+									<string key="IBUIAccessibilityLabel">立即询价</string>
+								</object>
+								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+								<int key="IBUIContentHorizontalAlignment">0</int>
+								<int key="IBUIContentVerticalAlignment">0</int>
+								<string key="IBUIDisabledTitle">立即询价</string>
+								<string key="IBUINormalTitle">立即询价</string>
+								<object class="NSColor" key="IBUIHighlightedTitleColor" id="623129919">
+									<int key="NSColorSpace">3</int>
+									<bytes key="NSWhite">MQA</bytes>
+								</object>
+								<reference key="IBUINormalTitleColor" ref="623129919"/>
+								<object class="NSColor" key="IBUINormalTitleShadowColor">
+									<int key="NSColorSpace">3</int>
+									<bytes key="NSWhite">MC41AA</bytes>
+								</object>
+								<object class="NSCustomResource" key="IBUINormalBackgroundImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">buttonn.png</string>
+								</object>
+								<object class="IBUIFontDescription" key="IBUIFontDescription">
+									<int key="type">2</int>
+									<double key="pointSize">15</double>
+								</object>
+								<object class="NSFont" key="IBUIFont">
+									<string key="NSName">Helvetica-Bold</string>
+									<double key="NSSize">15</double>
+									<int key="NSfFlags">16</int>
+								</object>
 							</object>
 						</array>
 						<string key="NSFrameSize">{320, 500}</string>
@@ -401,19 +402,67 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">RengongxunjiaViewController</string>
+					<string key="className">PinggujigouyinhangLV2ViewController</string>
 					<string key="superclassName">UIViewController</string>
 					<object class="NSMutableDictionary" key="outlets">
-						<string key="NS.key.0">contentView</string>
-						<string key="NS.object.0">UIView</string>
+						<string key="NS.key.0">navctrl</string>
+						<string key="NS.object.0">UINavigationController</string>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<string key="NS.key.0">contentView</string>
+						<string key="NS.key.0">navctrl</string>
 						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">navctrl</string>
+							<string key="candidateClassName">UINavigationController</string>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/PinggujigouyinhangLV2ViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">RengongxunjiaViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">rengongxunjia:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">rengongxunjia:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">rengongxunjia:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="btn">UIButton</string>
+						<string key="btnPinggujigou">UIButton</string>
+						<string key="chakanCell">UITableViewCell</string>
+						<string key="chakanpinggujigou">UITableView</string>
+						<string key="contentView">UIView</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="btn">
+							<string key="name">btn</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="btnPinggujigou">
+							<string key="name">btnPinggujigou</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="chakanCell">
+							<string key="name">chakanCell</string>
+							<string key="candidateClassName">UITableViewCell</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="chakanpinggujigou">
+							<string key="name">chakanpinggujigou</string>
+							<string key="candidateClassName">UITableView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="contentView">
 							<string key="name">contentView</string>
 							<string key="candidateClassName">UIView</string>
 						</object>
-					</object>
+					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/RengongxunjiaViewController.h</string>
@@ -442,6 +491,10 @@
 						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="btnDuanxin">UIButton</string>
+						<string key="btnKde">UIButton</string>
+						<string key="btnRngong">UIButton</string>
+						<string key="btnShilian">UIButton</string>
 						<string key="contentView">UIView</string>
 						<string key="navbar">UINavigationBar</string>
 						<string key="navctrl">UINavigationController</string>
@@ -449,6 +502,22 @@
 						<string key="yinhangctrl">YinhangkedaichaxunViewController</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="btnDuanxin">
+							<string key="name">btnDuanxin</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="btnKde">
+							<string key="name">btnKde</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="btnRngong">
+							<string key="name">btnRngong</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="btnShilian">
+							<string key="name">btnShilian</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="contentView">
 							<string key="name">contentView</string>
 							<string key="candidateClassName">UIView</string>
@@ -478,6 +547,106 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">YinhangKedaieDetailViewController</string>
 					<string key="superclassName">UIViewController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">OnClikedRngonggujia:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">OnClikedRngonggujia:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">OnClikedRngonggujia:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="btn">UIButton</string>
+						<string key="contentView">UIView</string>
+						<string key="daikuangchengshuCell">YinhangkedaieDetailCell</string>
+						<string key="daikuannianxianCell">YinhangkedaieDetailCell</string>
+						<string key="huankuanfangshiCell">YinhangkedaieDetailCell</string>
+						<string key="jingzhiCell">YinhangkedaieDetailCell</string>
+						<string key="keaijineCell">YinhangkedaieDetailCell</string>
+						<string key="kehujingliCell">YinhangkedaieDetailCell</string>
+						<string key="kehujingliCtrl">PinggujigouyinhangLV2ViewController</string>
+						<string key="nianlilvCell">YinhangkedaieDetailCell</string>
+						<string key="picker">UIPickerView</string>
+						<string key="pinggujiaCell">YinhangkedaieDetailCell</string>
+						<string key="rengonggujiaCtrl">RengongxunjiaViewController</string>
+						<string key="scrollView">UIScrollView</string>
+						<string key="shuifeiCell">YinhangkedaieDetailCell</string>
+						<string key="yuegongCell">YinhangkedaieDetailCell</string>
+						<string key="yuegongCtrl">YuegongViewController</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="btn">
+							<string key="name">btn</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="contentView">
+							<string key="name">contentView</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="daikuangchengshuCell">
+							<string key="name">daikuangchengshuCell</string>
+							<string key="candidateClassName">YinhangkedaieDetailCell</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="daikuannianxianCell">
+							<string key="name">daikuannianxianCell</string>
+							<string key="candidateClassName">YinhangkedaieDetailCell</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="huankuanfangshiCell">
+							<string key="name">huankuanfangshiCell</string>
+							<string key="candidateClassName">YinhangkedaieDetailCell</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="jingzhiCell">
+							<string key="name">jingzhiCell</string>
+							<string key="candidateClassName">YinhangkedaieDetailCell</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="keaijineCell">
+							<string key="name">keaijineCell</string>
+							<string key="candidateClassName">YinhangkedaieDetailCell</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="kehujingliCell">
+							<string key="name">kehujingliCell</string>
+							<string key="candidateClassName">YinhangkedaieDetailCell</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="kehujingliCtrl">
+							<string key="name">kehujingliCtrl</string>
+							<string key="candidateClassName">PinggujigouyinhangLV2ViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="nianlilvCell">
+							<string key="name">nianlilvCell</string>
+							<string key="candidateClassName">YinhangkedaieDetailCell</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="picker">
+							<string key="name">picker</string>
+							<string key="candidateClassName">UIPickerView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="pinggujiaCell">
+							<string key="name">pinggujiaCell</string>
+							<string key="candidateClassName">YinhangkedaieDetailCell</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="rengonggujiaCtrl">
+							<string key="name">rengonggujiaCtrl</string>
+							<string key="candidateClassName">RengongxunjiaViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="scrollView">
+							<string key="name">scrollView</string>
+							<string key="candidateClassName">UIScrollView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="shuifeiCell">
+							<string key="name">shuifeiCell</string>
+							<string key="candidateClassName">YinhangkedaieDetailCell</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="yuegongCell">
+							<string key="name">yuegongCell</string>
+							<string key="candidateClassName">YinhangkedaieDetailCell</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="yuegongCtrl">
+							<string key="name">yuegongCtrl</string>
+							<string key="candidateClassName">YuegongViewController</string>
+						</object>
+					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/YinhangKedaieDetailViewController.h</string>
@@ -501,6 +670,7 @@
 						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="btn">UIButton</string>
 						<string key="contentView">UIView</string>
 						<string key="gyhkdectrl">GeyinhangkedaieViewController</string>
 						<string key="navbar">UINavigationBar</string>
@@ -509,6 +679,10 @@
 						<string key="textField">UITextField</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="btn">
+							<string key="name">btn</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="contentView">
 							<string key="name">contentView</string>
 							<string key="candidateClassName">UIView</string>
@@ -539,6 +713,41 @@
 						<string key="minorKey">./Classes/YinhangkedaichaxunViewController.h</string>
 					</object>
 				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">YinhangkedaieDetailCell</string>
+					<string key="superclassName">UITableViewCell</string>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="lblTitle">UILabel</string>
+						<string key="lblValue">UILabel</string>
+						<string key="seg">UISegmentedControl</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="lblTitle">
+							<string key="name">lblTitle</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="lblValue">
+							<string key="name">lblValue</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="seg">
+							<string key="name">seg</string>
+							<string key="candidateClassName">UISegmentedControl</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/YinhangkedaieDetailCell.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">YuegongViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/YuegongViewController.h</string>
+					</object>
+				</object>
 			</array>
 		</object>
 		<int key="IBDocument.localizationMode">0</int>
@@ -553,6 +762,6 @@
 			<string key="NS.key.0">buttonn.png</string>
 			<string key="NS.object.0">{29, 46}</string>
 		</object>
-		<string key="IBCocoaTouchPluginVersion">1498</string>
+		<string key="IBCocoaTouchPluginVersion">1181</string>
 	</data>
 </archive>

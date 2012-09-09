@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "PinggujigouyinhangCellViewController.h"
 
-@interface PinggujigouyinhangLV2ViewController : UIViewController
+@interface PinggujigouyinhangLV2ViewController : UIViewController <UITableViewDelegate,UITableViewDataSource>
 {
     
 }

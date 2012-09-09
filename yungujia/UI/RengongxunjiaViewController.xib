@@ -50,7 +50,7 @@
 								<string key="NSFrameSize">{320, 126}</string>
 								<reference key="NSSuperview" ref="191373211"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="351320452"/>
+								<reference key="NSNextKeyView" ref="765418807"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<object class="NSColor" key="IBUIBackgroundColor" id="177654187">
 									<int key="NSColorSpace">3</int>
@@ -140,7 +140,6 @@
 								<string key="NSFrame">{{20, 364}, {280, 41}}</string>
 								<reference key="NSSuperview" ref="191373211"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -163,10 +162,10 @@
 									<int key="NSfFlags">16</int>
 								</object>
 							</object>
-							<object class="IBUITableView" id="351320452">
+							<object class="IBUITableView" id="765418807">
 								<reference key="NSNextResponder" ref="191373211"/>
 								<int key="NSvFlags">274</int>
-								<string key="NSFrame">{{0, 65}, {320, 170}}</string>
+								<string key="NSFrame">{{0, 65}, {320, 180}}</string>
 								<reference key="NSSuperview" ref="191373211"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="299950454"/>
@@ -224,7 +223,6 @@
 								<string key="NSFrame">{{20, 9}, {220, 21}}</string>
 								<reference key="NSSuperview" ref="753420535"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<reference key="IBUIBackgroundColor" ref="177654187"/>
 								<bool key="IBUIOpaque">NO</bool>
@@ -351,7 +349,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">delegate</string>
-						<reference key="source" ref="351320452"/>
+						<reference key="source" ref="765418807"/>
 						<reference key="destination" ref="372490531"/>
 					</object>
 					<int key="connectionID">27</int>
@@ -359,7 +357,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">dataSource</string>
-						<reference key="source" ref="351320452"/>
+						<reference key="source" ref="765418807"/>
 						<reference key="destination" ref="372490531"/>
 					</object>
 					<int key="connectionID">28</int>
@@ -399,7 +397,7 @@
 							<reference ref="761110631"/>
 							<reference ref="273767245"/>
 							<reference ref="74704426"/>
-							<reference ref="351320452"/>
+							<reference ref="765418807"/>
 							<reference ref="299950454"/>
 						</array>
 						<reference key="parent" ref="308713816"/>
@@ -427,7 +425,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">26</int>
-						<reference key="object" ref="351320452"/>
+						<reference key="object" ref="765418807"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 					<object class="IBObjectRecord">

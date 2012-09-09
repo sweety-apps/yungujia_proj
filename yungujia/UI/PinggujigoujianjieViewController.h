@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PinggujigouyinhangCellViewController.h"
 
-@interface PinggujigoujianjieViewController : UIViewController
+@interface PinggujigoujianjieViewController : UIViewController <UITableViewDelegate,UITableViewDataSource>
 {
     
 }

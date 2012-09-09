@@ -17,6 +17,7 @@
 @synthesize scrollView = _scrollView;
 @synthesize contentView = _contentView;
 @synthesize picker = _picker;
+@synthesize btn = _btn;
 
 //part1
 @synthesize keaijineCell;
@@ -37,6 +38,7 @@
 //controller
 @synthesize yuegongCtrl = _yuegongCtrl;
 @synthesize kehujingliCtrl = _kehujingliCtrl;
+@synthesize rengonggujiaCtrl = _rengonggujiaCtrl;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -59,6 +61,12 @@
     // Do any additional setup after loading the view from its nib.
     _scrollView.contentSize = _contentView.frame.size;
     self.kehujingliCtrl = [[[PinggujigouyinhangLV2ViewController alloc] initWithNibName:@"PinggujigouyinhangLV2ViewController" bundle:nil] autorelease];
+    
+    UIImage* btn_img = nil;
+    
+    btn_img = [UIImage imageNamed:@"btnGray"];
+    btn_img = [btn_img stretchableImageWithLeftCapWidth:14 topCapHeight:23];
+    [self.btn setBackgroundImage:btn_img forState:UIControlStateNormal];
     
     _section0Titles = [[NSArray arrayWithObjects:@"可贷金额",@"评估价",@"净值",@"税费",@"贷款成数",nil] retain];
     _section0Values = [[NSArray arrayWithObjects:@"234万",@"320万",@"298万",@"23万",@"七成",nil] retain];
@@ -107,6 +115,27 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+-(IBAction)OnClikedRngonggujia:(id)sender
+{
+    UIViewController* ctrl = nil;
+    NSString* title = @"向估价师人工询价";
+    for (int i = 0; i < [self.navigationController.viewControllers count]; ++i) 
+    {
+        ctrl = [self.navigationController.viewControllers objectAtIndex:i];
+        if ([ctrl isKindOfClass:[RengongxunjiaViewController class]])
+        {
+            self.rengonggujiaCtrl = (RengongxunjiaViewController*)ctrl;
+            self.rengonggujiaCtrl.title = title;
+            [self.navigationController popToViewController:ctrl animated:YES];
+            return;
+        }
+    }
+    
+    self.rengonggujiaCtrl = [[RengongxunjiaViewController alloc] initWithNibName:@"RengongxunjiaViewController" bundle:nil];
+    self.rengonggujiaCtrl.title = title;
+    [self.navigationController pushViewController:self.rengonggujiaCtrl animated:YES];
 }
 
 #pragma mark - UITableViewDataSource

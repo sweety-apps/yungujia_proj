@@ -15,6 +15,10 @@
     NSMutableArray* imagearray;
     UILabel* _labelName;
 }
+
+//views
+@property (nonatomic,retain) IBOutlet UIView* contentView;
+
 //@property (nonatomic,retain) IBOutlet UINavigationBar* navigation;
 @property (nonatomic,retain) NSMutableArray* datasource;
 @property (nonatomic,retain) NSMutableArray* imagearray;

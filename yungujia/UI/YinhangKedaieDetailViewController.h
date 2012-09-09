@@ -10,6 +10,7 @@
 #import "YinhangkedaieDetailCell.h"
 #import "YuegongViewController.h"
 #import "PinggujigouyinhangLV2ViewController.h"
+#import "RengongxunjiaViewController.h"
 
 enum YKDD_PICKER_TYPE {
     eDaikuanchengshu = 0,
@@ -37,6 +38,7 @@ enum YKDD_PICKER_TYPE {
 @property (nonatomic,retain) IBOutlet UIScrollView* scrollView;
 @property (nonatomic,retain) IBOutlet UIView* contentView;
 @property (nonatomic,retain) IBOutlet UIPickerView* picker;
+@property (nonatomic,retain) IBOutlet UIButton* btn;
 
 //part1
 @property (nonatomic,retain) IBOutlet YinhangkedaieDetailCell* keaijineCell;
@@ -57,5 +59,8 @@ enum YKDD_PICKER_TYPE {
 //controller
 @property (nonatomic,retain) IBOutlet YuegongViewController* yuegongCtrl;
 @property (nonatomic,retain) IBOutlet PinggujigouyinhangLV2ViewController* kehujingliCtrl;
+@property (nonatomic,retain) IBOutlet RengongxunjiaViewController* rengonggujiaCtrl;
+
+-(IBAction)OnClikedRngonggujia:(id)sender;
 
 @end

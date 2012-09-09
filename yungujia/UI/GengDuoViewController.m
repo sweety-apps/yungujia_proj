@@ -23,6 +23,8 @@
 @end
 
 @implementation GengDuoViewController
+
+@synthesize contentView = _contentView;
 @synthesize datasource;
 @synthesize imagearray;
 @synthesize labelName = _labelName;
@@ -31,8 +33,8 @@
 //@synthesize navigation;
 -(void)buildDataSource
 {
-    self.datasource = [[NSMutableArray alloc] initWithObjects:@"我的询价记录",@"修改密码",@"个人认证",@"邀请好友",@"意见反馈",@"关于",@"系统消息",@"检查新版本",@"银行可贷额计算公式与说明",nil];
-    self.imagearray = [[NSMutableArray alloc] initWithObjects:@"icon_wodexunjiajilu",@"icon_xiugaimima",@"icon_gerenrenzheng",@"icon_yaoqinghaoyou",@"icon_yijianfankui",@"icon_guanyu",@"icon_xitongxiaoxi",@"icon_jianchaxinbanben",@"icon_yinhangkedaiejisuangongshi",nil];
+    self.datasource = [[NSMutableArray alloc] initWithObjects:/*@"我的询价记录",*/@"修改密码",@"个人认证",@"邀请好友",@"意见反馈",@"关于",@"系统消息",@"检查新版本",@"银行可贷额计算公式与说明",nil];
+    self.imagearray = [[NSMutableArray alloc] initWithObjects:/*@"icon_wodexunjiajilu",*/@"icon_xiugaimima",@"icon_gerenrenzheng",@"icon_yaoqinghaoyou",@"icon_yijianfankui",@"icon_guanyu",@"icon_xitongxiaoxi",@"icon_jianchaxinbanben",@"icon_yinhangkedaiejisuangongshi",nil];
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -51,6 +53,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    ((UIScrollView*)(self.view)).contentSize = _contentView.frame.size;
+    
     self.labelName.text = [Config getUsername];
     
     UIImage* navBgImg = [UIImage imageNamed:@"naviBarBg.png"];
@@ -87,7 +91,7 @@
 #pragma mark -tabledatasource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 9;
+    return 8;
 }
 
 // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
@@ -119,31 +123,31 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     switch (indexPath.row) {
-        case 0:
+        case 20:
             [self showXunjiaHis];
             break;
-        case 1:
+        case 0:
             [self showModifyPwd];
             break;
-        case 2:
+        case 1:
             [self showPersonIdentify];
             break;
-        case 3:
+        case 2:
             [self showInvite];
             break;
-        case 4:
+        case 3:
             [self showfeedback];
             break;
-        case 5:
+        case 4:
             [self showAbout];
             break;
-        case 6:
+        case 5:
             [self showSystemMsg];
             break;
-        case 7:
+        case 6:
             [self showActionSheet];
             break;
-        case 8:
+        case 7:
             [self showGongshi];
             break;
         default:

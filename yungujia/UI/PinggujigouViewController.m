@@ -53,11 +53,14 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Pinggujigoulv1Cell *cell = (Pinggujigoulv1Cell*)[tableView cellForRowAtIndexPath:indexPath];
+    if (_navctrl == nil)
+    {
+        _navctrl = self.navigationController;
+    }
     if (cell.accessoryType != UITableViewCellAccessoryNone)
     {
         _xiangqingctrl.title = cell.xxpinggu.text;
-        [[AppDelegate sharedInstance] makeTabBarHidden:YES];
-        [_navctrl setDelegate:self];
+        //[[AppDelegate sharedInstance] makeTabBarHidden:YES];
         [_navctrl pushViewController:_xiangqingctrl animated:YES];
     }
 }
@@ -115,7 +118,7 @@
 {
     if (![viewController isKindOfClass:[PinggujigouxiangqingViewController class]])
     {
-        [[AppDelegate sharedInstance] makeTabBarHidden:NO];
+        //[[AppDelegate sharedInstance] makeTabBarHidden:NO];
     }
 }
 
