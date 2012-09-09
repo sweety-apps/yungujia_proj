@@ -85,19 +85,38 @@
 	
 	<body>
 
-			<!-- HEADER -->
+					<!-- HEADER -->
 			<div id="header">
 				<!-- wrapper-header -->
 				<div class="wrapper">
 					<a href="index.html"><img id="logo" src="img/logo.png" alt="Nova" /></a>
-					<!-- search -->
+	<!-- search -->
 					<div class="top-search">
-						<form  method="get" id="searchform" action="#">
-							<div>
-								<input type="text" value="Search..." name="s" id="s" onfocus="defaultInput(this)" onblur="clearInput(this)" />
-								<input type="submit" id="searchsubmit" value=" " />
-							</div>
-						</form>
+
+
+					<form action="http://www.baidu.com/baidu" target="_blank"  id="searchform" >
+<input type="text" value="" name="word" id="s" />
+								<input  type = "submit" id="searchsubmit"  value=""/>
+                                </form>
+                                
+                    <script type="text/javascript">
+    var b = function() {
+      if (document.getElementById("s").value == '') {
+       	//document.getElementById("s").style.background = '#FFFFFF url(img/google_custom_search_watermark.gif) left no-repeat';
+		document.getElementById('s').value = "百度一下...";
+      }
+    };
+
+    var f = function() {
+     //document.getElementById("s").style.background = '#ffffff';
+	 document.getElementById('s').value = "";
+    };
+	document.getElementById('s').value = "百度一下...";
+	//document.getElementById("s").style.background = '#FFFFFF url(img/google_custom_search_watermark.gif) left no-repeat';
+    document.getElementById("s").onfocus = f;
+    document.getElementById("s").onblur = b;
+</script>
+
 					</div>
 					<!-- ENDS search -->
 				</div>
@@ -117,26 +136,30 @@
 					<div class="wrapper">
 						<!-- Navigation -->
 						<ul id="nav" class="sf-menu">
-							<li><a href="index.html">首页<span class="subheader">亲，欢迎你！</span></a></li>
-							<li><a href="features.html">夜上海的故事<span class="subheader">团队成员的详细资料</span></a>
+							<li class="current-menu-item"><a href="index.html">首页<span class="subheader">亲，欢迎你！</span></a></li>
+							<li><a href="features.html">夜上海的资料<span class="subheader">业务、团队的详细资料</span></a>
 								<ul>
-									
-									<li><a href="features-columns.html"><span> Columns layout</span></a></li>
-									<li><a href="features-accordion.html"><span> Accordion</span></a></li>
-									<li><a href="features-toggle.html"><span> Toggle box</span></a></li>
-									<li><a href="features-tabs.html"><span> Tabs</span></a></li>
-									<li><a href="features-infobox.html"><span> Text box</span></a></li>
-									<li><a href="features-monobox.html"><span> Icons</span></a></li>
+									<li><a href="features-works.html"><span>业务介绍</span></a></li>
+									<li><a href="features-team.html"><span>团队成员</span></a></li>
+									<li><a href="features-story.html"><span>团队历史</span></a></li>
 								</ul>
 							</li>
 							<li><a href="blog.html">App Store生存手册<span class="subheader">对你的app开发有帮助的资料</span></a></li>
-							<li class="current-menu-item"><a href="portfolio.html">一些产品<span class="subheader">那些年一起开发的app</span></a></li>
+							<li><a href="portfolio.html">一些产品<span class="subheader">那些年一起开发的app</span></a>
+                            	<ul>	
+									<li><a href="project-realstrike.html"><span>RealStrike</span></a></li>
+									<li><a href="project-ifoggy.html"><span>iFoggy</span></a></li>
+                                    <li><a href="project-iceplayer.html"><span>ICE-Player</span></a></li>
+                                    <li><a href="project-chess.html"><span>中国象棋</span></a></li>
+                                    <li><a href="project-yungujia.html"><span>云估价</span></a></li>
+                                    <li><a href="project-winvoice.html"><span>Windows语聊内核</span></a></li>
+								</ul>
+                            </li>
 							<li><a href="gallery.html">画廊<span class="subheader">团队私房照与应用截图</span></a>
 								<ul>
-									<li><a href="gallery.html"><span> Four columns</span></a></li>
-									<li><a href="gallery-3.html"><span> Three columns </span></a></li>
-									<li><a href="gallery-2.html"><span> Two columns </span></a></li>
-									<li><a href="video-gallery.html"><span> Video gallery </span></a></li>
+									<li><a href="gallery-team.html"><span>兄弟姐妹们</span></a></li>
+									<li><a href="gallery-products.html"><span>产品</span></a></li>
+									<li><a href="video-gallery.html"><span>视频</span></a></li>
 								</ul>
 							</li>
 							<li><a href="contact.html">联系夜上海<span class="subheader">有订单当然更好啦！</span></a></li>

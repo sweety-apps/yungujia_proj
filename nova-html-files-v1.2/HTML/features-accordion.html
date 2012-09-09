@@ -92,12 +92,31 @@
 					<a href="index.html"><img id="logo" src="img/logo.png" alt="Nova" /></a>
 					<!-- search -->
 					<div class="top-search">
-						<form  method="get" id="searchform" action="#">
-							<div>
-								<input type="text" value="Search..." name="s" id="s" onfocus="defaultInput(this)" onblur="clearInput(this)" />
-								<input type="submit" id="searchsubmit" value=" " />
-							</div>
-						</form>
+
+
+					<form action="http://www.baidu.com/baidu" target="_blank"  id="searchform" >
+<input type="text" value="" name="word" id="s" />
+								<input  type = "submit" id="searchsubmit"  value=""/>
+                                </form>
+                                
+                    <script type="text/javascript">
+    var b = function() {
+      if (document.getElementById("s").value == '') {
+       	//document.getElementById("s").style.background = '#FFFFFF url(img/google_custom_search_watermark.gif) left no-repeat';
+		document.getElementById('s').value = "百度一下...";
+      }
+    };
+
+    var f = function() {
+     //document.getElementById("s").style.background = '#ffffff';
+	 document.getElementById('s').value = "";
+    };
+	document.getElementById('s').value = "百度一下...";
+	//document.getElementById("s").style.background = '#FFFFFF url(img/google_custom_search_watermark.gif) left no-repeat';
+    document.getElementById("s").onfocus = f;
+    document.getElementById("s").onblur = b;
+</script>
+
 					</div>
 					<!-- ENDS search -->
 				</div>
@@ -231,85 +250,7 @@
 			</div>
 			<!-- ENDS MAIN -->
 			
-			<!-- Twitter -->
-			<div id="twitter">
-				<div class="wrapper">
-					<a href="#" id="prev-tweet"></a>
-					<a href="#" id="next-tweet"></a>
-					<img id="bird" src="img/bird.png" alt="Tweets" />
-					<div id="tweets">
-						<ul class="tweet_list"></ul>
-					</div>
-				</div>
-			</div>
-			<!-- ENDS Twitter -->
-
-			
-			<!-- FOOTER -->
-			<div id="footer">
-				<!-- wrapper-footer -->
-				<div class="wrapper">
-					<!-- footer-cols -->
-					<ul id="footer-cols">
-						<li class="col">
-							<h6>Pages</h6>
-							<ul>
-								<li class="page_item"><a href="index.html">Home</a></li>
-								<li class="page_item"><a href="features.html">Features</a></li>
-								<li class="page_item"><a href="blog.html">Blog</a></li>
-								<li class="page_item"><a href="portfolio.html">Portfolio</a></li>
-								<li class="page_item"><a href="gallery.html">Gallery</a></li>
-								<li class="page_item"><a href="contact.html">Contact</a></li>
-							</ul>
-						</li>
-						
-						<li class="col">
-							<h6>Categories</h6>
-							<ul>
-								<li><a href="#">Webdesign projects senectus</a></li>
-								<li><a href="#/">Wordpress projects senectus</a></li>
-								<li><a href="#">Vestibulum tortor quam</a></li>
-								<li><a href="#">Code projects amet quam egestas</a></li>
-								<li><a href="#">Web design projects senectus</a></li>
-								<li><a href="#/">Marketplace projects</a></li>
-								<li><a href="#">Writting projects senectus</a></li>
-								<li><a href="#">Drawings projects fames Aenean</a></li>
-								<li><a href="#/">Wordpress projects Aenean ultricies</a></li>
-							</ul>
-						</li>
-						<li class="col">
-							<h6>About the theme</h6>
-							Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Cursus faucibus, tortor neque egestas augue, eu vulputate magna eros.
-						</li>
-						
-					</ul>
-					<!-- ENDS footer-cols -->
-				</div>
-				<!-- ENDS wrapper-footer -->
-			</div>
-			<!-- ENDS FOOTER -->
-		
-		
-			<!-- Bottom -->
-			<div id="bottom">
-				<!-- wrapper-bottom -->
-				<div class="wrapper">
-					<div id="bottom-text">2011 Nova all rights reserved. <a href="http://www.luiszuno.com"> Luiszuno.com</a> </div>
-					<!-- Social -->
-					<ul class="social ">
-						<li><a href="http://www.facebook.com" class="poshytip  facebook" title="Become a fan"></a></li>
-						<li><a href="http://www.twitter.com" class="poshytip twitter" title="Follow our tweets"></a></li>
-						<li><a href="http://www.dribbble.com" class="poshytip dribbble" title="View our work"></a></li>
-						<li><a href="http://www.addthis.com" class="poshytip addthis" title="Tell everybody"></a></li>
-						<li><a href="http://www.vimeo.com" class="poshytip vimeo" title="View our videos"></a></li>
-						<li><a href="http://www.youtube.com" class="poshytip youtube" title="View our videos"></a></li>
-					</ul>
-					<!-- ENDS Social -->
-					<div id="to-top" class="poshytip" title="To top"></div>
-				</div>
-				<!-- ENDS wrapper-bottom -->
-			</div>
-			<!-- ENDS Bottom -->
+			<IFRAME NAME="content_frame" width=100%  scrolling="no" height=455 marginwidth=0 marginheight=0 SRC="buttom.html" ></IFRAME>
 	
 	</body>
 </html>
