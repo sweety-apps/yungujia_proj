@@ -16,6 +16,11 @@
 		BE19EC0115F359B800065448 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE19EC0015F359B800065448 /* ViewController.m */; };
 		BE19EC0415F359B800065448 /* ViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE19EC0215F359B800065448 /* ViewController_iPhone.xib */; };
 		BE19EC0715F359B800065448 /* ViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE19EC0515F359B800065448 /* ViewController_iPad.xib */; };
+		F301345F15FD8F9E00480CD7 /* ViewController_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = F301345E15FD8F9E00480CD7 /* ViewController_iPhone.m */; };
+		F301346215FD8FB300480CD7 /* ViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = F301346115FD8FB100480CD7 /* ViewController_iPad.m */; };
+		F301346515FD908700480CD7 /* Configure.m in Sources */ = {isa = PBXBuildFile; fileRef = F301346415FD908500480CD7 /* Configure.m */; };
+		F301346C15FD98CE00480CD7 /* CameraOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = F301346B15FD98C500480CD7 /* CameraOptions.m */; };
+		F301347915FDDD1D00480CD7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F301347815FDDD1D00480CD7 /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +38,15 @@
 		BE19EC0015F359B800065448 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		BE19EC0315F359B800065448 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPhone.xib; sourceTree = "<group>"; };
 		BE19EC0615F359B800065448 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPad.xib; sourceTree = "<group>"; };
+		F301345D15FD8F9D00480CD7 /* ViewController_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController_iPhone.h; sourceTree = "<group>"; };
+		F301345E15FD8F9E00480CD7 /* ViewController_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController_iPhone.m; sourceTree = "<group>"; };
+		F301346015FD8FB100480CD7 /* ViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController_iPad.h; sourceTree = "<group>"; };
+		F301346115FD8FB100480CD7 /* ViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController_iPad.m; sourceTree = "<group>"; };
+		F301346315FD908400480CD7 /* Configure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Configure.h; sourceTree = "<group>"; };
+		F301346415FD908500480CD7 /* Configure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Configure.m; sourceTree = "<group>"; };
+		F301346A15FD98C300480CD7 /* CameraOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraOptions.h; sourceTree = "<group>"; };
+		F301346B15FD98C500480CD7 /* CameraOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraOptions.m; sourceTree = "<group>"; };
+		F301347815FDDD1D00480CD7 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F301347915FDDD1D00480CD7 /* AVFoundation.framework in Frameworks */,
 				BE19EBEE15F359B800065448 /* UIKit.framework in Frameworks */,
 				BE19EBF015F359B800065448 /* Foundation.framework in Frameworks */,
 				BE19EBF215F359B800065448 /* CoreGraphics.framework in Frameworks */,
@@ -69,6 +84,7 @@
 		BE19EBEC15F359B800065448 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F301347815FDDD1D00480CD7 /* AVFoundation.framework */,
 				BE19EBED15F359B800065448 /* UIKit.framework */,
 				BE19EBEF15F359B800065448 /* Foundation.framework */,
 				BE19EBF115F359B800065448 /* CoreGraphics.framework */,
@@ -85,6 +101,14 @@
 				BE19EC0015F359B800065448 /* ViewController.m */,
 				BE19EC0215F359B800065448 /* ViewController_iPhone.xib */,
 				BE19EC0515F359B800065448 /* ViewController_iPad.xib */,
+				F301345D15FD8F9D00480CD7 /* ViewController_iPhone.h */,
+				F301345E15FD8F9E00480CD7 /* ViewController_iPhone.m */,
+				F301346015FD8FB100480CD7 /* ViewController_iPad.h */,
+				F301346115FD8FB100480CD7 /* ViewController_iPad.m */,
+				F301346315FD908400480CD7 /* Configure.h */,
+				F301346415FD908500480CD7 /* Configure.m */,
+				F301346A15FD98C300480CD7 /* CameraOptions.h */,
+				F301346B15FD98C500480CD7 /* CameraOptions.m */,
 				BE19EBF415F359B800065448 /* Supporting Files */,
 			);
 			path = TimerCamera;
@@ -167,6 +191,10 @@
 				BE19EBFA15F359B800065448 /* main.m in Sources */,
 				BE19EBFE15F359B800065448 /* AppDelegate.m in Sources */,
 				BE19EC0115F359B800065448 /* ViewController.m in Sources */,
+				F301345F15FD8F9E00480CD7 /* ViewController_iPhone.m in Sources */,
+				F301346215FD8FB300480CD7 /* ViewController_iPad.m in Sources */,
+				F301346515FD908700480CD7 /* Configure.m in Sources */,
+				F301346C15FD98CE00480CD7 /* CameraOptions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,11 +282,15 @@
 		BE19EC0B15F359B800065448 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: JINXIN LI (DJJ4XT349N)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: JINXIN LI (DJJ4XT349N)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TimerCamera/TimerCamera-Prefix.pch";
 				INFOPLIST_FILE = "TimerCamera/TimerCamera-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "52F9DCD3-B960-438D-8DAB-2342EBB5DCAE";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "52F9DCD3-B960-438D-8DAB-2342EBB5DCAE";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -266,11 +298,15 @@
 		BE19EC0C15F359B800065448 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: JINXIN LI (DJJ4XT349N)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: JINXIN LI (DJJ4XT349N)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TimerCamera/TimerCamera-Prefix.pch";
 				INFOPLIST_FILE = "TimerCamera/TimerCamera-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "52F9DCD3-B960-438D-8DAB-2342EBB5DCAE";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "52F9DCD3-B960-438D-8DAB-2342EBB5DCAE";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -294,6 +330,7 @@
 				BE19EC0C15F359B800065448 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

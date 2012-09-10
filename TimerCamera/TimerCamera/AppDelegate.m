@@ -8,7 +8,8 @@
 
 #import "AppDelegate.h"
 
-#import "ViewController.h"
+#import "ViewController_iPhone.h"
+#import "ViewController_iPad.h"
 
 @implementation AppDelegate
 
@@ -27,12 +28,13 @@
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        self.viewController = [[[ViewController alloc] initWithNibName:@"ViewController_iPhone" bundle:nil] autorelease];
+        self.viewController = [[[ViewController_iPhone alloc] initWithNibName:@"ViewController_iPhone" bundle:nil] autorelease];
     } else {
-        self.viewController = [[[ViewController alloc] initWithNibName:@"ViewController_iPad" bundle:nil] autorelease];
+        self.viewController = [[[ViewController_iPad alloc] initWithNibName:@"ViewController_iPad" bundle:nil] autorelease];
     }
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
+    
     return YES;
 }
 
