@@ -8,7 +8,7 @@
 
 #import "CameraOptions.h"
 
-#define ConfigurableDevicePosition AVCaptureDevicePositionFront
+#define ConfigurableDevicePosition AVCaptureDevicePositionBack//AVCaptureDevicePositionFront
 
 static CameraOptions* gSI = nil;
 
@@ -20,6 +20,11 @@ static CameraOptions* gSI = nil;
 @synthesize focus = _focus;
 @synthesize hdr = _hdr;
 @synthesize exposureMode = _exposureMode;
+@synthesize exporePoint = _exporePoint;
+@synthesize focusPoint = _focusPoint;
+@synthesize isFlashAndLightAvailible = _isFlashAndLightAvailible;
+@synthesize maxScale = _maxScale;
+@synthesize minScale = _minScale;
 
 #pragma mark - NSObject
 
@@ -34,6 +39,9 @@ static CameraOptions* gSI = nil;
         ipc.showsCameraControls = NO;
         
         self.imagePicker = ipc;
+        
+        _maxScale = 50.f;
+        _minScale = 1.f;
     }
     return self;
 }
@@ -51,14 +59,18 @@ static CameraOptions* gSI = nil;
     if (gSI == nil)
     {
         gSI = [[CameraOptions alloc] init];
-        
-        gSI.light = getConfigForInt(kLight);
-        gSI.flash = getConfigForInt(kFlashMode);
-        gSI.focus = getConfigForInt(kFocus);
-        gSI.hdr = getConfigForInt(kHDR);
-        gSI.exposureMode = getConfigForInt(kExposure);
+        [gSI restoreState];
     }
     return gSI;
+}
+
+-(void)restoreState
+{
+    gSI.light = getConfigForInt(kLight);
+    gSI.flash = getConfigForInt(kFlashMode);
+    gSI.focus = getConfigForInt(kFocus);
+    gSI.hdr = getConfigForInt(kHDR);
+    gSI.exposureMode = getConfigForInt(kExposure);
 }
 
 - (AVCaptureDevice*)configurableDevice
@@ -102,9 +114,38 @@ static CameraOptions* gSI = nil;
 
 #pragma mark - Property Re-defines
 
+- (BOOL)isFlashAndLightAvailible
+{
+    if ([self currentDevice] != [self configurableDevice])
+    {
+        _isFlashAndLightAvailible = NO;
+    }
+    else
+    {
+        _isFlashAndLightAvailible = YES;
+    }
+    return _isFlashAndLightAvailible;
+}
+
+- (AVCaptureTorchMode)light
+{
+    AVCaptureDevice* d = [self currentDevice];
+    _light = d.torchMode;
+    return _light;
+}
+
 - (void)setLight:(AVCaptureTorchMode)mode
 {
-    AVCaptureDevice* d = [self configurableDevice];
+    AVCaptureDevice* d = nil;
+    if (!self.isFlashAndLightAvailible)
+    {
+        mode = AVCaptureTorchModeOff;
+        d = [self currentDevice];
+    }
+    else
+    {
+        d = [self configurableDevice];
+    }
     
     NSError* err = nil;
     BOOL lockAcquired = [d lockForConfiguration:&err];
@@ -125,9 +166,25 @@ static CameraOptions* gSI = nil;
     setAndSaveConfigForInt(kLight, _light);
 }
 
+- (AVCaptureFlashMode)flash
+{
+    AVCaptureDevice* d = [self currentDevice];
+    _flash = d.torchMode;
+    return _flash;
+}
+
 - (void)setFlash:(AVCaptureFlashMode)flash
 {
-    AVCaptureDevice* d = [self configurableDevice];
+    AVCaptureDevice* d = nil;
+    if (!self.isFlashAndLightAvailible)
+    {
+        flash = AVCaptureFlashModeOff;
+        d = [self currentDevice];
+    }
+    else
+    {
+        d = [self configurableDevice];
+    }
     
     NSError* err = nil;
     BOOL lockAcquired = [d lockForConfiguration:&err];
@@ -159,7 +216,10 @@ static CameraOptions* gSI = nil;
     if (!lockAcquired) {
         // log err and handle...
     } else {
-        [d setFocusMode:focus];
+        if ([d isFocusModeSupported:focus])
+        {
+            [d setFocusMode:focus];
+        }
         
         [d unlockForConfiguration];
     }
@@ -178,7 +238,10 @@ static CameraOptions* gSI = nil;
     if (!lockAcquired) {
         // log err and handle...
     } else {
-        [d setWhiteBalanceMode:hdr];
+        if ([d isWhiteBalanceModeSupported:hdr])
+        {
+            [d setWhiteBalanceMode:hdr];
+        }
         
         [d unlockForConfiguration];
     }
@@ -197,13 +260,57 @@ static CameraOptions* gSI = nil;
     if (!lockAcquired) {
         // log err and handle...
     } else {
-        [d setExposureMode:exposureMode];
+        if ([d isExposureModeSupported:exposureMode])
+        {
+            [d setExposureMode:exposureMode];
+        }
         
         [d unlockForConfiguration];
     }
     _exposureMode = d.exposureMode;
     
     setAndSaveConfigForInt(kExposure, _light);
+}
+
+- (void)setExporePoint:(CGPoint)exporePoint
+{
+    AVCaptureDevice* d = [self currentDevice];
+    
+    NSError* err = nil;
+    BOOL lockAcquired = [d lockForConfiguration:&err];
+    
+    if (!lockAcquired) {
+        // log err and handle...
+    } else {
+        
+        if (d.exposurePointOfInterestSupported)
+        {
+            _exporePoint = exporePoint;
+            d.exposurePointOfInterest = _exporePoint;
+        }
+        
+        [d unlockForConfiguration];
+    }
+}
+
+- (void)setFocusPoint:(CGPoint)focusPoint
+{
+    AVCaptureDevice* d = [self currentDevice];
+    
+    NSError* err = nil;
+    BOOL lockAcquired = [d lockForConfiguration:&err];
+    
+    if (!lockAcquired) {
+        // log err and handle...
+    } else {
+        if (d.focusPointOfInterestSupported && !d.adjustingFocus)
+        {
+            _focusPoint = focusPoint;
+            d.focusPointOfInterest = _focusPoint;
+        }
+        
+        [d unlockForConfiguration];
+    }
 }
 
 @end

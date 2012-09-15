@@ -22,7 +22,12 @@
 @synthesize optionBtn = _optionBtn;
 @synthesize bottomBar = _bottomBar;
 
+@synthesize tapGesture = _tapGesture;
+@synthesize pinchGesture = _pinchGesture;
+
 @synthesize imageSaveQueue = _imageSaveQueue;
+
+@synthesize currentScale = _currentScale;
 
 #pragma mark - UIViewController
 
@@ -41,6 +46,11 @@
     [CameraOptions sharedInstance].imagePicker.cameraOverlayView = _containerView;
     [_containerView release];
     [CameraOptions sharedInstance].imagePicker.view.frame = self.view.frame;
+    
+    _lastScale = 1.0;
+    _currentScale = 1.0;
+    
+    [NSTimer scheduledTimerWithTimeInterval:0.35 target:self selector:@selector(detectCameraSize) userInfo:nil repeats:YES];
 }
 
 - (void)viewDidUnload
@@ -60,6 +70,12 @@
     }
 }
 
+- (void)detectCameraSize
+{
+    CGAffineTransform af = [CameraOptions sharedInstance].imagePicker.cameraViewTransform;
+    NSLog(@"CameraSize = ( %f , %f , %f , %f , %f , %f )",af.a,af.b,af.c,af.d,af.tx,af.ty);
+}
+
 #pragma mark - UIImagePickerControllerDelegate
 
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
@@ -77,6 +93,8 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
+    return;
+    
     NSLog(@"OH YEAH!!! Take a Media");
     UIImage *image= [info objectForKey:UIImagePickerControllerOriginalImage];
     NSLog(@"OH YEAH!!! Take a pic, size = (%f,%f)",image.size.width, image.size.height);
@@ -116,6 +134,55 @@
 - (IBAction)OnClickedShot:(id)sender
 {
     [[CameraOptions sharedInstance].imagePicker takePicture];
+}
+
+- (IBAction)OnClickedLight:(id)sender
+{
+    if ([CameraOptions sharedInstance].flash == AVCaptureFlashModeOn)
+    {
+        [CameraOptions sharedInstance].flash = AVCaptureFlashModeOff;
+    }
+    else
+    {
+        [CameraOptions sharedInstance].flash = AVCaptureFlashModeOn;
+    }
+}
+
+- (IBAction)OnClickedTorch:(id)sender
+{
+    if ([CameraOptions sharedInstance].light == AVCaptureTorchModeOn)
+    {
+        [CameraOptions sharedInstance].light = AVCaptureTorchModeOff;
+    }
+    else
+    {
+        [CameraOptions sharedInstance].light = AVCaptureTorchModeOn;
+    }
+}
+
+- (IBAction)OnClickedHDR:(id)sender
+{
+    if ([CameraOptions sharedInstance].hdr == AVCaptureWhiteBalanceModeContinuousAutoWhiteBalance)
+    {
+        [CameraOptions sharedInstance].hdr = AVCaptureWhiteBalanceModeLocked;
+    }
+    else
+    {
+        [CameraOptions sharedInstance].hdr = AVCaptureWhiteBalanceModeContinuousAutoWhiteBalance;
+    }
+    
+}
+
+- (IBAction)OnClickedFront:(id)sender
+{
+    if ([CameraOptions sharedInstance].imagePicker.cameraDevice == UIImagePickerControllerCameraDeviceFront)
+    {
+        [CameraOptions sharedInstance].imagePicker.cameraDevice = UIImagePickerControllerCameraDeviceRear;
+    }
+    else
+    {
+        [CameraOptions sharedInstance].imagePicker.cameraDevice = UIImagePickerControllerCameraDeviceFront;
+    }
 }
 
 #pragma mark - test code
@@ -168,6 +235,76 @@
     
     [self presentModalViewController:ipc animated:NO];
     
+}
+
+#pragma mark - UIGestureRecognizerDelegate
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
+{
+    return YES;
+}
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    return NO;
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    return YES;
+}
+
+#pragma mark - UIGestureRecognizer Handlers
+
+-(IBAction)handleTapGesture:(UIGestureRecognizer*)gestureRecognizer
+{
+    if ([gestureRecognizer isKindOfClass:[UITapGestureRecognizer class]])
+    {
+        CGPoint pt = [gestureRecognizer locationInView:_containerView];
+        NSLog(@"Get a touch ( %f , %f )",pt.x,pt.y);
+        pt.x /= self.view.frame.size.width;
+        pt.y /= self.view.frame.size.height;
+        NSLog(@"Location touch ( %f , %f )",pt.x,pt.y);
+        [CameraOptions sharedInstance].exporePoint = pt;
+        [CameraOptions sharedInstance].focusPoint = pt;
+    }
+}
+
+-(IBAction)handlePinchGesture:(UIPinchGestureRecognizer*)gestureRecognizer
+{
+    //当手指离开屏幕时,将lastscale设置为1.0
+    if([gestureRecognizer state] == UIGestureRecognizerStateEnded) {
+        _lastScale = 1.0;
+        return;
+    }
+    
+    CGFloat scale = 1.0 - (_lastScale - [gestureRecognizer scale]);
+    self.currentScale = scale;
+    
+    _lastScale = [gestureRecognizer scale];
+}
+
+#pragma mark - properties re-define
+
+- (void)setCurrentScale:(CGFloat)currentScale
+{
+    CGFloat scale = currentScale;
+    CGAffineTransform currentTransform = [CameraOptions sharedInstance].imagePicker.cameraViewTransform;
+    
+    CGAffineTransform newTransform = CGAffineTransformScale(currentTransform, scale, scale);
+    
+    if (newTransform.a > [CameraOptions sharedInstance].maxScale)
+    {
+        newTransform.a = [CameraOptions sharedInstance].maxScale;
+        newTransform.d = [CameraOptions sharedInstance].maxScale;
+    }
+    if (newTransform.a < [CameraOptions sharedInstance].minScale)
+    {
+        newTransform.a = [CameraOptions sharedInstance].minScale;
+        newTransform.d = [CameraOptions sharedInstance].minScale;
+    }
+    
+    [CameraOptions sharedInstance].imagePicker.cameraViewTransform = newTransform;
+    _currentScale = newTransform.a;
 }
 
 @end
