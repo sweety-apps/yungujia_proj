@@ -16,6 +16,16 @@
 		BE19EC0115F359B800065448 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE19EC0015F359B800065448 /* ViewController.m */; };
 		BE19EC0415F359B800065448 /* ViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE19EC0215F359B800065448 /* ViewController_iPhone.xib */; };
 		BE19EC0715F359B800065448 /* ViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE19EC0515F359B800065448 /* ViewController_iPad.xib */; };
+		BE89BE671605DB6600D2F091 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE89BE661605DB6600D2F091 /* CoreAudio.framework */; };
+		BE89BE6A1605DB6F00D2F091 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE89BE691605DB6F00D2F091 /* CoreFoundation.framework */; };
+		BE89BE6C1605DB7700D2F091 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE89BE6B1605DB7700D2F091 /* AudioToolbox.framework */; };
+		BE89BE741605DBA300D2F091 /* AQPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = BE89BE6F1605DBA300D2F091 /* AQPlayer.mm */; };
+		BE89BE751605DBA300D2F091 /* AQRecorder.mm in Sources */ = {isa = PBXBuildFile; fileRef = BE89BE711605DBA300D2F091 /* AQRecorder.mm */; };
+		BE89BE761605DBA300D2F091 /* MeterTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE89BE721605DBA300D2F091 /* MeterTable.cpp */; };
+		BE89BE911605DC3B00D2F091 /* CADebugMacros.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE89BE8A1605DC3B00D2F091 /* CADebugMacros.cpp */; };
+		BE89BE921605DC3B00D2F091 /* CAStreamBasicDescription.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE89BE8D1605DC3B00D2F091 /* CAStreamBasicDescription.cpp */; };
+		BE89BE931605DC3B00D2F091 /* CAXException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE89BE8F1605DC3B00D2F091 /* CAXException.cpp */; };
+		BE89BE9D1605E24E00D2F091 /* AudioUtility.mm in Sources */ = {isa = PBXBuildFile; fileRef = BE89BE9C1605E24E00D2F091 /* AudioUtility.mm */; };
 		F301345F15FD8F9E00480CD7 /* ViewController_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = F301345E15FD8F9E00480CD7 /* ViewController_iPhone.m */; };
 		F301346215FD8FB300480CD7 /* ViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = F301346115FD8FB100480CD7 /* ViewController_iPad.m */; };
 		F301346515FD908700480CD7 /* Configure.m in Sources */ = {isa = PBXBuildFile; fileRef = F301346415FD908500480CD7 /* Configure.m */; };
@@ -38,6 +48,24 @@
 		BE19EC0015F359B800065448 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		BE19EC0315F359B800065448 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPhone.xib; sourceTree = "<group>"; };
 		BE19EC0615F359B800065448 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPad.xib; sourceTree = "<group>"; };
+		BE89BE661605DB6600D2F091 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		BE89BE691605DB6F00D2F091 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		BE89BE6B1605DB7700D2F091 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		BE89BE6E1605DBA300D2F091 /* AQPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AQPlayer.h; sourceTree = "<group>"; };
+		BE89BE6F1605DBA300D2F091 /* AQPlayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AQPlayer.mm; sourceTree = "<group>"; };
+		BE89BE701605DBA300D2F091 /* AQRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AQRecorder.h; sourceTree = "<group>"; };
+		BE89BE711605DBA300D2F091 /* AQRecorder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AQRecorder.mm; sourceTree = "<group>"; };
+		BE89BE721605DBA300D2F091 /* MeterTable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MeterTable.cpp; sourceTree = "<group>"; };
+		BE89BE731605DBA300D2F091 /* MeterTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeterTable.h; sourceTree = "<group>"; };
+		BE89BE8A1605DC3B00D2F091 /* CADebugMacros.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CADebugMacros.cpp; sourceTree = "<group>"; };
+		BE89BE8B1605DC3B00D2F091 /* CADebugMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CADebugMacros.h; sourceTree = "<group>"; };
+		BE89BE8C1605DC3B00D2F091 /* CAMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAMath.h; sourceTree = "<group>"; };
+		BE89BE8D1605DC3B00D2F091 /* CAStreamBasicDescription.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CAStreamBasicDescription.cpp; sourceTree = "<group>"; };
+		BE89BE8E1605DC3B00D2F091 /* CAStreamBasicDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAStreamBasicDescription.h; sourceTree = "<group>"; };
+		BE89BE8F1605DC3B00D2F091 /* CAXException.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CAXException.cpp; sourceTree = "<group>"; };
+		BE89BE901605DC3B00D2F091 /* CAXException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAXException.h; sourceTree = "<group>"; };
+		BE89BE9B1605E24E00D2F091 /* AudioUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioUtility.h; sourceTree = "<group>"; };
+		BE89BE9C1605E24E00D2F091 /* AudioUtility.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AudioUtility.mm; sourceTree = "<group>"; };
 		F301345D15FD8F9D00480CD7 /* ViewController_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController_iPhone.h; sourceTree = "<group>"; };
 		F301345E15FD8F9E00480CD7 /* ViewController_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController_iPhone.m; sourceTree = "<group>"; };
 		F301346015FD8FB100480CD7 /* ViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController_iPad.h; sourceTree = "<group>"; };
@@ -54,6 +82,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE89BE6C1605DB7700D2F091 /* AudioToolbox.framework in Frameworks */,
+				BE89BE6A1605DB6F00D2F091 /* CoreFoundation.framework in Frameworks */,
+				BE89BE671605DB6600D2F091 /* CoreAudio.framework in Frameworks */,
 				F301347915FDDD1D00480CD7 /* AVFoundation.framework in Frameworks */,
 				BE19EBEE15F359B800065448 /* UIKit.framework in Frameworks */,
 				BE19EBF015F359B800065448 /* Foundation.framework in Frameworks */,
@@ -84,6 +115,9 @@
 		BE19EBEC15F359B800065448 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BE89BE6B1605DB7700D2F091 /* AudioToolbox.framework */,
+				BE89BE691605DB6F00D2F091 /* CoreFoundation.framework */,
+				BE89BE661605DB6600D2F091 /* CoreAudio.framework */,
 				F301347815FDDD1D00480CD7 /* AVFoundation.framework */,
 				BE19EBED15F359B800065448 /* UIKit.framework */,
 				BE19EBEF15F359B800065448 /* Foundation.framework */,
@@ -95,6 +129,7 @@
 		BE19EBF315F359B800065448 /* TimerCamera */ = {
 			isa = PBXGroup;
 			children = (
+				BE89BE6D1605DBA300D2F091 /* AudioUtility */,
 				BE19EBFC15F359B800065448 /* AppDelegate.h */,
 				BE19EBFD15F359B800065448 /* AppDelegate.m */,
 				BE19EBFF15F359B800065448 /* ViewController.h */,
@@ -123,6 +158,28 @@
 				BE19EBFB15F359B800065448 /* TimerCamera-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BE89BE6D1605DBA300D2F091 /* AudioUtility */ = {
+			isa = PBXGroup;
+			children = (
+				BE89BE8A1605DC3B00D2F091 /* CADebugMacros.cpp */,
+				BE89BE8B1605DC3B00D2F091 /* CADebugMacros.h */,
+				BE89BE8C1605DC3B00D2F091 /* CAMath.h */,
+				BE89BE8D1605DC3B00D2F091 /* CAStreamBasicDescription.cpp */,
+				BE89BE8E1605DC3B00D2F091 /* CAStreamBasicDescription.h */,
+				BE89BE8F1605DC3B00D2F091 /* CAXException.cpp */,
+				BE89BE901605DC3B00D2F091 /* CAXException.h */,
+				BE89BE6E1605DBA300D2F091 /* AQPlayer.h */,
+				BE89BE6F1605DBA300D2F091 /* AQPlayer.mm */,
+				BE89BE701605DBA300D2F091 /* AQRecorder.h */,
+				BE89BE711605DBA300D2F091 /* AQRecorder.mm */,
+				BE89BE721605DBA300D2F091 /* MeterTable.cpp */,
+				BE89BE731605DBA300D2F091 /* MeterTable.h */,
+				BE89BE9B1605E24E00D2F091 /* AudioUtility.h */,
+				BE89BE9C1605E24E00D2F091 /* AudioUtility.mm */,
+			);
+			path = AudioUtility;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -195,6 +252,13 @@
 				F301346215FD8FB300480CD7 /* ViewController_iPad.m in Sources */,
 				F301346515FD908700480CD7 /* Configure.m in Sources */,
 				F301346C15FD98CE00480CD7 /* CameraOptions.m in Sources */,
+				BE89BE741605DBA300D2F091 /* AQPlayer.mm in Sources */,
+				BE89BE751605DBA300D2F091 /* AQRecorder.mm in Sources */,
+				BE89BE761605DBA300D2F091 /* MeterTable.cpp in Sources */,
+				BE89BE911605DC3B00D2F091 /* CADebugMacros.cpp in Sources */,
+				BE89BE921605DC3B00D2F091 /* CAStreamBasicDescription.cpp in Sources */,
+				BE89BE931605DC3B00D2F091 /* CAXException.cpp in Sources */,
+				BE89BE9D1605E24E00D2F091 /* AudioUtility.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
