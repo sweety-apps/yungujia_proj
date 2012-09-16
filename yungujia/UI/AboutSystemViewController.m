@@ -13,7 +13,7 @@
 @end
 
 @implementation AboutSystemViewController
-
+@synthesize tableview = _tableview;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -21,8 +21,8 @@
         // Custom initialization
         self.title = @"关于";
         
-        _arrayvalues = [[NSMutableArray alloc] initWithObjects:@"1.0",@"深圳房讯通信息技术有限公司",@"云估价专注于房地产价格数据研究与应用。目前已为众多专业房地产评估机构与商业银行提供服务。",@"http://www.yungujia.com",nil];
-        _arraykeys = [[NSMutableArray alloc] initWithObjects:@"版本",@"公司",@"简介",@"官网",nil];
+        _arrayvalues = [[NSMutableArray alloc] initWithObjects:@"1.0",@"深圳房讯通信息技术有限公司",@"http://www.yungujia.com",@"云估价专注于房地产价格数据研究与应用。目前已为众多专业房地产评估机构与商业银行提供服务。",nil];
+        _arraykeys = [[NSMutableArray alloc] initWithObjects:@"版本",@"公司",@"官网",@"简介",nil];
    }
     return self;
 }
@@ -31,6 +31,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    ((UIScrollView*)(self.view)).contentSize = _tableview.frame.size;
 }
 
 - (void)viewDidUnload
@@ -88,7 +89,7 @@
         return cell;
     }
     else {
-        if (indexPath.row == 2) 
+        if (indexPath.row == 3) 
         {
             static NSString* dequeueIdentifer = @"introcellwithlogo";
             UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:dequeueIdentifer];
@@ -104,7 +105,7 @@
                 lblkey.font = [UIFont boldSystemFontOfSize:17.0];
                 [lblkey release];
                 
-                UILabel* lblvalue = [[UILabel alloc] initWithFrame:CGRectMake(80, 5, 220, 79)];
+                UILabel* lblvalue = [[UILabel alloc] initWithFrame:CGRectMake(80, 5, 220, 70)];
                 lblvalue.text = [_arrayvalues objectAtIndex:indexPath.row];
                 lblvalue.textAlignment = UITextAlignmentLeft;
                 lblvalue.textColor =[UIColor colorWithRed:82.0/255.0 green:105.0/255.0 blue:155.0/255.0 alpha:1.0];
@@ -141,7 +142,7 @@
                 lblkey.font = [UIFont boldSystemFontOfSize:17.0];
                 [lblkey release];
                 
-                UILabel* lblvalue = [[UILabel alloc] initWithFrame:CGRectMake(80, 5, 220, indexPath.row == 2?129:35)];
+                UILabel* lblvalue = [[UILabel alloc] initWithFrame:CGRectMake(80, 5, 220,35)];
                 lblvalue.text = [_arrayvalues objectAtIndex:indexPath.row];
                 lblvalue.textAlignment = UITextAlignmentRight;
                 lblvalue.textColor =[UIColor colorWithRed:82.0/255.0 green:105.0/255.0 blue:155.0/255.0 alpha:1.0];
@@ -171,7 +172,7 @@
         return 62;
     }
     else {
-        if (indexPath.row == 2) {
+        if (indexPath.row == 3) {
             return 280;
         }
         else {

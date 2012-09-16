@@ -53,7 +53,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    ((UIScrollView*)(self.view)).contentSize = _contentView.frame.size;
+    ((UIScrollView*)(self.view)).contentSize = CGSizeMake(320, 550);
     
     self.labelName.text = [Config getUsername];
     
@@ -105,11 +105,17 @@
     {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:dequeueIdentifer] autorelease];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        cell.textLabel.font = [UIFont boldSystemFontOfSize:17.0];
-
     }
-    cell.textLabel.text = [self.datasource objectAtIndex:indexPath.row];
-    [cell.imageView setImage:[UIImage imageNamed:[self.imagearray objectAtIndex:indexPath.row]]]; 
+    
+    UILabel* lbltext = [[[UILabel alloc] initWithFrame:CGRectMake(50, 15, 320-70, 20)] autorelease];
+    [lbltext setBackgroundColor:[UIColor clearColor]];
+    lbltext.text = [self.datasource objectAtIndex:indexPath.row];
+    lbltext.font = [UIFont boldSystemFontOfSize:17.0];
+    [cell addSubview:lbltext];
+    
+    UIImageView* imgicon = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:[self.imagearray objectAtIndex:indexPath.row]]] autorelease];
+    [imgicon setFrame:CGRectMake(20, 15, 20, 20)];
+    [cell addSubview:imgicon];
     return cell;
 }
 

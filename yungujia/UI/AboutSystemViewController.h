@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AboutSystemViewController : UITableViewController
+@interface AboutSystemViewController : UIViewController
 {
     NSMutableArray* _arraykeys;
     NSMutableArray* _arrayvalues;
+    UITableView* _tableview;
 }
+
+@property (nonatomic,retain) IBOutlet UITableView* tableview;
 @end
