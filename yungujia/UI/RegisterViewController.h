@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface RegisterViewController : UIViewController
-<UIPickerViewDelegate,UIPickerViewDataSource,UITextFieldDelegate>
+<UIPickerViewDelegate,UIPickerViewDataSource,UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource>
 {
     UITextField* txtTel;
     UITextField* txtIdentifyCode;

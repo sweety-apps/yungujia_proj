@@ -24,7 +24,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title = @"登陆手机云估价";
+        self.title = @"登录手机云估价";
         UIBarButtonItem* rightbtn = [[UIBarButtonItem alloc] init];
         rightbtn.title = @"注册";
         self.navigationItem.rightBarButtonItem = rightbtn;
@@ -81,8 +81,18 @@
                                              selector:@selector(keyboardWillHide:)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil]; 
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(doHideKeyBoard)];
     
-    
+    tap.numberOfTapsRequired = 1;
+    for (int i = 0; i<[[self.view subviews] count]; i++) {
+        if (![self.view isKindOfClass:[UITextField class]]) {
+            [self.view  addGestureRecognizer: tap];
+        }
+    }
+    [tap setCancelsTouchesInView:NO];
+    [tap release];
     
 }
 
@@ -90,6 +100,11 @@
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
     [super viewDidUnload];
+}
+
+- (void)doHideKeyBoard{
+    [self.inputusername resignFirstResponder];
+    [self.inputpassword resignFirstResponder];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -111,7 +126,13 @@
 {
     NSLog(@"%f %f",self.view.center.x,self.view.center.y);
     //    self.view.center=CGPointMake(self.view.center.x,80);
-    [self moveviewsup:128];
+    //    [self moveviewsup:128];
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.3];
+    CGPoint center = CGPointMake(160.0,208.0);
+    [self.view setCenter:center];
+    [UIView commitAnimations];
+    
     NSLog(@"%f %f",self.view.center.x,self.view.center.y);
 }
 -(IBAction)actionNormalLogin:(id)sender
@@ -177,7 +198,7 @@
 {
     [_progressInd stopAnimating];
     [_progressInd hidesWhenStopped];
-    NSLog(@"登陆失败");
+    NSLog(@"登录失败");
 }
 
 -(void)moveviewsup:(int)distance

@@ -9,6 +9,27 @@
 #import "RegisterViewController.h"
 #import "AppDelegate.h"
 
+
+@implementation UITextField (HideKeyBoard)
+- (void) hideKeyBoard:(UIView*)view{
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(doHideKeyBoard)];
+    
+    tap.numberOfTapsRequired = 1;
+    for (int i = 0; i<[[view subviews] count]; i++) {
+        if (![view isKindOfClass:[UITextField class]]) {
+            [view  addGestureRecognizer: tap];
+        }
+    }
+    [tap setCancelsTouchesInView:NO];
+    [tap release];
+}
+//- (void)doHideKeyBoard{
+//    [txtTel resignFirstResponder];
+//}
+@end
+
 @interface RegisterViewController (private)
 
 -(void)buildDataSource;
@@ -63,10 +84,47 @@
     btn_img = [btn_img stretchableImageWithLeftCapWidth:14 topCapHeight:23];
     [self.btnSend setBackgroundImage:btn_img forState:UIControlStateNormal];
 
+//    [self.txtTel hideKeyBoard:self.view];
+//    
+//    [self.txtName hideKeyBoard:self.view];
+//    [self.txtPassword hideKeyBoard:self.view];
+//    [self.txtIdentifyCode hideKeyBoard:self.view];
+//    [self.txtConfirmPassword hideKeyBoard:self.view];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(doHideKeyBoard)];
+    
+    tap.numberOfTapsRequired = 1;
+    for (int i = 0; i<[[self.view subviews] count]; i++) {
+        if (![self.view isKindOfClass:[UITextField class]]) {
+            [self.view  addGestureRecognizer: tap];
+        }
+    }
+    [tap setCancelsTouchesInView:NO];
+    [tap release];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];   
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil]; 
+}
+
+- (void)doHideKeyBoard{
+    [self.txtTel resignFirstResponder];
+    [self.txtName resignFirstResponder];
+    [self.txtPassword resignFirstResponder];
+    [self.txtIdentifyCode resignFirstResponder];
+    [self.txtConfirmPassword resignFirstResponder];
 }
 
 - (void)viewDidUnload
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -208,6 +266,7 @@
     }
     [UIView commitAnimations];
     [textField resignFirstResponder];
+    [self.pickUserStyle setHidden:YES];
     return YES;
 }
 
@@ -215,4 +274,66 @@
 {
     return YES;
 }
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView              // Default is 1 if not implemented
+{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 5;
+}
+
+// Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
+// Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString* dequeueIdentifer = @"UITableViewCell";
+    UITableViewCell* cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:dequeueIdentifer];
+    if (cell == nil)
+    {
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:dequeueIdentifer] autorelease];
+        if (indexPath.row == 4) {
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        }
+    }
+    return cell;
+}
+
+- (void)keyboardWillShow:(NSNotification*)aNotification
+{
+//    NSLog(@"%f %f",self.view.center.x,self.view.center.y);
+//    if (self.view.frame.origin.y == 0) {
+//        [self moveviewsup:-128];
+//    }
+//    NSLog(@"%f %f",self.view.center.x,self.view.center.y);
+}
+
+- (void)keyboardWillHide:(NSNotification*)aNotification
+{
+    NSLog(@"%f %f",self.view.center.x,self.view.center.y);
+    //    self.view.center=CGPointMake(self.view.center.x,80);
+//    [self moveviewsup:128];
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.3];
+    CGPoint center = CGPointMake(160.0,208.0);
+    [self.view setCenter:center];
+    [UIView commitAnimations];
+    
+    NSLog(@"%f %f",self.view.center.x,self.view.center.y);
+}
+
+-(void)moveviewsup:(int)distance
+{
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.3];
+    //    for (int i = 0; i<[self.view.subviews count]; i++) {
+    UIView* view = self.view;//[self.view.subviews objectAtIndex:i];
+    view.frame = CGRectMake(view.frame.origin.x, view.frame.origin.y + distance, view.frame.size.width, view.frame.size.height);
+    //    }
+    [UIView commitAnimations];
+}
+
 @end

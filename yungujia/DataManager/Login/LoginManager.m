@@ -67,7 +67,7 @@ static LoginManager* g_Manager = nil;
 - (void)requestFailed:(ASIHTTPRequest *)request
 {
     NSDictionary* argsDict = nil;
-    argsDict = [NSDictionary dictionaryWithObject:@"登陆失败" forKey:@"msg"];
+    argsDict = [NSDictionary dictionaryWithObject:@"登录失败" forKey:@"msg"];
     [self sendFaildInfo2UI:argsDict];
 }
 
