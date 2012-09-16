@@ -11,15 +11,15 @@
 @interface InviteFriendController : UIViewController
 <UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 {
-    UILabel* lblInfo;
+//    UILabel* lblInfo;
     UITableView* _tableView;
     NSMutableArray* friendlist;
-    UITextField* txtTelNum;
-    UIButton*   btnSend;
+//    UITextField* txtTelNum;
+//    UIButton*   btnSend;
 }
 
-@property (retain,nonatomic) IBOutlet UILabel* lblInfo;
+//@property (retain,nonatomic) IBOutlet UILabel* lblInfo;
 @property (retain,nonatomic) IBOutlet UITableView* tableView;
-@property (retain,nonatomic) IBOutlet UIButton* btnSend;
-@property (retain,nonatomic) IBOutlet UITextField* txtTelNum;
+//@property (retain,nonatomic) IBOutlet UIButton* btnSend;
+//@property (retain,nonatomic) IBOutlet UITextField* txtTelNum;
 @end
