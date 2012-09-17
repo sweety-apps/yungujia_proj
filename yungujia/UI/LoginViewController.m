@@ -93,6 +93,7 @@
     }
     [tap setCancelsTouchesInView:NO];
     [tap release];
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]]];
     
 }
 

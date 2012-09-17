@@ -61,6 +61,7 @@
 		38E2F9B815BBB4D900EB72D0 /* topbar_button_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 38E2F9B415BBB4D900EB72D0 /* topbar_button_back.png */; };
 		38E2F9B915BBB4D900EB72D0 /* topbar_button_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38E2F9B515BBB4D900EB72D0 /* topbar_button_back@2x.png */; };
 		38E2F9BB15BBB83500EB72D0 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 38E2F9BA15BBB83500EB72D0 /* logo.png */; };
+		3DD3828E16076AE6008D2C18 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DD3828D16076AE6008D2C18 /* background.png */; };
 		BE12C8EE15CED8D1009902E6 /* gengduo_actived.png in Resources */ = {isa = PBXBuildFile; fileRef = BE12C8DA15CED8D1009902E6 /* gengduo_actived.png */; };
 		BE12C8EF15CED8D1009902E6 /* gengduo_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = BE12C8DB15CED8D1009902E6 /* gengduo_normal.png */; };
 		BE12C8F015CED8D1009902E6 /* gengduo_pushed.png in Resources */ = {isa = PBXBuildFile; fileRef = BE12C8DC15CED8D1009902E6 /* gengduo_pushed.png */; };
@@ -324,6 +325,7 @@
 		38E2F9B415BBB4D900EB72D0 /* topbar_button_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topbar_button_back.png; sourceTree = "<group>"; };
 		38E2F9B515BBB4D900EB72D0 /* topbar_button_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "topbar_button_back@2x.png"; sourceTree = "<group>"; };
 		38E2F9BA15BBB83500EB72D0 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		3DD3828D16076AE6008D2C18 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
 		BE12C8DA15CED8D1009902E6 /* gengduo_actived.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gengduo_actived.png; sourceTree = "<group>"; };
 		BE12C8DB15CED8D1009902E6 /* gengduo_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gengduo_normal.png; sourceTree = "<group>"; };
 		BE12C8DC15CED8D1009902E6 /* gengduo_pushed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gengduo_pushed.png; sourceTree = "<group>"; };
@@ -704,6 +706,7 @@
 		38E2F9A515BB9D6E00EB72D0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3DD3828D16076AE6008D2C18 /* background.png */,
 				38E2084315DA6E620086AF7E /* topseglefta.png */,
 				38E2084415DA6E620086AF7E /* topseglefta@2x.png */,
 				38E2084515DA6E620086AF7E /* topsegleftn.png */,
@@ -1404,6 +1407,7 @@
 				F30133DF15F8511700480CD7 /* ZidonggujiaCellViewController.xib in Resources */,
 				F30133EC15F8934C00480CD7 /* PinggujigoujianjieViewController.xib in Resources */,
 				BEBE051515F8FA75005D0EC9 /* PinggujigouyinhangLV2ViewController.xib in Resources */,
+				3DD3828E16076AE6008D2C18 /* background.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
