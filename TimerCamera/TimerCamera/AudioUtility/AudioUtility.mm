@@ -13,6 +13,12 @@
 #define TempRecordFile @"tmp.caf"
 #define DefaultDelegate 0x1
 #define SafeDelete(x) if(x) { delete (x); (x) = NULL; }
+#define UpdateTimerInterval 0.3 
+
+#define kMinDBvalue (-80.0)
+#define kMaxDBvalue (0.f)
+
+#define DBToVol(x) ((x) > kMaxDBvalue ? 1. : ((x) < kMinDBvalue ? 0. : (x)))
 
 #pragma mark - Recorder
 
@@ -146,6 +152,11 @@ static AudioUtility* gSI = nil;
 {
     [_playWarperDict release];
     _playWarperDict = nil;
+    
+    [_detectTimer invalidate];
+    [_detectTimer release];
+    _detectTimer = nil;
+    
     [super dealloc];
 }
 
@@ -263,6 +274,44 @@ static void OnPlaybackHasFinished(AQPlayer* player, void* context)
 
 #pragma mark -- <Detect>
 
+- (void)onUpdateDetect
+{
+    AQRecorderWarper* r = _recorderWarper;
+    AudioQueueLevelMeterState	_chan_lvls[r.recorder->GetNumberChannels()];
+    memset(_chan_lvls, 0, sizeof(AudioQueueLevelMeterState) * r.recorder->GetNumberChannels());
+    UInt32 data_sz = sizeof(AudioQueueLevelMeterState) * r.recorder->GetNumberChannels();
+    OSErr status = AudioQueueGetProperty(r.recorder->Queue(), kAudioQueueProperty_CurrentLevelMeterDB, _chan_lvls, &data_sz);
+    if (status != noErr)
+    {
+        printf("ERROR: metering failed\n");
+    }
+    
+    //caculate average level of all channels
+    float lvl = 0.f;
+    for (int i=0; i< r.recorder->GetNumberChannels() ; i++)
+    {
+        lvl += DBToVol(_chan_lvls[i].mAveragePower);
+    }
+    lvl /= (float)r.recorder->GetNumberChannels();
+    
+    _currentVolume = lvl;
+    
+    NSLog(@"[D]cur_VOL = %.4f, det_VOL = %.f", _currentVolume, _detectVolume);
+    
+    if (r.delegate && [r.delegate respondsToSelector:@selector(onUpdate:forInstance:)])
+    {
+        [r.delegate onUpdate:lvl forInstance:self];
+    }
+    
+    if (_currentVolume >= _detectVolume)
+    {
+        if (r.delegate && [r.delegate respondsToSelector:@selector(onDetected:higherThan:forInstance:)])
+        {
+            [r.delegate onDetected:lvl higherThan:_detectVolume forInstance:self];
+        }
+    }
+}
+
 // 0. ~ 1.0 for vol
 - (void)startDetectingVolume:(float)vol
 {
@@ -275,12 +324,18 @@ static void OnPlaybackHasFinished(AQPlayer* player, void* context)
     }
     r.recorder->DisableRecordToFile(YES);
     r.recorder->StartRecord((CFStringRef)[NSTemporaryDirectory() stringByAppendingPathComponent:TempRecordFile]);
+    
+    _detectTimer = [[NSTimer scheduledTimerWithTimeInterval:UpdateTimerInterval target:self selector:@selector(onUpdateDetect) userInfo:nil repeats:YES] retain];
 }
 
 - (void)stopDectingVolume
 {
     AQRecorderWarper* r = _recorderWarper;
     r.recorder->StopRecord();
+    
+    [_detectTimer invalidate];
+    [_detectTimer release];
+    _detectTimer = nil;
 }
 
 - (float)currentVolume

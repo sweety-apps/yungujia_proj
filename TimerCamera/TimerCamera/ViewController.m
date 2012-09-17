@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "AudioUtility.h"
 
 @interface ViewController ()
 
@@ -50,7 +51,7 @@
     _lastScale = 1.0;
     _currentScale = 1.0;
     
-    [NSTimer scheduledTimerWithTimeInterval:0.35 target:self selector:@selector(detectCameraSize) userInfo:nil repeats:YES];
+    //[NSTimer scheduledTimerWithTimeInterval:0.35 target:self selector:@selector(detectCameraSize) userInfo:nil repeats:YES];
 }
 
 - (void)viewDidUnload
@@ -186,6 +187,17 @@
 }
 
 #pragma mark - test code
+
+- (IBAction)OnClickedVolume:(id)sender
+{
+    [[AudioUtility sharedInstance] startDetectingVolume:0.5];
+}
+
+- (IBAction)OnClickedSound:(id)sender
+{
+    NSString* filePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"long_low_short_high.caf"];
+    [[AudioUtility sharedInstance] playFile:filePath];
+}
 
 - (void)test
 {

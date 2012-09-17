@@ -54,4 +54,8 @@
 -(IBAction)handleTapGesture:(UIGestureRecognizer*)gestureRecognizer;
 -(IBAction)handlePinchGesture:(UIPinchGestureRecognizer*)gestureRecognizer;
 
+//test Button
+- (IBAction)OnClickedVolume:(id)sender;
+- (IBAction)OnClickedSound:(id)sender;
+
 @end
