@@ -67,6 +67,8 @@
     btn_img = [UIImage imageNamed:@"btnRed"];
     btn_img = [btn_img stretchableImageWithLeftCapWidth:14 topCapHeight:23];
     [self.btn setBackgroundImage:btn_img forState:UIControlStateNormal];
+    
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]]];
 }
 
 - (void)viewDidUnload

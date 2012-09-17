@@ -41,6 +41,8 @@
     rightbtn.title = @"确定";
     self.navigationItem.rightBarButtonItem = rightbtn;
     [rightbtn release];
+    
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]]];
 }
 
 - (void)viewDidUnload

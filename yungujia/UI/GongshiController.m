@@ -64,6 +64,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]]];
 }
 
 - (void)viewDidUnload
@@ -98,6 +99,7 @@
         cell = [[[UITableViewCell alloc] init]autorelease];
         UILabel* lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 280, 30)];
         lblTitle.text = ((GongshiInfo*)[gongshilist objectAtIndex:indexPath.row]).title;
+        [lblTitle setBackgroundColor:[UIColor clearColor]];
         [cell addSubview:lblTitle];
 //        [lblTitle setBackgroundColor:[UIColor redColor]];
         [lblTitle release];

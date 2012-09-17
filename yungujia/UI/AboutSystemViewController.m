@@ -32,6 +32,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     ((UIScrollView*)(self.view)).contentSize = _tableview.frame.size;
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]]];
 }
 
 - (void)viewDidUnload
@@ -123,6 +124,7 @@
             else {
                 
             }
+            [cell setBackgroundColor:[UIColor clearColor]];
             return cell;
 
         }
@@ -155,6 +157,7 @@
             else {
                 
             }
+            [cell setBackgroundColor:[UIColor clearColor]];
             return cell;
         }
     }

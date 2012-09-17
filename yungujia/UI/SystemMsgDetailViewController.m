@@ -80,6 +80,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self setCustomNavButtonItemExpand:NSLocalizedString(@"str_back", @"返回") imagePath:@"topbar_button_back" imagePathHover:@"topbar_button_back_hover" target:self action:@selector(onClickBack:)];
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]]];
 }
 
 - (void)viewDidUnload
@@ -115,6 +116,7 @@
         {
             cell = [[[UITableViewCell alloc] init]autorelease];
             UILabel* lblText = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 310, 40)];
+            [lblText setBackgroundColor:[UIColor clearColor]];
             lblText.text = _msgRecord.title;
             [cell addSubview:lblText];
             //        [lblText setBackgroundColor:[UIColor redColor]];
@@ -127,6 +129,7 @@
             //        [lblTime setBackgroundColor:[UIColor blueColor]];
             [cell addSubview:lblTime];
             [lblTime setFont:[UIFont systemFontOfSize:14]];
+            [lblTime setBackgroundColor:[UIColor clearColor]];
             [lblTime release];
         }
         else {

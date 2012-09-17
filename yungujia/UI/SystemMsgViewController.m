@@ -64,6 +64,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]]];
 }
 
 - (void)viewDidUnload
@@ -99,6 +100,7 @@
         SystemMsgRecord* msg = (SystemMsgRecord*)[_msgList objectAtIndex:indexPath.row];
         UILabel* lblText = [[UILabel alloc] initWithFrame:CGRectMake(17, 5, 290, 40)];
         lblText.text = msg.title;
+        [lblText setBackgroundColor:[UIColor clearColor]];
         [cell addSubview:lblText];
 //        [lblText setBackgroundColor:[UIColor redColor]];
         lblText.numberOfLines = 2;
@@ -110,6 +112,7 @@
 //        [lblTime setBackgroundColor:[UIColor blueColor]];
         [cell addSubview:lblTime];
         [lblTime setFont:[UIFont systemFontOfSize:14]];
+        [lblTime setBackgroundColor:[UIColor clearColor]];
         [lblTime release];
         
         if (msg.isRead) {
