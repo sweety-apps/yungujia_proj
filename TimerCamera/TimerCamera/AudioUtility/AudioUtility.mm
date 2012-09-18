@@ -18,7 +18,7 @@
 #define kMinDBvalue (-80.0)
 #define kMaxDBvalue (0.f)
 
-#define DBToVol(x) ((x) > kMaxDBvalue ? 1. : ((x) < kMinDBvalue ? 0. : (x)))
+#define DBToVol(x) ((x) >= kMaxDBvalue ? 1. : ((x) <= kMinDBvalue ? 0. : (((x) - kMinDBvalue) / (kMaxDBvalue - kMinDBvalue))))
 
 #pragma mark - Recorder
 
@@ -141,6 +141,7 @@ static AudioUtility* gSI = nil;
         _recorderWarper = [[AQRecorderWarper alloc] init];
         
         _currentVolume = 0.;
+        _currentPeakVolume = 0.;
         _detectVolume = 1.;
         
         [self setupNotifiesAndAudioSessions];
@@ -280,7 +281,8 @@ static void OnPlaybackHasFinished(AQPlayer* player, void* context)
     AudioQueueLevelMeterState	_chan_lvls[r.recorder->GetNumberChannels()];
     memset(_chan_lvls, 0, sizeof(AudioQueueLevelMeterState) * r.recorder->GetNumberChannels());
     UInt32 data_sz = sizeof(AudioQueueLevelMeterState) * r.recorder->GetNumberChannels();
-    OSErr status = AudioQueueGetProperty(r.recorder->Queue(), kAudioQueueProperty_CurrentLevelMeterDB, _chan_lvls, &data_sz);
+    OSStatus status = AudioQueueGetProperty(r.recorder->Queue(), kAudioQueueProperty_CurrentLevelMeterDB, _chan_lvls, &data_sz);
+    //kAudioQueueErr_EnqueueDuringReset
     if (status != noErr)
     {
         printf("ERROR: metering failed\n");
@@ -288,26 +290,30 @@ static void OnPlaybackHasFinished(AQPlayer* player, void* context)
     
     //caculate average level of all channels
     float lvl = 0.f;
+    float lvlp = 0.f;
     for (int i=0; i< r.recorder->GetNumberChannels() ; i++)
     {
         lvl += DBToVol(_chan_lvls[i].mAveragePower);
+        lvlp += DBToVol(_chan_lvls[i].mPeakPower);
     }
     lvl /= (float)r.recorder->GetNumberChannels();
+    lvlp /= (float)r.recorder->GetNumberChannels();
     
     _currentVolume = lvl;
+    _currentPeakVolume = lvlp;
     
-    NSLog(@"[D]cur_VOL = %.4f, det_VOL = %.f", _currentVolume, _detectVolume);
+    NSLog(@"[D]cur_VOL = %.4f, det_VOL = %f", _currentVolume, _detectVolume);
     
-    if (r.delegate && [r.delegate respondsToSelector:@selector(onUpdate:forInstance:)])
+    if (r.delegate && [r.delegate respondsToSelector:@selector(onUpdate:peakVolume:forInstance:)])
     {
-        [r.delegate onUpdate:lvl forInstance:self];
+        [r.delegate onUpdate:lvl peakVolume:lvlp forInstance:self];
     }
     
     if (_currentVolume >= _detectVolume)
     {
-        if (r.delegate && [r.delegate respondsToSelector:@selector(onDetected:higherThan:forInstance:)])
+        if (r.delegate && [r.delegate respondsToSelector:@selector(onDetected:peakVolume:higherThan:forInstance:)])
         {
-            [r.delegate onDetected:lvl higherThan:_detectVolume forInstance:self];
+            [r.delegate onDetected:lvl peakVolume:lvlp higherThan:_detectVolume forInstance:self];
         }
     }
 }
@@ -324,6 +330,16 @@ static void OnPlaybackHasFinished(AQPlayer* player, void* context)
     }
     r.recorder->DisableRecordToFile(YES);
     r.recorder->StartRecord((CFStringRef)[NSTemporaryDirectory() stringByAppendingPathComponent:TempRecordFile]);
+    
+    //enable metering
+    {
+        UInt32 val = 1;
+        OSStatus status = AudioQueueSetProperty(r.recorder->Queue(), kAudioQueueProperty_EnableLevelMetering, &val, sizeof(UInt32));
+        if(status!=noErr)
+        {
+            printf("Error enabling level metering\n");
+        }
+    }
     
     _detectTimer = [[NSTimer scheduledTimerWithTimeInterval:UpdateTimerInterval target:self selector:@selector(onUpdateDetect) userInfo:nil repeats:YES] retain];
 }
@@ -346,6 +362,11 @@ static void OnPlaybackHasFinished(AQPlayer* player, void* context)
 - (float)detectVolume
 {
     return _detectVolume;
+}
+
+- (float)currentPeakVolume
+{
+    return _currentPeakVolume;
 }
 
 - (void)setVolumeDetectingDelegate:(id<AudioUtilityVolumeDetectDelegate>)delegate

@@ -13,10 +13,12 @@
 @protocol AudioUtilityVolumeDetectDelegate <NSObject>
 
 - (void)onDetected:(float)currentVolume
+        peakVolume:(float)peakVolume
         higherThan:(float)detectVolume
        forInstance:(AudioUtility*)util;
 
 - (void)onUpdate:(float)currentVolume
+      peakVolume:(float)peakVolume
      forInstance:(AudioUtility*)util;
 
 @end
@@ -36,6 +38,7 @@
     //for detect Volume while recording
     id _recorderWarper;
     float _currentVolume;
+    float _currentPeakVolume;
     float _detectVolume;
     NSTimer* _detectTimer;
     //for playback
@@ -64,6 +67,7 @@
 - (void)startDetectingVolume:(float)vol;
 - (void)stopDectingVolume;
 - (float)currentVolume;
+- (float)currentPeakVolume;
 - (float)detectVolume;
 - (void)setVolumeDetectingDelegate:(id<AudioUtilityVolumeDetectDelegate>)delegate;
 

@@ -7,7 +7,6 @@
 //
 
 #import "ViewController.h"
-#import "AudioUtility.h"
 
 @interface ViewController ()
 
@@ -317,6 +316,37 @@
     
     [CameraOptions sharedInstance].imagePicker.cameraViewTransform = newTransform;
     _currentScale = newTransform.a;
+}
+
+#pragma mark - AudioUtilityVolumeDetectDelegate
+
+- (void)onDetected:(float)currentVolume
+        peakVolume:(float)peakVolume
+        higherThan:(float)detectVolume
+       forInstance:(AudioUtility*)util
+{
+    
+}
+
+- (void)onUpdate:(float)currentVolume
+      peakVolume:(float)peakVolume
+     forInstance:(AudioUtility*)util
+{
+    
+}
+
+#pragma mark - AudioUtilityPlaybackDelegate
+
+- (void)onStartPlayFile:(NSString*)filePath
+            forInstance:(AudioUtility*)util
+{
+    
+}
+
+- (void)onFinishedPlayFile:(NSString*)filePath
+               forInstance:(AudioUtility*)util
+{
+    
 }
 
 @end

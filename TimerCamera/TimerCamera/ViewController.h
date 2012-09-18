@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "CameraOptions.h"
+#import "AudioUtility.h"
 
-@interface ViewController : UIViewController <UINavigationControllerDelegate,UIImagePickerControllerDelegate, UIGestureRecognizerDelegate>
+@interface ViewController : UIViewController <UINavigationControllerDelegate,UIImagePickerControllerDelegate, UIGestureRecognizerDelegate, AudioUtilityPlaybackDelegate, AudioUtilityVolumeDetectDelegate>
 {
     NSTimer* timer;
     
