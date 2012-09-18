@@ -30,6 +30,10 @@
     CGFloat _lastScale;
     
     CGFloat _currentScale;
+    
+    
+    UIView* _peakView;
+    UIView* _volView;
 }
 
 @property (nonatomic,retain) IBOutlet UIView* containerView;
@@ -44,6 +48,11 @@
 
 @property (nonatomic,retain) NSMutableArray* imageSaveQueue;
 @property (nonatomic,assign) CGFloat currentScale;
+
+
+@property (nonatomic,retain) IBOutlet UIView* peakView;
+@property (nonatomic,retain) IBOutlet UIView* volView;
+
 
 
 - (IBAction)OnClickedShot:(id)sender;

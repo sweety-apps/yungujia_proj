@@ -18,7 +18,12 @@
 #define kMinDBvalue (-80.0)
 #define kMaxDBvalue (0.f)
 
-#define DBToVol(x) ((x) >= kMaxDBvalue ? 1. : ((x) <= kMinDBvalue ? 0. : (((x) - kMinDBvalue) / (kMaxDBvalue - kMinDBvalue))))
+inline double DbToAmp(double inDb)
+{
+	return pow(10., 0.05 * inDb);
+}
+
+#define DBToVol(x) ((x) >= kMaxDBvalue ? 1. : ((x) <= kMinDBvalue ? 0. : DbToAmp(x)))
 
 #pragma mark - Recorder
 
@@ -195,7 +200,7 @@ static void OnPlaybackHasFinished(AQPlayer* player, void* context)
         ret = [[AQPlayerWarper alloc] initWithFile:filePath];
         ret.player->finishCallback = OnPlaybackHasFinished;
         ret.player->finishCallbackContext = self;
-        [_playWarperDict setObject:delegate forKey:filePath];
+        [_playWarperDict setObject:ret forKey:filePath];
     }
     if (delegate != (id<AudioUtilityPlaybackDelegate>)DefaultDelegate)
     {

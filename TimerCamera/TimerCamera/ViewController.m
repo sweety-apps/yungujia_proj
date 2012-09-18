@@ -29,6 +29,10 @@
 
 @synthesize currentScale = _currentScale;
 
+@synthesize peakView = _peakView;
+@synthesize volView = _volView;
+
+
 #pragma mark - UIViewController
 
 - (void)viewDidLoad
@@ -189,13 +193,14 @@
 
 - (IBAction)OnClickedVolume:(id)sender
 {
+    [[AudioUtility sharedInstance] setVolumeDetectingDelegate:self];
     [[AudioUtility sharedInstance] startDetectingVolume:0.5];
 }
 
 - (IBAction)OnClickedSound:(id)sender
 {
     NSString* filePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"long_low_short_high.caf"];
-    [[AudioUtility sharedInstance] playFile:filePath];
+    [[AudioUtility sharedInstance] playFile:filePath withDelegate:self];
 }
 
 - (void)test
@@ -320,19 +325,30 @@
 
 #pragma mark - AudioUtilityVolumeDetectDelegate
 
+#define kVolLength (145)
+
 - (void)onDetected:(float)currentVolume
         peakVolume:(float)peakVolume
         higherThan:(float)detectVolume
        forInstance:(AudioUtility*)util
 {
-    
+    NSLog(@"[PEAK] Reached Peak!");
 }
 
 - (void)onUpdate:(float)currentVolume
       peakVolume:(float)peakVolume
      forInstance:(AudioUtility*)util
 {
+    CGRect rct = {0};
+    //vol
+    rct = _volView.frame;
+    rct.size.height = currentVolume * kVolLength;
+    _volView.frame = rct;
     
+    //peak
+    rct = _peakView.frame;
+    rct.origin.y = peakVolume * kVolLength;
+    _peakView.frame = rct;
 }
 
 #pragma mark - AudioUtilityPlaybackDelegate
