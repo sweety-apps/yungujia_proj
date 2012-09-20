@@ -98,7 +98,7 @@
     {
         cell = [[[UITableViewCell alloc] init]autorelease];
         SystemMsgRecord* msg = (SystemMsgRecord*)[_msgList objectAtIndex:indexPath.row];
-        UILabel* lblText = [[UILabel alloc] initWithFrame:CGRectMake(17, 5, 290, 40)];
+        UILabel* lblText = [[UILabel alloc] initWithFrame:CGRectMake(25, 5, 270, 40)];
         lblText.text = msg.title;
         [lblText setBackgroundColor:[UIColor clearColor]];
         [cell addSubview:lblText];
@@ -106,7 +106,7 @@
         lblText.numberOfLines = 2;
         [lblText release];
         
-        UILabel* lblTime = [[UILabel alloc] initWithFrame:CGRectMake(17, 48, 290, 10)];
+        UILabel* lblTime = [[UILabel alloc] initWithFrame:CGRectMake(25, 48, 270, 10)];
         lblTime.text = msg.time;
         lblTime.textColor =[UIColor grayColor];
 //        [lblTime setBackgroundColor:[UIColor blueColor]];
