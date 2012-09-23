@@ -73,21 +73,26 @@
     if (lastCtrl == nil || lastCtrl.title == nil || [lastCtrl.title length] == 0)
     {
         lbl.text = @"返回";
-        [btn setTitle:@"返回" forState:UIControlStateNormal];
+        [btn addSubview:lbl];
+        //[btn setTitle:@"返回" forState:UIControlStateNormal];
     }
     else
     {
         lbl.text = lastCtrl.title;
         if ([lastCtrl.title length] > 4)
         {
-            [btn setTitle:[lastCtrl.title substringToIndex:4] forState:UIControlStateNormal];
+            lbl.text = [lastCtrl.title substringToIndex:4];
+            [btn addSubview:lbl];
+            //[btn setTitle:[lastCtrl.title substringToIndex:4] forState:UIControlStateNormal];
         }
         else
         {
-            [btn setTitle:lastCtrl.title forState:UIControlStateNormal];
+            [btn addSubview:lbl];
+            //[btn setTitle:lastCtrl.title forState:UIControlStateNormal];
         }
     }
     
+    /*
     btn.titleLabel.font = [UIFont boldSystemFontOfSize:13];
     btn.titleLabel.textAlignment = UITextAlignmentCenter;
     btn.titleLabel.textColor = [UIColor whiteColor];
@@ -96,7 +101,17 @@
     btn.titleLabel.backgroundColor = [UIColor clearColor];
     btn.titleLabel.adjustsFontSizeToFitWidth = YES;
     CGSize labelSize = [btn.titleLabel.text sizeWithFont:[UIFont boldSystemFontOfSize:13]];
-    btn.frame = CGRectMake(0, 0, labelSize.width+16, btnImage.size.height);
+     */
+    lbl.font = [UIFont boldSystemFontOfSize:13];
+    lbl.textAlignment = UITextAlignmentCenter;
+    lbl.textColor = [UIColor whiteColor];
+    lbl.shadowOffset = CGSizeMake(1, 1);
+    lbl.shadowColor = [UIColor colorWithWhite:0.f alpha:0.7];
+    lbl.backgroundColor = [UIColor clearColor];
+    lbl.adjustsFontSizeToFitWidth = YES;
+    CGSize labelSize = [lbl.text sizeWithFont:[UIFont boldSystemFontOfSize:13]];
+    btn.frame = CGRectMake(0, 0, labelSize.width+18, btnImage.size.height);
+    lbl.frame = CGRectMake(5, 0, labelSize.width+11, btnImage.size.height);
     //lbl.shadowColor = [UI]
     
     UIBarButtonItem* bbi = [[[UIBarButtonItem alloc] initWithCustomView:btn]autorelease];
