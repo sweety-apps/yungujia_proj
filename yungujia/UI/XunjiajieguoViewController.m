@@ -20,6 +20,16 @@
 @synthesize navbar = _navbar;
 @synthesize navctrl =_navctrl;
 
+@synthesize lblLoupan = _lblLoupan;
+@synthesize btnStar = _btnStar;
+@synthesize lblWeiguanzhu = _lblWeiguanzhu;
+@synthesize atvWeiguanzhu = _atvWeiguanzhu;
+@synthesize lblDanjia = _lblDanjia;
+@synthesize lblZongjia = _lblZongjia;
+@synthesize lblZoushi = _lblZoushi;
+@synthesize lblZuigaojia = _lblZuigaojia;
+@synthesize lblZuidijia = _lblZuidijia;
+@synthesize imgBgImage = _imgBgImage;
 
 @synthesize rengongctrl = _rengongctrl;
 @synthesize yinhangctrl = _yinhangctrl;
@@ -58,6 +68,17 @@
     btn_img = [UIImage imageNamed:@"btnGray"];
     btn_img = [btn_img stretchableImageWithLeftCapWidth:14 topCapHeight:23];
     [self.btnDuanxin setBackgroundImage:btn_img forState:UIControlStateNormal];
+    
+    self.imgBgImage.image = [self.imgBgImage.image stretchableImageWithLeftCapWidth:11 topCapHeight:11];
+    
+    self.atvWeiguanzhu.hidden = YES;
+    
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]]];
+    
+    UIBarButtonItem* rightbtn = [[UIBarButtonItem alloc] init];
+    rightbtn.title = @"重新询价";
+    self.navigationItem.rightBarButtonItem = rightbtn;
+    [rightbtn release];
 }
 
 - (void)viewDidUnload
@@ -93,6 +114,56 @@
 {
     _yinhangctrl.title = @"银行可贷金额查询";
     [self.navigationController pushViewController:_yinhangctrl animated:YES];
+}
+
+- (void)onStarSelected
+{
+    [_atvWeiguanzhu stopAnimating];
+    _atvWeiguanzhu.hidden = YES;
+    isStarSelecting = NO;
+    _lblWeiguanzhu.hidden = NO;
+    _lblWeiguanzhu.text = @"已关注";
+}
+
+- (void)onStarDeselected
+{
+    [_atvWeiguanzhu stopAnimating];
+    _atvWeiguanzhu.hidden = YES;
+    isStarSelecting = NO;
+    _lblWeiguanzhu.hidden = NO;
+    _lblWeiguanzhu.text = @"未关注";
+}
+
+- (IBAction)push_Star:(id)sender
+{
+    if (isStarSelecting)
+    {
+        return;
+    }
+    
+    if (!_btnStar.selected)
+    {
+        _lblWeiguanzhu.hidden = YES;
+        _atvWeiguanzhu.hidden = NO;
+        [_atvWeiguanzhu startAnimating];
+        _btnStar.selected = YES;
+        isStarSelecting = YES;
+        [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(onStarSelected) userInfo:nil repeats:NO];
+    }
+    else
+    {
+        _lblWeiguanzhu.hidden = YES;
+        _atvWeiguanzhu.hidden = NO;
+        [_atvWeiguanzhu startAnimating];
+        _btnStar.selected = NO;
+        isStarSelecting = YES;
+        [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(onStarDeselected) userInfo:nil repeats:NO];
+    }
+}
+
+- (void)rightclick
+{
+    //TODO:重新询价
 }
 
 @end

@@ -24,11 +24,14 @@
 
 @implementation GengDuoViewController
 
+@synthesize scrollView = _scrollView;
+@synthesize navbar = _navbar;
 @synthesize contentView = _contentView;
 @synthesize datasource;
 @synthesize imagearray;
 @synthesize labelName = _labelName;
 @synthesize btn = _btn;
+@synthesize navctrl = _navctrl;
 
 //@synthesize navigation;
 -(void)buildDataSource
@@ -53,14 +56,15 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    ((UIScrollView*)(self.view)).contentSize = CGSizeMake(320, 550);
+    ((UIScrollView*)(self.scrollView)).contentSize = CGSizeMake(320, 680);
     
     self.labelName.text = [Config getUsername];
     
+    //[self.view addSubview:_navctrl.view];
+    
     UIImage* navBgImg = [UIImage imageNamed:@"naviBarBg.png"];
     navBgImg = [navBgImg stretchableImageWithLeftCapWidth:0 topCapHeight:0];
-    [Utils setAtNavigationBar:self.navigationController.navigationBar withBgImage:navBgImg];
-    self.navigationController.navigationBar.clipsToBounds = YES;
+    [Utils setAtNavigationBar:self.navbar withBgImage:navBgImg];
     
     UIImage* btn_img = nil;
     
@@ -69,6 +73,8 @@
     [self.btn setBackgroundImage:btn_img forState:UIControlStateNormal];
     
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]]];
+    
+    self.navctrl.title = @"更多";
 }
 
 - (void)viewDidUnload
@@ -178,7 +184,7 @@
 //    self.navigation push
     InviteFriendController* controller = [[InviteFriendController alloc] initWithNibName:@"InviteFriendController" bundle:nil];
     controller.hidesBottomBarWhenPushed = YES;
-    [((UINavigationController*)self.parentViewController) pushViewController:controller animated:YES];
+    [((UINavigationController*)self.navctrl) pushViewController:controller animated:YES];
     [controller release];
 }
 
@@ -186,7 +192,7 @@
 {
     XunJiaHisViewController* controller = [[XunJiaHisViewController alloc] initWithNibName:@"XunJiaHisViewController" bundle:nil];
     controller.hidesBottomBarWhenPushed = YES;
-    [((UINavigationController*)self.parentViewController) pushViewController:controller animated:YES];
+    [((UINavigationController*)self.navctrl) pushViewController:controller animated:YES];
     [controller release];
 }
 
@@ -194,7 +200,7 @@
 {
     ModifyPwdViewController* controller = [[ModifyPwdViewController alloc] initWithNibName:@"ModifyPwdViewController" bundle:nil];
     controller.hidesBottomBarWhenPushed = YES;
-    [((UINavigationController*)self.parentViewController) pushViewController:controller animated:YES];
+    [((UINavigationController*)self.navctrl) pushViewController:controller animated:YES];
     [controller release];
 }
 
@@ -202,28 +208,28 @@
 {
     PersonIdentifyViewController* controller = [[PersonIdentifyViewController alloc] initWithNibName:@"PersonIdentifyViewController" bundle:nil];
     controller.hidesBottomBarWhenPushed = YES;
-    [((UINavigationController*)self.parentViewController) pushViewController:controller animated:YES];
+    [((UINavigationController*)self.navctrl) pushViewController:controller animated:YES];
     [controller release];
 }
 -(void)showfeedback
 {
     FeedBackViewController* controller = [[FeedBackViewController alloc] initWithNibName:@"FeedBackViewController" bundle:nil];
     controller.hidesBottomBarWhenPushed = YES;
-    [((UINavigationController*)self.parentViewController) pushViewController:controller animated:YES];
+    [((UINavigationController*)self.navctrl) pushViewController:controller animated:YES];
     [controller release];
 }
 -(void)showAbout
 {
     AboutSystemViewController* controller = [[AboutSystemViewController alloc] initWithNibName:@"AboutSystemViewController" bundle:nil];
     controller.hidesBottomBarWhenPushed = YES;
-    [((UINavigationController*)self.parentViewController) pushViewController:controller animated:YES];
+    [((UINavigationController*)self.navctrl) pushViewController:controller animated:YES];
     [controller release];
 }
 -(void)showSystemMsg
 {
     SystemMsgViewController* controller = [[SystemMsgViewController alloc] initWithNibName:@"SystemMsgViewController" bundle:nil];
     controller.hidesBottomBarWhenPushed = YES;
-    [((UINavigationController*)self.parentViewController) pushViewController:controller animated:YES];
+    [((UINavigationController*)self.navctrl) pushViewController:controller animated:YES];
     [controller release];
 }
 
@@ -231,7 +237,7 @@
 {
     GongshiController* controller = [[GongshiController alloc] initWithNibName:@"GongshiController" bundle:nil];
     controller.hidesBottomBarWhenPushed = YES;
-    [((UINavigationController*)self.parentViewController) pushViewController:controller animated:YES];
+    [((UINavigationController*)self.navctrl) pushViewController:controller animated:YES];
     [controller release];
 }
 

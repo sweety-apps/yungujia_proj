@@ -91,17 +91,29 @@
         [temporaryController release];
     }
     
-    if (row%2 == 0)
+    int row_yushu = row % 4;
+    
+    switch (row_yushu)
     {
-        cell.xxpinggu.text = @"世联评估";
-        //cell.xxpinggu.textColor = [UIColor blueColor];
-        //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    }
-    else
-    {
-        cell.xxpinggu.text = @"同志城";
-        //cell.xxpinggu.textColor = [UIColor darkGrayColor];
-        //cell.accessoryType = UITableViewCellAccessoryNone;
+        case 0:
+            cell.xxpinggu.text = @"世联评估";
+            cell.icon.image = [UIImage imageNamed:@"shilianpinggu_icon"];
+            break;
+        case 1:
+            cell.xxpinggu.text = @"戴德梁行";
+            cell.icon.image = [UIImage imageNamed:@"daideliangxin_icon"];
+            break;
+        case 2:
+            cell.xxpinggu.text = @"同致城";
+            cell.icon.image = [UIImage imageNamed:@"tongzhicheng_icon"];
+            break;
+        case 3:
+            cell.xxpinggu.text = @"云估价";
+            cell.icon.image = [UIImage imageNamed:@"yungujia_icon"];
+            break;
+            
+        default:
+            break;
     }
     
     return cell;

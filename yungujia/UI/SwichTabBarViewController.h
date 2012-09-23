@@ -10,7 +10,7 @@
 #import "XunJiaViewController.h"
 #import "GuanZhuViewController.h"
 #import "GuJiaShiViewController.h"
-#import "GengDuoViewController.h"
+#import "GengduoWarpperViewController.h"
 #import "UIBadgeView.h"
 
 @interface SwichTabBarViewController : UITabBarController

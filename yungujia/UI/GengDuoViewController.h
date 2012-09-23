@@ -17,7 +17,12 @@
 }
 
 //views
+@property (nonatomic,retain) IBOutlet UINavigationBar* navbar;
+@property (nonatomic,retain) IBOutlet UIView* scrollView;
 @property (nonatomic,retain) IBOutlet UIView* contentView;
+
+//controllers
+@property (nonatomic,retain) IBOutlet UINavigationController* navctrl;
 
 //@property (nonatomic,retain) IBOutlet UINavigationBar* navigation;
 @property (nonatomic,retain) NSMutableArray* datasource;

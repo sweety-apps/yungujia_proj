@@ -83,6 +83,8 @@
 {
     static NSString* reuseID = @"GeyinhangkedaieCell";
     
+    int row = indexPath.row;
+    
     GeyinhangkedaieCell *cell = (GeyinhangkedaieCell*)[tableView dequeueReusableCellWithIdentifier:reuseID];
     if (cell == nil)
     {
@@ -91,6 +93,31 @@
         // Grab a pointer to the custom cell.
         cell = (GeyinhangkedaieCell *)temporaryController.view;
         [temporaryController release];
+    }
+    
+    int row_yushu = row % 4;
+    
+    switch (row_yushu)
+    {
+        case 0:
+            cell.xxyinhang.text = @"工商银行";
+            cell.icon.image = [UIImage imageNamed:@"gongshangyinhang_icon"];
+            break;
+        case 1:
+            cell.xxyinhang.text = @"农业银行";
+            cell.icon.image = [UIImage imageNamed:@"nongyeyinhang_icon"];
+            break;
+        case 2:
+            cell.xxyinhang.text = @"中国银行";
+            cell.icon.image = [UIImage imageNamed:@"zhongguoyinhang_icon"];
+            break;
+        case 3:
+            cell.xxyinhang.text = @"建设银行";
+            cell.icon.image = [UIImage imageNamed:@"jiansheyinhang_icon"];
+            break;
+            
+        default:
+            break;
     }
     
     //cell.xxhao.text = [NSString stringWithFormat:@"50%d",row + 1];

@@ -111,7 +111,9 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillHide:)
                                                  name:UIKeyboardWillHideNotification
-                                               object:nil]; 
+                                               object:nil];
+    
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]]];
 }
 
 - (void)doHideKeyBoard{

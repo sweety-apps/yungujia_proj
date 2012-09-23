@@ -7,6 +7,7 @@
 //
 
 #import "SwichTabBarViewController.h"
+#import "CustomNavigationController.h"
 
 @interface SwichTabBarViewController ()
 
@@ -148,6 +149,23 @@
     self.selectedIndex = btn.tag;
     
     [btn setImage:[UIImage imageNamed:((NSString*)[_btnImagesSelected objectAtIndex:btn.tag])] forState:UIControlStateNormal];
+    
+    //pop to root
+    UIViewController* ctrl = [self.viewControllers objectAtIndex:btn.tag];
+    if (ctrl)
+    {
+        if (ctrl.navigationController)
+        {
+            [ctrl.navigationController popToRootViewControllerAnimated:NO];
+        }
+    
+        if ([ctrl respondsToSelector:@selector(navctrl)])
+        {
+            CustomNavigationController* navctrl = [ctrl performSelector:@selector(navctrl)];
+            [navctrl popToRootViewControllerAnimated:NO];
+        }
+    }
+    
 }
 
 -(void) hideTabbar:(BOOL)enable
