@@ -67,7 +67,7 @@
     self.louceng = @"6层";
     self.fanghao = @"605";
     _titles0 = [[NSArray arrayWithObjects:@"楼盘名",@"楼栋",@"楼层",@"房号", nil] retain];
-    _titles1 = [[NSArray arrayWithObjects:@"面积（平方米）",@"成交价（万元）", nil] retain];
+    _titles1 = [[NSArray arrayWithObjects:@"面积（㎡）",@"成交价（万元）", nil] retain];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self

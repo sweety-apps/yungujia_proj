@@ -224,7 +224,7 @@
     
     switch (row) {
         case 0:
-            cell.title.text = @"面积（平米）";
+            cell.title.text = @"面积（㎡）";
             cell.detail.placeholder = @"40";
             _mianji = cell.detail;
             break;
