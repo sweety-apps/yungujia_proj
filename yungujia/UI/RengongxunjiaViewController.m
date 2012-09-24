@@ -6,9 +6,11 @@
 //  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
 #import "RengongxunjiaViewController.h"
 #import "PinggujigouViewController.h"
 #import "YinhangkedaichaxunViewController.h"
+
 @interface RengongxunjiaViewController ()
 
 @end
@@ -18,6 +20,7 @@
 @synthesize contentView = _contentView;
 @synthesize btn = _btn;
 @synthesize btnPinggujigou = _btnPinggujigou;
+@synthesize textView = _textView;
 
 @synthesize chakanpinggujigou = _chakanpinggujigou;
 @synthesize chakanCell = _chakanCell;
@@ -37,11 +40,33 @@
     
     ((UIScrollView*)(self.view)).contentSize = _contentView.frame.size;
     
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]]];
+    
     UIImage* btn_img = nil;
     
     btn_img = [UIImage imageNamed:@"buttonn"];
     btn_img = [btn_img stretchableImageWithLeftCapWidth:14 topCapHeight:23];
     [self.btn setBackgroundImage:btn_img forState:UIControlStateNormal];
+    
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(doHideKeyBoard)];
+    
+    tap.numberOfTapsRequired = 1;
+    for (int i = 0; i<[[self.view subviews] count]; i++) {
+        if (![self.view isKindOfClass:[UITextField class]]) {
+            [self.view  addGestureRecognizer: tap];
+        }
+    }
+    [tap setCancelsTouchesInView:NO];
+    [tap release];
+    
+    //textView圆形边界
+    _textView.clipsToBounds = YES;
+    _textView.contentMode = UIViewContentModeScaleAspectFill;
+    _textView.layer.masksToBounds = YES;
+    _textView.layer.cornerRadius = 5.0;
 }
 
 - (void)viewDidUnload
@@ -56,6 +81,13 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+- (void)doHideKeyBoard
+{
+    [_textView resignFirstResponder];
+    [_mianji resignFirstResponder];
+    [_chengjiaojia resignFirstResponder];
+}
+
 -(void)moveviewsup:(int)distance
 {
     [UIView beginAnimations:nil context:nil];
@@ -65,6 +97,38 @@
         view.frame = CGRectMake(view.frame.origin.x, view.frame.origin.y + distance, view.frame.size.width, view.frame.size.height);
     }
     [UIView commitAnimations];
+}
+
+#pragma mark - UITextViewDelegate
+
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView
+{
+    if (textView.tag != 1)
+    {
+        NSLog(@"%f %f",self.view.center.x,self.view.center.y);
+        [self moveviewsup:-170];
+        NSLog(@"%f %f",self.view.center.x,self.view.center.y);
+    }
+    
+    return YES;
+}
+
+- (BOOL)textViewShouldEndEditing:(UITextView *)textView
+{
+    if (textView.tag != 1)
+    {
+        NSLog(@"%f %f",self.view.center.x,self.view.center.y);
+        [self moveviewsup:170];
+        NSLog(@"%f %f",self.view.center.x,self.view.center.y);
+    }
+    
+    return YES;
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView
+{
+    [textView resignFirstResponder];
+    //    self.view.center=CGPointMake(160,208);
 }
 
 #pragma mark -UITextFieldDelegate
@@ -162,10 +226,12 @@
         case 0:
             cell.title.text = @"面积（平米）";
             cell.detail.placeholder = @"40";
+            _mianji = cell.detail;
             break;
         case 1:
             cell.title.text = @"成交价（万元）";
             cell.detail.placeholder = @"52";
+            _chengjiaojia = cell.detail;
             break;
             
         default:

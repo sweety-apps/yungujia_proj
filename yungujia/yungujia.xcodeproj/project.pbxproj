@@ -232,7 +232,6 @@
 		BEF4C7DA160FA2D0008410EF /* yungujia_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BEF4C7D8160FA2D0008410EF /* yungujia_icon.png */; };
 		BEF4C7DB160FA2D0008410EF /* yungujia_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEF4C7D9160FA2D0008410EF /* yungujia_icon@2x.png */; };
 		BEF4C914160FBE58008410EF /* GengduoWarpperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF4C912160FBE57008410EF /* GengduoWarpperViewController.m */; };
-		BEF4C915160FBE58008410EF /* GengduoWarpperViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEF4C913160FBE58008410EF /* GengduoWarpperViewController.xib */; };
 		F30133D915F84F8100480CD7 /* ZidonggujiaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F30133D715F84F8100480CD7 /* ZidonggujiaViewController.m */; };
 		F30133DA15F84F8100480CD7 /* ZidonggujiaViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F30133D815F84F8100480CD7 /* ZidonggujiaViewController.xib */; };
 		F30133DE15F8511700480CD7 /* ZidonggujiaCellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F30133DC15F8511500480CD7 /* ZidonggujiaCellViewController.m */; };
@@ -251,6 +250,11 @@
 		F302BD1515BCF89200FB1663 /* PinggujigouyinhangCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F302BD1415BCF89100FB1663 /* PinggujigouyinhangCell.m */; };
 		F302BD1C15BCF91C00FB1663 /* PinggujigouyinhangCellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F302BD1A15BCF91A00FB1663 /* PinggujigouyinhangCellViewController.m */; };
 		F302BD1D15BCF91C00FB1663 /* PinggujigouyinhangCellViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F302BD1B15BCF91B00FB1663 /* PinggujigouyinhangCellViewController.xib */; };
+		F33D9CD416106A2F004D3269 /* GengduoWarpperViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F33D9CD316106A2F004D3269 /* GengduoWarpperViewController.xib */; };
+		F3B5BAE51610562200528652 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3B5BAE41610562000528652 /* QuartzCore.framework */; };
+		F3C06522161035CE00ABB6A0 /* YuegongGengduoCellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3C06520161035CE00ABB6A0 /* YuegongGengduoCellViewController.m */; };
+		F3C06523161035CE00ABB6A0 /* YuegongGengduoCellViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3C06521161035CE00ABB6A0 /* YuegongGengduoCellViewController.xib */; };
+		F3C06527161035E900ABB6A0 /* YuegongGengduoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F3C06526161035E900ABB6A0 /* YuegongGengduoCell.m */; };
 		F3D9CC7C15B81AD100FA63AE /* KaishixunjiaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3D9CC7A15B81AD100FA63AE /* KaishixunjiaViewController.m */; };
 		F3D9CC7D15B81AD100FA63AE /* KaishixunjiaViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3D9CC7B15B81AD100FA63AE /* KaishixunjiaViewController.xib */; };
 		F3D9CC8115B81B8F00FA63AE /* XunjiajieguoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3D9CC7F15B81B8F00FA63AE /* XunjiajieguoViewController.m */; };
@@ -566,7 +570,6 @@
 		BEF4C7D9160FA2D0008410EF /* yungujia_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yungujia_icon@2x.png"; sourceTree = "<group>"; };
 		BEF4C911160FBE57008410EF /* GengduoWarpperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GengduoWarpperViewController.h; sourceTree = "<group>"; };
 		BEF4C912160FBE57008410EF /* GengduoWarpperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GengduoWarpperViewController.m; sourceTree = "<group>"; };
-		BEF4C913160FBE58008410EF /* GengduoWarpperViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GengduoWarpperViewController.xib; sourceTree = "<group>"; };
 		F30133D615F84F8100480CD7 /* ZidonggujiaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZidonggujiaViewController.h; sourceTree = "<group>"; };
 		F30133D715F84F8100480CD7 /* ZidonggujiaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZidonggujiaViewController.m; sourceTree = "<group>"; };
 		F30133D815F84F8100480CD7 /* ZidonggujiaViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZidonggujiaViewController.xib; sourceTree = "<group>"; };
@@ -595,6 +598,13 @@
 		F302BD1915BCF91A00FB1663 /* PinggujigouyinhangCellViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinggujigouyinhangCellViewController.h; sourceTree = "<group>"; };
 		F302BD1A15BCF91A00FB1663 /* PinggujigouyinhangCellViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinggujigouyinhangCellViewController.m; sourceTree = "<group>"; };
 		F302BD1B15BCF91B00FB1663 /* PinggujigouyinhangCellViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PinggujigouyinhangCellViewController.xib; sourceTree = "<group>"; };
+		F33D9CD316106A2F004D3269 /* GengduoWarpperViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GengduoWarpperViewController.xib; sourceTree = "<group>"; };
+		F3B5BAE41610562000528652 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		F3C0651F161035CE00ABB6A0 /* YuegongGengduoCellViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YuegongGengduoCellViewController.h; sourceTree = "<group>"; };
+		F3C06520161035CE00ABB6A0 /* YuegongGengduoCellViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YuegongGengduoCellViewController.m; sourceTree = "<group>"; };
+		F3C06521161035CE00ABB6A0 /* YuegongGengduoCellViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YuegongGengduoCellViewController.xib; sourceTree = "<group>"; };
+		F3C06525161035E900ABB6A0 /* YuegongGengduoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YuegongGengduoCell.h; sourceTree = "<group>"; };
+		F3C06526161035E900ABB6A0 /* YuegongGengduoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YuegongGengduoCell.m; sourceTree = "<group>"; };
 		F3D9CC7915B81AD100FA63AE /* KaishixunjiaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KaishixunjiaViewController.h; sourceTree = "<group>"; };
 		F3D9CC7A15B81AD100FA63AE /* KaishixunjiaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KaishixunjiaViewController.m; sourceTree = "<group>"; };
 		F3D9CC7B15B81AD100FA63AE /* KaishixunjiaViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KaishixunjiaViewController.xib; sourceTree = "<group>"; };
@@ -632,6 +642,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F3B5BAE51610562200528652 /* QuartzCore.framework in Frameworks */,
 				38CB043715CCDB2100FF4F86 /* libz.dylib in Frameworks */,
 				38CB043B15CCDB6800FF4F86 /* MobileCoreServices.framework in Frameworks */,
 				38CB043915CCDB5900FF4F86 /* SystemConfiguration.framework in Frameworks */,
@@ -650,7 +661,7 @@
 			children = (
 				BEF4C911160FBE57008410EF /* GengduoWarpperViewController.h */,
 				BEF4C912160FBE57008410EF /* GengduoWarpperViewController.m */,
-				BEF4C913160FBE58008410EF /* GengduoWarpperViewController.xib */,
+				F33D9CD316106A2F004D3269 /* GengduoWarpperViewController.xib */,
 				BE85B55815B337B60010E0F5 /* GengDuoViewController.h */,
 				BE85B55915B337B60010E0F5 /* GengDuoViewController.m */,
 				BE85B55A15B337B60010E0F5 /* GengDuoViewController.xib */,
@@ -902,6 +913,7 @@
 		BE85B4FE15B3293E0010E0F5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F3B5BAE41610562000528652 /* QuartzCore.framework */,
 				38CB043A15CCDB6800FF4F86 /* MobileCoreServices.framework */,
 				38CB043815CCDB5900FF4F86 /* SystemConfiguration.framework */,
 				38CB043615CCDB2100FF4F86 /* libz.dylib */,
@@ -1178,6 +1190,11 @@
 				BEE5CDAC15D96F830081D347 /* YuegongCellViewController.xib */,
 				BEE5CDAF15D96FA80081D347 /* YuegongCell.h */,
 				BEE5CDB015D96FA80081D347 /* YuegongCell.m */,
+				F3C0651F161035CE00ABB6A0 /* YuegongGengduoCellViewController.h */,
+				F3C06520161035CE00ABB6A0 /* YuegongGengduoCellViewController.m */,
+				F3C06521161035CE00ABB6A0 /* YuegongGengduoCellViewController.xib */,
+				F3C06525161035E900ABB6A0 /* YuegongGengduoCell.h */,
+				F3C06526161035E900ABB6A0 /* YuegongGengduoCell.m */,
 			);
 			name = Yuegong;
 			sourceTree = "<group>";
@@ -1512,7 +1529,8 @@
 				BEF4C7D7160FA01F008410EF /* zhongguoyinhang_icon@2x.png in Resources */,
 				BEF4C7DA160FA2D0008410EF /* yungujia_icon.png in Resources */,
 				BEF4C7DB160FA2D0008410EF /* yungujia_icon@2x.png in Resources */,
-				BEF4C915160FBE58008410EF /* GengduoWarpperViewController.xib in Resources */,
+				F3C06523161035CE00ABB6A0 /* YuegongGengduoCellViewController.xib in Resources */,
+				F33D9CD416106A2F004D3269 /* GengduoWarpperViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1607,6 +1625,8 @@
 				F30133EB15F8934C00480CD7 /* PinggujigoujianjieViewController.m in Sources */,
 				BEBE051415F8FA75005D0EC9 /* PinggujigouyinhangLV2ViewController.m in Sources */,
 				BEF4C914160FBE58008410EF /* GengduoWarpperViewController.m in Sources */,
+				F3C06522161035CE00ABB6A0 /* YuegongGengduoCellViewController.m in Sources */,
+				F3C06527161035E900ABB6A0 /* YuegongGengduoCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

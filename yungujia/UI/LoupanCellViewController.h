@@ -10,5 +10,10 @@
 #import "LoupanCell.h"
 
 @interface LoupanCellViewController : UIViewController
+{
+    
+}
+
+
 
 @end

@@ -47,6 +47,7 @@
     CGFloat btnInterlace = _tabBarBg.frame.size.width / 4.f;
     
     CGPoint pt = CGPointMake(_tabBarBg.frame.origin.x, _tabBarBg.frame.origin.y) ;
+    pt.x += 10;
     
     _btnImagesNormal = [[NSArray arrayWithObjects:@"xunjia_normal",@"gujiashi_normal",@"guanzhu_normal",@"gengduo_normal", nil]retain];
     _btnImagesHighlighted = [[NSArray arrayWithObjects:@"xunjia_pushed",@"gujiashi_pushed",@"guanzhu_pushed",@"gengduo_pushed", nil]retain];

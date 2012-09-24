@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="8.00">
 	<data>
-		<int key="IBDocument.SystemTarget">1536</int>
+		<int key="IBDocument.SystemTarget">1296</int>
 		<string key="IBDocument.SystemVersion">11E53</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2840</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2549</string>
 		<string key="IBDocument.AppKitVersion">1138.47</string>
 		<string key="IBDocument.HIToolboxVersion">569.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">1926</string>
+			<string key="NS.object.0">1498</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBProxyObject</string>
@@ -90,7 +90,6 @@
 									<double key="NSSize">13</double>
 									<int key="NSfFlags">16</int>
 								</object>
-								<double key="preferredMaxLayoutWidth">224</double>
 							</object>
 							<object class="IBUIButton" id="1039768171">
 								<reference key="NSNextResponder" ref="191373211"/>
@@ -98,7 +97,6 @@
 								<string key="NSFrame">{{20, 337}, {280, 40}}</string>
 								<reference key="NSSuperview" ref="191373211"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="151548323"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -109,7 +107,7 @@
 									<int key="NSColorSpace">3</int>
 									<bytes key="NSWhite">MQA</bytes>
 								</object>
-								<object class="NSColor" key="IBUINormalTitleColor" id="877622884">
+								<object class="NSColor" key="IBUINormalTitleColor">
 									<int key="NSColorSpace">3</int>
 									<bytes key="NSWhite">MAA</bytes>
 								</object>
@@ -126,24 +124,6 @@
 									<double key="NSSize">15</double>
 									<int key="NSfFlags">16</int>
 								</object>
-							</object>
-							<object class="IBUIButton" id="151548323">
-								<reference key="NSNextResponder" ref="191373211"/>
-								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{19, 393}, {280, 45}}</string>
-								<reference key="NSSuperview" ref="191373211"/>
-								<reference key="NSWindow"/>
-								<string key="NSReuseIdentifierKey">_NS:9</string>
-								<bool key="IBUIOpaque">NO</bool>
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<int key="IBUIContentHorizontalAlignment">0</int>
-								<int key="IBUIContentVerticalAlignment">0</int>
-								<string key="IBUINormalTitle">以短信转发</string>
-								<reference key="IBUIHighlightedTitleColor" ref="824006381"/>
-								<reference key="IBUINormalTitleColor" ref="877622884"/>
-								<reference key="IBUINormalTitleShadowColor" ref="39162448"/>
-								<reference key="IBUIFontDescription" ref="239560313"/>
-								<reference key="IBUIFont" ref="303283601"/>
 							</object>
 							<object class="IBUIButton" id="331705141">
 								<reference key="NSNextResponder" ref="191373211"/>
@@ -185,7 +165,6 @@
 								<int key="IBUINumberOfLines">0</int>
 								<reference key="IBUIFontDescription" ref="1031058606"/>
 								<reference key="IBUIFont" ref="278409302"/>
-								<double key="preferredMaxLayoutWidth">280</double>
 							</object>
 							<object class="IBUILabel" id="920700367">
 								<reference key="NSNextResponder" ref="191373211"/>
@@ -204,7 +183,6 @@
 								<object class="NSColor" key="IBUITextColor" id="543771842">
 									<int key="NSColorSpace">1</int>
 									<bytes key="NSRGB">MCAwIDAAA</bytes>
-									<string key="IBUIColorCocoaTouchKeyPath">darkTextColor</string>
 								</object>
 								<nil key="IBUIHighlightedColor"/>
 								<int key="IBUIBaselineAdjustment">0</int>
@@ -219,7 +197,6 @@
 									<double key="NSSize">20</double>
 									<int key="NSfFlags">16</int>
 								</object>
-								<double key="preferredMaxLayoutWidth">91</double>
 							</object>
 							<object class="IBUILabel" id="967724765">
 								<reference key="NSNextResponder" ref="191373211"/>
@@ -245,7 +222,6 @@
 								<int key="IBUINumberOfLines">0</int>
 								<reference key="IBUIFontDescription" ref="855770688"/>
 								<reference key="IBUIFont" ref="649974610"/>
-								<double key="preferredMaxLayoutWidth">186</double>
 							</object>
 							<object class="IBUILabel" id="839107847">
 								<reference key="NSNextResponder" ref="191373211"/>
@@ -268,7 +244,6 @@
 								<int key="IBUINumberOfLines">0</int>
 								<reference key="IBUIFontDescription" ref="855770688"/>
 								<reference key="IBUIFont" ref="649974610"/>
-								<double key="preferredMaxLayoutWidth">186</double>
 							</object>
 							<object class="IBUILabel" id="855144418">
 								<reference key="NSNextResponder" ref="191373211"/>
@@ -291,7 +266,6 @@
 								<int key="IBUINumberOfLines">0</int>
 								<reference key="IBUIFontDescription" ref="855770688"/>
 								<reference key="IBUIFont" ref="649974610"/>
-								<double key="preferredMaxLayoutWidth">90</double>
 							</object>
 							<object class="IBUIImageView" id="840428242">
 								<reference key="NSNextResponder" ref="191373211"/>
@@ -337,7 +311,6 @@
 									<double key="NSSize">12</double>
 									<int key="NSfFlags">16</int>
 								</object>
-								<double key="preferredMaxLayoutWidth">280</double>
 							</object>
 							<object class="IBUILabel" id="896520480">
 								<reference key="NSNextResponder" ref="191373211"/>
@@ -360,7 +333,6 @@
 								<int key="IBUINumberOfLines">0</int>
 								<reference key="IBUIFontDescription" ref="978427707"/>
 								<reference key="IBUIFont" ref="736356443"/>
-								<double key="preferredMaxLayoutWidth">138</double>
 							</object>
 							<object class="IBUILabel" id="251702112">
 								<reference key="NSNextResponder" ref="191373211"/>
@@ -383,7 +355,6 @@
 								<int key="IBUINumberOfLines">0</int>
 								<reference key="IBUIFontDescription" ref="978427707"/>
 								<reference key="IBUIFont" ref="736356443"/>
-								<double key="preferredMaxLayoutWidth">138</double>
 							</object>
 							<object class="IBUILabel" id="129084977">
 								<reference key="NSNextResponder" ref="191373211"/>
@@ -454,7 +425,7 @@
 								<int key="IBUIStyle">2</int>
 							</object>
 						</array>
-						<string key="NSFrameSize">{320, 520}</string>
+						<string key="NSFrameSize">{320, 450}</string>
 						<reference key="NSSuperview" ref="681686787"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="18947772"/>
@@ -547,14 +518,6 @@
 						<reference key="destination" ref="331705141"/>
 					</object>
 					<int key="connectionID">29</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">btnDuanxin</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="151548323"/>
-					</object>
-					<int key="connectionID">33</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -656,15 +619,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">push_RengongxunjiaBtn:</string>
-						<reference key="source" ref="151548323"/>
-						<reference key="destination" ref="372490531"/>
-						<int key="IBEventType">7</int>
-					</object>
-					<int key="connectionID">32</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">push_Star:</string>
 						<reference key="source" ref="463785479"/>
 						<reference key="destination" ref="372490531"/>
@@ -725,7 +679,6 @@
 							<reference ref="839107847"/>
 							<reference ref="754425114"/>
 							<reference ref="840428242"/>
-							<reference ref="151548323"/>
 							<reference ref="331705141"/>
 							<reference ref="939728133"/>
 							<reference ref="129084977"/>
@@ -785,11 +738,6 @@
 						<reference key="parent" ref="191373211"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">31</int>
-						<reference key="object" ref="151548323"/>
-						<reference key="parent" ref="191373211"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">34</int>
 						<reference key="object" ref="18947772"/>
 						<reference key="parent" ref="191373211"/>
@@ -838,7 +786,6 @@
 				<string key="17.CustomClassName">YinhangkedaichaxunViewController</string>
 				<string key="17.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="23.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="31.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="34.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="35.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="36.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -925,6 +872,7 @@
 						<string key="chakanCell">UITableViewCell</string>
 						<string key="chakanpinggujigou">UITableView</string>
 						<string key="contentView">UIView</string>
+						<string key="textView">UITextView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<object class="IBToOneOutletInfo" key="btn">
@@ -946,6 +894,10 @@
 						<object class="IBToOneOutletInfo" key="contentView">
 							<string key="name">contentView</string>
 							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="textView">
+							<string key="name">textView</string>
+							<string key="candidateClassName">UITextView</string>
 						</object>
 					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
@@ -1283,6 +1235,17 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">YuegongViewController</string>
 					<string key="superclassName">UIViewController</string>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">tableView</string>
+						<string key="NS.object.0">UITableView</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">tableView</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">tableView</string>
+							<string key="candidateClassName">UITableView</string>
+						</object>
+					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/YuegongViewController.h</string>
@@ -1292,6 +1255,10 @@
 		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
+		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">
+			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaTouchPlugin.iPhoneOS</string>
+			<real value="1296" key="NS.object.0"/>
+		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
@@ -1300,6 +1267,6 @@
 			<string key="xunjiajieguo_bg.png">{23, 41}</string>
 			<string key="zoushi.png">{165, 61}</string>
 		</dictionary>
-		<string key="IBCocoaTouchPluginVersion">1926</string>
+		<string key="IBCocoaTouchPluginVersion">1498</string>
 	</data>
 </archive>

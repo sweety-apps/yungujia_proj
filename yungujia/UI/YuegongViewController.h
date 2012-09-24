@@ -8,13 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "YuegongCellViewController.h"
+#import "YuegongGengduoCellViewController.h"
 
 
 @interface YuegongViewController : UIViewController <UITableViewDataSource,UITableViewDelegate>
 {
-    
+    int _rowCount;
+    YuegongGengduoCell* _gengduoCell;
 }
 
 //view
+@property (nonatomic,retain) IBOutlet UITableView* tableView;
 
 @end

@@ -44,6 +44,8 @@
     
     ((UIScrollView*)(self.view)).contentSize = _contentView.frame.size;
     
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]]];
+    
     _pickerContents = [[NSMutableArray arrayWithObjects:@"421809123元(世联评估)",@"1809123元(自动评估)",@"409123元(同致城)", nil] retain];
     
     UIImage* btn_img = nil;
@@ -154,6 +156,30 @@
     [textField resignFirstResponder];
     //    self.view.center=CGPointMake(160,208); 
     return YES;
+}
+
+
+#pragma mark - UITableViewDataSource
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 5;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString* reuseID = @"UITableViewCell";
+    
+    int row = indexPath.row;
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseID];
+    if (cell == nil)
+    {
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseID] autorelease];
+    }
+    
+    return cell;
 }
 
 @end

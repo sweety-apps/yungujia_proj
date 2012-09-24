@@ -18,6 +18,9 @@
 //infos
 @property (nonatomic,retain) NSString* headinfo;
 
+//config
+@property (nonatomic,assign) BOOL hideXXminei;
+
 //views
 @property (nonatomic,retain) IBOutlet UINavigationBar* navbar;
 

@@ -15,6 +15,7 @@
 enum YKDD_PICKER_TYPE {
     eDaikuanchengshu = 0,
     eNianlilv = 1,
+    eDaikuannianxian = 2,
     };
 
 @interface YinhangKedaieDetailViewController : UIViewController
@@ -31,6 +32,7 @@ enum YKDD_PICKER_TYPE {
     NSArray* _section2Values;
     NSArray*    _daikuanchengshuarray;
     NSArray*    _nianlilvarray;
+    NSArray*    _daikuannianxianarray;
     enum YKDD_PICKER_TYPE _curPicker;
 }
 

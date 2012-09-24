@@ -54,6 +54,8 @@
     
     ((UIScrollView*)(self.view)).contentSize = _contentView.frame.size;
     
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]]];
+    
     UIImage* btn_img = nil;
     
     btn_img = [UIImage imageNamed:@"buttonn"];
@@ -66,6 +68,19 @@
     self.fanghao = @"605";
     _titles0 = [[NSArray arrayWithObjects:@"楼盘名",@"楼栋",@"楼层",@"房号", nil] retain];
     _titles1 = [[NSArray arrayWithObjects:@"面积（平方米）",@"成交价（万元）", nil] retain];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(doHideKeyBoard)];
+    
+    tap.numberOfTapsRequired = 1;
+    for (int i = 0; i<[[self.view subviews] count]; i++) {
+        if (![self.view isKindOfClass:[UITextField class]]) {
+            [self.view  addGestureRecognizer: tap];
+        }
+    }
+    [tap setCancelsTouchesInView:NO];
+    [tap release];
     
 }
 
@@ -185,6 +200,20 @@
         }
         
         cell.detail.delegate = self;
+        
+        switch (row)
+        {
+            case 0:
+                _mianji = cell.detail;
+                break;
+            case 1:
+                _chengjiaojia = cell.detail;
+                break;
+                
+            default:
+                break;
+        }
+        
         return cell;
     }
     
@@ -197,6 +226,11 @@
     return nil;
 }
 
+- (void)doHideKeyBoard
+{
+    [_mianji resignFirstResponder];
+    [_chengjiaojia resignFirstResponder];
+}
 
 -(void)moveviewsup:(int)distance
 {

@@ -3,20 +3,20 @@
 	<data>
 		<int key="IBDocument.SystemTarget">1296</int>
 		<string key="IBDocument.SystemVersion">11E53</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2182</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2549</string>
 		<string key="IBDocument.AppKitVersion">1138.47</string>
 		<string key="IBDocument.HIToolboxVersion">569.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">1181</string>
+			<string key="NS.object.0">1498</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
+			<string>IBProxyObject</string>
 			<string>IBUIButton</string>
-			<string>IBUIViewController</string>
+			<string>IBUIScrollView</string>
 			<string>IBUITableView</string>
 			<string>IBUIView</string>
-			<string>IBUIScrollView</string>
-			<string>IBProxyObject</string>
+			<string>IBUIViewController</string>
 		</array>
 		<array key="IBDocument.PluginDependencies">
 			<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -45,8 +45,8 @@
 							<object class="IBUITableView" id="939854019">
 								<reference key="NSNextResponder" ref="191373211"/>
 								<int key="NSvFlags">274</int>
-								<string key="NSFrame">{{0, 210}, {320, 179}}</string>
-								<string key="NSBounds">{{0, 2}, {320, 179}}</string>
+								<string key="NSFrame">{{0, 200}, {320, 174}}</string>
+								<string key="NSBounds">{{0, 2}, {320, 174}}</string>
 								<reference key="NSSuperview" ref="191373211"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="476605274"/>
@@ -73,7 +73,7 @@
 							<object class="IBUITableView" id="681289992">
 								<reference key="NSNextResponder" ref="191373211"/>
 								<int key="NSvFlags">274</int>
-								<string key="NSFrameSize">{320, 265}</string>
+								<string key="NSFrameSize">{320, 293}</string>
 								<reference key="NSSuperview" ref="191373211"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="939854019"/>
@@ -96,7 +96,7 @@
 							<object class="IBUIButton" id="476605274">
 								<reference key="NSNextResponder" ref="191373211"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{12, 328}, {297, 45}}</string>
+								<string key="NSFrame">{{12, 320}, {297, 45}}</string>
 								<reference key="NSSuperview" ref="191373211"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView"/>
@@ -134,7 +134,7 @@
 								</object>
 							</object>
 						</array>
-						<string key="NSFrameSize">{320, 500}</string>
+						<string key="NSFrameSize">{320, 460}</string>
 						<reference key="NSSuperview" ref="426705056"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="681289992"/>
@@ -440,6 +440,7 @@
 						<string key="chakanCell">UITableViewCell</string>
 						<string key="chakanpinggujigou">UITableView</string>
 						<string key="contentView">UIView</string>
+						<string key="textView">UITextView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<object class="IBToOneOutletInfo" key="btn">
@@ -462,6 +463,10 @@
 							<string key="name">contentView</string>
 							<string key="candidateClassName">UIView</string>
 						</object>
+						<object class="IBToOneOutletInfo" key="textView">
+							<string key="name">textView</string>
+							<string key="candidateClassName">UITextView</string>
+						</object>
 					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
@@ -475,6 +480,7 @@
 						<string key="push_KedaijineBtn:">id</string>
 						<string key="push_Pinggujigou:">id</string>
 						<string key="push_RengongxunjiaBtn:">id</string>
+						<string key="push_Star:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="push_KedaijineBtn:">
@@ -489,19 +495,37 @@
 							<string key="name">push_RengongxunjiaBtn:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="push_Star:">
+							<string key="name">push_Star:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="atvWeiguanzhu">UIActivityIndicatorView</string>
 						<string key="btnDuanxin">UIButton</string>
 						<string key="btnKde">UIButton</string>
 						<string key="btnRngong">UIButton</string>
 						<string key="btnShilian">UIButton</string>
+						<string key="btnStar">UIButton</string>
 						<string key="contentView">UIView</string>
+						<string key="imgBgImage">UIImageView</string>
+						<string key="lblDanjia">UILabel</string>
+						<string key="lblLoupan">UILabel</string>
+						<string key="lblWeiguanzhu">UILabel</string>
+						<string key="lblZongjia">UILabel</string>
+						<string key="lblZoushi">UILabel</string>
+						<string key="lblZuidijia">UILabel</string>
+						<string key="lblZuigaojia">UILabel</string>
 						<string key="navbar">UINavigationBar</string>
 						<string key="navctrl">UINavigationController</string>
 						<string key="rengongctrl">RengongxunjiaViewController</string>
 						<string key="yinhangctrl">YinhangkedaichaxunViewController</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="atvWeiguanzhu">
+							<string key="name">atvWeiguanzhu</string>
+							<string key="candidateClassName">UIActivityIndicatorView</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="btnDuanxin">
 							<string key="name">btnDuanxin</string>
 							<string key="candidateClassName">UIButton</string>
@@ -518,9 +542,45 @@
 							<string key="name">btnShilian</string>
 							<string key="candidateClassName">UIButton</string>
 						</object>
+						<object class="IBToOneOutletInfo" key="btnStar">
+							<string key="name">btnStar</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="contentView">
 							<string key="name">contentView</string>
 							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="imgBgImage">
+							<string key="name">imgBgImage</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="lblDanjia">
+							<string key="name">lblDanjia</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="lblLoupan">
+							<string key="name">lblLoupan</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="lblWeiguanzhu">
+							<string key="name">lblWeiguanzhu</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="lblZongjia">
+							<string key="name">lblZongjia</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="lblZoushi">
+							<string key="name">lblZoushi</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="lblZuidijia">
+							<string key="name">lblZuidijia</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="lblZuigaojia">
+							<string key="name">lblZuigaojia</string>
+							<string key="candidateClassName">UILabel</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="navbar">
 							<string key="name">navbar</string>
@@ -743,6 +803,17 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">YuegongViewController</string>
 					<string key="superclassName">UIViewController</string>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">tableView</string>
+						<string key="NS.object.0">UITableView</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">tableView</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">tableView</string>
+							<string key="candidateClassName">UITableView</string>
+						</object>
+					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/YuegongViewController.h</string>
@@ -762,6 +833,6 @@
 			<string key="NS.key.0">buttonn.png</string>
 			<string key="NS.object.0">{29, 46}</string>
 		</object>
-		<string key="IBCocoaTouchPluginVersion">1181</string>
+		<string key="IBCocoaTouchPluginVersion">1498</string>
 	</data>
 </archive>

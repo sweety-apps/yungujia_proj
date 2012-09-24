@@ -15,6 +15,9 @@
     
 }
 
+//infos
+@property (nonatomic,retain) NSString* headinfo;
+
 //controllers
 @property (nonatomic,retain) IBOutlet UINavigationController* navctrl;
 @property (nonatomic,retain) IBOutlet HuijiaxiangqingViewController* xiangqingctrl;

@@ -35,6 +35,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     //self.yinhangctrl = [[PinggujigouyinhangViewController alloc] initWithNibName:@"PinggujigouyinhangViewController" bundle:nil];
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]]];
+    
     self.lv2ctrl = [[[PinggujigouyinhangLV2ViewController alloc] initWithNibName:@"PinggujigouyinhangLV2ViewController" bundle:nil] autorelease];
     self.yinhang = [NSMutableArray arrayWithObjects:@"中国银行",@"农业银行",@"工商银行",@"建设银行",nil];
     self.kehujingli = [NSMutableArray arrayWithObjects:@"3位客户经理",@"4位客户经理",@"3位客户经理",@"2位客户经理",nil];

@@ -31,6 +31,8 @@
     // Do any additional setup after loading the view from its nib.
     
     ((UIScrollView*)(self.view)).contentSize = _contentView.frame.size;
+    
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]]];
 }
 
 - (void)viewDidUnload

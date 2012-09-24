@@ -14,6 +14,7 @@
 
 @implementation GujiashihuijiaViewController
 
+@synthesize headinfo = _headinfo;
 @synthesize xiangqingctrl = _xiangqingctrl;
 @synthesize navctrl = _navctrl;
 
@@ -22,6 +23,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        _headinfo = @"已询32次（本月剩余2次） xxxxxxcccccchhhjASHDKhasdkjhaSHDJakhsdjhakjdhskalHSDJAhsdhakSHDJAShdkskjlhdsajD";
     }
     return self;
 }
@@ -66,8 +68,10 @@
     return 10;
 }
 
-// Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
-// Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return _headinfo;
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "GeyinhangkedaieViewController.h"
 
-@interface YinhangkedaichaxunViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate,UITextFieldDelegate>
+@interface YinhangkedaichaxunViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate,UITextFieldDelegate,UITableViewDelegate, UITableViewDataSource>
 
 {
     NSMutableArray* _pickerContents;

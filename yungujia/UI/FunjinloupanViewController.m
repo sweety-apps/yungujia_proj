@@ -39,6 +39,7 @@
     _loupanctrl.headinfo = @"当前位置:深圳福田区深南中路23号";
     _loupanctrl.navbar = self.navbar;
     _loupanctrl.navctrl = self.navctrl;
+    _loupanctrl.hideXXminei = NO;
 }
 
 - (void)viewDidUnload

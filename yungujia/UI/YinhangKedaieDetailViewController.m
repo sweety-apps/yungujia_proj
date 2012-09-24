@@ -62,6 +62,8 @@
     _scrollView.contentSize = _contentView.frame.size;
     self.kehujingliCtrl = [[[PinggujigouyinhangLV2ViewController alloc] initWithNibName:@"PinggujigouyinhangLV2ViewController" bundle:nil] autorelease];
     
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]]];
+    
     UIImage* btn_img = nil;
     
     btn_img = [UIImage imageNamed:@"btnGray"];
@@ -87,6 +89,8 @@
     
     _nianlilvarray = [[NSArray alloc] initWithObjects:@"上浮30%（7.40%）",@"上浮25%（6.20%）",@"上浮20%（5.20%）",@"2012/5/21基准6.80%",nil];
     
+    _daikuannianxianarray = [[NSArray alloc] initWithObjects:@"1年",@"5年",@"10年",@"15年",@"20年",@"25年",@"30年",nil];
+    
 }
 
 - (void)viewDidUnload
@@ -98,6 +102,7 @@
     
     [_daikuanchengshuarray release];
     [_nianlilvarray release];
+    [_daikuannianxianarray release];
     
     [_section0Titles release];
     [_section1Titles release];
@@ -221,6 +226,12 @@
         [_picker reloadAllComponents];
         _picker.hidden = NO;
     }
+    else if(indexPath.section == 1 && indexPath.row == 1)
+    {
+        _curPicker = eDaikuannianxian;
+        [_picker reloadAllComponents];
+        _picker.hidden = NO;
+    }
     else if(indexPath.section == 1 && indexPath.row == 2)
     {
         _curPicker = eNianlilv;
@@ -272,6 +283,10 @@
     {
         return [_nianlilvarray objectAtIndex:row];
     }
+    if (_curPicker == eDaikuannianxian)
+    {
+        return [_daikuannianxianarray objectAtIndex:row];
+    }
     return @"";
 }
 
@@ -306,6 +321,10 @@
     if (_curPicker == eNianlilv)
     {
         return [_nianlilvarray count];
+    }
+    if (_curPicker == eDaikuannianxian)
+    {
+        return [_daikuannianxianarray count];
     }
     return 1;
 }

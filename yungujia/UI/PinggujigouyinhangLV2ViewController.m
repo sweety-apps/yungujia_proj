@@ -32,6 +32,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]]];
+    
     self.name = [NSMutableArray arrayWithObjects:@"张先勇",@"刘明则",@"李丽",@"金科",nil];
     self.dianhua = [NSMutableArray arrayWithObjects:@"13902332194(福田支行)",@"13902332194(龙岗支行)",@"13902332194(南山支行)",@"13902332194(福田支行)",nil];
 }

@@ -21,6 +21,8 @@
 @synthesize headinfo = _headinfo;
 @synthesize loudongctrl = _loudongctrl;
 
+@synthesize hideXXminei = _hideXXminei;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -94,6 +96,14 @@
         [temporaryController release];
     }
     
+    if (_hideXXminei)
+    {
+        cell.xxminei.hidden = YES;
+    }
+    else
+    {
+        cell.xxminei.hidden = NO;
+    }
     
     //cell.xxhuayuan.text = @"万科金色家园";
     //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;

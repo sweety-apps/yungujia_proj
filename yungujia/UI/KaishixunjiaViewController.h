@@ -29,6 +29,9 @@
     FanghaoTableViewController* _fanghaoCtrl;
     
     BOOL _disableLoupanXuanze;
+    
+    UITextField* _mianji;
+    UITextField* _chengjiaojia;
 }
 
 //infos

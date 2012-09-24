@@ -40,6 +40,7 @@
     _loupanctrl.headinfo = @"搜索结果3条";
     _loupanctrl.navbar = self.navbar;
     _loupanctrl.navctrl = self.navctrl;
+    _loupanctrl.hideXXminei = YES;
 }
 
 - (void)viewDidUnload
