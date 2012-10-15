@@ -198,6 +198,9 @@
         cell.lblTitle.text = [_section1Titles objectAtIndex:row];
         if (row == 0)
         {
+            CGRect rect = cell.seg.frame;
+            rect.size.height = 34;
+            cell.seg.frame = rect;
         }
         else
         {
@@ -210,6 +213,7 @@
         YinhangkedaieDetailCell* cell = [_section2Cells objectAtIndex:row];
         cell.lblTitle.text = [_section2Titles objectAtIndex:row];
         cell.lblValue.text = [_section2Values objectAtIndex:row];
+        
         return cell;
     }
     

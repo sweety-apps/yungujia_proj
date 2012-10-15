@@ -23,6 +23,10 @@
 @synthesize navbar = _navbar;
 @synthesize navctrl =_navctrl;
 
+@synthesize goumainianxianSeg = _goumainianxianSeg;
+@synthesize wuyeleixingSeg = _wuyeleixingSeg;
+@synthesize chanquanguishuSeg = _chanquanguishuSeg;
+
 @synthesize pickerContents = _pickerContents;
 @synthesize pickerView = _pickerView;
 
@@ -53,6 +57,34 @@
     btn_img = [UIImage imageNamed:@"buttonn"];
     btn_img = [btn_img stretchableImageWithLeftCapWidth:14 topCapHeight:23];
     [self.btn setBackgroundImage:btn_img forState:UIControlStateNormal];
+    
+    
+    CGRect rect = _goumainianxianSeg.frame;
+    rect.size.height = 34;
+    _goumainianxianSeg.frame = rect;
+    UISegmentedControl* seg = _goumainianxianSeg;
+    for (int i = 0; i < [seg numberOfSegments]; ++i)
+    {
+        [seg setWidth:0 forSegmentAtIndex:i];
+    }
+    
+    rect = _wuyeleixingSeg.frame;
+    rect.size.height = 34;
+    _wuyeleixingSeg.frame = rect;
+    seg = _goumainianxianSeg;
+    for (int i = 0; i < [seg numberOfSegments]; ++i)
+    {
+        [seg setWidth:0 forSegmentAtIndex:i];
+    }
+    
+    rect = _chanquanguishuSeg.frame;
+    rect.size.height = 34;
+    _chanquanguishuSeg.frame = rect;
+    seg = _goumainianxianSeg;
+    for (int i = 0; i < [seg numberOfSegments]; ++i)
+    {
+        [seg setWidth:0 forSegmentAtIndex:i];
+    }
 }
 
 - (void)viewDidUnload

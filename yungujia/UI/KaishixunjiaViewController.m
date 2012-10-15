@@ -110,6 +110,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (tableView.tag == 0)
     {
         UITableViewCell *cell = (UITableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
@@ -174,7 +175,7 @@
             cell.value.text = [_values0 objectAtIndex:row];
             [temporaryController release];
         }
-        if (_disableLoupanXuanze)
+        if (row == 0 || _disableLoupanXuanze)
         {
             cell.accessoryType = UITableViewCellAccessoryNone;
         }

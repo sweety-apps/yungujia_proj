@@ -21,6 +21,9 @@
 @property (nonatomic,retain) IBOutlet UIPickerView* pickerView;
 @property (nonatomic,retain) IBOutlet UITextField* textField;
 @property (nonatomic,retain) IBOutlet UIButton* btn;
+@property (nonatomic,retain) IBOutlet UISegmentedControl* goumainianxianSeg;
+@property (nonatomic,retain) IBOutlet UISegmentedControl* wuyeleixingSeg;
+@property (nonatomic,retain) IBOutlet UISegmentedControl* chanquanguishuSeg;
 
 //controllers
 @property (nonatomic,retain) IBOutlet UINavigationController* navctrl;
