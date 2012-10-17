@@ -272,6 +272,7 @@
 		F3DBEADC15BD31690040CDED /* GuanzhuLV1CellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3DBEADA15BD31690040CDED /* GuanzhuLV1CellViewController.m */; };
 		F3DBEADD15BD31690040CDED /* GuanzhuLV1CellViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3DBEADB15BD31690040CDED /* GuanzhuLV1CellViewController.xib */; };
 		F3DBEAE015BD31910040CDED /* GuanzhuLV1Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = F3DBEADF15BD31910040CDED /* GuanzhuLV1Cell.m */; };
+		F3ED8F1E162EA68000A437DA /* UIPickerWithToolBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = F3ED8F1D162EA66C00A437DA /* UIPickerWithToolBarView.m */; };
 		F3F8334515DA8AF0001DA1AC /* YinhangkedaieDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F3F8334415DA8AEB001DA1AC /* YinhangkedaieDetailCell.m */; };
 /* End PBXBuildFile section */
 
@@ -633,6 +634,8 @@
 		F3DBEADB15BD31690040CDED /* GuanzhuLV1CellViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GuanzhuLV1CellViewController.xib; sourceTree = "<group>"; };
 		F3DBEADE15BD31910040CDED /* GuanzhuLV1Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuanzhuLV1Cell.h; sourceTree = "<group>"; };
 		F3DBEADF15BD31910040CDED /* GuanzhuLV1Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuanzhuLV1Cell.m; sourceTree = "<group>"; };
+		F3ED8F1C162EA66100A437DA /* UIPickerWithToolBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPickerWithToolBarView.h; sourceTree = "<group>"; };
+		F3ED8F1D162EA66C00A437DA /* UIPickerWithToolBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPickerWithToolBarView.m; sourceTree = "<group>"; };
 		F3F8334315DA8AE8001DA1AC /* YinhangkedaieDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YinhangkedaieDetailCell.h; sourceTree = "<group>"; };
 		F3F8334415DA8AEB001DA1AC /* YinhangkedaieDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YinhangkedaieDetailCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -989,8 +992,7 @@
 		BE85B52E15B330140010E0F5 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				BEE87C4315D75D5600967BCD /* UIBadgeView.h */,
-				BEE87C4415D75D5800967BCD /* UIBadgeView.m */,
+				F3ED8F20162EA69900A437DA /* BaseUI */,
 				F3DBEAD715BD31270040CDED /* Guanzhu */,
 				BEB543A815BC65F200C6CDAD /* Gujiashi */,
 				3852DDD815B8402600ADB7C8 /* more */,
@@ -1005,8 +1007,6 @@
 				BE85B54515B3373A0010E0F5 /* SwichTabBarViewController.m */,
 				BE85B54615B3373A0010E0F5 /* SwichTabBarViewController.xib */,
 				3842FB5315B44C3000DA889E /* Localizable.strings */,
-				BEE87C8215D8076900967BCD /* CustomNavigationController.h */,
-				BEE87C8315D8077000967BCD /* CustomNavigationController.m */,
 			);
 			path = UI;
 			sourceTree = SOURCE_ROOT;
@@ -1295,6 +1295,19 @@
 				F3DBEADF15BD31910040CDED /* GuanzhuLV1Cell.m */,
 			);
 			name = Guanzhu;
+			sourceTree = "<group>";
+		};
+		F3ED8F20162EA69900A437DA /* BaseUI */ = {
+			isa = PBXGroup;
+			children = (
+				F3ED8F1C162EA66100A437DA /* UIPickerWithToolBarView.h */,
+				F3ED8F1D162EA66C00A437DA /* UIPickerWithToolBarView.m */,
+				BEE87C4315D75D5600967BCD /* UIBadgeView.h */,
+				BEE87C4415D75D5800967BCD /* UIBadgeView.m */,
+				BEE87C8215D8076900967BCD /* CustomNavigationController.h */,
+				BEE87C8315D8077000967BCD /* CustomNavigationController.m */,
+			);
+			name = BaseUI;
 			sourceTree = "<group>";
 		};
 		F3F8334715DA8B02001DA1AC /* YinhangkedaieDetail */ = {
@@ -1627,6 +1640,7 @@
 				BEF4C914160FBE58008410EF /* GengduoWarpperViewController.m in Sources */,
 				F3C06522161035CE00ABB6A0 /* YuegongGengduoCellViewController.m in Sources */,
 				F3C06527161035E900ABB6A0 /* YuegongGengduoCell.m in Sources */,
+				F3ED8F1E162EA68000A437DA /* UIPickerWithToolBarView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

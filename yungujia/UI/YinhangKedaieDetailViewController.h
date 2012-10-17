@@ -11,15 +11,17 @@
 #import "YuegongViewController.h"
 #import "PinggujigouyinhangLV2ViewController.h"
 #import "RengongxunjiaViewController.h"
+#import "UIPickerWithToolBarView.h"
 
 enum YKDD_PICKER_TYPE {
     eDaikuanchengshu = 0,
     eNianlilv = 1,
     eDaikuannianxian = 2,
+    eDaikuanfangshi = 3,
     };
 
 @interface YinhangKedaieDetailViewController : UIViewController
-<UITableViewDelegate,UITableViewDataSource,UIPickerViewDelegate,UIPickerViewDataSource>
+<UITableViewDelegate,UITableViewDataSource,UIPickerWithToolBarViewDelegate,UIPickerViewDataSource>
 {
     NSArray* _section0Cells;
     NSArray* _section1Cells;
@@ -30,6 +32,7 @@ enum YKDD_PICKER_TYPE {
     NSArray* _section1Values;
     NSArray* _section2Titles;
     NSArray* _section2Values;
+    NSArray*    _daikuanfangshiarray;
     NSArray*    _daikuanchengshuarray;
     NSArray*    _nianlilvarray;
     NSArray*    _daikuannianxianarray;
@@ -39,7 +42,7 @@ enum YKDD_PICKER_TYPE {
 //view
 @property (nonatomic,retain) IBOutlet UIScrollView* scrollView;
 @property (nonatomic,retain) IBOutlet UIView* contentView;
-@property (nonatomic,retain) IBOutlet UIPickerView* picker;
+@property (nonatomic,retain) IBOutlet UIPickerWithToolBarView* picker;
 @property (nonatomic,retain) IBOutlet UIButton* btn;
 
 //part1
@@ -50,6 +53,7 @@ enum YKDD_PICKER_TYPE {
 @property (nonatomic,retain) IBOutlet YinhangkedaieDetailCell* shuifeiCell;
 
 //part2
+@property (nonatomic,retain) IBOutlet YinhangkedaieDetailCell* daikuanfangshiCell;
 @property (nonatomic,retain) IBOutlet YinhangkedaieDetailCell* huankuanfangshiCell;
 @property (nonatomic,retain) IBOutlet YinhangkedaieDetailCell* daikuannianxianCell;
 @property (nonatomic,retain) IBOutlet YinhangkedaieDetailCell* nianlilvCell;

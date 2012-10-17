@@ -12,6 +12,7 @@
 
 @synthesize lblTitle = _lblTitle;
 @synthesize lblValue = _lblValue;
+@synthesize lblSubValue = _lblSubValue;
 @synthesize seg = _seg;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier

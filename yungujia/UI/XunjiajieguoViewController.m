@@ -73,7 +73,7 @@
     
     self.atvWeiguanzhu.hidden = YES;
     
-    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]]];
+    [self.view setBackgroundColor:[UIColor clearColor]];
     
     UIBarButtonItem* rightbtn = [[UIBarButtonItem alloc] init];
     rightbtn.title = @"重新询价";

@@ -72,7 +72,7 @@
     btn_img = [btn_img stretchableImageWithLeftCapWidth:14 topCapHeight:23];
     [self.btn setBackgroundImage:btn_img forState:UIControlStateNormal];
     
-    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]]];
+    [self.view setBackgroundColor:[UIColor clearColor]];
     
     self.navctrl.title = @"更多";
 }

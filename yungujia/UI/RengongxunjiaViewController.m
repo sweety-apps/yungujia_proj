@@ -40,7 +40,7 @@
     
     ((UIScrollView*)(self.view)).contentSize = _contentView.frame.size;
     
-    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]]];
+    [self.view setBackgroundColor:[UIColor clearColor]];
     
     UIImage* btn_img = nil;
     
@@ -224,7 +224,7 @@
     
     switch (row) {
         case 0:
-            cell.title.text = @"面积（㎡）";
+            cell.title.text = @"面积（平方米）";
             cell.detail.placeholder = @"40";
             _mianji = cell.detail;
             break;

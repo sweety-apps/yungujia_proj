@@ -64,7 +64,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]]];
+    //[self.view setBackgroundColor:[UIColor clearColor]];
 }
 
 - (void)viewDidUnload
@@ -117,7 +117,7 @@
         
         if (msg.isRead) {
             UIImageView* imgIsRead = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"isRead"]];
-            [imgIsRead setFrame:CGRectMake(0, 22, 15, 15)];
+            [imgIsRead setFrame:CGRectMake(4, 22, 15, 15)];
             [cell addSubview:imgIsRead];
             [imgIsRead release];
         }

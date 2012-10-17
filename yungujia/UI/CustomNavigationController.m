@@ -30,6 +30,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    //[self.view setBackgroundColor:[UIColor clearColor]];
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]]];
 }
 
 - (void)viewDidUnload
@@ -142,8 +144,8 @@
         btn.frame = CGRectMake(0, 0, btnImage.size.width, btnImage.size.height);
         
         CGRect lbl_rct = btn.frame;
-        lbl_rct.origin.x += 5;
-        lbl_rct.size.width -= 5;
+        lbl_rct.origin.x += 4;
+        lbl_rct.size.width -= 6;
         UILabel* lbl = [[[UILabel alloc] initWithFrame:lbl_rct] autorelease];
 
         lbl.text = viewController.navigationItem.rightBarButtonItem.title;

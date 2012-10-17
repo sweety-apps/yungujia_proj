@@ -31,8 +31,14 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    ((UIScrollView*)(self.view)).contentSize = _tableview.frame.size;
-    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]]];
+    ((UIScrollView*)(self.view)).contentSize = CGSizeMake(320, 570);
+    [self.view setBackgroundColor:[UIColor clearColor]];
+    
+    UIImageView* imgLogo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
+    imgLogo.contentMode = UIViewContentModeScaleAspectFit;
+    [imgLogo setFrame:CGRectMake(70, 10, 182, 71)];
+    [self.view addSubview:imgLogo];
+    [imgLogo release];
 }
 
 - (void)viewDidUnload
@@ -56,131 +62,100 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView              // Default is 1 if not implemented
 {
-    return 2;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == 0) {
-        return 1;
-    }
-    else {
-        return 4;
-    }
+    return 4;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0) {
-        static NSString* dequeueIdentifer = @"logocell";
+    if (indexPath.row == 3)
+    {
+        static NSString* dequeueIdentifer = @"introcellwithlogo";
         UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:dequeueIdentifer];
         if(cell == nil)
         {
+            NSLog(@"%d",indexPath.row);
             cell = [[[UITableViewCell alloc] init]autorelease];
-            UIImageView* imgLogo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
-            [imgLogo setFrame:CGRectMake(70, 0, 182, 71)];
-            [cell addSubview:imgLogo];
-            [cell setBackgroundColor:[UIColor clearColor]];
-            [imgLogo release];
+            UILabel* lblkey = [[UILabel alloc] initWithFrame:CGRectMake(20, 5, 60, 35)];
+            lblkey.text = [_arraykeys objectAtIndex:indexPath.row];
+            [cell addSubview:lblkey];
+            [lblkey setBackgroundColor:[UIColor clearColor]];
+            lblkey.textAlignment = UITextAlignmentLeft;
+            lblkey.font = [UIFont boldSystemFontOfSize:17.0];
+            [lblkey release];
             
+            UILabel* lblvalue = [[UILabel alloc] initWithFrame:CGRectMake(80, 5, 220, 70)];
+            lblvalue.text = [_arrayvalues objectAtIndex:indexPath.row];
+            lblvalue.textAlignment = UITextAlignmentLeft;
+            lblvalue.textColor =[UIColor colorWithRed:82.0/255.0 green:105.0/255.0 blue:155.0/255.0 alpha:1.0];
+            [lblvalue setBackgroundColor:[UIColor clearColor]];
+            [cell addSubview:lblvalue];
+            [lblvalue setFont:[UIFont systemFontOfSize:14]];
+            lblvalue.numberOfLines = 8;
+            [lblvalue release];
+            
+            UIImage* imagehezuologo = [UIImage imageNamed:@"hezuologo"];
+            UIImageView* imageview = [[[UIImageView alloc] initWithImage:imagehezuologo] autorelease];
+            [imageview setFrame:CGRectMake(80, 90, 220, 175)];
+            [cell addSubview:imageview];
         }
         else {
             
         }
+        [cell setBackgroundColor:[UIColor whiteColor]];
+        return cell;
+        
+    }
+    else
+    {
+        static NSString* dequeueIdentifer = @"introcell";
+        UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:dequeueIdentifer];
+        if(cell == nil)
+        {
+            NSLog(@"%d",indexPath.row);
+            cell = [[[UITableViewCell alloc] init]autorelease];
+            UILabel* lblkey = [[UILabel alloc] initWithFrame:CGRectMake(20, 5, 60, 35)];
+            lblkey.text = [_arraykeys objectAtIndex:indexPath.row];
+            [cell addSubview:lblkey];
+            [lblkey setBackgroundColor:[UIColor clearColor]];
+            lblkey.textAlignment = UITextAlignmentLeft;
+            lblkey.font = [UIFont boldSystemFontOfSize:17.0];
+            [lblkey release];
+            
+            UILabel* lblvalue = [[UILabel alloc] initWithFrame:CGRectMake(80, 5, 220,35)];
+            lblvalue.text = [_arrayvalues objectAtIndex:indexPath.row];
+            lblvalue.textAlignment = UITextAlignmentRight;
+            lblvalue.textColor =[UIColor colorWithRed:82.0/255.0 green:105.0/255.0 blue:155.0/255.0 alpha:1.0];
+            [lblvalue setBackgroundColor:[UIColor clearColor]];
+            [cell addSubview:lblvalue];
+            [lblvalue setFont:[UIFont systemFontOfSize:14]];
+            lblvalue.numberOfLines = 8;
+            [lblvalue release];
+        }
+        else {
+            
+        }
+        [cell setBackgroundColor:[UIColor whiteColor]];
         return cell;
     }
-    else {
-        if (indexPath.row == 3) 
-        {
-            static NSString* dequeueIdentifer = @"introcellwithlogo";
-            UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:dequeueIdentifer];
-            if(cell == nil)
-            {
-                NSLog(@"%d",indexPath.row);
-                cell = [[[UITableViewCell alloc] init]autorelease];
-                UILabel* lblkey = [[UILabel alloc] initWithFrame:CGRectMake(20, 5, 60, 35)];
-                lblkey.text = [_arraykeys objectAtIndex:indexPath.row];
-                [cell addSubview:lblkey];
-                [lblkey setBackgroundColor:[UIColor clearColor]];
-                lblkey.textAlignment = UITextAlignmentLeft;
-                lblkey.font = [UIFont boldSystemFontOfSize:17.0];
-                [lblkey release];
-                
-                UILabel* lblvalue = [[UILabel alloc] initWithFrame:CGRectMake(80, 5, 220, 70)];
-                lblvalue.text = [_arrayvalues objectAtIndex:indexPath.row];
-                lblvalue.textAlignment = UITextAlignmentLeft;
-                lblvalue.textColor =[UIColor colorWithRed:82.0/255.0 green:105.0/255.0 blue:155.0/255.0 alpha:1.0];
-                [lblvalue setBackgroundColor:[UIColor clearColor]];
-                [cell addSubview:lblvalue];
-                [lblvalue setFont:[UIFont systemFontOfSize:14]];
-                lblvalue.numberOfLines = 8;
-                [lblvalue release];
-                
-                UIImage* imagehezuologo = [UIImage imageNamed:@"hezuologo"];
-                UIImageView* imageview = [[[UIImageView alloc] initWithImage:imagehezuologo] autorelease];
-                [imageview setFrame:CGRectMake(80, 90, 220, 175)];
-                [cell addSubview:imageview];
-            }
-            else {
-                
-            }
-            [cell setBackgroundColor:[UIColor clearColor]];
-            return cell;
-
-        }
-        else 
-        {
-            static NSString* dequeueIdentifer = @"introcell";
-            UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:dequeueIdentifer];
-            if(cell == nil)
-            {
-                NSLog(@"%d",indexPath.row);
-                cell = [[[UITableViewCell alloc] init]autorelease];
-                UILabel* lblkey = [[UILabel alloc] initWithFrame:CGRectMake(20, 5, 60, 35)];
-                lblkey.text = [_arraykeys objectAtIndex:indexPath.row];
-                [cell addSubview:lblkey];
-                [lblkey setBackgroundColor:[UIColor clearColor]];
-                lblkey.textAlignment = UITextAlignmentLeft;
-                lblkey.font = [UIFont boldSystemFontOfSize:17.0];
-                [lblkey release];
-                
-                UILabel* lblvalue = [[UILabel alloc] initWithFrame:CGRectMake(80, 5, 220,35)];
-                lblvalue.text = [_arrayvalues objectAtIndex:indexPath.row];
-                lblvalue.textAlignment = UITextAlignmentRight;
-                lblvalue.textColor =[UIColor colorWithRed:82.0/255.0 green:105.0/255.0 blue:155.0/255.0 alpha:1.0];
-                [lblvalue setBackgroundColor:[UIColor clearColor]];
-                [cell addSubview:lblvalue];
-                [lblvalue setFont:[UIFont systemFontOfSize:14]];
-                lblvalue.numberOfLines = 8;
-                [lblvalue release];
-            }
-            else {
-                
-            }
-            [cell setBackgroundColor:[UIColor clearColor]];
-            return cell;
-        }
-    }
-        
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0) {
-        return 62;
+    if (indexPath.row == 3) {
+        return 280;
     }
     else {
-        if (indexPath.row == 3) {
-            return 280;
-        }
-        else {
-            return 44;
-        }
+        return 44;
     }
 }
 

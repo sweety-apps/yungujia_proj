@@ -87,12 +87,6 @@ static AppDelegate* gDel = nil;
 
 -(void)ShowMainView:(NSString*)nickname weiboaccount:(NSString*)account
 {	
-	if(loginViewController!=nil)
-	{
-		//[loginViewController endTimer];
-		[loginViewController.view removeFromSuperview];
-		self.loginViewController =nil;
-	}
     if(rootTabBarController==nil)
 	{
         UIViewController *viewController1 = [[[XunJiaViewController alloc] initWithNibName:@"XunJiaViewController" bundle:nil] autorelease];
@@ -106,6 +100,7 @@ static AppDelegate* gDel = nil;
         
 	}
 
+    [self.window insertSubview:rootTabBarController.view belowSubview:loginViewController.view];
     
     [UIView beginAnimations:@"transToMain" context:nil];
     [UIView setAnimationDuration:0.75f];
@@ -114,7 +109,12 @@ static AppDelegate* gDel = nil;
                            forView:self.window 
                              cache:YES];
     
-	[self.window addSubview:rootTabBarController.view];
+    if(loginViewController!=nil)
+	{
+		//[loginViewController endTimer];
+		[loginViewController.view removeFromSuperview];
+		self.loginViewController =nil;
+	}
     
     [UIView commitAnimations];
 }
@@ -134,7 +134,18 @@ static AppDelegate* gDel = nil;
         [controller release];
         
 	}
-	[self.window addSubview:loginViewController.view];
+    
+    
+    [UIView beginAnimations:@"transToMain" context:nil];
+    [UIView setAnimationDuration:0.70f];
+    [UIView setAnimationDelegate:self];
+    [UIView setAnimationTransition:UIViewAnimationTransitionCurlDown
+                           forView:self.window
+                             cache:YES];
+    
+    [self.window addSubview:loginViewController.view];
+    
+    [UIView commitAnimations];
 }
 
 - (void)makeTabBarHidden:(BOOL)hide

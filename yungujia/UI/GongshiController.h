@@ -12,6 +12,8 @@
 {
     UITableView* _tableView;
     NSMutableArray* gongshilist;
+    UIFont* _textFont;
+    CGFloat _textWidth;
 }
 @property (retain,nonatomic) IBOutlet UITableView* tableView;
 @end

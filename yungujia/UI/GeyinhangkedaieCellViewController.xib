@@ -70,7 +70,7 @@
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<string key="IBUIText">工商银行</string>
-								<object class="NSColor" key="IBUITextColor" id="676406073">
+								<object class="NSColor" key="IBUITextColor">
 									<int key="NSColorSpace">1</int>
 									<bytes key="NSRGB">MCAwIDAAA</bytes>
 									<string key="IBUIColorCocoaTouchKeyPath">darkTextColor</string>
@@ -105,7 +105,10 @@
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<string key="IBUIText">可贷：230万</string>
-								<reference key="IBUITextColor" ref="676406073"/>
+								<object class="NSColor" key="IBUITextColor">
+									<int key="NSColorSpace">2</int>
+									<bytes key="NSRGB">MC4yNzA1ODgyNDkgMC4zODQzMTM3NjIyIDAuNTg4MjM1MzE4NwA</bytes>
+								</object>
 								<reference key="IBUIHighlightedColor" ref="944709346"/>
 								<int key="IBUIBaselineAdjustment">0</int>
 								<float key="IBUIMinimumFontSize">10</float>
@@ -132,7 +135,10 @@
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<string key="IBUIText">月供：280万</string>
-								<reference key="IBUITextColor" ref="676406073"/>
+								<object class="NSColor" key="IBUITextColor">
+									<int key="NSColorSpace">2</int>
+									<bytes key="NSRGB">MC4yNzA1ODgyNDkgMC4zODQzMTM3NjIyIDAuNTg4MjM1MzE4NwA</bytes>
+								</object>
 								<reference key="IBUIHighlightedColor" ref="944709346"/>
 								<int key="IBUIBaselineAdjustment">0</int>
 								<float key="IBUIMinimumFontSize">10</float>

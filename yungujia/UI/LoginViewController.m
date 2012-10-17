@@ -93,7 +93,7 @@
     }
     [tap setCancelsTouchesInView:NO];
     [tap release];
-    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]]];
+    [self.view setBackgroundColor:[UIColor clearColor]];
     
 }
 
@@ -235,13 +235,18 @@
     if (cell == nil)
     {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:dequeueIdentifer] autorelease];
+        
+        UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(0, 5, 100, cell.frame.size.height)];
         if (indexPath.row == 0) {
-            cell.textLabel.text = @"手机号码";
+            label.text = @"手机号码";
         }
         else {
-            cell.textLabel.text = @"密码";
+            label.text = @"密码";
         }
-        cell.textLabel.font = [UIFont boldSystemFontOfSize:17.0];
+        label.backgroundColor = [UIColor clearColor];
+        label.textAlignment = UITextAlignmentRight;
+        label.font = [UIFont boldSystemFontOfSize:17.0];
+        [cell addSubview:label];
     }
     return cell;
 }

@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "GeyinhangkedaieViewController.h"
+#import "UIPickerWithToolBarView.h"
 
-@interface YinhangkedaichaxunViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate,UITextFieldDelegate,UITableViewDelegate, UITableViewDataSource>
+@interface YinhangkedaichaxunViewController : UIViewController <UIPickerViewDataSource, UIPickerWithToolBarViewDelegate,UITextFieldDelegate,UITableViewDelegate, UITableViewDataSource>
 
 {
     NSMutableArray* _pickerContents;
@@ -18,7 +19,7 @@
 //views
 @property (nonatomic,retain) IBOutlet UIView* contentView;
 @property (nonatomic,retain) IBOutlet UINavigationBar* navbar;
-@property (nonatomic,retain) IBOutlet UIPickerView* pickerView;
+@property (nonatomic,retain) IBOutlet UIPickerWithToolBarView* pickerView;
 @property (nonatomic,retain) IBOutlet UITextField* textField;
 @property (nonatomic,retain) IBOutlet UIButton* btn;
 @property (nonatomic,retain) IBOutlet UISegmentedControl* goumainianxianSeg;

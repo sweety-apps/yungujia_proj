@@ -42,7 +42,7 @@
     self.navigationItem.rightBarButtonItem = rightbtn;
     [rightbtn release];
     
-    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]]];
+    [self.view setBackgroundColor:[UIColor clearColor]];
 }
 
 - (void)viewDidUnload

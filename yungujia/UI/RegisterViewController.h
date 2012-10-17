@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UIPickerWithToolBarView.h"
 
 @interface RegisterViewController : UIViewController
-<UIPickerViewDelegate,UIPickerViewDataSource,UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource>
+<UIPickerWithToolBarViewDelegate,UIPickerViewDataSource,UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource>
 {
     UITextField* txtTel;
     UITextField* txtIdentifyCode;
@@ -17,7 +18,7 @@
     UITextField* txtPassword;
     UITextField* txtConfirmPassword;
     UILabel* lblUserStyle;
-    UIPickerView* pickUserStyle;
+    UIPickerWithToolBarView* pickUserStyle;
     NSMutableArray* arrayUserStyle;
 }
 
@@ -27,7 +28,7 @@
 @property (nonatomic,retain) IBOutlet UITextField* txtPassword;
 @property (nonatomic,retain) IBOutlet UITextField* txtConfirmPassword;
 @property (nonatomic,retain) IBOutlet UILabel* lblUserStyle;
-@property (nonatomic,retain) IBOutlet UIPickerView* pickUserStyle;
+@property (nonatomic,retain) IBOutlet UIPickerWithToolBarView* pickUserStyle;
 @property (nonatomic,retain) NSMutableArray* arrayUserStyle;
 @property (nonatomic,retain) IBOutlet UIButton* btn;
 @property (nonatomic,retain) IBOutlet UIButton* btnSend;

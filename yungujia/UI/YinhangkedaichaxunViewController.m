@@ -48,7 +48,7 @@
     
     ((UIScrollView*)(self.view)).contentSize = _contentView.frame.size;
     
-    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]]];
+    [self.view setBackgroundColor:[UIColor clearColor]];
     
     _pickerContents = [[NSMutableArray arrayWithObjects:@"421809123元(世联评估)",@"1809123元(自动评估)",@"409123元(同致城)", nil] retain];
     
@@ -146,6 +146,13 @@
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
+    
+}
+
+#pragma mark UIPickerWithToolBarViewDelegate
+-(void)onPushedToolBarDoneButton:(UIPickerWithToolBarView*)pickerView
+{
+    //[self.lblUserStyle setText:[self.arrayUserStyle objectAtIndex:[pickerView selectedRowInComponent:0]]];
     _pickerView.hidden = YES;
     ((UIScrollView*)self.view).scrollEnabled = YES;
 }

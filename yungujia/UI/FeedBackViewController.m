@@ -61,7 +61,7 @@
     [self textViewDidChange:textEdit];
     [self createTopBar];
     
-    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]]];
+    [self.view setBackgroundColor:[UIColor clearColor]];
 }
 
 - (void)viewDidUnload

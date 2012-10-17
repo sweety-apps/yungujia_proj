@@ -27,6 +27,7 @@
 @synthesize shuifeiCell;
 
 //part2
+@synthesize daikuanfangshiCell;
 @synthesize huankuanfangshiCell;
 @synthesize daikuannianxianCell;
 @synthesize nianlilvCell;
@@ -62,7 +63,7 @@
     _scrollView.contentSize = _contentView.frame.size;
     self.kehujingliCtrl = [[[PinggujigouyinhangLV2ViewController alloc] initWithNibName:@"PinggujigouyinhangLV2ViewController" bundle:nil] autorelease];
     
-    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]]];
+    [self.view setBackgroundColor:[UIColor clearColor]];
     
     UIImage* btn_img = nil;
     
@@ -73,17 +74,19 @@
     _section0Titles = [[NSArray arrayWithObjects:@"可贷金额",@"评估价",@"净值",@"税费",@"贷款成数",nil] retain];
     _section0Values = [[NSArray arrayWithObjects:@"234万",@"320万",@"298万",@"23万",@"七成",nil] retain];
     
-    _section1Titles = [[NSArray arrayWithObjects:@"还款方式",@"贷款年限",@"年利率",@"月供",nil] retain];
-    _section1Values = [[NSArray arrayWithObjects:@"等额",@"20年",@"2012/5/21基准6.80%",@"7.633.40",nil] retain];
+    _section1Titles = [[NSArray arrayWithObjects:@"贷款方式",@"还款方式",@"贷款年限",@"年利率",@"月供",nil] retain];
+    _section1Values = [[NSArray arrayWithObjects:@"商业贷款",@"等额",@"20年",@"2012/5/21基准6.80%",@"7.633.40",nil] retain];
     
     _section2Titles = [[NSArray arrayWithObjects:@"联系本行客户经理",nil] retain];
     _section2Values = [[NSArray arrayWithObjects:@"3位",nil] retain];
     
     _section0Cells = [[NSArray alloc] initWithObjects:keaijineCell,pinggujiaCell,jingzhiCell,shuifeiCell,daikuangchengshuCell, nil ];
     
-    _section1Cells = [[NSArray alloc] initWithObjects:huankuanfangshiCell,daikuannianxianCell,nianlilvCell,yuegongCell, nil ];
+    _section1Cells = [[NSArray alloc] initWithObjects:daikuanfangshiCell,huankuanfangshiCell,daikuannianxianCell,nianlilvCell,yuegongCell, nil ];
     
     _section2Cells = [[NSArray alloc] initWithObjects:kehujingliCell, nil ];
+    
+    _daikuanfangshiarray = [[NSArray alloc] initWithObjects:@"商业贷款",@"公积金贷款",nil];
     
     _daikuanchengshuarray = [[NSArray alloc] initWithObjects:@"9成",@"8成",@"7成",@"6成",@"5成",@"4成",@"3成",@"2成",@"1成",nil];
     
@@ -100,6 +103,7 @@
     // e.g. self.myOutlet = nil;
     self.kehujingliCtrl = nil;
     
+    [_daikuanfangshiarray release];
     [_daikuanchengshuarray release];
     [_nianlilvarray release];
     [_daikuannianxianarray release];
@@ -158,7 +162,7 @@
     }
     if (section == 1)
     {
-        return @"按还款计算";
+        return @"按揭与还款";
     }
     if (section == 2)
     {
@@ -174,7 +178,7 @@
     }
     else if(section == 1)
     {
-        return 4;
+        return 5;
     }
     else if(section == 2)
     {
@@ -196,11 +200,15 @@
     {
         YinhangkedaieDetailCell* cell = [_section1Cells objectAtIndex:row];
         cell.lblTitle.text = [_section1Titles objectAtIndex:row];
-        if (row == 0)
+        if (row == 1)
         {
             CGRect rect = cell.seg.frame;
             rect.size.height = 34;
             cell.seg.frame = rect;
+        }
+        else if (row == 4)
+        {
+            cell.lblSubValue.text = [_section1Values objectAtIndex:row];
         }
         else
         {
@@ -230,19 +238,25 @@
         [_picker reloadAllComponents];
         _picker.hidden = NO;
     }
-    else if(indexPath.section == 1 && indexPath.row == 1)
+    else if(indexPath.section == 1 && indexPath.row == 0)
     {
-        _curPicker = eDaikuannianxian;
+        _curPicker = eDaikuanfangshi;
         [_picker reloadAllComponents];
         _picker.hidden = NO;
     }
     else if(indexPath.section == 1 && indexPath.row == 2)
     {
-        _curPicker = eNianlilv;
+        _curPicker = eDaikuannianxian;
         [_picker reloadAllComponents];
         _picker.hidden = NO;
     }
     else if(indexPath.section == 1 && indexPath.row == 3)
+    {
+        _curPicker = eNianlilv;
+        [_picker reloadAllComponents];
+        _picker.hidden = NO;
+    }
+    else if(indexPath.section == 1 && indexPath.row == 4)
     {
         _yuegongCtrl.title = @"月供清单";
         [self.navigationController pushViewController:_yuegongCtrl animated:YES];
@@ -283,13 +297,17 @@
     {
         return [_daikuanchengshuarray objectAtIndex:row];
     }
-    if (_curPicker == eNianlilv)
+    else if (_curPicker == eNianlilv)
     {
         return [_nianlilvarray objectAtIndex:row];
     }
-    if (_curPicker == eDaikuannianxian)
+    else if (_curPicker == eDaikuannianxian)
     {
         return [_daikuannianxianarray objectAtIndex:row];
+    }
+    else if (_curPicker == eDaikuanfangshi)
+    {
+        return [_daikuanfangshiarray objectAtIndex:row];
     }
     return @"";
 }
@@ -302,7 +320,6 @@
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     NSLog(@"%d",row);
-    _picker.hidden = YES;
 //    [self.lblUserStyle setText:[self.arrayUserStyle objectAtIndex:row]];
 //    [self.pickUserStyle setHidden:true];
 }
@@ -314,6 +331,13 @@
     return 1;
 }
 
+#pragma mark UIPickerWithToolBarViewDelegate
+-(void)onPushedToolBarDoneButton:(UIPickerWithToolBarView*)pickerView
+{
+    //[self.lblUserStyle setText:[self.arrayUserStyle objectAtIndex:[pickerView selectedRowInComponent:0]]];
+    _picker.hidden = YES;
+}
+
 
 // returns the # of rows in each component..
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
@@ -322,13 +346,17 @@
     {
         return [_daikuanchengshuarray count];
     }
-    if (_curPicker == eNianlilv)
+    else if (_curPicker == eNianlilv)
     {
         return [_nianlilvarray count];
     }
-    if (_curPicker == eDaikuannianxian)
+    else if (_curPicker == eDaikuannianxian)
     {
         return [_daikuannianxianarray count];
+    }
+    else if (_curPicker == eDaikuanfangshi)
+    {
+        return [_daikuanfangshiarray count];
     }
     return 1;
 }

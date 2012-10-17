@@ -18,7 +18,7 @@
 {
     //根据msgid查询得到msg数据结构
     _msgRecord = [[SystemMsgRecord alloc]init];
-    _msgRecord.title = @"您的朋友123在您的邀请下已经在云股价注册";
+    _msgRecord.title = @"您的朋友123在您的邀请下已经在云估价注册";
     _msgRecord.text = @"这里是该系统消息的正文，应该支持显示图片和这里是该系统消息的正文，这里是该系统消息的正文，这里是该系统消息的正文，这里是该系统消息的正文，这里是该系统消息的正文，这里是该系统消息的正文，这里是该系统消息的正文这里是该系统消息的正文，这里是该系统消息的正文，这里是该系统消息的正文，这里是该系统消息的正文，这里是该系统消息的正文，这里是该系统消息的正文，这里是该系统消息的正文，这里是该系统消息的正文这里是该系统消息的正文，这里是该系统消息的正文，这里是该系统消息的正文，这里是该系统消息的正文，这里是该系统消息的正文，这里是该系统消息的正文，这里是该系统消息的正文，这里是该系统消息的正文";
     _msgRecord.time = @"2012-12-12 23:23:23";
     
@@ -80,7 +80,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self setCustomNavButtonItemExpand:NSLocalizedString(@"str_back", @"返回") imagePath:@"topbar_button_back" imagePathHover:@"topbar_button_back_hover" target:self action:@selector(onClickBack:)];
-    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]]];
+    [self.view setBackgroundColor:[UIColor clearColor]];
 }
 
 - (void)viewDidUnload
@@ -135,6 +135,7 @@
         else {
             
         }
+        cell.backgroundColor = [UIColor whiteColor];
         return cell;
 
     }
@@ -146,13 +147,19 @@
         {
             cell = [[[UITableViewCell alloc] init]autorelease];
             cell.backgroundColor = [UIColor redColor];
-            cell.textLabel.numberOfLines = 20;
-            cell.textLabel.text = _msgRecord.text;
-            [cell.textLabel setFont:[UIFont systemFontOfSize:16]];
+            
+            UILabel* lblText = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 295, 354)];
+            lblText.numberOfLines = 0;
+            lblText.text = _msgRecord.text;
+            lblText.backgroundColor = [UIColor clearColor];
+            [lblText setFont:[UIFont systemFontOfSize:16]];
+            
+            [cell addSubview:lblText];
         }
         else {
             
         }
+        cell.backgroundColor = [UIColor clearColor];
         return cell;
     }
     
@@ -170,7 +177,7 @@
         return 62;
     }
     else {
-        return 354;
+        return 400;
     }
 }
 

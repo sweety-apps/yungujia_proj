@@ -8,7 +8,7 @@
 #import <UIKit/UIKit.h>
 #import "SystemMsgRecord.h"
 
-@interface SystemMsgDetailViewController : UITableViewController
+@interface SystemMsgDetailViewController : UIViewController
 {
     SystemMsgRecord* _msgRecord;
 }

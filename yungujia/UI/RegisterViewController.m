@@ -113,7 +113,7 @@
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
     
-    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]]];
+    [self.view setBackgroundColor:[UIColor clearColor]];
 }
 
 - (void)doHideKeyBoard{
@@ -170,8 +170,6 @@
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     NSLog(@"%d",row);
-    [self.lblUserStyle setText:[self.arrayUserStyle objectAtIndex:row]];
-    [self.pickUserStyle setHidden:true];
 }
 
 #pragma mark -pickdatasource
@@ -188,6 +186,14 @@
     return 3;
 }
 
+#pragma mark UIPickerWithToolBarViewDelegate
+-(void)onPushedToolBarDoneButton:(UIPickerWithToolBarView*)pickerView
+{
+    [self.lblUserStyle setText:[self.arrayUserStyle objectAtIndex:[pickerView selectedRowInComponent:0]]];
+    [self.pickUserStyle setHidden:true];
+}
+
+#pragma mark actions
 
 -(IBAction)actionSendIdentifyCode:(id)sender
 {

@@ -657,6 +657,28 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
+					<string key="className">UIPickerWithToolBarView</string>
+					<string key="superclassName">UIPickerView</string>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="doneButton">UIBarButtonItem</string>
+						<string key="toolBar">UIToolbar</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="doneButton">
+							<string key="name">doneButton</string>
+							<string key="candidateClassName">UIBarButtonItem</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="toolBar">
+							<string key="name">toolBar</string>
+							<string key="candidateClassName">UIToolbar</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/UIPickerWithToolBarView.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
 					<string key="className">XunJiaViewController</string>
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
@@ -873,7 +895,7 @@
 						<string key="kehujingliCell">YinhangkedaieDetailCell</string>
 						<string key="kehujingliCtrl">PinggujigouyinhangLV2ViewController</string>
 						<string key="nianlilvCell">YinhangkedaieDetailCell</string>
-						<string key="picker">UIPickerView</string>
+						<string key="picker">UIPickerWithToolBarView</string>
 						<string key="pinggujiaCell">YinhangkedaieDetailCell</string>
 						<string key="rengonggujiaCtrl">RengongxunjiaViewController</string>
 						<string key="scrollView">UIScrollView</string>
@@ -924,7 +946,7 @@
 						</object>
 						<object class="IBToOneOutletInfo" key="picker">
 							<string key="name">picker</string>
-							<string key="candidateClassName">UIPickerView</string>
+							<string key="candidateClassName">UIPickerWithToolBarView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="pinggujiaCell">
 							<string key="name">pinggujiaCell</string>
@@ -975,21 +997,32 @@
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="btn">UIButton</string>
+						<string key="chanquanguishuSeg">UISegmentedControl</string>
 						<string key="contentView">UIView</string>
+						<string key="goumainianxianSeg">UISegmentedControl</string>
 						<string key="gyhkdectrl">GeyinhangkedaieViewController</string>
 						<string key="navbar">UINavigationBar</string>
 						<string key="navctrl">UINavigationController</string>
-						<string key="pickerView">UIPickerView</string>
+						<string key="pickerView">UIPickerWithToolBarView</string>
 						<string key="textField">UITextField</string>
+						<string key="wuyeleixingSeg">UISegmentedControl</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<object class="IBToOneOutletInfo" key="btn">
 							<string key="name">btn</string>
 							<string key="candidateClassName">UIButton</string>
 						</object>
+						<object class="IBToOneOutletInfo" key="chanquanguishuSeg">
+							<string key="name">chanquanguishuSeg</string>
+							<string key="candidateClassName">UISegmentedControl</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="contentView">
 							<string key="name">contentView</string>
 							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="goumainianxianSeg">
+							<string key="name">goumainianxianSeg</string>
+							<string key="candidateClassName">UISegmentedControl</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="gyhkdectrl">
 							<string key="name">gyhkdectrl</string>
@@ -1005,11 +1038,15 @@
 						</object>
 						<object class="IBToOneOutletInfo" key="pickerView">
 							<string key="name">pickerView</string>
-							<string key="candidateClassName">UIPickerView</string>
+							<string key="candidateClassName">UIPickerWithToolBarView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="textField">
 							<string key="name">textField</string>
 							<string key="candidateClassName">UITextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="wuyeleixingSeg">
+							<string key="name">wuyeleixingSeg</string>
+							<string key="candidateClassName">UISegmentedControl</string>
 						</object>
 					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">

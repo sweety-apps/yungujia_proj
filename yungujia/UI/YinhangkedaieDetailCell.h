@@ -16,6 +16,7 @@
 //view
 @property (nonatomic,retain) IBOutlet UILabel* lblTitle;
 @property (nonatomic,retain) IBOutlet UILabel* lblValue;
+@property (nonatomic,retain) IBOutlet UILabel* lblSubValue;
 @property (nonatomic,retain) IBOutlet UISegmentedControl* seg;
 
 @end
