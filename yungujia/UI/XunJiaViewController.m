@@ -43,6 +43,19 @@
     UIImage* navBgImg = [UIImage imageNamed:@"naviBarBg.png"];
     navBgImg = [navBgImg stretchableImageWithLeftCapWidth:0 topCapHeight:0];
     [Utils setAtNavigationBar:self.navbar withBgImage:navBgImg];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self.sousuoloupanctrl
+                                   action:@selector(doHideKeyBoard)];
+    
+    tap.numberOfTapsRequired = 1;
+    for (int i = 0; i<[[self.view subviews] count]; i++) {
+        if (![self.view isKindOfClass:[UITextField class]]) {
+            [self.view  addGestureRecognizer: tap];
+        }
+    }
+    [tap setCancelsTouchesInView:NO];
+    [tap release];
 
 }
 

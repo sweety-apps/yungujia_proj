@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "LoupanTableViewController.h"
 
-@interface SousuoloupanViewController : UIViewController
+@interface SousuoloupanViewController : UIViewController <UISearchBarDelegate>
 {
     
 }
@@ -23,5 +23,7 @@
 //controllers
 @property (nonatomic,retain) IBOutlet UINavigationController* navctrl;
 @property (nonatomic,retain) IBOutlet LoupanTableViewController* loupanctrl;
+
+- (void)doHideKeyBoard;
 
 @end

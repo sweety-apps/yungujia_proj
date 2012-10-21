@@ -9,6 +9,8 @@
 #import "SwichTabBarViewController.h"
 #import "CustomNavigationController.h"
 
+#define ICON_Y_OFFSET (2)
+
 @interface SwichTabBarViewController ()
 
 @end
@@ -35,6 +37,7 @@
     _tabBarBg = [[[UIImageView alloc] initWithImage:tabBarImg] autorelease];
     CGRect rect = self.tabBar.frame;
     rect.origin.y = CGRectGetMaxY(rect) - tabBarImg.size.height;
+    rect.origin.y += 1;
     rect.size.height = tabBarImg.size.height;
     self.tabBar.frame = rect;
     _tabBarBg.frame = rect;
@@ -48,6 +51,7 @@
     
     CGPoint pt = CGPointMake(_tabBarBg.frame.origin.x, _tabBarBg.frame.origin.y) ;
     pt.x += 10;
+    pt.y += ICON_Y_OFFSET;
     
     _btnImagesNormal = [[NSArray arrayWithObjects:@"xunjia_normal",@"gujiashi_normal",@"guanzhu_normal",@"gengduo_normal", nil]retain];
     _btnImagesHighlighted = [[NSArray arrayWithObjects:@"xunjia_pushed",@"gujiashi_pushed",@"guanzhu_pushed",@"gengduo_pushed", nil]retain];

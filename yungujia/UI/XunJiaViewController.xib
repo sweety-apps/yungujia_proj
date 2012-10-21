@@ -2,9 +2,9 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1536</int>
-		<string key="IBDocument.SystemVersion">11E53</string>
+		<string key="IBDocument.SystemVersion">11G63</string>
 		<string key="IBDocument.InterfaceBuilderVersion">2840</string>
-		<string key="IBDocument.AppKitVersion">1138.47</string>
+		<string key="IBDocument.AppKitVersion">1138.51</string>
 		<string key="IBDocument.HIToolboxVersion">569.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -73,8 +73,9 @@
 				<array class="NSMutableArray" key="IBUIViewControllers">
 					<object class="IBUIViewController" id="734054496">
 						<object class="IBUINavigationItem" key="IBUINavigationItem" id="287403385">
+							<reference key="IBUINavigationBar"/>
 							<object class="IBUIView" key="IBUITitleView" id="65653082">
-								<nil key="NSNextResponder"/>
+								<reference key="NSNextResponder"/>
 								<int key="NSvFlags">292</int>
 								<array class="NSMutableArray" key="NSSubviews">
 									<object class="IBUIButton" id="466232344">
@@ -82,6 +83,7 @@
 										<int key="NSvFlags">292</int>
 										<string key="NSFrame">{{10, 2}, {114, 28}}</string>
 										<reference key="NSSuperview" ref="65653082"/>
+										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="657862327"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<bool key="IBUIOpaque">NO</bool>
@@ -125,6 +127,7 @@
 										<int key="NSvFlags">292</int>
 										<string key="NSFrame">{{124, 2}, {114, 28}}</string>
 										<reference key="NSSuperview" ref="65653082"/>
+										<reference key="NSWindow"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<bool key="IBUIOpaque">NO</bool>
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -148,6 +151,8 @@
 									</object>
 								</array>
 								<string key="NSFrame">{{37, 6}, {246, 33}}</string>
+								<reference key="NSSuperview"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="466232344"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<object class="NSColor" key="IBUIBackgroundColor">
@@ -887,6 +892,7 @@
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="btn">UIButton</string>
 						<string key="contentView">UIView</string>
+						<string key="daikuanfangshiCell">YinhangkedaieDetailCell</string>
 						<string key="daikuangchengshuCell">YinhangkedaieDetailCell</string>
 						<string key="daikuannianxianCell">YinhangkedaieDetailCell</string>
 						<string key="huankuanfangshiCell">YinhangkedaieDetailCell</string>
@@ -911,6 +917,10 @@
 						<object class="IBToOneOutletInfo" key="contentView">
 							<string key="name">contentView</string>
 							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="daikuanfangshiCell">
+							<string key="name">daikuanfangshiCell</string>
+							<string key="candidateClassName">YinhangkedaieDetailCell</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="daikuangchengshuCell">
 							<string key="name">daikuangchengshuCell</string>
@@ -1058,11 +1068,16 @@
 					<string key="className">YinhangkedaieDetailCell</string>
 					<string key="superclassName">UITableViewCell</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="lblSubValue">UILabel</string>
 						<string key="lblTitle">UILabel</string>
 						<string key="lblValue">UILabel</string>
 						<string key="seg">UISegmentedControl</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="lblSubValue">
+							<string key="name">lblSubValue</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="lblTitle">
 							<string key="name">lblTitle</string>
 							<string key="candidateClassName">UILabel</string>
@@ -1107,10 +1122,10 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="topseglefta.png">{115, 28}</string>
-			<string key="topsegleftn.png">{114, 28}</string>
-			<string key="topsegrighta.png">{115, 28}</string>
-			<string key="topsegrightn.png">{114, 28}</string>
+			<string key="topseglefta.png">{115, 27}</string>
+			<string key="topsegleftn.png">{115, 28}</string>
+			<string key="topsegrighta.png">{114, 28}</string>
+			<string key="topsegrightn.png">{114, 27}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">1926</string>
 	</data>

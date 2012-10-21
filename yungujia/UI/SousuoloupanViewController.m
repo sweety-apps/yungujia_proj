@@ -41,6 +41,19 @@
     _loupanctrl.navbar = self.navbar;
     _loupanctrl.navctrl = self.navctrl;
     _loupanctrl.hideXXminei = YES;
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(doHideKeyBoard)];
+    
+    tap.numberOfTapsRequired = 1;
+    for (int i = 0; i<[[self.view subviews] count]; i++) {
+        if (![self.view isKindOfClass:[UITextField class]]) {
+            [self.view  addGestureRecognizer: tap];
+        }
+    }
+    [tap setCancelsTouchesInView:NO];
+    [tap release];
 }
 
 - (void)viewDidUnload
@@ -54,6 +67,34 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+#pragma mark SousuoloupanViewController
+
+- (void)doHideKeyBoard
+{
+    [_searchbar resignFirstResponder];
+}
+
+#pragma mark UISearchBarDelegate
+
+- (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar
+{
+    return YES;
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    [searchBar resignFirstResponder];
+}
+
+- (void)searchBarBookmarkButtonClicked:(UISearchBar *)searchBar
+{
+    [searchBar resignFirstResponder];
+}
+
+- (void)searchBarResultsListButtonClicked:(UISearchBar *)searchBar
+{
 }
 
 @end
