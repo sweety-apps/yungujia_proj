@@ -19,6 +19,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        _laiv = [[LoadingAnimateImageView viewWithDelegate:self image:[UIImage imageNamed:@"/Resource/Picture/camera_open"] forTimeInterval:5.0] retain];
     }
     return self;
 }
@@ -27,6 +28,12 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    if (_laiv)
+    {
+        [self.view addSubview:_laiv];
+        [self.view bringSubviewToFront:_laiv];
+        [_laiv startLoadingAnimation];
+    }
 }
 
 - (void)viewDidUnload
@@ -39,5 +46,14 @@
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
+
+#pragma mark LoadingAnimateImageViewDelegate
+
+- (void)onFinishedLoadingAnimation
+{
+    [_laiv removeFromSuperview];
+    ReleaseAndNil(_laiv);
+}
+
 
 @end

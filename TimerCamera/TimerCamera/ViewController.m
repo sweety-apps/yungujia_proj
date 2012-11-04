@@ -199,7 +199,7 @@
 
 - (IBAction)OnClickedSound:(id)sender
 {
-    NSString* filePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"long_low_short_high.caf"];
+    NSString* filePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"/Resource/Sound/long_low_short_high.caf"];
     [[AudioUtility sharedInstance] playFile:filePath withDelegate:self];
 }
 
