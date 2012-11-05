@@ -189,6 +189,37 @@
     }
 }
 
+#pragma mark - Animations
+
+- (void)PrepareLoadingAnimation
+{
+    [self onFinishedLoadingAnimation:_laiv];
+    _laiv = [[LoadingAnimateImageView viewWithDelegate:self image:[UIImage imageNamed:@"/Resource/Picture/camera_open"] forTimeInterval:1.0] retain];
+    if (_laiv)
+    {
+        [self.view addSubview:_laiv];
+        [self.view bringSubviewToFront:_laiv];
+    }
+}
+
+- (void)ShowLoadingAnimation
+{
+    
+    if (_laiv)
+    {
+        [self.view bringSubviewToFront:_laiv];
+        [_laiv startLoadingAnimation];
+    }
+}
+
+#pragma mark LoadingAnimateImageViewDelegate
+
+- (void)onFinishedLoadingAnimation:(LoadingAnimateImageView*)view
+{
+    [_laiv removeFromSuperview];
+    ReleaseAndNil(_laiv);
+}
+
 #pragma mark - test code
 
 - (IBAction)OnClickedVolume:(id)sender

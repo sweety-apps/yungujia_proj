@@ -7,11 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "LoadingAnimateImageView.h"
 
-@interface ViewController_iPhone : ViewController <LoadingAnimateImageViewDelegate>
-{
-    LoadingAnimateImageView* _laiv;
-}
+@interface ViewController_iPhone : ViewController
 
 @end

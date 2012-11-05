@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "CameraOptions.h"
 #import "AudioUtility.h"
+#import "LoadingAnimateImageView.h"
 
-@interface ViewController : UIViewController <UINavigationControllerDelegate,UIImagePickerControllerDelegate, UIGestureRecognizerDelegate, AudioUtilityPlaybackDelegate, AudioUtilityVolumeDetectDelegate>
+@interface ViewController : UIViewController <UINavigationControllerDelegate,UIImagePickerControllerDelegate, UIGestureRecognizerDelegate, AudioUtilityPlaybackDelegate, AudioUtilityVolumeDetectDelegate, LoadingAnimateImageViewDelegate>
 {
     NSTimer* timer;
     
@@ -34,6 +35,8 @@
     
     UIView* _peakView;
     UIView* _volView;
+    
+    LoadingAnimateImageView* _laiv;
 }
 
 @property (nonatomic,retain) IBOutlet UIView* containerView;
@@ -67,5 +70,9 @@
 //test Button
 - (IBAction)OnClickedVolume:(id)sender;
 - (IBAction)OnClickedSound:(id)sender;
+
+//loading Animation
+- (void)PrepareLoadingAnimation;
+- (void)ShowLoadingAnimation;
 
 @end
