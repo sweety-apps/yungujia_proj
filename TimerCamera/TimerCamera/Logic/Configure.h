@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#pragma mark Key Defines
+
 #define kTimerInterval @"TI"
 #define kNumberOfContinueShot @"NOC"
 #define kFlashMode @"FM"
@@ -17,7 +19,22 @@
 #define kFocus @"FCS"
 #define kDevicePosition @"DP"
 
+#pragma mark Initialized Values
+
+#define kDefaultTimerIntervalValue 5
+#define kDefaultNumberOfContinueShotValue 1
+#define kDefaultFlashModeValue 0
+#define kDefaultHDRValue 0
+#define kDefaultLightValue 0
+#define kDefaultExposureValue 0
+#define kDefaultFocusValue 0
+#define kDefaultDevicePositionValue 0
+
+#pragma mark Config File Path
+
 #define kConfigureStorePath @"/Library/Caches/config"
+
+#pragma mark Useful Macro
 
 #define getConfig(key) [[Configure sharedInstance].configDict objectForKey:(key)]
 #define getConfigForInt(key) [(NSNumber*)getConfig(key) integerValue]

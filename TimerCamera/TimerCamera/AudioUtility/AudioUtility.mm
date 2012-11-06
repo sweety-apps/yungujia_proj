@@ -9,6 +9,9 @@
 #import "AudioUtility.h"
 #import "AQRecorder.h"
 #import "AQPlayer.h"
+#import <AVFoundation/AVFoundation.h>
+#import <MediaPlayer/MediaPlayer.h>
+#import <AudioToolbox/AudioServices.h>
 
 #define TempRecordFile @"tmp.caf"
 #define DefaultDelegate 0x1
@@ -135,7 +138,6 @@ static AudioUtility* gSI = nil;
 
 @implementation AudioUtility
 
-
 #pragma mark NSObject
 
 - (id)init
@@ -220,9 +222,43 @@ static void OnPlaybackHasFinished(AQPlayer* player, void* context)
     [self preLoadFileForPlayback:filePath withDelegate:nil];
 }
 
+typedef struct _tAudioServicePlaybackContext{
+    AudioUtility* au;
+    AQPlayer* player;
+}AudioServicePlaybackContext;
+
+static void playbackCompletionCallback (SystemSoundID  mySSID, void* data) {
+    //NSLog(@"completion Callback");
+    AudioServicesRemoveSystemSoundCompletion (mySSID);
+    AudioServicePlaybackContext* pctx = (AudioServicePlaybackContext*)data;
+    if (pctx)
+    {
+        OnPlaybackHasFinished(pctx->player, pctx->au);
+        free(pctx);
+    }
+}
+
 - (void)playFile:(NSString*)filePath withDelegate:(id<AudioUtilityPlaybackDelegate>)delegate isResume:(BOOL)isResume
 {
     AQPlayerWarper* p = [self getPlayer:filePath withDelegate:delegate];
+    
+#if 1
+    SystemSoundID ssid = 0;
+    NSURL *soundURL = [NSURL fileURLWithPath:filePath];
+    OSStatus err = AudioServicesCreateSystemSoundID((CFURLRef)soundURL,
+                                                    &ssid);
+    if (err != kAudioServicesNoError)
+        NSLog(@"Could not load %@, error code: %lu", soundURL, err);
+    AudioServicePlaybackContext* pctx = (AudioServicePlaybackContext*)malloc(sizeof(AudioServicePlaybackContext));
+    pctx->au = self;
+    pctx->player = p.player;
+    AudioServicesAddSystemSoundCompletion(ssid, NULL, NULL, playbackCompletionCallback, pctx);
+    if(p && p.delegate && [p.delegate respondsToSelector:@selector(onStartPlayFile:forInstance:)])
+    {
+        [p.delegate onStartPlayFile:p.filePath forInstance:self];
+    }
+    AudioServicesPlaySystemSound(ssid);
+#else
     if (p)
     {
         if (p.player->IsRunning())
@@ -236,6 +272,7 @@ static void OnPlaybackHasFinished(AQPlayer* player, void* context)
             [p.delegate onStartPlayFile:p.filePath forInstance:self];
         }
     }
+#endif
 }
 
 - (void)playFile:(NSString*)filePath withDelegate:(id<AudioUtilityPlaybackDelegate>)delegate
@@ -392,7 +429,7 @@ static void OnPlaybackHasFinished(AQPlayer* player, void* context)
     }
 	else 
 	{
-		UInt32 category = kAudioSessionCategory_PlayAndRecord;	
+		UInt32 category = kAudioSessionCategory_PlayAndRecord;//kAudioSessionCategory_SoloAmbientSound;//
 		error = AudioSessionSetProperty(kAudioSessionProperty_AudioCategory, sizeof(category), &category);
 		if (error) printf("couldn't set audio category!");
         

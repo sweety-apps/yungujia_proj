@@ -47,7 +47,6 @@
 
 + (AudioUtility*)sharedInstance;
 
-
 #pragma mark Playback API
 
 - (void)preLoadFileForPlayback:(NSString*)filePath;

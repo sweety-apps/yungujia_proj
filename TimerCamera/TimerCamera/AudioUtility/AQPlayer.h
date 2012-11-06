@@ -81,6 +81,9 @@ class AQPlayer
         
         OnPlayFinished  finishCallback;
         void*           finishCallbackContext;
+        
+        void                            SetVolume(float vol);
+        float                           GetVolume() const		{ return mIsLooping; }                          
 										
 	private:
 		UInt32							GetNumPacketsToRead()				{ return mNumPacketsToRead; }
@@ -101,6 +104,7 @@ class AQPlayer
 		UInt32							mIsRunning;
 		Boolean							mIsDone;
 		Boolean							mIsLooping;
+        float                           mVolume;
 		
 		static void isRunningProc(		void *              inUserData,
 										AudioQueueRef           inAQ,

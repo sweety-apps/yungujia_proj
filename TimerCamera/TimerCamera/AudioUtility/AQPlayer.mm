@@ -145,7 +145,8 @@ AQPlayer::AQPlayer() :
 	mIsDone(false),
 	mIsLooping(false),
     finishCallback(NULL),
-    finishCallbackContext(NULL)
+    finishCallbackContext(NULL),
+    mVolume(1.0)
 { }
 
 AQPlayer::~AQPlayer() 
@@ -269,7 +270,7 @@ void AQPlayer::SetupNewQueue()
 	}	
 
 	// set the volume of the queue
-	XThrowIfError (AudioQueueSetParameter(mQueue, kAudioQueueParam_Volume, 1.0), "set queue volume");
+	XThrowIfError (AudioQueueSetParameter(mQueue, kAudioQueueParam_Volume, mVolume), "set queue volume");
 	
 	mIsInitialized = true;
 }
@@ -295,4 +296,14 @@ void AQPlayer::DisposeQueue(Boolean inDisposeFile)
 		}
 	}
 	mIsInitialized = false;
+}
+
+void AQPlayer::SetVolume(float vol)
+{
+    mVolume = vol;
+    if (mQueue)
+    {
+        // set the volume of the queue
+        XThrowIfError (AudioQueueSetParameter(mQueue, kAudioQueueParam_Volume, mVolume), "set queue volume");
+    }
 }
