@@ -22,14 +22,22 @@
     float _animateInterval;
     float _animateScale;
     CGRect _rawFrame;
+    UIImageView* _preloadView;
+    float _preloadAnimateInterval;
 }
 
 @property (nonatomic,assign) id<LoadingAnimateImageViewDelegate> loadingDelegate;
 @property (nonatomic,assign) float animateInterval;
 @property (nonatomic,assign) float animateScale;
+@property (nonatomic,assign) float preloadAnimateInterval;
 
-+ (LoadingAnimateImageView*)viewWithDelegate:(id<LoadingAnimateImageViewDelegate>)del image:(UIImage*)img forTimeInterval:(float)seconds;
++ (LoadingAnimateImageView*)viewWithDelegate:(id<LoadingAnimateImageViewDelegate>)del
+                                       image:(UIImage*)img
+                             forTimeInterval:(float)seconds
+                                preLoadImage:(UIImage*)pimg
+                   forPreloadAnimateInterval:(float)pSeconds;
 
+- (void)startPreloadingAnimation;
 - (void)startLoadingAnimation;
 
 

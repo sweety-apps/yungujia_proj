@@ -210,7 +210,7 @@
 - (void)PrepareLoadingAnimation
 {
     [self onFinishedLoadingAnimation:_laiv];
-    _laiv = [[LoadingAnimateImageView viewWithDelegate:self image:[UIImage imageNamed:@"/Resource/Picture/camera_open"] forTimeInterval:1.0] retain];
+    _laiv = [[LoadingAnimateImageView viewWithDelegate:self image:[UIImage imageNamed:@"/Resource/Picture/camera_open"] forTimeInterval:1.0 preLoadImage:[UIImage imageNamed:@"Default"] forPreloadAnimateInterval:0.3] retain];
     if (_laiv)
     {
         [self.view addSubview:_laiv];
@@ -224,6 +224,7 @@
     if (_laiv)
     {
         [self.view bringSubviewToFront:_laiv];
+        [_laiv startPreloadingAnimation];
         [_laiv startLoadingAnimation];
     }
 }

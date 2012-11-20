@@ -28,6 +28,9 @@
 		BEB8E44C1646D25700DC5800 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB8E4491646D25700DC5800 /* Icon@2x.png */; };
 		BEB8E44F1646D36800DC5800 /* Resource in Resources */ = {isa = PBXBuildFile; fileRef = BEB8E44E1646D36800DC5800 /* Resource */; };
 		BEB8E45A1646DF9800DC5800 /* LoadingAnimateImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB8E4591646DF9800DC5800 /* LoadingAnimateImageView.m */; };
+		F30053A6165B27F80091CF85 /* UIStateAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = F30053A5165B27F80091CF85 /* UIStateAnimationView.m */; };
+		F30053A9165B2F4B0091CF85 /* AlphaAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = F30053A8165B2F4A0091CF85 /* AlphaAnimationView.m */; };
+		F30053AC165B2FDB0091CF85 /* CommonAnimationButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F30053AB165B2FDB0091CF85 /* CommonAnimationButton.m */; };
 		F301347915FDDD1D00480CD7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F301347815FDDD1D00480CD7 /* AVFoundation.framework */; };
 		F39891301648B91B006E0703 /* ViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = F39891291648B91B006E0703 /* ViewController_iPad.m */; };
 		F39891311648B91B006E0703 /* ViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = F398912A1648B91B006E0703 /* ViewController_iPad.xib */; };
@@ -75,6 +78,12 @@
 		BEB8E44E1646D36800DC5800 /* Resource */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Resource; sourceTree = "<group>"; };
 		BEB8E4581646DF9800DC5800 /* LoadingAnimateImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingAnimateImageView.h; sourceTree = "<group>"; };
 		BEB8E4591646DF9800DC5800 /* LoadingAnimateImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingAnimateImageView.m; sourceTree = "<group>"; };
+		F30053A4165B27F80091CF85 /* UIStateAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIStateAnimationView.h; sourceTree = "<group>"; };
+		F30053A5165B27F80091CF85 /* UIStateAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIStateAnimationView.m; sourceTree = "<group>"; };
+		F30053A7165B2F4A0091CF85 /* AlphaAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlphaAnimationView.h; sourceTree = "<group>"; };
+		F30053A8165B2F4A0091CF85 /* AlphaAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlphaAnimationView.m; sourceTree = "<group>"; };
+		F30053AA165B2FDA0091CF85 /* CommonAnimationButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonAnimationButton.h; sourceTree = "<group>"; };
+		F30053AB165B2FDB0091CF85 /* CommonAnimationButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonAnimationButton.m; sourceTree = "<group>"; };
 		F301347815FDDD1D00480CD7 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		F39891281648B91B006E0703 /* ViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController_iPad.h; sourceTree = "<group>"; };
 		F39891291648B91B006E0703 /* ViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController_iPad.m; sourceTree = "<group>"; };
@@ -197,6 +206,7 @@
 		BEB8E4571646DF0A00DC5800 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				F30053A2165B27CB0091CF85 /* Base */,
 				F39891281648B91B006E0703 /* ViewController_iPad.h */,
 				F39891291648B91B006E0703 /* ViewController_iPad.m */,
 				F398912A1648B91B006E0703 /* ViewController_iPad.xib */,
@@ -209,6 +219,19 @@
 				BEB8E4591646DF9800DC5800 /* LoadingAnimateImageView.m */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		F30053A2165B27CB0091CF85 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				F30053A4165B27F80091CF85 /* UIStateAnimationView.h */,
+				F30053A5165B27F80091CF85 /* UIStateAnimationView.m */,
+				F30053A7165B2F4A0091CF85 /* AlphaAnimationView.h */,
+				F30053A8165B2F4A0091CF85 /* AlphaAnimationView.m */,
+				F30053AA165B2FDA0091CF85 /* CommonAnimationButton.h */,
+				F30053AB165B2FDB0091CF85 /* CommonAnimationButton.m */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 		F39891361648B928006E0703 /* Logic */ = {
@@ -307,6 +330,9 @@
 				F398913B1648B928006E0703 /* CameraOptions.m in Sources */,
 				F398913C1648B928006E0703 /* Configure.m in Sources */,
 				F398913F1648BA93006E0703 /* ShotTimer.m in Sources */,
+				F30053A6165B27F80091CF85 /* UIStateAnimationView.m in Sources */,
+				F30053A9165B2F4B0091CF85 /* AlphaAnimationView.m in Sources */,
+				F30053AC165B2FDB0091CF85 /* CommonAnimationButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

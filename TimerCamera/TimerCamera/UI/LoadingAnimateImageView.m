@@ -20,6 +20,21 @@
 @synthesize loadingDelegate = _loadingDelegate;
 @synthesize animateInterval = _animateInterval;
 @synthesize animateScale = _animateScale;
+@synthesize preloadAnimateInterval = _preloadAnimateInterval;
+
+- (UIImageView *)preloadView
+{
+    return _preloadView;
+}
+
+- (void)setPreloadView:(UIImageView *)preloadView
+{
+    [preloadView retain];
+    [_preloadView removeFromSuperview];
+    [_preloadView release];
+    _preloadView = preloadView;
+    [self addSubview:_preloadView];
+}
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -33,6 +48,7 @@
 
 - (void)dealloc
 {
+    ReleaseAndNil(_preloadView);
     _loadingDelegate = nil;
     [super dealloc];
 }
@@ -46,18 +62,23 @@
 }
 */
 
-+ (LoadingAnimateImageView*)viewWithDelegate:(id<LoadingAnimateImageViewDelegate>)del image:(UIImage*)img forTimeInterval:(float)seconds
++ (LoadingAnimateImageView*)viewWithDelegate:(id<LoadingAnimateImageViewDelegate>)del
+                                       image:(UIImage*)img
+                             forTimeInterval:(float)seconds
+                                preLoadImage:(UIImage*)pimg
+                   forPreloadAnimateInterval:(float)pSeconds
 {
     LoadingAnimateImageView* ret = [[[LoadingAnimateImageView alloc] initWithImage:img] autorelease];
     ret.loadingDelegate = del;
     ret.animateInterval = seconds;
+    [ret setPreloadView:[[[UIImageView alloc] initWithImage:pimg] autorelease]];
+    ret.preloadAnimateInterval = pSeconds;
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         ret.animateScale = DefaultAnimationScale_iPhone;
     } else {
         ret.animateScale = DefaultAnimationScale_iPad;
     }
-    
     
     return ret;
 }
@@ -66,6 +87,18 @@
 {
     _rawFrame = frame;
     super.frame = frame;
+}
+
+- (void)startPreloadingAnimation
+{
+    _preloadView.alpha = 1.0;
+    CGRect rct = _rawFrame;
+    rct.origin = CGPointMake(0, 0);
+    _preloadView.frame = rct;
+    [UIView animateWithDuration:_preloadAnimateInterval animations:^{
+        _preloadView.alpha = 0.0;
+    } completion:^(BOOL finished){
+    }];
 }
 
 - (void)startLoadingAnimation
@@ -92,6 +125,10 @@
         newFrame.size = newSize;
         self.frame = newFrame;
         self.alpha = 0.4;
+        
+        CGRect preNewFrame = CGRectMake(0, 0, newFrame.size.width, newFrame.size.height);
+        _preloadView.frame = preNewFrame;
+        
     } completion:^(BOOL finished){
         if (finished)
         {

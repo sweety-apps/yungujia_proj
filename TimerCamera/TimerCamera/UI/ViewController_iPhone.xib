@@ -322,7 +322,9 @@
 								<int key="IBUIBaselineAdjustment">0</int>
 								<int key="IBUITextAlignment">1</int>
 								<object class="IBUIFontDescription" key="IBUIFontDescription">
-									<int key="type">1</int>
+									<string key="name">Helvetica</string>
+									<string key="family">Helvetica</string>
+									<int key="traits">0</int>
 									<double key="pointSize">17</double>
 								</object>
 								<object class="NSFont" key="IBUIFont">
@@ -790,7 +792,6 @@
 						<string key="OnClickedVolume:">id</string>
 						<string key="handlePinchGesture:">UIPinchGestureRecognizer</string>
 						<string key="handleTapGesture:">UIGestureRecognizer</string>
-						<string key="onTest:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="OnClickedFront:">
@@ -828,10 +829,6 @@
 						<object class="IBActionInfo" key="handleTapGesture:">
 							<string key="name">handleTapGesture:</string>
 							<string key="candidateClassName">UIGestureRecognizer</string>
-						</object>
-						<object class="IBActionInfo" key="onTest:">
-							<string key="name">onTest:</string>
-							<string key="candidateClassName">id</string>
 						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
