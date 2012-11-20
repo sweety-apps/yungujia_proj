@@ -33,6 +33,120 @@
 @synthesize peakView = _peakView;
 @synthesize volView = _volView;
 
+#pragma mark - Animation Views
+
+- (void)createSubViews
+{
+    CGRect rect = CGRectZero;
+    
+    _animationCatButton = [CommonAnimationButton
+                           buttonWithPressedImageSizeforNormalImage1:[UIImage imageNamed:@"/Resource/Picture/main/animation_cat_bg_with_eye"]
+                           forNormalImage2:[UIImage imageNamed:@"/Resource/Picture/main/animation_cat_bg_with_eye"]
+                           forPressedImage:[UIImage imageNamed:@"/Resource/Picture/main/animation_cat_bg_no_eye"]
+                           forEnabledImage1:[UIImage imageNamed:@"/Resource/Picture/main/animation_cat_bg_no_eye"]
+                           forEnabledImage2:[UIImage imageNamed:@"/Resource/Picture/main/animation_cat_bg_no_eye"]];
+    rect = _animationCatButton.frame;
+    rect.origin.x = 122;
+    rect.origin.y = _containerView.frame.size.height - 82;
+    _animationCatButton.frame = rect;
+    [_containerView addSubview:_animationCatButton];
+    
+    
+    _shotButton = [CommonAnimationButton
+                   buttonWithPressedImageSizeforNormalImage1:[UIImage imageNamed:@"/Resource/Picture/main/shot_btn_normal1"]
+                   forNormalImage2:[UIImage imageNamed:@"/Resource/Picture/main/shot_btn_normal2"]
+                   forPressedImage:[UIImage imageNamed:@"/Resource/Picture/main/shot_btn_pressed"]
+                   forEnabledImage1:[UIImage imageNamed:@"/Resource/Picture/main/shot_btn_normal1"]
+                   forEnabledImage2:[UIImage imageNamed:@"/Resource/Picture/main/shot_btn_normal2"]];
+    rect = _shotButton.frame;
+    rect.origin.x = _containerView.frame.size.width - rect.size.width;
+    rect.origin.y = _containerView.frame.size.height - rect.size.height;
+    _shotButton.frame = rect;
+    [_containerView addSubview:_shotButton];
+    
+    
+    _timerButton = [CommonAnimationButton
+                    buttonWithPressedImageSizeforNormalImage1:[UIImage imageNamed:@"/Resource/Picture/main/timer_btn_normal1"]
+                    forNormalImage2:[UIImage imageNamed:@"/Resource/Picture/main/timer_btn_normal2"]
+                    forPressedImage:[UIImage imageNamed:@"/Resource/Picture/main/timer_btn_pressed"]
+                    forEnabledImage1:[UIImage imageNamed:@"/Resource/Picture/main/timer_btn_enable1"]
+                    forEnabledImage2:[UIImage imageNamed:@"/Resource/Picture/main/timer_btn_enable2"]];
+    rect = _timerButton.frame;
+    rect.origin.x = 0;
+    rect.origin.y = _containerView.frame.size.height - rect.size.height;
+    _timerButton.frame = rect;
+    [_containerView addSubview:_timerButton];
+    
+    
+    _configButton = [CommonAnimationButton
+                   buttonWithPressedImageSizeforNormalImage1:[UIImage imageNamed:@"/Resource/Picture/main/config_btn_normal1"]
+                   forNormalImage2:[UIImage imageNamed:@"/Resource/Picture/main/config_btn_normal2"]
+                   forPressedImage:[UIImage imageNamed:@"/Resource/Picture/main/config_btn_pressed"]
+                   forEnabledImage1:[UIImage imageNamed:@"/Resource/Picture/main/config_btn_normal1"]
+                   forEnabledImage2:[UIImage imageNamed:@"/Resource/Picture/main/config_btn_normal2"]];
+    rect = _configButton.frame;
+    rect.origin.x = 0;
+    rect.origin.y = 50;
+    _configButton.frame = rect;
+    [_containerView addSubview:_configButton];
+    
+    
+    _torchButton = [CommonAnimationButton
+                   buttonWithPressedImageSizeforNormalImage1:[UIImage imageNamed:@"/Resource/Picture/main/torch_normal1"]
+                   forNormalImage2:[UIImage imageNamed:@"/Resource/Picture/main/torch_normal2"]
+                   forPressedImage:[UIImage imageNamed:@"/Resource/Picture/main/torch_pressed"]
+                   forEnabledImage1:[UIImage imageNamed:@"/Resource/Picture/main/torch_enable1"]
+                   forEnabledImage2:[UIImage imageNamed:@"/Resource/Picture/main/torch_enable2"]];
+    rect = _torchButton.frame;
+    rect.origin.x = _containerView.frame.size.width - rect.size.width;
+    rect.origin.y = 49;
+    _torchButton.frame = rect;
+    [_containerView addSubview:_torchButton];
+    
+    
+    _HDRButton = [CommonAnimationButton
+                  buttonWithPressedImageSizeforNormalImage1:[UIImage imageNamed:@"/Resource/Picture/main/HDR_normal1"]
+                  forNormalImage2:[UIImage imageNamed:@"/Resource/Picture/main/HDR_normal2"]
+                  forPressedImage:[UIImage imageNamed:@"/Resource/Picture/main/HDR_pressed"]
+                  forEnabledImage1:[UIImage imageNamed:@"/Resource/Picture/main/HDR_enable1"]
+                  forEnabledImage2:[UIImage imageNamed:@"/Resource/Picture/main/HDR_enable2"]];
+    rect = _HDRButton.frame;
+    rect.origin.x = 0;
+    rect.origin.y = 0;
+    _HDRButton.frame = rect;
+    [_containerView addSubview:_HDRButton];
+    
+    
+    _frontButton = [CommonAnimationButton
+                    buttonWithPressedImageSizeforNormalImage1:[UIImage imageNamed:@"/Resource/Picture/main/front_normal1"]
+                    forNormalImage2:[UIImage imageNamed:@"/Resource/Picture/main/front_normal2"]
+                    forPressedImage:[UIImage imageNamed:@"/Resource/Picture/main/front_pressed"]
+                    forEnabledImage1:[UIImage imageNamed:@"/Resource/Picture/main/front_normal1"]
+                    forEnabledImage2:[UIImage imageNamed:@"/Resource/Picture/main/front_normal2"]];
+    rect = _frontButton.frame;
+    rect.origin.x = _containerView.frame.size.width - rect.size.width;
+    rect.origin.y = 0;
+    _frontButton.frame = rect;
+    [_containerView addSubview:_frontButton];
+}
+
+- (void)destorySubViews
+{
+    [_shotButton removeFromSuperview];
+    _shotButton = nil;
+    [_timerButton removeFromSuperview];
+    _timerButton = nil;
+    [_configButton removeFromSuperview];
+    _configButton = nil;
+    [_torchButton removeFromSuperview];
+    _torchButton = nil;
+    [_HDRButton removeFromSuperview];
+    _HDRButton = nil;
+    [_frontButton removeFromSuperview];
+    _frontButton = nil;
+    [_animationCatButton removeFromSuperview];
+    _animationCatButton = nil;
+}
 
 #pragma mark - UIViewController
 
@@ -58,11 +172,14 @@
     _tipLabel.text = @"";
     
     //[NSTimer scheduledTimerWithTimeInterval:0.35 target:self selector:@selector(detectCameraSize) userInfo:nil repeats:YES];
+    [self createSubViews];
 }
 
 - (void)dealloc
 {
     self.imageSaveQueue = nil;
+    
+    [self destorySubViews];
     [super dealloc];
 }
 
@@ -72,6 +189,8 @@
     // Release any retained subviews of the main view.
     
     self.imageSaveQueue = nil;
+    
+    [self destorySubViews];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

@@ -21,9 +21,9 @@
     NSString* _currentState;
 }
 
-- (void)setView:(UIView*)view forState:(NSString*)state;
-- (void)setAnimation:(id<UIStateAnimation>)animation forState:(NSString*)state;
+- (void)setAnimation:(id<UIStateAnimation>)animation andView:(UIView*)view forState:(NSString*)state;
 - (UIView*)getViewForState:(NSString*)state;
+- (id<UIStateAnimation>)getAnimationForState:(NSString*)state;
 
 @property (nonatomic, retain) NSString* currentState;
 

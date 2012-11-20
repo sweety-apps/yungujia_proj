@@ -29,6 +29,13 @@
     return self;
 }
 
+- (void)dealloc
+{
+    [_imageView1 removeFromSuperview];
+    [_imageView2 removeFromSuperview];
+    [super dealloc];
+}
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
@@ -57,15 +64,15 @@
 
 - (void)alphaAnimationSelector
 {
-    [UIView animateWithDuration:_animationInterval animations:^{
-        _imageView1.alpha = 0.0;
+    [UIView animateWithDuration:_animationInterval delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+        _imageView1.alpha = 1.0;
         _imageView2.alpha = 1.0;
     } completion:^(BOOL finished){
         if (finished)
         {
-            _imageView1.alpha = 0.0;
-            _imageView2.alpha = 1.0;
-            [UIView animateWithDuration:_animationInterval animations:^{
+            //_imageView1.alpha = 0.0;
+            //_imageView2.alpha = 1.0;
+            [UIView animateWithDuration:_animationInterval delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
                 _imageView1.alpha = 1.0;
                 _imageView2.alpha = 0.0;
             } completion:^(BOOL finished){

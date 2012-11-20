@@ -11,6 +11,7 @@
 #import "AudioUtility.h"
 #import "LoadingAnimateImageView.h"
 #import "ShotTimer.h"
+#import "CommonAnimationButton.h"
 
 @interface ViewController : UIViewController <UINavigationControllerDelegate,UIImagePickerControllerDelegate, UIGestureRecognizerDelegate, AudioUtilityPlaybackDelegate, AudioUtilityVolumeDetectDelegate, LoadingAnimateImageViewDelegate, ShotTimerDelegate>
 {
@@ -42,6 +43,15 @@
     UILabel* _tipLabel;
     
     ShotTimer* _timer;
+    
+    //Animation Views
+    CommonAnimationButton* _shotButton;
+    CommonAnimationButton* _timerButton;
+    CommonAnimationButton* _configButton;
+    CommonAnimationButton* _torchButton;
+    CommonAnimationButton* _HDRButton;
+    CommonAnimationButton* _frontButton;
+    CommonAnimationButton* _animationCatButton;
 }
 
 @property (nonatomic,retain) IBOutlet UIView* containerView;

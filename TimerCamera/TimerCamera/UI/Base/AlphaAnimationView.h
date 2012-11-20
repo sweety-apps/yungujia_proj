@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "UIStateAnimationView.h"
 
-#define kDefaultAlphaAnimationInterval 1.5
+#define kDefaultAlphaAnimationInterval 1.0
 
 @interface AlphaAnimationView : UIView <UIStateAnimation>
 {

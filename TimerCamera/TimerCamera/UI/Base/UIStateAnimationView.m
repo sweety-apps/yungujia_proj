@@ -19,7 +19,6 @@
 
 @property (nonatomic,retain) UIView* view;
 @property (nonatomic,retain) id<UIStateAnimation> animation;
-@property (nonatomic,assign) BOOL loop;
 
 @end
 
@@ -27,7 +26,6 @@
 
 @synthesize view = _view;
 @synthesize animation = _animation;
-@synthesize loop = _loop;
 
 - (id)init
 {
@@ -41,6 +39,7 @@
 - (void)dealloc
 {
     ReleaseAndNil(_view);
+    ReleaseAndNil(_animation);
     [super dealloc];
 }
 
@@ -59,12 +58,17 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
+        _stateDict = [[NSMutableDictionary dictionary] retain];
     }
     return self;
 }
 
 - (void)dealloc
 {
+    [self setCurrentState:@""];
+    [_stateDict removeAllObjects];
+    ReleaseAndNil(_stateDict);
+    ReleaseAndNil(_currentState);
     [super dealloc];
 }
 
@@ -80,29 +84,60 @@
 
 #pragma mark UIStateAnimationView Methods
 
-- (void)setView:(UIView*)view forState:(NSString*)state
+- (void)setAnimation:(id<UIStateAnimation>)animation andView:(UIView*)view forState:(NSString*)state;
 {
-    
-}
-
-- (void)setAnimation:(id<UIStateAnimation>)animation forState:(NSString*)state;
-{
-    
+    UIStateAnimationViewStateObject* o = [[[UIStateAnimationViewStateObject alloc] init] autorelease];
+    o.view = view;
+    o.animation = animation;
+    [_stateDict setObject:o forKey:state];
 }
 
 - (UIView*)getViewForState:(NSString*)state
 {
+    UIStateAnimationViewStateObject* o = [_stateDict objectForKey:state];
+    if (o)
+    {
+        return o.view;
+    }
     return nil;
 }
 
-- (void)setCurrentState:(NSString*)state
+- (id<UIStateAnimation>)getAnimationForState:(NSString*)state
 {
-    
+    UIStateAnimationViewStateObject* o = [_stateDict objectForKey:state];
+    if (o)
+    {
+        return o.animation;
+    }
+    return nil;
 }
 
-- (NSString*)getCurrentState
+- (void)setCurrentState:(NSString *)currentState
 {
-    return _currentState;
+    UIStateAnimationViewStateObject* o = [_stateDict objectForKey:_currentState];
+    if (o)
+    {
+        if (o.animation && [o.animation respondsToSelector:@selector(stopStateAnimationForView:forState:)])
+        {
+            [o.animation stopStateAnimationForView:o.view forState:_currentState];
+        }
+        [o.view removeFromSuperview];
+    }
+    
+    o = [_stateDict objectForKey:currentState];
+    if (o)
+    {
+        [self addSubview:o.view];
+        
+        [currentState retain];
+        [_currentState release];
+        _currentState = currentState;
+        
+        if (o.animation && [o.animation respondsToSelector:@selector(startStateAnimationForView:forState:)])
+        {
+            [o.animation startStateAnimationForView:o.view forState:_currentState];
+        }
+    }
 }
 
 @end
