@@ -17,9 +17,11 @@
     UIImageView* _imageView2;
     float _animationInterval;
     BOOL _animationStoped;
+    BOOL _disableAnimation;
 }
 
 @property (nonatomic,assign) float animationInterval;
+@property (nonatomic,assign) BOOL disableAnimation;
 
 - (void)setImage1:(UIImage*)image;
 - (void)setImage2:(UIImage*)image;

@@ -31,6 +31,8 @@
 		F30053A6165B27F80091CF85 /* UIStateAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = F30053A5165B27F80091CF85 /* UIStateAnimationView.m */; };
 		F30053A9165B2F4B0091CF85 /* AlphaAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = F30053A8165B2F4A0091CF85 /* AlphaAnimationView.m */; };
 		F30053AC165B2FDB0091CF85 /* CommonAnimationButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F30053AB165B2FDB0091CF85 /* CommonAnimationButton.m */; };
+		F30053C916608FEF0091CF85 /* CameraCoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F30053C816608FE60091CF85 /* CameraCoverViewController.m */; };
+		F30053CD1660901C0091CF85 /* ConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F30053CC166090130091CF85 /* ConfigViewController.m */; };
 		F301347915FDDD1D00480CD7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F301347815FDDD1D00480CD7 /* AVFoundation.framework */; };
 		F39891301648B91B006E0703 /* ViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = F39891291648B91B006E0703 /* ViewController_iPad.m */; };
 		F39891311648B91B006E0703 /* ViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = F398912A1648B91B006E0703 /* ViewController_iPad.xib */; };
@@ -41,6 +43,7 @@
 		F398913C1648B928006E0703 /* Configure.m in Sources */ = {isa = PBXBuildFile; fileRef = F398913A1648B928006E0703 /* Configure.m */; };
 		F398913F1648BA93006E0703 /* ShotTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = F398913E1648BA93006E0703 /* ShotTimer.m */; };
 		F39891411648FE23006E0703 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F39891401648FE22006E0703 /* MediaPlayer.framework */; };
+		F3DAC8131660918B00950E18 /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3DAC8121660918B00950E18 /* MoreViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,6 +87,10 @@
 		F30053A8165B2F4A0091CF85 /* AlphaAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlphaAnimationView.m; sourceTree = "<group>"; };
 		F30053AA165B2FDA0091CF85 /* CommonAnimationButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonAnimationButton.h; sourceTree = "<group>"; };
 		F30053AB165B2FDB0091CF85 /* CommonAnimationButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonAnimationButton.m; sourceTree = "<group>"; };
+		F30053C716608FE10091CF85 /* CameraCoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraCoverViewController.h; sourceTree = "<group>"; };
+		F30053C816608FE60091CF85 /* CameraCoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraCoverViewController.m; sourceTree = "<group>"; };
+		F30053CB166090100091CF85 /* ConfigViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigViewController.h; sourceTree = "<group>"; };
+		F30053CC166090130091CF85 /* ConfigViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigViewController.m; sourceTree = "<group>"; };
 		F301347815FDDD1D00480CD7 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		F39891281648B91B006E0703 /* ViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController_iPad.h; sourceTree = "<group>"; };
 		F39891291648B91B006E0703 /* ViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController_iPad.m; sourceTree = "<group>"; };
@@ -100,6 +107,8 @@
 		F398913D1648BA93006E0703 /* ShotTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShotTimer.h; sourceTree = "<group>"; };
 		F398913E1648BA93006E0703 /* ShotTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShotTimer.m; sourceTree = "<group>"; };
 		F39891401648FE22006E0703 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		F3DAC8111660918B00950E18 /* MoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreViewController.h; sourceTree = "<group>"; };
+		F3DAC8121660918B00950E18 /* MoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,6 +226,12 @@
 				F398912F1648B91B006E0703 /* ViewController.m */,
 				BEB8E4581646DF9800DC5800 /* LoadingAnimateImageView.h */,
 				BEB8E4591646DF9800DC5800 /* LoadingAnimateImageView.m */,
+				F30053C716608FE10091CF85 /* CameraCoverViewController.h */,
+				F30053C816608FE60091CF85 /* CameraCoverViewController.m */,
+				F30053CB166090100091CF85 /* ConfigViewController.h */,
+				F30053CC166090130091CF85 /* ConfigViewController.m */,
+				F3DAC8111660918B00950E18 /* MoreViewController.h */,
+				F3DAC8121660918B00950E18 /* MoreViewController.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -333,6 +348,9 @@
 				F30053A6165B27F80091CF85 /* UIStateAnimationView.m in Sources */,
 				F30053A9165B2F4B0091CF85 /* AlphaAnimationView.m in Sources */,
 				F30053AC165B2FDB0091CF85 /* CommonAnimationButton.m in Sources */,
+				F30053C916608FEF0091CF85 /* CameraCoverViewController.m in Sources */,
+				F30053CD1660901C0091CF85 /* ConfigViewController.m in Sources */,
+				F3DAC8131660918B00950E18 /* MoreViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

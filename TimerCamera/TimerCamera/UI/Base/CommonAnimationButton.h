@@ -16,10 +16,12 @@
     AlphaAnimationView* _enabledView;
     UIImageView* _pressedView;
     BOOL _buttonEnabled;
+    BOOL _enableAnimations;
 }
 
 @property (nonatomic,assign,readonly) UIButton* button;
 @property (nonatomic,assign) BOOL buttonEnabled;
+@property (nonatomic,assign) BOOL enableAnimations;
 
 - (id)initWithFrame:(CGRect)frame
     forNormalImage1:(UIImage*)ni1

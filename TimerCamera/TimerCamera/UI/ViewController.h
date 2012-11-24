@@ -11,13 +11,12 @@
 #import "AudioUtility.h"
 #import "LoadingAnimateImageView.h"
 #import "ShotTimer.h"
-#import "CommonAnimationButton.h"
+#import "CameraCoverViewController.h"
 
 @interface ViewController : UIViewController <UINavigationControllerDelegate,UIImagePickerControllerDelegate, UIGestureRecognizerDelegate, AudioUtilityPlaybackDelegate, AudioUtilityVolumeDetectDelegate, LoadingAnimateImageViewDelegate, ShotTimerDelegate>
 {
     NSTimer* timer;
     
-    UIView* _containerView;
     UIImageView* _picutureView;
     UIButton* _shotBtn;
     UIButton* _flashBtn;
@@ -44,17 +43,10 @@
     
     ShotTimer* _timer;
     
-    //Animation Views
-    CommonAnimationButton* _shotButton;
-    CommonAnimationButton* _timerButton;
-    CommonAnimationButton* _configButton;
-    CommonAnimationButton* _torchButton;
-    CommonAnimationButton* _HDRButton;
-    CommonAnimationButton* _frontButton;
-    CommonAnimationButton* _animationCatButton;
+    CameraCoverViewController* _coverController;
 }
 
-@property (nonatomic,retain) IBOutlet UIView* containerView;
+@property (nonatomic,retain) IBOutlet CameraCoverViewController* coverController;
 @property (nonatomic,retain) IBOutlet UIImageView* picutureView;
 @property (nonatomic,retain) IBOutlet UIButton* shotBtn;
 @property (nonatomic,retain) IBOutlet UIButton* flashBtn;

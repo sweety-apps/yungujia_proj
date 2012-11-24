@@ -11,6 +11,7 @@
 @implementation AlphaAnimationView
 
 @synthesize animationInterval = _animationInterval;
+@synthesize disableAnimation = _disableAnimation;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -64,6 +65,12 @@
 
 - (void)alphaAnimationSelector
 {
+    if (_disableAnimation || _animationStoped)
+    {
+        _imageView1.alpha = 1.0;
+        _imageView2.alpha = 0.0;
+        return;
+    }
     [UIView animateWithDuration:_animationInterval delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
         _imageView1.alpha = 1.0;
         _imageView2.alpha = 1.0;
@@ -83,6 +90,15 @@
             }];
         }
     }];
+}
+
+-(void)setDisableAnimation:(BOOL)disableAnimation
+{
+    if (_disableAnimation != disableAnimation)
+    {
+        _disableAnimation = disableAnimation;
+        [self alphaAnimationSelector];
+    }
 }
 
 #pragma mark <UIStateAnimation>

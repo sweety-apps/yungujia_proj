@@ -33,12 +33,16 @@ static CameraOptions* gSI = nil;
     self = [super init];
     if (self) {
         //
-        UIImagePickerController *ipc = [[[UIImagePickerController alloc] init] autorelease];
-        ipc.sourceType = UIImagePickerControllerSourceTypeCamera;
-        ipc.cameraCaptureMode = UIImagePickerControllerCameraCaptureModePhoto;
-        ipc.showsCameraControls = NO;
-        
-        self.imagePicker = ipc;
+        if ([UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceRear]
+            || [UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceFront])
+        {
+            UIImagePickerController *ipc = [[[UIImagePickerController alloc] init] autorelease];
+            ipc.sourceType = UIImagePickerControllerSourceTypeCamera;
+            ipc.cameraCaptureMode = UIImagePickerControllerCameraCaptureModePhoto;
+            ipc.showsCameraControls = NO;
+            
+            self.imagePicker = ipc;
+        }
         
         _maxScale = 50.f;
         _minScale = 1.f;

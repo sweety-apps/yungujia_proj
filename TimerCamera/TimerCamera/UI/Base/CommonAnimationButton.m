@@ -12,6 +12,7 @@
 
 @synthesize button = _button;
 @synthesize buttonEnabled = _buttonEnabled;
+@synthesize enableAnimations = _enableAnimations;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -135,6 +136,24 @@
         }
     }
     _buttonEnabled = buttonEnabled;
+}
+
+- (void)setEnableAnimations:(BOOL)enableAnimations
+{
+    if (_enableAnimations != enableAnimations)
+    {
+        if (enableAnimations)
+        {
+            _normalView.disableAnimation = NO;
+            _enabledView.disableAnimation = NO;
+        }
+        else
+        {
+            _normalView.disableAnimation = YES;
+            _enabledView.disableAnimation = YES;
+        }
+    }
+    _enableAnimations = enableAnimations;
 }
 
 @end
