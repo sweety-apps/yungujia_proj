@@ -21,4 +21,8 @@
     CommonAnimationButton* _animationCatButton;
 }
 
+- (void)showSubViews:(BOOL)animated delayed:(float)seconds;
+- (void)showSubViews:(BOOL)animated;
+- (void)hideSubViews:(BOOL)animated;
+
 @end

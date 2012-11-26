@@ -220,23 +220,29 @@
 - (void)PrepareLoadingAnimation
 {
     [self onFinishedLoadingAnimation:_laiv];
-    _laiv = [[LoadingAnimateImageView viewWithDelegate:self image:[UIImage imageNamed:@"/Resource/Picture/camera_open"] forTimeInterval:1.0 preLoadImage:[UIImage imageNamed:@"Default"] forPreloadAnimateInterval:0.3] retain];
+    _laiv = [[LoadingAnimateImageView viewWithDelegate:self image:[UIImage imageNamed:@"/Resource/Picture/camera_open"] forTimeInterval:0.8 preLoadImage:[UIImage imageNamed:@"Default"] forPreloadAnimateInterval:0.2] retain];
     if (_laiv)
     {
         [self.view addSubview:_laiv];
         [self.view bringSubviewToFront:_laiv];
     }
+    
+    CGRect rect = CGRectZero;
+    rect.size = self.view.frame.size;
+    _coverController.view.frame = rect;
+    [_coverController hideSubViews:NO];
 }
 
 - (void)ShowLoadingAnimation
 {
-    
     if (_laiv)
     {
         [self.view bringSubviewToFront:_laiv];
         [_laiv startPreloadingAnimation];
         [_laiv startLoadingAnimation];
     }
+    
+    [_coverController showSubViews:YES delayed:0.7];
 }
 
 #pragma mark LoadingAnimateImageViewDelegate
@@ -245,6 +251,8 @@
 {
     [_laiv removeFromSuperview];
     ReleaseAndNil(_laiv);
+    
+    //[_coverController showSubViews:YES];
 }
 
 #pragma mark - test code
