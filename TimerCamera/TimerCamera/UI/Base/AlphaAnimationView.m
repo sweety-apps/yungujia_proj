@@ -26,12 +26,16 @@
         [self addSubview:_imageView2];
         _animationInterval = kDefaultAlphaAnimationInterval;
         _animationStoped = YES;
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onEnterFourgroud) name:UIApplicationDidBecomeActiveNotification object:nil];
     }
     return self;
 }
 
 - (void)dealloc
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
     [_imageView1 removeFromSuperview];
     [_imageView2 removeFromSuperview];
     [super dealloc];
@@ -97,6 +101,16 @@
     if (_disableAnimation != disableAnimation)
     {
         _disableAnimation = disableAnimation;
+        [self alphaAnimationSelector];
+    }
+}
+
+#pragma mark Global Notification
+
+-(void)onEnterFourgroud
+{
+    if (!_animationStoped)
+    {
         [self alphaAnimationSelector];
     }
 }

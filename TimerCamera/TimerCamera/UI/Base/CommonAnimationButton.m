@@ -58,6 +58,14 @@
 - (void)onReleased:(id)sender
 {
     self.buttonEnabled = !_buttonEnabled;
+    if (_buttonEnabled)
+    {
+        _normalView.disableAnimation = YES;
+    }
+    else
+    {
+        _enabledView.disableAnimation = YES;
+    }
 }
 
 - (void)onRestored:(id)sender
@@ -75,10 +83,11 @@
     self = [self initWithFrame:frame];
     if (self)
     {
+        BOOL needEnableState = (ei1 || ei1) ? YES : NO;
         CGRect rect = frame;
         rect.origin = CGPointMake(0, 0);
         _normalView = [[AlphaAnimationView alloc] initWithFrame:rect];
-        _enabledView = [[AlphaAnimationView alloc] initWithFrame:rect];
+        _enabledView = needEnableState ? [[AlphaAnimationView alloc] initWithFrame:rect] : _normalView;
         _pressedView = [[UIImageView alloc] initWithFrame:rect];
         [self setAnimation:_normalView andView:_normalView forState:@"normal"];
         [self setAnimation:_enabledView andView:_enabledView forState:@"enabled"];

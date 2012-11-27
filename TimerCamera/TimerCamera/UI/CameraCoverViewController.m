@@ -282,17 +282,17 @@
                    buttonWithPressedImageSizeforNormalImage1:[UIImage imageNamed:@"/Resource/Picture/main/shot_btn_normal1"]
                    forNormalImage2:[UIImage imageNamed:@"/Resource/Picture/main/shot_btn_normal2"]
                    forPressedImage:[UIImage imageNamed:@"/Resource/Picture/main/shot_btn_pressed"]
-                   forEnabledImage1:[UIImage imageNamed:@"/Resource/Picture/main/shot_btn_normal1"]
-                   forEnabledImage2:[UIImage imageNamed:@"/Resource/Picture/main/shot_btn_normal2"]];
+                   forEnabledImage1:nil
+                   forEnabledImage2:nil];
     [self.view addSubview:_shotButton];
     
     
-    _timerButton = [CommonAnimationButton
-                    buttonWithPressedImageSizeforNormalImage1:[UIImage imageNamed:@"/Resource/Picture/main/timer_btn_normal1"]
-                    forNormalImage2:[UIImage imageNamed:@"/Resource/Picture/main/timer_btn_normal2"]
-                    forPressedImage:[UIImage imageNamed:@"/Resource/Picture/main/timer_btn_pressed"]
-                    forEnabledImage1:[UIImage imageNamed:@"/Resource/Picture/main/timer_btn_enable1"]
-                    forEnabledImage2:[UIImage imageNamed:@"/Resource/Picture/main/timer_btn_enable2"]];
+    _timerButton = [TimerButton buttonWithPressedImageSizeforNormalImage1:[UIImage imageNamed:@"/Resource/Picture/main/timer_btn_normal1"]
+                                                          forNormalImage2:[UIImage imageNamed:@"/Resource/Picture/main/timer_btn_normal2"]
+                                                         forPressedImage1:[UIImage imageNamed:@"/Resource/Picture/main/timer_btn_pressed"]
+                                                         forPressedImage2:[UIImage imageNamed:@"/Resource/Picture/main/timer_btn_enable1"]
+                                                         forEnabledImage1:[UIImage imageNamed:@"/Resource/Picture/main/timer_btn_enable1"]
+                                                         forEnabledImage2:[UIImage imageNamed:@"/Resource/Picture/main/timer_btn_enable2"]];
     [self.view addSubview:_timerButton];
     
     
@@ -300,8 +300,8 @@
                      buttonWithPressedImageSizeforNormalImage1:[UIImage imageNamed:@"/Resource/Picture/main/config_btn_normal1"]
                      forNormalImage2:[UIImage imageNamed:@"/Resource/Picture/main/config_btn_normal2"]
                      forPressedImage:[UIImage imageNamed:@"/Resource/Picture/main/config_btn_pressed"]
-                     forEnabledImage1:[UIImage imageNamed:@"/Resource/Picture/main/config_btn_normal1"]
-                     forEnabledImage2:[UIImage imageNamed:@"/Resource/Picture/main/config_btn_normal2"]];
+                     forEnabledImage1:nil
+                     forEnabledImage2:nil];
     [self.view addSubview:_configButton];
     
     
@@ -327,8 +327,8 @@
                     buttonWithPressedImageSizeforNormalImage1:[UIImage imageNamed:@"/Resource/Picture/main/front_normal1"]
                     forNormalImage2:[UIImage imageNamed:@"/Resource/Picture/main/front_normal2"]
                     forPressedImage:[UIImage imageNamed:@"/Resource/Picture/main/front_pressed"]
-                    forEnabledImage1:[UIImage imageNamed:@"/Resource/Picture/main/front_normal1"]
-                    forEnabledImage2:[UIImage imageNamed:@"/Resource/Picture/main/front_normal2"]];
+                    forEnabledImage1:nil
+                    forEnabledImage2:nil];
     [self.view addSubview:_frontButton];
     
     [self hideSubViews:NO];
