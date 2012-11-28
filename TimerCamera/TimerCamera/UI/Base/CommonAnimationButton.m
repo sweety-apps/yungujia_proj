@@ -131,6 +131,21 @@
                                         forEnabledImage2:ei2] autorelease];
 }
 
+- (void)setButtonPressed
+{
+    [self onPressed:_button];
+}
+
+- (void)setButtonReleased
+{
+    [self onReleased:_button];
+}
+
+- (void)setButtonRestored
+{
+    [self onRestored:_button];
+}
+
 - (void)setButtonEnabled:(BOOL)buttonEnabled
 {
     if (_buttonEnabled != buttonEnabled)

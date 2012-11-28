@@ -13,5 +13,6 @@
     #import <Foundation/Foundation.h>
 
 #define ReleaseAndNil(x) if(x){[(x) release]; (x) = nil; }
+#define ReleaseAndNilView(x) if(x){[(x) removeFromSuperview]; [(x) release]; (x) = nil; }
 
 #endif

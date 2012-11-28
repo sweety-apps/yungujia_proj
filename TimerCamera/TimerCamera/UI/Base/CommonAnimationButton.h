@@ -36,4 +36,8 @@
                                                    forEnabledImage1:(UIImage*)ei1
                                                    forEnabledImage2:(UIImage*)ei2;
 
+- (void)setButtonPressed;
+- (void)setButtonReleased;
+- (void)setButtonRestored;
+
 @end
