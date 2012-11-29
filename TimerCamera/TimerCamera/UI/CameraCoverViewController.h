@@ -9,12 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "CommonAnimationButton.h"
 #import "TimerButton.h"
+#import "VolumeMonitor.h"
 
 @interface CameraCoverViewController : UIViewController
 {
     //Animation Views
     CommonAnimationButton* _shotButton;
     TimerButton* _timerButton;
+    VolumeMonitor* _volMonitor;
     CommonAnimationButton* _configButton;
     CommonAnimationButton* _torchButton;
     CommonAnimationButton* _HDRButton;
