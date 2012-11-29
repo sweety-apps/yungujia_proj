@@ -103,6 +103,11 @@
         rect = _frontButton.frame;
         rect.origin.y += rect.size.height + BOUNCE_OFFSET;
         _frontButton.frame = rect;
+        
+        ////
+        rect = _volMonitor.frame;
+        rect.origin.x -= rect.size.width + BOUNCE_OFFSET;
+        _volMonitor.frame = rect;
     };
     
     void (^doSetSubViewFramesAndBounce)(void) = ^(void){
@@ -145,6 +150,11 @@
         rect = _frontButton.frame;
         rect.origin.y += 0 - BOUNCE_OFFSET;
         _frontButton.frame = rect;
+        
+        ////
+        rect = _volMonitor.frame;
+        rect.origin.x += 0 - BOUNCE_OFFSET;
+        _volMonitor.frame = rect;
     };
     
     if (animated)
@@ -238,12 +248,20 @@
         rect.origin.y -= rect.size.height;
         _HDRButton.frame = rect;
         
+        
         ////
         rect = _frontButton.frame;
         rect.origin.x = self.view.frame.size.width - rect.size.width;
         rect.origin.y = 0;
         rect.origin.y -= rect.size.height;
         _frontButton.frame = rect;
+        
+        
+        ////
+        rect = _volMonitor.frame;
+        rect.origin.x = self.view.frame.size.width + rect.size.width;
+        rect.origin.y = self.view.frame.size.height - _shotButton.frame.size.height - rect.size.height;
+        _volMonitor.frame = rect;
     };
     
     void (^doHideSubViews)(BOOL) = ^(BOOL finished){
@@ -254,6 +272,7 @@
         _torchButton.hidden = YES;
         _HDRButton.hidden = YES;
         _frontButton.hidden = YES;
+        _volMonitor.hidden = YES;
     };
     
     if (animated)
@@ -331,6 +350,36 @@
                     forEnabledImage2:nil];
     [self.view addSubview:_frontButton];
     
+    
+    CommonAnimationButton* bar = [CommonAnimationButton
+                                  buttonWithPressedImageSizeforNormalImage1:[UIImage imageNamed:@"/Resource/Picture/main/vol_point_normal1"]
+                                  forNormalImage2:[UIImage imageNamed:@"/Resource/Picture/main/vol_point_normal2"]
+                                  forPressedImage:[UIImage imageNamed:@"/Resource/Picture/main/vol_point_pressed"]
+                                  forEnabledImage1:nil
+                                  forEnabledImage2:nil];
+    
+    CommonAnimationButton* stop = [CommonAnimationButton
+                                   buttonWithPressedImageSizeforNormalImage1:[UIImage imageNamed:@"/Resource/Picture/main/vol_point_normal1"]
+                                   forNormalImage2:[UIImage imageNamed:@"/Resource/Picture/main/vol_point_normal2"]
+                                   forPressedImage:[UIImage imageNamed:@"/Resource/Picture/main/vol_point_pressed"]
+                                   forEnabledImage1:nil
+                                   forEnabledImage2:nil];
+    
+    _volMonitor = [VolumeMonitor monitorWithBarButton:bar
+                                       withStopButton:stop
+                                      backGroundImage:[UIImage imageNamed:@"/Resource/Picture/main/volume_bg"]
+                                          volumeImage:[UIImage imageNamed:@"/Resource/Picture/main/fist"]
+                                     reachedPeakImage:[UIImage imageNamed:@"/Resource/Picture/main/vol_point_punched"]];
+    _volMonitor.minPeakVolume = 0.4;
+    _volMonitor.peakVolume = 0.7;
+    
+    [self.view addSubview:_volMonitor];
+    
+    //add events
+    [_timerButton.button addTarget:self
+                            action:@selector(onPressedTimer:)
+                  forControlEvents:UIControlEventTouchUpInside];
+    
     [self hideSubViews:NO];
 }
 
@@ -350,6 +399,23 @@
     _frontButton = nil;
     [_animationCatButton removeFromSuperview];
     _animationCatButton = nil;
+    [_volMonitor removeFromSuperview];
+    _volMonitor = nil;
+}
+
+#pragma mark Event Handlers
+
+- (void)onPressedTimer:(id)sender
+{
+    if (_timerButton.timerEnabled)
+    {
+        [_volMonitor showMonitor:YES];
+        _volMonitor.currentVolume = 0.5;
+    }
+    else
+    {
+        [_volMonitor hideMonitor:YES];
+    }
 }
 
 @end

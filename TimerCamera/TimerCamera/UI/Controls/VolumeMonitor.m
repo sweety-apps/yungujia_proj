@@ -78,6 +78,7 @@
         _containerView.userInteractionEnabled = YES;
         self.userInteractionEnabled = YES;
         
+        [_containerView addSubview:_backGroudView];
         [_containerView addSubview:_barButton];
         [_containerView addSubview:_reachedPeakView];
         [_containerView addSubview:stopButton];
@@ -101,11 +102,11 @@
     return self;
 }
 
-+ (VolumeMonitor*)buttonWithBarButton:(CommonAnimationButton*)barButton
-                       withStopButton:(CommonAnimationButton*)stopButton
-                      backGroundImage:(UIImage*)bgi
-                          volumeImage:(UIImage*)vi
-                     reachedPeakImage:(UIImage*)ri
++ (VolumeMonitor*)monitorWithBarButton:(CommonAnimationButton*)barButton
+                        withStopButton:(CommonAnimationButton*)stopButton
+                       backGroundImage:(UIImage*)bgi
+                           volumeImage:(UIImage*)vi
+                      reachedPeakImage:(UIImage*)ri
 {
     CGRect rect = CGRectMake(0, 0, bgi.size.width, bgi.size.height);
     return [[[VolumeMonitor alloc] initWithFrame:rect

@@ -10,6 +10,8 @@
 
 @implementation TimerButton
 
+@synthesize timerEnabled = _timerEnabled;
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -52,11 +54,13 @@
 {
     if (!_buttonEnabled)
     {
+        _timerEnabled = YES;
         _normalView.disableAnimation = YES;
         [self setCurrentState:@"enableAnimate"];
     }
     else
     {
+        _timerEnabled = NO;
         _enabledView.disableAnimation = YES;
         [self setCurrentState:@"disableAnimate"];
     }
@@ -124,10 +128,12 @@
     {
         if (buttonEnabled)
         {
+            _timerEnabled = YES;
             [self setCurrentState:@"enabled"];
         }
         else
         {
+            _timerEnabled = NO;
             [self setCurrentState:@"normal"];
         }
     }

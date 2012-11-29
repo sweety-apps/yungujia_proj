@@ -40,11 +40,11 @@
         volumeImage:(UIImage*)vi
    reachedPeakImage:(UIImage*)ri;
 
-+ (VolumeMonitor*)buttonWithBarButton:(CommonAnimationButton*)barButton
-                       withStopButton:(CommonAnimationButton*)stopButton
-                      backGroundImage:(UIImage*)bgi
-                          volumeImage:(UIImage*)vi
-                     reachedPeakImage:(UIImage*)ri;
++ (VolumeMonitor*)monitorWithBarButton:(CommonAnimationButton*)barButton
+                        withStopButton:(CommonAnimationButton*)stopButton
+                       backGroundImage:(UIImage*)bgi
+                           volumeImage:(UIImage*)vi
+                      reachedPeakImage:(UIImage*)ri;
 
 - (void)showMonitor:(BOOL)animated;
 - (void)hideMonitor:(BOOL)animated;
