@@ -8,13 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "CommonAnimationButton.h"
+#import "SliderTouchCoverView.h"
 
 #define VOLUME_ANIMATION_INTERVAL (0.1)
 
-@interface VolumeMonitor : UIStateAnimationView <UIStateAnimation>
+@interface VolumeMonitor : UIStateAnimationView <UIStateAnimation,SliderTouchCoverViewDelegate>
 {
     CommonAnimationButton* _barButton;
     CommonAnimationButton* _stopButton;
+    SliderTouchCoverView* _slideCover;
     UIImageView* _backGroudView;
     UIImageView* _volumeView;
     UIImageView* _reachedPeakView;

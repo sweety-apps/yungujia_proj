@@ -62,6 +62,7 @@
     _torchButton.hidden = NO;
     _HDRButton.hidden = NO;
     _frontButton.hidden = NO;
+    _volMonitor.hidden = NO;
     
     void (^doMoveSubViews)(void) = ^(void){
         CGRect rect = CGRectZero;
@@ -153,7 +154,7 @@
         
         ////
         rect = _volMonitor.frame;
-        rect.origin.x += 0 - BOUNCE_OFFSET;
+        rect.origin.x -= 0 - BOUNCE_OFFSET;
         _volMonitor.frame = rect;
     };
     
@@ -259,7 +260,7 @@
         
         ////
         rect = _volMonitor.frame;
-        rect.origin.x = self.view.frame.size.width + rect.size.width;
+        rect.origin.x = self.view.frame.size.width;
         rect.origin.y = self.view.frame.size.height - _shotButton.frame.size.height - rect.size.height;
         _volMonitor.frame = rect;
     };
@@ -409,6 +410,7 @@
 {
     if (_timerButton.timerEnabled)
     {
+        //[_volMonitor hideMonitor:NO];
         [_volMonitor showMonitor:YES];
         _volMonitor.currentVolume = 0.5;
     }

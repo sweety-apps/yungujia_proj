@@ -34,6 +34,7 @@
 		F30053C916608FEF0091CF85 /* CameraCoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F30053C816608FE60091CF85 /* CameraCoverViewController.m */; };
 		F30053CD1660901C0091CF85 /* ConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F30053CC166090130091CF85 /* ConfigViewController.m */; };
 		F301347915FDDD1D00480CD7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F301347815FDDD1D00480CD7 /* AVFoundation.framework */; };
+		F376D53A1668AD6600CEEEE1 /* SliderTouchCoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = F376D5391668AD6600CEEEE1 /* SliderTouchCoverView.m */; };
 		F39891301648B91B006E0703 /* ViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = F39891291648B91B006E0703 /* ViewController_iPad.m */; };
 		F39891311648B91B006E0703 /* ViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = F398912A1648B91B006E0703 /* ViewController_iPad.xib */; };
 		F39891321648B91B006E0703 /* ViewController_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = F398912C1648B91B006E0703 /* ViewController_iPhone.m */; };
@@ -96,6 +97,8 @@
 		F30053CB166090100091CF85 /* ConfigViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigViewController.h; sourceTree = "<group>"; };
 		F30053CC166090130091CF85 /* ConfigViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigViewController.m; sourceTree = "<group>"; };
 		F301347815FDDD1D00480CD7 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		F376D5381668AD6600CEEEE1 /* SliderTouchCoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SliderTouchCoverView.h; sourceTree = "<group>"; };
+		F376D5391668AD6600CEEEE1 /* SliderTouchCoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SliderTouchCoverView.m; sourceTree = "<group>"; };
 		F39891281648B91B006E0703 /* ViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController_iPad.h; sourceTree = "<group>"; };
 		F39891291648B91B006E0703 /* ViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController_iPad.m; sourceTree = "<group>"; };
 		F398912A1648B91B006E0703 /* ViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController_iPad.xib; sourceTree = "<group>"; };
@@ -286,6 +289,8 @@
 				F3DAC830166468A900950E18 /* BlackCat.m */,
 				F3DAC8321664725D00950E18 /* ShotButton.h */,
 				F3DAC8331664725D00950E18 /* ShotButton.m */,
+				F376D5381668AD6600CEEEE1 /* SliderTouchCoverView.h */,
+				F376D5391668AD6600CEEEE1 /* SliderTouchCoverView.m */,
 			);
 			path = Controls;
 			sourceTree = "<group>";
@@ -383,6 +388,7 @@
 				F3DAC82E1664689A00950E18 /* VolumeMonitor.m in Sources */,
 				F3DAC831166468A900950E18 /* BlackCat.m in Sources */,
 				F3DAC8341664725D00950E18 /* ShotButton.m in Sources */,
+				F376D53A1668AD6600CEEEE1 /* SliderTouchCoverView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

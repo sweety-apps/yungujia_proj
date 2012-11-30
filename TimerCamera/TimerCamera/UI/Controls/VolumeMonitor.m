@@ -26,6 +26,7 @@
         _volumeView = [[UIImageView alloc] initWithFrame:rect];
         _reachedPeakView = [[UIImageView alloc] initWithFrame:rect];
         _containerView = [[UIImageView alloc] initWithFrame:rect];
+        _slideCover = [[SliderTouchCoverView sliderWithFrame:frame andDelegate:self] retain];
     }
     return self;
 }
@@ -41,6 +42,7 @@
 
 - (void)dealloc
 {
+    ReleaseAndNilView(_slideCover);
     ReleaseAndNilView(_containerView);
     ReleaseAndNilView(_reachedPeakView);
     ReleaseAndNilView(_barButton);
@@ -72,11 +74,13 @@
         _barButton = [barButton retain];
         _stopButton = [stopButton retain];
         _stopButton.frame = rect;
+        _slideCover.frame = rect;
         _backGroudView.userInteractionEnabled = NO;
         _barButton.userInteractionEnabled = NO;
         _volumeView.userInteractionEnabled = NO;
         _containerView.userInteractionEnabled = YES;
         self.userInteractionEnabled = YES;
+        _slideCover.userInteractionEnabled = YES;
         
         [_containerView addSubview:_backGroudView];
         [_containerView addSubview:_barButton];
@@ -84,6 +88,8 @@
         [_containerView addSubview:stopButton];
         [_containerView addSubview:_volumeView];
         [_containerView addSubview:_stopButton];
+        [self addSubview:_slideCover];
+    
         _stopButton.hidden = YES;
         _reachedPeakView.hidden = YES;
         
@@ -98,6 +104,9 @@
         [self setAnimation:self andView:_containerView forState:@"holding"];
         
         [self setCurrentState:@"hided"];
+        [self hideAnimateSelector:NO withStateTrans:NO];
+        
+        [self bringSubviewToFront:_slideCover];
     }
     return self;
 }
@@ -178,11 +187,12 @@
 - (void)hideAnimateSelector:(BOOL)animated withStateTrans:(BOOL)trans
 {
     void (^hide)(void) = ^(void){
-        self.hidden = YES;
+        _containerView.hidden = YES;
     };
     void (^remove)(void) = ^(void){
-        CGRect rect = self.frame;
+        CGRect rect = _containerView.frame;
         rect.origin.x += rect.size.width;
+        _containerView.frame = rect;
     };
     
     if (animated)
@@ -190,14 +200,14 @@
         if (trans)
         {
             [UIView animateWithDuration:0.3 animations:remove completion:^(BOOL finished){
-                remove();
+                hide();
                 [self setCurrentState:@"hided"];
             }];
         }
         else
         {
             [UIView animateWithDuration:0.3 animations:remove completion:^(BOOL finished){
-                remove();
+                hide();
             }];
         }
     }
@@ -215,14 +225,17 @@
 - (void)showAnimateSelector:(BOOL)animated withStateTrans:(BOOL)trans
 {
 #define BOUNCE_OFFSET (4)
-    self.hidden = NO;
+    _containerView.hidden = NO;
     void (^move)(void) = ^(void){
-        CGRect rect = self.frame;
+        CGRect rect = _containerView.frame;
         rect.origin.x -= rect.size.width + BOUNCE_OFFSET;
+        _containerView.frame = rect;
+        
     };
     void (^bounce)(void) = ^(void){
-        CGRect rect = self.frame;
+        CGRect rect = _containerView.frame;
         rect.origin.x += BOUNCE_OFFSET;
+        _containerView.frame = rect;
     };
     
     if (animated)
@@ -288,6 +301,8 @@
 - (void)tarnsToHoldingAnimateSelector:(BOOL)animated
 {
 #define PEAK_SCALE (1.2)
+    _slideCover.hidden = YES;
+    
     void (^preReached)(void) = ^(void) {
         _barButton.hidden = YES;
         _reachedPeakView.alpha = 1.0;
@@ -360,6 +375,9 @@
 
 - (void)transToMonitorAnimateSelector:(BOOL)animated
 {
+    _slideCover.hidden = NO;
+    [self bringSubviewToFront:_slideCover];
+    
     void (^preHideStopButton)(void) = ^(void) {
         _stopButton.hidden = NO;
         _stopButton.alpha = 1.0;
@@ -464,15 +482,14 @@
     }
 }
 
-#pragma mark Touch Handler
+#pragma mark <SliderTouchCoverViewDelegate>
 
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+- (void) onBeginTouch:(SliderTouchCoverView*)view atPoint:(CGPoint)point
 {
     if([_currentState isEqualToString:@"monitor"])
     {
-        CGPoint point = [[touches anyObject] locationInView:self];
         float minPeakX = 0;
-        float maxPeakX = self.frame.size.width * (1.0 - _minPeakVolume);
+        float maxPeakX = view.frame.size.width * (1.0 - _minPeakVolume);
         if (point.x >= minPeakX && point.x <= maxPeakX)
         {
             float peak = 1.0 - (point.x / maxPeakX);
@@ -482,10 +499,9 @@
             [self setCurrentState:@"draging"];
         }
     }
-    [super touchesBegan:touches withEvent:event];
 }
 
--(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+- (void) onEndTouch:(SliderTouchCoverView*)view atPoint:(CGPoint)point
 {
     if(_draging)
     {
@@ -493,26 +509,23 @@
         _draging = NO;
         [self setCurrentState:@"monitor"];
     }
-    [super touchesEnded:touches withEvent:event];
 }
 
--(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+- (void) onMoveTouch:(SliderTouchCoverView*)view atPoint:(CGPoint)point
 {
     if(_draging)
     {
-        CGPoint point = [[touches anyObject] locationInView:self];
         float minPeakX = 0;
-        float maxPeakX = self.frame.size.width * (1.0 - _minPeakVolume);
+        float maxPeakX = view.frame.size.width * (1.0 - _minPeakVolume);
         if (point.x >= minPeakX && point.x <= maxPeakX)
         {
             float peak = 1.0 - (point.x / maxPeakX);
             [self setPeakVolume:peak];
         }
     }
-    [super touchesMoved:touches withEvent:event];
 }
 
--(void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
+- (void) onCancelTouch:(SliderTouchCoverView*)view atPoint:(CGPoint)point
 {
     if (_draging)
     {
@@ -520,7 +533,6 @@
         _draging = NO;
         [self setCurrentState:@"monitor"];
     }
-    [super touchesCancelled:touches withEvent:event];
 }
 
 @end

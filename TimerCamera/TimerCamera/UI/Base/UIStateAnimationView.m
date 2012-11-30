@@ -114,20 +114,35 @@
 
 - (void)setCurrentState:(NSString *)currentState
 {
-    UIStateAnimationViewStateObject* o = [_stateDict objectForKey:_currentState];
+    BOOL needRemoveView = YES;
+    UIStateAnimationViewStateObject* oldO = [_stateDict objectForKey:_currentState];
+    UIStateAnimationViewStateObject* newO = [_stateDict objectForKey:currentState];
+    
+    if (oldO && newO && oldO.view == newO.view)
+    {
+        needRemoveView = NO;
+    }
+    
+    UIStateAnimationViewStateObject* o = oldO;
     if (o)
     {
         if (o.animation && [o.animation respondsToSelector:@selector(stopStateAnimationForView:forState:)])
         {
             [o.animation stopStateAnimationForView:o.view forState:_currentState];
         }
-        [o.view removeFromSuperview];
+        if (needRemoveView)
+        {
+            [o.view removeFromSuperview];
+        }
     }
     
-    o = [_stateDict objectForKey:currentState];
+    o = newO;
     if (o)
     {
-        [self addSubview:o.view];
+        if (needRemoveView)
+        {
+            [self addSubview:o.view];
+        }
         
         [currentState retain];
         [_currentState release];
