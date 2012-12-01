@@ -8,6 +8,13 @@
 
 #import "VolumeMonitor.h"
 
+#define PEAK_BTN_CENTER_X (47.0)
+#define PEAK_BTN_BEGIN_X (25.0)
+#define PEAK_BTN_END_X (69.0)
+#define PEAK_RANGE_X (self.frame.size.width - PEAK_BTN_END_X)
+#define VOLUME_BEGIN_X (68.0)
+#define VOLUME_RANGE_X (self.frame.size.width - VOLUME_BEGIN_X)
+
 @implementation VolumeMonitor
 
 @synthesize barButton = _barButton;
@@ -128,11 +135,13 @@
 
 - (void)showMonitor:(BOOL)animated
 {
+    _slideCover.hidden = NO;
     [self setCurrentState:@"showing"];
 }
 
 - (void)hideMonitor:(BOOL)animated
 {
+    _slideCover.hidden = YES;
     [self setCurrentState:@"hiding"];
 }
 
@@ -143,7 +152,7 @@
 
 - (void)transToMonitorState
 {
-    if ([_currentState isEqualToString:@"holding"])
+    if ([_currentState isEqualToString:@"holding"] || [_currentState isEqualToString:@"transToHolding"])
     {
         [self setCurrentState:@"transToMonitor"];
     }
@@ -151,7 +160,7 @@
 
 - (void)transToHoldingState
 {
-    if (![_currentState isEqualToString:@"monitor"])
+    if ([_currentState isEqualToString:@"monitor"])
     {
         [self setCurrentState:@"transToHolding"];
     }
@@ -174,7 +183,7 @@
 - (void)setPeakVolume:(float)peakVolume
 {
     peakVolume = peakVolume < _minPeakVolume ? _minPeakVolume : (peakVolume > 1.0 ? 1.0 : peakVolume);
-    float x = self.frame.size.width * (1.0 - peakVolume);
+    float x = PEAK_RANGE_X * (1.0 - peakVolume);
     CGRect rect = _barButton.frame;
     rect.origin.x = x;
     _barButton.frame = rect;
@@ -272,7 +281,7 @@
 {
     CGRect volFrame = CGRectZero;
     newlevel = newlevel < 0.0 ? 0.0 : (newlevel > _peakVolume ? _peakVolume : newlevel);
-    float x = self.frame.size.width * (1.0 - newlevel);
+    float x = VOLUME_RANGE_X * (1.0 - newlevel);
     CGRect rect = _volumeView.frame;
     rect.origin.x = x;
     volFrame = rect;
@@ -394,6 +403,8 @@
     
     void (^toMonitor)(BOOL) = ^(BOOL animated) {
         _barButton.hidden = NO;
+        _backGroudView.hidden = NO;
+        _volumeView.hidden = NO;
         [self hideAnimateSelector:NO withStateTrans:NO];
         [self showAnimateSelector:animated withStateTrans:YES];
     };
@@ -420,6 +431,7 @@
 {
     if([state isEqualToString:@"draging"])
     {
+        [self volumeAnimateSelector:YES volume:0.0 interval:VOLUME_ANIMATION_INTERVAL complationAnimation:nil];
     }
     else if([state isEqualToString:@"monitor"])
     {
@@ -488,11 +500,15 @@
 {
     if([_currentState isEqualToString:@"monitor"])
     {
-        float minPeakX = 0;
-        float maxPeakX = view.frame.size.width * (1.0 - _minPeakVolume);
-        if (point.x >= minPeakX && point.x <= maxPeakX)
+        float minTouchX = PEAK_BTN_BEGIN_X;
+        float maxTouchX = PEAK_BTN_END_X + ((PEAK_RANGE_X) * (1.0 - _minPeakVolume));
+        if (point.x >= minTouchX && point.x < maxTouchX)
         {
-            float peak = 1.0 - (point.x / maxPeakX);
+            float minPeakX = 0;
+            float maxPeakX = PEAK_RANGE_X * (1.0 - _minPeakVolume);
+            point.x -= PEAK_BTN_CENTER_X;
+            point.x = point.x < minPeakX ? minPeakX : (point.x > maxPeakX ? maxPeakX : point.x);
+            float peak = 1.0 - (point.x / PEAK_RANGE_X);
             [self setPeakVolume:peak];
             [_barButton setButtonPressed];
             _draging = YES;
@@ -516,12 +532,11 @@
     if(_draging)
     {
         float minPeakX = 0;
-        float maxPeakX = view.frame.size.width * (1.0 - _minPeakVolume);
-        if (point.x >= minPeakX && point.x <= maxPeakX)
-        {
-            float peak = 1.0 - (point.x / maxPeakX);
-            [self setPeakVolume:peak];
-        }
+        float maxPeakX = PEAK_RANGE_X * (1.0 - _minPeakVolume);
+        point.x -= PEAK_BTN_CENTER_X;
+        point.x = point.x < minPeakX ? minPeakX : (point.x > maxPeakX ? maxPeakX : point.x);
+        float peak = 1.0 - (point.x / PEAK_RANGE_X);
+        [self setPeakVolume:peak];
     }
 }
 

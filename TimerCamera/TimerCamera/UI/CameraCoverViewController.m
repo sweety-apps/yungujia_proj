@@ -78,9 +78,18 @@
         _shotButton.frame = rect;
         
         ////
-        rect = _timerButton.frame;
-        rect.origin.x += rect.size.width + BOUNCE_OFFSET;
-        _timerButton.frame = rect;
+        if (_timerButton.buttonEnabled)
+        {
+            rect = _timerButton.frame;
+            rect.origin.y -= rect.size.height + BOUNCE_OFFSET;
+            _timerButton.frame = rect;
+        }
+        else
+        {
+            rect = _timerButton.frame;
+            rect.origin.x += rect.size.width + BOUNCE_OFFSET;
+            _timerButton.frame = rect;
+        }
         
         
         ////
@@ -125,9 +134,18 @@
         _shotButton.frame = rect;
         
         ////
-        rect = _timerButton.frame;
-        rect.origin.x += 0 - BOUNCE_OFFSET;
-        _timerButton.frame = rect;
+        if (_timerButton.buttonEnabled)
+        {
+            rect = _timerButton.frame;
+            rect.origin.y -= 0 - BOUNCE_OFFSET;
+            _timerButton.frame = rect;
+        }
+        else
+        {
+            rect = _timerButton.frame;
+            rect.origin.x += 0 - BOUNCE_OFFSET;
+            _timerButton.frame = rect;
+        }
         
         
         ////
@@ -219,11 +237,21 @@
         _shotButton.frame = rect;
         
         ////
-        rect = _timerButton.frame;
-        rect.origin.x = 0;
-        rect.origin.y = self.view.frame.size.height - rect.size.height;
-        rect.origin.x -= rect.size.width;
-        _timerButton.frame = rect;
+        if (_timerButton.buttonEnabled)
+        {
+            rect = _timerButton.frame;
+            rect.origin.x = 0;
+            rect.origin.y = self.view.frame.size.height;
+            _timerButton.frame = rect;
+        }
+        else
+        {
+            rect = _timerButton.frame;
+            rect.origin.x = 0;
+            rect.origin.y = self.view.frame.size.height - rect.size.height;
+            rect.origin.x -= rect.size.width;
+            _timerButton.frame = rect;
+        }
         
         
         ////
@@ -351,7 +379,7 @@
                     forEnabledImage2:nil];
     [self.view addSubview:_frontButton];
     
-    
+
     CommonAnimationButton* bar = [CommonAnimationButton
                                   buttonWithPressedImageSizeforNormalImage1:[UIImage imageNamed:@"/Resource/Picture/main/vol_point_normal1"]
                                   forNormalImage2:[UIImage imageNamed:@"/Resource/Picture/main/vol_point_normal2"]
@@ -371,7 +399,7 @@
                                       backGroundImage:[UIImage imageNamed:@"/Resource/Picture/main/volume_bg"]
                                           volumeImage:[UIImage imageNamed:@"/Resource/Picture/main/fist"]
                                      reachedPeakImage:[UIImage imageNamed:@"/Resource/Picture/main/vol_point_punched"]];
-    _volMonitor.minPeakVolume = 0.4;
+    _volMonitor.minPeakVolume = 0.0;
     _volMonitor.peakVolume = 0.7;
     
     [self.view addSubview:_volMonitor];
@@ -380,6 +408,14 @@
     [_timerButton.button addTarget:self
                             action:@selector(onPressedTimer:)
                   forControlEvents:UIControlEventTouchUpInside];
+    
+    [_shotButton.button addTarget:self
+                           action:@selector(onPressedShot:)
+                 forControlEvents:UIControlEventTouchUpInside];
+    
+    [_volMonitor.stopButton.button addTarget:self
+                                      action:@selector(onStopTimerPressed:)
+                            forControlEvents:UIControlEventTouchUpInside];
     
     [self hideSubViews:NO];
 }
@@ -412,11 +448,33 @@
     {
         //[_volMonitor hideMonitor:NO];
         [_volMonitor showMonitor:YES];
-        _volMonitor.currentVolume = 0.5;
+        _volMonitor.currentVolume = 0.3;
     }
     else
     {
+        if (![_volMonitor isMonitorState])
+        {
+            [_volMonitor transToMonitorState];
+        }
         [_volMonitor hideMonitor:YES];
+    }
+}
+
+- (void)onPressedShot:(id)sender
+{
+    ////Test code
+    if (_timerButton.timerEnabled)
+    {
+        [_volMonitor transToHoldingState];
+    }
+    ////end of Test code
+}
+
+- (void)onStopTimerPressed:(id)sender
+{
+    if (![_volMonitor isMonitorState])
+    {
+        [_volMonitor transToMonitorState];
     }
 }
 
