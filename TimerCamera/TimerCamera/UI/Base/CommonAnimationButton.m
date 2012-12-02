@@ -30,14 +30,10 @@
 
 - (void)dealloc
 {
-    [_button removeFromSuperview];
-    ReleaseAndNil(_button);
-    [_normalView removeFromSuperview];
-    ReleaseAndNil(_normalView);
-    [_enabledView removeFromSuperview];
-    ReleaseAndNil(_enabledView);
-    [_pressedView removeFromSuperview];
-    ReleaseAndNil(_pressedView);
+    ReleaseAndNilView(_button);
+    ReleaseAndNilView(_normalView);
+    ReleaseAndNilView(_enabledView);
+    ReleaseAndNilView(_pressedView);
     [super dealloc];
 }
 
@@ -148,16 +144,13 @@
 
 - (void)setButtonEnabled:(BOOL)buttonEnabled
 {
-    if (_buttonEnabled != buttonEnabled)
+    if (buttonEnabled)
     {
-        if (buttonEnabled)
-        {
-            [self setCurrentState:@"enabled"];
-        }
-        else
-        {
-            [self setCurrentState:@"normal"];
-        }
+        [self setCurrentState:@"enabled"];
+    }
+    else
+    {
+        [self setCurrentState:@"normal"];
     }
     _buttonEnabled = buttonEnabled;
 }

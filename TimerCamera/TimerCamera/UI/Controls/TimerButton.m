@@ -137,6 +137,17 @@
             [self setCurrentState:@"normal"];
         }
     }
+    else
+    {
+        if ([_currentState isEqualToString:@"pressed"])
+        {
+            [self setCurrentState:@"normal"];
+        }
+        else if([_currentState isEqualToString:@"pressed2"])
+        {
+            [self setCurrentState:@"enabled"];
+        }
+    }
     _buttonEnabled = buttonEnabled;
 }
 

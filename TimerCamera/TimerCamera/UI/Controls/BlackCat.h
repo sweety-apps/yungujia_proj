@@ -7,8 +7,25 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AlphaAnimationView.h"
+#import "UIStateAnimationView.h"
 
-@interface BlackCat : UIStateAnimationView
+@interface BlackCat : UIStateAnimationView <UIStateAnimation>
+{
+    UIButton* _button;
+    UIImageView* _catView;
+    UIImageView* _leftEyeView;
+    UIImageView* _rightEyeView;
+    UIImage* _catCloseEyeImage;
+}
 
+@property (nonatomic,assign,readonly) UIButton* button;
+
+- (id)initWithFrame:(CGRect)frame
+        forCatImage:(UIImage*)cat
+forCatCloseEyeImage:(UIImage*)cc
+        forEyeImage:(UIImage*)eye;
+
++ (BlackCat*)catWithCatImage:(UIImage*)cat
+         forCatCloseEyeImage:(UIImage*)cc
+                 forEyeImage:(UIImage*)eye;
 @end

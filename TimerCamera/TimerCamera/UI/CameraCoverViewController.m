@@ -317,21 +317,21 @@
 
 - (void)createSubViews
 {
-    _animationCatButton = [CommonAnimationButton
-                           buttonWithPressedImageSizeforNormalImage1:[UIImage imageNamed:@"/Resource/Picture/main/animation_cat_bg_with_eye"]
-                           forNormalImage2:[UIImage imageNamed:@"/Resource/Picture/main/animation_cat_bg_with_eye"]
-                           forPressedImage:[UIImage imageNamed:@"/Resource/Picture/main/animation_cat_bg_no_eye"]
-                           forEnabledImage1:[UIImage imageNamed:@"/Resource/Picture/main/animation_cat_bg_no_eye"]
-                           forEnabledImage2:[UIImage imageNamed:@"/Resource/Picture/main/animation_cat_bg_no_eye"]];
+    _animationCatButton = [BlackCat
+                           catWithCatImage:[UIImage imageNamed:@"/Resource/Picture/main/animation_cat_bg_with_eye"]
+                           forCatCloseEyeImage:[UIImage imageNamed:@"/Resource/Picture/main/animation_cat_bg_no_eye"]
+                           forEyeImage:[UIImage imageNamed:@"/Resource/Picture/main/eye"]];
     [self.view addSubview:_animationCatButton];
     
     
-    _shotButton = [CommonAnimationButton
-                   buttonWithPressedImageSizeforNormalImage1:[UIImage imageNamed:@"/Resource/Picture/main/shot_btn_normal1"]
-                   forNormalImage2:[UIImage imageNamed:@"/Resource/Picture/main/shot_btn_normal2"]
-                   forPressedImage:[UIImage imageNamed:@"/Resource/Picture/main/shot_btn_pressed"]
+    _shotButton = [ShotButton
+                   buttonWithPressedImageSizeforNormalImage1:[UIImage imageNamed:@"/Resource/Picture/main/shot_btn_empty_normal1"]
+                   forNormalImage2:[UIImage imageNamed:@"/Resource/Picture/main/shot_btn_empty_normal2"]
+                   forPressedImage:[UIImage imageNamed:@"/Resource/Picture/main/shot_btn_empty_pressed"]
                    forEnabledImage1:nil
-                   forEnabledImage2:nil];
+                   forEnabledImage2:nil
+                   forIcon:nil];
+    [_shotButton setLabelString:@"60"];
     [self.view addSubview:_shotButton];
     
     

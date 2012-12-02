@@ -11,6 +11,9 @@
 @class ViewController;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
+{
+    BOOL _isEnterBackGround;
+}
 
 @property (strong, nonatomic) UIWindow *window;
 

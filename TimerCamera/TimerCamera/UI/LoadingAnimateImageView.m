@@ -30,8 +30,7 @@
 - (void)setPreloadView:(UIImageView *)preloadView
 {
     [preloadView retain];
-    [_preloadView removeFromSuperview];
-    [_preloadView release];
+    ReleaseAndNilView(_preloadView);
     _preloadView = preloadView;
     [self addSubview:_preloadView];
 }

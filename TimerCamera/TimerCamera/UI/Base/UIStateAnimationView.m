@@ -115,6 +115,7 @@
 - (void)setCurrentState:(NSString *)currentState
 {
     BOOL needRemoveView = YES;
+    int viewIndex = -1;
     UIStateAnimationViewStateObject* oldO = [_stateDict objectForKey:_currentState];
     UIStateAnimationViewStateObject* newO = [_stateDict objectForKey:currentState];
     
@@ -132,6 +133,10 @@
         }
         if (needRemoveView)
         {
+            if (o.view)
+            {
+                viewIndex = [[[o.view superview] subviews] indexOfObject:o.view];
+            }
             [o.view removeFromSuperview];
         }
     }
@@ -141,7 +146,14 @@
     {
         if (needRemoveView)
         {
-            [self addSubview:o.view];
+            if (viewIndex >= 0)
+            {
+                [self insertSubview:o.view atIndex:viewIndex];
+            }
+            else
+            {
+                [self addSubview:o.view];
+            }
         }
         
         [currentState retain];

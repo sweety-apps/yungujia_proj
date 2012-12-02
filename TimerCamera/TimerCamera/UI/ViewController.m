@@ -249,8 +249,7 @@
 
 - (void)onFinishedLoadingAnimation:(LoadingAnimateImageView*)view
 {
-    [_laiv removeFromSuperview];
-    ReleaseAndNil(_laiv);
+    ReleaseAndNilView(_laiv);
     
     //[_coverController showSubViews:YES];
 }

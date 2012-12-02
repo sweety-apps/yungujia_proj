@@ -10,18 +10,20 @@
 #import "CommonAnimationButton.h"
 #import "TimerButton.h"
 #import "VolumeMonitor.h"
+#import "ShotButton.h"
+#import "BlackCat.h"
 
 @interface CameraCoverViewController : UIViewController
 {
     //Animation Views
-    CommonAnimationButton* _shotButton;
+    ShotButton* _shotButton;
     TimerButton* _timerButton;
     VolumeMonitor* _volMonitor;
     CommonAnimationButton* _configButton;
     CommonAnimationButton* _torchButton;
     CommonAnimationButton* _HDRButton;
     CommonAnimationButton* _frontButton;
-    CommonAnimationButton* _animationCatButton;
+    BlackCat* _animationCatButton;
 }
 
 - (void)showSubViews:(BOOL)animated delayed:(float)seconds;
