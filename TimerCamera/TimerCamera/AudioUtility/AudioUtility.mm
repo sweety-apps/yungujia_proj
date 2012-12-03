@@ -16,7 +16,7 @@
 #define TempRecordFile @"tmp.caf"
 #define DefaultDelegate 0x1
 #define SafeDelete(x) if(x) { delete (x); (x) = NULL; }
-#define UpdateTimerInterval 0.3 
+#define UpdateTimerInterval 0.1 
 
 #define kMinDBvalue (-80.0)
 #define kMaxDBvalue (0.f)

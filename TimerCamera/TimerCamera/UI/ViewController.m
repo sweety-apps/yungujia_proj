@@ -231,6 +231,8 @@
     rect.size = self.view.frame.size;
     _coverController.view.frame = rect;
     [_coverController hideSubViews:NO];
+    
+    [_coverController resetStatus];
 }
 
 - (void)ShowLoadingAnimation

@@ -7,6 +7,7 @@
 //
 
 #import "CameraCoverViewController.h"
+#import "CameraOptions.h"
 
 @interface CameraCoverViewController ()
 
@@ -315,6 +316,8 @@
     }
 }
 
+#pragma mark Views' Lifecycle
+
 - (void)createSubViews
 {
     _animationCatButton = [BlackCat
@@ -331,7 +334,7 @@
                    forEnabledImage1:nil
                    forEnabledImage2:nil
                    forIcon:nil];
-    [_shotButton setLabelString:@"60"];
+    [_shotButton setLabelString:@""];
     [self.view addSubview:_shotButton];
     
     
@@ -399,7 +402,7 @@
                                       backGroundImage:[UIImage imageNamed:@"/Resource/Picture/main/volume_bg"]
                                           volumeImage:[UIImage imageNamed:@"/Resource/Picture/main/fist"]
                                      reachedPeakImage:[UIImage imageNamed:@"/Resource/Picture/main/vol_point_punched"]];
-    _volMonitor.minPeakVolume = 0.0;
+    _volMonitor.minPeakVolume = 0.2;
     _volMonitor.peakVolume = 0.7;
     
     [self.view addSubview:_volMonitor];
@@ -413,9 +416,28 @@
                            action:@selector(onPressedShot:)
                  forControlEvents:UIControlEventTouchUpInside];
     
+    [_configButton.button addTarget:self
+                            action:@selector(onConfigPressed:)
+                  forControlEvents:UIControlEventTouchUpInside];
+    
+    [_HDRButton.button addTarget:self
+                            action:@selector(onHDRPressed:)
+                  forControlEvents:UIControlEventTouchUpInside];
+    
+    [_frontButton.button addTarget:self
+                            action:@selector(onFrontPressed:)
+                  forControlEvents:UIControlEventTouchUpInside];
+    
+    [_torchButton.button addTarget:self
+                            action:@selector(onTorchPressed:)
+                  forControlEvents:UIControlEventTouchUpInside];
+    
     [_volMonitor.stopButton.button addTarget:self
                                       action:@selector(onStopTimerPressed:)
                             forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    [self resetStatus];
     
     [self hideSubViews:NO];
 }
@@ -440,6 +462,21 @@
     _volMonitor = nil;
 }
 
+- (void)resetStatus
+{
+    [CameraOptions sharedInstance].light = AVCaptureTorchModeOff;
+    [_torchButton setButtonEnabled:NO];
+    
+    if ([CameraOptions sharedInstance].hdr == AVCaptureWhiteBalanceModeContinuousAutoWhiteBalance)
+    {
+        [_HDRButton setButtonEnabled:YES];
+    }
+    else
+    {
+        [_HDRButton setButtonEnabled:NO];
+    }
+}
+
 #pragma mark Event Handlers
 
 - (void)onPressedTimer:(id)sender
@@ -448,7 +485,9 @@
     {
         //[_volMonitor hideMonitor:NO];
         [_volMonitor showMonitor:YES];
-        _volMonitor.currentVolume = 0.3;
+        [[AudioUtility sharedInstance] setVolumeDetectingDelegate:self];
+        [[AudioUtility sharedInstance] startDetectingVolume:1.0];
+        _volMonitor.currentVolume = 0.25;
     }
     else
     {
@@ -457,16 +496,14 @@
             [_volMonitor transToMonitorState];
         }
         [_volMonitor hideMonitor:YES];
+        [[AudioUtility sharedInstance] setVolumeDetectingDelegate:nil];
+        _volMonitor.currentVolume = 0.25;
     }
 }
 
 - (void)onPressedShot:(id)sender
 {
     ////Test code
-    if (_timerButton.timerEnabled)
-    {
-        [_volMonitor transToHoldingState];
-    }
     ////end of Test code
 }
 
@@ -475,7 +512,142 @@
     if (![_volMonitor isMonitorState])
     {
         [_volMonitor transToMonitorState];
+        [[AudioUtility sharedInstance] setVolumeDetectingDelegate:self];
+        [[AudioUtility sharedInstance] startDetectingVolume:1.0];
+        _volMonitor.currentVolume = 0.25;
     }
+}
+
+- (void)onTorchPressed:(id)sender
+{
+    if ([CameraOptions sharedInstance].light == AVCaptureTorchModeOn)
+    {
+        [CameraOptions sharedInstance].light = AVCaptureTorchModeOff;
+        [_torchButton setButtonEnabled:NO];
+    }
+    else
+    {
+        [CameraOptions sharedInstance].light = AVCaptureTorchModeOn;
+        [_torchButton setButtonEnabled:YES];
+    }
+}
+
+- (void)onHDRPressed:(id)sender
+{
+    if ([CameraOptions sharedInstance].hdr == AVCaptureWhiteBalanceModeContinuousAutoWhiteBalance)
+    {
+        [CameraOptions sharedInstance].hdr = AVCaptureWhiteBalanceModeLocked;
+        [_HDRButton setButtonEnabled:NO];
+    }
+    else
+    {
+        [CameraOptions sharedInstance].hdr = AVCaptureWhiteBalanceModeContinuousAutoWhiteBalance;
+        [_HDRButton setButtonEnabled:YES];
+    }
+}
+
+- (void)onFrontPressed:(id)sender
+{
+    if (_isFlipingCamera)
+    {
+        return;
+    }
+    if ([CameraOptions sharedInstance].imagePicker.cameraDevice == UIImagePickerControllerCameraDeviceFront)
+    {
+        [CameraOptions sharedInstance].imagePicker.cameraDevice = UIImagePickerControllerCameraDeviceRear;
+        [self doCameraFilpAnimation];
+    }
+    else
+    {
+        [CameraOptions sharedInstance].imagePicker.cameraDevice = UIImagePickerControllerCameraDeviceFront;
+        [self doCameraFilpAnimation];
+    }
+}
+
+- (void)onConfigPressed:(id)sender
+{
+    
+}
+
+
+#pragma mark - AudioUtilityVolumeDetectDelegate
+
+- (void)onDetected:(float)currentVolume
+        peakVolume:(float)peakVolume
+        higherThan:(float)detectVolume
+       forInstance:(AudioUtility*)util
+{
+    //NSLog(@"[PEAK] Reached Peak!");
+}
+
+- (void)onUpdate:(float)currentVolume
+      peakVolume:(float)peakVolume
+     forInstance:(AudioUtility*)util
+{
+#define LOUDER_SCALE (1.0)
+    NSLog(@"DetectCurrentVol = %.2f",currentVolume);
+    currentVolume *= LOUDER_SCALE;
+    [_volMonitor setCurrentVolume:currentVolume];
+    if ([_volMonitor isMonitorState] && currentVolume >= _volMonitor.peakVolume)
+    {
+        [_volMonitor transToHoldingState];
+        [[AudioUtility sharedInstance] stopDectingVolume];
+    }
+    //[[AudioUtility sharedInstance] ];
+}
+
+
+#pragma mark Other
+
+- (void)doCameraFilpAnimation
+{
+    //return;
+    _isFlipingCamera = YES;
+    CGRect rect = [CameraOptions sharedInstance].imagePicker.view.frame;
+    rect.origin = CGPointZero;
+    UIImageView* coverView = [[[UIImageView alloc] initWithFrame:rect] autorelease];
+    /*
+    coverView.backgroundColor = [UIColor colorWithRed:(97.0/255.0)
+                                                green:(61.0/255.0)
+                                                 blue:(30.0/255.0)
+                                                alpha:1.0];
+     */
+    [[CameraOptions sharedInstance].imagePicker.view addSubview:coverView];
+    coverView.clipsToBounds = YES;
+    coverView.image = [UIImage imageNamed:@"Default"];
+    [UIView transitionWithView:[CameraOptions sharedInstance].imagePicker.view
+                      duration:1.1
+                       options:UIViewAnimationOptionTransitionFlipFromRight|UIViewAnimationOptionShowHideTransitionViews
+                    animations:^(){
+                        //[CameraOptions sharedInstance].imagePicker.view.alpha = 0.0;
+                        //[CameraOptions sharedInstance].imagePicker.view.hidden = NO;
+                        //coverView.alpha = 0.8;
+                    }
+                    completion:^(BOOL finished){
+                        [UIView animateWithDuration:0.4
+                                        animations:^(){
+                         
+                                             [CameraOptions sharedInstance].imagePicker.view.alpha = 1.0;
+                                             //[CameraOptions sharedInstance].imagePicker.view.hidden = NO;
+                                            coverView.alpha = 0.0;
+                         
+                                         }
+                                         completion:^(BOOL finished){
+                                             [coverView removeFromSuperview];
+                                             _isFlipingCamera = NO;
+                                         }];
+                         
+                        
+                    }];
+    /*
+    [UIView animateWithDuration:0.8
+                          delay:0.0
+                        options:UIViewAnimationOptionTransitionFlipFromRight
+                     animations:^(){[CameraOptions sharedInstance].imagePicker.view.alpha = 0.6;}
+                     completion:^(BOOL finished){
+                         [CameraOptions sharedInstance].imagePicker.view.alpha = 1.0;
+                     }];
+    */
 }
 
 @end

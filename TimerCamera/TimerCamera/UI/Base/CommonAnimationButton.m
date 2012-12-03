@@ -53,8 +53,8 @@
 
 - (void)onReleased:(id)sender
 {
-    self.buttonEnabled = !_buttonEnabled;
-    if (_buttonEnabled)
+    //self.buttonEnabled = !_buttonEnabled;
+    if (!_buttonEnabled)
     {
         _normalView.disableAnimation = YES;
     }
@@ -62,6 +62,7 @@
     {
         _enabledView.disableAnimation = YES;
     }
+    self.buttonEnabled = _buttonEnabled;
 }
 
 - (void)onRestored:(id)sender
