@@ -13,8 +13,9 @@
 #import "ShotButton.h"
 #import "BlackCat.h"
 #import "AudioUtility.h"
+#import "BaseCameraLogicViewController.h"
 
-@interface CameraCoverViewController : UIViewController <AudioUtilityPlaybackDelegate, AudioUtilityVolumeDetectDelegate>
+@interface CameraCoverViewController : BaseCameraLogicViewController <AudioUtilityPlaybackDelegate, AudioUtilityVolumeDetectDelegate>
 {
     //Animation Views
     ShotButton* _shotButton;

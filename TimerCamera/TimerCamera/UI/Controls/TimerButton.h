@@ -15,7 +15,6 @@
     UIImage* _pressedImage1;
     UIImage* _pressedImage2;
     UIImage* _normalImage1;
-    BOOL _timerEnabled;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -33,6 +32,6 @@
                                          forEnabledImage1:(UIImage*)ei1
                                          forEnabledImage2:(UIImage*)ei2;
 
-@property (nonatomic,assign,readonly) BOOL timerEnabled;
+- (void)setButtonEnabled:(BOOL)buttonEnabled withAnimation:(BOOL)animated;
 
 @end

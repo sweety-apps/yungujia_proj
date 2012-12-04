@@ -14,6 +14,7 @@
 
 - (void)onInterval:(float)leftTimeInterval forTimer:(ShotTimer*)timer;
 - (void)onFinishedTimer:(ShotTimer*)timer;
+- (void)onCancelledTimer:(ShotTimer*)timer;
 
 @end
 
@@ -34,6 +35,8 @@
 - (void)restartTimer;
 - (void)restartTimerWithConfigInterval;
 - (void)restartTimerWithInterval:(float)timerInterval;
+
+- (void)cancelTimer;
 
 + (ShotTimer*)timerStart:(float)timerInterval forDelegate:(id<ShotTimerDelegate>)delegate;
 + (ShotTimer*)timerStartWithConfigIntervalForDelegate:(id<ShotTimerDelegate>)delegate;

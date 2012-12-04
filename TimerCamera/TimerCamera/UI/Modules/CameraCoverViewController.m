@@ -28,7 +28,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    self.view.backgroundColor = [UIColor clearColor];
+    //self.view.backgroundColor = [UIColor clearColor];
     [self createSubViews];
 }
 
@@ -481,36 +481,54 @@
 
 - (void)onPressedTimer:(id)sender
 {
-    if (_timerButton.timerEnabled)
+    if (!_timerButton.buttonEnabled)
     {
         //[_volMonitor hideMonitor:NO];
         [_volMonitor showMonitor:YES];
         [[AudioUtility sharedInstance] setVolumeDetectingDelegate:self];
         [[AudioUtility sharedInstance] startDetectingVolume:1.0];
         _volMonitor.currentVolume = 0.25;
+        [_timerButton setButtonEnabled:YES withAnimation:YES];
     }
     else
     {
-        if (![_volMonitor isMonitorState])
+        if ([_volMonitor isMonitorState] || [_volMonitor isHoldingState])
         {
-            [_volMonitor transToMonitorState];
+            if (![_volMonitor isMonitorState])
+            {
+                [_volMonitor transToMonitorState];
+            }
+            [self cancelTimer];
+            [_volMonitor hideMonitor:YES];
+            [[AudioUtility sharedInstance] setVolumeDetectingDelegate:nil];
+            [[AudioUtility sharedInstance] stopDectingVolume];
+            _volMonitor.currentVolume = 0.25;
+            [_timerButton setButtonEnabled:NO withAnimation:YES];
         }
-        [_volMonitor hideMonitor:YES];
-        [[AudioUtility sharedInstance] setVolumeDetectingDelegate:nil];
-        _volMonitor.currentVolume = 0.25;
     }
 }
 
 - (void)onPressedShot:(id)sender
 {
     ////Test code
+    //[self onUpdate:1.0 peakVolume:1.0 forInstance:[AudioUtility sharedInstance]];
     ////end of Test code
+    
+    if (!_timerButton.buttonEnabled)
+    {
+        [self takePicture];
+    }
+    else
+    {
+        [self onUpdate:1.0 peakVolume:1.0 forInstance:[AudioUtility sharedInstance]];
+    }
 }
 
 - (void)onStopTimerPressed:(id)sender
 {
     if (![_volMonitor isMonitorState])
     {
+        [self cancelTimer];
         [_volMonitor transToMonitorState];
         [[AudioUtility sharedInstance] setVolumeDetectingDelegate:self];
         [[AudioUtility sharedInstance] startDetectingVolume:1.0];
@@ -592,6 +610,15 @@
     {
         [_volMonitor transToHoldingState];
         [[AudioUtility sharedInstance] stopDectingVolume];
+        
+        {
+            //notify sound
+            NSString* filePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"/Resource/Sound/sms-received4.caf"];
+            [[AudioUtility sharedInstance] playFile:filePath withDelegate:self];
+        }
+        
+        [self performSelector:@selector(startTimer) withObject:nil afterDelay:2.0];
+        //[self startTimer];
     }
     //[[AudioUtility sharedInstance] ];
 }
@@ -648,6 +675,26 @@
                          [CameraOptions sharedInstance].imagePicker.view.alpha = 1.0;
                      }];
     */
+}
+
+#pragma mark - ShotTimerDelegate
+
+- (void)onInterval:(float)leftTimeInterval forTimer:(ShotTimer*)timer
+{
+    [_shotButton setLabelString:[NSString stringWithFormat:@"%i",(int)leftTimeInterval]];
+    [super onInterval:leftTimeInterval forTimer:timer];
+}
+
+- (void)onFinishedTimer:(ShotTimer*)timer
+{
+    [super onFinishedTimer:timer];
+    [self takePicture];
+}
+
+- (void)onCancelledTimer:(ShotTimer*)timer
+{
+    [_shotButton setLabelString:@""];
+    [super onCancelledTimer:timer];
 }
 
 @end

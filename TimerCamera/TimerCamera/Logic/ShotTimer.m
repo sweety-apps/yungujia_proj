@@ -42,7 +42,7 @@
         {
             [_delegate onFinishedTimer:self];
         }
-        [self autorelease];
+        //[self autorelease];
     }
     _leftInterval -= 1.0;
 }
@@ -75,10 +75,22 @@
     [self restartTimer];
 }
 
+- (void)cancelTimer
+{
+    if (_timer)
+    {
+        [_timer invalidate];
+        _timer = nil;
+        if(_delegate && [_delegate respondsToSelector:@selector(onCancelledTimer:)])
+        {
+            [_delegate onCancelledTimer:self];
+        }
+    }
+}
+
 -(void)dealloc
 {
-    [_timer invalidate];
-    _timer = nil;
+    [self cancelTimer];
     [super dealloc];
 }
 

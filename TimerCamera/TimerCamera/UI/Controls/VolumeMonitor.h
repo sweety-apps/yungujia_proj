@@ -54,5 +54,6 @@
 - (void)transToMonitorState;
 - (void)transToHoldingState;
 - (BOOL)isMonitorState;
+- (BOOL)isHoldingState;
 
 @end

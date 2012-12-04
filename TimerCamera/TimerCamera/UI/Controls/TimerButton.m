@@ -10,8 +10,6 @@
 
 @implementation TimerButton
 
-@synthesize timerEnabled = _timerEnabled;
-
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -54,16 +52,15 @@
 {
     if (!_buttonEnabled)
     {
-        _timerEnabled = YES;
         _normalView.disableAnimation = YES;
-        [self setCurrentState:@"enableAnimate"];
+        //[self setCurrentState:@"enableAnimate"];
     }
     else
     {
-        _timerEnabled = NO;
         _enabledView.disableAnimation = YES;
-        [self setCurrentState:@"disableAnimate"];
+        //[self setCurrentState:@"disableAnimate"];
     }
+    self.buttonEnabled = _buttonEnabled;
 }
 
 - (void)onRestored:(id)sender
@@ -124,17 +121,34 @@
 
 - (void)setButtonEnabled:(BOOL)buttonEnabled
 {
+    [self setButtonEnabled:buttonEnabled withAnimation:NO];
+}
+
+- (void)setButtonEnabled:(BOOL)buttonEnabled withAnimation:(BOOL)animated
+{
     if (_buttonEnabled != buttonEnabled)
     {
         if (buttonEnabled)
         {
-            _timerEnabled = YES;
-            [self setCurrentState:@"enabled"];
+            if (animated)
+            {
+                [self setCurrentState:@"enableAnimate"];
+            }
+            else
+            {
+                [self setCurrentState:@"enabled"];
+            }
         }
         else
         {
-            _timerEnabled = NO;
-            [self setCurrentState:@"normal"];
+            if (animated)
+            {
+                [self setCurrentState:@"disableAnimate"];
+            }
+            else
+            {
+                [self setCurrentState:@"normal"];
+            }
         }
     }
     else
@@ -292,7 +306,7 @@
                  endBlock:^(){
                      _pressedView.image = _pressedImage1;
                      _pressedView2.image = _pressedImage2;
-                     self.buttonEnabled = YES;
+                     [self setCurrentState:@"enabled"];
                  }];
 }
 
@@ -305,7 +319,7 @@
                  endBlock:^(){
                      _pressedView.image = _pressedImage1;
                      _pressedView2.image = _pressedImage2;
-                     self.buttonEnabled = NO;
+                     [self setCurrentState:@"normal"];
                  }];
 }
 

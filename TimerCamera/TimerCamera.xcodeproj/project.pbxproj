@@ -28,11 +28,12 @@
 		BEB8E44C1646D25700DC5800 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB8E4491646D25700DC5800 /* Icon@2x.png */; };
 		BEB8E44F1646D36800DC5800 /* Resource in Resources */ = {isa = PBXBuildFile; fileRef = BEB8E44E1646D36800DC5800 /* Resource */; };
 		BEB8E45A1646DF9800DC5800 /* LoadingAnimateImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB8E4591646DF9800DC5800 /* LoadingAnimateImageView.m */; };
+		BEE3D9A6166DD5E2001AE5E9 /* CameraCoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE3D9A5166DD5E2001AE5E9 /* CameraCoverViewController.m */; };
+		BEE3D9A9166DD622001AE5E9 /* BaseCameraLogicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE3D9A8166DD622001AE5E9 /* BaseCameraLogicViewController.m */; };
 		BEF975B2166A02B800B6C7AC /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEF975B1166A02B800B6C7AC /* Default-568h@2x.png */; };
 		F30053A6165B27F80091CF85 /* UIStateAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = F30053A5165B27F80091CF85 /* UIStateAnimationView.m */; };
 		F30053A9165B2F4B0091CF85 /* AlphaAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = F30053A8165B2F4A0091CF85 /* AlphaAnimationView.m */; };
 		F30053AC165B2FDB0091CF85 /* CommonAnimationButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F30053AB165B2FDB0091CF85 /* CommonAnimationButton.m */; };
-		F30053C916608FEF0091CF85 /* CameraCoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F30053C816608FE60091CF85 /* CameraCoverViewController.m */; };
 		F30053CD1660901C0091CF85 /* ConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F30053CC166090130091CF85 /* ConfigViewController.m */; };
 		F301347915FDDD1D00480CD7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F301347815FDDD1D00480CD7 /* AVFoundation.framework */; };
 		F376D53A1668AD6600CEEEE1 /* SliderTouchCoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = F376D5391668AD6600CEEEE1 /* SliderTouchCoverView.m */; };
@@ -87,6 +88,10 @@
 		BEB8E44E1646D36800DC5800 /* Resource */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Resource; sourceTree = "<group>"; };
 		BEB8E4581646DF9800DC5800 /* LoadingAnimateImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingAnimateImageView.h; sourceTree = "<group>"; };
 		BEB8E4591646DF9800DC5800 /* LoadingAnimateImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingAnimateImageView.m; sourceTree = "<group>"; };
+		BEE3D9A4166DD5E2001AE5E9 /* CameraCoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraCoverViewController.h; sourceTree = "<group>"; };
+		BEE3D9A5166DD5E2001AE5E9 /* CameraCoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraCoverViewController.m; sourceTree = "<group>"; };
+		BEE3D9A7166DD622001AE5E9 /* BaseCameraLogicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseCameraLogicViewController.h; sourceTree = "<group>"; };
+		BEE3D9A8166DD622001AE5E9 /* BaseCameraLogicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseCameraLogicViewController.m; sourceTree = "<group>"; };
 		BEF975B1166A02B800B6C7AC /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		F30053A4165B27F80091CF85 /* UIStateAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIStateAnimationView.h; sourceTree = "<group>"; };
 		F30053A5165B27F80091CF85 /* UIStateAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIStateAnimationView.m; sourceTree = "<group>"; };
@@ -94,8 +99,6 @@
 		F30053A8165B2F4A0091CF85 /* AlphaAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlphaAnimationView.m; sourceTree = "<group>"; };
 		F30053AA165B2FDA0091CF85 /* CommonAnimationButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonAnimationButton.h; sourceTree = "<group>"; };
 		F30053AB165B2FDB0091CF85 /* CommonAnimationButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonAnimationButton.m; sourceTree = "<group>"; };
-		F30053C716608FE10091CF85 /* CameraCoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraCoverViewController.h; sourceTree = "<group>"; };
-		F30053C816608FE60091CF85 /* CameraCoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraCoverViewController.m; sourceTree = "<group>"; };
 		F30053CB166090100091CF85 /* ConfigViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigViewController.h; sourceTree = "<group>"; };
 		F30053CC166090130091CF85 /* ConfigViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigViewController.m; sourceTree = "<group>"; };
 		F301347815FDDD1D00480CD7 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -233,6 +236,7 @@
 		BEB8E4571646DF0A00DC5800 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				BEE3D9A2166DD5C0001AE5E9 /* Modules */,
 				F3DAC827166467BD00950E18 /* Controls */,
 				F30053A2165B27CB0091CF85 /* Base */,
 				F39891281648B91B006E0703 /* ViewController_iPad.h */,
@@ -245,14 +249,23 @@
 				F398912F1648B91B006E0703 /* ViewController.m */,
 				BEB8E4581646DF9800DC5800 /* LoadingAnimateImageView.h */,
 				BEB8E4591646DF9800DC5800 /* LoadingAnimateImageView.m */,
-				F30053C716608FE10091CF85 /* CameraCoverViewController.h */,
-				F30053C816608FE60091CF85 /* CameraCoverViewController.m */,
 				F30053CB166090100091CF85 /* ConfigViewController.h */,
 				F30053CC166090130091CF85 /* ConfigViewController.m */,
 				F3DAC8111660918B00950E18 /* MoreViewController.h */,
 				F3DAC8121660918B00950E18 /* MoreViewController.m */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		BEE3D9A2166DD5C0001AE5E9 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				BEE3D9A4166DD5E2001AE5E9 /* CameraCoverViewController.h */,
+				BEE3D9A5166DD5E2001AE5E9 /* CameraCoverViewController.m */,
+				BEE3D9A7166DD622001AE5E9 /* BaseCameraLogicViewController.h */,
+				BEE3D9A8166DD622001AE5E9 /* BaseCameraLogicViewController.m */,
+			);
+			path = Modules;
 			sourceTree = "<group>";
 		};
 		F30053A2165B27CB0091CF85 /* Base */ = {
@@ -385,7 +398,6 @@
 				F30053A6165B27F80091CF85 /* UIStateAnimationView.m in Sources */,
 				F30053A9165B2F4B0091CF85 /* AlphaAnimationView.m in Sources */,
 				F30053AC165B2FDB0091CF85 /* CommonAnimationButton.m in Sources */,
-				F30053C916608FEF0091CF85 /* CameraCoverViewController.m in Sources */,
 				F30053CD1660901C0091CF85 /* ConfigViewController.m in Sources */,
 				F3DAC8131660918B00950E18 /* MoreViewController.m in Sources */,
 				F3DAC82B1664680800950E18 /* TimerButton.m in Sources */,
@@ -393,6 +405,8 @@
 				F3DAC831166468A900950E18 /* BlackCat.m in Sources */,
 				F3DAC8341664725D00950E18 /* ShotButton.m in Sources */,
 				F376D53A1668AD6600CEEEE1 /* SliderTouchCoverView.m in Sources */,
+				BEE3D9A6166DD5E2001AE5E9 /* CameraCoverViewController.m in Sources */,
+				BEE3D9A9166DD622001AE5E9 /* BaseCameraLogicViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

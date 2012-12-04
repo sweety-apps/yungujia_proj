@@ -171,6 +171,11 @@
     return [_currentState isEqualToString:@"monitor"];
 }
 
+- (BOOL)isHoldingState
+{
+    return [_currentState isEqualToString:@"holding"];
+}
+
 - (void)setCurrentVolume:(float)currentVolume
 {
     _currentVolume = currentVolume < 0.0 ? 0.0 : (currentVolume > 1.0 ? 1.0 : currentVolume);

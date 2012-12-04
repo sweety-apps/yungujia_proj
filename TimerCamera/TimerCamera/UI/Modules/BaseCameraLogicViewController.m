@@ -1,27 +1,19 @@
 //
-//  ViewController.m
+//  BaseCameraLogicViewController.m
 //  TimerCamera
 //
-//  Created by lijinxin on 12-9-2.
-//  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
+//  Created by lijinxin on 12-12-4.
+//
 //
 
-#import "ViewController.h"
+#import "BaseCameraLogicViewController.h"
+#import "Configure.h"
 
-@interface ViewController ()
+@interface BaseCameraLogicViewController ()
 
 @end
 
-@implementation ViewController
-
-@synthesize coverController = _coverController;
-@synthesize picutureView = _picutureView;
-@synthesize shotBtn = _shotBtn;
-@synthesize flashBtn = _flashBtn;
-@synthesize positionBtn = _positionBtn;
-@synthesize optionBtn = _optionBtn;
-@synthesize bottomBar = _bottomBar;
-@synthesize tipLabel = _tipLabel;
+@implementation BaseCameraLogicViewController
 
 @synthesize tapGesture = _tapGesture;
 @synthesize pinchGesture = _pinchGesture;
@@ -30,8 +22,8 @@
 
 @synthesize currentScale = _currentScale;
 
-@synthesize peakView = _peakView;
-@synthesize volView = _volView;
+@synthesize timer = _timer;
+
 
 #pragma mark - UIViewController
 
@@ -39,36 +31,47 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    if (_coverController == nil)
+    self.view.backgroundColor = kBGColor();
+    
+    if (_tapGesture)
     {
-        _coverController = [[CameraCoverViewController alloc] init];
+        [_tapGesture retain];
+    }
+    else
+    {
+        _tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
+        _tapGesture.delegate = self;
     }
     
-    _picutureView.hidden = YES;
+    if (_pinchGesture)
+    {
+        [_pinchGesture retain];
+    }
+    else
+    {
+        _pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinchGesture:)];
+        _pinchGesture.delegate = self;
+    }
     
     self.imageSaveQueue = [NSMutableArray array];
     
-    //[CameraOptions sharedInstance].imagePicker.delegate = self;
-    //[self.view addSubview:[CameraOptions sharedInstance].imagePicker.view];
+    [CameraOptions sharedInstance].imagePicker.delegate = self;
+    [self.view addSubview:[CameraOptions sharedInstance].imagePicker.view];
     //[CameraOptions sharedInstance].imagePicker.cameraOverlayView = _containerView;
-    [self.view addSubview:_coverController.view];
-    //[_coverController.view addGestureRecognizer:_tapGesture];
-    //[_coverController.view addGestureRecognizer:_pinchGesture];
-    //_tapGesture.cancelsTouchesInView = NO;
-    //[CameraOptions sharedInstance].imagePicker.view.frame = self.view.frame;
+    [self.view addGestureRecognizer:_tapGesture];
+    [self.view addGestureRecognizer:_pinchGesture];
+    _tapGesture.cancelsTouchesInView = NO;
+    [CameraOptions sharedInstance].imagePicker.view.frame = self.view.frame;
     
     _lastScale = 1.0;
     _currentScale = 1.0;
-    
-    _tipLabel.text = @"";
-    
-    //[NSTimer scheduledTimerWithTimeInterval:0.35 target:self selector:@selector(detectCameraSize) userInfo:nil repeats:YES];
 }
 
 - (void)dealloc
 {
-    [_coverController.view removeFromSuperview];
-    ReleaseAndNil(_coverController);
+    ReleaseAndNilView(_picturePreview);
+    ReleaseAndNil(_tapGesture);
+    ReleaseAndNil(_pinchGesture);
     
     self.imageSaveQueue = nil;
     [super dealloc];
@@ -78,8 +81,9 @@
 {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
-    [_coverController.view removeFromSuperview];
-    ReleaseAndNil(_coverController);
+    ReleaseAndNilView(_picturePreview);
+    ReleaseAndNil(_tapGesture);
+    ReleaseAndNil(_pinchGesture);
     
     self.imageSaveQueue = nil;
 }
@@ -99,6 +103,38 @@
     NSLog(@"CameraSize = ( %f , %f , %f , %f , %f , %f )",af.a,af.b,af.c,af.d,af.tx,af.ty);
 }
 
+- (void)showPreview:(UIImage*)image
+{
+    CGRect rect = self.view.frame;
+    rect.origin = CGPointZero;
+    _picturePreview = [[UIImageView alloc] initWithImage:image];
+    _picturePreview.userInteractionEnabled = YES;
+    //_picturePreview.frame = CGRectZero;
+    rect.origin.x = rect.size.width;
+    _picturePreview.frame = rect;
+    rect.origin.x = 0;
+    _previewTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hidePreview)];
+    [_picturePreview addGestureRecognizer:_previewTap];
+    
+    [self.view addSubview:_picturePreview];
+    
+    [UIView animateWithDuration:0.5 animations:^(){_picturePreview.frame = rect;}];
+}
+
+- (void)hidePreview
+{
+    if (_picturePreview)
+    {
+        CGRect rect = _picturePreview.frame;
+        rect.origin.x = rect.size.width;
+        [UIView animateWithDuration:0.8 animations:^(){_picturePreview.frame = rect;} completion:^(BOOL finished){
+            [_picturePreview removeGestureRecognizer:_previewTap];
+            ReleaseAndNil(_previewTap);
+            ReleaseAndNilView(_picturePreview);
+        }];
+    }
+}
+
 #pragma mark - UIImagePickerControllerDelegate
 
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
@@ -110,19 +146,19 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo
 {
     NSLog(@"OH YEAH!!! Take a pic, size = (%f,%f)",image.size.width, image.size.height);
-    _picutureView.hidden = NO;
-    _picutureView.image = image;
+    //_picutureView.hidden = NO;
+    //_picutureView.image = image;
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    return;
+    //return;
     
     NSLog(@"OH YEAH!!! Take a Media");
     UIImage *image= [info objectForKey:UIImagePickerControllerOriginalImage];
     NSLog(@"OH YEAH!!! Take a pic, size = (%f,%f)",image.size.width, image.size.height);
-    _picutureView.hidden = NO;
-    _picutureView.image = image;
+    
+    [self showPreview:image];
     
     [self.imageSaveQueue addObject:image];
     UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
@@ -166,94 +202,38 @@
     }
 }
 
-- (IBAction)OnClickedLight:(id)sender
+#pragma mark - Timer Operations
+
+- (void)startTimer:(int)seconds
 {
-    if ([CameraOptions sharedInstance].flash == AVCaptureFlashModeOn)
+    setConfigForInt(kTimerInterval,seconds);
+    if (_timer)
     {
-        [CameraOptions sharedInstance].flash = AVCaptureFlashModeOff;
+        [_timer restartTimerWithConfigInterval];
     }
     else
     {
-        [CameraOptions sharedInstance].flash = AVCaptureFlashModeOn;
+        _timer = [[ShotTimer timerStartWithConfigIntervalForDelegate:self] retain];
     }
 }
 
-- (IBAction)OnClickedTorch:(id)sender
+- (void)startTimer
 {
-    if ([CameraOptions sharedInstance].light == AVCaptureTorchModeOn)
+    int second = getConfigForInt(kTimerInterval);
+    [self startTimer:second];
+}
+
+- (void)cancelTimer
+{
+    if (_timer)
     {
-        [CameraOptions sharedInstance].light = AVCaptureTorchModeOff;
-    }
-    else
-    {
-        [CameraOptions sharedInstance].light = AVCaptureTorchModeOn;
+        [_timer cancelTimer];
     }
 }
 
-- (IBAction)OnClickedHDR:(id)sender
+-(void)takePicture
 {
-    if ([CameraOptions sharedInstance].hdr == AVCaptureWhiteBalanceModeContinuousAutoWhiteBalance)
-    {
-        [CameraOptions sharedInstance].hdr = AVCaptureWhiteBalanceModeLocked;
-    }
-    else
-    {
-        [CameraOptions sharedInstance].hdr = AVCaptureWhiteBalanceModeContinuousAutoWhiteBalance;
-    }
-    
-}
-
-- (IBAction)OnClickedFront:(id)sender
-{
-    if ([CameraOptions sharedInstance].imagePicker.cameraDevice == UIImagePickerControllerCameraDeviceFront)
-    {
-        [CameraOptions sharedInstance].imagePicker.cameraDevice = UIImagePickerControllerCameraDeviceRear;
-    }
-    else
-    {
-        [CameraOptions sharedInstance].imagePicker.cameraDevice = UIImagePickerControllerCameraDeviceFront;
-    }
-}
-
-#pragma mark - Animations
-
-- (void)PrepareLoadingAnimation
-{
-    [self onFinishedLoadingAnimation:_laiv];
-    _laiv = [[LoadingAnimateImageView viewWithDelegate:self image:[UIImage imageNamed:@"/Resource/Picture/camera_open"] forTimeInterval:0.8 preLoadImage:[UIImage imageNamed:@"Default"] forPreloadAnimateInterval:0.2] retain];
-    if (_laiv)
-    {
-        [self.view addSubview:_laiv];
-        [self.view bringSubviewToFront:_laiv];
-    }
-    
-    CGRect rect = CGRectZero;
-    rect.size = self.view.frame.size;
-    _coverController.view.frame = rect;
-    [_coverController hideSubViews:NO];
-    
-    [_coverController resetStatus];
-}
-
-- (void)ShowLoadingAnimation
-{
-    if (_laiv)
-    {
-        [self.view bringSubviewToFront:_laiv];
-        [_laiv startPreloadingAnimation];
-        [_laiv startLoadingAnimation];
-    }
-    
-    [_coverController showSubViews:YES delayed:0.7];
-}
-
-#pragma mark LoadingAnimateImageViewDelegate
-
-- (void)onFinishedLoadingAnimation:(LoadingAnimateImageView*)view
-{
-    ReleaseAndNilView(_laiv);
-    
-    //[_coverController showSubViews:YES];
+    [[CameraOptions sharedInstance].imagePicker takePicture];
 }
 
 #pragma mark - test code
@@ -269,56 +249,6 @@
     //NSString* filePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"/Resource/Sound/long_low_short_high.caf"];
     NSString* filePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"/Resource/Sound/tweet_sent.caf"];
     [[AudioUtility sharedInstance] playFile:filePath withDelegate:self];
-}
-
-- (void)test
-{
-    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-    if ([UIImagePickerController isSourceTypeAvailable:
-         UIImagePickerControllerSourceTypeSavedPhotosAlbum/*UIImagePickerControllerSourceTypePhotoLibrary*/]) {
-        imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;//UIImagePickerControllerSourceTypeSavedPhotosAlbum;//
-        imagePicker.delegate = self;
-        [imagePicker setAllowsEditing:YES];
-        UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:imagePicker];
-        
-        //self.popoverController = popover;
-        [popover presentPopoverFromRect:CGRectMake(0, 0, 300, 300) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-        //[popover release];
-        [imagePicker release];
-    } else {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"Error accessing photo library!" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles:nil];
-        [alert show];
-        [alert release];
-    }
-}
-
-- (IBAction)onTest:(id)sender
-{
-    [self test];
-    return;
-    
-    UIImagePickerController *ipc = [[UIImagePickerController alloc] init];
-    
-    ipc.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;//UIImagePickerControllerSourceTypeCamera;//UIImagePickerControllerSourceTypePhotoLibrary;//
-    
-    ipc.delegate = self;
-    
-    ipc.allowsEditing = YES;
-    
-    ipc.videoQuality = UIImagePickerControllerQualityTypeMedium;
-    
-    ipc.videoMaximumDuration = 30.0f; // 30 seconds
-    
-    ///ipc.mediaTypes = [NSArray arrayWithObject:@"public.movie"];
-    
-    //主要是下边的两能数，@"public.movie", @"public.image"  一个是录像，一个是拍照
-    
-    ipc.mediaTypes = [NSArray arrayWithObjects:@"public.movie", @"public.image", nil];
-    
-    //ipc.showsCameraControls = NO;
-    
-    [self presentModalViewController:ipc animated:NO];
-    
 }
 
 #pragma mark - UIGestureRecognizerDelegate
@@ -343,11 +273,12 @@
 {
     if ([gestureRecognizer isKindOfClass:[UITapGestureRecognizer class]])
     {
-        CGPoint pt = [gestureRecognizer locationInView:_coverController.view];
+        CGPoint pt = [gestureRecognizer locationInView:self.view];
         NSLog(@"Get a touch ( %f , %f )",pt.x,pt.y);
         pt.x /= self.view.frame.size.width;
         pt.y /= self.view.frame.size.height;
         NSLog(@"Location touch ( %f , %f )",pt.x,pt.y);
+        
         [CameraOptions sharedInstance].exporePoint = pt;
         [CameraOptions sharedInstance].focusPoint = pt;
     }
@@ -393,32 +324,19 @@
 
 #pragma mark - AudioUtilityVolumeDetectDelegate
 
-#define kVolLength (145)
-
 - (void)onDetected:(float)currentVolume
         peakVolume:(float)peakVolume
         higherThan:(float)detectVolume
        forInstance:(AudioUtility*)util
 {
-    NSLog(@"[PEAK] Reached Peak!");
-    [[AudioUtility sharedInstance] stopDectingVolume];
-    [self OnClickedShot:nil];
+    
 }
 
 - (void)onUpdate:(float)currentVolume
       peakVolume:(float)peakVolume
      forInstance:(AudioUtility*)util
 {
-    CGRect rct = {0};
-    //vol
-    rct = _volView.frame;
-    rct.size.height = currentVolume * kVolLength;
-    _volView.frame = rct;
     
-    //peak
-    rct = _peakView.frame;
-    rct.origin.y = peakVolume * kVolLength;
-    _peakView.frame = rct;
 }
 
 #pragma mark - AudioUtilityPlaybackDelegate
@@ -443,14 +361,18 @@
     {
         [self OnClickedSound:nil];
     }
-    _tipLabel.text = [NSString stringWithFormat:@"%.0f",leftTimeInterval];
     NSLog(@"[TIMER LEFT] %0.f sec",leftTimeInterval);
 }
 
 - (void)onFinishedTimer:(ShotTimer*)timer
 {
-    _timer = nil;
-    [[CameraOptions sharedInstance].imagePicker takePicture];
+    ReleaseAndNil(_timer);
+    //[self takePicture];
+}
+
+- (void)onCancelledTimer:(ShotTimer*)timer
+{
+    ReleaseAndNil(_timer);
 }
 
 @end

@@ -12,15 +12,16 @@
 
 int main(int argc, char *argv[])
 {
-    @try {
+    //@try {
         @autoreleasepool {
             return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
         }
-    }
-    @catch (NSException *exception) {
-        NSLog(@"%@",exception.description);
-    }
-    @finally {
+    //}
+    //@catch (NSException *exception) {
+        //NSLog(@"%@",exception.description);
+        //NSLog(@"%@",[exception.callStackSymbols description]);
+    //}
+    //@finally {
         
-    }
+    //}
 }

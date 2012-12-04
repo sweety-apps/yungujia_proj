@@ -43,6 +43,8 @@
     NSTimer* _detectTimer;
     //for playback
     NSMutableDictionary* _playWarperDict;
+    
+    BOOL _isDetecting;
 }
 
 + (AudioUtility*)sharedInstance;

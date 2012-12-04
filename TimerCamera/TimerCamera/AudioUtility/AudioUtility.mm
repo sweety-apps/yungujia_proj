@@ -11,7 +11,7 @@
 #import "AQPlayer.h"
 #import <AVFoundation/AVFoundation.h>
 #import <MediaPlayer/MediaPlayer.h>
-#import <AudioToolbox/AudioServices.h>
+#import <AudioToolbox/AudioToolbox.h>
 
 #define TempRecordFile @"tmp.caf"
 #define DefaultDelegate 0x1
@@ -152,6 +152,9 @@ static AudioUtility* gSI = nil;
         _detectVolume = 1.;
         
         [self setupNotifiesAndAudioSessions];
+        
+        //[[MPMusicPlayerController applicationMusicPlayer] setVolume:1.0];
+        //[[MPMusicPlayerController iPodMusicPlayer] setVolume:1.0];
     }
     return self;
 }
@@ -265,6 +268,7 @@ static void playbackCompletionCallback (SystemSoundID  mySSID, void* data) {
         {
             p.player->StopQueue();
         }
+        p.player->SetVolume(1.0);
         p.player->StartQueue(isResume);
         
         if(p && p.delegate && [p.delegate respondsToSelector:@selector(onStartPlayFile:forInstance:)])
@@ -320,6 +324,11 @@ static void playbackCompletionCallback (SystemSoundID  mySSID, void* data) {
 - (void)onUpdateDetect
 {
     AQRecorderWarper* r = _recorderWarper;
+    if (r.detectWasInterrupted)
+    {
+        return;
+    }
+    
     AudioQueueLevelMeterState	_chan_lvls[r.recorder->GetNumberChannels()];
     memset(_chan_lvls, 0, sizeof(AudioQueueLevelMeterState) * r.recorder->GetNumberChannels());
     UInt32 data_sz = sizeof(AudioQueueLevelMeterState) * r.recorder->GetNumberChannels();
@@ -370,6 +379,21 @@ static void playbackCompletionCallback (SystemSoundID  mySSID, void* data) {
     {
         r.recorder->StopRecord();
     }
+    
+    
+    _isDetecting = YES;
+    
+    {
+        //set up for record
+        OSStatus error = 0;
+        UInt32 category = kAudioSessionCategory_PlayAndRecord;//kAudioSessionCategory_SoloAmbientSound;//
+        error = AudioSessionSetProperty(kAudioSessionProperty_AudioCategory, sizeof(category), &category);
+        if (error)
+        {
+            printf("couldn't set audio category!");
+        }
+    }
+    
     r.recorder->DisableRecordToFile(YES);
     r.recorder->StartRecord((CFStringRef)[NSTemporaryDirectory() stringByAppendingPathComponent:TempRecordFile]);
     
@@ -389,11 +413,25 @@ static void playbackCompletionCallback (SystemSoundID  mySSID, void* data) {
 - (void)stopDectingVolume
 {
     AQRecorderWarper* r = _recorderWarper;
-    r.recorder->StopRecord();
-    
-    [_detectTimer invalidate];
-    [_detectTimer release];
-    _detectTimer = nil;
+    if (_detectTimer)
+    {
+        r.recorder->StopRecord();
+        
+        {
+            //set up for play back
+            OSStatus error = 0;
+            UInt32 category = kAudioSessionCategory_SoloAmbientSound;//kAudioSessionCategory_PlayAndRecord;//
+            error = AudioSessionSetProperty(kAudioSessionProperty_AudioCategory, sizeof(category), &category);
+            if (error)
+            {
+                printf("couldn't set audio category!");
+            }
+        }
+        
+        [_detectTimer invalidate];
+        [_detectTimer release];
+        _detectTimer = nil;
+    }
 }
 
 - (float)currentVolume
@@ -429,7 +467,7 @@ static void playbackCompletionCallback (SystemSoundID  mySSID, void* data) {
     }
 	else 
 	{
-		UInt32 category = kAudioSessionCategory_PlayAndRecord;//kAudioSessionCategory_SoloAmbientSound;//
+		UInt32 category = kAudioSessionCategory_SoloAmbientSound;//kAudioSessionCategory_PlayAndRecord;//
 		error = AudioSessionSetProperty(kAudioSessionProperty_AudioCategory, sizeof(category), &category);
 		if (error) printf("couldn't set audio category!");
         
@@ -591,7 +629,7 @@ void propListener(	void *                  inClientData,
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(enterForeground)
-												 name:UIApplicationWillEnterForegroundNotification
+												 name:UIApplicationDidBecomeActiveNotification/*UIApplicationWillEnterForegroundNotification*/
 											   object:nil];
 }
 
@@ -608,5 +646,9 @@ void propListener(	void *                  inClientData,
     [self handleInterruptForDetecting:YES];
     [self handleInterruptForPlayback:YES];
 }
+
+
+#pragma mark Play volumes
+
 
 @end
