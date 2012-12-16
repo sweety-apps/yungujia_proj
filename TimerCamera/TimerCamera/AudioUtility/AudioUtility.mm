@@ -372,6 +372,10 @@ static void playbackCompletionCallback (SystemSoundID  mySSID, void* data) {
 // 0. ~ 1.0 for vol
 - (void)startDetectingVolume:(float)vol
 {
+#if TARGET_IPHONE_SIMULATOR
+    return;
+#endif
+    
     vol = (vol > 1.) ? 1. : (vol < 0. ? 0. : vol);
     _detectVolume = vol;
     AQRecorderWarper* r = _recorderWarper;
@@ -395,6 +399,7 @@ static void playbackCompletionCallback (SystemSoundID  mySSID, void* data) {
     }
     
     r.recorder->DisableRecordToFile(YES);
+    
     r.recorder->StartRecord((CFStringRef)[NSTemporaryDirectory() stringByAppendingPathComponent:TempRecordFile]);
     
     //enable metering
@@ -412,6 +417,10 @@ static void playbackCompletionCallback (SystemSoundID  mySSID, void* data) {
 
 - (void)stopDectingVolume
 {
+#if TARGET_IPHONE_SIMULATOR
+    return;
+#endif
+    
     AQRecorderWarper* r = _recorderWarper;
     if (_detectTimer)
     {

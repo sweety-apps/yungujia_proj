@@ -8,12 +8,18 @@
 
 #import "VolumeMonitor.h"
 
-#define PEAK_BTN_CENTER_X (47.0)
-#define PEAK_BTN_BEGIN_X (25.0)
-#define PEAK_BTN_END_X (69.0)
-#define PEAK_RANGE_X (self.frame.size.width - PEAK_BTN_END_X)
-#define VOLUME_BEGIN_X (68.0)
-#define VOLUME_RANGE_X (self.frame.size.width - VOLUME_BEGIN_X)
+#define PEAK_BTN_CENTER_X (30.0)
+#define PEAK_BTN_BEGIN_X (12.0)
+#define PEAK_BTN_END_X (48.0)
+#define PEAK_RANGE_X (self.frame.size.width - PEAK_BTN_END_X - 48.0)
+#define VOLUME_BEGIN_X (59.0)
+#define VOLUME_END_X (84.0)
+#define VOLUME_EMPTY_OFFSET_X (14.0)
+#define VOLUME_ALPHA_ANIMATION_OFFSET_X (148.0 - VOLUME_BEGIN_X)
+#define VOLUME_ALPHA_ANIMATION_RANGE_X (22.0)
+#define VOLUME_RANGE_X (self.frame.size.width - VOLUME_BEGIN_X - 37.0)
+#define VOLUME_IMAGE_STRETCH_POINT_X (81.0)
+#define VOLUME_IMAGE_STRETCH_POINT_Y (32.0)
 
 @implementation VolumeMonitor
 
@@ -30,7 +36,9 @@
         // Initialization code
         CGRect rect = CGRectMake(0, 0, frame.size.width, frame.size.height);
         _backGroudView = [[UIImageView alloc] initWithFrame:rect];
+        _mouthView = [[UIImageView alloc] initWithFrame:rect];
         _volumeView = [[UIImageView alloc] initWithFrame:rect];
+        _puchedPointView = [[UIImageView alloc] initWithFrame:rect];
         _reachedPeakView = [[UIImageView alloc] initWithFrame:rect];
         _containerView = [[UIImageView alloc] initWithFrame:rect];
         _slideCover = [[SliderTouchCoverView sliderWithFrame:frame andDelegate:self] retain];
@@ -54,7 +62,9 @@
     ReleaseAndNilView(_reachedPeakView);
     ReleaseAndNilView(_barButton);
     ReleaseAndNilView(_volumeView);
+    ReleaseAndNil(_puchedPointView);
     ReleaseAndNilView(_backGroudView);
+    ReleaseAndNil(_mouthView);
     [super dealloc];
 }
 
@@ -65,6 +75,8 @@
     backGroundImage:(UIImage*)bgi
         volumeImage:(UIImage*)vi
    reachedPeakImage:(UIImage*)ri
+  punchedPointImage:(UIImage*)ppi
+         mouthImage:(UIImage*)mi;
 {
     self = [self initWithFrame:frame];
     if (self)
@@ -75,7 +87,11 @@
         rect.origin = CGPointMake(0, 0);
         _containerView.backgroundColor = [UIColor clearColor];
         _backGroudView.image = bgi;
-        _volumeView.image = vi;
+        _mouthView.image = mi;
+        _volumeView.image = [vi stretchableImageWithLeftCapWidth:VOLUME_IMAGE_STRETCH_POINT_X topCapHeight:VOLUME_IMAGE_STRETCH_POINT_Y];
+        //_volumeView.
+        _puchedPointView.image = ppi;
+        _puchedPointView.frame = rect;
         _reachedPeakView.image = ri;
         _reachedPeakView.frame = rect;
         _barButton = [barButton retain];
@@ -83,8 +99,10 @@
         _stopButton.frame = rect;
         _slideCover.frame = rect;
         _backGroudView.userInteractionEnabled = NO;
+        _mouthView.userInteractionEnabled = NO;
         _barButton.userInteractionEnabled = NO;
         _volumeView.userInteractionEnabled = NO;
+        _puchedPointView.userInteractionEnabled = NO;
         _containerView.userInteractionEnabled = YES;
         self.userInteractionEnabled = YES;
         _slideCover.userInteractionEnabled = YES;
@@ -93,10 +111,13 @@
         [_containerView addSubview:_barButton];
         [_containerView addSubview:_reachedPeakView];
         [_containerView addSubview:stopButton];
+        [_containerView addSubview:_puchedPointView];
         [_containerView addSubview:_volumeView];
+        [_containerView addSubview:_mouthView];
         [_containerView addSubview:_stopButton];
         [self addSubview:_slideCover];
     
+        _puchedPointView.hidden = YES;
         _stopButton.hidden = YES;
         _reachedPeakView.hidden = YES;
         
@@ -123,6 +144,8 @@
                        backGroundImage:(UIImage*)bgi
                            volumeImage:(UIImage*)vi
                       reachedPeakImage:(UIImage*)ri
+                     punchedPointImage:(UIImage*)ppi
+                            mouthImage:(UIImage*)mi
 {
     CGRect rect = CGRectMake(0, 0, bgi.size.width, bgi.size.height);
     return [[[VolumeMonitor alloc] initWithFrame:rect
@@ -130,7 +153,9 @@
                                   withStopButton:stopButton
                                  backGroundImage:bgi
                                      volumeImage:vi
-                                reachedPeakImage:ri] autorelease];
+                                reachedPeakImage:ri
+                               punchedPointImage:ppi
+                                      mouthImage:mi] autorelease];
 }
 
 - (void)showMonitor:(BOOL)animated
@@ -193,6 +218,7 @@
     rect.origin.x = x;
     _barButton.frame = rect;
     _reachedPeakView.frame = rect;
+    _puchedPointView.frame = rect;
     _peakVolume = peakVolume;
 }
 
@@ -287,14 +313,25 @@
     CGRect volFrame = CGRectZero;
     newlevel = newlevel < 0.0 ? 0.0 : (newlevel > _peakVolume ? _peakVolume : newlevel);
     float x = VOLUME_RANGE_X * (1.0 - newlevel);
-    CGRect rect = _volumeView.frame;
+    CGRect rect = CGRectZero;
+    rect.size = self.frame.size;
+    CGFloat stretchLength = (rect.size.width - VOLUME_EMPTY_OFFSET_X) - (x + VOLUME_END_X);
+    rect.size.width += stretchLength;
     rect.origin.x = x;
     volFrame = rect;
+    
+    //alpha control
+    CGFloat alpha = 1.0;
+    if (x > VOLUME_ALPHA_ANIMATION_OFFSET_X)
+    {
+        alpha = 1.0 - ((x - VOLUME_ALPHA_ANIMATION_OFFSET_X) / VOLUME_ALPHA_ANIMATION_RANGE_X);
+        alpha = alpha > 0.0 ? alpha : 0.0;
+    }
     
     if (animated)
     {
         [UIView animateWithDuration:second
-                         animations:^(){_volumeView.frame = volFrame;}
+                         animations:^(){_volumeView.frame = volFrame; _volumeView.alpha = alpha;}
                          completion:^(BOOL finished){
                              if (comp)
                              {
@@ -305,6 +342,7 @@
     else
     {
         _volumeView.frame = volFrame;
+        _volumeView.alpha = alpha;
         if (comp)
         {
             comp();
@@ -321,6 +359,8 @@
         _barButton.hidden = YES;
         _reachedPeakView.alpha = 1.0;
         _reachedPeakView.hidden = NO;
+        _puchedPointView.alpha = 1.0;
+        _puchedPointView.hidden = NO;
     };
     
     void (^reached)(void) = ^(void) {
@@ -331,7 +371,10 @@
         rect.size.height *= PEAK_SCALE;
         _reachedPeakView.frame = rect;
         _reachedPeakView.alpha = 0.0;
+        _puchedPointView.frame = rect;
+        _puchedPointView.alpha = 0.0;
         _backGroudView.alpha = 0.0;
+        _mouthView.alpha = 0.0;
         _volumeView.alpha = 0.0;
     };
     
@@ -340,9 +383,14 @@
         _reachedPeakView.frame = rect;
         _reachedPeakView.alpha = 1.0;
         _reachedPeakView.hidden = YES;
+        _puchedPointView.alpha = 1.0;
+        _puchedPointView.frame = rect;
+        _puchedPointView.hidden = YES;
         _backGroudView.alpha = 1.0;
+        _mouthView.alpha = 1.0;
         _volumeView.alpha = 1.0;
         _backGroudView.hidden = YES;
+        _mouthView.hidden = YES;
         _volumeView.hidden = YES;
         [self volumeAnimateSelector:NO volume:0.0 interval:0.0 complationAnimation:nil];
     };
@@ -409,7 +457,9 @@
     void (^toMonitor)(BOOL) = ^(BOOL animated) {
         _barButton.hidden = NO;
         _backGroudView.hidden = NO;
+        _mouthView.hidden = NO;
         _volumeView.hidden = NO;
+        _puchedPointView.hidden = YES;
         [self hideAnimateSelector:NO withStateTrans:NO];
         [self showAnimateSelector:animated withStateTrans:YES];
     };

@@ -40,4 +40,7 @@
 - (void)setButtonReleased;
 - (void)setButtonRestored;
 
++ (void)setAllCommonButtonEnabled:(BOOL)enabled;
++ (BOOL)isAllCommonButtonEnabled;
+
 @end

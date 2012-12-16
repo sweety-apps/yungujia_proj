@@ -20,6 +20,8 @@
     UIImageView* _backGroudView;
     UIImageView* _volumeView;
     UIImageView* _reachedPeakView;
+    UIImageView* _mouthView;
+    UIImageView* _puchedPointView;
     UIView* _containerView;
     CGRect _lastFrame;
     float _currentVolume;
@@ -40,13 +42,17 @@
      withStopButton:(CommonAnimationButton*)stopButton
     backGroundImage:(UIImage*)bgi
         volumeImage:(UIImage*)vi
-   reachedPeakImage:(UIImage*)ri;
+   reachedPeakImage:(UIImage*)ri
+  punchedPointImage:(UIImage*)ppi
+         mouthImage:(UIImage*)mi;
 
 + (VolumeMonitor*)monitorWithBarButton:(CommonAnimationButton*)barButton
                         withStopButton:(CommonAnimationButton*)stopButton
                        backGroundImage:(UIImage*)bgi
                            volumeImage:(UIImage*)vi
-                      reachedPeakImage:(UIImage*)ri;
+                      reachedPeakImage:(UIImage*)ri
+                     punchedPointImage:(UIImage*)ppi
+                            mouthImage:(UIImage*)mi;
 
 - (void)showMonitor:(BOOL)animated;
 - (void)hideMonitor:(BOOL)animated;

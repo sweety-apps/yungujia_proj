@@ -100,7 +100,50 @@
 
 - (void)setIcon:(UIImage*)icon
 {
-    _coverIconView.image = icon;
+    [self setIcon:icon withAnimation:NO];
+}
+
+- (void)setIcon:(UIImage*)icon withAnimation:(BOOL)animated
+{
+    if (icon == _lastCoverIcon)
+    {
+        return;
+    }
+    [icon retain];
+    [_lastCoverIcon release];
+    _lastCoverIcon = icon;
+    if (animated)
+    {
+        void (^fadeOld)(void) = ^(){
+            _coverIconView.alpha = 0.0;
+        };
+        void (^appearNew)(void) = ^(){
+            _coverIconView.alpha = 1.0;
+        };
+        
+        if (_coverIconView.image)
+        {
+            [UIView animateWithDuration:0.3
+                             animations:fadeOld
+                             completion:^(BOOL finished){
+                                 _coverIconView.image = _lastCoverIcon;
+                                 [UIView animateWithDuration:0.3
+                                                  animations:appearNew];
+                             }];
+        }
+        else
+        {
+            fadeOld();
+            _coverIconView.image = _lastCoverIcon;
+            [UIView animateWithDuration:0.4
+                             animations:appearNew];
+        }
+        
+    }
+    else
+    {
+        _coverIconView.image = _lastCoverIcon;
+    }
 }
 
 - (void)setLabelString:(NSString*)string

@@ -9,6 +9,8 @@
 #import "CameraCoverViewController.h"
 #import "CameraOptions.h"
 
+#define VOLUME_INIT_VAL (0.1)
+
 @interface CameraCoverViewController ()
 
 @end
@@ -334,6 +336,7 @@
                    forEnabledImage1:nil
                    forEnabledImage2:nil
                    forIcon:nil];
+    [_shotButton setIcon:[UIImage imageNamed:@"/Resource/Picture/main/shot_btn_icon_camera"]];
     [_shotButton setLabelString:@""];
     [self.view addSubview:_shotButton];
     
@@ -391,9 +394,9 @@
                                   forEnabledImage2:nil];
     
     CommonAnimationButton* stop = [CommonAnimationButton
-                                   buttonWithPressedImageSizeforNormalImage1:[UIImage imageNamed:@"/Resource/Picture/main/vol_point_normal1"]
-                                   forNormalImage2:[UIImage imageNamed:@"/Resource/Picture/main/vol_point_normal2"]
-                                   forPressedImage:[UIImage imageNamed:@"/Resource/Picture/main/vol_point_pressed"]
+                                   buttonWithPressedImageSizeforNormalImage1:[UIImage imageNamed:@"/Resource/Picture/main/vol_point_stop_normal1"]
+                                   forNormalImage2:[UIImage imageNamed:@"/Resource/Picture/main/vol_point_stop_normal2"]
+                                   forPressedImage:[UIImage imageNamed:@"/Resource/Picture/main/vol_point_stop_pressed"]
                                    forEnabledImage1:nil
                                    forEnabledImage2:nil];
     
@@ -401,8 +404,10 @@
                                        withStopButton:stop
                                       backGroundImage:[UIImage imageNamed:@"/Resource/Picture/main/volume_bg"]
                                           volumeImage:[UIImage imageNamed:@"/Resource/Picture/main/fist"]
-                                     reachedPeakImage:[UIImage imageNamed:@"/Resource/Picture/main/vol_point_punched"]];
-    _volMonitor.minPeakVolume = 0.2;
+                                     reachedPeakImage:[UIImage imageNamed:@"/Resource/Picture/main/vol_point_punched"]
+                                    punchedPointImage:[UIImage imageNamed:@"/Resource/Picture/main/vol_point_punched_point"]
+                                           mouthImage:[UIImage imageNamed:@"/Resource/Picture/main/mouth"]];
+    _volMonitor.minPeakVolume = 0.1;
     _volMonitor.peakVolume = 0.7;
     
     [self.view addSubview:_volMonitor];
@@ -487,8 +492,9 @@
         [_volMonitor showMonitor:YES];
         [[AudioUtility sharedInstance] setVolumeDetectingDelegate:self];
         [[AudioUtility sharedInstance] startDetectingVolume:1.0];
-        _volMonitor.currentVolume = 0.25;
+        _volMonitor.currentVolume = VOLUME_INIT_VAL;//1.0;
         [_timerButton setButtonEnabled:YES withAnimation:YES];
+        [_shotButton setIcon:[UIImage imageNamed:@"/Resource/Picture/main/shot_btn_icon_timer"] withAnimation:YES];
     }
     else
     {
@@ -502,8 +508,9 @@
             [_volMonitor hideMonitor:YES];
             [[AudioUtility sharedInstance] setVolumeDetectingDelegate:nil];
             [[AudioUtility sharedInstance] stopDectingVolume];
-            _volMonitor.currentVolume = 0.25;
+            _volMonitor.currentVolume = VOLUME_INIT_VAL;
             [_timerButton setButtonEnabled:NO withAnimation:YES];
+            [_shotButton setIcon:[UIImage imageNamed:@"/Resource/Picture/main/shot_btn_icon_camera"] withAnimation:YES];
         }
     }
 }
@@ -532,7 +539,7 @@
         [_volMonitor transToMonitorState];
         [[AudioUtility sharedInstance] setVolumeDetectingDelegate:self];
         [[AudioUtility sharedInstance] startDetectingVolume:1.0];
-        _volMonitor.currentVolume = 0.25;
+        _volMonitor.currentVolume = VOLUME_INIT_VAL;
     }
 }
 
@@ -602,7 +609,7 @@
       peakVolume:(float)peakVolume
      forInstance:(AudioUtility*)util
 {
-#define LOUDER_SCALE (1.0)
+#define LOUDER_SCALE (3.0)
     NSLog(@"DetectCurrentVol = %.2f",currentVolume);
     currentVolume *= LOUDER_SCALE;
     [_volMonitor setCurrentVolume:currentVolume];
@@ -617,7 +624,13 @@
             [[AudioUtility sharedInstance] playFile:filePath withDelegate:self];
         }
         
-        [self performSelector:@selector(startTimer) withObject:nil afterDelay:2.0];
+        _preStartTimingTimer = [NSTimer scheduledTimerWithTimeInterval:2.0
+                                                                target:self
+                                                              selector:@selector(startTimer)
+                                                              userInfo:nil
+                                                               repeats:NO];
+        [_shotButton setIcon:nil withAnimation:YES];
+        //[self performSelector:@selector(startTimer) withObject:nil afterDelay:2.0];
         //[self startTimer];
     }
     //[[AudioUtility sharedInstance] ];
@@ -694,7 +707,36 @@
 - (void)onCancelledTimer:(ShotTimer*)timer
 {
     [_shotButton setLabelString:@""];
+    [_shotButton setIcon:[UIImage imageNamed:@"/Resource/Picture/main/shot_btn_icon_timer"] withAnimation:YES];
     [super onCancelledTimer:timer];
+}
+
+#pragma mark - Override BaseCameraLogicViewController
+
+- (void)startTimer:(int)seconds
+{
+    _preStartTimingTimer = nil;
+    [super startTimer:seconds];
+}
+
+- (void)startTimer
+{
+    _preStartTimingTimer = nil;
+    [super startTimer];
+}
+
+- (void)cancelTimer
+{
+    if (_preStartTimingTimer)
+    {
+        [_preStartTimingTimer invalidate];
+        _preStartTimingTimer = nil;
+        [_shotButton setIcon:[UIImage imageNamed:@"/Resource/Picture/main/shot_btn_icon_timer"] withAnimation:YES];
+    }
+    else
+    {
+        [super cancelTimer];
+    }
 }
 
 @end

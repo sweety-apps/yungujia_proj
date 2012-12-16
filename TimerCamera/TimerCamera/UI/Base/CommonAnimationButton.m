@@ -8,6 +8,10 @@
 
 #import "CommonAnimationButton.h"
 
+static BOOL gAllButtonEnabled = YES;
+
+#define kAllButtonEnableChanged @"AllButtonEnableChanged"
+
 @implementation CommonAnimationButton
 
 @synthesize button = _button;
@@ -24,12 +28,17 @@
         _button = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
         _button.frame = rect;
         [self addSubview:_button];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(handleAllButtonEnableChanged:)
+                                                     name:kAllButtonEnableChanged
+                                                   object:nil];
     }
     return self;
 }
 
 - (void)dealloc
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     ReleaseAndNilView(_button);
     ReleaseAndNilView(_normalView);
     ReleaseAndNilView(_enabledView);
@@ -45,6 +54,11 @@
     // Drawing code
 }
 */
+
+- (void)handleAllButtonEnableChanged:(NSNotification*)notify
+{
+    _button.enabled = gAllButtonEnabled;
+}
 
 - (void)onPressed:(id)sender
 {
@@ -172,6 +186,20 @@
         }
     }
     _enableAnimations = enableAnimations;
+}
+
++ (void)setAllCommonButtonEnabled:(BOOL)enabled
+{
+    gAllButtonEnabled = enabled;
+    [[NSNotificationCenter defaultCenter]
+     postNotification:[NSNotification
+                       notificationWithName:kAllButtonEnableChanged
+                       object:nil]];
+}
+
++ (BOOL)isAllCommonButtonEnabled
+{
+    return gAllButtonEnabled;
 }
 
 @end

@@ -26,6 +26,7 @@
     CommonAnimationButton* _HDRButton;
     CommonAnimationButton* _frontButton;
     BlackCat* _animationCatButton;
+    NSTimer* _preStartTimingTimer;
     
     BOOL _isFlipingCamera;
 }

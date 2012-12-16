@@ -13,12 +13,14 @@
 {
     UIImageView* _coverIconView;
     UILabel* _coverLabel;
+    UIImage* _lastCoverIcon;
 }
 
 @property (nonatomic,readonly,retain) UIImageView* coverIconView;
 @property (nonatomic,readonly,retain) UILabel* coverLabel;
 
 - (void)setIcon:(UIImage*)icon;
+- (void)setIcon:(UIImage*)icon withAnimation:(BOOL)animated;
 - (void)setLabelString:(NSString*)string;
 
 - (id)initWithFrame:(CGRect)frame

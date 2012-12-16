@@ -229,6 +229,10 @@
     {
         [_timer cancelTimer];
     }
+    else
+    {
+        [self onCancelledTimer:_timer];
+    }
 }
 
 -(void)takePicture
