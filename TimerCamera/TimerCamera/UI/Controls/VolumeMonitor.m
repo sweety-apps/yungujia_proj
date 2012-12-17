@@ -20,6 +20,7 @@
 #define VOLUME_RANGE_X (self.frame.size.width - VOLUME_BEGIN_X - 37.0)
 #define VOLUME_IMAGE_STRETCH_POINT_X (81.0)
 #define VOLUME_IMAGE_STRETCH_POINT_Y (32.0)
+#define PUNCHED_POINT_IMAGE_END_X (106.0)
 
 @implementation VolumeMonitor
 
@@ -352,7 +353,8 @@
 
 - (void)tarnsToHoldingAnimateSelector:(BOOL)animated
 {
-#define PEAK_SCALE (1.2)
+#define PEAK_SCALE (2.5)
+#define BUTTON_SCALE (2.0)
     _slideCover.hidden = YES;
     
     void (^preReached)(void) = ^(void) {
@@ -365,14 +367,20 @@
     
     void (^reached)(void) = ^(void) {
         CGRect rect = _barButton.frame;
-        rect.origin.x -= (rect.size.width * (PEAK_SCALE - 1.0));
-        rect.origin.y -= (rect.size.height * (PEAK_SCALE - 1.0));
+        rect.origin.x -= (PUNCHED_POINT_IMAGE_END_X * ((PEAK_SCALE - 1.0)/2.0));
+        rect.origin.y -= (rect.size.height * ((PEAK_SCALE - 1.0)/2.0));
         rect.size.width *= PEAK_SCALE;
         rect.size.height *= PEAK_SCALE;
-        _reachedPeakView.frame = rect;
-        _reachedPeakView.alpha = 0.0;
         _puchedPointView.frame = rect;
         _puchedPointView.alpha = 0.0;
+        //fly away
+        rect = _barButton.frame;
+        rect.origin.x = 0.0 - self.frame.origin.x * 1.5;
+        rect.origin.y -= self.frame.origin.y * 0.2;
+        rect.size.width *= BUTTON_SCALE;
+        rect.size.height *= BUTTON_SCALE;
+        _reachedPeakView.frame = rect;
+        _reachedPeakView.alpha = 0.0;
         _backGroudView.alpha = 0.0;
         _mouthView.alpha = 0.0;
         _volumeView.alpha = 0.0;
@@ -413,7 +421,7 @@
     {
         void (^warper)(void) = ^(void){
             preReached();
-            [UIView animateWithDuration:0.5 animations:reached completion:^(BOOL finished){
+            [UIView animateWithDuration:0.8 animations:reached completion:^(BOOL finished){
                 endReached();
                 prepareStopButton();
                 [UIView animateWithDuration:0.5 animations:showStopButton completion:^(BOOL finished){
