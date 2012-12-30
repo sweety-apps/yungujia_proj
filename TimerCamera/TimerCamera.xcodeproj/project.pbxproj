@@ -28,6 +28,7 @@
 		BEB8E44C1646D25700DC5800 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB8E4491646D25700DC5800 /* Icon@2x.png */; };
 		BEB8E44F1646D36800DC5800 /* Resource in Resources */ = {isa = PBXBuildFile; fileRef = BEB8E44E1646D36800DC5800 /* Resource */; };
 		BEB8E45A1646DF9800DC5800 /* LoadingAnimateImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB8E4591646DF9800DC5800 /* LoadingAnimateImageView.m */; };
+		BED79FE21690ADAC00FE5C57 /* TipsView.m in Sources */ = {isa = PBXBuildFile; fileRef = BED79FE11690ADAC00FE5C57 /* TipsView.m */; };
 		BEE3D9A6166DD5E2001AE5E9 /* CameraCoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE3D9A5166DD5E2001AE5E9 /* CameraCoverViewController.m */; };
 		BEE3D9A9166DD622001AE5E9 /* BaseCameraLogicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE3D9A8166DD622001AE5E9 /* BaseCameraLogicViewController.m */; };
 		BEF975B2166A02B800B6C7AC /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEF975B1166A02B800B6C7AC /* Default-568h@2x.png */; };
@@ -88,6 +89,8 @@
 		BEB8E44E1646D36800DC5800 /* Resource */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Resource; sourceTree = "<group>"; };
 		BEB8E4581646DF9800DC5800 /* LoadingAnimateImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingAnimateImageView.h; sourceTree = "<group>"; };
 		BEB8E4591646DF9800DC5800 /* LoadingAnimateImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingAnimateImageView.m; sourceTree = "<group>"; };
+		BED79FE01690ADAB00FE5C57 /* TipsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TipsView.h; sourceTree = "<group>"; };
+		BED79FE11690ADAC00FE5C57 /* TipsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TipsView.m; sourceTree = "<group>"; };
 		BEE3D9A4166DD5E2001AE5E9 /* CameraCoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraCoverViewController.h; sourceTree = "<group>"; };
 		BEE3D9A5166DD5E2001AE5E9 /* CameraCoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraCoverViewController.m; sourceTree = "<group>"; };
 		BEE3D9A7166DD622001AE5E9 /* BaseCameraLogicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseCameraLogicViewController.h; sourceTree = "<group>"; };
@@ -307,6 +310,8 @@
 				F3DAC8331664725D00950E18 /* ShotButton.m */,
 				F376D5381668AD6600CEEEE1 /* SliderTouchCoverView.h */,
 				F376D5391668AD6600CEEEE1 /* SliderTouchCoverView.m */,
+				BED79FE01690ADAB00FE5C57 /* TipsView.h */,
+				BED79FE11690ADAC00FE5C57 /* TipsView.m */,
 			);
 			path = Controls;
 			sourceTree = "<group>";
@@ -407,6 +412,7 @@
 				F376D53A1668AD6600CEEEE1 /* SliderTouchCoverView.m in Sources */,
 				BEE3D9A6166DD5E2001AE5E9 /* CameraCoverViewController.m in Sources */,
 				BEE3D9A9166DD622001AE5E9 /* BaseCameraLogicViewController.m in Sources */,
+				BED79FE21690ADAC00FE5C57 /* TipsView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
