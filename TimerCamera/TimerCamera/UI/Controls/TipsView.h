@@ -17,11 +17,17 @@
 {
     UIView* _currentSuperView;
     UILabel* _tipsLabel;
+    UIImageView* _pushHandImageView;
+    UIImageView* _tipsBackGroundImageView;
     float _currentLastSeconds;
     ShotTimer* _showingTimer;
 }
 
 + (TipsView*)sharedInstance;
++ (TipsView*)tipsViewWithPushHand:(UIImage*)pushHandImage
+                  backGroundImage:(UIImage*)bgImage;
+- (TipsView*)initWithPushHand:(UIImage*)pushHandImage
+              backGroundImage:(UIImage*)bgImage;
 
 - (void)setPushHandImage:(UIImage*)image;
 

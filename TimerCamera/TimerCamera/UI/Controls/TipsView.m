@@ -18,9 +18,20 @@
         // Initialization code
         CGRect rect = frame;
         rect.origin = CGPointMake(0, 0);
-//        _button = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
-//        _button.frame = rect;
-//        [self addSubview:_button];
+        _tipsLabel = [[UILabel alloc] initWithFrame:rect];
+        _pushHandImageView = [[UIImageView alloc] initWithFrame:rect];
+        _tipsBackGroundImageView = [[UIImageView alloc] initWithFrame:rect];
+        
+        _tipsLabel.textColor = [UIColor whiteColor];
+        _tipsLabel.backgroundColor = [UIColor clearColor];
+        _tipsLabel.font = [UIFont systemFontOfSize:36.0];
+        
+        [self addSubview:_tipsBackGroundImageView];
+        [self addSubview:_tipsLabel];
+        [self addSubview:_pushHandImageView];
+        
+        self.hidden = YES;
+        
         _currentLastSeconds = TIPS_LAST_DEFAULT_SECONDS;
     }
     return self;
@@ -29,6 +40,8 @@
 - (void)dealloc
 {
     ReleaseAndNilView(_tipsLabel);
+    ReleaseAndNilView(_pushHandImageView);
+    ReleaseAndNilView(_tipsBackGroundImageView);
     [super dealloc];
 }
 
@@ -49,20 +62,43 @@ static TipsView* gTipsView = nil;
 {
     if (gTipsView == nil)
     {
-        
         gTipsView = [[TipsView alloc] initWithFrame:CGRectZero];
     }
     return gTipsView;
 }
 
++ (TipsView*)tipsViewWithPushHand:(UIImage*)pushHandImage
+                  backGroundImage:(UIImage*)bgImage
+{
+    return [[[TipsView alloc] initWithPushHand:pushHandImage backGroundImage:bgImage] autorelease];
+}
+
+- (TipsView*)initWithPushHand:(UIImage*)pushHandImage
+              backGroundImage:(UIImage*)bgImage
+{
+    self = [self initWithFrame:CGRectZero];
+    if (self)
+    {
+        [self setPushHandImage:pushHandImage];
+        [self setTipsBackGroundImage:bgImage];
+    }
+    return self;
+}
+
 - (void)setPushHandImage:(UIImage*)image
 {
-    
+    _pushHandImageView.image = image;
+    CGRect rect = CGRectZero;
+    rect.size = image.size;
+    _pushHandImageView.frame = rect;
 }
 
 - (void)setTipsBackGroundImage:(UIImage*)image
 {
-    
+    _tipsBackGroundImageView.image = image;
+    CGRect rect = CGRectZero;
+    rect.size = image.size;
+    _tipsBackGroundImageView.frame = rect;
 }
 
 - (UILabel*)getTipsLabel
