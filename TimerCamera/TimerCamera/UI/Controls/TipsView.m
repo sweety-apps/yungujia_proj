@@ -18,19 +18,28 @@
         // Initialization code
         CGRect rect = frame;
         rect.origin = CGPointMake(0, 0);
+        _containerView = [[UIView alloc] initWithFrame:rect];
+        
         _tipsLabel = [[UILabel alloc] initWithFrame:rect];
         _pushHandImageView = [[UIImageView alloc] initWithFrame:rect];
         _tipsBackGroundImageView = [[UIImageView alloc] initWithFrame:rect];
         
+        _containerView.backgroundColor = [UIColor clearColor];
+        _containerView.userInteractionEnabled = NO;
+        
+        _tipsLabel.numberOfLines = 0;
         _tipsLabel.textColor = [UIColor whiteColor];
         _tipsLabel.backgroundColor = [UIColor clearColor];
         _tipsLabel.font = [UIFont systemFontOfSize:36.0];
+        _tipsLabel.textAlignment = UITextAlignmentCenter;
         
-        [self addSubview:_tipsBackGroundImageView];
-        [self addSubview:_tipsLabel];
-        [self addSubview:_pushHandImageView];
+        [_containerView addSubview:_tipsBackGroundImageView];
+        [_containerView addSubview:_tipsLabel];
+        [_containerView addSubview:_pushHandImageView];
         
         self.hidden = YES;
+        
+        _tipsContentStringArray = [[NSMutableArray array] retain];
         
         _currentLastSeconds = TIPS_LAST_DEFAULT_SECONDS;
     }
@@ -42,6 +51,13 @@
     ReleaseAndNilView(_tipsLabel);
     ReleaseAndNilView(_pushHandImageView);
     ReleaseAndNilView(_tipsBackGroundImageView);
+    ReleaseAndNilView(_containerView);
+    ReleaseAndNil(_tipsContentStringArray);
+    if (_showingTimer)
+    {
+        [_showingTimer invalidate];
+        _showingTimer = nil;
+    }
     [super dealloc];
 }
 
@@ -81,6 +97,11 @@ static TipsView* gTipsView = nil;
     {
         [self setPushHandImage:pushHandImage];
         [self setTipsBackGroundImage:bgImage];
+        [self setAnimation:self andView:_containerView forState:@"hide"];
+        [self setAnimation:self andView:_containerView forState:@"showing"];
+        [self setAnimation:self andView:_containerView forState:@"show"];
+        [self setAnimation:self andView:_containerView forState:@"hiding"];
+        [self setCurrentState:@"hide"];
     }
     return self;
 }
@@ -111,6 +132,25 @@ static TipsView* gTipsView = nil;
             last:(float)seconds
 {
     _currentLastSeconds = seconds;
+    
+    [_tipsContentStringArray addObject:tipsContent];
+    NSString* state = self.currentState;
+    if([state isEqualToString:@"hide"])
+    {
+        
+    }
+    else if([state isEqualToString:@"show"])
+    {
+        
+    }
+    else if([state isEqualToString:@"showing"])
+    {
+        
+    }
+    else if([state isEqualToString:@"hiding"])
+    {
+        
+    }
 }
 
 - (void)showTips:(NSString*)tipsContent
@@ -139,7 +179,22 @@ static TipsView* gTipsView = nil;
 
 - (void)startStateAnimationForView:(UIView*)view forState:(NSString*)state
 {
-    
+    if([state isEqualToString:@"hide"])
+    {
+        
+    }
+    else if([state isEqualToString:@"show"])
+    {
+        
+    }
+    else if([state isEqualToString:@"showing"])
+    {
+        
+    }
+    else if([state isEqualToString:@"hiding"])
+    {
+        
+    }
 }
 
 - (void)stopStateAnimationForView:(UIView*)view forState:(NSString*)state
@@ -147,21 +202,17 @@ static TipsView* gTipsView = nil;
     
 }
 
-#pragma mark ShotTimerDelegate
+#pragma mark Animations
 
-- (void)onInterval:(float)leftTimeInterval forTimer:(ShotTimer*)timer
+- (void)doAdjustViewAnimationWithContent:(NSString*)content withAnimation:(BOOL)animated
 {
-    
-}
-
-- (void)onFinishedTimer:(ShotTimer*)timer
-{
-    
-}
-
-- (void)onCancelledTimer:(ShotTimer*)timer
-{
-    
+    if (_tipsBackGroundImageView.image)
+    {
+        CGSize sizeView = CGSizeZero;
+        CGSize sizeImage = _tipsBackGroundImageView.image.size;
+        sizeView = sizeImage;
+        //CGSize sizeText = [content sizeWithFont:_tipsLabel.font forWidth:<#(CGFloat)#> lineBreakMode:];
+    }
 }
 
 @end

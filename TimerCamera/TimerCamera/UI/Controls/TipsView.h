@@ -12,15 +12,20 @@
 
 #define TIPS_LAST_INFINITE (-1.0)
 #define TIPS_LAST_DEFAULT_SECONDS (2.0)
+#define TIPS_VIEW_DEFAULT_WIDTH (150)
+//#define TIPS_LABEL_OFFSET
 
-@interface TipsView : UIStateAnimationView <UIStateAnimation,ShotTimerDelegate>
+@interface TipsView : UIStateAnimationView <UIStateAnimation>
 {
     UIView* _currentSuperView;
+    UIView* _containerView;
     UILabel* _tipsLabel;
     UIImageView* _pushHandImageView;
     UIImageView* _tipsBackGroundImageView;
     float _currentLastSeconds;
-    ShotTimer* _showingTimer;
+    NSTimer* _showingTimer;
+    NSMutableArray* _tipsContentStringArray;
+    CGFloat _tipsViewMaxWidth;
 }
 
 + (TipsView*)sharedInstance;
