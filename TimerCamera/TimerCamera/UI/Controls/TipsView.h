@@ -12,8 +12,11 @@
 
 #define TIPS_LAST_INFINITE (-1.0)
 #define TIPS_LAST_DEFAULT_SECONDS (2.0)
-#define TIPS_VIEW_DEFAULT_WIDTH (150)
-//#define TIPS_LABEL_OFFSET
+#define TIPS_VIEW_DEFAULT_WIDTH (170)
+#define TIPS_LABEL_TOP_PADDING (20.0)
+#define TIPS_LABEL_BOTTOM_PADDING (17.0)
+#define TIPS_LABEL_LEFT_PADDING (15.0)
+#define TIPS_LABEL_RIGHT_PADDING (15.0)
 
 @interface TipsView : UIStateAnimationView <UIStateAnimation>
 {
@@ -26,7 +29,14 @@
     NSTimer* _showingTimer;
     NSMutableArray* _tipsContentStringArray;
     CGFloat _tipsViewMaxWidth;
+    
+    CGRect _pushHandRect;
+    CGRect _bgRect;
+    CGRect _labelRect;
+    CGRect _selfRect;
 }
+
+@property (nonatomic,assign) CGFloat tipsViewMaxWidth;
 
 + (TipsView*)sharedInstance;
 + (TipsView*)tipsViewWithPushHand:(UIImage*)pushHandImage

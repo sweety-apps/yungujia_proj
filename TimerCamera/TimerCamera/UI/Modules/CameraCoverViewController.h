@@ -14,6 +14,7 @@
 #import "BlackCat.h"
 #import "AudioUtility.h"
 #import "BaseCameraLogicViewController.h"
+#import "TipsView.h"
 
 @interface CameraCoverViewController : BaseCameraLogicViewController <AudioUtilityPlaybackDelegate, AudioUtilityVolumeDetectDelegate>
 {
@@ -26,6 +27,7 @@
     CommonAnimationButton* _HDRButton;
     CommonAnimationButton* _frontButton;
     BlackCat* _animationCatButton;
+    TipsView* _tipsView;
     NSTimer* _preStartTimingTimer;
     
     BOOL _isFlipingCamera;

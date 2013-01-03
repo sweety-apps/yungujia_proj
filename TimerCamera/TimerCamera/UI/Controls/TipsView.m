@@ -11,6 +11,8 @@
 
 @implementation TipsView
 
+@synthesize tipsViewMaxWidth = _tipsViewMaxWidth;
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -30,8 +32,9 @@
         _tipsLabel.numberOfLines = 0;
         _tipsLabel.textColor = [UIColor whiteColor];
         _tipsLabel.backgroundColor = [UIColor clearColor];
-        _tipsLabel.font = [UIFont systemFontOfSize:36.0];
+        _tipsLabel.font = [UIFont systemFontOfSize:16.0];
         _tipsLabel.textAlignment = UITextAlignmentCenter;
+        _tipsLabel.adjustsFontSizeToFitWidth = NO;
         
         [_containerView addSubview:_tipsBackGroundImageView];
         [_containerView addSubview:_tipsLabel];
@@ -42,6 +45,7 @@
         _tipsContentStringArray = [[NSMutableArray array] retain];
         
         _currentLastSeconds = TIPS_LAST_DEFAULT_SECONDS;
+        _tipsViewMaxWidth = TIPS_VIEW_DEFAULT_WIDTH;
     }
     return self;
 }
@@ -69,6 +73,57 @@
     // Drawing code
 }
 */
+
+#pragma mark TipsView private methods
+
+- (void)doCaculateRectWithContent:(NSString*)content
+{
+    if (_tipsBackGroundImageView.image)
+    {
+        CGSize sizeView = CGSizeZero;
+        CGSize sizeImage = _tipsBackGroundImageView.image.size;
+        CGSize sizeText = [content sizeWithFont:_tipsLabel.font];
+        if (sizeText.width > (_tipsViewMaxWidth - TIPS_LABEL_LEFT_PADDING - TIPS_LABEL_RIGHT_PADDING))
+        {
+            //More Than One Line
+            sizeText = CGSizeMake(_tipsViewMaxWidth - TIPS_LABEL_LEFT_PADDING - TIPS_LABEL_RIGHT_PADDING, 9999);
+            sizeText = [content sizeWithFont:_tipsLabel.font constrainedToSize:sizeText];
+        }
+        sizeView.width = sizeText.width + TIPS_LABEL_LEFT_PADDING + TIPS_LABEL_RIGHT_PADDING;
+        sizeView.height = sizeText.height + TIPS_LABEL_TOP_PADDING + TIPS_LABEL_BOTTOM_PADDING;
+        sizeView.width = sizeView.width > sizeImage.width ? sizeView.width : sizeImage.width;
+        sizeView.height = sizeView.height > sizeImage.height ? sizeView.height : sizeImage.height;
+        sizeText.width = sizeView.width - TIPS_LABEL_LEFT_PADDING - TIPS_LABEL_RIGHT_PADDING;
+        sizeText.height = sizeView.height - TIPS_LABEL_TOP_PADDING - TIPS_LABEL_BOTTOM_PADDING;
+        
+        _pushHandRect = CGRectZero;
+        _bgRect = CGRectZero;
+        _labelRect = CGRectZero;
+        
+        _pushHandRect.size = _pushHandImageView.image.size;
+        _pushHandRect.origin.x = (sizeView.width - _pushHandRect.size.width) / 2.0;
+        _pushHandRect.origin.y = 0;
+        
+        _bgRect.size = sizeView;
+        _bgRect.origin = CGPointZero;
+        
+        _labelRect.size = sizeText;
+        _labelRect.origin.x = TIPS_LABEL_LEFT_PADDING;
+        _labelRect.origin.y = TIPS_LABEL_TOP_PADDING;
+        
+        _selfRect = _bgRect;
+        if (_currentSuperView)
+        {
+            _selfRect.origin.x = (_currentSuperView.frame.size.width - _selfRect.size.width) / 2.0;
+        }
+    }
+}
+
+- (void)onFinishedShow
+{
+    [self setCurrentState:@"hiding"];
+    _showingTimer = nil;
+}
 
 #pragma mark TipsView public methods
 
@@ -132,16 +187,31 @@ static TipsView* gTipsView = nil;
             last:(float)seconds
 {
     _currentLastSeconds = seconds;
+    if (superView)
+    {
+        [superView addSubview:self];
+    }
+    _currentSuperView = superView;
     
     [_tipsContentStringArray addObject:tipsContent];
     NSString* state = self.currentState;
     if([state isEqualToString:@"hide"])
     {
-        
+        [self setCurrentState:@"showing"];
     }
     else if([state isEqualToString:@"show"])
     {
-        
+        if (_showingTimer)
+        {
+            [_showingTimer invalidate];
+        }
+        _showingTimer = [NSTimer scheduledTimerWithTimeInterval:_currentLastSeconds
+                                                         target:self
+                                                       selector:@selector(onFinishedShow)
+                                                       userInfo:nil
+                                                        repeats:NO];
+        [_tipsContentStringArray removeAllObjects];
+        [self doBgAdjustForContent:tipsContent withAnimation:YES];
     }
     else if([state isEqualToString:@"showing"])
     {
@@ -181,19 +251,35 @@ static TipsView* gTipsView = nil;
 {
     if([state isEqualToString:@"hide"])
     {
-        
+        if ([_tipsContentStringArray count] > 0)
+        {
+            [self setCurrentState:@"showing"];
+        }
     }
     else if([state isEqualToString:@"show"])
     {
-        
+        _showingTimer = [NSTimer scheduledTimerWithTimeInterval:_currentLastSeconds
+                                                         target:self
+                                                       selector:@selector(onFinishedShow)
+                                                       userInfo:nil
+                                                        repeats:NO];
+        if ([_tipsContentStringArray count] > 0)
+        {
+            NSString* tipsContent = [_tipsContentStringArray lastObject];
+            [_tipsContentStringArray removeAllObjects];
+            [self doBgAdjustForContent:tipsContent withAnimation:YES];
+        }
     }
     else if([state isEqualToString:@"showing"])
     {
-        
+        NSString* tipsContent = [_tipsContentStringArray lastObject];
+        [_tipsContentStringArray removeAllObjects];
+        [self doBgAdjustForContent:tipsContent withAnimation:NO];
+        [self doHandPush];
     }
     else if([state isEqualToString:@"hiding"])
     {
-        
+        [self doHandPull];
     }
 }
 
@@ -204,14 +290,102 @@ static TipsView* gTipsView = nil;
 
 #pragma mark Animations
 
-- (void)doAdjustViewAnimationWithContent:(NSString*)content withAnimation:(BOOL)animated
+- (void)doHandPush
 {
-    if (_tipsBackGroundImageView.image)
+    self.hidden = NO;
+    CGRect rect = _bgRect;
+    CGRect rectHand = _pushHandRect;
+    rect.origin.x = 0;
+    rect.origin.y = -_bgRect.size.height;
+    _containerView.frame = rect;
+    rectHand.origin.y -= 2;
+    _pushHandImageView.frame = rectHand;
+    rect.origin.y = 0;
+    _tipsLabel.alpha = 0.0;
+    
+    [UIView animateWithDuration:0.15 animations:^(){
+        _containerView.frame = rect;
+    } completion:^(BOOL finished){
+        [UIView animateWithDuration:0.1 animations:^(){
+            _pushHandImageView.frame = _pushHandRect;
+        } completion:^(BOOL finshed){
+            [UIView animateWithDuration:0.15 animations:^(){
+                CGRect rectHand = _pushHandRect;
+                rectHand.origin.y -= _pushHandRect.size.height;
+                _pushHandImageView.frame = rectHand;
+                _tipsLabel.alpha = 1.0;
+            } completion:^(BOOL finshed){
+                [self setCurrentState:@"show"];
+            }];
+        }];
+        
+    }];
+}
+
+- (void)doHandPull
+{
+    self.hidden = NO;
+    CGRect rect = _bgRect;
+    CGRect rectHand = _pushHandRect;
+    _containerView.frame = rect;
+    rectHand.origin.y -= rectHand.size.height;
+    _pushHandImageView.frame = rectHand;
+    rectHand.origin.y = -2;
+    _tipsLabel.alpha = 1.0;
+    
+    [UIView animateWithDuration:0.1 animations:^(){
+        _pushHandImageView.frame = rectHand;
+        _tipsLabel.alpha = 0.0;
+    } completion:^(BOOL finished){
+        [UIView animateWithDuration:0.05 animations:^(){
+            _pushHandImageView.frame = _pushHandRect;
+        } completion:^(BOOL finshed){
+            [UIView animateWithDuration:0.15 animations:^(){
+                CGRect rect = _bgRect;
+                rect.origin.y -= _bgRect.size.height;
+                _containerView.frame = rect;
+            } completion:^(BOOL finshed){
+                self.hidden = YES;
+                [self setCurrentState:@"hide"];
+            }];
+        }];
+        
+    }];
+}
+
+- (void)doBgAdjustForContent:(NSString*)content withAnimation:(BOOL)animated
+{
+    [self doCaculateRectWithContent:content];
+    
+    _tipsLabel.alpha = 1.0;
+    
+    if(animated)
     {
-        CGSize sizeView = CGSizeZero;
-        CGSize sizeImage = _tipsBackGroundImageView.image.size;
-        sizeView = sizeImage;
-        //CGSize sizeText = [content sizeWithFont:_tipsLabel.font forWidth:<#(CGFloat)#> lineBreakMode:];
+        [UIView animateWithDuration:0.2 animations:^(){
+            _tipsLabel.alpha = 0.0;
+        } completion:^(BOOL finished){
+            [UIView animateWithDuration:0.3 animations:^(){
+                self.frame = _selfRect;
+                _containerView.frame = _bgRect;
+                _tipsBackGroundImageView.frame = _bgRect;
+            } completion:^(BOOL finished){
+                _tipsLabel.frame = _labelRect;
+                _tipsLabel.text = content;
+                [UIView animateWithDuration:0.4 animations:^(){
+                    _tipsLabel.alpha = 1.0;
+                } completion:^(BOOL finished){
+                    
+                }];
+            }];
+        }];
+    }
+    else
+    {
+        self.frame = _selfRect;
+        _containerView.frame = _bgRect;
+        _tipsBackGroundImageView.frame = _bgRect;
+        _tipsLabel.frame = _labelRect;
+        _tipsLabel.text = content;
     }
 }
 

@@ -412,6 +412,10 @@
     
     [self.view addSubview:_volMonitor];
     
+    _tipsView = [[TipsView tipsViewWithPushHand:[UIImage imageNamed:@"/Resource/Picture/main/tips_cat_hand"]
+                                backGroundImage:[[UIImage imageNamed:@"/Resource/Picture/main/tips_fish_bg_strtechable"] stretchableImageWithLeftCapWidth:50 topCapHeight:28] ]
+                 retain];
+    
     //add events
     [_timerButton.button addTarget:self
                             action:@selector(onPressedTimer:)
@@ -465,6 +469,7 @@
     _animationCatButton = nil;
     [_volMonitor removeFromSuperview];
     _volMonitor = nil;
+    ReleaseAndNilView(_tipsView);
 }
 
 - (void)resetStatus
@@ -513,6 +518,7 @@
             [_shotButton setIcon:[UIImage imageNamed:@"/Resource/Picture/main/shot_btn_icon_camera"] withAnimation:YES];
         }
     }
+    [_tipsView showOverWindowTips:@"Starting Timer Now! hahahahahahahahahahahaha!"];
 }
 
 - (void)onPressedShot:(id)sender
@@ -555,6 +561,7 @@
         [CameraOptions sharedInstance].light = AVCaptureTorchModeOn;
         [_torchButton setButtonEnabled:YES];
     }
+    [_tipsView showOverWindowTips:@"Torch Pressed!"];
 }
 
 - (void)onHDRPressed:(id)sender
@@ -569,6 +576,7 @@
         [CameraOptions sharedInstance].hdr = AVCaptureWhiteBalanceModeContinuousAutoWhiteBalance;
         [_HDRButton setButtonEnabled:YES];
     }
+    [_tipsView showOverWindowTips:@"HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH"];
 }
 
 - (void)onFrontPressed:(id)sender
