@@ -555,13 +555,14 @@
     {
         [CameraOptions sharedInstance].light = AVCaptureTorchModeOff;
         [_torchButton setButtonEnabled:NO];
+        [_tipsView showOverWindowTips:LString(@"Torch Light Off!")];
     }
     else
     {
         [CameraOptions sharedInstance].light = AVCaptureTorchModeOn;
         [_torchButton setButtonEnabled:YES];
+        [_tipsView showOverWindowTips:LString(@"Torch Light On!")];
     }
-    [_tipsView showOverWindowTips:@"Torch Pressed!"];
 }
 
 - (void)onHDRPressed:(id)sender
