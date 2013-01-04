@@ -31,6 +31,7 @@
 		BED79FE21690ADAC00FE5C57 /* TipsView.m in Sources */ = {isa = PBXBuildFile; fileRef = BED79FE11690ADAC00FE5C57 /* TipsView.m */; };
 		BEE3D9A6166DD5E2001AE5E9 /* CameraCoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE3D9A5166DD5E2001AE5E9 /* CameraCoverViewController.m */; };
 		BEE3D9A9166DD622001AE5E9 /* BaseCameraLogicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE3D9A8166DD622001AE5E9 /* BaseCameraLogicViewController.m */; };
+		BEEFD53016973270004B93F8 /* text.strings in Resources */ = {isa = PBXBuildFile; fileRef = BEEFD53216973270004B93F8 /* text.strings */; };
 		BEF975B2166A02B800B6C7AC /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEF975B1166A02B800B6C7AC /* Default-568h@2x.png */; };
 		F30053A6165B27F80091CF85 /* UIStateAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = F30053A5165B27F80091CF85 /* UIStateAnimationView.m */; };
 		F30053A9165B2F4B0091CF85 /* AlphaAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = F30053A8165B2F4A0091CF85 /* AlphaAnimationView.m */; };
@@ -95,6 +96,7 @@
 		BEE3D9A5166DD5E2001AE5E9 /* CameraCoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraCoverViewController.m; sourceTree = "<group>"; };
 		BEE3D9A7166DD622001AE5E9 /* BaseCameraLogicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseCameraLogicViewController.h; sourceTree = "<group>"; };
 		BEE3D9A8166DD622001AE5E9 /* BaseCameraLogicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseCameraLogicViewController.m; sourceTree = "<group>"; };
+		BEEFD53116973270004B93F8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/text.strings; sourceTree = "<group>"; };
 		BEF975B1166A02B800B6C7AC /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		F30053A4165B27F80091CF85 /* UIStateAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIStateAnimationView.h; sourceTree = "<group>"; };
 		F30053A5165B27F80091CF85 /* UIStateAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIStateAnimationView.m; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 		BE19EBDE15F359B700065448 = {
 			isa = PBXGroup;
 			children = (
+				BEEFD52D16973267004B93F8 /* Strings */,
 				BEB8E44E1646D36800DC5800 /* Resource */,
 				BEB8E4471646D25700DC5800 /* Default.png */,
 				BEB8E4481646D25700DC5800 /* Default@2x.png */,
@@ -271,6 +274,14 @@
 			path = Modules;
 			sourceTree = "<group>";
 		};
+		BEEFD52D16973267004B93F8 /* Strings */ = {
+			isa = PBXGroup;
+			children = (
+				BEEFD53216973270004B93F8 /* text.strings */,
+			);
+			path = Strings;
+			sourceTree = "<group>";
+		};
 		F30053A2165B27CB0091CF85 /* Base */ = {
 			isa = PBXGroup;
 			children = (
@@ -374,6 +385,7 @@
 				F39891311648B91B006E0703 /* ViewController_iPad.xib in Resources */,
 				F39891331648B91B006E0703 /* ViewController_iPhone.xib in Resources */,
 				BEF975B2166A02B800B6C7AC /* Default-568h@2x.png in Resources */,
+				BEEFD53016973270004B93F8 /* text.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -425,6 +437,14 @@
 				BE19EBF715F359B800065448 /* en */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		BEEFD53216973270004B93F8 /* text.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BEEFD53116973270004B93F8 /* en */,
+			);
+			name = text.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
