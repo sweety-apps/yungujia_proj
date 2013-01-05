@@ -6,5 +6,24 @@
 
 */
 
-"Torch Light On!" = "手电筒已打开！";
-"Torch Light Off!" = "手电筒已关闭。";
+//Camera
+"Torch Light On" = "手电筒已开";
+"Torch Light Off" = "手电筒已关闭";
+"HDR Mode Opened" = "HDR模式打开";
+"HDR Mode Closed" = "HDR模式关闭";
+"Shout aloud to mic, camera timer will fired by the volume." = "大声对麦克风说话，让音量激活拍照倒计时（快门）。";
+"Voice control disabled." = "音量控制已关闭";
+"Camera Timer Fired! \\(^o^)/" = "拍照倒计时开始!\r \\(^o^)/";
+"Camera Timer Is Cancelled o(>_<)o" = "拍照计时被取消\r o(>_<)o";
+
+//Black Cat
+"Black Cat 0" = "<(=ㄒ﹏ㄒ=)>";
+"Black Cat 1" = "<(=°ο°=)>";
+"Black Cat 2" = "<(='_'=)?>";
+"Black Cat 3" = "<(=⊙_⊙=)>";
+"Black Cat 4" = "<(=┘￣Д￣)┘╧═╧";
+"Black Cat 5" = "<(=￢_￢=)>";
+"Black Cat 6" = "<(=╥﹏╥=)>";
+"Black Cat 7" = "<(=$▽$=)>";
+"Black Cat 8" = "<(=￣ε(￣＃)>";
+"Black Cat 9" = "<(=￣.￣=)>";

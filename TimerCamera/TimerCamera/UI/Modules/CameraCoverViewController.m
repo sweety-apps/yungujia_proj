@@ -417,6 +417,10 @@
                  retain];
     
     //add events
+    [_animationCatButton.button addTarget:self
+                                   action:@selector(onPressedBlackCat:)
+                         forControlEvents:UIControlEventTouchUpInside];
+    
     [_timerButton.button addTarget:self
                             action:@selector(onPressedTimer:)
                   forControlEvents:UIControlEventTouchUpInside];
@@ -449,6 +453,7 @@
     [self resetStatus];
     
     [self hideSubViews:NO];
+    [self hideOrShowButtons];
 }
 
 - (void)destorySubViews
@@ -489,6 +494,14 @@
 
 #pragma mark Event Handlers
 
+- (void)onPressedBlackCat:(id)sender
+{
+    srand(time(NULL));
+    int i = rand()%10;
+    NSString* catTips = [NSString stringWithFormat:@"Black Cat %d",i];
+    [_tipsView showTips:LString(catTips) over:self.view];
+}
+
 - (void)onPressedTimer:(id)sender
 {
     if (!_timerButton.buttonEnabled)
@@ -498,8 +511,10 @@
         [[AudioUtility sharedInstance] setVolumeDetectingDelegate:self];
         [[AudioUtility sharedInstance] startDetectingVolume:1.0];
         _volMonitor.currentVolume = VOLUME_INIT_VAL;//1.0;
+        _volMonitor.peakVolume = 1.0;
         [_timerButton setButtonEnabled:YES withAnimation:YES];
         [_shotButton setIcon:[UIImage imageNamed:@"/Resource/Picture/main/shot_btn_icon_timer"] withAnimation:YES];
+        [_tipsView showTips:LString(@"Shout aloud to mic, camera timer will fired by the volume.") over:self.view];
     }
     else
     {
@@ -516,9 +531,9 @@
             _volMonitor.currentVolume = VOLUME_INIT_VAL;
             [_timerButton setButtonEnabled:NO withAnimation:YES];
             [_shotButton setIcon:[UIImage imageNamed:@"/Resource/Picture/main/shot_btn_icon_camera"] withAnimation:YES];
+            [_tipsView showTips:LString(@"Voice control disabled.") over:self.view];
         }
     }
-    [_tipsView showOverWindowTips:@"Starting Timer Now! hahahahahahahahahahahaha!"];
 }
 
 - (void)onPressedShot:(id)sender
@@ -546,6 +561,7 @@
         [[AudioUtility sharedInstance] setVolumeDetectingDelegate:self];
         [[AudioUtility sharedInstance] startDetectingVolume:1.0];
         _volMonitor.currentVolume = VOLUME_INIT_VAL;
+        [_tipsView showTips:LString(@"Camera Timer Is Cancelled o(>_<)o") over:self.view];
     }
 }
 
@@ -555,13 +571,13 @@
     {
         [CameraOptions sharedInstance].light = AVCaptureTorchModeOff;
         [_torchButton setButtonEnabled:NO];
-        [_tipsView showOverWindowTips:LString(@"Torch Light Off!")];
+        [_tipsView showTips:LString(@"Torch Light Off") over:self.view];
     }
     else
     {
         [CameraOptions sharedInstance].light = AVCaptureTorchModeOn;
         [_torchButton setButtonEnabled:YES];
-        [_tipsView showOverWindowTips:LString(@"Torch Light On!")];
+        [_tipsView showTips:LString(@"Torch Light On") over:self.view];
     }
 }
 
@@ -571,13 +587,14 @@
     {
         [CameraOptions sharedInstance].hdr = AVCaptureWhiteBalanceModeLocked;
         [_HDRButton setButtonEnabled:NO];
+        [_tipsView showTips:LString(@"HDR Mode Closed") over:self.view];
     }
     else
     {
         [CameraOptions sharedInstance].hdr = AVCaptureWhiteBalanceModeContinuousAutoWhiteBalance;
         [_HDRButton setButtonEnabled:YES];
+        [_tipsView showTips:LString(@"HDR Mode Opened") over:self.view];
     }
-    [_tipsView showOverWindowTips:@"HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH"];
 }
 
 - (void)onFrontPressed:(id)sender
@@ -590,11 +607,13 @@
     {
         [CameraOptions sharedInstance].imagePicker.cameraDevice = UIImagePickerControllerCameraDeviceRear;
         [self doCameraFilpAnimation];
+        [self hideOrShowButtons];
     }
     else
     {
         [CameraOptions sharedInstance].imagePicker.cameraDevice = UIImagePickerControllerCameraDeviceFront;
         [self doCameraFilpAnimation];
+        [self hideOrShowButtons];
     }
 }
 
@@ -638,6 +657,7 @@
                                                               selector:@selector(startTimer)
                                                               userInfo:nil
                                                                repeats:NO];
+        [_tipsView showTips:LString(@"Camera Timer Fired! \\(^o^)/") over:self.view];
         [_shotButton setIcon:nil withAnimation:YES];
         //[self performSelector:@selector(startTimer) withObject:nil afterDelay:2.0];
         //[self startTimer];
@@ -647,6 +667,32 @@
 
 
 #pragma mark Other
+
+- (void)hideOrShowButtons
+{
+    if (![CameraOptions sharedInstance].isFlashAndLightAvailible)
+    {
+        _torchButton.hidden = YES;
+        return;
+    }
+    if ([CameraOptions sharedInstance].imagePicker.cameraDevice == UIImagePickerControllerCameraDeviceFront)
+    {
+        [UIView animateWithDuration:0.3 animations:^(){
+            _torchButton.alpha = 0.0;
+        } completion:^(BOOL finished){
+            _torchButton.hidden = YES;
+        }];
+    }
+    else
+    {
+        [_torchButton setButtonEnabled:NO];
+        _torchButton.hidden = NO;
+        [UIView animateWithDuration:0.3 animations:^(){
+            _torchButton.alpha = 1.0;
+        } completion:^(BOOL finished){
+        }];
+    }
+}
 
 - (void)doCameraFilpAnimation
 {

@@ -6,5 +6,24 @@
 
 */
 
-"Torch Light On!" = "Torch Light On!";
-"Torch Light Off!" = "Torch Light Off!";
+//Camera
+"Torch Light On" = "Torch Light On";
+"Torch Light Off" = "Torch Light Off";
+"HDR Mode Opened" = "HDR Mode Opened";
+"HDR Mode Closed" = "HDR Mode Closed";
+"Shout aloud to mic, camera timer will fired by the volume." = "Shout aloud to mic, camera timer will fired by the volume.";
+"Voice control disabled." = "Voice control disabled.";
+"Camera Timer Fired! \\(^o^)/" = "Camera Timer Fired! \\(^o^)/";
+"Camera Timer Is Cancelled o(>_<)o" = "Camera Timer Is Cancelled o(>_<)o";
+
+//Black Cat
+"Black Cat 0" = "<(=ㄒ﹏ㄒ=)>";
+"Black Cat 1" = "<(=°ο°=)>";
+"Black Cat 2" = "<(='_'=)?>";
+"Black Cat 3" = "<(=⊙_⊙=)>";
+"Black Cat 4" = "<(=┘￣Д￣)┘╧═╧";
+"Black Cat 5" = "<(=￢_￢=)>";
+"Black Cat 6" = "<(=╥﹏╥=)>";
+"Black Cat 7" = "<(=$▽$=)>";
+"Black Cat 8" = "<(=￣ε(￣＃)>";
+"Black Cat 9" = "<(=￣.￣=)>";

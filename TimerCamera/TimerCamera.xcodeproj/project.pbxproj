@@ -459,6 +459,7 @@
 			);
 			name = text.strings;
 			sourceTree = "<group>";
+			usesTabs = 0;
 		};
 /* End PBXVariantGroup section */
 
