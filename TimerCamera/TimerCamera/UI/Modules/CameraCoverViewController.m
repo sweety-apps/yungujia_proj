@@ -66,6 +66,7 @@
     _HDRButton.hidden = NO;
     _frontButton.hidden = NO;
     _volMonitor.hidden = NO;
+    [self hideOrShowButtons];
     
     void (^doMoveSubViews)(void) = ^(void){
         CGRect rect = CGRectZero;
@@ -514,7 +515,7 @@
         _volMonitor.peakVolume = 1.0;
         [_timerButton setButtonEnabled:YES withAnimation:YES];
         [_shotButton setIcon:[UIImage imageNamed:@"/Resource/Picture/main/shot_btn_icon_timer"] withAnimation:YES];
-        [_tipsView showTips:LString(@"Shout aloud to mic, camera timer will fired by the volume.") over:self.view];
+        [_tipsView showTips:LString(@"Shout aloud to mic, camera timer will fired by the volume.") over:self.view autoCaculateLastTime:YES];
     }
     else
     {

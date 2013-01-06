@@ -9,6 +9,8 @@
 #import "TipsView.h"
 #import "AppDelegate.h"
 
+#define GetReadTimeByString(str) ((float)(((float)[(str) length]) * 60.0 / 300.0))
+
 @implementation TipsView
 
 @synthesize tipsViewMaxWidth = _tipsViewMaxWidth;
@@ -225,6 +227,20 @@ static TipsView* gTipsView = nil;
 
 - (void)showTips:(NSString*)tipsContent
             over:(UIView*)superView
+autoCaculateLastTime:(BOOL)yesOrNo
+{
+    float lastSeconds = TIPS_LAST_DEFAULT_SECONDS;
+    if (yesOrNo)
+    {
+        lastSeconds = GetReadTimeByString(tipsContent);
+    }
+    [self showTips:tipsContent
+              over:superView
+              last:lastSeconds];
+}
+
+- (void)showTips:(NSString*)tipsContent
+            over:(UIView*)superView
 {
     [self showTips:tipsContent
               over:superView
@@ -237,6 +253,14 @@ static TipsView* gTipsView = nil;
     [self showTips:tipsContent
               over:((AppDelegate*)[UIApplication sharedApplication].delegate).window
               last:seconds];
+}
+
+- (void)showOverWindowTips:(NSString*)tipsContent
+      autoCaculateLastTime:(BOOL)yesOrNo
+{
+    [self showTips:tipsContent
+              over:((AppDelegate*)[UIApplication sharedApplication].delegate).window
+autoCaculateLastTime:yesOrNo];
 }
 
 - (void)showOverWindowTips:(NSString*)tipsContent

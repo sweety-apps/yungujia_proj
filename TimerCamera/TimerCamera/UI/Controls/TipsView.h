@@ -11,7 +11,7 @@
 #import "ShotTimer.h"
 
 #define TIPS_LAST_INFINITE (-1.0)
-#define TIPS_LAST_DEFAULT_SECONDS (1.6)
+#define TIPS_LAST_DEFAULT_SECONDS (2.0)
 #define TIPS_VIEW_DEFAULT_WIDTH (170)
 #define TIPS_LABEL_TOP_PADDING (20.0)
 #define TIPS_LABEL_BOTTOM_PADDING (17.0)
@@ -57,9 +57,16 @@
 - (void)showTips:(NSString*)tipsContent
             over:(UIView*)superView;
 
+- (void)showTips:(NSString*)tipsContent
+            over:(UIView*)superView
+autoCaculateLastTime:(BOOL)yesOrNo;
+
 - (void)showOverWindowTips:(NSString*)tipsContent
                       last:(float)seconds;
 
 - (void)showOverWindowTips:(NSString*)tipsContent;
+
+- (void)showOverWindowTips:(NSString*)tipsContent
+      autoCaculateLastTime:(BOOL)yesOrNo;
 
 @end
