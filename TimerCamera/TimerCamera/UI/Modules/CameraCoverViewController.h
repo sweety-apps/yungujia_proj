@@ -15,6 +15,7 @@
 #import "AudioUtility.h"
 #import "BaseCameraLogicViewController.h"
 #import "TipsView.h"
+#import "FocusAimer.h"
 
 @interface CameraCoverViewController : BaseCameraLogicViewController <AudioUtilityPlaybackDelegate, AudioUtilityVolumeDetectDelegate>
 {
@@ -28,8 +29,9 @@
     CommonAnimationButton* _frontButton;
     BlackCat* _animationCatButton;
     TipsView* _tipsView;
-    NSTimer* _preStartTimingTimer;
     
+    NSTimer* _preStartTimingTimer;
+    FocusAimer* _focusView;
     BOOL _isFlipingCamera;
 }
 

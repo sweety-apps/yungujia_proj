@@ -47,6 +47,7 @@
 		F398913C1648B928006E0703 /* Configure.m in Sources */ = {isa = PBXBuildFile; fileRef = F398913A1648B928006E0703 /* Configure.m */; };
 		F398913F1648BA93006E0703 /* ShotTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = F398913E1648BA93006E0703 /* ShotTimer.m */; };
 		F39891411648FE23006E0703 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F39891401648FE22006E0703 /* MediaPlayer.framework */; };
+		F3B18426169AAC5A00CE4791 /* FocusAimer.m in Sources */ = {isa = PBXBuildFile; fileRef = F3B18425169AAC5900CE4791 /* FocusAimer.m */; };
 		F3DAC8131660918B00950E18 /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3DAC8121660918B00950E18 /* MoreViewController.m */; };
 		F3DAC82B1664680800950E18 /* TimerButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F3DAC82A1664680800950E18 /* TimerButton.m */; };
 		F3DAC82E1664689A00950E18 /* VolumeMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = F3DAC82D1664689A00950E18 /* VolumeMonitor.m */; };
@@ -130,6 +131,8 @@
 		F398913D1648BA93006E0703 /* ShotTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShotTimer.h; sourceTree = "<group>"; };
 		F398913E1648BA93006E0703 /* ShotTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShotTimer.m; sourceTree = "<group>"; };
 		F39891401648FE22006E0703 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		F3B18424169AAC5800CE4791 /* FocusAimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FocusAimer.h; sourceTree = "<group>"; };
+		F3B18425169AAC5900CE4791 /* FocusAimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FocusAimer.m; sourceTree = "<group>"; };
 		F3DAC8111660918B00950E18 /* MoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreViewController.h; sourceTree = "<group>"; };
 		F3DAC8121660918B00950E18 /* MoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreViewController.m; sourceTree = "<group>"; };
 		F3DAC8291664680800950E18 /* TimerButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerButton.h; sourceTree = "<group>"; };
@@ -328,6 +331,8 @@
 				F376D5391668AD6600CEEEE1 /* SliderTouchCoverView.m */,
 				BED79FE01690ADAB00FE5C57 /* TipsView.h */,
 				BED79FE11690ADAC00FE5C57 /* TipsView.m */,
+				F3B18424169AAC5800CE4791 /* FocusAimer.h */,
+				F3B18425169AAC5900CE4791 /* FocusAimer.m */,
 			);
 			path = Controls;
 			sourceTree = "<group>";
@@ -438,6 +443,7 @@
 				BEE3D9A6166DD5E2001AE5E9 /* CameraCoverViewController.m in Sources */,
 				BEE3D9A9166DD622001AE5E9 /* BaseCameraLogicViewController.m in Sources */,
 				BED79FE21690ADAC00FE5C57 /* TipsView.m in Sources */,
+				F3B18426169AAC5A00CE4791 /* FocusAimer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

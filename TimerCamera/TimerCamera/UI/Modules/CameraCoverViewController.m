@@ -323,6 +323,11 @@
 
 - (void)createSubViews
 {
+    _focusView = [FocusAimer focusAimerWithFocusImage:[UIImage imageNamed:@"/Resource/Picture/main/focus_camera_point_normal2"]
+                                       andAimingImage:[UIImage imageNamed:@"/Resource/Picture/main/focus_camera_point_normal1"]];
+    
+    [self.view addSubview:_focusView];
+    
     _animationCatButton = [BlackCat
                            catWithCatImage:[UIImage imageNamed:@"/Resource/Picture/main/animation_cat_bg_with_eye"]
                            forCatCloseEyeImage:[UIImage imageNamed:@"/Resource/Picture/main/animation_cat_bg_no_eye"]
@@ -475,6 +480,8 @@
     _animationCatButton = nil;
     [_volMonitor removeFromSuperview];
     _volMonitor = nil;
+    [_focusView removeFromSuperview];
+    _focusView = nil;
     ReleaseAndNilView(_tipsView);
 }
 
@@ -792,6 +799,20 @@
     else
     {
         [super cancelTimer];
+    }
+}
+
+- (IBAction)handleTapGesture:(UIGestureRecognizer*)gestureRecognizer
+{
+    if (![[CameraOptions sharedInstance] currentDevice].isAdjustingFocus
+        && ![[CameraOptions sharedInstance] currentDevice].isAdjustingExposure)
+    {
+        [super handleTapGesture:gestureRecognizer];
+        if ([gestureRecognizer isKindOfClass:[UITapGestureRecognizer class]])
+        {
+            CGPoint pt = [gestureRecognizer locationInView:self.view];
+            [_focusView focusAndAimAtPoint:pt];
+        }
     }
 }
 

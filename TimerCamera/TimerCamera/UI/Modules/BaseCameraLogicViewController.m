@@ -282,6 +282,9 @@
         pt.x /= self.view.frame.size.width;
         pt.y /= self.view.frame.size.height;
         NSLog(@"Location touch ( %f , %f )",pt.x,pt.y);
+        pt.x /= self.currentScale;
+        pt.y /= self.currentScale;
+        NSLog(@"Scaled touch ( %f , %f )",pt.x,pt.y);
         
         [CameraOptions sharedInstance].exporePoint = pt;
         [CameraOptions sharedInstance].focusPoint = pt;
