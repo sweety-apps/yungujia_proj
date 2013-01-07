@@ -816,4 +816,23 @@
     }
 }
 
+- (BOOL)shouldSavePhoto:(UIImage*)image
+{
+    CGRect rect = [CameraOptions sharedInstance].imagePicker.view.frame;
+    rect.size.height = rect.size.width * image.size.height / image.size.width;
+    CGRect tRect = rect;
+    rect.size.width *= _currentScale;
+    rect.size.height *= _currentScale;
+    rect.origin.x = rect.origin.x + ((tRect.size.width - rect.size.width) * 0.5);
+    rect.origin.y = rect.origin.y + ((tRect.size.height - rect.size.height) * 0.5);
+    
+    CGRect dstRect = CGRectMake(145, 420, 30, 30 * image.size.height / image.size.width);
+    [self doImageCollectionAnimationFrom:rect
+                                      to:dstRect
+                               withImage:image
+                               superView:self.view
+                      insertAboveSubView:_animationCatButton];
+    return YES;
+}
+
 @end

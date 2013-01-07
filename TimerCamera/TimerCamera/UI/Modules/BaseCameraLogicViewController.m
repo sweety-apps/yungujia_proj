@@ -58,7 +58,7 @@
     [CameraOptions sharedInstance].imagePicker.delegate = self;
     [self.view addSubview:[CameraOptions sharedInstance].imagePicker.view];
     //[CameraOptions sharedInstance].imagePicker.cameraOverlayView = _containerView;
-    [self.view addGestureRecognizer:_tapGesture];
+    [[CameraOptions sharedInstance].imagePicker.view addGestureRecognizer:_tapGesture];
     [self.view addGestureRecognizer:_pinchGesture];
     _tapGesture.cancelsTouchesInView = NO;
     [CameraOptions sharedInstance].imagePicker.view.frame = self.view.frame;
@@ -96,6 +96,8 @@
         return YES;
     }
 }
+
+#pragma mark Private Methods
 
 - (void)detectCameraSize
 {
@@ -135,6 +137,42 @@
     }
 }
 
+- (void)doImageCollectionAnimationFrom:(CGRect)srcRect
+                                    to:(CGRect)destRect
+                             withImage:(UIImage*)image
+                             superView:(UIView*)superView
+                    insertAboveSubView:(UIView*)subView
+{
+    CGRect rect = srcRect;
+    UIImageView* imageView = [[[UIImageView alloc] initWithImage:image] autorelease];
+    imageView.frame = rect;
+    [superView insertSubview:imageView aboveSubview:subView];
+    
+    rect.size = destRect.size;
+    rect.origin.x = srcRect.origin.x + ((srcRect.size.width - destRect.size.width) * 0.5);
+    rect.origin.y = srcRect.origin.y + ((srcRect.size.height - destRect.size.height) * 0.5);
+    
+    [UIView animateWithDuration:0.8 animations:^(){
+        imageView.frame = rect;
+    } completion:^(BOOL finshed){
+        [UIView animateWithDuration:0.3 animations:^(){
+            imageView.frame = destRect;
+        } completion:^(BOOL finished){
+            [UIView animateWithDuration:0.2 animations:^(){
+                imageView.alpha = 0.0;
+            } completion:^(BOOL finished){
+                [imageView removeFromSuperview];
+            }];
+        }];
+    }];
+    
+}
+
+- (BOOL)shouldSavePhoto:(UIImage*)image
+{
+    return YES;
+}
+
 #pragma mark - UIImagePickerControllerDelegate
 
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
@@ -158,10 +196,13 @@
     UIImage *image= [info objectForKey:UIImagePickerControllerOriginalImage];
     NSLog(@"OH YEAH!!! Take a pic, size = (%f,%f)",image.size.width, image.size.height);
     
-    [self showPreview:image];
+    //[self showPreview:image];
     
-    [self.imageSaveQueue addObject:image];
-    UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+    if ([self shouldSavePhoto:image])
+    {
+        [self.imageSaveQueue addObject:image];
+        UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+    }
     
     //save jpeg photo
     if (0)

@@ -48,4 +48,12 @@
 
 - (void)takePicture;
 
+- (BOOL)shouldSavePhoto:(UIImage*)image;
+
+- (void)doImageCollectionAnimationFrom:(CGRect)srcRect
+                                    to:(CGRect)destRect
+                             withImage:(UIImage*)image
+                             superView:(UIView*)superView
+                    insertAboveSubView:(UIView*)subView;
+
 @end
