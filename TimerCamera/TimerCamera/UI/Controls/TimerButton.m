@@ -8,6 +8,8 @@
 
 #import "TimerButton.h"
 
+#define BUTTON_RECT CGRectMake(13,45,60,63)
+
 @implementation TimerButton
 
 - (id)initWithFrame:(CGRect)frame
@@ -98,6 +100,8 @@
         _pressedImage1 = [pi1 retain];
         _pressedImage2 = [pi2 retain];
         _normalImage1 = [ni1 retain];
+        
+        self.button.frame = BUTTON_RECT;
     }
     return self;
 }

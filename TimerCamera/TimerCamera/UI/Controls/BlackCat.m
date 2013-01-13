@@ -21,6 +21,8 @@
 #define LEFT_EYE_DOWN_ORIGIN CGPointMake(24,35)
 #define RIGHT_EYE_DOWN_ORIGIN CGPointMake(54,35)
 
+#define BUTTON_RECT CGRectMake(14,15,57,47)
+
 
 @implementation BlackCat
 
@@ -99,6 +101,8 @@ forCatCloseEyeImage:(UIImage*)cc
         [self setCurrentState:@"normal"];
         
         [self bringSubviewToFront:_button];
+        
+        self.button.frame = BUTTON_RECT;
     }
     return self;
 }

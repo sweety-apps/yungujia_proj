@@ -8,7 +8,8 @@
 
 #import "ShotButton.h"
 
-#define SHOT_BTN_LABEL_RECT CGRectMake(24,48,86,86)
+#define SHOT_BTN_LABEL_RECT CGRectMake(19,48,86,86)
+#define SHOT_BTN_RECT CGRectMake(29,58,75,75)
 
 @implementation ShotButton
 
@@ -69,6 +70,7 @@
         [self addSubview:_coverIconView];
         [self addSubview:_coverLabel];
         
+        self.button.frame = SHOT_BTN_RECT;
     }
     return self;
 }

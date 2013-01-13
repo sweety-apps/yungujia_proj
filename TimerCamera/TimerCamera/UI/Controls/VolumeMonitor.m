@@ -22,6 +22,9 @@
 #define VOLUME_IMAGE_STRETCH_POINT_Y (32.0)
 #define PUNCHED_POINT_IMAGE_END_X (106.0)
 
+#define STOP_BTN_RECT CGRectMake(12,0,66,64)
+#define STOP_BTN_OFFSET_X (60)
+
 @implementation VolumeMonitor
 
 @synthesize barButton = _barButton;
@@ -97,8 +100,11 @@
         _reachedPeakView.frame = rect;
         _barButton = [barButton retain];
         _stopButton = [stopButton retain];
-        _stopButton.frame = rect;
         _slideCover.frame = rect;
+        rect.origin.x += STOP_BTN_OFFSET_X;
+        _stopButton.frame = rect;
+        _stopButton.button.frame = STOP_BTN_RECT;
+        
         _backGroudView.userInteractionEnabled = NO;
         _mouthView.userInteractionEnabled = NO;
         _barButton.userInteractionEnabled = NO;

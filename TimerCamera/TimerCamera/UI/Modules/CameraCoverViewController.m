@@ -228,7 +228,7 @@
         
         ////
         rect = _animationCatButton.frame;
-        rect.origin.x = 122;
+        rect.origin.x = 141;
         rect.origin.y = self.view.frame.size.height - 82;
         rect.origin.y += rect.size.height;
         _animationCatButton.frame = rect;
