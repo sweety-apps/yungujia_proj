@@ -189,6 +189,7 @@
         rect = _albumButton.frame;
         rect.origin.x -= 0 - BOUNCE_OFFSET;
         _albumButton.frame = rect;
+        _albumRawRect = rect;
     };
     
     if (animated)
@@ -870,8 +871,8 @@
 {
     CGRect rect = [self getCameraScaledRectWithHeightWidthRatio:image.size.height / image.size.width];
     
-    CGRect rectAlbumRaw = _albumButton.frame;
-    CGRect rectAlbumNew = _albumButton.frame;
+    CGRect rectAlbumRaw = _albumRawRect;
+    CGRect rectAlbumNew = _albumRawRect;
     rectAlbumNew.origin.x -= 51;
     
     CGRect dstRect = CGRectMake(0, 0, 40, 40 * image.size.height / image.size.width);

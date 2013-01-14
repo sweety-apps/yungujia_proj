@@ -34,6 +34,7 @@
     NSTimer* _preStartTimingTimer;
     FocusAimer* _focusView;
     BOOL _isFlipingCamera;
+    CGRect _albumRawRect;
 }
 
 

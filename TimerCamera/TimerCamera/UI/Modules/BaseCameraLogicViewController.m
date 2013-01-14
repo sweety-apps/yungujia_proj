@@ -238,6 +238,8 @@
         ReleaseAndNilView(_takingPictureFlashEffectView);
     }];
     
+    _isTakingPicture = NO;
+    
     if ([self shouldSavePhoto:image])
     {
         [self.imageSaveQueue addObject:image];
@@ -318,7 +320,13 @@
 
 -(void)takePicture
 {
+    if (_isTakingPicture)
+    {
+        return;
+    }
     [[CameraOptions sharedInstance].imagePicker takePicture];
+    _isTakingPicture = YES;
+    ReleaseAndNilView(_takingPictureFlashEffectView);
     if (_takingPictureFlashEffectView == nil)
     {
         _takingPictureFlashEffectView = [[UIView alloc] initWithFrame:[self getCameraScaledRectWithHeightWidthRatio:4.0/3.0]];

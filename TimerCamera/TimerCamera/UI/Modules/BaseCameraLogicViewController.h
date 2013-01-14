@@ -30,6 +30,8 @@
     UITapGestureRecognizer* _previewTap;
     
     UIView* _takingPictureFlashEffectView;
+    
+    BOOL _isTakingPicture;
 }
 
 @property (nonatomic,retain) IBOutlet UITapGestureRecognizer* tapGesture;
