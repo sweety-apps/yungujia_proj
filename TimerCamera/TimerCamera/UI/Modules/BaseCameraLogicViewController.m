@@ -84,6 +84,7 @@
     ReleaseAndNilView(_picturePreview);
     ReleaseAndNil(_tapGesture);
     ReleaseAndNil(_pinchGesture);
+    ReleaseAndNilView(_takingPictureFlashEffectView);
     
     self.imageSaveQueue = nil;
 }
@@ -142,7 +143,21 @@
                              withImage:(UIImage*)image
                              superView:(UIView*)superView
                     insertAboveSubView:(UIView*)subView
+                         animatedBlock:(void (^)(void))animation
+                             doneBlock:(void (^)(void))doneBlock
 {
+    if (subView == nil)
+    {
+        if (_takingPictureFlashEffectView)
+        {
+            subView = _takingPictureFlashEffectView;
+        }
+        else
+        {
+            subView = [CameraOptions sharedInstance].imagePicker.view;
+        }
+    }
+    
     CGRect rect = srcRect;
     UIImageView* imageView = [[[UIImageView alloc] initWithImage:image] autorelease];
     imageView.frame = rect;
@@ -152,8 +167,12 @@
     rect.origin.x = srcRect.origin.x + ((srcRect.size.width - destRect.size.width) * 0.5);
     rect.origin.y = srcRect.origin.y + ((srcRect.size.height - destRect.size.height) * 0.5);
     
-    [UIView animateWithDuration:0.8 animations:^(){
+    [UIView animateWithDuration:0.5 animations:^(){
         imageView.frame = rect;
+        if (animation)
+        {
+            animation();
+        }
     } completion:^(BOOL finshed){
         [UIView animateWithDuration:0.3 animations:^(){
             imageView.frame = destRect;
@@ -162,10 +181,26 @@
                 imageView.alpha = 0.0;
             } completion:^(BOOL finished){
                 [imageView removeFromSuperview];
+                if (doneBlock)
+                {
+                    doneBlock();
+                }
             }];
         }];
     }];
     
+}
+
+- (CGRect)getCameraScaledRectWithHeightWidthRatio:(float)ratio
+{
+    CGRect rect = [CameraOptions sharedInstance].imagePicker.view.frame;
+    rect.size.height = rect.size.width * ratio;
+    CGRect tRect = rect;
+    rect.size.width *= _currentScale;
+    rect.size.height *= _currentScale;
+    rect.origin.x = rect.origin.x + ((tRect.size.width - rect.size.width) * 0.5);
+    rect.origin.y = rect.origin.y + ((tRect.size.height - rect.size.height) * 0.5);
+    return rect;
 }
 
 - (BOOL)shouldSavePhoto:(UIImage*)image
@@ -197,6 +232,11 @@
     NSLog(@"OH YEAH!!! Take a pic, size = (%f,%f)",image.size.width, image.size.height);
     
     //[self showPreview:image];
+    [UIView animateWithDuration:1.0 animations:^(){
+        _takingPictureFlashEffectView.alpha = 0.0;
+    } completion:^(BOOL finished){
+        ReleaseAndNilView(_takingPictureFlashEffectView);
+    }];
     
     if ([self shouldSavePhoto:image])
     {
@@ -279,6 +319,14 @@
 -(void)takePicture
 {
     [[CameraOptions sharedInstance].imagePicker takePicture];
+    if (_takingPictureFlashEffectView == nil)
+    {
+        _takingPictureFlashEffectView = [[UIView alloc] initWithFrame:[self getCameraScaledRectWithHeightWidthRatio:4.0/3.0]];
+        _takingPictureFlashEffectView.backgroundColor = [UIColor whiteColor];
+        _takingPictureFlashEffectView.alpha = 0.0;
+        [self.view insertSubview:_takingPictureFlashEffectView aboveSubview:[CameraOptions sharedInstance].imagePicker.view];
+        [UIView animateWithDuration:0.2 animations:^(){_takingPictureFlashEffectView.alpha = 1.0;}];
+    }
 }
 
 #pragma mark - test code

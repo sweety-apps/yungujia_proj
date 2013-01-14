@@ -27,6 +27,7 @@
     CommonAnimationButton* _torchButton;
     CommonAnimationButton* _HDRButton;
     CommonAnimationButton* _frontButton;
+    CommonAnimationButton* _albumButton;
     BlackCat* _animationCatButton;
     TipsView* _tipsView;
     

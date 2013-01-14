@@ -28,6 +28,8 @@
     
     UIImageView* _picturePreview;
     UITapGestureRecognizer* _previewTap;
+    
+    UIView* _takingPictureFlashEffectView;
 }
 
 @property (nonatomic,retain) IBOutlet UITapGestureRecognizer* tapGesture;
@@ -54,6 +56,10 @@
                                     to:(CGRect)destRect
                              withImage:(UIImage*)image
                              superView:(UIView*)superView
-                    insertAboveSubView:(UIView*)subView;
+                    insertAboveSubView:(UIView*)subView
+                         animatedBlock:(void (^)(void))animation
+                             doneBlock:(void (^)(void))doneBlock;
+
+- (CGRect)getCameraScaledRectWithHeightWidthRatio:(float)ratio;
 
 @end

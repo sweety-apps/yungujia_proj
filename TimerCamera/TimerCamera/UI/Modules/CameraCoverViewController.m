@@ -66,6 +66,7 @@
     _HDRButton.hidden = NO;
     _frontButton.hidden = NO;
     _volMonitor.hidden = NO;
+    _albumButton.hidden = NO;
     [self hideOrShowButtons];
     
     void (^doMoveSubViews)(void) = ^(void){
@@ -122,6 +123,11 @@
         rect = _volMonitor.frame;
         rect.origin.x -= rect.size.width + BOUNCE_OFFSET;
         _volMonitor.frame = rect;
+        
+        ////
+        rect = _albumButton.frame;
+        rect.origin.x -= rect.size.width + BOUNCE_OFFSET;
+        _albumButton.frame = rect;
     };
     
     void (^doSetSubViewFramesAndBounce)(void) = ^(void){
@@ -178,6 +184,11 @@
         rect = _volMonitor.frame;
         rect.origin.x -= 0 - BOUNCE_OFFSET;
         _volMonitor.frame = rect;
+        
+        ////
+        rect = _albumButton.frame;
+        rect.origin.x -= 0 - BOUNCE_OFFSET;
+        _albumButton.frame = rect;
     };
     
     if (animated)
@@ -295,6 +306,13 @@
         rect.origin.x = self.view.frame.size.width;
         rect.origin.y = self.view.frame.size.height - _shotButton.frame.size.height - rect.size.height;
         _volMonitor.frame = rect;
+        
+        
+        ////
+        rect = _albumButton.frame;
+        rect.origin.x = self.view.frame.size.width + 51;
+        rect.origin.y = _volMonitor.frame.origin.y - rect.size.height + 6;
+        _albumButton.frame = rect;
     };
     
     void (^doHideSubViews)(BOOL) = ^(BOOL finished){
@@ -306,6 +324,7 @@
         _HDRButton.hidden = YES;
         _frontButton.hidden = YES;
         _volMonitor.hidden = YES;
+        _albumButton.hidden = YES;
     };
     
     if (animated)
@@ -418,6 +437,15 @@
     
     [self.view addSubview:_volMonitor];
     
+    _albumButton = [CommonAnimationButton
+                    buttonWithPressedImageSizeforNormalImage1:[UIImage imageNamed:@"/Resource/Picture/main/album_small_open_normal1"]
+                    forNormalImage2:[UIImage imageNamed:@"/Resource/Picture/main/album_small_open_normal2"]
+                    forPressedImage:[UIImage imageNamed:@"/Resource/Picture/main/album_small_open_pressed"]
+                    forEnabledImage1:nil
+                    forEnabledImage2:nil];
+    
+    [self.view addSubview:_albumButton];
+    
     _tipsView = [[TipsView tipsViewWithPushHand:[UIImage imageNamed:@"/Resource/Picture/main/tips_cat_hand"]
                                 backGroundImage:[[UIImage imageNamed:@"/Resource/Picture/main/tips_fish_bg_strtechable"] stretchableImageWithLeftCapWidth:50 topCapHeight:28] ]
                  retain];
@@ -455,6 +483,10 @@
                                       action:@selector(onStopTimerPressed:)
                             forControlEvents:UIControlEventTouchUpInside];
     
+    [_albumButton.button addTarget:self
+                            action:@selector(onAlbumPressed:)
+                  forControlEvents:UIControlEventTouchUpInside];
+    
     
     [self resetStatus];
     
@@ -464,6 +496,18 @@
 
 - (void)destorySubViews
 {
+    //remove event handlers
+    [_shotButton.button removeTarget:self action:nil forControlEvents:UIControlEventAllTouchEvents];
+    [_timerButton.button removeTarget:self action:nil forControlEvents:UIControlEventAllTouchEvents];
+    [_configButton.button removeTarget:self action:nil forControlEvents:UIControlEventAllTouchEvents];
+    [_torchButton.button removeTarget:self action:nil forControlEvents:UIControlEventAllTouchEvents];
+    [_HDRButton.button removeTarget:self action:nil forControlEvents:UIControlEventAllTouchEvents];
+    [_frontButton.button removeTarget:self action:nil forControlEvents:UIControlEventAllTouchEvents];
+    [_animationCatButton.button removeTarget:self action:nil forControlEvents:UIControlEventAllTouchEvents];
+    [_volMonitor.barButton.button removeTarget:self action:nil forControlEvents:UIControlEventAllTouchEvents];
+    [_volMonitor.stopButton.button removeTarget:self action:nil forControlEvents:UIControlEventAllTouchEvents];
+    [_albumButton.button removeTarget:self action:nil forControlEvents:UIControlEventAllTouchEvents];
+    
     [_shotButton removeFromSuperview];
     _shotButton = nil;
     [_timerButton removeFromSuperview];
@@ -482,6 +526,8 @@
     _volMonitor = nil;
     [_focusView removeFromSuperview];
     _focusView = nil;
+    [_albumButton removeFromSuperview];
+    _albumButton = nil;
     ReleaseAndNilView(_tipsView);
 }
 
@@ -630,6 +676,10 @@
     
 }
 
+- (void)onAlbumPressed:(id)sender
+{
+    
+}
 
 #pragma mark - AudioUtilityVolumeDetectDelegate
 
@@ -818,20 +868,34 @@
 
 - (BOOL)shouldSavePhoto:(UIImage*)image
 {
-    CGRect rect = [CameraOptions sharedInstance].imagePicker.view.frame;
-    rect.size.height = rect.size.width * image.size.height / image.size.width;
-    CGRect tRect = rect;
-    rect.size.width *= _currentScale;
-    rect.size.height *= _currentScale;
-    rect.origin.x = rect.origin.x + ((tRect.size.width - rect.size.width) * 0.5);
-    rect.origin.y = rect.origin.y + ((tRect.size.height - rect.size.height) * 0.5);
+    CGRect rect = [self getCameraScaledRectWithHeightWidthRatio:image.size.height / image.size.width];
     
-    CGRect dstRect = CGRectMake(145, 420, 30, 30 * image.size.height / image.size.width);
+    CGRect rectAlbumRaw = _albumButton.frame;
+    CGRect rectAlbumNew = _albumButton.frame;
+    rectAlbumNew.origin.x -= 51;
+    
+    CGRect dstRect = CGRectMake(0, 0, 40, 40 * image.size.height / image.size.width);
+    dstRect.origin.x = rectAlbumNew.origin.x + ((rectAlbumNew.size.width - dstRect.size.width) * 0.5);
+    dstRect.origin.y = rectAlbumNew.origin.y + ((rectAlbumNew.size.height - dstRect.size.height) * 0.5);
+    
+    void (^pushAlbumAnimation)(void)  = ^(void){
+        _albumButton.frame = rectAlbumNew;
+    };
+    
+    void (^restoreAlbumFrame)(void)  = ^(void){
+        [UIView animateWithDuration:0.2 animations:^(){
+            _albumButton.frame = rectAlbumRaw;
+        }];
+    };
+    
     [self doImageCollectionAnimationFrom:rect
                                       to:dstRect
                                withImage:image
                                superView:self.view
-                      insertAboveSubView:_animationCatButton];
+                      insertAboveSubView:nil
+                           animatedBlock:pushAlbumAnimation
+                               doneBlock:restoreAlbumFrame];
+    
     return YES;
 }
 
