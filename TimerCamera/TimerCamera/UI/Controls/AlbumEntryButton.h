@@ -2,7 +2,7 @@
 //  AlbumEntryButton.h
 //  TimerCamera
 //
-//  Created by lijinxin on 13-1-14.
+//  Created by lijinxin on 13-1-15.
 //
 //
 

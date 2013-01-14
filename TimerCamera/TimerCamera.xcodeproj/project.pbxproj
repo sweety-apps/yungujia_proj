@@ -29,6 +29,7 @@
 		BEB8E45A1646DF9800DC5800 /* LoadingAnimateImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB8E4591646DF9800DC5800 /* LoadingAnimateImageView.m */; };
 		BEC3353A16A451A900C60A89 /* QRCodeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC3353916A451A900C60A89 /* QRCodeButton.m */; };
 		BEC3354116A45D0E00C60A89 /* AlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC3354016A45D0E00C60A89 /* AlbumViewController.m */; };
+		BEC3354416A4792200C60A89 /* AlbumEntryButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC3354316A4792200C60A89 /* AlbumEntryButton.m */; };
 		BED79FE21690ADAC00FE5C57 /* TipsView.m in Sources */ = {isa = PBXBuildFile; fileRef = BED79FE11690ADAC00FE5C57 /* TipsView.m */; };
 		BEE3D9A6166DD5E2001AE5E9 /* CameraCoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE3D9A5166DD5E2001AE5E9 /* CameraCoverViewController.m */; };
 		BEE3D9A9166DD622001AE5E9 /* BaseCameraLogicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE3D9A8166DD622001AE5E9 /* BaseCameraLogicViewController.m */; };
@@ -95,6 +96,8 @@
 		BEC3353916A451A900C60A89 /* QRCodeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeButton.m; sourceTree = "<group>"; };
 		BEC3353F16A45D0D00C60A89 /* AlbumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumViewController.h; sourceTree = "<group>"; };
 		BEC3354016A45D0E00C60A89 /* AlbumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumViewController.m; sourceTree = "<group>"; };
+		BEC3354216A4792100C60A89 /* AlbumEntryButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumEntryButton.h; sourceTree = "<group>"; };
+		BEC3354316A4792200C60A89 /* AlbumEntryButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumEntryButton.m; sourceTree = "<group>"; };
 		BED79FE01690ADAB00FE5C57 /* TipsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TipsView.h; sourceTree = "<group>"; };
 		BED79FE11690ADAC00FE5C57 /* TipsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TipsView.m; sourceTree = "<group>"; };
 		BEE3D9A4166DD5E2001AE5E9 /* CameraCoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraCoverViewController.h; sourceTree = "<group>"; };
@@ -343,6 +346,8 @@
 				F3B18425169AAC5900CE4791 /* FocusAimer.m */,
 				BEC3353816A451A900C60A89 /* QRCodeButton.h */,
 				BEC3353916A451A900C60A89 /* QRCodeButton.m */,
+				BEC3354216A4792100C60A89 /* AlbumEntryButton.h */,
+				BEC3354316A4792200C60A89 /* AlbumEntryButton.m */,
 			);
 			path = Controls;
 			sourceTree = "<group>";
@@ -456,6 +461,7 @@
 				F3B18426169AAC5A00CE4791 /* FocusAimer.m in Sources */,
 				BEC3353A16A451A900C60A89 /* QRCodeButton.m in Sources */,
 				BEC3354116A45D0E00C60A89 /* AlbumViewController.m in Sources */,
+				BEC3354416A4792200C60A89 /* AlbumEntryButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
