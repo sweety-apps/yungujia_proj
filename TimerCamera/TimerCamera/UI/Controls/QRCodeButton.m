@@ -8,6 +8,8 @@
 
 #import "QRCodeButton.h"
 
+#define BUTTON_RECT CGRectMake(1,26,61,55)
+
 @implementation QRCodeButton
 
 - (id)initQRCodeButtonWithFrame:(CGRect)frame
@@ -40,6 +42,7 @@
         [self setAnimation:_enabledView andView:_enabledView forState:@"enabled"];
         
         [self setCurrentState:@"normal"];
+        self.button.frame = BUTTON_RECT;
     }
     return self;
 }
