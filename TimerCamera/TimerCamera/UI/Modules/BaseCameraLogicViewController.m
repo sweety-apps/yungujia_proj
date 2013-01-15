@@ -148,58 +148,84 @@
 {
     if (subView == nil)
     {
-        if (_takingPictureFlashEffectView)
-        {
-            subView = _takingPictureFlashEffectView;
-        }
-        else
-        {
-            subView = [CameraOptions sharedInstance].imagePicker.view;
-        }
+        subView = [CameraOptions sharedInstance].imagePicker.view;
     }
     
     CGRect rect = srcRect;
     UIImageView* imageView = [[[UIImageView alloc] initWithImage:image] autorelease];
     imageView.frame = rect;
+    //[superView insertSubview:imageView belowSubview:_takingPictureFlashEffectView];
     [superView insertSubview:imageView aboveSubview:subView];
     
     rect.size = destRect.size;
     rect.origin.x = srcRect.origin.x + ((srcRect.size.width - destRect.size.width) * 0.5);
     rect.origin.y = srcRect.origin.y + ((srcRect.size.height - destRect.size.height) * 0.5);
     
-    [UIView animateWithDuration:0.5 animations:^(){
-        imageView.frame = rect;
-        if (animation)
-        {
-            animation();
-        }
-    } completion:^(BOOL finshed){
-        [UIView animateWithDuration:0.3 animations:^(){
-            imageView.frame = destRect;
-        } completion:^(BOOL finished){
-            [UIView animateWithDuration:0.2 animations:^(){
-                imageView.alpha = 0.0;
+    UIView* coverEffectView = _takingPictureFlashEffectView;
+    
+    void (^takingAnimation)(void) = ^()
+    {
+        [UIView animateWithDuration:0.2 animations:^(){
+            imageView.frame = rect;
+            if (animation)
+            {
+                animation();
+            }
+        } completion:^(BOOL finshed){
+            [UIView animateWithDuration:0.15 animations:^(){
+                imageView.frame = destRect;
             } completion:^(BOOL finished){
-                [imageView removeFromSuperview];
-                if (doneBlock)
-                {
-                    doneBlock();
-                }
+                [UIView animateWithDuration:0.15 animations:^(){
+                    imageView.alpha = 0.0;
+                } completion:^(BOOL finished){
+                    [imageView removeFromSuperview];
+                    if (doneBlock)
+                    {
+                        doneBlock();
+                    }
+                }];
             }];
         }];
-    }];
+    };
     
+    if (coverEffectView)
+    {
+        _takingPictureFlashEffectView = nil;
+        CGRect tRect = coverEffectView.frame;
+        tRect.origin.x += 2;
+        tRect.origin.y += 2;
+        tRect.size.width -= 4;
+        tRect.size.height -= 4;
+        coverEffectView.alpha = 0.65;
+        [UIView animateWithDuration:0.25 animations:^(){
+            coverEffectView.alpha = 0.25;
+        } completion:^(BOOL finished){
+            coverEffectView.alpha = 0.0;
+            [UIView animateWithDuration:0.25 animations:^(){
+                coverEffectView.frame = tRect;
+            } completion:^(BOOL finished){
+                takingAnimation();
+                [coverEffectView removeFromSuperview];
+                [coverEffectView release];
+            }];
+        }];
+    }
+    else
+    {
+        takingAnimation();
+    }
 }
 
 - (CGRect)getCameraScaledRectWithHeightWidthRatio:(float)ratio
 {
     CGRect rect = [CameraOptions sharedInstance].imagePicker.view.frame;
-    rect.size.height = rect.size.width * ratio;
     CGRect tRect = rect;
+    float maxWidth = rect.size.height / ratio;
     rect.size.width *= _currentScale;
-    rect.size.height *= _currentScale;
+    rect.size.width = rect.size.width > maxWidth ? maxWidth : rect.size.width;
+    rect.size.height = rect.size.width * ratio;
     rect.origin.x = rect.origin.x + ((tRect.size.width - rect.size.width) * 0.5);
-    rect.origin.y = rect.origin.y + ((tRect.size.height - rect.size.height) * 0.5);
+    rect.origin.y = rect.origin.y + 0 /*((tRect.size.height - rect.size.height) * 0.5)*/;
     return rect;
 }
 
@@ -232,19 +258,23 @@
     NSLog(@"OH YEAH!!! Take a pic, size = (%f,%f)",image.size.width, image.size.height);
     
     //[self showPreview:image];
-    [UIView animateWithDuration:1.0 animations:^(){
-        _takingPictureFlashEffectView.alpha = 0.0;
-    } completion:^(BOOL finished){
-        ReleaseAndNilView(_takingPictureFlashEffectView);
-    }];
-    
-    _isTakingPicture = NO;
     
     if ([self shouldSavePhoto:image])
     {
         [self.imageSaveQueue addObject:image];
         UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
     }
+    
+    if (_takingPictureFlashEffectView)
+    {
+        [UIView animateWithDuration:1.0 animations:^(){
+            _takingPictureFlashEffectView.alpha = 0.0;
+        } completion:^(BOOL finished){
+            ReleaseAndNilView(_takingPictureFlashEffectView);
+        }];
+    }
+    
+    _isTakingPicture = NO;
     
     //save jpeg photo
     if (0)
