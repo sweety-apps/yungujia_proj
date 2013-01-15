@@ -98,7 +98,7 @@ static BOOL gAllButtonEnabled = YES;
         CGRect rect = frame;
         rect.origin = CGPointMake(0, 0);
         _normalView = [[AlphaAnimationView alloc] initWithFrame:rect];
-        _enabledView = needEnableState ? [[AlphaAnimationView alloc] initWithFrame:rect] : _normalView;
+        _enabledView = needEnableState ? [[AlphaAnimationView alloc] initWithFrame:rect] : [_normalView retain];
         _pressedView = [[UIImageView alloc] initWithFrame:rect];
         [self setAnimation:_normalView andView:_normalView forState:@"normal"];
         [self setAnimation:_enabledView andView:_enabledView forState:@"enabled"];
@@ -112,7 +112,10 @@ static BOOL gAllButtonEnabled = YES;
         [_enabledView setImage1:ei1];
         [_enabledView setImage2:ei2];
         
-        [self setCurrentState:@"normal"];
+        if (!_disableStateWhenInit)
+        {
+            [self setCurrentState:@"normal"];
+        }
         [_button addTarget:self action:@selector(onPressed:) forControlEvents:UIControlEventTouchDown];
         [_button addTarget:self action:@selector(onReleased:) forControlEvents:UIControlEventTouchUpInside];
         [_button addTarget:self action:@selector(onRestored:) forControlEvents:UIControlEventTouchUpOutside];

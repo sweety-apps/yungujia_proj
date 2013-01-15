@@ -67,6 +67,7 @@
     _frontButton.hidden = NO;
     _volMonitor.hidden = NO;
     _albumButton.hidden = NO;
+    _QRCodeButton.hidden = NO;
     [self hideOrShowButtons];
     
     void (^doMoveSubViews)(void) = ^(void){
@@ -128,6 +129,12 @@
         rect = _albumButton.frame;
         rect.origin.x -= rect.size.width + BOUNCE_OFFSET;
         _albumButton.frame = rect;
+        
+        
+        ////
+        rect = _QRCodeButton.frame;
+        rect.origin.y -= rect.size.height + BOUNCE_OFFSET;
+        _QRCodeButton.frame = rect;
     };
     
     void (^doSetSubViewFramesAndBounce)(void) = ^(void){
@@ -190,6 +197,12 @@
         rect.origin.x -= 0 - BOUNCE_OFFSET;
         _albumButton.frame = rect;
         _albumRawRect = rect;
+        
+        
+        ////
+        rect = _QRCodeButton.frame;
+        rect.origin.y -= 0 - BOUNCE_OFFSET;
+        _QRCodeButton.frame = rect;
     };
     
     if (animated)
@@ -240,7 +253,7 @@
         
         ////
         rect = _animationCatButton.frame;
-        rect.origin.x = 141;
+        rect.origin.x = 143;
         rect.origin.y = self.view.frame.size.height - 82;
         rect.origin.y += rect.size.height;
         _animationCatButton.frame = rect;
@@ -314,6 +327,13 @@
         rect.origin.x = self.view.frame.size.width + 51;
         rect.origin.y = _volMonitor.frame.origin.y - rect.size.height + 6;
         _albumButton.frame = rect;
+        
+        
+        ////
+        rect = _QRCodeButton.frame;
+        rect.origin.x = 90;
+        rect.origin.y = self.view.frame.size.height;
+        _QRCodeButton.frame = rect;
     };
     
     void (^doHideSubViews)(BOOL) = ^(BOOL finished){
@@ -326,6 +346,7 @@
         _frontButton.hidden = YES;
         _volMonitor.hidden = YES;
         _albumButton.hidden = YES;
+        _QRCodeButton.hidden = YES;
     };
     
     if (animated)
@@ -447,6 +468,14 @@
     
     [self.view addSubview:_albumButton];
     
+    _QRCodeButton = [QRCodeButton
+                     QRCodebuttonWithPressedImageSizeforNormalImage1:[UIImage imageNamed:@"/Resource/Picture/main/QRCode_icon_normal"]
+                     forNormalImage2:[UIImage imageNamed:@"/Resource/Picture/main/QRCode_icon_red_face"]
+                     forWaterImage:[UIImage imageNamed:@"/Resource/Picture/main/QRCode_icon_water"]
+                     forPressedImage:[UIImage imageNamed:@"/Resource/Picture/main/QRCode_icon_pressed"]];
+    
+    [self.view addSubview:_QRCodeButton];
+    
     _tipsView = [[TipsView tipsViewWithPushHand:[UIImage imageNamed:@"/Resource/Picture/main/tips_cat_hand"]
                                 backGroundImage:[[UIImage imageNamed:@"/Resource/Picture/main/tips_fish_bg_strtechable"] stretchableImageWithLeftCapWidth:50 topCapHeight:28] ]
                  retain];
@@ -488,6 +517,10 @@
                             action:@selector(onAlbumPressed:)
                   forControlEvents:UIControlEventTouchUpInside];
     
+    [_QRCodeButton.button addTarget:self
+                             action:@selector(onQRCodePressed:)
+                   forControlEvents:UIControlEventTouchUpInside];
+    
     
     [self resetStatus];
     
@@ -508,6 +541,7 @@
     [_volMonitor.barButton.button removeTarget:self action:nil forControlEvents:UIControlEventAllTouchEvents];
     [_volMonitor.stopButton.button removeTarget:self action:nil forControlEvents:UIControlEventAllTouchEvents];
     [_albumButton.button removeTarget:self action:nil forControlEvents:UIControlEventAllTouchEvents];
+    [_QRCodeButton.button removeTarget:self action:nil forControlEvents:UIControlEventAllTouchEvents];
     
     [_shotButton removeFromSuperview];
     _shotButton = nil;
@@ -529,6 +563,8 @@
     _focusView = nil;
     [_albumButton removeFromSuperview];
     _albumButton = nil;
+    [_QRCodeButton removeFromSuperview];
+    _QRCodeButton = nil;
     ReleaseAndNilView(_tipsView);
 }
 
@@ -678,6 +714,11 @@
 }
 
 - (void)onAlbumPressed:(id)sender
+{
+    
+}
+
+- (void)onQRCodePressed:(id)sender
 {
     
 }

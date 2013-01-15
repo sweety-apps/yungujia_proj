@@ -53,8 +53,10 @@
 - (void)setFrame:(CGRect)frame
 {
     [super setFrame:frame];
-    _imageView1.frame = frame;
-    _imageView2.frame = frame;
+    CGRect rect = frame;
+    rect.origin = CGPointMake(0, 0);
+    _imageView1.frame = rect;
+    _imageView2.frame = rect;
 }
 
 - (void)setImage1:(UIImage*)image

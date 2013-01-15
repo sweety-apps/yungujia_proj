@@ -10,22 +10,56 @@
 
 @implementation QRCodeButton
 
-- (id)initWithFrame:(CGRect)frame
+- (id)initQRCodeButtonWithFrame:(CGRect)frame
+                forNormalImage1:(UIImage*)ni1
+                forNormalImage2:(UIImage*)ni2
+                  forWaterImage:(UIImage*)wi
+                forPressedImage:(UIImage*)pi
 {
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
+    _disableStateWhenInit = YES;
+    self = [super initWithFrame:frame
+                forNormalImage1:ni1
+                forNormalImage2:ni2
+                forPressedImage:pi
+               forEnabledImage1:ni1
+               forEnabledImage2:ni2];
+    if (self)
+    {
+        CGRect rect = frame;
+        rect.origin = CGPointMake(0, 0);
+        _QRCodeView = [[QRCodeNormalStateAnimationView alloc] initWithFrame:rect];
+        [_QRCodeView setImage1:ni1];
+        [_QRCodeView setImage2:ni2];
+        [_QRCodeView setWaterImage:wi];
+        ReleaseAndNilView(_normalView);
+        ReleaseAndNilView(_enabledView);
+        _normalView = _QRCodeView;
+        _enabledView = [_QRCodeView retain];
+        
+        [self setAnimation:_normalView andView:_normalView forState:@"normal"];
+        [self setAnimation:_enabledView andView:_enabledView forState:@"enabled"];
+        
+        [self setCurrentState:@"normal"];
     }
     return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
++ (QRCodeButton*)QRCodebuttonWithPressedImageSizeforNormalImage1:(UIImage*)ni1
+                                                 forNormalImage2:(UIImage*)ni2
+                                                   forWaterImage:(UIImage*)wi
+                                                 forPressedImage:(UIImage*)pi
 {
-    // Drawing code
+    CGRect rect = CGRectMake(0, 0, pi.size.width, pi.size.height);
+    return [[[QRCodeButton alloc] initQRCodeButtonWithFrame:rect
+                                            forNormalImage1:ni1
+                                            forNormalImage2:ni2
+                                              forWaterImage:wi
+                                            forPressedImage:pi] autorelease];
 }
-*/
+
+- (void)onReleased:(id)sender
+{
+    self.buttonEnabled = _buttonEnabled;
+}
 
 @end

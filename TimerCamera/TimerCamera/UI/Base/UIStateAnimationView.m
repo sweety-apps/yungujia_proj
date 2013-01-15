@@ -17,8 +17,8 @@
     BOOL _loop;
 }
 
-@property (nonatomic,retain) UIView* view;
-@property (nonatomic,retain) id<UIStateAnimation> animation;
+@property (nonatomic,assign) UIView* view;
+@property (nonatomic,assign) id<UIStateAnimation> animation;
 
 @end
 
@@ -38,8 +38,6 @@
 
 - (void)dealloc
 {
-    ReleaseAndNil(_view);
-    ReleaseAndNil(_animation);
     [super dealloc];
 }
 

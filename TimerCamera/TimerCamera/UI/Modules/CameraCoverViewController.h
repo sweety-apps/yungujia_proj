@@ -14,6 +14,7 @@
 #import "BlackCat.h"
 #import "AudioUtility.h"
 #import "BaseCameraLogicViewController.h"
+#import "QRCodeButton.h"
 #import "TipsView.h"
 #import "FocusAimer.h"
 
@@ -29,6 +30,7 @@
     CommonAnimationButton* _frontButton;
     CommonAnimationButton* _albumButton;
     BlackCat* _animationCatButton;
+    QRCodeButton* _QRCodeButton;
     TipsView* _tipsView;
     
     NSTimer* _preStartTimingTimer;

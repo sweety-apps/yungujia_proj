@@ -17,6 +17,7 @@
     UIImageView* _pressedView;
     BOOL _buttonEnabled;
     BOOL _enableAnimations;
+    BOOL _disableStateWhenInit;
 }
 
 @property (nonatomic,assign,readonly) UIButton* button;
