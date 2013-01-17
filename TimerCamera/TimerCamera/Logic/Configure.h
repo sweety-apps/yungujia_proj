@@ -26,8 +26,8 @@
 #define kDefaultFlashModeValue 0
 #define kDefaultHDRValue 0
 #define kDefaultLightValue 0
-#define kDefaultExposureValue 0
-#define kDefaultFocusValue 0
+#define kDefaultExposureValue 2
+#define kDefaultFocusValue 2
 #define kDefaultDevicePositionValue 0
 
 #pragma mark Config File Path

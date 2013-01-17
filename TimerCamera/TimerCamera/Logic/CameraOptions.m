@@ -258,6 +258,9 @@ static CameraOptions* gSI = nil;
 {
     AVCaptureDevice* d = [self currentDevice];
     
+    [d addObserver:self forKeyPath:@"exposureMode" options:(NSKeyValueObservingOptionNew |
+                                                            NSKeyValueObservingOptionOld) context:self];
+    
     NSError* err = nil;
     BOOL lockAcquired = [d lockForConfiguration:&err];
     
@@ -278,6 +281,7 @@ static CameraOptions* gSI = nil;
 
 - (void)setExporePoint:(CGPoint)exporePoint
 {
+    [self setExposureMode:AVCaptureExposureModeLocked];
     AVCaptureDevice* d = [self currentDevice];
     
     NSError* err = nil;
@@ -291,6 +295,7 @@ static CameraOptions* gSI = nil;
         {
             _exporePoint = exporePoint;
             d.exposurePointOfInterest = _exporePoint;
+            d.exposureMode = AVCaptureFocusModeContinuousAutoFocus;
         }
         
         [d unlockForConfiguration];
@@ -299,6 +304,7 @@ static CameraOptions* gSI = nil;
 
 - (void)setFocusPoint:(CGPoint)focusPoint
 {
+    [self setFocus:AVCaptureFocusModeAutoFocus];
     AVCaptureDevice* d = [self currentDevice];
     
     NSError* err = nil;
@@ -311,9 +317,26 @@ static CameraOptions* gSI = nil;
         {
             _focusPoint = focusPoint;
             d.focusPointOfInterest = _focusPoint;
+            d.focusMode = AVCaptureFocusModeAutoFocus;
         }
         
         [d unlockForConfiguration];
+    }
+}
+
+#pragma mark Private Methods
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if (context == self)
+    {
+        NSNumber* newExposureMode = [change objectForKey:NSKeyValueChangeNewKey];
+        NSNumber* oldExposureMode = [change objectForKey:NSKeyValueChangeOldKey];
+        NSLog(@"(*)ExposureMode changed %d to %d(*)",[oldExposureMode intValue],[newExposureMode intValue]);
+    }
+    else
+    {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
 }
 

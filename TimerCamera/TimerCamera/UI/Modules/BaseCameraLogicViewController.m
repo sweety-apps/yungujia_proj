@@ -58,10 +58,12 @@
     [CameraOptions sharedInstance].imagePicker.delegate = self;
     [self.view addSubview:[CameraOptions sharedInstance].imagePicker.view];
     //[CameraOptions sharedInstance].imagePicker.cameraOverlayView = _containerView;
-    [[CameraOptions sharedInstance].imagePicker.view addGestureRecognizer:_tapGesture];
+    [self.view addGestureRecognizer:_tapGesture];
     [self.view addGestureRecognizer:_pinchGesture];
     _tapGesture.cancelsTouchesInView = NO;
     [CameraOptions sharedInstance].imagePicker.view.frame = self.view.frame;
+    [CameraOptions sharedInstance].exposureMode = AVCaptureExposureModeContinuousAutoExposure;//AVCaptureExposureModeLocked;//
+    [CameraOptions sharedInstance].focus = AVCaptureFocusModeContinuousAutoFocus;//AVCaptureFocusModeLocked;//AVCaptureFocusModeContinuousAutoFocus;
     
     _lastScale = 1.0;
     _currentScale = 1.0;
@@ -414,7 +416,7 @@
         NSLog(@"Scaled touch ( %f , %f )",pt.x,pt.y);
         
         [CameraOptions sharedInstance].exporePoint = pt;
-        [CameraOptions sharedInstance].focusPoint = pt;
+        //[CameraOptions sharedInstance].focusPoint = pt;
     }
 }
 
