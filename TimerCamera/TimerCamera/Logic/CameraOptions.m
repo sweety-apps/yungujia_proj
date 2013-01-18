@@ -72,9 +72,9 @@ static CameraOptions* gSI = nil;
 {
     gSI.light = getConfigForInt(kLight);
     gSI.flash = getConfigForInt(kFlashMode);
-    gSI.focus = getConfigForInt(kFocus);
+    //gSI.focus = getConfigForInt(kFocus);
     gSI.hdr = getConfigForInt(kHDR);
-    gSI.exposureMode = getConfigForInt(kExposure);
+    //gSI.exposureMode = getConfigForInt(kExposure);
 }
 
 - (AVCaptureDevice*)configurableDevice
@@ -114,6 +114,24 @@ static CameraOptions* gSI = nil;
     }
     
     return d;
+}
+
+- (void)setValuesForExporePoint:(CGPoint)exporePoint focusPoint:(CGPoint)focusPoint
+{
+    AVCaptureDevice* d = [self currentDevice];
+    
+    NSError* err = nil;
+    BOOL lockAcquired = [d lockForConfiguration:&err];
+    
+    if (!lockAcquired) {
+        // log err and handle...
+    } else {
+        
+        [self setFocusPointWithoutLock:focusPoint device:d];
+        [self setExporePointWithoutLock:exporePoint device:d];
+        
+        [d unlockForConfiguration];
+    }
 }
 
 #pragma mark - Property Re-defines
@@ -214,6 +232,9 @@ static CameraOptions* gSI = nil;
 {
     AVCaptureDevice* d = [self currentDevice];
     
+    [d addObserver:self forKeyPath:@"focusMode" options:(NSKeyValueObservingOptionNew |
+                                                         NSKeyValueObservingOptionOld) context:self];
+    
     NSError* err = nil;
     BOOL lockAcquired = [d lockForConfiguration:&err];
     
@@ -229,7 +250,7 @@ static CameraOptions* gSI = nil;
     }
     _focus = d.focusMode;
     
-    setAndSaveConfigForInt(kFocus, _focus);
+    //setAndSaveConfigForInt(kFocus, _focus);
 }
 
 -(void)setHdr:(AVCaptureWhiteBalanceMode)hdr
@@ -261,6 +282,7 @@ static CameraOptions* gSI = nil;
     [d addObserver:self forKeyPath:@"exposureMode" options:(NSKeyValueObservingOptionNew |
                                                             NSKeyValueObservingOptionOld) context:self];
     
+    
     NSError* err = nil;
     BOOL lockAcquired = [d lockForConfiguration:&err];
     
@@ -276,7 +298,7 @@ static CameraOptions* gSI = nil;
     }
     _exposureMode = d.exposureMode;
     
-    setAndSaveConfigForInt(kExposure, _light);
+    //setAndSaveConfigForInt(kExposure, _light);
 }
 
 - (void)setExporePoint:(CGPoint)exporePoint
@@ -291,12 +313,7 @@ static CameraOptions* gSI = nil;
         // log err and handle...
     } else {
         
-        if (d.exposurePointOfInterestSupported)
-        {
-            _exporePoint = exporePoint;
-            d.exposurePointOfInterest = _exporePoint;
-            d.exposureMode = AVCaptureFocusModeContinuousAutoFocus;
-        }
+        [self setExporePointWithoutLock:exporePoint device:d];
         
         [d unlockForConfiguration];
     }
@@ -313,12 +330,8 @@ static CameraOptions* gSI = nil;
     if (!lockAcquired) {
         // log err and handle...
     } else {
-        if (d.focusPointOfInterestSupported && !d.adjustingFocus)
-        {
-            _focusPoint = focusPoint;
-            d.focusPointOfInterest = _focusPoint;
-            d.focusMode = AVCaptureFocusModeAutoFocus;
-        }
+        
+        [self setFocusPointWithoutLock:focusPoint device:d];
         
         [d unlockForConfiguration];
     }
@@ -326,13 +339,65 @@ static CameraOptions* gSI = nil;
 
 #pragma mark Private Methods
 
+- (void)setExporePointWithoutLock:(CGPoint)exporePoint device:(AVCaptureDevice*)d
+{
+    if (d.exposurePointOfInterestSupported)
+    {
+        _exporePoint = exporePoint;
+        d.exposurePointOfInterest = _exporePoint;
+        if([d isExposureModeSupported:AVCaptureFocusModeContinuousAutoFocus])
+        {
+            d.exposureMode = AVCaptureFocusModeContinuousAutoFocus;
+        }
+        else if ([d isExposureModeSupported:AVCaptureFocusModeAutoFocus])
+        {
+            d.exposureMode = AVCaptureFocusModeAutoFocus;
+        }
+        else if ([d isExposureModeSupported:AVCaptureFocusModeLocked])
+        {
+            d.exposureMode = AVCaptureFocusModeLocked;
+        }
+            
+    }
+}
+
+- (void)setFocusPointWithoutLock:(CGPoint)focusPoint device:(AVCaptureDevice*)d
+{
+    if (d.focusPointOfInterestSupported && !d.adjustingFocus)
+    {
+        _focusPoint = focusPoint;
+        d.focusPointOfInterest = _focusPoint;
+        if ([d isFocusModeSupported:AVCaptureFocusModeAutoFocus])
+        {
+            d.focusMode = AVCaptureFocusModeAutoFocus;
+        }
+        else if ([d isFocusModeSupported:AVCaptureFocusModeContinuousAutoFocus])
+        {
+            d.focusMode = AVCaptureFocusModeContinuousAutoFocus;
+        }
+        else if ([d isFocusModeSupported:AVCaptureFocusModeLocked])
+        {
+            d.focusMode = AVCaptureFocusModeLocked;
+        }
+    }
+}
+
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if (context == self)
     {
-        NSNumber* newExposureMode = [change objectForKey:NSKeyValueChangeNewKey];
-        NSNumber* oldExposureMode = [change objectForKey:NSKeyValueChangeOldKey];
-        NSLog(@"(*)ExposureMode changed %d to %d(*)",[oldExposureMode intValue],[newExposureMode intValue]);
+        if ([keyPath isEqualToString:@"exposureMode"])
+        {
+            NSNumber* newExposureMode = [change objectForKey:NSKeyValueChangeNewKey];
+            NSNumber* oldExposureMode = [change objectForKey:NSKeyValueChangeOldKey];
+            NSLog(@"(*)ExposureMode changed %d to %d(*)",[oldExposureMode intValue],[newExposureMode intValue]);
+        }
+        else if ([keyPath isEqualToString:@"focusMode"])
+        {
+            NSNumber* newFocusMode = [change objectForKey:NSKeyValueChangeNewKey];
+            NSNumber* oldFocusMode = [change objectForKey:NSKeyValueChangeOldKey];
+            NSLog(@"(0|0)FocusMode changed %d to %d(0|0)",[oldFocusMode intValue],[newFocusMode intValue]);
+        }
     }
     else
     {

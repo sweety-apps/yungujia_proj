@@ -406,16 +406,24 @@
 {
     if ([gestureRecognizer isKindOfClass:[UITapGestureRecognizer class]])
     {
+        //竖屏的时候x,y是反的
         CGPoint pt = [gestureRecognizer locationInView:self.view];
+        float t = pt.x;
+        pt.x = pt.y;
+        pt.y = t;
         NSLog(@"Get a touch ( %f , %f )",pt.x,pt.y);
-        pt.x /= self.view.frame.size.width;
-        pt.y /= self.view.frame.size.height;
+        CGRect rect = [self getCameraScaledRectWithHeightWidthRatio:4.0/3.0];
+        pt.y /= rect.size.width;
+        pt.x /= rect.size.height;
+        pt.x = pt.x > 1.0 ? 1.0 : (pt.x < 0.0 ? 0.0 : pt.x);
+        pt.y = pt.y > 1.0 ? 1.0 : (pt.y < 0.0 ? 0.0 : pt.y);
         NSLog(@"Location touch ( %f , %f )",pt.x,pt.y);
         pt.x /= self.currentScale;
         pt.y /= self.currentScale;
         NSLog(@"Scaled touch ( %f , %f )",pt.x,pt.y);
         
-        [CameraOptions sharedInstance].exporePoint = pt;
+        [[CameraOptions sharedInstance] setValuesForExporePoint:pt focusPoint:pt];
+        //[CameraOptions sharedInstance].exporePoint = pt;
         //[CameraOptions sharedInstance].focusPoint = pt;
     }
 }

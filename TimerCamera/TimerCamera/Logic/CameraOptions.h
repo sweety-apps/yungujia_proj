@@ -47,5 +47,6 @@
 
 -(AVCaptureDevice*)currentDevice;
 -(AVCaptureDevice*)configurableDevice;
+-(void)setValuesForExporePoint:(CGPoint)exporePoint focusPoint:(CGPoint)focusPoint;
 
 @end
