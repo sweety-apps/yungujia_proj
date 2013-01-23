@@ -11,7 +11,7 @@
 #import "AudioUtility.h"
 #import "ShotTimer.h"
 
-#define kBGColor()  [UIColor colorWithRed:(97.0/255.0) green:(61.0/255.0) blue:(30.0/255.0) alpha:1.0]
+#define kBGColor()  [UIColor colorWithRed:(140.0/255.0) green:(200.0/255.0) blue:(0.0/255.0) alpha:1.0]
 
 @interface BaseCameraLogicViewController : UIViewController <UINavigationControllerDelegate,UIImagePickerControllerDelegate, UIGestureRecognizerDelegate, AudioUtilityPlaybackDelegate, AudioUtilityVolumeDetectDelegate, ShotTimerDelegate>
 {

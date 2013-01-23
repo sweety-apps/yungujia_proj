@@ -8,7 +8,8 @@
 
 //Camera
 "Torch Light On" = "Torch Light On";
-"Torch Light Off" = "Torch Light Off";
+"All Lights Off" = "All Lights Off";
+"Flash On" = "Flash On";
 "HDR Mode Opened" = "HDR Mode Opened";
 "HDR Mode Closed" = "HDR Mode Closed";
 "Shout aloud to mic, camera timer will fired by the volume." = "Shout aloud to mic, camera timer will fired by the volume.";

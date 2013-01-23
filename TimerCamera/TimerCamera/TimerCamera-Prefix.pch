@@ -11,9 +11,6 @@
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
-
-#define ReleaseAndNil(x) if(x){[(x) release]; (x) = nil; }
-#define ReleaseAndNilView(x) if(x){[(x) removeFromSuperview]; [(x) release]; (x) = nil; }
-#define LString(key) NSLocalizedStringFromTable((key), @"text",(key))
+    #import "BaseUtilitiesFuncions.h"
 
 #endif

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "CommonAnimationButton.h"
+#import "CommonAnimationTripleStateButton.h"
 #import "TimerButton.h"
 #import "VolumeMonitor.h"
 #import "ShotButton.h"
@@ -25,7 +26,7 @@
     TimerButton* _timerButton;
     VolumeMonitor* _volMonitor;
     CommonAnimationButton* _configButton;
-    CommonAnimationButton* _torchButton;
+    CommonAnimationTripleStateButton* _torchButton;
     CommonAnimationButton* _HDRButton;
     CommonAnimationButton* _frontButton;
     CommonAnimationButton* _albumButton;

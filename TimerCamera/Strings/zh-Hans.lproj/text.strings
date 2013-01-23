@@ -8,7 +8,8 @@
 
 //Camera
 "Torch Light On" = "手电筒已开";
-"Torch Light Off" = "手电筒已关闭";
+"All Lights Off" = "所有光源已关闭";
+"Flash On" = "闪光灯已开";
 "HDR Mode Opened" = "HDR模式打开";
 "HDR Mode Closed" = "HDR模式关闭";
 "Shout aloud to mic, camera timer will fired by the volume." = "大声对麦克风说话，让音量激活拍照倒计时（快门）。";

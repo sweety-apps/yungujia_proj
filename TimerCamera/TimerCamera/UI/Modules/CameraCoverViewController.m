@@ -406,12 +406,17 @@
     [self.view addSubview:_configButton];
     
     
-    _torchButton = [CommonAnimationButton
-                    buttonWithPressedImageSizeforNormalImage1:[UIImage imageNamed:@"/Resource/Picture/main/torch_normal1"]
-                    forNormalImage2:[UIImage imageNamed:@"/Resource/Picture/main/torch_normal2"]
-                    forPressedImage:[UIImage imageNamed:@"/Resource/Picture/main/torch_pressed"]
-                    forEnabledImage1:[UIImage imageNamed:@"/Resource/Picture/main/torch_enable1"]
-                    forEnabledImage2:[UIImage imageNamed:@"/Resource/Picture/main/torch_enable2"]];
+    _torchButton = [CommonAnimationTripleStateButton
+                    tripleButtonWithPressedImageSizeforNormalImage1:[UIImage imageNamed:@"/Resource/Picture/main/torch_disable1"]
+                    forNormalImage2:[UIImage imageNamed:@"/Resource/Picture/main/torch_disable2"]
+                    forNormalPressedImage:[UIImage imageNamed:@"/Resource/Picture/main/torch_pressed"]
+                    forEnabledImage1:[UIImage imageNamed:@"/Resource/Picture/main/torch_normal1"]
+                    forEnabledImage2:[UIImage imageNamed:@"/Resource/Picture/main/torch_normal2"]
+                    forEnabledPressedImage:[UIImage imageNamed:@"/Resource/Picture/main/torch_pressed"]
+                    forExtendImage1:[UIImage imageNamed:@"/Resource/Picture/main/torch_enable1"]
+                    forExtendImage2:[UIImage imageNamed:@"/Resource/Picture/main/torch_enable2"]
+                    forExtendPressedImage:[UIImage imageNamed:@"/Resource/Picture/main/torch_pressed"]];
+    
     [self.view addSubview:_torchButton];
     
     
@@ -571,7 +576,19 @@
 - (void)resetStatus
 {
     [CameraOptions sharedInstance].light = AVCaptureTorchModeOff;
-    [_torchButton setButtonEnabled:NO];
+    [CameraOptions sharedInstance].flash = AVCaptureFlashModeOff;
+    [_torchButton setCurrentButtonState:kNormalButtonState];
+    /*
+    if ([CameraOptions sharedInstance].flash == AVCaptureFlashModeOn)
+    {
+        [_torchButton setCurrentButtonState:kEnableButtonState];
+    }
+    if ([CameraOptions sharedInstance].flash == AVCaptureFlashModeOff)
+    {
+        [_torchButton setCurrentButtonState:kNormalButtonState];
+    }
+     */
+    
     
     if ([CameraOptions sharedInstance].hdr == AVCaptureWhiteBalanceModeContinuousAutoWhiteBalance)
     {
@@ -660,15 +677,27 @@
 {
     if ([CameraOptions sharedInstance].light == AVCaptureTorchModeOn)
     {
+        [CameraOptions sharedInstance].flash = AVCaptureFlashModeOff;
         [CameraOptions sharedInstance].light = AVCaptureTorchModeOff;
-        [_torchButton setButtonEnabled:NO];
-        [_tipsView showTips:LString(@"Torch Light Off") over:self.view];
+        [_torchButton setCurrentButtonState:kNormalButtonState];
+        [_tipsView showTips:LString(@"All Lights Off") over:self.view];
     }
     else
     {
-        [CameraOptions sharedInstance].light = AVCaptureTorchModeOn;
-        [_torchButton setButtonEnabled:YES];
-        [_tipsView showTips:LString(@"Torch Light On") over:self.view];
+        if ([CameraOptions sharedInstance].flash == AVCaptureFlashModeOff)
+        {
+            [CameraOptions sharedInstance].flash = AVCaptureFlashModeOn;
+            [CameraOptions sharedInstance].light = AVCaptureTorchModeOff;
+            [_torchButton setCurrentButtonState:kEnableButtonState];
+            [_tipsView showTips:LString(@"Flash On") over:self.view];
+        }
+        else
+        {
+            [CameraOptions sharedInstance].flash = AVCaptureFlashModeOff;
+            [CameraOptions sharedInstance].light = AVCaptureTorchModeOn;
+            [_torchButton setCurrentButtonState:kExtendButtonState];
+            [_tipsView showTips:LString(@"Torch Light On") over:self.view];
+        }
     }
 }
 

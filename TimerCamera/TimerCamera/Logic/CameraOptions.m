@@ -42,6 +42,7 @@ static CameraOptions* gSI = nil;
             ipc.showsCameraControls = NO;
             
             self.imagePicker = ipc;
+            self.imagePicker.cameraFlashMode = UIImagePickerControllerCameraFlashModeOff;
         }
         
         _maxScale = 50.f;
@@ -70,8 +71,8 @@ static CameraOptions* gSI = nil;
 
 -(void)restoreState
 {
-    gSI.light = getConfigForInt(kLight);
-    gSI.flash = getConfigForInt(kFlashMode);
+    //gSI.light = getConfigForInt(kLight);
+    //gSI.flash = getConfigForInt(kFlashMode);
     //gSI.focus = getConfigForInt(kFocus);
     gSI.hdr = getConfigForInt(kHDR);
     //gSI.exposureMode = getConfigForInt(kExposure);
@@ -151,7 +152,15 @@ static CameraOptions* gSI = nil;
 
 - (AVCaptureTorchMode)light
 {
-    AVCaptureDevice* d = [self currentDevice];
+    AVCaptureDevice* d = nil;
+    if (self.isFlashAndLightAvailible)
+    {
+        d = [self currentDevice];
+    }
+    else
+    {
+        d = [self configurableDevice];
+    }
     _light = d.torchMode;
     return _light;
 }
@@ -159,13 +168,13 @@ static CameraOptions* gSI = nil;
 - (void)setLight:(AVCaptureTorchMode)mode
 {
     AVCaptureDevice* d = nil;
-    if (!self.isFlashAndLightAvailible)
+    if (self.isFlashAndLightAvailible)
     {
-        mode = AVCaptureTorchModeOff;
         d = [self currentDevice];
     }
     else
     {
+        mode = AVCaptureTorchModeOff;
         d = [self configurableDevice];
     }
     
@@ -190,23 +199,33 @@ static CameraOptions* gSI = nil;
 
 - (AVCaptureFlashMode)flash
 {
-    AVCaptureDevice* d = [self currentDevice];
-    _flash = d.torchMode;
-    return _flash;
-}
-
-- (void)setFlash:(AVCaptureFlashMode)flash
-{
     AVCaptureDevice* d = nil;
-    if (!self.isFlashAndLightAvailible)
+    if (self.isFlashAndLightAvailible)
     {
-        flash = AVCaptureFlashModeOff;
         d = [self currentDevice];
     }
     else
     {
         d = [self configurableDevice];
     }
+    _flash = d.flashMode;
+    return _flash;
+}
+
+- (void)setFlash:(AVCaptureFlashMode)flash
+{
+    AVCaptureDevice* d = nil;
+    if (self.isFlashAndLightAvailible)
+    {
+        d = [self currentDevice];
+    }
+    else
+    {
+        flash = AVCaptureFlashModeOff;
+        d = [self configurableDevice];
+    }
+    
+    BOOL avaliable = d.connected;
     
     NSError* err = nil;
     BOOL lockAcquired = [d lockForConfiguration:&err];

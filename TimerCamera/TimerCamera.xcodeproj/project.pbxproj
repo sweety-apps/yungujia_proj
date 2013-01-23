@@ -12,6 +12,9 @@
 		BE19EBF215F359B800065448 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE19EBF115F359B800065448 /* CoreGraphics.framework */; };
 		BE19EBFA15F359B800065448 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BE19EBF915F359B800065448 /* main.m */; };
 		BE19EBFE15F359B800065448 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BE19EBFD15F359B800065448 /* AppDelegate.m */; };
+		BE46388616B00EBE00227BA9 /* CommonAnimationTripleStateButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BE46388516B00EBE00227BA9 /* CommonAnimationTripleStateButton.m */; };
+		BE46388B16B039E100227BA9 /* BaseUtilitiesFuncions.m in Sources */ = {isa = PBXBuildFile; fileRef = BE46388A16B039E100227BA9 /* BaseUtilitiesFuncions.m */; };
+		BE46388D16B03BBC00227BA9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE46388C16B03BBC00227BA9 /* QuartzCore.framework */; };
 		BE89BE671605DB6600D2F091 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE89BE661605DB6600D2F091 /* CoreAudio.framework */; };
 		BE89BE6A1605DB6F00D2F091 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE89BE691605DB6F00D2F091 /* CoreFoundation.framework */; };
 		BE89BE6C1605DB7700D2F091 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE89BE6B1605DB7700D2F091 /* AudioToolbox.framework */; };
@@ -68,6 +71,11 @@
 		BE19EBFB15F359B800065448 /* TimerCamera-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TimerCamera-Prefix.pch"; sourceTree = "<group>"; };
 		BE19EBFC15F359B800065448 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		BE19EBFD15F359B800065448 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		BE46388416B00EBE00227BA9 /* CommonAnimationTripleStateButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonAnimationTripleStateButton.h; sourceTree = "<group>"; };
+		BE46388516B00EBE00227BA9 /* CommonAnimationTripleStateButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonAnimationTripleStateButton.m; sourceTree = "<group>"; };
+		BE46388916B039E100227BA9 /* BaseUtilitiesFuncions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseUtilitiesFuncions.h; sourceTree = "<group>"; };
+		BE46388A16B039E100227BA9 /* BaseUtilitiesFuncions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseUtilitiesFuncions.m; sourceTree = "<group>"; };
+		BE46388C16B03BBC00227BA9 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		BE89BE661605DB6600D2F091 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		BE89BE691605DB6F00D2F091 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		BE89BE6B1605DB7700D2F091 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -159,6 +167,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE46388D16B03BBC00227BA9 /* QuartzCore.framework in Frameworks */,
 				F39891411648FE23006E0703 /* MediaPlayer.framework in Frameworks */,
 				BE89BE6C1605DB7700D2F091 /* AudioToolbox.framework in Frameworks */,
 				BE89BE6A1605DB6F00D2F091 /* CoreFoundation.framework in Frameworks */,
@@ -199,6 +208,7 @@
 		BE19EBEC15F359B800065448 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BE46388C16B03BBC00227BA9 /* QuartzCore.framework */,
 				F39891401648FE22006E0703 /* MediaPlayer.framework */,
 				BE89BE6B1605DB7700D2F091 /* AudioToolbox.framework */,
 				BE89BE691605DB6F00D2F091 /* CoreFoundation.framework */,
@@ -234,6 +244,16 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		BE46388816B0399F00227BA9 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				BE46388916B039E100227BA9 /* BaseUtilitiesFuncions.h */,
+				BE46388A16B039E100227BA9 /* BaseUtilitiesFuncions.m */,
+			);
+			name = Utilities;
+			path = TimerCamera/Utilities;
+			sourceTree = SOURCE_ROOT;
+		};
 		BE89BE6D1605DBA300D2F091 /* AudioUtility */ = {
 			isa = PBXGroup;
 			children = (
@@ -259,6 +279,7 @@
 		BEB8E4571646DF0A00DC5800 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				BE46388816B0399F00227BA9 /* Utilities */,
 				BEE3D9A2166DD5C0001AE5E9 /* Modules */,
 				F3DAC827166467BD00950E18 /* Controls */,
 				F30053A2165B27CB0091CF85 /* Base */,
@@ -310,6 +331,8 @@
 				F30053A8165B2F4A0091CF85 /* AlphaAnimationView.m */,
 				F30053AA165B2FDA0091CF85 /* CommonAnimationButton.h */,
 				F30053AB165B2FDB0091CF85 /* CommonAnimationButton.m */,
+				BE46388416B00EBE00227BA9 /* CommonAnimationTripleStateButton.h */,
+				BE46388516B00EBE00227BA9 /* CommonAnimationTripleStateButton.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -462,6 +485,8 @@
 				BEC3353A16A451A900C60A89 /* QRCodeButton.m in Sources */,
 				BEC3354116A45D0E00C60A89 /* AlbumViewController.m in Sources */,
 				BEC3354F16A5B75F00C60A89 /* QRCodeNormalStateAnimationView.m in Sources */,
+				BE46388616B00EBE00227BA9 /* CommonAnimationTripleStateButton.m in Sources */,
+				BE46388B16B039E100227BA9 /* BaseUtilitiesFuncions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

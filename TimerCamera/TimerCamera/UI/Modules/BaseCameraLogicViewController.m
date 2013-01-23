@@ -263,8 +263,8 @@
     
     if ([self shouldSavePhoto:image])
     {
-        [self.imageSaveQueue addObject:image];
-        UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+        //[self.imageSaveQueue addObject:image];
+        //UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
     }
     
     if (_takingPictureFlashEffectView)
@@ -356,6 +356,7 @@
     {
         return;
     }
+    UIImage* testImage = [BaseUtilitiesFuncions grabUIView:self.view/*[CameraOptions sharedInstance].imagePicker.view*/];
     [[CameraOptions sharedInstance].imagePicker takePicture];
     _isTakingPicture = YES;
     ReleaseAndNilView(_takingPictureFlashEffectView);
