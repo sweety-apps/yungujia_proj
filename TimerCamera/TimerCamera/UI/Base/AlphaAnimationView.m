@@ -69,6 +69,16 @@
     _imageView2.image = image;
 }
 
+- (UIImage*)getImage1
+{
+    return _imageView1.image;
+}
+
+- (UIImage*)getImage2
+{
+    return _imageView2.image;
+}
+
 - (void)alphaAnimationSelector
 {
     if (_disableAnimation || _animationStoped)

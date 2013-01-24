@@ -10,6 +10,11 @@
 
 #define BUTTON_RECT CGRectMake(13,45,60,63)
 
+#define HittedStateLastSeconds (5.0)
+
+static NSString* stayStateTable[kCountOfButtonTripleStates] = {@"normal",@"enabled",@"extend"};
+static NSString* pressedStateTable[kCountOfButtonTripleStates] = {@"pressed",@"pressed1",@"pressed2"};
+
 @implementation TimerButton
 
 - (id)initWithFrame:(CGRect)frame
@@ -23,308 +28,254 @@
 
 - (void)dealloc
 {
-    ReleaseAndNil(_pressedImage1);
-    ReleaseAndNil(_pressedImage2);
-    ReleaseAndNil(_normalImage1);
+    [self releaseAllRetainedImages];
+    [_hittedRecoverTimer invalidate];
     [super dealloc];
 }
 
-/*
- // Only override drawRect: if you perform custom drawing.
- // An empty implementation adversely affects performance during animation.
- - (void)drawRect:(CGRect)rect
- {
- // Drawing code
- }
- */
-
-- (void)onPressed:(id)sender
-{
-    if (!_buttonEnabled)
-    {
-        [self setCurrentState:@"pressed"];
-    }
-    else
-    {
-        [self setCurrentState:@"pressed2"];
-    }
-}
+#pragma mark Override method
 
 - (void)onReleased:(id)sender
 {
-    if (!_buttonEnabled)
-    {
-        _normalView.disableAnimation = YES;
-        //[self setCurrentState:@"enableAnimate"];
-    }
-    else
-    {
-        _enabledView.disableAnimation = YES;
-        //[self setCurrentState:@"disableAnimate"];
-    }
-    self.buttonEnabled = _buttonEnabled;
+    _stayViewTable[_currentButtonState].disableAnimation = YES;
 }
 
-- (void)onRestored:(id)sender
+-       (id)initWithFrame:(CGRect)frame
+          forNormalImage1:(UIImage*)ni1
+          forNormalImage2:(UIImage*)ni2
+    forNormalPressedImage:(UIImage*)npi
+         forEnabledImage1:(UIImage*)ei1
+         forEnabledImage2:(UIImage*)ei2
+   forEnabledPressedImage:(UIImage*)epi
+          forExtendImage1:(UIImage*)xi1
+          forExtendImage2:(UIImage*)xi2
+    forExtendPressedImage:(UIImage*)xpi
 {
-    self.buttonEnabled = _buttonEnabled;
-}
-
-- (id)initWithFrame:(CGRect)frame
-    forNormalImage1:(UIImage*)ni1
-    forNormalImage2:(UIImage*)ni2
-   forPressedImage1:(UIImage*)pi1
-   forPressedImage2:(UIImage*)pi2
-   forEnabledImage1:(UIImage*)ei1
-   forEnabledImage2:(UIImage*)ei2
-{
-    self = [self initWithFrame:frame
-               forNormalImage1:ni1
-               forNormalImage2:ni2
-               forPressedImage:pi1
-              forEnabledImage1:ei1
-              forEnabledImage2:ei2];
+    for (int i = kNormalButtonState; i < kCountOfButtonTripleStates; ++i)
+    {
+        _transStateWithAnimation[i] = NO;
+    }
+    self = [super initWithFrame:frame
+                forNormalImage1:ni1
+                forNormalImage2:ni2
+          forNormalPressedImage:npi
+               forEnabledImage1:ei1
+               forEnabledImage2:ei2
+         forEnabledPressedImage:epi
+                forExtendImage1:xi1
+                forExtendImage2:xi2
+          forExtendPressedImage:xpi];
     if (self)
     {
-        CGRect rect = frame;
-        rect.origin = CGPointMake(0, 0);
-        _pressedView2 = [[UIImageView alloc] initWithFrame:rect];
-        [self setAnimation:nil andView:_pressedView2 forState:@"pressed2"];
-        
-        pi2 = pi2 ? pi2 : (pi1 ? pi1 : ni1);
-        [_pressedView2 setImage:pi2];
-        
-        [self setAnimation:self andView:_pressedView forState:@"enableAnimate"];
-        [self setAnimation:self andView:_pressedView2 forState:@"disableAnimate"];
-        
-        _pressedImage1 = [pi1 retain];
-        _pressedImage2 = [pi2 retain];
-        _normalImage1 = [ni1 retain];
-        
-        self.button.frame = BUTTON_RECT;
+        for (int i = kNormalButtonState; i < kCountOfButtonTripleStates; ++i)
+        {
+            [self setAnimation:self andView:_stayViewTable[i] forState:stayStateTable[i]];
+            [self setAnimation:self andView:_pressedViewTable[i] forState:pressedStateTable[i]];
+        }
     }
     return self;
 }
 
-+ (TimerButton*)buttonWithPressedImageSizeforNormalImage1:(UIImage*)ni1
-                                          forNormalImage2:(UIImage*)ni2
-                                         forPressedImage1:(UIImage*)pi1
-                                         forPressedImage2:(UIImage*)pi2
-                                         forEnabledImage1:(UIImage*)ei1
-                                         forEnabledImage2:(UIImage*)ei2
+#pragma mark Private Methods
+
+- (void)releaseAllRetainedImages
 {
-    CGRect rect = CGRectMake(0, 0, pi1.size.width, pi1.size.height);
-    return [[[TimerButton alloc] initWithFrame:rect
-                               forNormalImage1:ni1
-                               forNormalImage2:ni2
-                              forPressedImage1:pi1
-                              forPressedImage2:pi2
-                              forEnabledImage1:ei1
-                              forEnabledImage2:ei2] autorelease];
+    ReleaseAndNil(_normalImage1);
+    ReleaseAndNil(_normalImage2);
+    ReleaseAndNil(_normalPressedImage);
+    ReleaseAndNil(_hittedNormalImage1);
+    ReleaseAndNil(_hittedNormalImage2);
+    ReleaseAndNil(_hittedNormalPressedImage);
 }
 
-- (void)setButtonEnabled:(BOOL)buttonEnabled
+- (void)startHittedState
 {
-    [self setButtonEnabled:buttonEnabled withAnimation:NO];
-}
-
-- (void)setButtonEnabled:(BOOL)buttonEnabled withAnimation:(BOOL)animated
-{
-    if (_buttonEnabled != buttonEnabled)
+    if (_hittedNormalImage1)
     {
-        if (buttonEnabled)
-        {
-            if (animated)
-            {
-                [self setCurrentState:@"enableAnimate"];
-            }
-            else
-            {
-                [self setCurrentState:@"enabled"];
-            }
-        }
-        else
-        {
-            if (animated)
-            {
-                [self setCurrentState:@"disableAnimate"];
-            }
-            else
-            {
-                [self setCurrentState:@"normal"];
-            }
-        }
+        [_stayViewTable[kNormalButtonState] setImage1:_hittedNormalImage1];
+    }
+    if (_hittedNormalImage2)
+    {
+        [_stayViewTable[kNormalButtonState] setImage2:_hittedNormalImage2];
+    }
+    if (_hittedNormalPressedImage)
+    {
+        _pressedViewTable[kNormalButtonState].image = _hittedNormalPressedImage;
+    }
+}
+
+- (void)endHittedState
+{
+    _hittedRecoverTimer = nil;
+    if (_normalImage1)
+    {
+        [_stayViewTable[kNormalButtonState] setImage1:_normalImage1];
+    }
+    if (_normalImage1)
+    {
+        [_stayViewTable[kNormalButtonState] setImage2:_normalImage2];
+    }
+    if (_normalPressedImage)
+    {
+        _pressedViewTable[kNormalButtonState].image = _normalPressedImage;
+    }
+}
+
+#pragma mark TimerButton Methods
+
++ (TimerButton*)timerButtonWithPressedImageSizeforNormalImage1:(UIImage*)ni1
+                                               forNormalImage2:(UIImage*)ni2
+                                         forNormalPressedImage:(UIImage*)npi
+                                              forEnabledImage1:(UIImage*)ei1
+                                              forEnabledImage2:(UIImage*)ei2
+                                        forEnabledPressedImage:(UIImage*)epi
+                                               forExtendImage1:(UIImage*)xi1
+                                               forExtendImage2:(UIImage*)xi2
+                                         forExtendPressedImage:(UIImage*)xpi
+{
+    CGRect rect = CGRectMake(0, 0, npi.size.width, npi.size.height);
+    return [[[TimerButton alloc] initWithFrame:rect
+                              forNormalImage1:ni1
+                              forNormalImage2:ni2
+                        forNormalPressedImage:npi
+                             forEnabledImage1:ei1
+                             forEnabledImage2:ei2
+                       forEnabledPressedImage:epi
+                              forExtendImage1:xi1
+                              forExtendImage2:xi2
+                        forExtendPressedImage:xpi] autorelease];
+}
+
+- (void)setHittedNormalImage1:(UIImage*)hni1
+           hittedNormalImage2:(UIImage*)hni2
+     hittedNormalPressedImage:(UIImage*)hnpi
+{
+    [self releaseAllRetainedImages];
+    
+    _hittedNormalImage1 = [hni1 retain];
+    _hittedNormalImage2 = [hni2 retain];
+    _hittedNormalPressedImage = [hnpi retain];
+    
+    _normalImage1 = [[_normalView getImage1] retain];
+    _normalImage2 = [[_normalView getImage2] retain];
+    _normalPressedImage = [_pressedView.image retain];
+}
+
+- (void)setHittedOnce
+{
+    _hasHitted = YES;
+}
+
+- (void)setCurrentButtonState:(eButtonTripleState)currentButtonState withAnimation:(BOOL)animated
+{
+    _transStateWithAnimation[currentButtonState] = animated;
+    if (animated)
+    {
+        [self doMoveDownAnimationToButtonState:currentButtonState];
     }
     else
     {
-        if ([_currentState isEqualToString:@"pressed"])
-        {
-            [self setCurrentState:@"normal"];
-        }
-        else if([_currentState isEqualToString:@"pressed2"])
-        {
-            [self setCurrentState:@"enabled"];
-        }
+        [super setCurrentButtonState:currentButtonState];
     }
-    _buttonEnabled = buttonEnabled;
+}
+
+- (void)setCurrentButtonState:(eButtonTripleState)currentButtonState
+{
+    [self setCurrentButtonState:currentButtonState withAnimation:NO];
 }
 
 #pragma mark <UIStateAnimation>
 
 - (void)startStateAnimationForView:(UIView*)view forState:(NSString*)state
 {
-    if ([state isEqualToString:@"enableAnimate"])
+    if (_hasHitted && [state isEqualToString:stayStateTable[kNormalButtonState]])
     {
-        _button.hidden = YES;
-        [self enableAnimateSelector];
+        [self startHittedState];
+        _hittedRecoverTimer = [NSTimer
+                               scheduledTimerWithTimeInterval:HittedStateLastSeconds
+                               target:self
+                               selector:@selector(endHittedState)
+                               userInfo:nil repeats:NO];
+        _hasHitted = NO;
     }
-    else if([state isEqualToString:@"disableAnimate"])
+    for (int i = kNormalButtonState; i < kCountOfButtonTripleStates; ++i)
     {
-        _button.hidden = YES;
-        [self disableAnimateSelector];
+        if ([state isEqualToString:stayStateTable[i]])
+        {
+            if (_transStateWithAnimation[i])
+            {
+                //do move right animation
+                [self doMoveRightAnimation];
+            }
+            //start Alpha Animation
+            [_stayViewTable[i] startStateAnimationForView:_stayViewTable[i] forState:state];
+        }
     }
 }
 
 - (void)stopStateAnimationForView:(UIView*)view forState:(NSString*)state
 {
-    if ([state isEqualToString:@"enableAnimate"])
+    for (int i = kNormalButtonState; i < kCountOfButtonTripleStates; ++i)
     {
-        _button.hidden = NO;
+        if ([state isEqualToString:stayStateTable[i]])
+        {
+            //stop Alpha Animation
+            [_stayViewTable[i] stopStateAnimationForView:_stayViewTable[i] forState:state];
+        }
     }
-    else if([state isEqualToString:@"disableAnimate"])
+    if ([state isEqualToString:pressedStateTable[kNormalButtonState]] && _hittedRecoverTimer)
     {
-        _button.hidden = NO;
+        [_hittedRecoverTimer invalidate];
+        [self endHittedState];
     }
 }
 
 #pragma mark Animations
 
-- (void)doBounceAnimate:(UIImageView*)view
-             startImage:(UIImage*)si
-               endImage:(UIImage*)ei
-               isEnable:(BOOL)isEnable
-               endBlock:(void (^)(void))endBlock
+- (void)doMoveRightAnimation
 {
 #define BOUNCE_OFFSET (3)
-    void (^doMoveDownView)(void) = ^(void){
-        CGRect rect = CGRectZero;
-        
-        ////
-        rect = view.frame;
-        rect.origin.y += rect.size.height;
-        view.frame = rect;
-    };
+    AlphaAnimationView* view = _stayViewTable[_currentButtonState];
+    CGRect rawRect = view.frame;
+    CGRect originalRect = rawRect;
+    originalRect.origin.x -= rawRect.size.width;
+    CGRect tmpRect = rawRect;
+    tmpRect.origin.x += BOUNCE_OFFSET;
     
-    void (^doMoveUpView)(void) = ^(void){
-        CGRect rect = CGRectZero;
-        
-        ////
-        rect = view.frame;
-        rect.origin.y -= rect.size.height + BOUNCE_OFFSET;
-        view.frame = rect;
-    };
-
-    void (^doBounceDownView)(void) = ^(void){
-        CGRect rect = CGRectZero;
-        
-        ////
-        rect = view.frame;
-        rect.origin.y += BOUNCE_OFFSET;
-        view.frame = rect;
-    };
+    view.frame = originalRect;
     
-    void (^doMoveLeftView)(void) = ^(void){
-        CGRect rect = CGRectZero;
-        
-        ////
-        rect = view.frame;
-        rect.origin.x -= rect.size.width;
-        view.frame = rect;
-    };
+    //prevent from press
+    _button.hidden = YES;
     
-    void (^doMoveRightView)(void) = ^(void){
-        CGRect rect = CGRectZero;
-        
-        ////
-        rect = view.frame;
-        rect.origin.x += rect.size.width + BOUNCE_OFFSET;
-        view.frame = rect;
-    };
-    
-    void (^doBounceLeftView)(void) = ^(void){
-        CGRect rect = CGRectZero;
-        
-        ////
-        rect = view.frame;
-        rect.origin.x -= BOUNCE_OFFSET;
-        view.frame = rect;
-    };
-    
-    view.image = si;
-    
-    if (isEnable)
-    {
-        [UIView animateWithDuration:0.6
-                         animations:doMoveDownView
-                         completion:^(BOOL finished){
-                             view.image = ei;
-                             [UIView animateWithDuration:0.3
-                                              animations:doMoveUpView
-                                              completion:^(BOOL finished){
-                                                  [UIView animateWithDuration:0.1
-                                                                   animations:doBounceDownView
-                                                                   completion:^(BOOL finished){
-                                                                       endBlock();
-                                                                   }];
-                             }];
-                         }];
-    }
-    else
-    {
-        [UIView animateWithDuration:0.3
-                         animations:doMoveDownView
-                         completion:^(BOOL finished){
-                             view.image = ei;
-                             doMoveUpView();
-                             doBounceDownView();
-                             doMoveLeftView();
-                             [UIView animateWithDuration:0.3
-                                              animations:doMoveRightView
-                                              completion:^(BOOL finished){
-                                                  [UIView animateWithDuration:0.1
-                                                                   animations:doBounceLeftView
-                                                                   completion:^(BOOL finished){
-                                                                       endBlock();
-                                                                   }];
-                                              }];
-                         }];
-    }
+    [UIView animateWithDuration:0.25 animations:^(){
+        view.frame = tmpRect;
+    } completion:^(BOOL finished){
+        [UIView animateWithDuration:0.1 animations:^(){
+            view.frame = rawRect;
+        } completion:^(BOOL finished){
+            _button.hidden = NO;
+            _transStateWithAnimation[_currentButtonState] = NO;
+        }];
+    }];
 }
 
-- (void)enableAnimateSelector
+- (void)doMoveDownAnimationToButtonState:(eButtonTripleState)currentButtonState
 {
-    [self doBounceAnimate:_pressedView
-               startImage:_pressedImage1
-                 endImage:_pressedImage2
-                 isEnable:YES
-                 endBlock:^(){
-                     _pressedView.image = _pressedImage1;
-                     _pressedView2.image = _pressedImage2;
-                     [self setCurrentState:@"enabled"];
-                 }];
-}
-
-- (void)disableAnimateSelector
-{
-    [self doBounceAnimate:_pressedView2
-               startImage:_pressedImage2
-                 endImage:_normalImage1
-                 isEnable:NO
-                 endBlock:^(){
-                     _pressedView.image = _pressedImage1;
-                     _pressedView2.image = _pressedImage2;
-                     [self setCurrentState:@"normal"];
-                 }];
+    UIImageView* pressedView = _pressedViewTable[_currentButtonState];
+    CGRect rawRect = pressedView.frame;
+    CGRect dstRect = rawRect;
+    dstRect.origin.y += dstRect.size.height;
+    
+    //prevent from press
+    _button.hidden = YES;
+    
+    [UIView animateWithDuration:0.3 animations:^(){
+        pressedView.frame = dstRect;
+    } completion:^(BOOL finished){
+        pressedView.frame = rawRect;
+        _button.hidden = NO;
+        [super setCurrentButtonState:currentButtonState];
+    }];
 }
 
 @end

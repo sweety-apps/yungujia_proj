@@ -26,4 +26,7 @@
 - (void)setImage1:(UIImage*)image;
 - (void)setImage2:(UIImage*)image;
 
+- (UIImage*)getImage1;
+- (UIImage*)getImage2;
+
 @end

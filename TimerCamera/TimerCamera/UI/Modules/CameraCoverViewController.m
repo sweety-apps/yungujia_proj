@@ -84,18 +84,9 @@
         _shotButton.frame = rect;
         
         ////
-        if (_timerButton.buttonEnabled)
-        {
-            rect = _timerButton.frame;
-            rect.origin.y -= rect.size.height + BOUNCE_OFFSET;
-            _timerButton.frame = rect;
-        }
-        else
-        {
-            rect = _timerButton.frame;
-            rect.origin.x += rect.size.width + BOUNCE_OFFSET;
-            _timerButton.frame = rect;
-        }
+        rect = _timerButton.frame;
+        rect.origin.x += rect.size.width + BOUNCE_OFFSET;
+        _timerButton.frame = rect;
         
         
         ////
@@ -150,19 +141,11 @@
         rect.origin.y -= 0 - BOUNCE_OFFSET;
         _shotButton.frame = rect;
         
+        
         ////
-        if (_timerButton.buttonEnabled)
-        {
-            rect = _timerButton.frame;
-            rect.origin.y -= 0 - BOUNCE_OFFSET;
-            _timerButton.frame = rect;
-        }
-        else
-        {
-            rect = _timerButton.frame;
-            rect.origin.x += 0 - BOUNCE_OFFSET;
-            _timerButton.frame = rect;
-        }
+        rect = _timerButton.frame;
+        rect.origin.x += 0 - BOUNCE_OFFSET;
+        _timerButton.frame = rect;
         
         
         ////
@@ -266,21 +249,11 @@
         _shotButton.frame = rect;
         
         ////
-        if (_timerButton.buttonEnabled)
-        {
-            rect = _timerButton.frame;
-            rect.origin.x = 0;
-            rect.origin.y = self.view.frame.size.height;
-            _timerButton.frame = rect;
-        }
-        else
-        {
-            rect = _timerButton.frame;
-            rect.origin.x = 0;
-            rect.origin.y = self.view.frame.size.height - rect.size.height;
-            rect.origin.x -= rect.size.width;
-            _timerButton.frame = rect;
-        }
+        rect = _timerButton.frame;
+        rect.origin.x = 0;
+        rect.origin.y = self.view.frame.size.height - rect.size.height;
+        rect.origin.x -= rect.size.width;
+        _timerButton.frame = rect;
         
         
         ////
@@ -388,12 +361,21 @@
     [self.view addSubview:_shotButton];
     
     
-    _timerButton = [TimerButton buttonWithPressedImageSizeforNormalImage1:[UIImage imageNamed:@"/Resource/Picture/main/timer_btn_normal1"]
-                                                          forNormalImage2:[UIImage imageNamed:@"/Resource/Picture/main/timer_btn_normal2"]
-                                                         forPressedImage1:[UIImage imageNamed:@"/Resource/Picture/main/timer_btn_pressed"]
-                                                         forPressedImage2:[UIImage imageNamed:@"/Resource/Picture/main/timer_btn_enable1"]
-                                                         forEnabledImage1:[UIImage imageNamed:@"/Resource/Picture/main/timer_btn_enable1"]
-                                                         forEnabledImage2:[UIImage imageNamed:@"/Resource/Picture/main/timer_btn_enable2"]];
+    _timerButton = [TimerButton
+                    timerButtonWithPressedImageSizeforNormalImage1:[UIImage imageNamed:@"/Resource/Picture/main/timer_btn_disable1"]
+                    forNormalImage2:[UIImage imageNamed:@"/Resource/Picture/main/timer_btn_disable2"]
+                    forNormalPressedImage:[UIImage imageNamed:@"/Resource/Picture/main/timer_btn_disable_pressed"]
+                    forEnabledImage1:[UIImage imageNamed:@"/Resource/Picture/main/timer_btn_voice1"]
+                    forEnabledImage2:[UIImage imageNamed:@"/Resource/Picture/main/timer_btn_voice2"]
+                    forEnabledPressedImage:[UIImage imageNamed:@"/Resource/Picture/main/timer_btn_voice_pressed"]
+                    forExtendImage1:[UIImage imageNamed:@"/Resource/Picture/main/timer_btn_timer1"]
+                    forExtendImage2:[UIImage imageNamed:@"/Resource/Picture/main/timer_btn_timer2"]
+                    forExtendPressedImage:[UIImage imageNamed:@"/Resource/Picture/main/timer_btn_timer_pressed"]];
+    
+    [_timerButton setHittedNormalImage1:[UIImage imageNamed:@"/Resource/Picture/main/timer_btn_hitten_disable1"]
+                     hittedNormalImage2:[UIImage imageNamed:@"/Resource/Picture/main/timer_btn_hitten_disable2"]
+               hittedNormalPressedImage:[UIImage imageNamed:@"/Resource/Picture/main/timer_btn_hitten_disable_pressed"]];
+    
     [self.view addSubview:_timerButton];
     
     
@@ -612,7 +594,7 @@
 
 - (void)onPressedTimer:(id)sender
 {
-    if (!_timerButton.buttonEnabled)
+    if (_timerButton.currentButtonState == kNormalButtonState)
     {
         //[_volMonitor hideMonitor:NO];
         [_volMonitor showMonitor:YES];
@@ -620,11 +602,11 @@
         [[AudioUtility sharedInstance] startDetectingVolume:1.0];
         _volMonitor.currentVolume = VOLUME_INIT_VAL;//1.0;
         _volMonitor.peakVolume = 1.0;
-        [_timerButton setButtonEnabled:YES withAnimation:YES];
+        [_timerButton setCurrentButtonState:kEnableButtonState withAnimation:YES];
         [_shotButton setIcon:[UIImage imageNamed:@"/Resource/Picture/main/shot_btn_icon_timer"] withAnimation:YES];
         [_tipsView showTips:LString(@"Shout aloud to mic, camera timer will fired by the volume.") over:self.view autoCaculateLastTime:YES];
     }
-    else
+    else if (_timerButton.currentButtonState == kEnableButtonState)
     {
         if ([_volMonitor isMonitorState] || [_volMonitor isHoldingState])
         {
@@ -637,10 +619,14 @@
             [[AudioUtility sharedInstance] setVolumeDetectingDelegate:nil];
             [[AudioUtility sharedInstance] stopDectingVolume];
             _volMonitor.currentVolume = VOLUME_INIT_VAL;
-            [_timerButton setButtonEnabled:NO withAnimation:YES];
+            [_timerButton setCurrentButtonState:kExtendButtonState withAnimation:YES];
             [_shotButton setIcon:[UIImage imageNamed:@"/Resource/Picture/main/shot_btn_icon_camera"] withAnimation:YES];
             [_tipsView showTips:LString(@"Voice control disabled.") over:self.view];
         }
+    }
+    else
+    {
+        [_timerButton setCurrentButtonState:kNormalButtonState withAnimation:YES];
     }
 }
 
@@ -650,7 +636,7 @@
     //[self onUpdate:1.0 peakVolume:1.0 forInstance:[AudioUtility sharedInstance]];
     ////end of Test code
     
-    if (!_timerButton.buttonEnabled)
+    if (_timerButton.currentButtonState == kNormalButtonState)
     {
         [self takePicture];
     }
@@ -787,6 +773,7 @@
                                                               userInfo:nil
                                                                repeats:NO];
         [_tipsView showTips:LString(@"Camera Timer Fired! \\(^o^)/") over:self.view];
+        [_timerButton setHittedOnce];
         [_shotButton setIcon:nil withAnimation:YES];
         //[self performSelector:@selector(startTimer) withObject:nil afterDelay:2.0];
         //[self startTimer];

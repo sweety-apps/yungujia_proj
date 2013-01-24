@@ -7,31 +7,38 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CommonAnimationButton.h"
+#import "CommonAnimationTripleStateButton.h"
 
-@interface TimerButton : CommonAnimationButton <UIStateAnimation>
+@interface TimerButton : CommonAnimationTripleStateButton <UIStateAnimation>
 {
-    UIImageView* _pressedView2;
-    UIImage* _pressedImage1;
-    UIImage* _pressedImage2;
+    BOOL _transStateWithAnimation[kCountOfButtonTripleStates];
     UIImage* _normalImage1;
+    UIImage* _normalImage2;
+    UIImage* _normalPressedImage;
+    
+    UIImage* _hittedNormalImage1;
+    UIImage* _hittedNormalImage2;
+    UIImage* _hittedNormalPressedImage;
+    NSTimer* _hittedRecoverTimer;
+    BOOL _hasHitted;
 }
 
-- (id)initWithFrame:(CGRect)frame
-    forNormalImage1:(UIImage*)ni1
-    forNormalImage2:(UIImage*)ni2
-   forPressedImage1:(UIImage*)pi1
-   forPressedImage2:(UIImage*)pi2
-   forEnabledImage1:(UIImage*)ei1
-   forEnabledImage2:(UIImage*)ei2;
++ (TimerButton*)timerButtonWithPressedImageSizeforNormalImage1:(UIImage*)ni1
+                                               forNormalImage2:(UIImage*)ni2
+                                         forNormalPressedImage:(UIImage*)npi
+                                              forEnabledImage1:(UIImage*)ei1
+                                              forEnabledImage2:(UIImage*)ei2
+                                        forEnabledPressedImage:(UIImage*)epi
+                                               forExtendImage1:(UIImage*)xi1
+                                               forExtendImage2:(UIImage*)xi2
+                                         forExtendPressedImage:(UIImage*)xpi;
 
-+ (TimerButton*)buttonWithPressedImageSizeforNormalImage1:(UIImage*)ni1
-                                          forNormalImage2:(UIImage*)ni2
-                                         forPressedImage1:(UIImage*)pi1
-                                         forPressedImage2:(UIImage*)pi2
-                                         forEnabledImage1:(UIImage*)ei1
-                                         forEnabledImage2:(UIImage*)ei2;
+- (void)setHittedNormalImage1:(UIImage*)hni1
+           hittedNormalImage2:(UIImage*)hni2
+     hittedNormalPressedImage:(UIImage*)hnpi;
 
-- (void)setButtonEnabled:(BOOL)buttonEnabled withAnimation:(BOOL)animated;
+- (void)setHittedOnce;
+
+- (void)setCurrentButtonState:(eButtonTripleState)currentButtonState withAnimation:(BOOL)animated;
 
 @end
