@@ -12,6 +12,9 @@
 #define ReleaseAndNilView(x) if(x){[(x) removeFromSuperview]; [(x) release]; (x) = nil; }
 #define LString(key) NSLocalizedStringFromTable((key), @"text",(key))
 
+#define DEGREES_TO_RADIANS(d) (d * M_PI / 180)
+#define RADIANS_TO_DEGREES(r) (r * 180 / M_PI)
+
 @interface BaseUtilitiesFuncions : NSObject
 
 + (UIImage*)grabUIView:(UIView*)view;

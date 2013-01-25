@@ -18,6 +18,7 @@
 #import "QRCodeButton.h"
 #import "TipsView.h"
 #import "FocusAimer.h"
+#import "ConfigButton.h"
 
 @interface CameraCoverViewController : BaseCameraLogicViewController <AudioUtilityPlaybackDelegate, AudioUtilityVolumeDetectDelegate>
 {
@@ -25,7 +26,7 @@
     ShotButton* _shotButton;
     TimerButton* _timerButton;
     VolumeMonitor* _volMonitor;
-    CommonAnimationButton* _configButton;
+    ConfigButton* _configButton;
     CommonAnimationTripleStateButton* _torchButton;
     CommonAnimationButton* _HDRButton;
     CommonAnimationButton* _frontButton;

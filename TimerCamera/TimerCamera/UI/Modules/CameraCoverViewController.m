@@ -188,6 +188,10 @@
         _QRCodeButton.frame = rect;
     };
     
+    void (^setSubViewDone)(void) = ^(void){
+        _configButton.enableRotation = YES;
+    };
+    
     if (animated)
     {
         [UIView animateWithDuration:0.4
@@ -197,7 +201,11 @@
                          completion:^(BOOL finished)
          {
              //doSetSubViewFramesAndBounce();
-             [UIView animateWithDuration:0.15 animations:doSetSubViewFramesAndBounce];
+             [UIView animateWithDuration:0.15
+                              animations:doSetSubViewFramesAndBounce
+                              completion:^(BOOL finished){
+                                  setSubViewDone();
+                              }];
          }];
     }
     else
@@ -214,12 +222,14 @@
              {
                  doMoveSubViews();
                  doSetSubViewFramesAndBounce();
+                 setSubViewDone();
              }];
         }
         else
         {
             doMoveSubViews();
             doSetSubViewFramesAndBounce();
+            setSubViewDone();
         }
     }
 }
@@ -320,6 +330,7 @@
         _volMonitor.hidden = YES;
         _albumButton.hidden = YES;
         _QRCodeButton.hidden = YES;
+        _configButton.enableRotation = NO;
     };
     
     if (animated)
@@ -379,12 +390,11 @@
     [self.view addSubview:_timerButton];
     
     
-    _configButton = [CommonAnimationButton
-                     buttonWithPressedImageSizeforNormalImage1:[UIImage imageNamed:@"/Resource/Picture/main/config_btn_normal1"]
+    _configButton = [ConfigButton
+                     configButtonWithPressedImageSizeforNormalImage1:[UIImage imageNamed:@"/Resource/Picture/main/config_btn_normal1"]
                      forNormalImage2:[UIImage imageNamed:@"/Resource/Picture/main/config_btn_normal2"]
-                     forPressedImage:[UIImage imageNamed:@"/Resource/Picture/main/config_btn_pressed"]
-                     forEnabledImage1:nil
-                     forEnabledImage2:nil];
+                     forPressedImage:[UIImage imageNamed:@"/Resource/Picture/main/config_btn_pressed"]];
+    
     [self.view addSubview:_configButton];
     
     
