@@ -15,6 +15,7 @@
 		BE46388616B00EBE00227BA9 /* CommonAnimationTripleStateButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BE46388516B00EBE00227BA9 /* CommonAnimationTripleStateButton.m */; };
 		BE46388B16B039E100227BA9 /* BaseUtilitiesFuncions.m in Sources */ = {isa = PBXBuildFile; fileRef = BE46388A16B039E100227BA9 /* BaseUtilitiesFuncions.m */; };
 		BE46388D16B03BBC00227BA9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE46388C16B03BBC00227BA9 /* QuartzCore.framework */; };
+		BE7D809416B57E0C002ED0AB /* CountView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7D809316B57E0C002ED0AB /* CountView.m */; };
 		BE89BE671605DB6600D2F091 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE89BE661605DB6600D2F091 /* CoreAudio.framework */; };
 		BE89BE6A1605DB6F00D2F091 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE89BE691605DB6F00D2F091 /* CoreFoundation.framework */; };
 		BE89BE6C1605DB7700D2F091 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE89BE6B1605DB7700D2F091 /* AudioToolbox.framework */; };
@@ -26,6 +27,7 @@
 		BE89BE931605DC3B00D2F091 /* CAXException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE89BE8F1605DC3B00D2F091 /* CAXException.cpp */; };
 		BE89BE9D1605E24E00D2F091 /* AudioUtility.mm in Sources */ = {isa = PBXBuildFile; fileRef = BE89BE9C1605E24E00D2F091 /* AudioUtility.mm */; };
 		BE8B6F4C16B2B4B7000B7B88 /* ConfigButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8B6F4B16B2B4B7000B7B88 /* ConfigButton.m */; };
+		BE8B6F5816B41EF9000B7B88 /* EmiterCoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8B6F5716B41EF9000B7B88 /* EmiterCoverView.m */; };
 		BEB8E44A1646D25700DC5800 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB8E4471646D25700DC5800 /* Default.png */; };
 		BEB8E44B1646D25700DC5800 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB8E4481646D25700DC5800 /* Default@2x.png */; };
 		BEB8E44C1646D25700DC5800 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB8E4491646D25700DC5800 /* Icon@2x.png */; };
@@ -77,6 +79,8 @@
 		BE46388916B039E100227BA9 /* BaseUtilitiesFuncions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseUtilitiesFuncions.h; sourceTree = "<group>"; };
 		BE46388A16B039E100227BA9 /* BaseUtilitiesFuncions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseUtilitiesFuncions.m; sourceTree = "<group>"; };
 		BE46388C16B03BBC00227BA9 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		BE7D809216B57E0C002ED0AB /* CountView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountView.h; sourceTree = "<group>"; };
+		BE7D809316B57E0C002ED0AB /* CountView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountView.m; sourceTree = "<group>"; };
 		BE89BE661605DB6600D2F091 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		BE89BE691605DB6F00D2F091 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		BE89BE6B1605DB7700D2F091 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -97,6 +101,8 @@
 		BE89BE9C1605E24E00D2F091 /* AudioUtility.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AudioUtility.mm; sourceTree = "<group>"; };
 		BE8B6F4A16B2B4B7000B7B88 /* ConfigButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigButton.h; sourceTree = "<group>"; };
 		BE8B6F4B16B2B4B7000B7B88 /* ConfigButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigButton.m; sourceTree = "<group>"; };
+		BE8B6F5616B41EF9000B7B88 /* EmiterCoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmiterCoverView.h; sourceTree = "<group>"; };
+		BE8B6F5716B41EF9000B7B88 /* EmiterCoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmiterCoverView.m; sourceTree = "<group>"; };
 		BEB8E4471646D25700DC5800 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		BEB8E4481646D25700DC5800 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		BEB8E4491646D25700DC5800 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
@@ -376,6 +382,10 @@
 				BEC3354E16A5B75F00C60A89 /* QRCodeNormalStateAnimationView.m */,
 				BE8B6F4A16B2B4B7000B7B88 /* ConfigButton.h */,
 				BE8B6F4B16B2B4B7000B7B88 /* ConfigButton.m */,
+				BE8B6F5616B41EF9000B7B88 /* EmiterCoverView.h */,
+				BE8B6F5716B41EF9000B7B88 /* EmiterCoverView.m */,
+				BE7D809216B57E0C002ED0AB /* CountView.h */,
+				BE7D809316B57E0C002ED0AB /* CountView.m */,
 			);
 			path = Controls;
 			sourceTree = "<group>";
@@ -493,6 +503,8 @@
 				BE46388616B00EBE00227BA9 /* CommonAnimationTripleStateButton.m in Sources */,
 				BE46388B16B039E100227BA9 /* BaseUtilitiesFuncions.m in Sources */,
 				BE8B6F4C16B2B4B7000B7B88 /* ConfigButton.m in Sources */,
+				BE8B6F5816B41EF9000B7B88 /* EmiterCoverView.m in Sources */,
+				BE7D809416B57E0C002ED0AB /* CountView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

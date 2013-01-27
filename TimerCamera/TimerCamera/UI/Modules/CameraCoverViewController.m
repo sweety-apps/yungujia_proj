@@ -126,6 +126,7 @@
         rect = _QRCodeButton.frame;
         rect.origin.y -= rect.size.height + BOUNCE_OFFSET;
         _QRCodeButton.frame = rect;
+        
     };
     
     void (^doSetSubViewFramesAndBounce)(void) = ^(void){
@@ -317,6 +318,13 @@
         rect.origin.x = 90;
         rect.origin.y = self.view.frame.size.height;
         _QRCodeButton.frame = rect;
+        
+        
+        ////
+        rect = _countView.frame;
+        rect.origin.x = self.view.frame.size.width - rect.size.width - 1;
+        rect.origin.y = self.view.frame.size.height - 161;
+        _countView.frame = rect;
     };
     
     void (^doHideSubViews)(BOOL) = ^(BOOL finished){
@@ -352,6 +360,20 @@
                                        andAimingImage:[UIImage imageNamed:@"/Resource/Picture/main/focus_camera_point_normal1"]];
     
     [self.view addSubview:_focusView];
+    
+    _countView = [CountView countViewWithBgImage:[UIImage imageNamed:@"/Resource/Picture/main/timer_count_bg"]];
+    
+    [self.view addSubview:_countView];
+    
+    //Emitter Is Only supported higher than iOS 5.0
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 5.0)
+    {
+        _flipEmitterCover = [EmiterCoverView
+                             emiterCoverViewWithElementImage:[UIImage imageNamed:@"/Resource/Picture/sprites/sprite_heart"]
+                             andCoverColor:kBGColor()];
+        
+        [self.view addSubview:_flipEmitterCover];
+    }
     
     _animationCatButton = [BlackCat
                            catWithCatImage:[UIImage imageNamed:@"/Resource/Picture/main/animation_cat_bg_with_eye"]
@@ -562,6 +584,10 @@
     _albumButton = nil;
     [_QRCodeButton removeFromSuperview];
     _QRCodeButton = nil;
+    [_flipEmitterCover removeFromSuperview];
+    _flipEmitterCover = nil;
+    [_countView removeFromSuperview];
+    _countView = nil;
     ReleaseAndNilView(_tipsView);
 }
 
@@ -569,6 +595,7 @@
 {
     [CameraOptions sharedInstance].light = AVCaptureTorchModeOff;
     [CameraOptions sharedInstance].flash = AVCaptureFlashModeOff;
+    [UIApplication sharedApplication].idleTimerDisabled = NO;
     [_torchButton setCurrentButtonState:kNormalButtonState];
     /*
     if ([CameraOptions sharedInstance].flash == AVCaptureFlashModeOn)
@@ -671,6 +698,7 @@
 
 - (void)onTorchPressed:(id)sender
 {
+    [UIApplication sharedApplication].idleTimerDisabled = NO;
     if ([CameraOptions sharedInstance].light == AVCaptureTorchModeOn)
     {
         [CameraOptions sharedInstance].flash = AVCaptureFlashModeOff;
@@ -691,6 +719,7 @@
         {
             [CameraOptions sharedInstance].flash = AVCaptureFlashModeOff;
             [CameraOptions sharedInstance].light = AVCaptureTorchModeOn;
+            [UIApplication sharedApplication].idleTimerDisabled = YES; 
             [_torchButton setCurrentButtonState:kExtendButtonState];
             [_tipsView showTips:LString(@"Torch Light On") over:self.view];
         }
@@ -784,7 +813,9 @@
                                                                repeats:NO];
         [_tipsView showTips:LString(@"Camera Timer Fired! \\(^o^)/") over:self.view];
         [_timerButton setHittedOnce];
-        [_shotButton setIcon:nil withAnimation:YES];
+        [_shotButton setIcon:[UIImage imageNamed:@"/Resource/Picture/main/shot_btn_icon_cancel"]
+               withAnimation:YES];
+        [_countView show];
         //[self performSelector:@selector(startTimer) withObject:nil afterDelay:2.0];
         //[self startTimer];
     }
@@ -820,12 +851,17 @@
     }
 }
 
+- (void)onFinishedFlipAnimation
+{
+    _isFlipingCamera = NO;
+}
+
 - (void)doCameraFilpAnimation
 {
-    //return;
     _isFlipingCamera = YES;
     CGRect rect = [CameraOptions sharedInstance].imagePicker.view.frame;
     rect.origin = CGPointZero;
+    
     UIImageView* coverView = [[[UIImageView alloc] initWithFrame:rect] autorelease];
     /*
     coverView.backgroundColor = [UIColor colorWithRed:(97.0/255.0)
@@ -835,9 +871,9 @@
      */
     [[CameraOptions sharedInstance].imagePicker.view addSubview:coverView];
     coverView.clipsToBounds = YES;
-    coverView.image = [UIImage imageNamed:@"Default"];
+    coverView.image = [UIImage imageNamed:@"/Resource/Picture/main/flip_back_ground"];
     [UIView transitionWithView:[CameraOptions sharedInstance].imagePicker.view
-                      duration:1.1
+                      duration:1.5
                        options:UIViewAnimationOptionTransitionFlipFromRight|UIViewAnimationOptionShowHideTransitionViews
                     animations:^(){
                         //[CameraOptions sharedInstance].imagePicker.view.alpha = 0.0;
@@ -855,7 +891,7 @@
                                          }
                                          completion:^(BOOL finished){
                                              [coverView removeFromSuperview];
-                                             _isFlipingCamera = NO;
+                                             [self onFinishedFlipAnimation];
                                          }];
                          
                         
@@ -869,13 +905,25 @@
                          [CameraOptions sharedInstance].imagePicker.view.alpha = 1.0;
                      }];
     */
+    if (_flipEmitterCover)
+    {
+        if (CGRectIsEmpty(rect))
+        {
+            rect = self.view.frame;
+            rect.origin = CGPointZero;
+        }
+        _flipEmitterCover.frame = rect;
+        [_flipEmitterCover performEmitterOverViewWithCompletionForTarget:self
+                                                     andCompletionMethod:@selector(onFinishedFlipAnimation)];
+        //return;
+    }
 }
 
 #pragma mark - ShotTimerDelegate
 
 - (void)onInterval:(float)leftTimeInterval forTimer:(ShotTimer*)timer
 {
-    [_shotButton setLabelString:[NSString stringWithFormat:@"%i",(int)leftTimeInterval]];
+    [_countView refreshText:[NSString stringWithFormat:@"%i",(int)leftTimeInterval]];
     [super onInterval:leftTimeInterval forTimer:timer];
 }
 
@@ -887,8 +935,8 @@
 
 - (void)onCancelledTimer:(ShotTimer*)timer
 {
-    [_shotButton setLabelString:@""];
     [_shotButton setIcon:[UIImage imageNamed:@"/Resource/Picture/main/shot_btn_icon_timer"] withAnimation:YES];
+    [_countView hide];
     [super onCancelledTimer:timer];
 }
 
@@ -913,6 +961,7 @@
         [_preStartTimingTimer invalidate];
         _preStartTimingTimer = nil;
         [_shotButton setIcon:[UIImage imageNamed:@"/Resource/Picture/main/shot_btn_icon_timer"] withAnimation:YES];
+        [_countView hide];
     }
     else
     {

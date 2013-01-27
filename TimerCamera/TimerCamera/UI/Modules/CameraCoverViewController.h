@@ -19,6 +19,8 @@
 #import "TipsView.h"
 #import "FocusAimer.h"
 #import "ConfigButton.h"
+#import "EmiterCoverView.h"
+#import "CountView.h"
 
 @interface CameraCoverViewController : BaseCameraLogicViewController <AudioUtilityPlaybackDelegate, AudioUtilityVolumeDetectDelegate>
 {
@@ -34,6 +36,9 @@
     BlackCat* _animationCatButton;
     QRCodeButton* _QRCodeButton;
     TipsView* _tipsView;
+    CountView* _countView;
+    
+    EmiterCoverView* _flipEmitterCover;
     
     NSTimer* _preStartTimingTimer;
     FocusAimer* _focusView;
