@@ -63,7 +63,6 @@
     _timerButton.hidden = NO;
     _configButton.hidden = NO;
     _torchButton.hidden = NO;
-    _HDRButton.hidden = NO;
     _frontButton.hidden = NO;
     _volMonitor.hidden = NO;
     _albumButton.hidden = NO;
@@ -97,14 +96,9 @@
         
         ////
         rect = _torchButton.frame;
-        rect.origin.x -= rect.size.width + BOUNCE_OFFSET;
+        rect.origin.y += rect.size.height + BOUNCE_OFFSET;
         _torchButton.frame = rect;
         
-        
-        ////
-        rect = _HDRButton.frame;
-        rect.origin.y += rect.size.height + BOUNCE_OFFSET;
-        _HDRButton.frame = rect;
         
         ////
         rect = _frontButton.frame;
@@ -157,14 +151,8 @@
         
         ////
         rect = _torchButton.frame;
-        rect.origin.x -= 0 - BOUNCE_OFFSET;
-        _torchButton.frame = rect;
-        
-        
-        ////
-        rect = _HDRButton.frame;
         rect.origin.y += 0 - BOUNCE_OFFSET;
-        _HDRButton.frame = rect;
+        _torchButton.frame = rect;
         
         ////
         rect = _frontButton.frame;
@@ -247,14 +235,14 @@
         
         ////
         rect = _animationCatButton.frame;
-        rect.origin.x = 143;
-        rect.origin.y = self.view.frame.size.height - 82;
+        rect.origin.x = 78;
+        rect.origin.y = self.view.frame.size.height - 60;
         rect.origin.y += rect.size.height;
         _animationCatButton.frame = rect;
         
         ////
         rect = _shotButton.frame;
-        rect.origin.x = self.view.frame.size.width - rect.size.width;
+        rect.origin.x = 126;
         rect.origin.y = self.view.frame.size.height - rect.size.height;
         rect.origin.y += rect.size.height;
         _shotButton.frame = rect;
@@ -269,26 +257,18 @@
         
         ////
         rect = _configButton.frame;
-        rect.origin.x = 0;
-        rect.origin.y = 50;
+        rect.origin.x = -15;
+        rect.origin.y = 82;
         rect.origin.x -= rect.size.width;
         _configButton.frame = rect;
         
         
         ////
         rect = _torchButton.frame;
-        rect.origin.x = self.view.frame.size.width - rect.size.width;
-        rect.origin.y = 49;
-        rect.origin.x += rect.size.width;
-        _torchButton.frame = rect;
-        
-        
-        ////
-        rect = _HDRButton.frame;
         rect.origin.x = 0;
         rect.origin.y = 0;
         rect.origin.y -= rect.size.height;
-        _HDRButton.frame = rect;
+        _torchButton.frame = rect;
         
         
         ////
@@ -309,13 +289,13 @@
         ////
         rect = _albumButton.frame;
         rect.origin.x = self.view.frame.size.width + 51;
-        rect.origin.y = _volMonitor.frame.origin.y - rect.size.height + 6;
+        rect.origin.y = _volMonitor.frame.origin.y - rect.size.height - 40;
         _albumButton.frame = rect;
         
         
         ////
         rect = _QRCodeButton.frame;
-        rect.origin.x = 90;
+        rect.origin.x = 215;
         rect.origin.y = self.view.frame.size.height;
         _QRCodeButton.frame = rect;
         
@@ -333,7 +313,6 @@
         _timerButton.hidden = YES;
         _configButton.hidden = YES;
         _torchButton.hidden = YES;
-        _HDRButton.hidden = YES;
         _frontButton.hidden = YES;
         _volMonitor.hidden = YES;
         _albumButton.hidden = YES;
@@ -434,15 +413,6 @@
     [self.view addSubview:_torchButton];
     
     
-    _HDRButton = [CommonAnimationButton
-                  buttonWithPressedImageSizeforNormalImage1:[UIImage imageNamed:@"/Resource/Picture/main/HDR_normal1"]
-                  forNormalImage2:[UIImage imageNamed:@"/Resource/Picture/main/HDR_normal2"]
-                  forPressedImage:[UIImage imageNamed:@"/Resource/Picture/main/HDR_pressed"]
-                  forEnabledImage1:[UIImage imageNamed:@"/Resource/Picture/main/HDR_enable1"]
-                  forEnabledImage2:[UIImage imageNamed:@"/Resource/Picture/main/HDR_enable2"]];
-    [self.view addSubview:_HDRButton];
-    
-    
     _frontButton = [CommonAnimationButton
                     buttonWithPressedImageSizeforNormalImage1:[UIImage imageNamed:@"/Resource/Picture/main/front_normal1"]
                     forNormalImage2:[UIImage imageNamed:@"/Resource/Picture/main/front_normal2"]
@@ -459,15 +429,17 @@
                                   forEnabledImage1:nil
                                   forEnabledImage2:nil];
     
+    /*
     CommonAnimationButton* stop = [CommonAnimationButton
                                    buttonWithPressedImageSizeforNormalImage1:[UIImage imageNamed:@"/Resource/Picture/main/vol_point_stop_normal1"]
                                    forNormalImage2:[UIImage imageNamed:@"/Resource/Picture/main/vol_point_stop_normal2"]
                                    forPressedImage:[UIImage imageNamed:@"/Resource/Picture/main/vol_point_stop_pressed"]
                                    forEnabledImage1:nil
                                    forEnabledImage2:nil];
+     */
     
     _volMonitor = [VolumeMonitor monitorWithBarButton:bar
-                                       withStopButton:stop
+                                       withStopButton:nil
                                       backGroundImage:[UIImage imageNamed:@"/Resource/Picture/main/volume_bg"]
                                           volumeImage:[UIImage imageNamed:@"/Resource/Picture/main/fist"]
                                      reachedPeakImage:[UIImage imageNamed:@"/Resource/Picture/main/vol_point_punched"]
@@ -516,9 +488,6 @@
                             action:@selector(onConfigPressed:)
                   forControlEvents:UIControlEventTouchUpInside];
     
-    [_HDRButton.button addTarget:self
-                            action:@selector(onHDRPressed:)
-                  forControlEvents:UIControlEventTouchUpInside];
     
     [_frontButton.button addTarget:self
                             action:@selector(onFrontPressed:)
@@ -528,9 +497,11 @@
                             action:@selector(onTorchPressed:)
                   forControlEvents:UIControlEventTouchUpInside];
     
+    /*
     [_volMonitor.stopButton.button addTarget:self
                                       action:@selector(onStopTimerPressed:)
                             forControlEvents:UIControlEventTouchUpInside];
+     */
     
     [_albumButton.button addTarget:self
                             action:@selector(onAlbumPressed:)
@@ -554,7 +525,6 @@
     [_timerButton.button removeTarget:self action:nil forControlEvents:UIControlEventAllTouchEvents];
     [_configButton.button removeTarget:self action:nil forControlEvents:UIControlEventAllTouchEvents];
     [_torchButton.button removeTarget:self action:nil forControlEvents:UIControlEventAllTouchEvents];
-    [_HDRButton.button removeTarget:self action:nil forControlEvents:UIControlEventAllTouchEvents];
     [_frontButton.button removeTarget:self action:nil forControlEvents:UIControlEventAllTouchEvents];
     [_animationCatButton.button removeTarget:self action:nil forControlEvents:UIControlEventAllTouchEvents];
     [_volMonitor.barButton.button removeTarget:self action:nil forControlEvents:UIControlEventAllTouchEvents];
@@ -570,8 +540,6 @@
     _configButton = nil;
     [_torchButton removeFromSuperview];
     _torchButton = nil;
-    [_HDRButton removeFromSuperview];
-    _HDRButton = nil;
     [_frontButton removeFromSuperview];
     _frontButton = nil;
     [_animationCatButton removeFromSuperview];
@@ -607,16 +575,6 @@
         [_torchButton setCurrentButtonState:kNormalButtonState];
     }
      */
-    
-    
-    if ([CameraOptions sharedInstance].hdr == AVCaptureWhiteBalanceModeContinuousAutoWhiteBalance)
-    {
-        [_HDRButton setButtonEnabled:YES];
-    }
-    else
-    {
-        [_HDRButton setButtonEnabled:NO];
-    }
 }
 
 #pragma mark Event Handlers
@@ -677,9 +635,27 @@
     {
         [self takePicture];
     }
+    else if(_timerButton.currentButtonState == kEnableButtonState)
+    {
+        if ([_volMonitor isMonitorState])
+        {
+            [self onUpdate:1.0 peakVolume:1.0 forInstance:[AudioUtility sharedInstance]];
+        }
+        else
+        {
+            [self onStopTimerPressed:sender];
+        }
+    }
     else
     {
-        [self onUpdate:1.0 peakVolume:1.0 forInstance:[AudioUtility sharedInstance]];
+        if (!_preStartTimingTimer || !_timer)
+        {
+            [self startTimerOnly];
+        }
+        else
+        {
+            [self cancelTimer];
+        }
     }
 }
 
@@ -723,22 +699,6 @@
             [_torchButton setCurrentButtonState:kExtendButtonState];
             [_tipsView showTips:LString(@"Torch Light On") over:self.view];
         }
-    }
-}
-
-- (void)onHDRPressed:(id)sender
-{
-    if ([CameraOptions sharedInstance].hdr == AVCaptureWhiteBalanceModeContinuousAutoWhiteBalance)
-    {
-        [CameraOptions sharedInstance].hdr = AVCaptureWhiteBalanceModeLocked;
-        [_HDRButton setButtonEnabled:NO];
-        [_tipsView showTips:LString(@"HDR Mode Closed") over:self.view];
-    }
-    else
-    {
-        [CameraOptions sharedInstance].hdr = AVCaptureWhiteBalanceModeContinuousAutoWhiteBalance;
-        [_HDRButton setButtonEnabled:YES];
-        [_tipsView showTips:LString(@"HDR Mode Opened") over:self.view];
     }
 }
 
@@ -806,16 +766,8 @@
             [[AudioUtility sharedInstance] playFile:filePath withDelegate:self];
         }
         
-        _preStartTimingTimer = [NSTimer scheduledTimerWithTimeInterval:2.0
-                                                                target:self
-                                                              selector:@selector(startTimer)
-                                                              userInfo:nil
-                                                               repeats:NO];
-        [_tipsView showTips:LString(@"Camera Timer Fired! \\(^o^)/") over:self.view];
-        [_timerButton setHittedOnce];
-        [_shotButton setIcon:[UIImage imageNamed:@"/Resource/Picture/main/shot_btn_icon_cancel"]
-               withAnimation:YES];
-        [_countView show];
+        [self startTimerOnly];
+        
         //[self performSelector:@selector(startTimer) withObject:nil afterDelay:2.0];
         //[self startTimer];
     }
@@ -824,6 +776,20 @@
 
 
 #pragma mark Other
+
+- (void)startTimerOnly
+{
+    _preStartTimingTimer = [NSTimer scheduledTimerWithTimeInterval:2.0
+                                                            target:self
+                                                          selector:@selector(startTimer)
+                                                          userInfo:nil
+                                                           repeats:NO];
+    [_tipsView showTips:LString(@"Camera Timer Fired! \\(^o^)/") over:self.view];
+    [_timerButton setHittedOnce];
+    [_shotButton setIcon:[UIImage imageNamed:@"/Resource/Picture/main/shot_btn_icon_cancel"]
+           withAnimation:YES];
+    [_countView show];
+}
 
 - (void)hideOrShowButtons
 {
@@ -919,6 +885,48 @@
     }
 }
 
+- (BOOL)point:(CGPoint)point isInRect:(CGRect)rect
+{
+    if (point.x >= rect.origin.x && point.y >= rect.origin.y
+        && point.x <= (rect.origin.x + rect.size.width)
+        && point.y <= (rect.origin.y + rect.size.height))
+    {
+        return YES;
+    }
+    return NO;
+}
+
+- (BOOL)isPointLocatedOnCameraView:(CGPoint)point
+{
+    CGRect rctCamera = [self getCameraScaledRectWithHeightWidthRatio:4.0/3.0];
+    
+    if (![self point:point isInRect:rctCamera])
+    {
+        return NO;
+    }
+    
+    for (int i = 0; i < self.view.subviews.count; ++i)
+    {
+        UIView* view = [self.view.subviews objectAtIndex:i];
+        if (view != [CameraOptions sharedInstance].imagePicker.view
+            && view != _focusView
+            && view != _countView
+            && view != _flipEmitterCover
+            && !view.hidden)
+        {
+            if (view != _volMonitor || [_volMonitor isShowNow])
+            {
+                CGRect rect = view.frame;
+                if ([self point:point isInRect:rect])
+                {
+                    return NO;
+                }
+            }
+        }
+    }
+    return YES;
+}
+
 #pragma mark - ShotTimerDelegate
 
 - (void)onInterval:(float)leftTimeInterval forTimer:(ShotTimer*)timer
@@ -974,11 +982,14 @@
     if (![[CameraOptions sharedInstance] currentDevice].isAdjustingFocus
         && ![[CameraOptions sharedInstance] currentDevice].isAdjustingExposure)
     {
-        [super handleTapGesture:gestureRecognizer];
-        if ([gestureRecognizer isKindOfClass:[UITapGestureRecognizer class]])
+        CGPoint pt = [gestureRecognizer locationInView:self.view];
+        if (!_isFlipingCamera && [self isPointLocatedOnCameraView:pt])
         {
-            CGPoint pt = [gestureRecognizer locationInView:self.view];
-            [_focusView focusAndAimAtPoint:pt];
+            [super handleTapGesture:gestureRecognizer];
+            if ([gestureRecognizer isKindOfClass:[UITapGestureRecognizer class]])
+            {
+                [_focusView focusAndAimAtPoint:pt];
+            }
         }
     }
 }

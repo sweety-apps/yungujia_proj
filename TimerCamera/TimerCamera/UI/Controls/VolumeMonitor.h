@@ -28,6 +28,7 @@
     float _peakVolume;
     float _minPeakVolume;
     BOOL _draging;
+    BOOL _isShowNow;
 }
 
 @property (nonatomic,retain) CommonAnimationButton* barButton;
@@ -35,6 +36,7 @@
 @property (nonatomic,assign) float currentVolume; //0-1.0
 @property (nonatomic,assign) float peakVolume;  //0-1.0
 @property (nonatomic,assign) float minPeakVolume;  //0-1.0
+@property (nonatomic,assign) BOOL isShowNow;
 
 
 - (id)initWithFrame:(CGRect)frame

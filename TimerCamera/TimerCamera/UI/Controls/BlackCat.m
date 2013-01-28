@@ -8,20 +8,20 @@
 
 #import "BlackCat.h"
 
-#define LEFT_EYE_NORMAL_ORIGIN CGPointMake(23,34)
-#define RIGHT_EYE_NORMAL_ORIGIN CGPointMake(55,25)
-#define LEFT_EYE_MID_ORIGIN CGPointMake(24,29)
-#define RIGHT_EYE_MID_ORIGIN CGPointMake(54,29)
-#define LEFT_EYE_LEFT_ORIGIN CGPointMake(19,29)
-#define RIGHT_EYE_LEFT_ORIGIN CGPointMake(49,29)
-#define LEFT_EYE_RIGHT_ORIGIN CGPointMake(29,29)
-#define RIGHT_EYE_RIGHT_ORIGIN CGPointMake(59,29)
-#define LEFT_EYE_UP_ORIGIN CGPointMake(24,24)
-#define RIGHT_EYE_UP_ORIGIN CGPointMake(54,24)
-#define LEFT_EYE_DOWN_ORIGIN CGPointMake(24,35)
-#define RIGHT_EYE_DOWN_ORIGIN CGPointMake(54,35)
+#define LEFT_EYE_NORMAL_ORIGIN CGPointMake(17,15)
+#define RIGHT_EYE_NORMAL_ORIGIN CGPointMake(41,23)
+#define LEFT_EYE_MID_ORIGIN CGPointMake(17,19)
+#define RIGHT_EYE_MID_ORIGIN CGPointMake(41,19)
+#define LEFT_EYE_LEFT_ORIGIN CGPointMake(12,19)
+#define RIGHT_EYE_LEFT_ORIGIN CGPointMake(36,19)
+#define LEFT_EYE_RIGHT_ORIGIN CGPointMake(21,19)
+#define RIGHT_EYE_RIGHT_ORIGIN CGPointMake(45,19)
+#define LEFT_EYE_UP_ORIGIN CGPointMake(17,15)
+#define RIGHT_EYE_UP_ORIGIN CGPointMake(41,15)
+#define LEFT_EYE_DOWN_ORIGIN CGPointMake(17,23)
+#define RIGHT_EYE_DOWN_ORIGIN CGPointMake(41,23)
 
-#define BUTTON_RECT CGRectMake(14,15,57,47)
+#define BUTTON_RECT CGRectMake(0,0,61,48)
 
 
 @implementation BlackCat

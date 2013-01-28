@@ -26,6 +26,7 @@
     CGFloat _minScale;
     
     BOOL _isFlashAndLightAvailible;
+    BOOL _enableHDR;
 }
 
 +(CameraOptions*)sharedInstance;
@@ -36,7 +37,7 @@
 @property (nonatomic,assign) AVCaptureTorchMode light;
 @property (nonatomic,assign) AVCaptureFlashMode flash;
 @property (nonatomic,assign) AVCaptureFocusMode focus;
-@property (nonatomic,assign) AVCaptureWhiteBalanceMode hdr;
+@property (nonatomic,assign) BOOL enableHDR;
 @property (nonatomic,assign) AVCaptureExposureMode exposureMode;
 @property (nonatomic,assign) CGPoint exporePoint;
 @property (nonatomic,assign) CGPoint focusPoint;

@@ -190,19 +190,6 @@
     }
 }
 
-- (IBAction)OnClickedHDR:(id)sender
-{
-    if ([CameraOptions sharedInstance].hdr == AVCaptureWhiteBalanceModeContinuousAutoWhiteBalance)
-    {
-        [CameraOptions sharedInstance].hdr = AVCaptureWhiteBalanceModeLocked;
-    }
-    else
-    {
-        [CameraOptions sharedInstance].hdr = AVCaptureWhiteBalanceModeContinuousAutoWhiteBalance;
-    }
-    
-}
-
 - (IBAction)OnClickedFront:(id)sender
 {
     if ([CameraOptions sharedInstance].imagePicker.cameraDevice == UIImagePickerControllerCameraDeviceFront)

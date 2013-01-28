@@ -18,7 +18,7 @@ static CameraOptions* gSI = nil;
 @synthesize light = _light;
 @synthesize flash = _flash;
 @synthesize focus = _focus;
-@synthesize hdr = _hdr;
+@synthesize enableHDR = _enableHDR;
 @synthesize exposureMode = _exposureMode;
 @synthesize exporePoint = _exporePoint;
 @synthesize focusPoint = _focusPoint;
@@ -74,7 +74,7 @@ static CameraOptions* gSI = nil;
     //gSI.light = getConfigForInt(kLight);
     //gSI.flash = getConfigForInt(kFlashMode);
     //gSI.focus = getConfigForInt(kFocus);
-    gSI.hdr = getConfigForInt(kHDR);
+    gSI.enableHDR = getConfigForInt(kHDR);
     //gSI.exposureMode = getConfigForInt(kExposure);
 }
 
@@ -225,7 +225,7 @@ static CameraOptions* gSI = nil;
         d = [self configurableDevice];
     }
     
-    BOOL avaliable = d.connected;
+    //BOOL avaliable = d.connected;
     
     NSError* err = nil;
     BOOL lockAcquired = [d lockForConfiguration:&err];
@@ -270,28 +270,6 @@ static CameraOptions* gSI = nil;
     _focus = d.focusMode;
     
     //setAndSaveConfigForInt(kFocus, _focus);
-}
-
--(void)setHdr:(AVCaptureWhiteBalanceMode)hdr
-{
-    AVCaptureDevice* d = [self currentDevice];
-    
-    NSError* err = nil;
-    BOOL lockAcquired = [d lockForConfiguration:&err];
-    
-    if (!lockAcquired) {
-        // log err and handle...
-    } else {
-        if ([d isWhiteBalanceModeSupported:hdr])
-        {
-            [d setWhiteBalanceMode:hdr];
-        }
-        
-        [d unlockForConfiguration];
-    }
-    _hdr = d.whiteBalanceMode;
-    
-    setAndSaveConfigForInt(kHDR, _hdr);
 }
 
 - (void)setExposureMode:(AVCaptureExposureMode)exposureMode
@@ -354,6 +332,44 @@ static CameraOptions* gSI = nil;
         
         [d unlockForConfiguration];
     }
+}
+
+-(void)setEnableHDR:(BOOL)enableHDR
+{
+    AVCaptureDevice* d = [self currentDevice];
+    
+    NSError* err = nil;
+    BOOL lockAcquired = [d lockForConfiguration:&err];
+    
+    if (!lockAcquired) {
+        // log err and handle...
+    } else {
+        if (!enableHDR)
+        {
+            [d setWhiteBalanceMode:AVCaptureWhiteBalanceModeLocked];
+        }
+        else
+        {
+            if ([d isWhiteBalanceModeSupported:AVCaptureWhiteBalanceModeContinuousAutoWhiteBalance])
+            {
+                [d setWhiteBalanceMode:AVCaptureWhiteBalanceModeContinuousAutoWhiteBalance];
+            }
+            else if ([d isWhiteBalanceModeSupported:AVCaptureWhiteBalanceModeAutoWhiteBalance])
+            {
+                [d setWhiteBalanceMode:AVCaptureWhiteBalanceModeAutoWhiteBalance];
+            }
+            else
+            {
+                enableHDR = NO;
+            }
+        }
+        
+        _enableHDR = enableHDR;
+        
+        [d unlockForConfiguration];
+    }
+    
+    setAndSaveConfigForInt(kHDR, _enableHDR);
 }
 
 #pragma mark Private Methods

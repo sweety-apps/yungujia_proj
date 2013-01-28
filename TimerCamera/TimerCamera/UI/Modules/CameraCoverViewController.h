@@ -30,7 +30,6 @@
     VolumeMonitor* _volMonitor;
     ConfigButton* _configButton;
     CommonAnimationTripleStateButton* _torchButton;
-    CommonAnimationButton* _HDRButton;
     CommonAnimationButton* _frontButton;
     CommonAnimationButton* _albumButton;
     BlackCat* _animationCatButton;

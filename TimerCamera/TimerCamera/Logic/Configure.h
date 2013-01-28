@@ -24,7 +24,7 @@
 #define kDefaultTimerIntervalValue 5
 #define kDefaultNumberOfContinueShotValue 1
 #define kDefaultFlashModeValue 0
-#define kDefaultHDRValue 0
+#define kDefaultHDRValue 1
 #define kDefaultLightValue 0
 #define kDefaultExposureValue 2
 #define kDefaultFocusValue 2

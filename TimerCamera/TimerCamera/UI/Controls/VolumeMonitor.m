@@ -32,6 +32,7 @@
 @synthesize currentVolume = _currentVolume;
 @synthesize peakVolume = _peakVolume;
 @synthesize minPeakVolume = _minPeakVolume;
+@synthesize isShowNow = _isShowNow;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -168,12 +169,14 @@
 - (void)showMonitor:(BOOL)animated
 {
     _slideCover.hidden = NO;
+    _isShowNow = YES;
     [self setCurrentState:@"showing"];
 }
 
 - (void)hideMonitor:(BOOL)animated
 {
     _slideCover.hidden = YES;
+    _isShowNow = NO;
     [self setCurrentState:@"hiding"];
 }
 

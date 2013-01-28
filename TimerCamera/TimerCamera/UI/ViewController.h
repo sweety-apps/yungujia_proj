@@ -69,7 +69,6 @@
 - (IBAction)OnClickedShot:(id)sender;
 - (IBAction)OnClickedLight:(id)sender;
 - (IBAction)OnClickedTorch:(id)sender;
-- (IBAction)OnClickedHDR:(id)sender;
 - (IBAction)OnClickedFront:(id)sender;
 
 -(IBAction)handleTapGesture:(UIGestureRecognizer*)gestureRecognizer;
