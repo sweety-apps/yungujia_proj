@@ -615,13 +615,14 @@
             [[AudioUtility sharedInstance] stopDectingVolume];
             _volMonitor.currentVolume = VOLUME_INIT_VAL;
             [_timerButton setCurrentButtonState:kExtendButtonState withAnimation:YES];
-            [_shotButton setIcon:[UIImage imageNamed:@"/Resource/Picture/main/shot_btn_icon_camera"] withAnimation:YES];
+            [_shotButton setIcon:[UIImage imageNamed:@"/Resource/Picture/main/shot_btn_icon_timer"] withAnimation:NO];
             [_tipsView showTips:LString(@"Voice control disabled.") over:self.view];
         }
     }
     else
     {
         [_timerButton setCurrentButtonState:kNormalButtonState withAnimation:YES];
+        [_shotButton setIcon:[UIImage imageNamed:@"/Resource/Picture/main/shot_btn_icon_camera"] withAnimation:YES];
     }
 }
 
@@ -648,7 +649,7 @@
     }
     else
     {
-        if (!_preStartTimingTimer || !_timer)
+        if (!_preStartTimingTimer && !_timer)
         {
             [self startTimerOnly];
         }
@@ -788,7 +789,6 @@
     [_timerButton setHittedOnce];
     [_shotButton setIcon:[UIImage imageNamed:@"/Resource/Picture/main/shot_btn_icon_cancel"]
            withAnimation:YES];
-    [_countView show];
 }
 
 - (void)hideOrShowButtons
@@ -931,12 +931,19 @@
 
 - (void)onInterval:(float)leftTimeInterval forTimer:(ShotTimer*)timer
 {
+    [_countView show];
     [_countView refreshText:[NSString stringWithFormat:@"%i",(int)leftTimeInterval]];
     [super onInterval:leftTimeInterval forTimer:timer];
 }
 
 - (void)onFinishedTimer:(ShotTimer*)timer
 {
+    [_countView refreshText:@""];
+    [_countView hide];
+    if(_timerButton.currentButtonState == kExtendButtonState)
+    {
+        [_shotButton setIcon:[UIImage imageNamed:@"/Resource/Picture/main/shot_btn_icon_timer"] withAnimation:NO];
+    }
     [super onFinishedTimer:timer];
     [self takePicture];
 }
@@ -944,7 +951,6 @@
 - (void)onCancelledTimer:(ShotTimer*)timer
 {
     [_shotButton setIcon:[UIImage imageNamed:@"/Resource/Picture/main/shot_btn_icon_timer"] withAnimation:YES];
-    [_countView hide];
     [super onCancelledTimer:timer];
 }
 
@@ -964,6 +970,8 @@
 
 - (void)cancelTimer
 {
+    [_countView refreshText:@""];
+    [_countView hide];
     if (_preStartTimingTimer)
     {
         [_preStartTimingTimer invalidate];
