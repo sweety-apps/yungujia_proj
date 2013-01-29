@@ -624,7 +624,7 @@
         [self cancelTimer];
         [_timerButton setCurrentButtonState:kNormalButtonState withAnimation:YES];
         [_shotButton setIcon:[UIImage imageNamed:@"/Resource/Picture/main/shot_btn_icon_camera"] withAnimation:YES];
-        [_tipsView showTips:LString("Normal Camera Mode") over:self.view];
+        [_tipsView showTips:LString(@"Normal Camera Mode") over:self.view];
     }
 }
 
