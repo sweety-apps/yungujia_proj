@@ -18,5 +18,6 @@
 @interface BaseUtilitiesFuncions : NSObject
 
 + (UIImage*)grabUIView:(UIView*)view;
-
++ (long long)getCurrentTimeInMicroSeconds;
++ (UIImage *)scaleImage:(UIImage *)image toSize:(CGSize)targetSize;
 @end

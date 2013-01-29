@@ -60,7 +60,9 @@
                              superView:(UIView*)superView
                     insertAboveSubView:(UIView*)subView
                          animatedBlock:(void (^)(void))animation
-                             doneBlock:(void (^)(void))doneBlock;
+                             doneBlock:(void (^)(void))doneBlock
+                 shouldFlipRightToLeft:(BOOL)flip
+                             useBorder:(BOOL)border;
 
 - (CGRect)getCameraScaledRectWithHeightWidthRatio:(float)ratio;
 

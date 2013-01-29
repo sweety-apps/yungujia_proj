@@ -621,8 +621,10 @@
     }
     else
     {
+        [self cancelTimer];
         [_timerButton setCurrentButtonState:kNormalButtonState withAnimation:YES];
         [_shotButton setIcon:[UIImage imageNamed:@"/Resource/Picture/main/shot_btn_icon_camera"] withAnimation:YES];
+        [_tipsView showTips:LString("Normal Camera Mode") over:self.view];
     }
 }
 
@@ -761,12 +763,6 @@
         [_volMonitor transToHoldingState];
         [[AudioUtility sharedInstance] stopDectingVolume];
         
-        {
-            //notify sound
-            NSString* filePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"/Resource/Sound/sms-received4.caf"];
-            [[AudioUtility sharedInstance] playFile:filePath withDelegate:self];
-        }
-        
         [self startTimerOnly];
         
         //[self performSelector:@selector(startTimer) withObject:nil afterDelay:2.0];
@@ -780,6 +776,11 @@
 
 - (void)startTimerOnly
 {
+    {
+        //notify sound
+        NSString* filePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"/Resource/Sound/sms-received4.caf"];
+        [[AudioUtility sharedInstance] playFile:filePath withDelegate:self];
+    }
     _preStartTimingTimer = [NSTimer scheduledTimerWithTimeInterval:2.0
                                                             target:self
                                                           selector:@selector(startTimer)
@@ -1024,13 +1025,22 @@
         }];
     };
     
+    BOOL shouldFlip = NO;
+    
+    if ([CameraOptions sharedInstance].imagePicker.cameraDevice == UIImagePickerControllerCameraDeviceFront)
+    {
+        shouldFlip = YES;
+    }
+    
     [self doImageCollectionAnimationFrom:rect
                                       to:dstRect
                                withImage:image
                                superView:self.view
                       insertAboveSubView:nil
                            animatedBlock:pushAlbumAnimation
-                               doneBlock:restoreAlbumFrame];
+                               doneBlock:restoreAlbumFrame
+                   shouldFlipRightToLeft:shouldFlip
+                               useBorder:YES];
     
     return YES;
 }

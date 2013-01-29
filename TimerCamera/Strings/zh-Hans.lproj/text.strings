@@ -14,6 +14,7 @@
 "HDR Mode Closed" = "HDR模式关闭";
 "Shout aloud to mic, camera timer will fired by the volume." = "大声对麦克风说话，让音量激活拍照倒计时（快门）。";
 "Voice control disabled." = "音量控制已关闭";
+"Normal Camera Mode" = "普通拍照模式";
 "Camera Timer Fired! \\(^o^)/" = "拍照倒计时开始!\r \\(^o^)/";
 "Camera Timer Is Cancelled o(>_<)o" = "拍照计时被取消\r o(>_<)o";
 

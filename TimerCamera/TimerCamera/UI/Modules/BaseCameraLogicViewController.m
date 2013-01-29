@@ -65,6 +65,8 @@
     [CameraOptions sharedInstance].exposureMode = AVCaptureExposureModeContinuousAutoExposure;//AVCaptureExposureModeLocked;//
     [CameraOptions sharedInstance].focus = AVCaptureFocusModeContinuousAutoFocus;//AVCaptureFocusModeLocked;//AVCaptureFocusModeContinuousAutoFocus;
     
+    _picturePreview = [[UIImageView alloc] initWithFrame:CGRectZero];
+    
     _lastScale = 1.0;
     _currentScale = 1.0;
 }
@@ -108,38 +110,6 @@
     NSLog(@"CameraSize = ( %f , %f , %f , %f , %f , %f )",af.a,af.b,af.c,af.d,af.tx,af.ty);
 }
 
-- (void)showPreview:(UIImage*)image
-{
-    CGRect rect = self.view.frame;
-    rect.origin = CGPointZero;
-    _picturePreview = [[UIImageView alloc] initWithImage:image];
-    _picturePreview.userInteractionEnabled = YES;
-    //_picturePreview.frame = CGRectZero;
-    rect.origin.x = rect.size.width;
-    _picturePreview.frame = rect;
-    rect.origin.x = 0;
-    _previewTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hidePreview)];
-    [_picturePreview addGestureRecognizer:_previewTap];
-    
-    [self.view addSubview:_picturePreview];
-    
-    [UIView animateWithDuration:0.5 animations:^(){_picturePreview.frame = rect;}];
-}
-
-- (void)hidePreview
-{
-    if (_picturePreview)
-    {
-        CGRect rect = _picturePreview.frame;
-        rect.origin.x = rect.size.width;
-        [UIView animateWithDuration:0.8 animations:^(){_picturePreview.frame = rect;} completion:^(BOOL finished){
-            [_picturePreview removeGestureRecognizer:_previewTap];
-            ReleaseAndNil(_previewTap);
-            ReleaseAndNilView(_picturePreview);
-        }];
-    }
-}
-
 - (void)doImageCollectionAnimationFrom:(CGRect)srcRect
                                     to:(CGRect)destRect
                              withImage:(UIImage*)image
@@ -147,40 +117,67 @@
                     insertAboveSubView:(UIView*)subView
                          animatedBlock:(void (^)(void))animation
                              doneBlock:(void (^)(void))doneBlock
+                 shouldFlipRightToLeft:(BOOL)flip
+                             useBorder:(BOOL)border
 {
+#define BORDER_WIDTH_FACTOR (0.02)
     if (subView == nil)
     {
         subView = [CameraOptions sharedInstance].imagePicker.view;
     }
     
     CGRect rect = srcRect;
-    UIImageView* imageView = [[[UIImageView alloc] initWithImage:image] autorelease];
+    UIImageView* imageView = _picturePreview;
+    
+    imageView.image = [BaseUtilitiesFuncions scaleImage:image toSize:rect.size];
     imageView.frame = rect;
+    [imageView removeFromSuperview];
     //[superView insertSubview:imageView belowSubview:_takingPictureFlashEffectView];
     [superView insertSubview:imageView aboveSubview:subView];
+    imageView.alpha = 1.0;
+    if (flip)
+    {
+        imageView.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+    }
+    if (border)
+    {
+        imageView.layer.borderColor = [[UIColor whiteColor] CGColor];
+        imageView.layer.borderWidth = rect.size.width * BORDER_WIDTH_FACTOR;
+    }
     
     rect.size = destRect.size;
     rect.origin.x = srcRect.origin.x + ((srcRect.size.width - destRect.size.width) * 0.5);
     rect.origin.y = srcRect.origin.y + ((srcRect.size.height - destRect.size.height) * 0.5);
+    float dstBorderWidth = destRect.size.width * BORDER_WIDTH_FACTOR;
     
     UIView* coverEffectView = _takingPictureFlashEffectView;
     
     void (^takingAnimation)(void) = ^()
     {
-        [UIView animateWithDuration:0.2 animations:^(){
+        [UIView animateWithDuration:0.25 animations:^(){
             imageView.frame = rect;
             if (animation)
             {
                 animation();
             }
         } completion:^(BOOL finshed){
-            [UIView animateWithDuration:0.15 animations:^(){
+            [UIView animateWithDuration:0.25 animations:^(){
                 imageView.frame = destRect;
+                if (border)
+                {
+                    imageView.layer.borderWidth = dstBorderWidth;
+                }
             } completion:^(BOOL finished){
-                [UIView animateWithDuration:0.15 animations:^(){
+                [UIView animateWithDuration:0.1 animations:^(){
                     imageView.alpha = 0.0;
                 } completion:^(BOOL finished){
                     [imageView removeFromSuperview];
+                    imageView.image = nil;
+                    imageView.layer.borderWidth = 0;
+                    if (flip)
+                    {
+                        imageView.transform = CGAffineTransformMakeScale(1.0, 1.0);
+                    }
                     if (doneBlock)
                     {
                         doneBlock();
@@ -254,6 +251,7 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     //return;
+    long long tsDebug = [BaseUtilitiesFuncions getCurrentTimeInMicroSeconds];
     
     NSLog(@"OH YEAH!!! Take a Media");
     UIImage *image= [info objectForKey:UIImagePickerControllerOriginalImage];
@@ -264,8 +262,9 @@
     if ([self shouldSavePhoto:image])
     {
         //[self.imageSaveQueue addObject:image];
-        //UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+        UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
     }
+    
     
     if (_takingPictureFlashEffectView)
     {
@@ -283,6 +282,7 @@
     {
         NSData* jpg = UIImageJPEGRepresentation(image, 1.0);
     }
+    NSLog(@"OOOTime DebugOOO WriteToSavedPhotosAlbum Used %llu micro sec...",[BaseUtilitiesFuncions getCurrentTimeInMicroSeconds] - tsDebug);
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
@@ -356,11 +356,11 @@
     {
         return;
     }
-    UIImage* testImage = [BaseUtilitiesFuncions grabUIView:self.view/*[CameraOptions sharedInstance].imagePicker.view*/];
+    //UIImage* testImage = [BaseUtilitiesFuncions grabUIView:self.view/*[CameraOptions sharedInstance].imagePicker.view*/];
     [[CameraOptions sharedInstance].imagePicker takePicture];
     _isTakingPicture = YES;
     ReleaseAndNilView(_takingPictureFlashEffectView);
-    if (_takingPictureFlashEffectView == nil)
+    if (0/*_takingPictureFlashEffectView == nil*/)
     {
         _takingPictureFlashEffectView = [[UIView alloc] initWithFrame:[self getCameraScaledRectWithHeightWidthRatio:4.0/3.0]];
         _takingPictureFlashEffectView.backgroundColor = [UIColor whiteColor];
