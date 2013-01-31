@@ -26,6 +26,7 @@
         [self addSubview:_imageView2];
         _animationInterval = kDefaultAlphaAnimationInterval;
         _animationStoped = YES;
+        _animationStillAlive = NO;
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onEnterFourgroud) name:UIApplicationDidBecomeActiveNotification object:nil];
     }
@@ -87,6 +88,9 @@
         _imageView2.alpha = 0.0;
         return;
     }
+    _animationStillAlive = YES;
+    _imageView1.alpha = 1.0;
+    _imageView2.alpha = 0.0;
     [UIView animateWithDuration:_animationInterval delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
         _imageView1.alpha = 1.0;
         _imageView2.alpha = 1.0;
@@ -103,7 +107,15 @@
                 {
                     [self performSelectorOnMainThread:@selector(alphaAnimationSelector) withObject:nil waitUntilDone:NO];
                 }
+                else
+                {
+                    _animationStillAlive = NO;
+                }
             }];
+        }
+        else
+        {
+            _animationStillAlive = NO;
         }
     }];
 }
@@ -121,7 +133,7 @@
 
 -(void)onEnterFourgroud
 {
-    if (!_animationStoped)
+    if (!_animationStoped && !_animationStillAlive)
     {
         [self alphaAnimationSelector];
     }

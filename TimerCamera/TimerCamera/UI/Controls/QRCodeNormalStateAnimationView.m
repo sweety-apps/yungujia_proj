@@ -75,20 +75,39 @@
         _waterView.alpha = 1.0;
         _waterView.frame = waterNewRect1;
     } completion:^(BOOL finished){
-        [UIView animateWithDuration:_animationInterval*0.15 animations:^(){
-            _waterView.frame = waterNewRect2;
-            _waterView.alpha = 0.0;
-        } completion:^(BOOL finished){
-            [UIView animateWithDuration:_animationInterval*0.2 animations:^{
-                _imageView1.alpha = 1.0;
-                _imageView2.alpha = 0.0;
+        if (finished && !_animationStoped)
+        {
+            [UIView animateWithDuration:_animationInterval*0.15 animations:^(){
+                _waterView.frame = waterNewRect2;
+                _waterView.alpha = 0.0;
             } completion:^(BOOL finished){
-                if (!_animationStoped)
+                if (finished && !_animationStoped)
                 {
-                    [self performSelectorOnMainThread:@selector(alphaAnimationSelector) withObject:nil waitUntilDone:NO];
+                    [UIView animateWithDuration:_animationInterval*0.2 animations:^{
+                        _imageView1.alpha = 1.0;
+                        _imageView2.alpha = 0.0;
+                    } completion:^(BOOL finished){
+                        if (finished && !_animationStoped)
+                        {
+                            [self performSelectorOnMainThread:@selector(alphaAnimationSelector) withObject:nil waitUntilDone:NO];
+                        }
+                        else
+                        {
+                            _animationStillAlive = NO;
+                        }
+                    }];
                 }
+                else
+                {
+                    _animationStillAlive = NO;
+                }
+                
             }];
-        }];
+        }
+        else
+        {
+            _animationStillAlive = NO;
+        }
     }];
 }
 

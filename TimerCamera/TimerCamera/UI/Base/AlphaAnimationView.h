@@ -18,6 +18,7 @@
     float _animationInterval;
     BOOL _animationStoped;
     BOOL _disableAnimation;
+    BOOL _animationStillAlive;
 }
 
 @property (nonatomic,assign) float animationInterval;
