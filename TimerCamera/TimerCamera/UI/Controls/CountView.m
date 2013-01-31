@@ -6,7 +6,10 @@
 //
 //
 
+#import <QuartzCore/QuartzCore.h>
 #import "CountView.h"
+
+#define CLIP_RECT() CGRectMake(0,12,96,72)
 
 @implementation CountView
 
@@ -33,6 +36,7 @@
 - (void)dealloc
 {
     ReleaseAndNilView(_label);
+    ReleaseAndNilView(_clipView);
     [super dealloc];
 }
 
@@ -44,14 +48,22 @@
         CGRect rect = CGRectZero;
         rect.size = frame.size;
         self.image = bgImage;
-        _label = [[UILabel alloc] initWithFrame:frame];
-        _label.frame = rect;
+        _label = [[UILabel alloc] initWithFrame:rect];
         _label.backgroundColor = [UIColor clearColor];
         _label.textColor = [UIColor colorWithRed:(77.0/255.0) green:0.0 blue:(126.0/255.0) alpha:1.0];
         _label.text = @"";
         _label.textAlignment = UITextAlignmentCenter;
         _label.font = [UIFont systemFontOfSize:72.0];
-        [self addSubview:_label];
+        _label.clipsToBounds = YES;
+        _label.adjustsFontSizeToFitWidth = NO;
+        _clipView = [[UIView alloc] initWithFrame:CLIP_RECT()];
+        rect = CLIP_RECT();
+        rect.origin = CGPointZero;
+        _clipView.clipsToBounds = YES;
+        _clipView.backgroundColor = [UIColor clearColor];
+        _label.frame = rect;
+        [_clipView addSubview:_label];
+        [self addSubview:_clipView];
         self.hidden = YES;
     }
     return self;
@@ -94,7 +106,7 @@
     }];
 }
 
-- (void)refreshText:(NSString*)text
+- (void)alphaRefreshText:(NSString*)text
 {
     _label.alpha = 1.0;
     [UIView animateWithDuration:0.2 animations:^(){
@@ -107,6 +119,25 @@
             _label.alpha = 1.0;
         }];
     }];
+}
+
+- (void)pushRefreshText:(NSString*)text
+{
+    // set up an animation for the transition between the views
+    _label.text = text;
+    CATransition *animation = [CATransition animation];
+    [animation setDuration:0.3];
+    [animation setType:kCATransitionPush];
+    [animation setSubtype:kCATransitionFromBottom];
+    
+    [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+    
+    [[_label layer] addAnimation:animation forKey:@"SwitchToView"];
+}
+
+- (void)refreshText:(NSString*)text
+{
+    [self pushRefreshText:text];
 }
 
 @end

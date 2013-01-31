@@ -711,6 +711,19 @@
     {
         return;
     }
+    
+    if(_timerButton.currentButtonState == kEnableButtonState)
+    {
+        if (![_volMonitor isMonitorState])
+        {
+            [self onStopTimerPressed:sender];
+        }
+    }
+    else if(_timerButton.currentButtonState == kExtendButtonState)
+    {
+        [self cancelTimer];
+    }
+    
     if ([CameraOptions sharedInstance].imagePicker.cameraDevice == UIImagePickerControllerCameraDeviceFront)
     {
         [CameraOptions sharedInstance].imagePicker.cameraDevice = UIImagePickerControllerCameraDeviceRear;
@@ -763,6 +776,7 @@
         [_volMonitor transToHoldingState];
         [[AudioUtility sharedInstance] stopDectingVolume];
         
+        [_timerButton setHittedOnce];
         [self startTimerOnly];
         
         //[self performSelector:@selector(startTimer) withObject:nil afterDelay:2.0];
@@ -787,7 +801,6 @@
                                                           userInfo:nil
                                                            repeats:NO];
     [_tipsView showTips:LString(@"Camera Timer Fired! \\(^o^)/") over:self.view];
-    [_timerButton setHittedOnce];
     [_shotButton setIcon:[UIImage imageNamed:@"/Resource/Picture/main/shot_btn_icon_cancel"]
            withAnimation:YES];
 }

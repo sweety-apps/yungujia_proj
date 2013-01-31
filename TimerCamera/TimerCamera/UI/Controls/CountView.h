@@ -11,6 +11,7 @@
 @interface CountView : UIImageView
 {
     UILabel* _label;
+    UIView* _clipView;
 }
 
 @property (nonatomic, retain, readonly) UILabel* label;
