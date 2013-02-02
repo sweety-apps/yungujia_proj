@@ -61,6 +61,7 @@
 		BED2606116BD76A40026EEDA /* DataMatrix.mm in Sources */ = {isa = PBXBuildFile; fileRef = BED2605C16BD76A40026EEDA /* DataMatrix.mm */; };
 		BED2606216BD76A40026EEDA /* QR_Encode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BED2605D16BD76A40026EEDA /* QR_Encode.cpp */; };
 		BED2606316BD76A40026EEDA /* QREncoder.mm in Sources */ = {isa = PBXBuildFile; fileRef = BED2606016BD76A40026EEDA /* QREncoder.mm */; };
+		BED2606A16BD7CF40026EEDA /* AssetOperator.m in Sources */ = {isa = PBXBuildFile; fileRef = BED2606916BD7CF40026EEDA /* AssetOperator.m */; };
 		BEEFD53016973270004B93F8 /* text.strings in Resources */ = {isa = PBXBuildFile; fileRef = BEEFD53216973270004B93F8 /* text.strings */; };
 		BEF975B2166A02B800B6C7AC /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEF975B1166A02B800B6C7AC /* Default-568h@2x.png */; };
 		F301347915FDDD1D00480CD7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F301347815FDDD1D00480CD7 /* AVFoundation.framework */; };
@@ -166,6 +167,8 @@
 		BED2605E16BD76A40026EEDA /* QR_Encode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QR_Encode.h; sourceTree = "<group>"; };
 		BED2605F16BD76A40026EEDA /* QREncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QREncoder.h; sourceTree = "<group>"; };
 		BED2606016BD76A40026EEDA /* QREncoder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = QREncoder.mm; sourceTree = "<group>"; };
+		BED2606816BD7CF40026EEDA /* AssetOperator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssetOperator.h; sourceTree = "<group>"; };
+		BED2606916BD7CF40026EEDA /* AssetOperator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssetOperator.m; sourceTree = "<group>"; };
 		BEEFD53116973270004B93F8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/text.strings; sourceTree = "<group>"; };
 		BEEFD53F169737BA004B93F8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/text.strings"; sourceTree = "<group>"; };
 		BEEFD540169737C4004B93F8 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/text.strings"; sourceTree = "<group>"; };
@@ -265,8 +268,8 @@
 		BED25FDA16BD76200026EEDA /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				BED2606716BD7CD70026EEDA /* Album */,
 				BED2605A16BD76A40026EEDA /* QREncoder */,
-				BED2605916BD764A0026EEDA /* Album */,
 				BED25FDB16BD76200026EEDA /* AudioUtility */,
 				BED25FEB16BD76200026EEDA /* Camera */,
 				BED25FEE16BD76200026EEDA /* Setting */,
@@ -448,13 +451,6 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
-		BED2605916BD764A0026EEDA /* Album */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Album;
-			sourceTree = "<group>";
-		};
 		BED2605A16BD76A40026EEDA /* QREncoder */ = {
 			isa = PBXGroup;
 			children = (
@@ -466,6 +462,15 @@
 				BED2606016BD76A40026EEDA /* QREncoder.mm */,
 			);
 			path = QREncoder;
+			sourceTree = "<group>";
+		};
+		BED2606716BD7CD70026EEDA /* Album */ = {
+			isa = PBXGroup;
+			children = (
+				BED2606816BD7CF40026EEDA /* AssetOperator.h */,
+				BED2606916BD7CF40026EEDA /* AssetOperator.m */,
+			);
+			path = Album;
 			sourceTree = "<group>";
 		};
 		BEEFD52D16973267004B93F8 /* Strings */ = {
@@ -594,6 +599,7 @@
 				BED2606116BD76A40026EEDA /* DataMatrix.mm in Sources */,
 				BED2606216BD76A40026EEDA /* QR_Encode.cpp in Sources */,
 				BED2606316BD76A40026EEDA /* QREncoder.mm in Sources */,
+				BED2606A16BD7CF40026EEDA /* AssetOperator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
