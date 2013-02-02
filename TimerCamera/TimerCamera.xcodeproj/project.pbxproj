@@ -12,56 +12,59 @@
 		BE19EBF215F359B800065448 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE19EBF115F359B800065448 /* CoreGraphics.framework */; };
 		BE19EBFA15F359B800065448 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BE19EBF915F359B800065448 /* main.m */; };
 		BE19EBFE15F359B800065448 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BE19EBFD15F359B800065448 /* AppDelegate.m */; };
-		BE46388616B00EBE00227BA9 /* CommonAnimationTripleStateButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BE46388516B00EBE00227BA9 /* CommonAnimationTripleStateButton.m */; };
-		BE46388B16B039E100227BA9 /* BaseUtilitiesFuncions.m in Sources */ = {isa = PBXBuildFile; fileRef = BE46388A16B039E100227BA9 /* BaseUtilitiesFuncions.m */; };
 		BE46388D16B03BBC00227BA9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE46388C16B03BBC00227BA9 /* QuartzCore.framework */; };
-		BE7D809416B57E0C002ED0AB /* CountView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7D809316B57E0C002ED0AB /* CountView.m */; };
 		BE89BE671605DB6600D2F091 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE89BE661605DB6600D2F091 /* CoreAudio.framework */; };
 		BE89BE6A1605DB6F00D2F091 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE89BE691605DB6F00D2F091 /* CoreFoundation.framework */; };
 		BE89BE6C1605DB7700D2F091 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE89BE6B1605DB7700D2F091 /* AudioToolbox.framework */; };
-		BE89BE741605DBA300D2F091 /* AQPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = BE89BE6F1605DBA300D2F091 /* AQPlayer.mm */; };
-		BE89BE751605DBA300D2F091 /* AQRecorder.mm in Sources */ = {isa = PBXBuildFile; fileRef = BE89BE711605DBA300D2F091 /* AQRecorder.mm */; };
-		BE89BE761605DBA300D2F091 /* MeterTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE89BE721605DBA300D2F091 /* MeterTable.cpp */; };
-		BE89BE911605DC3B00D2F091 /* CADebugMacros.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE89BE8A1605DC3B00D2F091 /* CADebugMacros.cpp */; };
-		BE89BE921605DC3B00D2F091 /* CAStreamBasicDescription.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE89BE8D1605DC3B00D2F091 /* CAStreamBasicDescription.cpp */; };
-		BE89BE931605DC3B00D2F091 /* CAXException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE89BE8F1605DC3B00D2F091 /* CAXException.cpp */; };
-		BE89BE9D1605E24E00D2F091 /* AudioUtility.mm in Sources */ = {isa = PBXBuildFile; fileRef = BE89BE9C1605E24E00D2F091 /* AudioUtility.mm */; };
-		BE8B6F4C16B2B4B7000B7B88 /* ConfigButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8B6F4B16B2B4B7000B7B88 /* ConfigButton.m */; };
-		BE8B6F5816B41EF9000B7B88 /* EmiterCoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8B6F5716B41EF9000B7B88 /* EmiterCoverView.m */; };
 		BEB8E44A1646D25700DC5800 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB8E4471646D25700DC5800 /* Default.png */; };
 		BEB8E44B1646D25700DC5800 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB8E4481646D25700DC5800 /* Default@2x.png */; };
 		BEB8E44C1646D25700DC5800 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB8E4491646D25700DC5800 /* Icon@2x.png */; };
 		BEB8E44F1646D36800DC5800 /* Resource in Resources */ = {isa = PBXBuildFile; fileRef = BEB8E44E1646D36800DC5800 /* Resource */; };
-		BEB8E45A1646DF9800DC5800 /* LoadingAnimateImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB8E4591646DF9800DC5800 /* LoadingAnimateImageView.m */; };
-		BEC3353A16A451A900C60A89 /* QRCodeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC3353916A451A900C60A89 /* QRCodeButton.m */; };
-		BEC3354116A45D0E00C60A89 /* AlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC3354016A45D0E00C60A89 /* AlbumViewController.m */; };
-		BEC3354F16A5B75F00C60A89 /* QRCodeNormalStateAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC3354E16A5B75F00C60A89 /* QRCodeNormalStateAnimationView.m */; };
-		BED79FE21690ADAC00FE5C57 /* TipsView.m in Sources */ = {isa = PBXBuildFile; fileRef = BED79FE11690ADAC00FE5C57 /* TipsView.m */; };
-		BEE3D9A6166DD5E2001AE5E9 /* CameraCoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE3D9A5166DD5E2001AE5E9 /* CameraCoverViewController.m */; };
-		BEE3D9A9166DD622001AE5E9 /* BaseCameraLogicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE3D9A8166DD622001AE5E9 /* BaseCameraLogicViewController.m */; };
+		BED2603316BD76200026EEDA /* AQPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = BED25FDD16BD76200026EEDA /* AQPlayer.mm */; };
+		BED2603416BD76200026EEDA /* AQRecorder.mm in Sources */ = {isa = PBXBuildFile; fileRef = BED25FDF16BD76200026EEDA /* AQRecorder.mm */; };
+		BED2603516BD76200026EEDA /* AudioUtility.mm in Sources */ = {isa = PBXBuildFile; fileRef = BED25FE116BD76200026EEDA /* AudioUtility.mm */; };
+		BED2603616BD76200026EEDA /* CADebugMacros.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BED25FE216BD76200026EEDA /* CADebugMacros.cpp */; };
+		BED2603716BD76200026EEDA /* CAStreamBasicDescription.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BED25FE516BD76200026EEDA /* CAStreamBasicDescription.cpp */; };
+		BED2603816BD76200026EEDA /* CAXException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BED25FE716BD76200026EEDA /* CAXException.cpp */; };
+		BED2603916BD76200026EEDA /* MeterTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BED25FE916BD76200026EEDA /* MeterTable.cpp */; };
+		BED2603A16BD76200026EEDA /* CameraOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = BED25FED16BD76200026EEDA /* CameraOptions.m */; };
+		BED2603B16BD76200026EEDA /* Configure.m in Sources */ = {isa = PBXBuildFile; fileRef = BED25FF016BD76200026EEDA /* Configure.m */; };
+		BED2603C16BD76200026EEDA /* ShotTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = BED25FF316BD76200026EEDA /* ShotTimer.m */; };
+		BED2603D16BD76200026EEDA /* AlphaAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = BED25FF816BD76200026EEDA /* AlphaAnimationView.m */; };
+		BED2603E16BD76200026EEDA /* CommonAnimationButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BED25FFA16BD76200026EEDA /* CommonAnimationButton.m */; };
+		BED2603F16BD76200026EEDA /* CommonAnimationTripleStateButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BED25FFC16BD76200026EEDA /* CommonAnimationTripleStateButton.m */; };
+		BED2604016BD76200026EEDA /* UIStateAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = BED25FFE16BD76200026EEDA /* UIStateAnimationView.m */; };
+		BED2604116BD76200026EEDA /* AlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BED2600116BD76200026EEDA /* AlbumViewController.m */; };
+		BED2604216BD76200026EEDA /* BaseCameraLogicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BED2600316BD76200026EEDA /* BaseCameraLogicViewController.m */; };
+		BED2604316BD76200026EEDA /* CameraCoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BED2600516BD76200026EEDA /* CameraCoverViewController.m */; };
+		BED2604416BD76200026EEDA /* BlackCat.m in Sources */ = {isa = PBXBuildFile; fileRef = BED2600816BD76200026EEDA /* BlackCat.m */; };
+		BED2604516BD76200026EEDA /* ConfigButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BED2600A16BD76200026EEDA /* ConfigButton.m */; };
+		BED2604616BD76200026EEDA /* CountView.m in Sources */ = {isa = PBXBuildFile; fileRef = BED2600C16BD76200026EEDA /* CountView.m */; };
+		BED2604716BD76200026EEDA /* EmiterCoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = BED2600E16BD76200026EEDA /* EmiterCoverView.m */; };
+		BED2604816BD76200026EEDA /* FocusAimer.m in Sources */ = {isa = PBXBuildFile; fileRef = BED2601016BD76200026EEDA /* FocusAimer.m */; };
+		BED2604916BD76200026EEDA /* QRCodeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BED2601216BD76200026EEDA /* QRCodeButton.m */; };
+		BED2604A16BD76200026EEDA /* QRCodeNormalStateAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = BED2601416BD76200026EEDA /* QRCodeNormalStateAnimationView.m */; };
+		BED2604B16BD76200026EEDA /* ShotButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BED2601616BD76200026EEDA /* ShotButton.m */; };
+		BED2604C16BD76200026EEDA /* SliderTouchCoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = BED2601816BD76200026EEDA /* SliderTouchCoverView.m */; };
+		BED2604D16BD76200026EEDA /* TimerButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BED2601A16BD76200026EEDA /* TimerButton.m */; };
+		BED2604E16BD76200026EEDA /* TipsView.m in Sources */ = {isa = PBXBuildFile; fileRef = BED2601C16BD76200026EEDA /* TipsView.m */; };
+		BED2604F16BD76200026EEDA /* VolumeMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = BED2601E16BD76200026EEDA /* VolumeMonitor.m */; };
+		BED2605016BD76200026EEDA /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BED2602116BD76200026EEDA /* MoreViewController.m */; };
+		BED2605116BD76200026EEDA /* LoadingAnimateImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = BED2602416BD76200026EEDA /* LoadingAnimateImageView.m */; };
+		BED2605216BD76200026EEDA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BED2602616BD76200026EEDA /* ViewController.m */; };
+		BED2605316BD76200026EEDA /* ViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = BED2602816BD76200026EEDA /* ViewController_iPad.m */; };
+		BED2605416BD76200026EEDA /* ViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = BED2602916BD76200026EEDA /* ViewController_iPad.xib */; };
+		BED2605516BD76200026EEDA /* ViewController_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = BED2602B16BD76200026EEDA /* ViewController_iPhone.m */; };
+		BED2605616BD76200026EEDA /* ViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = BED2602C16BD76200026EEDA /* ViewController_iPhone.xib */; };
+		BED2605716BD76200026EEDA /* ConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BED2602F16BD76200026EEDA /* ConfigViewController.m */; };
+		BED2605816BD76200026EEDA /* BaseUtilitiesFuncions.m in Sources */ = {isa = PBXBuildFile; fileRef = BED2603216BD76200026EEDA /* BaseUtilitiesFuncions.m */; };
+		BED2606116BD76A40026EEDA /* DataMatrix.mm in Sources */ = {isa = PBXBuildFile; fileRef = BED2605C16BD76A40026EEDA /* DataMatrix.mm */; };
+		BED2606216BD76A40026EEDA /* QR_Encode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BED2605D16BD76A40026EEDA /* QR_Encode.cpp */; };
+		BED2606316BD76A40026EEDA /* QREncoder.mm in Sources */ = {isa = PBXBuildFile; fileRef = BED2606016BD76A40026EEDA /* QREncoder.mm */; };
 		BEEFD53016973270004B93F8 /* text.strings in Resources */ = {isa = PBXBuildFile; fileRef = BEEFD53216973270004B93F8 /* text.strings */; };
 		BEF975B2166A02B800B6C7AC /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEF975B1166A02B800B6C7AC /* Default-568h@2x.png */; };
-		F30053A6165B27F80091CF85 /* UIStateAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = F30053A5165B27F80091CF85 /* UIStateAnimationView.m */; };
-		F30053A9165B2F4B0091CF85 /* AlphaAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = F30053A8165B2F4A0091CF85 /* AlphaAnimationView.m */; };
-		F30053AC165B2FDB0091CF85 /* CommonAnimationButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F30053AB165B2FDB0091CF85 /* CommonAnimationButton.m */; };
-		F30053CD1660901C0091CF85 /* ConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F30053CC166090130091CF85 /* ConfigViewController.m */; };
 		F301347915FDDD1D00480CD7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F301347815FDDD1D00480CD7 /* AVFoundation.framework */; };
-		F376D53A1668AD6600CEEEE1 /* SliderTouchCoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = F376D5391668AD6600CEEEE1 /* SliderTouchCoverView.m */; };
-		F39891301648B91B006E0703 /* ViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = F39891291648B91B006E0703 /* ViewController_iPad.m */; };
-		F39891311648B91B006E0703 /* ViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = F398912A1648B91B006E0703 /* ViewController_iPad.xib */; };
-		F39891321648B91B006E0703 /* ViewController_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = F398912C1648B91B006E0703 /* ViewController_iPhone.m */; };
-		F39891331648B91B006E0703 /* ViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = F398912D1648B91B006E0703 /* ViewController_iPhone.xib */; };
-		F39891341648B91B006E0703 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F398912F1648B91B006E0703 /* ViewController.m */; };
-		F398913B1648B928006E0703 /* CameraOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = F39891381648B928006E0703 /* CameraOptions.m */; };
-		F398913C1648B928006E0703 /* Configure.m in Sources */ = {isa = PBXBuildFile; fileRef = F398913A1648B928006E0703 /* Configure.m */; };
-		F398913F1648BA93006E0703 /* ShotTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = F398913E1648BA93006E0703 /* ShotTimer.m */; };
 		F39891411648FE23006E0703 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F39891401648FE22006E0703 /* MediaPlayer.framework */; };
-		F3B18426169AAC5A00CE4791 /* FocusAimer.m in Sources */ = {isa = PBXBuildFile; fileRef = F3B18425169AAC5900CE4791 /* FocusAimer.m */; };
-		F3DAC8131660918B00950E18 /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3DAC8121660918B00950E18 /* MoreViewController.m */; };
-		F3DAC82B1664680800950E18 /* TimerButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F3DAC82A1664680800950E18 /* TimerButton.m */; };
-		F3DAC82E1664689A00950E18 /* VolumeMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = F3DAC82D1664689A00950E18 /* VolumeMonitor.m */; };
-		F3DAC831166468A900950E18 /* BlackCat.m in Sources */ = {isa = PBXBuildFile; fileRef = F3DAC830166468A900950E18 /* BlackCat.m */; };
-		F3DAC8341664725D00950E18 /* ShotButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F3DAC8331664725D00950E18 /* ShotButton.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,53 +77,95 @@
 		BE19EBFB15F359B800065448 /* TimerCamera-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TimerCamera-Prefix.pch"; sourceTree = "<group>"; };
 		BE19EBFC15F359B800065448 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		BE19EBFD15F359B800065448 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		BE46388416B00EBE00227BA9 /* CommonAnimationTripleStateButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonAnimationTripleStateButton.h; sourceTree = "<group>"; };
-		BE46388516B00EBE00227BA9 /* CommonAnimationTripleStateButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonAnimationTripleStateButton.m; sourceTree = "<group>"; };
-		BE46388916B039E100227BA9 /* BaseUtilitiesFuncions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseUtilitiesFuncions.h; sourceTree = "<group>"; };
-		BE46388A16B039E100227BA9 /* BaseUtilitiesFuncions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseUtilitiesFuncions.m; sourceTree = "<group>"; };
 		BE46388C16B03BBC00227BA9 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		BE7D809216B57E0C002ED0AB /* CountView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountView.h; sourceTree = "<group>"; };
-		BE7D809316B57E0C002ED0AB /* CountView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountView.m; sourceTree = "<group>"; };
 		BE89BE661605DB6600D2F091 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		BE89BE691605DB6F00D2F091 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		BE89BE6B1605DB7700D2F091 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		BE89BE6E1605DBA300D2F091 /* AQPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AQPlayer.h; sourceTree = "<group>"; };
-		BE89BE6F1605DBA300D2F091 /* AQPlayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AQPlayer.mm; sourceTree = "<group>"; };
-		BE89BE701605DBA300D2F091 /* AQRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AQRecorder.h; sourceTree = "<group>"; };
-		BE89BE711605DBA300D2F091 /* AQRecorder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AQRecorder.mm; sourceTree = "<group>"; };
-		BE89BE721605DBA300D2F091 /* MeterTable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MeterTable.cpp; sourceTree = "<group>"; };
-		BE89BE731605DBA300D2F091 /* MeterTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeterTable.h; sourceTree = "<group>"; };
-		BE89BE8A1605DC3B00D2F091 /* CADebugMacros.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CADebugMacros.cpp; sourceTree = "<group>"; };
-		BE89BE8B1605DC3B00D2F091 /* CADebugMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CADebugMacros.h; sourceTree = "<group>"; };
-		BE89BE8C1605DC3B00D2F091 /* CAMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAMath.h; sourceTree = "<group>"; };
-		BE89BE8D1605DC3B00D2F091 /* CAStreamBasicDescription.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CAStreamBasicDescription.cpp; sourceTree = "<group>"; };
-		BE89BE8E1605DC3B00D2F091 /* CAStreamBasicDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAStreamBasicDescription.h; sourceTree = "<group>"; };
-		BE89BE8F1605DC3B00D2F091 /* CAXException.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CAXException.cpp; sourceTree = "<group>"; };
-		BE89BE901605DC3B00D2F091 /* CAXException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAXException.h; sourceTree = "<group>"; };
-		BE89BE9B1605E24E00D2F091 /* AudioUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioUtility.h; sourceTree = "<group>"; };
-		BE89BE9C1605E24E00D2F091 /* AudioUtility.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AudioUtility.mm; sourceTree = "<group>"; };
-		BE8B6F4A16B2B4B7000B7B88 /* ConfigButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigButton.h; sourceTree = "<group>"; };
-		BE8B6F4B16B2B4B7000B7B88 /* ConfigButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigButton.m; sourceTree = "<group>"; };
-		BE8B6F5616B41EF9000B7B88 /* EmiterCoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmiterCoverView.h; sourceTree = "<group>"; };
-		BE8B6F5716B41EF9000B7B88 /* EmiterCoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmiterCoverView.m; sourceTree = "<group>"; };
 		BEB8E4471646D25700DC5800 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		BEB8E4481646D25700DC5800 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		BEB8E4491646D25700DC5800 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		BEB8E44E1646D36800DC5800 /* Resource */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Resource; sourceTree = "<group>"; };
-		BEB8E4581646DF9800DC5800 /* LoadingAnimateImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingAnimateImageView.h; sourceTree = "<group>"; };
-		BEB8E4591646DF9800DC5800 /* LoadingAnimateImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingAnimateImageView.m; sourceTree = "<group>"; };
-		BEC3353816A451A900C60A89 /* QRCodeButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeButton.h; sourceTree = "<group>"; };
-		BEC3353916A451A900C60A89 /* QRCodeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeButton.m; sourceTree = "<group>"; };
-		BEC3353F16A45D0D00C60A89 /* AlbumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumViewController.h; sourceTree = "<group>"; };
-		BEC3354016A45D0E00C60A89 /* AlbumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumViewController.m; sourceTree = "<group>"; };
-		BEC3354D16A5B75F00C60A89 /* QRCodeNormalStateAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeNormalStateAnimationView.h; sourceTree = "<group>"; };
-		BEC3354E16A5B75F00C60A89 /* QRCodeNormalStateAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeNormalStateAnimationView.m; sourceTree = "<group>"; };
-		BED79FE01690ADAB00FE5C57 /* TipsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TipsView.h; sourceTree = "<group>"; };
-		BED79FE11690ADAC00FE5C57 /* TipsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TipsView.m; sourceTree = "<group>"; };
-		BEE3D9A4166DD5E2001AE5E9 /* CameraCoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraCoverViewController.h; sourceTree = "<group>"; };
-		BEE3D9A5166DD5E2001AE5E9 /* CameraCoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraCoverViewController.m; sourceTree = "<group>"; };
-		BEE3D9A7166DD622001AE5E9 /* BaseCameraLogicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseCameraLogicViewController.h; sourceTree = "<group>"; };
-		BEE3D9A8166DD622001AE5E9 /* BaseCameraLogicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseCameraLogicViewController.m; sourceTree = "<group>"; };
+		BED25FDC16BD76200026EEDA /* AQPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AQPlayer.h; sourceTree = "<group>"; };
+		BED25FDD16BD76200026EEDA /* AQPlayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AQPlayer.mm; sourceTree = "<group>"; };
+		BED25FDE16BD76200026EEDA /* AQRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AQRecorder.h; sourceTree = "<group>"; };
+		BED25FDF16BD76200026EEDA /* AQRecorder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AQRecorder.mm; sourceTree = "<group>"; };
+		BED25FE016BD76200026EEDA /* AudioUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioUtility.h; sourceTree = "<group>"; };
+		BED25FE116BD76200026EEDA /* AudioUtility.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AudioUtility.mm; sourceTree = "<group>"; };
+		BED25FE216BD76200026EEDA /* CADebugMacros.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CADebugMacros.cpp; sourceTree = "<group>"; };
+		BED25FE316BD76200026EEDA /* CADebugMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CADebugMacros.h; sourceTree = "<group>"; };
+		BED25FE416BD76200026EEDA /* CAMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAMath.h; sourceTree = "<group>"; };
+		BED25FE516BD76200026EEDA /* CAStreamBasicDescription.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CAStreamBasicDescription.cpp; sourceTree = "<group>"; };
+		BED25FE616BD76200026EEDA /* CAStreamBasicDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAStreamBasicDescription.h; sourceTree = "<group>"; };
+		BED25FE716BD76200026EEDA /* CAXException.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CAXException.cpp; sourceTree = "<group>"; };
+		BED25FE816BD76200026EEDA /* CAXException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAXException.h; sourceTree = "<group>"; };
+		BED25FE916BD76200026EEDA /* MeterTable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MeterTable.cpp; sourceTree = "<group>"; };
+		BED25FEA16BD76200026EEDA /* MeterTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeterTable.h; sourceTree = "<group>"; };
+		BED25FEC16BD76200026EEDA /* CameraOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraOptions.h; sourceTree = "<group>"; };
+		BED25FED16BD76200026EEDA /* CameraOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraOptions.m; sourceTree = "<group>"; };
+		BED25FEF16BD76200026EEDA /* Configure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Configure.h; sourceTree = "<group>"; };
+		BED25FF016BD76200026EEDA /* Configure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Configure.m; sourceTree = "<group>"; };
+		BED25FF216BD76200026EEDA /* ShotTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShotTimer.h; sourceTree = "<group>"; };
+		BED25FF316BD76200026EEDA /* ShotTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShotTimer.m; sourceTree = "<group>"; };
+		BED25FF716BD76200026EEDA /* AlphaAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlphaAnimationView.h; sourceTree = "<group>"; };
+		BED25FF816BD76200026EEDA /* AlphaAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlphaAnimationView.m; sourceTree = "<group>"; };
+		BED25FF916BD76200026EEDA /* CommonAnimationButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonAnimationButton.h; sourceTree = "<group>"; };
+		BED25FFA16BD76200026EEDA /* CommonAnimationButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonAnimationButton.m; sourceTree = "<group>"; };
+		BED25FFB16BD76200026EEDA /* CommonAnimationTripleStateButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonAnimationTripleStateButton.h; sourceTree = "<group>"; };
+		BED25FFC16BD76200026EEDA /* CommonAnimationTripleStateButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonAnimationTripleStateButton.m; sourceTree = "<group>"; };
+		BED25FFD16BD76200026EEDA /* UIStateAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIStateAnimationView.h; sourceTree = "<group>"; };
+		BED25FFE16BD76200026EEDA /* UIStateAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIStateAnimationView.m; sourceTree = "<group>"; };
+		BED2600016BD76200026EEDA /* AlbumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumViewController.h; sourceTree = "<group>"; };
+		BED2600116BD76200026EEDA /* AlbumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumViewController.m; sourceTree = "<group>"; };
+		BED2600216BD76200026EEDA /* BaseCameraLogicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseCameraLogicViewController.h; sourceTree = "<group>"; };
+		BED2600316BD76200026EEDA /* BaseCameraLogicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseCameraLogicViewController.m; sourceTree = "<group>"; };
+		BED2600416BD76200026EEDA /* CameraCoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraCoverViewController.h; sourceTree = "<group>"; };
+		BED2600516BD76200026EEDA /* CameraCoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraCoverViewController.m; sourceTree = "<group>"; };
+		BED2600716BD76200026EEDA /* BlackCat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlackCat.h; sourceTree = "<group>"; };
+		BED2600816BD76200026EEDA /* BlackCat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlackCat.m; sourceTree = "<group>"; };
+		BED2600916BD76200026EEDA /* ConfigButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigButton.h; sourceTree = "<group>"; };
+		BED2600A16BD76200026EEDA /* ConfigButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigButton.m; sourceTree = "<group>"; };
+		BED2600B16BD76200026EEDA /* CountView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountView.h; sourceTree = "<group>"; };
+		BED2600C16BD76200026EEDA /* CountView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountView.m; sourceTree = "<group>"; };
+		BED2600D16BD76200026EEDA /* EmiterCoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmiterCoverView.h; sourceTree = "<group>"; };
+		BED2600E16BD76200026EEDA /* EmiterCoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmiterCoverView.m; sourceTree = "<group>"; };
+		BED2600F16BD76200026EEDA /* FocusAimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FocusAimer.h; sourceTree = "<group>"; };
+		BED2601016BD76200026EEDA /* FocusAimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FocusAimer.m; sourceTree = "<group>"; };
+		BED2601116BD76200026EEDA /* QRCodeButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeButton.h; sourceTree = "<group>"; };
+		BED2601216BD76200026EEDA /* QRCodeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeButton.m; sourceTree = "<group>"; };
+		BED2601316BD76200026EEDA /* QRCodeNormalStateAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeNormalStateAnimationView.h; sourceTree = "<group>"; };
+		BED2601416BD76200026EEDA /* QRCodeNormalStateAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeNormalStateAnimationView.m; sourceTree = "<group>"; };
+		BED2601516BD76200026EEDA /* ShotButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShotButton.h; sourceTree = "<group>"; };
+		BED2601616BD76200026EEDA /* ShotButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShotButton.m; sourceTree = "<group>"; };
+		BED2601716BD76200026EEDA /* SliderTouchCoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SliderTouchCoverView.h; sourceTree = "<group>"; };
+		BED2601816BD76200026EEDA /* SliderTouchCoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SliderTouchCoverView.m; sourceTree = "<group>"; };
+		BED2601916BD76200026EEDA /* TimerButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerButton.h; sourceTree = "<group>"; };
+		BED2601A16BD76200026EEDA /* TimerButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimerButton.m; sourceTree = "<group>"; };
+		BED2601B16BD76200026EEDA /* TipsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TipsView.h; sourceTree = "<group>"; };
+		BED2601C16BD76200026EEDA /* TipsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TipsView.m; sourceTree = "<group>"; };
+		BED2601D16BD76200026EEDA /* VolumeMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VolumeMonitor.h; sourceTree = "<group>"; };
+		BED2601E16BD76200026EEDA /* VolumeMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VolumeMonitor.m; sourceTree = "<group>"; };
+		BED2602016BD76200026EEDA /* MoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreViewController.h; sourceTree = "<group>"; };
+		BED2602116BD76200026EEDA /* MoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreViewController.m; sourceTree = "<group>"; };
+		BED2602316BD76200026EEDA /* LoadingAnimateImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingAnimateImageView.h; sourceTree = "<group>"; };
+		BED2602416BD76200026EEDA /* LoadingAnimateImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingAnimateImageView.m; sourceTree = "<group>"; };
+		BED2602516BD76200026EEDA /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		BED2602616BD76200026EEDA /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		BED2602716BD76200026EEDA /* ViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController_iPad.h; sourceTree = "<group>"; };
+		BED2602816BD76200026EEDA /* ViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController_iPad.m; sourceTree = "<group>"; };
+		BED2602916BD76200026EEDA /* ViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController_iPad.xib; sourceTree = "<group>"; };
+		BED2602A16BD76200026EEDA /* ViewController_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController_iPhone.h; sourceTree = "<group>"; };
+		BED2602B16BD76200026EEDA /* ViewController_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController_iPhone.m; sourceTree = "<group>"; };
+		BED2602C16BD76200026EEDA /* ViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController_iPhone.xib; sourceTree = "<group>"; };
+		BED2602E16BD76200026EEDA /* ConfigViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigViewController.h; sourceTree = "<group>"; };
+		BED2602F16BD76200026EEDA /* ConfigViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigViewController.m; sourceTree = "<group>"; };
+		BED2603116BD76200026EEDA /* BaseUtilitiesFuncions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseUtilitiesFuncions.h; sourceTree = "<group>"; };
+		BED2603216BD76200026EEDA /* BaseUtilitiesFuncions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseUtilitiesFuncions.m; sourceTree = "<group>"; };
+		BED2605B16BD76A40026EEDA /* DataMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataMatrix.h; sourceTree = "<group>"; };
+		BED2605C16BD76A40026EEDA /* DataMatrix.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DataMatrix.mm; sourceTree = "<group>"; };
+		BED2605D16BD76A40026EEDA /* QR_Encode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = QR_Encode.cpp; sourceTree = "<group>"; };
+		BED2605E16BD76A40026EEDA /* QR_Encode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QR_Encode.h; sourceTree = "<group>"; };
+		BED2605F16BD76A40026EEDA /* QREncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QREncoder.h; sourceTree = "<group>"; };
+		BED2606016BD76A40026EEDA /* QREncoder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = QREncoder.mm; sourceTree = "<group>"; };
 		BEEFD53116973270004B93F8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/text.strings; sourceTree = "<group>"; };
 		BEEFD53F169737BA004B93F8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/text.strings"; sourceTree = "<group>"; };
 		BEEFD540169737C4004B93F8 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/text.strings"; sourceTree = "<group>"; };
@@ -131,44 +176,8 @@
 		BEEFD54616973876004B93F8 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/text.strings; sourceTree = "<group>"; };
 		BEEFD5471697399F004B93F8 /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/text.strings; sourceTree = "<group>"; };
 		BEF975B1166A02B800B6C7AC /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		F30053A4165B27F80091CF85 /* UIStateAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIStateAnimationView.h; sourceTree = "<group>"; };
-		F30053A5165B27F80091CF85 /* UIStateAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIStateAnimationView.m; sourceTree = "<group>"; };
-		F30053A7165B2F4A0091CF85 /* AlphaAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlphaAnimationView.h; sourceTree = "<group>"; };
-		F30053A8165B2F4A0091CF85 /* AlphaAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlphaAnimationView.m; sourceTree = "<group>"; };
-		F30053AA165B2FDA0091CF85 /* CommonAnimationButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonAnimationButton.h; sourceTree = "<group>"; };
-		F30053AB165B2FDB0091CF85 /* CommonAnimationButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonAnimationButton.m; sourceTree = "<group>"; };
-		F30053CB166090100091CF85 /* ConfigViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigViewController.h; sourceTree = "<group>"; };
-		F30053CC166090130091CF85 /* ConfigViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigViewController.m; sourceTree = "<group>"; };
 		F301347815FDDD1D00480CD7 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		F376D5381668AD6600CEEEE1 /* SliderTouchCoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SliderTouchCoverView.h; sourceTree = "<group>"; };
-		F376D5391668AD6600CEEEE1 /* SliderTouchCoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SliderTouchCoverView.m; sourceTree = "<group>"; };
-		F39891281648B91B006E0703 /* ViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController_iPad.h; sourceTree = "<group>"; };
-		F39891291648B91B006E0703 /* ViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController_iPad.m; sourceTree = "<group>"; };
-		F398912A1648B91B006E0703 /* ViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController_iPad.xib; sourceTree = "<group>"; };
-		F398912B1648B91B006E0703 /* ViewController_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController_iPhone.h; sourceTree = "<group>"; };
-		F398912C1648B91B006E0703 /* ViewController_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController_iPhone.m; sourceTree = "<group>"; };
-		F398912D1648B91B006E0703 /* ViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController_iPhone.xib; sourceTree = "<group>"; };
-		F398912E1648B91B006E0703 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		F398912F1648B91B006E0703 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		F39891371648B928006E0703 /* CameraOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraOptions.h; sourceTree = "<group>"; };
-		F39891381648B928006E0703 /* CameraOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraOptions.m; sourceTree = "<group>"; };
-		F39891391648B928006E0703 /* Configure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Configure.h; sourceTree = "<group>"; };
-		F398913A1648B928006E0703 /* Configure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Configure.m; sourceTree = "<group>"; };
-		F398913D1648BA93006E0703 /* ShotTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShotTimer.h; sourceTree = "<group>"; };
-		F398913E1648BA93006E0703 /* ShotTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShotTimer.m; sourceTree = "<group>"; };
 		F39891401648FE22006E0703 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
-		F3B18424169AAC5800CE4791 /* FocusAimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FocusAimer.h; sourceTree = "<group>"; };
-		F3B18425169AAC5900CE4791 /* FocusAimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FocusAimer.m; sourceTree = "<group>"; };
-		F3DAC8111660918B00950E18 /* MoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreViewController.h; sourceTree = "<group>"; };
-		F3DAC8121660918B00950E18 /* MoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreViewController.m; sourceTree = "<group>"; };
-		F3DAC8291664680800950E18 /* TimerButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerButton.h; sourceTree = "<group>"; };
-		F3DAC82A1664680800950E18 /* TimerButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimerButton.m; sourceTree = "<group>"; };
-		F3DAC82C1664689A00950E18 /* VolumeMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VolumeMonitor.h; sourceTree = "<group>"; };
-		F3DAC82D1664689A00950E18 /* VolumeMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VolumeMonitor.m; sourceTree = "<group>"; };
-		F3DAC82F166468A900950E18 /* BlackCat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlackCat.h; sourceTree = "<group>"; };
-		F3DAC830166468A900950E18 /* BlackCat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlackCat.m; sourceTree = "<group>"; };
-		F3DAC8321664725D00950E18 /* ShotButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShotButton.h; sourceTree = "<group>"; };
-		F3DAC8331664725D00950E18 /* ShotButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShotButton.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -233,9 +242,9 @@
 		BE19EBF315F359B800065448 /* TimerCamera */ = {
 			isa = PBXGroup;
 			children = (
-				F39891361648B928006E0703 /* Logic */,
-				BEB8E4571646DF0A00DC5800 /* UI */,
-				BE89BE6D1605DBA300D2F091 /* AudioUtility */,
+				BED25FDA16BD76200026EEDA /* Modules */,
+				BED25FF416BD76200026EEDA /* UI */,
+				BED2603016BD76200026EEDA /* Utilities */,
 				BE19EBFC15F359B800065448 /* AppDelegate.h */,
 				BE19EBFD15F359B800065448 /* AppDelegate.m */,
 				BE19EBF415F359B800065448 /* Supporting Files */,
@@ -253,74 +262,210 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		BE46388816B0399F00227BA9 /* Utilities */ = {
+		BED25FDA16BD76200026EEDA /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				BE46388916B039E100227BA9 /* BaseUtilitiesFuncions.h */,
-				BE46388A16B039E100227BA9 /* BaseUtilitiesFuncions.m */,
+				BED2605A16BD76A40026EEDA /* QREncoder */,
+				BED2605916BD764A0026EEDA /* Album */,
+				BED25FDB16BD76200026EEDA /* AudioUtility */,
+				BED25FEB16BD76200026EEDA /* Camera */,
+				BED25FEE16BD76200026EEDA /* Setting */,
+				BED25FF116BD76200026EEDA /* Timer */,
 			);
-			name = Utilities;
-			path = TimerCamera/Utilities;
-			sourceTree = SOURCE_ROOT;
+			path = Modules;
+			sourceTree = "<group>";
 		};
-		BE89BE6D1605DBA300D2F091 /* AudioUtility */ = {
+		BED25FDB16BD76200026EEDA /* AudioUtility */ = {
 			isa = PBXGroup;
 			children = (
-				BE89BE8A1605DC3B00D2F091 /* CADebugMacros.cpp */,
-				BE89BE8B1605DC3B00D2F091 /* CADebugMacros.h */,
-				BE89BE8C1605DC3B00D2F091 /* CAMath.h */,
-				BE89BE8D1605DC3B00D2F091 /* CAStreamBasicDescription.cpp */,
-				BE89BE8E1605DC3B00D2F091 /* CAStreamBasicDescription.h */,
-				BE89BE8F1605DC3B00D2F091 /* CAXException.cpp */,
-				BE89BE901605DC3B00D2F091 /* CAXException.h */,
-				BE89BE6E1605DBA300D2F091 /* AQPlayer.h */,
-				BE89BE6F1605DBA300D2F091 /* AQPlayer.mm */,
-				BE89BE701605DBA300D2F091 /* AQRecorder.h */,
-				BE89BE711605DBA300D2F091 /* AQRecorder.mm */,
-				BE89BE721605DBA300D2F091 /* MeterTable.cpp */,
-				BE89BE731605DBA300D2F091 /* MeterTable.h */,
-				BE89BE9B1605E24E00D2F091 /* AudioUtility.h */,
-				BE89BE9C1605E24E00D2F091 /* AudioUtility.mm */,
+				BED25FDC16BD76200026EEDA /* AQPlayer.h */,
+				BED25FDD16BD76200026EEDA /* AQPlayer.mm */,
+				BED25FDE16BD76200026EEDA /* AQRecorder.h */,
+				BED25FDF16BD76200026EEDA /* AQRecorder.mm */,
+				BED25FE016BD76200026EEDA /* AudioUtility.h */,
+				BED25FE116BD76200026EEDA /* AudioUtility.mm */,
+				BED25FE216BD76200026EEDA /* CADebugMacros.cpp */,
+				BED25FE316BD76200026EEDA /* CADebugMacros.h */,
+				BED25FE416BD76200026EEDA /* CAMath.h */,
+				BED25FE516BD76200026EEDA /* CAStreamBasicDescription.cpp */,
+				BED25FE616BD76200026EEDA /* CAStreamBasicDescription.h */,
+				BED25FE716BD76200026EEDA /* CAXException.cpp */,
+				BED25FE816BD76200026EEDA /* CAXException.h */,
+				BED25FE916BD76200026EEDA /* MeterTable.cpp */,
+				BED25FEA16BD76200026EEDA /* MeterTable.h */,
 			);
 			path = AudioUtility;
 			sourceTree = "<group>";
 		};
-		BEB8E4571646DF0A00DC5800 /* UI */ = {
+		BED25FEB16BD76200026EEDA /* Camera */ = {
 			isa = PBXGroup;
 			children = (
-				BE46388816B0399F00227BA9 /* Utilities */,
-				BEE3D9A2166DD5C0001AE5E9 /* Modules */,
-				F3DAC827166467BD00950E18 /* Controls */,
-				F30053A2165B27CB0091CF85 /* Base */,
-				F39891281648B91B006E0703 /* ViewController_iPad.h */,
-				F39891291648B91B006E0703 /* ViewController_iPad.m */,
-				F398912A1648B91B006E0703 /* ViewController_iPad.xib */,
-				F398912B1648B91B006E0703 /* ViewController_iPhone.h */,
-				F398912C1648B91B006E0703 /* ViewController_iPhone.m */,
-				F398912D1648B91B006E0703 /* ViewController_iPhone.xib */,
-				F398912E1648B91B006E0703 /* ViewController.h */,
-				F398912F1648B91B006E0703 /* ViewController.m */,
-				BEB8E4581646DF9800DC5800 /* LoadingAnimateImageView.h */,
-				BEB8E4591646DF9800DC5800 /* LoadingAnimateImageView.m */,
-				F30053CB166090100091CF85 /* ConfigViewController.h */,
-				F30053CC166090130091CF85 /* ConfigViewController.m */,
-				F3DAC8111660918B00950E18 /* MoreViewController.h */,
-				F3DAC8121660918B00950E18 /* MoreViewController.m */,
+				BED25FEC16BD76200026EEDA /* CameraOptions.h */,
+				BED25FED16BD76200026EEDA /* CameraOptions.m */,
+			);
+			path = Camera;
+			sourceTree = "<group>";
+		};
+		BED25FEE16BD76200026EEDA /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				BED25FEF16BD76200026EEDA /* Configure.h */,
+				BED25FF016BD76200026EEDA /* Configure.m */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		BED25FF116BD76200026EEDA /* Timer */ = {
+			isa = PBXGroup;
+			children = (
+				BED25FF216BD76200026EEDA /* ShotTimer.h */,
+				BED25FF316BD76200026EEDA /* ShotTimer.m */,
+			);
+			path = Timer;
+			sourceTree = "<group>";
+		};
+		BED25FF416BD76200026EEDA /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				BED25FF516BD76200026EEDA /* Album */,
+				BED25FF616BD76200026EEDA /* Base */,
+				BED25FFF16BD76200026EEDA /* Camera */,
+				BED2600616BD76200026EEDA /* Controls */,
+				BED2601F16BD76200026EEDA /* More */,
+				BED2602216BD76200026EEDA /* Root */,
+				BED2602D16BD76200026EEDA /* Setting */,
 			);
 			path = UI;
 			sourceTree = "<group>";
 		};
-		BEE3D9A2166DD5C0001AE5E9 /* Modules */ = {
+		BED25FF516BD76200026EEDA /* Album */ = {
 			isa = PBXGroup;
 			children = (
-				BEE3D9A4166DD5E2001AE5E9 /* CameraCoverViewController.h */,
-				BEE3D9A5166DD5E2001AE5E9 /* CameraCoverViewController.m */,
-				BEE3D9A7166DD622001AE5E9 /* BaseCameraLogicViewController.h */,
-				BEE3D9A8166DD622001AE5E9 /* BaseCameraLogicViewController.m */,
-				BEC3353F16A45D0D00C60A89 /* AlbumViewController.h */,
-				BEC3354016A45D0E00C60A89 /* AlbumViewController.m */,
 			);
-			path = Modules;
+			path = Album;
+			sourceTree = "<group>";
+		};
+		BED25FF616BD76200026EEDA /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				BED25FF716BD76200026EEDA /* AlphaAnimationView.h */,
+				BED25FF816BD76200026EEDA /* AlphaAnimationView.m */,
+				BED25FF916BD76200026EEDA /* CommonAnimationButton.h */,
+				BED25FFA16BD76200026EEDA /* CommonAnimationButton.m */,
+				BED25FFB16BD76200026EEDA /* CommonAnimationTripleStateButton.h */,
+				BED25FFC16BD76200026EEDA /* CommonAnimationTripleStateButton.m */,
+				BED25FFD16BD76200026EEDA /* UIStateAnimationView.h */,
+				BED25FFE16BD76200026EEDA /* UIStateAnimationView.m */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		BED25FFF16BD76200026EEDA /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				BED2600016BD76200026EEDA /* AlbumViewController.h */,
+				BED2600116BD76200026EEDA /* AlbumViewController.m */,
+				BED2600216BD76200026EEDA /* BaseCameraLogicViewController.h */,
+				BED2600316BD76200026EEDA /* BaseCameraLogicViewController.m */,
+				BED2600416BD76200026EEDA /* CameraCoverViewController.h */,
+				BED2600516BD76200026EEDA /* CameraCoverViewController.m */,
+			);
+			path = Camera;
+			sourceTree = "<group>";
+		};
+		BED2600616BD76200026EEDA /* Controls */ = {
+			isa = PBXGroup;
+			children = (
+				BED2600716BD76200026EEDA /* BlackCat.h */,
+				BED2600816BD76200026EEDA /* BlackCat.m */,
+				BED2600916BD76200026EEDA /* ConfigButton.h */,
+				BED2600A16BD76200026EEDA /* ConfigButton.m */,
+				BED2600B16BD76200026EEDA /* CountView.h */,
+				BED2600C16BD76200026EEDA /* CountView.m */,
+				BED2600D16BD76200026EEDA /* EmiterCoverView.h */,
+				BED2600E16BD76200026EEDA /* EmiterCoverView.m */,
+				BED2600F16BD76200026EEDA /* FocusAimer.h */,
+				BED2601016BD76200026EEDA /* FocusAimer.m */,
+				BED2601116BD76200026EEDA /* QRCodeButton.h */,
+				BED2601216BD76200026EEDA /* QRCodeButton.m */,
+				BED2601316BD76200026EEDA /* QRCodeNormalStateAnimationView.h */,
+				BED2601416BD76200026EEDA /* QRCodeNormalStateAnimationView.m */,
+				BED2601516BD76200026EEDA /* ShotButton.h */,
+				BED2601616BD76200026EEDA /* ShotButton.m */,
+				BED2601716BD76200026EEDA /* SliderTouchCoverView.h */,
+				BED2601816BD76200026EEDA /* SliderTouchCoverView.m */,
+				BED2601916BD76200026EEDA /* TimerButton.h */,
+				BED2601A16BD76200026EEDA /* TimerButton.m */,
+				BED2601B16BD76200026EEDA /* TipsView.h */,
+				BED2601C16BD76200026EEDA /* TipsView.m */,
+				BED2601D16BD76200026EEDA /* VolumeMonitor.h */,
+				BED2601E16BD76200026EEDA /* VolumeMonitor.m */,
+			);
+			path = Controls;
+			sourceTree = "<group>";
+		};
+		BED2601F16BD76200026EEDA /* More */ = {
+			isa = PBXGroup;
+			children = (
+				BED2602016BD76200026EEDA /* MoreViewController.h */,
+				BED2602116BD76200026EEDA /* MoreViewController.m */,
+			);
+			path = More;
+			sourceTree = "<group>";
+		};
+		BED2602216BD76200026EEDA /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				BED2602316BD76200026EEDA /* LoadingAnimateImageView.h */,
+				BED2602416BD76200026EEDA /* LoadingAnimateImageView.m */,
+				BED2602516BD76200026EEDA /* ViewController.h */,
+				BED2602616BD76200026EEDA /* ViewController.m */,
+				BED2602716BD76200026EEDA /* ViewController_iPad.h */,
+				BED2602816BD76200026EEDA /* ViewController_iPad.m */,
+				BED2602916BD76200026EEDA /* ViewController_iPad.xib */,
+				BED2602A16BD76200026EEDA /* ViewController_iPhone.h */,
+				BED2602B16BD76200026EEDA /* ViewController_iPhone.m */,
+				BED2602C16BD76200026EEDA /* ViewController_iPhone.xib */,
+			);
+			path = Root;
+			sourceTree = "<group>";
+		};
+		BED2602D16BD76200026EEDA /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				BED2602E16BD76200026EEDA /* ConfigViewController.h */,
+				BED2602F16BD76200026EEDA /* ConfigViewController.m */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		BED2603016BD76200026EEDA /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				BED2603116BD76200026EEDA /* BaseUtilitiesFuncions.h */,
+				BED2603216BD76200026EEDA /* BaseUtilitiesFuncions.m */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		BED2605916BD764A0026EEDA /* Album */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Album;
+			sourceTree = "<group>";
+		};
+		BED2605A16BD76A40026EEDA /* QREncoder */ = {
+			isa = PBXGroup;
+			children = (
+				BED2605B16BD76A40026EEDA /* DataMatrix.h */,
+				BED2605C16BD76A40026EEDA /* DataMatrix.mm */,
+				BED2605D16BD76A40026EEDA /* QR_Encode.cpp */,
+				BED2605E16BD76A40026EEDA /* QR_Encode.h */,
+				BED2605F16BD76A40026EEDA /* QREncoder.h */,
+				BED2606016BD76A40026EEDA /* QREncoder.mm */,
+			);
+			path = QREncoder;
 			sourceTree = "<group>";
 		};
 		BEEFD52D16973267004B93F8 /* Strings */ = {
@@ -329,65 +474,6 @@
 				BEEFD53216973270004B93F8 /* text.strings */,
 			);
 			path = Strings;
-			sourceTree = "<group>";
-		};
-		F30053A2165B27CB0091CF85 /* Base */ = {
-			isa = PBXGroup;
-			children = (
-				F30053A4165B27F80091CF85 /* UIStateAnimationView.h */,
-				F30053A5165B27F80091CF85 /* UIStateAnimationView.m */,
-				F30053A7165B2F4A0091CF85 /* AlphaAnimationView.h */,
-				F30053A8165B2F4A0091CF85 /* AlphaAnimationView.m */,
-				F30053AA165B2FDA0091CF85 /* CommonAnimationButton.h */,
-				F30053AB165B2FDB0091CF85 /* CommonAnimationButton.m */,
-				BE46388416B00EBE00227BA9 /* CommonAnimationTripleStateButton.h */,
-				BE46388516B00EBE00227BA9 /* CommonAnimationTripleStateButton.m */,
-			);
-			path = Base;
-			sourceTree = "<group>";
-		};
-		F39891361648B928006E0703 /* Logic */ = {
-			isa = PBXGroup;
-			children = (
-				F39891371648B928006E0703 /* CameraOptions.h */,
-				F39891381648B928006E0703 /* CameraOptions.m */,
-				F39891391648B928006E0703 /* Configure.h */,
-				F398913A1648B928006E0703 /* Configure.m */,
-				F398913D1648BA93006E0703 /* ShotTimer.h */,
-				F398913E1648BA93006E0703 /* ShotTimer.m */,
-			);
-			path = Logic;
-			sourceTree = "<group>";
-		};
-		F3DAC827166467BD00950E18 /* Controls */ = {
-			isa = PBXGroup;
-			children = (
-				F3DAC8291664680800950E18 /* TimerButton.h */,
-				F3DAC82A1664680800950E18 /* TimerButton.m */,
-				F3DAC82C1664689A00950E18 /* VolumeMonitor.h */,
-				F3DAC82D1664689A00950E18 /* VolumeMonitor.m */,
-				F3DAC82F166468A900950E18 /* BlackCat.h */,
-				F3DAC830166468A900950E18 /* BlackCat.m */,
-				F3DAC8321664725D00950E18 /* ShotButton.h */,
-				F3DAC8331664725D00950E18 /* ShotButton.m */,
-				F376D5381668AD6600CEEEE1 /* SliderTouchCoverView.h */,
-				F376D5391668AD6600CEEEE1 /* SliderTouchCoverView.m */,
-				BED79FE01690ADAB00FE5C57 /* TipsView.h */,
-				BED79FE11690ADAC00FE5C57 /* TipsView.m */,
-				F3B18424169AAC5800CE4791 /* FocusAimer.h */,
-				F3B18425169AAC5900CE4791 /* FocusAimer.m */,
-				BEC3353816A451A900C60A89 /* QRCodeButton.h */,
-				BEC3353916A451A900C60A89 /* QRCodeButton.m */,
-				BEC3354D16A5B75F00C60A89 /* QRCodeNormalStateAnimationView.h */,
-				BEC3354E16A5B75F00C60A89 /* QRCodeNormalStateAnimationView.m */,
-				BE8B6F4A16B2B4B7000B7B88 /* ConfigButton.h */,
-				BE8B6F4B16B2B4B7000B7B88 /* ConfigButton.m */,
-				BE8B6F5616B41EF9000B7B88 /* EmiterCoverView.h */,
-				BE8B6F5716B41EF9000B7B88 /* EmiterCoverView.m */,
-				BE7D809216B57E0C002ED0AB /* CountView.h */,
-				BE7D809316B57E0C002ED0AB /* CountView.m */,
-			);
-			path = Controls;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -453,10 +539,10 @@
 				BEB8E44B1646D25700DC5800 /* Default@2x.png in Resources */,
 				BEB8E44C1646D25700DC5800 /* Icon@2x.png in Resources */,
 				BEB8E44F1646D36800DC5800 /* Resource in Resources */,
-				F39891311648B91B006E0703 /* ViewController_iPad.xib in Resources */,
-				F39891331648B91B006E0703 /* ViewController_iPhone.xib in Resources */,
 				BEF975B2166A02B800B6C7AC /* Default-568h@2x.png in Resources */,
 				BEEFD53016973270004B93F8 /* text.strings in Resources */,
+				BED2605416BD76200026EEDA /* ViewController_iPad.xib in Resources */,
+				BED2605616BD76200026EEDA /* ViewController_iPhone.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -469,42 +555,45 @@
 			files = (
 				BE19EBFA15F359B800065448 /* main.m in Sources */,
 				BE19EBFE15F359B800065448 /* AppDelegate.m in Sources */,
-				BE89BE741605DBA300D2F091 /* AQPlayer.mm in Sources */,
-				BE89BE751605DBA300D2F091 /* AQRecorder.mm in Sources */,
-				BE89BE761605DBA300D2F091 /* MeterTable.cpp in Sources */,
-				BE89BE911605DC3B00D2F091 /* CADebugMacros.cpp in Sources */,
-				BE89BE921605DC3B00D2F091 /* CAStreamBasicDescription.cpp in Sources */,
-				BE89BE931605DC3B00D2F091 /* CAXException.cpp in Sources */,
-				BE89BE9D1605E24E00D2F091 /* AudioUtility.mm in Sources */,
-				BEB8E45A1646DF9800DC5800 /* LoadingAnimateImageView.m in Sources */,
-				F39891301648B91B006E0703 /* ViewController_iPad.m in Sources */,
-				F39891321648B91B006E0703 /* ViewController_iPhone.m in Sources */,
-				F39891341648B91B006E0703 /* ViewController.m in Sources */,
-				F398913B1648B928006E0703 /* CameraOptions.m in Sources */,
-				F398913C1648B928006E0703 /* Configure.m in Sources */,
-				F398913F1648BA93006E0703 /* ShotTimer.m in Sources */,
-				F30053A6165B27F80091CF85 /* UIStateAnimationView.m in Sources */,
-				F30053A9165B2F4B0091CF85 /* AlphaAnimationView.m in Sources */,
-				F30053AC165B2FDB0091CF85 /* CommonAnimationButton.m in Sources */,
-				F30053CD1660901C0091CF85 /* ConfigViewController.m in Sources */,
-				F3DAC8131660918B00950E18 /* MoreViewController.m in Sources */,
-				F3DAC82B1664680800950E18 /* TimerButton.m in Sources */,
-				F3DAC82E1664689A00950E18 /* VolumeMonitor.m in Sources */,
-				F3DAC831166468A900950E18 /* BlackCat.m in Sources */,
-				F3DAC8341664725D00950E18 /* ShotButton.m in Sources */,
-				F376D53A1668AD6600CEEEE1 /* SliderTouchCoverView.m in Sources */,
-				BEE3D9A6166DD5E2001AE5E9 /* CameraCoverViewController.m in Sources */,
-				BEE3D9A9166DD622001AE5E9 /* BaseCameraLogicViewController.m in Sources */,
-				BED79FE21690ADAC00FE5C57 /* TipsView.m in Sources */,
-				F3B18426169AAC5A00CE4791 /* FocusAimer.m in Sources */,
-				BEC3353A16A451A900C60A89 /* QRCodeButton.m in Sources */,
-				BEC3354116A45D0E00C60A89 /* AlbumViewController.m in Sources */,
-				BEC3354F16A5B75F00C60A89 /* QRCodeNormalStateAnimationView.m in Sources */,
-				BE46388616B00EBE00227BA9 /* CommonAnimationTripleStateButton.m in Sources */,
-				BE46388B16B039E100227BA9 /* BaseUtilitiesFuncions.m in Sources */,
-				BE8B6F4C16B2B4B7000B7B88 /* ConfigButton.m in Sources */,
-				BE8B6F5816B41EF9000B7B88 /* EmiterCoverView.m in Sources */,
-				BE7D809416B57E0C002ED0AB /* CountView.m in Sources */,
+				BED2603316BD76200026EEDA /* AQPlayer.mm in Sources */,
+				BED2603416BD76200026EEDA /* AQRecorder.mm in Sources */,
+				BED2603516BD76200026EEDA /* AudioUtility.mm in Sources */,
+				BED2603616BD76200026EEDA /* CADebugMacros.cpp in Sources */,
+				BED2603716BD76200026EEDA /* CAStreamBasicDescription.cpp in Sources */,
+				BED2603816BD76200026EEDA /* CAXException.cpp in Sources */,
+				BED2603916BD76200026EEDA /* MeterTable.cpp in Sources */,
+				BED2603A16BD76200026EEDA /* CameraOptions.m in Sources */,
+				BED2603B16BD76200026EEDA /* Configure.m in Sources */,
+				BED2603C16BD76200026EEDA /* ShotTimer.m in Sources */,
+				BED2603D16BD76200026EEDA /* AlphaAnimationView.m in Sources */,
+				BED2603E16BD76200026EEDA /* CommonAnimationButton.m in Sources */,
+				BED2603F16BD76200026EEDA /* CommonAnimationTripleStateButton.m in Sources */,
+				BED2604016BD76200026EEDA /* UIStateAnimationView.m in Sources */,
+				BED2604116BD76200026EEDA /* AlbumViewController.m in Sources */,
+				BED2604216BD76200026EEDA /* BaseCameraLogicViewController.m in Sources */,
+				BED2604316BD76200026EEDA /* CameraCoverViewController.m in Sources */,
+				BED2604416BD76200026EEDA /* BlackCat.m in Sources */,
+				BED2604516BD76200026EEDA /* ConfigButton.m in Sources */,
+				BED2604616BD76200026EEDA /* CountView.m in Sources */,
+				BED2604716BD76200026EEDA /* EmiterCoverView.m in Sources */,
+				BED2604816BD76200026EEDA /* FocusAimer.m in Sources */,
+				BED2604916BD76200026EEDA /* QRCodeButton.m in Sources */,
+				BED2604A16BD76200026EEDA /* QRCodeNormalStateAnimationView.m in Sources */,
+				BED2604B16BD76200026EEDA /* ShotButton.m in Sources */,
+				BED2604C16BD76200026EEDA /* SliderTouchCoverView.m in Sources */,
+				BED2604D16BD76200026EEDA /* TimerButton.m in Sources */,
+				BED2604E16BD76200026EEDA /* TipsView.m in Sources */,
+				BED2604F16BD76200026EEDA /* VolumeMonitor.m in Sources */,
+				BED2605016BD76200026EEDA /* MoreViewController.m in Sources */,
+				BED2605116BD76200026EEDA /* LoadingAnimateImageView.m in Sources */,
+				BED2605216BD76200026EEDA /* ViewController.m in Sources */,
+				BED2605316BD76200026EEDA /* ViewController_iPad.m in Sources */,
+				BED2605516BD76200026EEDA /* ViewController_iPhone.m in Sources */,
+				BED2605716BD76200026EEDA /* ConfigViewController.m in Sources */,
+				BED2605816BD76200026EEDA /* BaseUtilitiesFuncions.m in Sources */,
+				BED2606116BD76A40026EEDA /* DataMatrix.mm in Sources */,
+				BED2606216BD76A40026EEDA /* QR_Encode.cpp in Sources */,
+				BED2606316BD76A40026EEDA /* QREncoder.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
