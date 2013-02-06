@@ -53,7 +53,4 @@
 
 - (void)resetStatus;
 
-- (void)startTiming;
-- (void)endTiming;
-
 @end

@@ -64,7 +64,7 @@
     CGFloat scaleFactor = 1.0;
     
     //Deciding which factor to use to scale the image (factor = targetSize / imageSize)
-    if (image.size.width > targetSize.width || image.size.height > targetSize.height)
+    //if (image.size.width > targetSize.width || image.size.height > targetSize.height)
         if (!((scaleFactor = (targetSize.width / image.size.width)) > (targetSize.height / image.size.height))) //scale to fit width, or
             scaleFactor = targetSize.height / image.size.height; // scale to fit heigth.
     
@@ -83,6 +83,56 @@
     UIGraphicsEndImageContext();
     
     return scaledImage;
+}
+
+// get sub image
++ (UIImage*) getSubImageFrom: (UIImage*) img WithRect: (CGRect) rect
+{
+    
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    // translated rectangle for drawing sub image
+    CGRect drawRect = CGRectMake(-rect.origin.x, -rect.origin.y, img.size.width, img.size.height);
+    
+    // clip to the bounds of the image context
+    // not strictly necessary as it will get clipped anyway?
+    CGContextClipToRect(context, CGRectMake(0, 0, rect.size.width, rect.size.height));
+    
+    // draw image
+    [img drawInRect:drawRect];
+    
+    // grab image
+    UIImage* subImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    return subImage;
+}
+
++ (UIImage*)scaleAndCropImage:(UIImage*)img CropSize:(CGSize)size
+{
+    float rawRatio = img.size.width / img.size.height;
+    float newRatio = size.width / size.height;
+    BOOL scaleFitToWidth = rawRatio > newRatio ? NO : YES;
+    CGSize scaleSize = size;
+    if (scaleFitToWidth)
+    {
+        scaleSize.height = size.width / rawRatio;
+    }
+    else
+    {
+        scaleSize.width = size.height * rawRatio;
+    }
+    //scale
+    img = [BaseUtilitiesFuncions scaleImage:img toSize:scaleSize];
+    CGRect subRect = CGRectZero;
+    subRect.size = size;
+    subRect.origin.x = (scaleSize.width - size.width) * 0.5;
+    subRect.origin.y = (scaleSize.height - size.height) * 0.5;
+    //grab sub image
+    img = [BaseUtilitiesFuncions getSubImageFrom:img WithRect:subRect];
+    return img;
 }
 
 @end

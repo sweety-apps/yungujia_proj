@@ -34,7 +34,6 @@
 		BED2603E16BD76200026EEDA /* CommonAnimationButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BED25FFA16BD76200026EEDA /* CommonAnimationButton.m */; };
 		BED2603F16BD76200026EEDA /* CommonAnimationTripleStateButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BED25FFC16BD76200026EEDA /* CommonAnimationTripleStateButton.m */; };
 		BED2604016BD76200026EEDA /* UIStateAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = BED25FFE16BD76200026EEDA /* UIStateAnimationView.m */; };
-		BED2604116BD76200026EEDA /* AlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BED2600116BD76200026EEDA /* AlbumViewController.m */; };
 		BED2604216BD76200026EEDA /* BaseCameraLogicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BED2600316BD76200026EEDA /* BaseCameraLogicViewController.m */; };
 		BED2604316BD76200026EEDA /* CameraCoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BED2600516BD76200026EEDA /* CameraCoverViewController.m */; };
 		BED2604416BD76200026EEDA /* BlackCat.m in Sources */ = {isa = PBXBuildFile; fileRef = BED2600816BD76200026EEDA /* BlackCat.m */; };
@@ -62,8 +61,17 @@
 		BED2606216BD76A40026EEDA /* QR_Encode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BED2605D16BD76A40026EEDA /* QR_Encode.cpp */; };
 		BED2606316BD76A40026EEDA /* QREncoder.mm in Sources */ = {isa = PBXBuildFile; fileRef = BED2606016BD76A40026EEDA /* QREncoder.mm */; };
 		BED2606A16BD7CF40026EEDA /* AssetOperator.m in Sources */ = {isa = PBXBuildFile; fileRef = BED2606916BD7CF40026EEDA /* AssetOperator.m */; };
+		BED2606C16BD80CD0026EEDA /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BED2606B16BD80CD0026EEDA /* AssetsLibrary.framework */; };
+		BED2606F16BD82860026EEDA /* AlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BED2606E16BD82860026EEDA /* AlbumViewController.m */; };
 		BEEFD53016973270004B93F8 /* text.strings in Resources */ = {isa = PBXBuildFile; fileRef = BEEFD53216973270004B93F8 /* text.strings */; };
 		BEF975B2166A02B800B6C7AC /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEF975B1166A02B800B6C7AC /* Default-568h@2x.png */; };
+		BEFB5CDD16BD9EC2000F378B /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEFB5CDC16BD9EC2000F378B /* ImageIO.framework */; };
+		BEFB5CE116BEB76F000F378B /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = BEFB5CE016BEB76F000F378B /* iCarousel.m */; };
+		BEFB5CE616BEB8F9000F378B /* ImagePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = BEFB5CE516BEB8F9000F378B /* ImagePickerView.m */; };
+		BEFB5CE916BEB953000F378B /* BaseImagePickerTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = BEFB5CE816BEB953000F378B /* BaseImagePickerTarget.m */; };
+		BEFB5CEC16BEB979000F378B /* AssetImagePickerTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = BEFB5CEB16BEB979000F378B /* AssetImagePickerTarget.m */; };
+		BEFB5CEF16C0D491000F378B /* ThumbNailManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BEFB5CEE16C0D490000F378B /* ThumbNailManager.m */; };
+		BEFB5CF316C12002000F378B /* ImagePickerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BEFB5CF216C12002000F378B /* ImagePickerViewCell.m */; };
 		F301347915FDDD1D00480CD7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F301347815FDDD1D00480CD7 /* AVFoundation.framework */; };
 		F39891411648FE23006E0703 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F39891401648FE22006E0703 /* MediaPlayer.framework */; };
 /* End PBXBuildFile section */
@@ -115,8 +123,6 @@
 		BED25FFC16BD76200026EEDA /* CommonAnimationTripleStateButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonAnimationTripleStateButton.m; sourceTree = "<group>"; };
 		BED25FFD16BD76200026EEDA /* UIStateAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIStateAnimationView.h; sourceTree = "<group>"; };
 		BED25FFE16BD76200026EEDA /* UIStateAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIStateAnimationView.m; sourceTree = "<group>"; };
-		BED2600016BD76200026EEDA /* AlbumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumViewController.h; sourceTree = "<group>"; };
-		BED2600116BD76200026EEDA /* AlbumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumViewController.m; sourceTree = "<group>"; };
 		BED2600216BD76200026EEDA /* BaseCameraLogicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseCameraLogicViewController.h; sourceTree = "<group>"; };
 		BED2600316BD76200026EEDA /* BaseCameraLogicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseCameraLogicViewController.m; sourceTree = "<group>"; };
 		BED2600416BD76200026EEDA /* CameraCoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraCoverViewController.h; sourceTree = "<group>"; };
@@ -169,6 +175,9 @@
 		BED2606016BD76A40026EEDA /* QREncoder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = QREncoder.mm; sourceTree = "<group>"; };
 		BED2606816BD7CF40026EEDA /* AssetOperator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssetOperator.h; sourceTree = "<group>"; };
 		BED2606916BD7CF40026EEDA /* AssetOperator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssetOperator.m; sourceTree = "<group>"; };
+		BED2606B16BD80CD0026EEDA /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		BED2606D16BD82860026EEDA /* AlbumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumViewController.h; sourceTree = "<group>"; };
+		BED2606E16BD82860026EEDA /* AlbumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumViewController.m; sourceTree = "<group>"; };
 		BEEFD53116973270004B93F8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/text.strings; sourceTree = "<group>"; };
 		BEEFD53F169737BA004B93F8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/text.strings"; sourceTree = "<group>"; };
 		BEEFD540169737C4004B93F8 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/text.strings"; sourceTree = "<group>"; };
@@ -179,6 +188,20 @@
 		BEEFD54616973876004B93F8 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/text.strings; sourceTree = "<group>"; };
 		BEEFD5471697399F004B93F8 /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/text.strings; sourceTree = "<group>"; };
 		BEF975B1166A02B800B6C7AC /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		BEFB5CDC16BD9EC2000F378B /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		BEFB5CDF16BEB76F000F378B /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
+		BEFB5CE016BEB76F000F378B /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
+		BEFB5CE316BEB884000F378B /* IImagePickerTarget.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IImagePickerTarget.h; sourceTree = "<group>"; };
+		BEFB5CE416BEB8F9000F378B /* ImagePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePickerView.h; sourceTree = "<group>"; };
+		BEFB5CE516BEB8F9000F378B /* ImagePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePickerView.m; sourceTree = "<group>"; };
+		BEFB5CE716BEB953000F378B /* BaseImagePickerTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseImagePickerTarget.h; sourceTree = "<group>"; };
+		BEFB5CE816BEB953000F378B /* BaseImagePickerTarget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseImagePickerTarget.m; sourceTree = "<group>"; };
+		BEFB5CEA16BEB979000F378B /* AssetImagePickerTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssetImagePickerTarget.h; sourceTree = "<group>"; };
+		BEFB5CEB16BEB979000F378B /* AssetImagePickerTarget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssetImagePickerTarget.m; sourceTree = "<group>"; };
+		BEFB5CED16C0D490000F378B /* ThumbNailManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThumbNailManager.h; sourceTree = "<group>"; };
+		BEFB5CEE16C0D490000F378B /* ThumbNailManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThumbNailManager.m; sourceTree = "<group>"; };
+		BEFB5CF116C12002000F378B /* ImagePickerViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePickerViewCell.h; sourceTree = "<group>"; };
+		BEFB5CF216C12002000F378B /* ImagePickerViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePickerViewCell.m; sourceTree = "<group>"; };
 		F301347815FDDD1D00480CD7 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		F39891401648FE22006E0703 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -188,6 +211,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEFB5CDD16BD9EC2000F378B /* ImageIO.framework in Frameworks */,
+				BED2606C16BD80CD0026EEDA /* AssetsLibrary.framework in Frameworks */,
 				BE46388D16B03BBC00227BA9 /* QuartzCore.framework in Frameworks */,
 				F39891411648FE23006E0703 /* MediaPlayer.framework in Frameworks */,
 				BE89BE6C1605DB7700D2F091 /* AudioToolbox.framework in Frameworks */,
@@ -229,6 +254,8 @@
 		BE19EBEC15F359B800065448 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BEFB5CDC16BD9EC2000F378B /* ImageIO.framework */,
+				BED2606B16BD80CD0026EEDA /* AssetsLibrary.framework */,
 				BE46388C16B03BBC00227BA9 /* QuartzCore.framework */,
 				F39891401648FE22006E0703 /* MediaPlayer.framework */,
 				BE89BE6B1605DB7700D2F091 /* AudioToolbox.framework */,
@@ -268,6 +295,7 @@
 		BED25FDA16BD76200026EEDA /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				BEFB5CE216BEB783000F378B /* ImagePicker */,
 				BED2606716BD7CD70026EEDA /* Album */,
 				BED2605A16BD76A40026EEDA /* QREncoder */,
 				BED25FDB16BD76200026EEDA /* AudioUtility */,
@@ -330,6 +358,7 @@
 		BED25FF416BD76200026EEDA /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				BEFB5CDE16BEB76F000F378B /* ImagePicker */,
 				BED25FF516BD76200026EEDA /* Album */,
 				BED25FF616BD76200026EEDA /* Base */,
 				BED25FFF16BD76200026EEDA /* Camera */,
@@ -344,6 +373,8 @@
 		BED25FF516BD76200026EEDA /* Album */ = {
 			isa = PBXGroup;
 			children = (
+				BED2606D16BD82860026EEDA /* AlbumViewController.h */,
+				BED2606E16BD82860026EEDA /* AlbumViewController.m */,
 			);
 			path = Album;
 			sourceTree = "<group>";
@@ -366,8 +397,6 @@
 		BED25FFF16BD76200026EEDA /* Camera */ = {
 			isa = PBXGroup;
 			children = (
-				BED2600016BD76200026EEDA /* AlbumViewController.h */,
-				BED2600116BD76200026EEDA /* AlbumViewController.m */,
 				BED2600216BD76200026EEDA /* BaseCameraLogicViewController.h */,
 				BED2600316BD76200026EEDA /* BaseCameraLogicViewController.m */,
 				BED2600416BD76200026EEDA /* CameraCoverViewController.h */,
@@ -469,6 +498,8 @@
 			children = (
 				BED2606816BD7CF40026EEDA /* AssetOperator.h */,
 				BED2606916BD7CF40026EEDA /* AssetOperator.m */,
+				BEFB5CEA16BEB979000F378B /* AssetImagePickerTarget.h */,
+				BEFB5CEB16BEB979000F378B /* AssetImagePickerTarget.m */,
 			);
 			path = Album;
 			sourceTree = "<group>";
@@ -479,6 +510,31 @@
 				BEEFD53216973270004B93F8 /* text.strings */,
 			);
 			path = Strings;
+			sourceTree = "<group>";
+		};
+		BEFB5CDE16BEB76F000F378B /* ImagePicker */ = {
+			isa = PBXGroup;
+			children = (
+				BEFB5CDF16BEB76F000F378B /* iCarousel.h */,
+				BEFB5CE016BEB76F000F378B /* iCarousel.m */,
+				BEFB5CE416BEB8F9000F378B /* ImagePickerView.h */,
+				BEFB5CE516BEB8F9000F378B /* ImagePickerView.m */,
+				BEFB5CF116C12002000F378B /* ImagePickerViewCell.h */,
+				BEFB5CF216C12002000F378B /* ImagePickerViewCell.m */,
+			);
+			path = ImagePicker;
+			sourceTree = "<group>";
+		};
+		BEFB5CE216BEB783000F378B /* ImagePicker */ = {
+			isa = PBXGroup;
+			children = (
+				BEFB5CE316BEB884000F378B /* IImagePickerTarget.h */,
+				BEFB5CE716BEB953000F378B /* BaseImagePickerTarget.h */,
+				BEFB5CE816BEB953000F378B /* BaseImagePickerTarget.m */,
+				BEFB5CED16C0D490000F378B /* ThumbNailManager.h */,
+				BEFB5CEE16C0D490000F378B /* ThumbNailManager.m */,
+			);
+			path = ImagePicker;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -574,7 +630,6 @@
 				BED2603E16BD76200026EEDA /* CommonAnimationButton.m in Sources */,
 				BED2603F16BD76200026EEDA /* CommonAnimationTripleStateButton.m in Sources */,
 				BED2604016BD76200026EEDA /* UIStateAnimationView.m in Sources */,
-				BED2604116BD76200026EEDA /* AlbumViewController.m in Sources */,
 				BED2604216BD76200026EEDA /* BaseCameraLogicViewController.m in Sources */,
 				BED2604316BD76200026EEDA /* CameraCoverViewController.m in Sources */,
 				BED2604416BD76200026EEDA /* BlackCat.m in Sources */,
@@ -600,6 +655,13 @@
 				BED2606216BD76A40026EEDA /* QR_Encode.cpp in Sources */,
 				BED2606316BD76A40026EEDA /* QREncoder.mm in Sources */,
 				BED2606A16BD7CF40026EEDA /* AssetOperator.m in Sources */,
+				BED2606F16BD82860026EEDA /* AlbumViewController.m in Sources */,
+				BEFB5CE116BEB76F000F378B /* iCarousel.m in Sources */,
+				BEFB5CE616BEB8F9000F378B /* ImagePickerView.m in Sources */,
+				BEFB5CE916BEB953000F378B /* BaseImagePickerTarget.m in Sources */,
+				BEFB5CEC16BEB979000F378B /* AssetImagePickerTarget.m in Sources */,
+				BEFB5CEF16C0D491000F378B /* ThumbNailManager.m in Sources */,
+				BEFB5CF316C12002000F378B /* ImagePickerViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

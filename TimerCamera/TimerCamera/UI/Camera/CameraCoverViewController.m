@@ -6,6 +6,7 @@
 //
 //
 
+#import "AppDelegate.h"
 #import "CameraCoverViewController.h"
 #import "CameraOptions.h"
 
@@ -745,7 +746,7 @@
 
 - (void)onAlbumPressed:(id)sender
 {
-    
+    [((AppDelegate*)([UIApplication sharedApplication].delegate)).viewController showAlbum];
 }
 
 - (void)onQRCodePressed:(id)sender

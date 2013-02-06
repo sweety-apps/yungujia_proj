@@ -15,9 +15,15 @@
 #define DEGREES_TO_RADIANS(d) (d * M_PI / 180)
 #define RADIANS_TO_DEGREES(r) (r * 180 / M_PI)
 
+#define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+#define IS_RETINA ([UIScreen mainScreen].scale > 1.0)
+
+
 @interface BaseUtilitiesFuncions : NSObject
 
 + (UIImage*)grabUIView:(UIView*)view;
 + (long long)getCurrentTimeInMicroSeconds;
 + (UIImage *)scaleImage:(UIImage *)image toSize:(CGSize)targetSize;
++ (UIImage*)getSubImageFrom:(UIImage*)img WithRect:(CGRect)rect;
++ (UIImage*)scaleAndCropImage:(UIImage*)img CropSize:(CGSize)size;
 @end
