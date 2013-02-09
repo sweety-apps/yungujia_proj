@@ -12,6 +12,8 @@
 		BE19EBF215F359B800065448 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE19EBF115F359B800065448 /* CoreGraphics.framework */; };
 		BE19EBFA15F359B800065448 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BE19EBF915F359B800065448 /* main.m */; };
 		BE19EBFE15F359B800065448 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BE19EBFD15F359B800065448 /* AppDelegate.m */; };
+		BE3BB1E516C40E4300E0E4BA /* AlbumImagePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3BB1E416C40E4300E0E4BA /* AlbumImagePickerView.m */; };
+		BE3BB1E816C40E6C00E0E4BA /* AlbumImagePickerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3BB1E716C40E6C00E0E4BA /* AlbumImagePickerViewCell.m */; };
 		BE46388D16B03BBC00227BA9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE46388C16B03BBC00227BA9 /* QuartzCore.framework */; };
 		BE89BE671605DB6600D2F091 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE89BE661605DB6600D2F091 /* CoreAudio.framework */; };
 		BE89BE6A1605DB6F00D2F091 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE89BE691605DB6F00D2F091 /* CoreFoundation.framework */; };
@@ -86,6 +88,10 @@
 		BE19EBFB15F359B800065448 /* TimerCamera-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TimerCamera-Prefix.pch"; sourceTree = "<group>"; };
 		BE19EBFC15F359B800065448 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		BE19EBFD15F359B800065448 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		BE3BB1E316C40E4300E0E4BA /* AlbumImagePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumImagePickerView.h; sourceTree = "<group>"; };
+		BE3BB1E416C40E4300E0E4BA /* AlbumImagePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumImagePickerView.m; sourceTree = "<group>"; };
+		BE3BB1E616C40E6C00E0E4BA /* AlbumImagePickerViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumImagePickerViewCell.h; sourceTree = "<group>"; };
+		BE3BB1E716C40E6C00E0E4BA /* AlbumImagePickerViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumImagePickerViewCell.m; sourceTree = "<group>"; };
 		BE46388C16B03BBC00227BA9 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		BE89BE661605DB6600D2F091 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		BE89BE691605DB6F00D2F091 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
@@ -375,6 +381,10 @@
 			children = (
 				BED2606D16BD82860026EEDA /* AlbumViewController.h */,
 				BED2606E16BD82860026EEDA /* AlbumViewController.m */,
+				BE3BB1E316C40E4300E0E4BA /* AlbumImagePickerView.h */,
+				BE3BB1E416C40E4300E0E4BA /* AlbumImagePickerView.m */,
+				BE3BB1E616C40E6C00E0E4BA /* AlbumImagePickerViewCell.h */,
+				BE3BB1E716C40E6C00E0E4BA /* AlbumImagePickerViewCell.m */,
 			);
 			path = Album;
 			sourceTree = "<group>";
@@ -662,6 +672,8 @@
 				BEFB5CEC16BEB979000F378B /* AssetImagePickerTarget.m in Sources */,
 				BEFB5CEF16C0D491000F378B /* ThumbNailManager.m in Sources */,
 				BEFB5CF316C12002000F378B /* ImagePickerViewCell.m in Sources */,
+				BE3BB1E516C40E4300E0E4BA /* AlbumImagePickerView.m in Sources */,
+				BE3BB1E816C40E6C00E0E4BA /* AlbumImagePickerViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

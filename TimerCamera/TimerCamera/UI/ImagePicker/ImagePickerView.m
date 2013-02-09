@@ -152,7 +152,6 @@
             cell.imageView.image = image;
             if (_imageViewUseBounds)
             {
-                cell.imageBorderWidth = 15.0;
             }
             //set label
             cell.label.text = [_target getImageTitleAtIndex:index];

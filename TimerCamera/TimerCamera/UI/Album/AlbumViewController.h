@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "AssetImagePickerTarget.h"
-#import "ImagePickerView.h"
+#import "AlbumImagePickerView.h"
 
 @interface AlbumViewController : UIViewController <AssetImagePickerTargetDelegate, ImagePickerViewDelegate>
 {
     AssetImagePickerTarget* _target;
-    ImagePickerView* _assetPicker;
+    AlbumImagePickerView* _assetPicker;
 }
 
 - (void)showAlbumWithAnimation;
