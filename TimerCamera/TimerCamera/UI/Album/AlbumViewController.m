@@ -13,6 +13,8 @@
 
 #define kAlbumThumbNailSize CGSizeMake(180, 180)
 
+static BOOL gTipsHasShown = NO;
+
 @interface AlbumViewController ()
 
 @end
@@ -78,7 +80,7 @@
     
     
     _target = [[AssetImagePickerTarget alloc] initWithDelegate:self];
-    _assetPicker = [AlbumImagePickerView
+    _assetPicker = [[AlbumImagePickerView
                     albumImagePickerWitWithFrame:self.view.frame
                     andTarget:_target
                     andDelegate:self
@@ -86,11 +88,23 @@
                     editorButton:editorBtn
                     menuButton:menuBtn
                     imageBorderImage:[[UIImage imageNamed:@"/Resource/Picture/picker/photo_boder_cover_light"] stretchableImageWithLeftCapWidth:15.0 topCapHeight:15.0]
-                    imageBorderSelectedImage:[[UIImage imageNamed:@"/Resource/Picture/picker/photo_boder_cover_unselected"] stretchableImageWithLeftCapWidth:15.0 topCapHeight:15.0]];
+                    imageBorderSelectedImage:[[UIImage imageNamed:@"/Resource/Picture/picker/photo_boder_cover_unselected"] stretchableImageWithLeftCapWidth:15.0 topCapHeight:15.0]]
+                    retain];
     _assetPicker.imageViewSize = kAlbumThumbNailSize;
     _assetPicker.imageViewUseBounds = YES;
     [self.view addSubview:_assetPicker];
     self.view.backgroundColor = [UIColor clearColor];//kBGColor();
+    
+    _assetPicker.hidden = YES;
+    
+    _tipsView = [[TipsView tipsViewWithPushHand:[UIImage imageNamed:@"/Resource/Picture/main/tips_cat_hand"]
+                                backGroundImage:[[UIImage imageNamed:@"/Resource/Picture/main/tips_fish_bg_strtechable"] stretchableImageWithLeftCapWidth:50 topCapHeight:28] ]
+                 retain];
+    
+    _imagePickerController = [[CustomizedUIImagePickerController alloc] init];
+    _imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    _imagePickerController.allowsEditing = NO;
+    _imagePickerController.delegate = self;
 }
 
 - (void)viewDidUnload
@@ -98,6 +112,10 @@
     [super viewDidUnload];
     ReleaseAndNilView(_assetPicker);
     ReleaseAndNil(_target);
+    ReleaseAndNilView(_albumCoverImageView);
+    ReleaseAndNilView(_tipsView);
+    [_imagePickerController.view removeFromSuperview];
+    ReleaseAndNil(_imagePickerController);
 }
 
 - (void)didReceiveMemoryWarning
@@ -111,19 +129,152 @@
 {
     ReleaseAndNilView(_assetPicker);
     ReleaseAndNil(_target);
+    ReleaseAndNilView(_albumCoverImageView);
+    ReleaseAndNilView(_tipsView);
+    [_imagePickerController.view removeFromSuperview];
+    ReleaseAndNil(_imagePickerController);
     [super dealloc];
 }
 
 #pragma mark Album Showing Animations
 
+- (void)showCover:(BOOL)animated finishedBlock:(void (^)(void))callFinshed
+{
+    if (_albumCoverImageView)
+    {
+        ReleaseAndNilView(_albumCoverImageView);
+    }
+    _albumCoverImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"/Resource/Picture/main/album_cover"]];
+    
+    CGRect rect = self.view.frame;
+    rect.origin.x = rect.size.width;
+    rect.origin.y = (rect.size.height - _albumCoverImageView.frame.size.height) * 0.5;
+    rect.size = _albumCoverImageView.frame.size;
+    
+    _albumCoverImageView.frame = rect;
+    [self.view addSubview:_albumCoverImageView];
+    
+    rect.origin.x = (self.view.frame.size.width - rect.size.width) * 0.5;
+    
+    void (^showCover)() = ^(){
+        _albumCoverImageView.frame = rect;
+    };
+    
+    if (animated)
+    {
+        [UIView animateWithDuration:0.3
+                         animations:showCover
+                         completion:^(BOOL finished){
+                             if (callFinshed)
+                             {
+                                 callFinshed();
+                             }
+        }];
+    }
+    else
+    {
+        showCover();
+        if (callFinshed)
+        {
+            callFinshed();
+        }
+    }
+}
+
+- (void)hideCover:(BOOL)animated finishedBlock:(void (^)(void))callFinshed
+{
+    CGRect rect = _albumCoverImageView.frame;
+    //rect.size = _albumCoverImageView.frame.size;
+    
+    UIImage* image = [_albumCoverImageView.image stretchableImageWithLeftCapWidth:(rect.size.width - 1) topCapHeight:0.0];
+    _albumCoverImageView.image = image;
+    rect.size.width = rect.size.width * 2.0;
+    _albumCoverImageView.frame = rect;
+    
+    void (^hideCover)() = ^(){
+        //_albumCoverImageView.frame = rect;
+        _albumCoverImageView.hidden = YES;
+    };
+    
+    void (^finishedHide)() = ^(){
+        ReleaseAndNilView(_albumCoverImageView);
+        if (callFinshed)
+        {
+            callFinshed();
+        }
+    };
+    
+    if (animated)
+    {
+        [UIView transitionWithView:_albumCoverImageView
+                          duration:0.6
+                           options:UIViewAnimationOptionTransitionFlipFromLeft|UIViewAnimationOptionShowHideTransitionViews
+                        animations:hideCover
+                        completion:^(BOOL finished){
+                            finishedHide();
+                        }];
+//        [UIView animateWithDuration:0.25
+//                         animations:hideCover
+//                         completion:^(BOOL finished){
+//                             finishedHide();
+//                         }];
+    }
+    else
+    {
+        hideCover();
+        finishedHide();
+    }
+}
+
 - (void)showAlbumWithAnimation
 {
-    
+    [self showAlbumWithAnimationAndReleaseCaller:nil];
 }
 
 - (void)hideAlbumWithAnimation
 {
+    [self hideAlbumWithAnimationAndDoBlock:nil withFinishBlock:nil];
+}
+
+- (void)showAlbumWithAnimationAndReleaseCaller:(UIViewController*)caller
+{
+    [self showCover:YES finishedBlock:nil];
+    _callerController = caller;
+}
+
+- (void)hideAlbumWithAnimationAndDoBlock:(void (^)(void))block
+                         withFinishBlock:(void (^)(void))finishBlock
+{
+    void (^transFinishBlock)() = ^(){
+        if (finishBlock)
+        {
+            finishBlock();
+        }
+        [((AppDelegate*)([UIApplication sharedApplication].delegate)).viewController removeAlbum];
+    };
     
+    void (^transBlock)() = ^(){
+        if (block)
+        {
+            block();
+        }
+        [self hideCover:YES finishedBlock:transFinishBlock];
+    };
+    [self showCover:YES finishedBlock:transBlock];
+}
+
+- (void)assetFailedDelayHideCover
+{
+    void (^finishedHideCover)() = ^()
+    {
+        if (_callerController)
+        {
+            [((AppDelegate*)([UIApplication sharedApplication].delegate)).viewController removeController:_callerController];
+            _callerController = nil;
+        }
+    };
+    
+    [self hideCover:YES finishedBlock:finishedHideCover];
 }
 
 #pragma mark <AssetImagePickerTargetDelegate>
@@ -134,6 +285,25 @@
     {
         [_assetPicker reloadData];
     }
+    
+    void (^finishedHideCover)() = ^()
+    {
+        if (_callerController)
+        {
+            [((AppDelegate*)([UIApplication sharedApplication].delegate)).viewController removeController:_callerController];
+            _callerController = nil;
+        }
+        
+        if (!gTipsHasShown && [_target getImageCount] > 0)
+        {
+            [_tipsView showTips:LString(@"Operate photos by slide and tap.") over:self.view autoCaculateLastTime:YES];
+            gTipsHasShown = YES;
+        }
+    };
+    
+    _assetPicker.hidden = NO;
+    _assetFailed = NO;
+    [self hideCover:YES finishedBlock:finishedHideCover];
 }
 
 - (void)onLoadAssetFailed:(AssetImagePickerTarget*)target
@@ -148,14 +318,27 @@
                           cancelButtonTitle:LString(@"I've known.")
                           otherButtonTitles:nil] autorelease];
     }
+    
     //use UIImagePickerController
+    _assetFailed = YES;
+    CGRect rect = self.view.frame;
+    rect.origin = CGPointZero;
+    _imagePickerController.view.frame = rect;
+    [self.view insertSubview:_imagePickerController.view
+                belowSubview:_albumCoverImageView];
+    
+    [self assetFailedDelayHideCover];
+    /*
+    [self performSelector:@selector(assetFailedDelayHideCover)
+               withObject:nil
+               afterDelay:0.35];*/
 }
 
 #pragma mark <ImagePickerViewDelegate>
 
 - (void)onPickedImage:(UIImage*)image forView:(ImagePickerView*)pickerView
 {
-    
+    [self handleRawImage:image];
 }
 
 - (void)onCancelledPick:(ImagePickerView*)pickerView
@@ -167,7 +350,13 @@
 
 - (void)cameraButtonPressed:(id)sender
 {
-    
+    [self hideAlbumWithAnimationAndDoBlock:^(){
+        _assetPicker.hidden = YES;
+        [((AppDelegate*)([UIApplication sharedApplication].delegate)).viewController showCamera];
+        [((AppDelegate*)([UIApplication sharedApplication].delegate)).viewController PrepareLoadingAnimation];
+    } withFinishBlock:^(){
+        [((AppDelegate*)([UIApplication sharedApplication].delegate)).viewController ShowLoadingAnimation];
+    }];
 }
 
 - (void)editorButtonPressed:(id)sender
@@ -176,6 +365,60 @@
 }
 
 - (void)menuButtonPressed:(id)sender
+{
+    [self presentModalViewController: _imagePickerController
+                            animated: YES];
+}
+
+#pragma mark - UIImagePickerController part
+
+
+#pragma mark <UIImagePickerControllerDelegate>
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    if (!_assetFailed)
+    {
+        [_imagePickerController dismissModalViewControllerAnimated:YES];
+    }
+    
+    UIImage *image= [info objectForKey:UIImagePickerControllerOriginalImage];
+    [self handleRawImage:image];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    if (!_assetFailed)
+    {
+        [_imagePickerController dismissModalViewControllerAnimated:YES];
+    }
+    else
+    {
+        [self hideAlbumWithAnimationAndDoBlock:^(){
+            [_imagePickerController.view removeFromSuperview];
+            [((AppDelegate*)([UIApplication sharedApplication].delegate)).viewController showCamera];
+            [((AppDelegate*)([UIApplication sharedApplication].delegate)).viewController PrepareLoadingAnimation];
+        } withFinishBlock:^(){
+            [((AppDelegate*)([UIApplication sharedApplication].delegate)).viewController ShowLoadingAnimation];
+        }];
+    }
+}
+
+#pragma mark <UINavigationControllerDelegate>
+
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    [_imagePickerController navigationController:navigationController willShowViewController:viewController animated:animated];
+}
+
+- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    [_imagePickerController navigationController:navigationController didShowViewController:viewController animated:animated];
+}
+
+#pragma mark Raw Image Handler
+
+- (void)handleRawImage:(UIImage*)image
 {
     
 }

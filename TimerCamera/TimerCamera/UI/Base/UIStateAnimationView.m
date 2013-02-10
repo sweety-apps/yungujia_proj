@@ -63,7 +63,7 @@
 
 - (void)dealloc
 {
-    [self setCurrentState:@""];
+    //[self setCurrentState:@""];
     [_stateDict removeAllObjects];
     ReleaseAndNil(_stateDict);
     ReleaseAndNil(_currentState);

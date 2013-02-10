@@ -746,7 +746,8 @@
 
 - (void)onAlbumPressed:(id)sender
 {
-    [((AppDelegate*)([UIApplication sharedApplication].delegate)).viewController showAlbum];
+    [self hideSubViews:YES];
+    [((AppDelegate*)([UIApplication sharedApplication].delegate)).viewController showAlbumAndReleaseCaller:self];
 }
 
 - (void)onQRCodePressed:(id)sender

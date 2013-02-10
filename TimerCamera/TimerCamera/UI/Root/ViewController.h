@@ -19,12 +19,27 @@
     LoadingAnimateImageView* _laiv;
     CameraCoverViewController* _coverController;
     AlbumViewController* _albumController;
+    
+    NSMutableArray* _currentControllers;
 }
 
 //loading Animation
 - (void)PrepareLoadingAnimation;
 - (void)ShowLoadingAnimation;
 
+- (void)showCamera;
+- (void)removeCamera;
+
 - (void)showAlbum;
+- (void)showAlbumAndReleaseCaller:(UIViewController*)caller;
+- (void)removeAlbum;
+
+- (void)showEditor;
+- (void)removeEditor;
+
+- (void)showSetting;
+- (void)removeSetting;
+
+- (void)removeController:(UIViewController*)controller;
 
 @end

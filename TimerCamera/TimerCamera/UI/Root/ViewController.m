@@ -20,31 +20,16 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    if (_coverController == nil)
-    {
-        _coverController = [[CameraCoverViewController alloc] init];
-    }
+    _currentControllers = [[NSMutableArray array] retain];
     
-    //[CameraOptions sharedInstance].imagePicker.delegate = self;
-    //[self.view addSubview:[CameraOptions sharedInstance].imagePicker.view];
-    //[CameraOptions sharedInstance].imagePicker.cameraOverlayView = _containerView;
-    [self.view addSubview:_coverController.view];
-    //[_coverController.view addGestureRecognizer:_tapGesture];
-    //[_coverController.view addGestureRecognizer:_pinchGesture];
-    //_tapGesture.cancelsTouchesInView = NO;
-    //[CameraOptions sharedInstance].imagePicker.view.frame = self.view.frame;
-    
-    //[NSTimer scheduledTimerWithTimeInterval:0.35 target:self selector:@selector(detectCameraSize) userInfo:nil repeats:YES];
+    [self showCamera];
 }
 
 - (void)dealloc
 {
-    [_coverController.view removeFromSuperview];
-    ReleaseAndNil(_coverController);
+    [self removeCurrentControllers];
     
-    [_albumController.view removeFromSuperview];
-    ReleaseAndNil(_albumController);
-    
+    ReleaseAndNil(_currentControllers);
     [super dealloc];
 }
 
@@ -52,11 +37,9 @@
 {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
-    [_coverController.view removeFromSuperview];
-    ReleaseAndNil(_coverController);
     
-    [_albumController.view removeFromSuperview];
-    ReleaseAndNil(_albumController);
+    [self removeCurrentControllers];
+    ReleaseAndNil(_currentControllers);
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -76,28 +59,48 @@
     _laiv = [[LoadingAnimateImageView viewWithDelegate:self image:[UIImage imageNamed:@"/Resource/Picture/camera_open"] forTimeInterval:0.8 preLoadImage:[UIImage imageNamed:@"Default"] forPreloadAnimateInterval:0.2] retain];
     if (_laiv)
     {
-        [self.view addSubview:_laiv];
-        [self.view bringSubviewToFront:_laiv];
+        if (_albumController)
+        {
+            [self.view insertSubview:_laiv belowSubview:_albumController.view];
+        }
+        else
+        {
+            [self.view addSubview:_laiv];
+            [self.view bringSubviewToFront:_laiv];
+        }
     }
     
-    CGRect rect = CGRectZero;
-    rect.size = self.view.frame.size;
-    _coverController.view.frame = rect;
-    [_coverController hideSubViews:NO];
-    
-    [_coverController resetStatus];
+    if (_coverController)
+    {
+        CGRect rect = CGRectZero;
+        rect.size = self.view.frame.size;
+        _coverController.view.frame = rect;
+        [_coverController hideSubViews:NO];
+        
+        [_coverController resetStatus];
+    }
 }
 
 - (void)ShowLoadingAnimation
 {
     if (_laiv)
     {
-        [self.view bringSubviewToFront:_laiv];
+        if (_albumController)
+        {
+            [self.view insertSubview:_laiv belowSubview:_albumController.view];
+        }
+        else
+        {
+            [self.view bringSubviewToFront:_laiv];
+        }
         [_laiv startPreloadingAnimation];
         [_laiv startLoadingAnimation];
     }
     
-    [_coverController showSubViews:YES delayed:0.7];
+    if (_coverController)
+    {
+        [_coverController showSubViews:YES delayed:0.7];
+    }
 }
 
 #pragma mark LoadingAnimateImageViewDelegate
@@ -109,9 +112,58 @@
     //[_coverController showSubViews:YES];
 }
 
+
+#pragma mark private Methods
+
+- (void)removeCurrentControllers
+{
+    for (int i = [_currentControllers count] - 1; i >= 0; --i)
+    {
+        UIViewController* controller = [_currentControllers objectAtIndex:i];
+        [controller.view removeFromSuperview];
+        ReleaseAndNil(controller);
+    }
+    
+    [_currentControllers removeAllObjects];
+    
+    _coverController = nil;
+    _albumController = nil;
+}
+
 #pragma mark Controller Caller
 
+- (void)showCamera
+{
+    if (_coverController == nil)
+    {
+        _coverController = [[CameraCoverViewController alloc] init];
+    }
+    
+    if (_albumController)
+    {
+        [self.view insertSubview:_coverController.view belowSubview:_albumController.view];
+    }
+    else
+    {
+        [self.view addSubview:_coverController.view];
+    }
+    
+    [_currentControllers addObject:_coverController];
+}
+
+- (void)removeCamera
+{
+    [_currentControllers removeObject:_coverController];
+    [_coverController.view removeFromSuperview];
+    ReleaseAndNil(_coverController);
+}
+
 - (void)showAlbum
+{
+    [self showAlbumAndReleaseCaller:nil];
+}
+
+- (void)showAlbumAndReleaseCaller:(UIViewController*)caller
 {
     if (!_albumController)
     {
@@ -121,7 +173,48 @@
     rect.origin = CGPointZero;
     _albumController.view.frame = rect;
     [self.view addSubview:_albumController.view];
-    [_albumController showAlbumWithAnimation];
+    [_albumController showAlbumWithAnimationAndReleaseCaller:caller];
+    
+    [_currentControllers addObject:_albumController];
+}
+
+- (void)removeAlbum
+{
+    [_currentControllers removeObject:_albumController];
+    [_albumController.view removeFromSuperview];
+    ReleaseAndNil(_albumController);
+}
+
+- (void)showEditor
+{
+    
+}
+
+- (void)removeEditor
+{
+    
+}
+
+- (void)showSetting
+{
+    
+}
+
+- (void)removeSetting
+{
+    
+}
+
+- (void)removeController:(UIViewController*)controller
+{
+    if (controller == _coverController)
+    {
+        [self removeCamera];
+    }
+    if (controller == _albumController)
+    {
+        [self removeAlbum];
+    }
 }
 
 @end

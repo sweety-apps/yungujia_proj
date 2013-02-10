@@ -12,6 +12,9 @@
 		BE19EBF215F359B800065448 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE19EBF115F359B800065448 /* CoreGraphics.framework */; };
 		BE19EBFA15F359B800065448 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BE19EBF915F359B800065448 /* main.m */; };
 		BE19EBFE15F359B800065448 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BE19EBFD15F359B800065448 /* AppDelegate.m */; };
+		BE2903CB16C7FE9E00E172CE /* CustomizedUIImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2903CA16C7FE9D00E172CE /* CustomizedUIImagePickerController.m */; };
+		BE2903CE16C8032900E172CE /* CustomizedUIImagePickerNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2903CD16C8032900E172CE /* CustomizedUIImagePickerNavigationBar.m */; };
+		BE2903D116C80B0500E172CE /* NavigationBarBlackCat.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2903D016C80B0500E172CE /* NavigationBarBlackCat.m */; };
 		BE3BB1E516C40E4300E0E4BA /* AlbumImagePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3BB1E416C40E4300E0E4BA /* AlbumImagePickerView.m */; };
 		BE3BB1E816C40E6C00E0E4BA /* AlbumImagePickerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3BB1E716C40E6C00E0E4BA /* AlbumImagePickerViewCell.m */; };
 		BE46388D16B03BBC00227BA9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE46388C16B03BBC00227BA9 /* QuartzCore.framework */; };
@@ -88,6 +91,12 @@
 		BE19EBFB15F359B800065448 /* TimerCamera-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TimerCamera-Prefix.pch"; sourceTree = "<group>"; };
 		BE19EBFC15F359B800065448 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		BE19EBFD15F359B800065448 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		BE2903C916C7FE9D00E172CE /* CustomizedUIImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomizedUIImagePickerController.h; sourceTree = "<group>"; };
+		BE2903CA16C7FE9D00E172CE /* CustomizedUIImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomizedUIImagePickerController.m; sourceTree = "<group>"; };
+		BE2903CC16C8032800E172CE /* CustomizedUIImagePickerNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomizedUIImagePickerNavigationBar.h; sourceTree = "<group>"; };
+		BE2903CD16C8032900E172CE /* CustomizedUIImagePickerNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomizedUIImagePickerNavigationBar.m; sourceTree = "<group>"; };
+		BE2903CF16C80B0500E172CE /* NavigationBarBlackCat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationBarBlackCat.h; sourceTree = "<group>"; };
+		BE2903D016C80B0500E172CE /* NavigationBarBlackCat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationBarBlackCat.m; sourceTree = "<group>"; };
 		BE3BB1E316C40E4300E0E4BA /* AlbumImagePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumImagePickerView.h; sourceTree = "<group>"; };
 		BE3BB1E416C40E4300E0E4BA /* AlbumImagePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumImagePickerView.m; sourceTree = "<group>"; };
 		BE3BB1E616C40E6C00E0E4BA /* AlbumImagePickerViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumImagePickerViewCell.h; sourceTree = "<group>"; };
@@ -385,6 +394,10 @@
 				BE3BB1E416C40E4300E0E4BA /* AlbumImagePickerView.m */,
 				BE3BB1E616C40E6C00E0E4BA /* AlbumImagePickerViewCell.h */,
 				BE3BB1E716C40E6C00E0E4BA /* AlbumImagePickerViewCell.m */,
+				BE2903C916C7FE9D00E172CE /* CustomizedUIImagePickerController.h */,
+				BE2903CA16C7FE9D00E172CE /* CustomizedUIImagePickerController.m */,
+				BE2903CC16C8032800E172CE /* CustomizedUIImagePickerNavigationBar.h */,
+				BE2903CD16C8032900E172CE /* CustomizedUIImagePickerNavigationBar.m */,
 			);
 			path = Album;
 			sourceTree = "<group>";
@@ -442,6 +455,8 @@
 				BED2601C16BD76200026EEDA /* TipsView.m */,
 				BED2601D16BD76200026EEDA /* VolumeMonitor.h */,
 				BED2601E16BD76200026EEDA /* VolumeMonitor.m */,
+				BE2903CF16C80B0500E172CE /* NavigationBarBlackCat.h */,
+				BE2903D016C80B0500E172CE /* NavigationBarBlackCat.m */,
 			);
 			path = Controls;
 			sourceTree = "<group>";
@@ -674,6 +689,9 @@
 				BEFB5CF316C12002000F378B /* ImagePickerViewCell.m in Sources */,
 				BE3BB1E516C40E4300E0E4BA /* AlbumImagePickerView.m in Sources */,
 				BE3BB1E816C40E6C00E0E4BA /* AlbumImagePickerViewCell.m in Sources */,
+				BE2903CB16C7FE9E00E172CE /* CustomizedUIImagePickerController.m in Sources */,
+				BE2903CE16C8032900E172CE /* CustomizedUIImagePickerNavigationBar.m in Sources */,
+				BE2903D116C80B0500E172CE /* NavigationBarBlackCat.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

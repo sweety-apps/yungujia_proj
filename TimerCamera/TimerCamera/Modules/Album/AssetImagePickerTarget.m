@@ -22,7 +22,7 @@
         _assetOperator = [[AssetOperator alloc] init];
         _assetOperator.operatorDelegate = self;
         //[_assetOperator setThumbNailPreCropSize:kDefaultAssetTargetImageSize];
-        [_assetOperator getPhotos:YES];
+        [_assetOperator getPhotos:NO];
     }
     return self;
 }
