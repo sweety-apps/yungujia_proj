@@ -10,7 +10,7 @@
 
 @interface NavigationBarBlackCat : BlackCat
 {
-    
+    BOOL _hasStoped;
 }
 
 + (NavigationBarBlackCat*)navigationBlackCatWithCatImage:(UIImage*)cat
@@ -18,5 +18,6 @@
                                              forEyeImage:(UIImage*)eye;
 
 - (void)startBlackCatAnimation;
+- (void)stopBlackCatAnimation;
 
 @end

@@ -75,6 +75,7 @@
     ReleaseAndNilView(_cancelBtn);
     ReleaseAndNilView(_backBtn);
     ReleaseAndNilView(_catContainer);
+    [_blackCat stopBlackCatAnimation];
     ReleaseAndNilView(_blackCat);
     [super dealloc];
 }

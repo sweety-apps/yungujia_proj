@@ -22,6 +22,7 @@ forCatCloseEyeImage:(UIImage*)cc
     if (self)
     {
         _button.hidden = YES;
+        _hasStoped = YES;
     }
     return self;
 }
@@ -39,7 +40,27 @@ forCatCloseEyeImage:(UIImage*)cc
 
 - (void)startBlackCatAnimation
 {
-    [self setCurrentState:@"animate2"];
+    _hasStoped = NO;
+    [self internalStartBlackCatAnimation];
+}
+
+- (void)stopBlackCatAnimation
+{
+    _hasStoped = YES;
+    [self setCurrentState:@"normal"];
+}
+
+- (void)internalStartBlackCatAnimation
+{
+    if (!_hasStoped)
+    {
+        [self setCurrentState:@"animate2"];
+    }
+}
+
+- (void)dealloc
+{
+    [super dealloc];
 }
 
 #pragma mark <UIStateAnimation>
@@ -51,9 +72,9 @@ forCatCloseEyeImage:(UIImage*)cc
 
 - (void)stopStateAnimationForView:(UIView*)view forState:(NSString*)state
 {
-    if([state isEqualToString:@"animate2"])
+    if(!_hasStoped && [state isEqualToString:@"animate2"])
     {
-        [self performSelector:@selector(startBlackCatAnimation)
+        [self performSelector:@selector(internalStartBlackCatAnimation)
                    withObject:nil afterDelay:0.4];
     }
     else
