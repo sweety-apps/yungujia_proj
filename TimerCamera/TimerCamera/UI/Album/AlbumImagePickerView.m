@@ -113,6 +113,21 @@
 - (void)reloadData
 {
     [_carouselView reloadData];
+    [self performSelector:@selector(doFakeScrollEffect)
+               withObject:nil afterDelay:0.2];
+}
+
+- (void)doFakeScrollEffect
+{
+    if ([_target getImageCount] > 0)
+    {
+        int startIndex = [_target getImageCount];
+        startIndex = startIndex > 20 ? 10 : (startIndex / 2 - 1);
+        [_carouselView scrollToItemAtIndex:startIndex
+                                  animated:NO];
+        [_carouselView scrollToItemAtIndex:0
+                                  animated:YES];
+    }
 }
 
 #pragma mark methods override

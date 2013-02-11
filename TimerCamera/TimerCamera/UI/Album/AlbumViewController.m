@@ -150,6 +150,7 @@ static BOOL gTipsHasShown = NO;
     rect.origin.x = rect.size.width;
     rect.origin.y = (rect.size.height - _albumCoverImageView.frame.size.height) * 0.5;
     rect.size = _albumCoverImageView.frame.size;
+    _albumCoverImageView.userInteractionEnabled = YES;
     
     _albumCoverImageView.frame = rect;
     [self.view addSubview:_albumCoverImageView];

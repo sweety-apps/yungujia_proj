@@ -157,7 +157,7 @@
                     
                     if (isTarget)
                     {
-                        [_photoAssets addObject:result];
+                        [_photoAssets insertObject:result atIndex:0];
                         if (Enable_Clear_ThumbNail)
                         {
                             [self savePreCropThumbNail:result];
