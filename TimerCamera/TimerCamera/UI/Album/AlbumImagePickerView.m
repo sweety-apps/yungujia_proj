@@ -137,7 +137,7 @@
     [self addSubview:catHandView];
     
     CGRect rect = cell.containerView.frame;
-    //CGRect rectRaw = rect;
+    CGRect rectRaw = rect;
     rect.origin.y += self.frame.size.height;
     
     [UIView animateWithDuration:0.15 animations:^(){
@@ -153,6 +153,7 @@
                              }
                              completion:^(BOOL finished){
                                  [catHandView removeFromSuperview];
+                                 cell.containerView.frame = rectRaw;
                                  if (block)
                                  {
                                      block();
