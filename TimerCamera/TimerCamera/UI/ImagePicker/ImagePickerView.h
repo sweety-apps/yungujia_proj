@@ -15,7 +15,7 @@
 
 @protocol ImagePickerViewDelegate <NSObject>
 
-- (void)onPickedImage:(UIImage*)image forView:(ImagePickerView*)pickerView;
+- (void)onPickedImage:(UIImage*)image atIndex:(int)index forView:(ImagePickerView*)pickerView;
 - (void)onCancelledPick:(ImagePickerView*)pickerView;
 
 @end

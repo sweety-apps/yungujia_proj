@@ -39,4 +39,8 @@
                                      imageBorderImage:(UIImage*)borderImg
                              imageBorderSelectedImage:(UIImage*)borderSelectedImg;
 
+- (void)doSelectedCellAnimation:(int)index
+                   catHandImage:(UIImage*)catHand
+                       endBlock:(void (^)(void))block;
+
 @end

@@ -337,9 +337,16 @@ static BOOL gTipsHasShown = NO;
 
 #pragma mark <ImagePickerViewDelegate>
 
-- (void)onPickedImage:(UIImage*)image forView:(ImagePickerView*)pickerView
+- (void)onPickedImage:(UIImage*)image
+              atIndex:(int)index
+              forView:(ImagePickerView *)pickerView
 {
-    [self handleRawImage:image];
+    [self.view bringSubviewToFront:_assetPicker];
+    [_assetPicker doSelectedCellAnimation:index
+                             catHandImage:[UIImage imageNamed:@"/Resource/Picture/picker/picking_cat_hand"]
+                                 endBlock:^(){
+                                     [self handleRawImage:image];
+                                 }];
 }
 
 - (void)onCancelledPick:(ImagePickerView*)pickerView

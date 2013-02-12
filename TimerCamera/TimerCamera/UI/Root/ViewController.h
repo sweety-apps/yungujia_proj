@@ -13,12 +13,14 @@
 #import "ShotTimer.h"
 #import "CameraCoverViewController.h"
 #import "AlbumViewController.h"
+#import "EditorViewController.h"
 
 @interface ViewController : UIViewController <LoadingAnimateImageViewDelegate>
 {
     LoadingAnimateImageView* _laiv;
     CameraCoverViewController* _coverController;
     AlbumViewController* _albumController;
+    EditorViewController* _editorController;
     
     NSMutableArray* _currentControllers;
 }
@@ -34,7 +36,7 @@
 - (void)showAlbumAndReleaseCaller:(UIViewController*)caller;
 - (void)removeAlbum;
 
-- (void)showEditor;
+- (void)showEditor:(UIImage*)originalImage andReleaseCaller:(UIViewController*)caller;
 - (void)removeEditor;
 
 - (void)showSetting;

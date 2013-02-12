@@ -23,14 +23,17 @@
         CGRect rect = frame;
         rect.origin = CGPointZero;
         //alloc subviews
+        _containerView = [[UIView alloc] initWithFrame:rect];
+        _containerView.backgroundColor = [UIColor clearColor];
         _imageView = [[UIImageView alloc] initWithFrame:rect];
         _coverImage = [[UIImageView alloc] initWithFrame:rect];
         _label = [[UILabel alloc] initWithFrame:rect];
         _label.backgroundColor = [UIColor clearColor];
         //add subviews
-        [self addSubview:_imageView];
-        [self addSubview:_coverImage];
-        [self addSubview:_label];
+        [self addSubview:_containerView];
+        [_containerView addSubview:_imageView];
+        [_containerView addSubview:_coverImage];
+        [_containerView addSubview:_label];
     }
     return self;
 }
@@ -40,6 +43,7 @@
     ReleaseAndNilView(_coverImage);
     ReleaseAndNilView(_label);
     ReleaseAndNilView(_imageView);
+    ReleaseAndNil(_containerView);
     [super dealloc];
 }
 
@@ -48,6 +52,7 @@
     [super setFrame:frame];
     CGRect rect = frame;
     rect.origin = CGPointZero;
+    _containerView.frame = rect;
     _imageView.frame = rect;
     _label.frame = rect;
     _coverImage.frame = rect;

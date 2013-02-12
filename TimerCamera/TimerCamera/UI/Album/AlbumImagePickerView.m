@@ -17,6 +17,9 @@
 #define ITEM_SPACING 150
 #define INCLUDE_PLACEHOLDERS YES
 
+#define kCatHandStartPosition CGPointMake(320,370)
+#define kCatHandStayPosition CGPointMake(110,180)
+
 @implementation AlbumImagePickerView
 
 #pragma mark life-cycle
@@ -110,6 +113,55 @@
             autorelease];
 }
 
+- (void)doSelectedCellAnimation:(int)index
+                   catHandImage:(UIImage*)catHand
+                       endBlock:(void (^)(void))block
+{
+    [_carouselView scrollToItemAtIndex:index
+                              animated:YES];
+    AlbumImagePickerViewCell* cell = (AlbumImagePickerViewCell*)[_carouselView itemViewAtIndex:index];
+    
+    UIImageView* catHandView = [[[UIImageView alloc]
+                             initWithImage:catHand] autorelease];
+    
+    CGRect rectCatHandStart = catHandView.frame;
+    rectCatHandStart.origin = kCatHandStartPosition;
+    CGRect rectCatHandStay = catHandView.frame;
+    rectCatHandStay.origin = kCatHandStayPosition;
+    CGRect rectCatHandStay2 = rectCatHandStay;
+    rectCatHandStay2.origin.y += 1;
+    CGRect rectCatHandEnd = rectCatHandStay;
+    rectCatHandEnd.origin.y += self.frame.size.height;
+    
+    catHandView.frame = rectCatHandStart;
+    [self addSubview:catHandView];
+    
+    CGRect rect = cell.containerView.frame;
+    //CGRect rectRaw = rect;
+    rect.origin.y += self.frame.size.height;
+    
+    [UIView animateWithDuration:0.15 animations:^(){
+        catHandView.frame = rectCatHandStay;
+    } completion:^(BOOL finished){
+        [UIView animateWithDuration:0.1 animations:^(){
+            catHandView.frame = rectCatHandStay2;
+        } completion:^(BOOL finished){
+            [UIView animateWithDuration:0.2
+                             animations:^(){
+                                 catHandView.frame = rectCatHandEnd;
+                                 cell.containerView.frame = rect;
+                             }
+                             completion:^(BOOL finished){
+                                 [catHandView removeFromSuperview];
+                                 if (block)
+                                 {
+                                     block();
+                                 }
+                             }];
+        }];
+    }];
+}
+
 - (void)reloadData
 {
     [_carouselView reloadData];
@@ -139,6 +191,8 @@
 }
 
 #pragma mark AlbumImagePickerView private methods
+
+#pragma mark Other Methods
 
 - (void)resetSubviewFrames
 {
@@ -287,7 +341,7 @@
         UIImage* rawImage = [_target getRawImageAtIndex:index];
         if (rawImage)
         {
-            [_pickerDelegate onPickedImage:rawImage forView:self];
+            [_pickerDelegate onPickedImage:rawImage atIndex:index forView:self];
         }
     }
 }

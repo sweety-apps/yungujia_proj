@@ -128,6 +128,7 @@
     
     _coverController = nil;
     _albumController = nil;
+    _editorController = nil;
 }
 
 #pragma mark Controller Caller
@@ -185,14 +186,30 @@
     ReleaseAndNil(_albumController);
 }
 
-- (void)showEditor
+- (void)showEditor:(UIImage*)originalImage andReleaseCaller:(UIViewController*)caller
 {
+    if (_editorController == nil)
+    {
+        _editorController = [[EditorViewController alloc] init];
+    }
     
+    if (_albumController)
+    {
+        [self.view insertSubview:_editorController.view belowSubview:_albumController.view];
+    }
+    else
+    {
+        [self.view addSubview:_editorController.view];
+    }
+    
+    [_currentControllers addObject:_editorController];
 }
 
 - (void)removeEditor
 {
-    
+    [_currentControllers removeObject:_editorController];
+    [_editorController.view removeFromSuperview];
+    ReleaseAndNil(_editorController);
 }
 
 - (void)showSetting
@@ -214,6 +231,10 @@
     if (controller == _albumController)
     {
         [self removeAlbum];
+    }
+    if (controller == _editorController)
+    {
+        [self removeEditor];
     }
 }
 

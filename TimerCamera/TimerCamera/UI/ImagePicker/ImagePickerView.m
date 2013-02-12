@@ -212,7 +212,7 @@
         UIImage* rawImage = [_target getRawImageAtIndex:index];
         if (rawImage)
         {
-            [_pickerDelegate onPickedImage:rawImage forView:self];
+            [_pickerDelegate onPickedImage:rawImage atIndex:index forView:self];
         }
     }
 }

@@ -15,6 +15,7 @@
 		BE2903CB16C7FE9E00E172CE /* CustomizedUIImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2903CA16C7FE9D00E172CE /* CustomizedUIImagePickerController.m */; };
 		BE2903CE16C8032900E172CE /* CustomizedUIImagePickerNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2903CD16C8032900E172CE /* CustomizedUIImagePickerNavigationBar.m */; };
 		BE2903D116C80B0500E172CE /* NavigationBarBlackCat.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2903D016C80B0500E172CE /* NavigationBarBlackCat.m */; };
+		BE37AF0316CAB8F0005A98C8 /* EditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE37AF0216CAB8F0005A98C8 /* EditorViewController.m */; };
 		BE3BB1E516C40E4300E0E4BA /* AlbumImagePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3BB1E416C40E4300E0E4BA /* AlbumImagePickerView.m */; };
 		BE3BB1E816C40E6C00E0E4BA /* AlbumImagePickerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3BB1E716C40E6C00E0E4BA /* AlbumImagePickerViewCell.m */; };
 		BE46388D16B03BBC00227BA9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE46388C16B03BBC00227BA9 /* QuartzCore.framework */; };
@@ -97,6 +98,8 @@
 		BE2903CD16C8032900E172CE /* CustomizedUIImagePickerNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomizedUIImagePickerNavigationBar.m; sourceTree = "<group>"; };
 		BE2903CF16C80B0500E172CE /* NavigationBarBlackCat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationBarBlackCat.h; sourceTree = "<group>"; };
 		BE2903D016C80B0500E172CE /* NavigationBarBlackCat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationBarBlackCat.m; sourceTree = "<group>"; };
+		BE37AF0116CAB8F0005A98C8 /* EditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditorViewController.h; sourceTree = "<group>"; };
+		BE37AF0216CAB8F0005A98C8 /* EditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditorViewController.m; sourceTree = "<group>"; };
 		BE3BB1E316C40E4300E0E4BA /* AlbumImagePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumImagePickerView.h; sourceTree = "<group>"; };
 		BE3BB1E416C40E4300E0E4BA /* AlbumImagePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumImagePickerView.m; sourceTree = "<group>"; };
 		BE3BB1E616C40E6C00E0E4BA /* AlbumImagePickerViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumImagePickerViewCell.h; sourceTree = "<group>"; };
@@ -307,6 +310,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		BE37AF0016CAB8D7005A98C8 /* Editor */ = {
+			isa = PBXGroup;
+			children = (
+				BE37AF0116CAB8F0005A98C8 /* EditorViewController.h */,
+				BE37AF0216CAB8F0005A98C8 /* EditorViewController.m */,
+			);
+			path = Editor;
+			sourceTree = "<group>";
+		};
 		BED25FDA16BD76200026EEDA /* Modules */ = {
 			isa = PBXGroup;
 			children = (
@@ -373,6 +385,7 @@
 		BED25FF416BD76200026EEDA /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				BE37AF0016CAB8D7005A98C8 /* Editor */,
 				BEFB5CDE16BEB76F000F378B /* ImagePicker */,
 				BED25FF516BD76200026EEDA /* Album */,
 				BED25FF616BD76200026EEDA /* Base */,
@@ -692,6 +705,7 @@
 				BE2903CB16C7FE9E00E172CE /* CustomizedUIImagePickerController.m in Sources */,
 				BE2903CE16C8032900E172CE /* CustomizedUIImagePickerNavigationBar.m in Sources */,
 				BE2903D116C80B0500E172CE /* NavigationBarBlackCat.m in Sources */,
+				BE37AF0316CAB8F0005A98C8 /* EditorViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
