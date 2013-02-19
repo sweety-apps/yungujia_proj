@@ -22,6 +22,8 @@
 		BE89BE671605DB6600D2F091 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE89BE661605DB6600D2F091 /* CoreAudio.framework */; };
 		BE89BE6A1605DB6F00D2F091 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE89BE691605DB6F00D2F091 /* CoreFoundation.framework */; };
 		BE89BE6C1605DB7700D2F091 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE89BE6B1605DB7700D2F091 /* AudioToolbox.framework */; };
+		BEB4DBE716D3D22C0054F702 /* MessageBoxView.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB4DBE616D3D22C0054F702 /* MessageBoxView.m */; };
+		BEB4DBEA16D3D48E0054F702 /* BaseMessageBoxView.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB4DBE916D3D48E0054F702 /* BaseMessageBoxView.m */; };
 		BEB8E44A1646D25700DC5800 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB8E4471646D25700DC5800 /* Default.png */; };
 		BEB8E44B1646D25700DC5800 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB8E4481646D25700DC5800 /* Default@2x.png */; };
 		BEB8E44C1646D25700DC5800 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB8E4491646D25700DC5800 /* Icon@2x.png */; };
@@ -108,6 +110,10 @@
 		BE89BE661605DB6600D2F091 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		BE89BE691605DB6F00D2F091 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		BE89BE6B1605DB7700D2F091 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		BEB4DBE516D3D22C0054F702 /* MessageBoxView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageBoxView.h; sourceTree = "<group>"; };
+		BEB4DBE616D3D22C0054F702 /* MessageBoxView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageBoxView.m; sourceTree = "<group>"; };
+		BEB4DBE816D3D48E0054F702 /* BaseMessageBoxView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseMessageBoxView.h; sourceTree = "<group>"; };
+		BEB4DBE916D3D48E0054F702 /* BaseMessageBoxView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseMessageBoxView.m; sourceTree = "<group>"; };
 		BEB8E4471646D25700DC5800 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		BEB8E4481646D25700DC5800 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		BEB8E4491646D25700DC5800 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
@@ -426,6 +432,8 @@
 				BED25FFC16BD76200026EEDA /* CommonAnimationTripleStateButton.m */,
 				BED25FFD16BD76200026EEDA /* UIStateAnimationView.h */,
 				BED25FFE16BD76200026EEDA /* UIStateAnimationView.m */,
+				BEB4DBE816D3D48E0054F702 /* BaseMessageBoxView.h */,
+				BEB4DBE916D3D48E0054F702 /* BaseMessageBoxView.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -470,6 +478,8 @@
 				BED2601E16BD76200026EEDA /* VolumeMonitor.m */,
 				BE2903CF16C80B0500E172CE /* NavigationBarBlackCat.h */,
 				BE2903D016C80B0500E172CE /* NavigationBarBlackCat.m */,
+				BEB4DBE516D3D22C0054F702 /* MessageBoxView.h */,
+				BEB4DBE616D3D22C0054F702 /* MessageBoxView.m */,
 			);
 			path = Controls;
 			sourceTree = "<group>";
@@ -706,6 +716,8 @@
 				BE2903CE16C8032900E172CE /* CustomizedUIImagePickerNavigationBar.m in Sources */,
 				BE2903D116C80B0500E172CE /* NavigationBarBlackCat.m in Sources */,
 				BE37AF0316CAB8F0005A98C8 /* EditorViewController.m in Sources */,
+				BEB4DBE716D3D22C0054F702 /* MessageBoxView.m in Sources */,
+				BEB4DBEA16D3D48E0054F702 /* BaseMessageBoxView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
