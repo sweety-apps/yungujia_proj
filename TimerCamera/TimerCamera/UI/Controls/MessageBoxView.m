@@ -38,7 +38,7 @@
 
 #pragma mark - BaseMessageBoxView methods
 
-+ (BaseMessageBoxView*)baseMessageBoxWithBgView:(UIView*)bgImg
++ (BaseMessageBoxView*)baseMessageBoxWithBgView:(UIView*)bgView
                                       orBgColor:(UIColor*)bgColor
                                      boxBgImage:(UIImage*)boxBgImage
                                  yesButtonImage:(UIImage*)yesImage
@@ -53,7 +53,7 @@
                                 textButtonTexts:(NSArray*)textBtnTexts
                                    withDelegate:(id<BaseMessageBoxViewDelegate>) messageBoxDelegate
 {
-    return [[[MessageBoxView alloc] initWithBgView:bgImg
+    return [[[MessageBoxView alloc] initWithBgView:bgView
                                          orBgColor:bgColor
                                         boxBgImage:boxBgImage
                                     yesButtonImage:yesImage

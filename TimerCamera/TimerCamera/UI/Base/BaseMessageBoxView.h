@@ -29,6 +29,7 @@
     CommonAnimationButton* _yesButton;
     CommonAnimationButton* _noButton;
     NSMutableArray* _textButtons;
+    UIImage* _textImage;
     NSArray* _textButtonTexts;
     UILabel* _titleLbl;
     NSString* _title;
@@ -44,7 +45,7 @@
 @property (nonatomic,retain) UIView* extraView;
 @property (nonatomic,assign) id<BaseMessageBoxViewDelegate> messageBoxDelegate;
 
-+ (BaseMessageBoxView*)baseMessageBoxWithBgView:(UIView*)bgImg
++ (BaseMessageBoxView*)baseMessageBoxWithBgView:(UIView*)bgView
                                       orBgColor:(UIColor*)bgColor
                                      boxBgImage:(UIImage*)boxBgImage
                                  yesButtonImage:(UIImage*)yesImage
@@ -59,7 +60,7 @@
                                 textButtonTexts:(NSArray*)textBtnTexts
                                    withDelegate:(id<BaseMessageBoxViewDelegate>) messageBoxDelegate;
 
-- (id)      initWithBgView:(UIView*)bgImg
+- (id)      initWithBgView:(UIView*)bgView
                  orBgColor:(UIColor*)bgColor
                 boxBgImage:(UIImage*)boxBgImage
             yesButtonImage:(UIImage*)yesImage
