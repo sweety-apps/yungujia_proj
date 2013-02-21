@@ -30,6 +30,7 @@
     CommonAnimationButton* _noButton;
     NSMutableArray* _textButtons;
     UIImage* _textImage;
+    UIImage* _textPressedImage;
     NSArray* _textButtonTexts;
     UILabel* _titleLbl;
     NSString* _title;
@@ -37,12 +38,26 @@
     NSString* _content;
     UIView* _extraView;
     id<BaseMessageBoxViewDelegate> _messageBoxDelegate;
+    UIColor* _titleTextColor;
+    UIColor* _contentTextColor;
+    UIColor* _buttonTextColor;
+    float _titleTopPadding;
+    float _titleLeftRightPadding;
+    float _titleContentExtraInterval;
+    float _buttonToBoxBottomPadding;
 }
 
 @property (nonatomic,retain) NSArray* textButtonTexts;
 @property (nonatomic,retain) NSString* title;
 @property (nonatomic,retain) NSString* content;
 @property (nonatomic,retain) UIView* extraView;
+@property (nonatomic,retain) UIColor* titleTextColor;
+@property (nonatomic,retain) UIColor* contentTextColor;
+@property (nonatomic,retain) UIColor* buttonTextColor;
+@property (nonatomic,assign) float titleTopPadding;
+@property (nonatomic,assign) float titleLeftRightPadding;
+@property (nonatomic,assign) float titleContentExtraInterval;
+@property (nonatomic,assign) float buttonToBoxBottomPadding;
 @property (nonatomic,assign) id<BaseMessageBoxViewDelegate> messageBoxDelegate;
 
 + (BaseMessageBoxView*)baseMessageBoxWithBgView:(UIView*)bgView
@@ -82,5 +97,15 @@
 - (void)showOnView:(UIView*)view
    yesButtonShowed:(BOOL)showYes
     noButtonShowed:(BOOL)showNO;
+
+- (void)hide;
+
+- (void)onPressedTextBtn:(int)index;
+- (void)onRestoreTextBtn:(int)index;
+- (void)onReleaseTextBtn:(int)index;
+
+- (void)onPressedYesNoBtn:(BOOL)isYes;
+- (void)onRestoreYesNoBtn:(BOOL)isYes;
+- (void)onReleaseYesNoBtn:(BOOL)isYes;
 
 @end
