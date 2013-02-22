@@ -455,11 +455,6 @@
         {
             [_btnArray addObject:_noButton];
         }
-        
-        for (CommonAnimationButton* btn in _btnArray)
-        {
-            
-        }
     }
     else
     {
@@ -478,11 +473,28 @@
         {
             [_btnArray addObject:_noButton];
         }
-        
-        for (CommonAnimationButton* btn in _btnArray)
+    }
+    
+    for (int i = [_btnArray count] - 1; i >= 0; i -= 3)
+    {
+        CommonAnimationButton* rowBtn[3] = {0};
+        for (int j = 0; j < 3; --j)
         {
-            
+            if (i - j >= 0)
+            {
+                rowBtn[j] = [_btnArray objectAtIndex:i - j];
+                if (showYes && showNO && !onlyOneRow)
+                {
+                    rowBtn[j] = nil;
+                }
+            }
         }
+        
+        //1 button in row
+        
+        //2 button in row
+        
+        //3 button in row
     }
     
     [self addSubview:_bgView];
