@@ -7,8 +7,14 @@
 //
 
 #import "BaseMessageBoxView.h"
+#import <QuartzCore/QuartzCore.h>
 
 #define BUTTON_LABEL_TAG (60)
+#define NUM_OF_BUTTONS_IN_ROW_IPHONE (3)
+#define NUM_OF_BUTTONS_IN_ROW_IPAD (5)
+#define BUTTON_EXTENDS_WIDTH (30.)
+
+static int number_of_buttons_in_row = 0;
 
 @implementation BaseMessageBoxView
 
@@ -23,7 +29,9 @@
 @synthesize titleTopPadding = _titleTopPadding;
 @synthesize titleLeftRightPadding = _titleLeftRightPadding;
 @synthesize titleContentExtraInterval = _titleContentExtraInterval;
+@synthesize buttonRowInterval = _buttonRowInterval;
 @synthesize buttonToBoxBottomPadding = _buttonToBoxBottomPadding;
+@synthesize customTextButtonLabelRect = _customTextButtonLabelRect;
 
 #pragma mark life-cycle
 
@@ -76,24 +84,33 @@
     if (_textButtonTexts)
     {
         int i = 0;
+        if (_textButtons == nil)
+        {
+            _textButtons = [[NSMutableArray array] retain];
+        }
         for (NSString* text in _textButtonTexts)
         {
-            CommonAnimationButton* btn = [CommonAnimationButton
+            CommonAnimationButton* btn = [[CommonAnimationButton
                                           buttonWithPressedImageSizeforNormalImage1:_textImage
                                           forNormalImage2:_textImage
                                           forPressedImage:_textPressedImage
                                           forEnabledImage1:nil
-                                          forEnabledImage2:nil];
+                                          forEnabledImage2:nil] retain];
             
             CGRect rect = btn.frame;
             rect.origin = CGPointZero;
+            if (!CGRectIsEmpty(_customTextButtonLabelRect))
+            {
+                rect = _customTextButtonLabelRect;
+            }
             
             UILabel* lbl = [[[UILabel alloc] initWithFrame:rect] autorelease];
             lbl.backgroundColor = [UIColor clearColor];
             lbl.textColor = _buttonTextColor;
             lbl.numberOfLines = 0;
             lbl.textAlignment = UITextAlignmentCenter;
-            lbl.font = [UIFont systemFontOfSize:36.0];
+            lbl.font = [UIFont systemFontOfSize:18.0];
+            lbl.text = text;
             lbl.tag = BUTTON_LABEL_TAG;
             
             [btn.button addSubview:lbl];
@@ -110,15 +127,21 @@
                  forControlEvents:UIControlEventTouchUpInside];
             
             ++i;
+            
+            [_textButtons addObject:btn];
         }
     }
 }
 
 - (void)destroyTextButtons
 {
-    for (CommonAnimationButton* btn in _textButtons)
+    if (_textButtons)
     {
-        ReleaseAndNilView(btn);
+        for (CommonAnimationButton* btn in _textButtons)
+        {
+            ReleaseAndNilView(btn);
+        }
+        ReleaseAndNil(_textButtons);
     }
 }
 
@@ -141,6 +164,10 @@
     UIButton* btn = sender;
     int index = btn.tag;
     [self onReleaseTextBtn:index];
+    if (_messageBoxDelegate)
+    {
+        [_messageBoxDelegate onTextButtonPressedAt:index forMessageBox:self];
+    }
 }
 
 - (void)onTouchDownInsideYesBtn:(id)sender
@@ -156,6 +183,10 @@
 - (void)onTouchUpInsideYesBtn:(id)sender
 {
     [self onReleaseYesNoBtn:YES];
+    if (_messageBoxDelegate)
+    {
+        [_messageBoxDelegate onYesButtonPressedForMessageBox:self];
+    }
 }
 
 - (void)onTouchDownInsideNoBtn:(id)sender
@@ -171,6 +202,164 @@
 - (void)onTouchUpInsideNoBtn:(id)sender
 {
     [self onReleaseYesNoBtn:NO];
+    if (_messageBoxDelegate)
+    {
+        [_messageBoxDelegate onNoButtonPressedForMessageBox:self];
+    }
+}
+
+- (void)setTransformsForViews:(UIView**)views
+                        trans:(CGAffineTransform*)transforms
+                        count:(int)count
+{
+    for (int i = 0; i < count; ++i)
+    {
+        views[i].transform = transforms[i];
+    }
+}
+
+- (void)showBoxWithAnimation:(NSArray*)btnArray
+{
+    int btnCount = [btnArray count];
+    float bgAlpha = _bgView.alpha;
+    CGAffineTransform boxTrans = _boxBgImage.transform;
+    CGAffineTransform boxBounceTrans = CGAffineTransformScale(boxTrans, 1.2, 1.2);
+    
+    CommonAnimationButton** btnsPtr = malloc(sizeof(CommonAnimationButton*) * btnCount);
+    CGAffineTransform* btnZeroTransPtr = malloc(sizeof(CGAffineTransform) * btnCount);
+    CGAffineTransform* btnTransPtr = malloc(sizeof(CGAffineTransform) * btnCount);
+    CGAffineTransform* btnBounceTransPtr = malloc(sizeof(CGAffineTransform) * btnCount);
+    
+    
+    void (^freeBtnTrans)() = ^(){
+        free(btnsPtr);
+        free(btnZeroTransPtr);
+        free(btnTransPtr);
+        free(btnBounceTransPtr);
+    };
+    
+    for (int i = 0; i < [btnArray count]; ++i)
+    {
+        CommonAnimationButton* btn =  [btnArray objectAtIndex:i];
+        btnsPtr[i] = btn;
+        btnTransPtr[i] = btn.transform;
+        btnZeroTransPtr[i] = CGAffineTransformScale(btnTransPtr[i], 0.00001, 0.00001);
+        btnBounceTransPtr[i] = CGAffineTransformScale(btnTransPtr[i], 1.2, 1.2);
+    }
+    
+    void (^initAll)() = ^(){
+        _bgView.alpha = 0.0;
+        _boxBgImage.transform = CGAffineTransformScale(boxTrans, 0.00001, 0.00001);
+        [self setTransformsForViews:btnsPtr trans:btnZeroTransPtr count:btnCount];
+        _titleLbl.alpha = 0.0;
+        _contentLbl.alpha = 0.0;
+        _extraView.alpha = 0.0;
+    };
+    
+    void (^showBG)() = ^(){
+        _bgView.alpha = bgAlpha;
+    };
+    
+    void (^bounceBox)() = ^(){
+        _boxBgImage.transform = boxBounceTrans;
+    };
+    
+    void (^endBounceBox)() = ^(){
+        _boxBgImage.transform = boxTrans;
+    };
+    
+    void (^bounceBtn)() = ^(){
+        _titleLbl.alpha = 1.0;
+        _contentLbl.alpha = 1.0;
+        _extraView.alpha = 1.0;
+        [self setTransformsForViews:btnsPtr trans:btnBounceTransPtr count:btnCount];
+    };
+    
+    void (^endBounceBtn)() = ^(){
+        [self setTransformsForViews:btnsPtr trans:btnTransPtr count:btnCount];
+    };
+    
+    initAll();
+    
+    [UIView
+     animateWithDuration:0.15
+     animations:^(){
+         showBG();
+         bounceBox();
+     }
+     completion:^(BOOL finished){
+         [UIView
+          animateWithDuration:0.05
+          animations:endBounceBox
+          completion:^(BOOL finished){
+              [UIView
+               animateWithDuration:0.15
+               animations:bounceBtn
+               completion:^(BOOL finished){
+                   [UIView
+                    animateWithDuration:0.05
+                    animations:endBounceBtn
+                    completion:^(BOOL finished){
+                        freeBtnTrans();
+                    }];
+               }];
+          }];
+     }];
+}
+
+- (void)hideBoxWithAnimation:(NSArray*)btnArray
+{
+    int btnCount = [btnArray count];
+    CGAffineTransform boxTrans = _boxBgImage.transform;
+    
+    CommonAnimationButton** btnsPtr = malloc(sizeof(CommonAnimationButton*) * btnCount);
+    CGAffineTransform* btnZeroTransPtr = malloc(sizeof(CGAffineTransform) * btnCount);
+    CGAffineTransform* btnTransPtr = malloc(sizeof(CGAffineTransform) * btnCount);
+    CGAffineTransform* btnBounceTransPtr = malloc(sizeof(CGAffineTransform) * btnCount);
+    
+    
+    void (^freeBtnTrans)() = ^(){
+        free(btnsPtr);
+        free(btnZeroTransPtr);
+        free(btnTransPtr);
+        free(btnBounceTransPtr);
+    };
+    
+    for (int i = 0; i < [btnArray count]; ++i)
+    {
+        CommonAnimationButton* btn =  [btnArray objectAtIndex:i];
+        btnsPtr[i] = btn;
+        btnTransPtr[i] = btn.transform;
+        btnZeroTransPtr[i] = CGAffineTransformScale(btnTransPtr[i], 0.00001, 0.00001);
+        btnBounceTransPtr[i] = CGAffineTransformScale(btnTransPtr[i], 1.2, 1.2);
+    }
+    
+    void (^hideBtns)() = ^(){
+        [self setTransformsForViews:btnsPtr trans:btnZeroTransPtr count:btnCount];
+        _titleLbl.alpha = 0.0;
+        _contentLbl.alpha = 0.0;
+        _extraView.alpha = 0.0;
+    };
+    
+    void (^hideOther)() = ^(){
+        _bgView.alpha = 0.0;
+        _boxBgImage.transform = CGAffineTransformScale(boxTrans, 0.00001, 0.00001);
+    };
+    
+    [UIView
+     animateWithDuration:0.15
+     animations:hideBtns
+     completion:^(BOOL finished){
+         [UIView
+          animateWithDuration:0.15
+          animations:hideOther
+          completion:^(BOOL finished){
+              freeBtnTrans();
+              [self removeFromSuperview];
+              [_btnArray removeAllObjects];
+              ReleaseAndNil(_btnArray);
+          }];
+     }];
 }
 
 #pragma mark BaseMessageBoxView methods
@@ -193,6 +382,18 @@
     self = [self initWithFrame:CGRectZero];
     if (self)
     {
+        if (number_of_buttons_in_row == 0)
+        {
+            if (IS_IPAD)
+            {
+                number_of_buttons_in_row = NUM_OF_BUTTONS_IN_ROW_IPAD;
+            }
+            else
+            {
+                number_of_buttons_in_row = NUM_OF_BUTTONS_IN_ROW_IPHONE;
+            }
+        }
+        
         _titleTextColor = [[UIColor whiteColor] retain];
         _contentTextColor = [[UIColor whiteColor] retain];
         _buttonTextColor = [[UIColor blackColor] retain];
@@ -268,17 +469,19 @@
         _titleLbl.textColor = _titleTextColor;
         _titleLbl.numberOfLines = 0;
         _titleLbl.textAlignment = UITextAlignmentCenter;
-        _titleLbl.font = [UIFont systemFontOfSize:48.0];
+        _titleLbl.font = [UIFont systemFontOfSize:24.0];
         
         _contentLbl = [[UILabel alloc] initWithFrame:CGRectZero];
         _contentLbl.backgroundColor = [UIColor clearColor];
         _contentLbl.textColor = _contentTextColor;
         _contentLbl.numberOfLines = 0;
         _contentLbl.textAlignment = UITextAlignmentCenter;
-        _contentLbl.font = [UIFont systemFontOfSize:36.0];
+        _contentLbl.font = [UIFont systemFontOfSize:18.0];
         
         _extraView = [extraView retain];
         _messageBoxDelegate = messageBoxDelegate;
+        
+        _customTextButtonLabelRect = CGRectZero;
     }
     return self;
 }
@@ -354,6 +557,8 @@
         _bgView.backgroundColor = _bgColor;
     }
     
+    self.frame = rect;
+    
     //set box
     CGSize boxSize = _boxBgImage.image.size;
     
@@ -364,14 +569,12 @@
         CGSize titleSize = CGSizeMake(boxSize.width - (2.0 * _titleLeftRightPadding), 100000);
         titleSize = [_title sizeWithFont:_titleLbl.font constrainedToSize:titleSize];
         
-        titleRect = CGRectMake((boxSize.width - titleSize.width) * 0.5,
+        titleRect = CGRectMake(((boxSize.width - titleSize.width) * 0.5),
                                _titleTopPadding,
                                titleSize.width,
                                titleSize.height);
         
-        _titleLbl.frame = titleRect;
         _titleLbl.text = _title;
-        [_boxBgImage addSubview:_titleLbl];
     }
     
     //caculate extra view
@@ -389,8 +592,6 @@
         {
             extraRect.origin.y = CGRectGetMaxY(titleRect) + _titleContentExtraInterval;
         }
-        
-        [_boxBgImage addSubview:_extraView];
     }
     
     //caculate Content
@@ -414,13 +615,11 @@
             contentRect.origin.y = CGRectGetMaxY(extraRect) + _titleContentExtraInterval;
         }
         
-        _contentLbl.frame = contentRect;
         _contentLbl.text = _content;
-        [_boxBgImage addSubview:_contentLbl];
     }
     
     //caculate Buttons
-    NSMutableArray* _btnArray = [NSMutableArray array];
+    _btnArray = [[NSMutableArray array] retain];
     
     BOOL onlyOneRow = NO;
     
@@ -433,7 +632,7 @@
     {
         buttonsAllCount ++;
     }
-    if (buttonsAllCount > 3)
+    if (buttonsAllCount <= number_of_buttons_in_row)
     {
         onlyOneRow = YES;
     }
@@ -475,34 +674,127 @@
         }
     }
     
-    for (int i = [_btnArray count] - 1; i >= 0; i -= 3)
+    //caculate button start Y
+    float lastY = 0.;
+    float y[4] = {0};
+    y[0] = CGRectGetMaxY(contentRect);
+    y[1] = CGRectGetMaxY(titleRect);
+    y[2] = CGRectGetMaxY(extraRect);
+    y[3] = _titleTopPadding;
+    for (int i = 0; i < 4; ++ i)
     {
-        CommonAnimationButton* rowBtn[3] = {0};
-        for (int j = 0; j < 3; --j)
+        if (y[i] > lastY)
         {
-            if (i - j >= 0)
+            lastY = y[i];
+        }
+    }
+    
+    //set buttons frame
+    int step = number_of_buttons_in_row;
+    float btnAll_width = boxSize.width + BUTTON_EXTENDS_WIDTH;
+    
+    for (int i = 0; i < [_btnArray count]; i += step)
+    {
+        NSMutableArray* rowBtn = [NSMutableArray array];
+        step = number_of_buttons_in_row;
+        int restCount = [_btnArray count] - i;
+        if (!onlyOneRow)
+        {
+            if (showYes && showNO)
             {
-                rowBtn[j] = [_btnArray objectAtIndex:i - j];
-                if (showYes && showNO && !onlyOneRow)
+                if (restCount > 2 && (restCount - number_of_buttons_in_row) < 2)
                 {
-                    rowBtn[j] = nil;
+                    step = restCount - 2;
                 }
             }
         }
         
-        //1 button in row
+        for (int j = 0; j < step; ++j)
+        {
+            if (i + j < [_btnArray count])
+            {
+                [rowBtn addObject:[_btnArray objectAtIndex:i + j]];
+            }
+        }
         
-        //2 button in row
+        float buttonMaxHeight = 0.0;
+        for (int j = 0; j < [rowBtn count]; ++j)
+        {
+            CommonAnimationButton* btn = [rowBtn objectAtIndex:j];
+            
+            if (btn.frame.size.height > buttonMaxHeight)
+            {
+                buttonMaxHeight = btn.frame.size.height;
+            }
+        }
         
-        //3 button in row
+        if (i != 0)
+        {
+            lastY += _buttonRowInterval;
+        }
+        
+        float cellWidth = btnAll_width/[rowBtn count];
+        for (int j = 0; j < [rowBtn count]; ++j)
+        {
+            CGPoint btnCenter = CGPointMake(cellWidth * (((float)j) + 0.5)- (BUTTON_EXTENDS_WIDTH * 0.5), lastY + (0.5 * buttonMaxHeight));
+            
+            CommonAnimationButton* btn = [rowBtn objectAtIndex:j];
+            
+            CGRect btnRect = btn.frame;
+            btnRect.origin.x = btnCenter.x - (btnRect.size.width * 0.5);
+            btnRect.origin.y = btnCenter.y - (btnRect.size.height * 0.5);
+            btn.frame = btnRect;
+        }
+        
+        [rowBtn removeAllObjects];
+        lastY += buttonMaxHeight;
     }
     
+    boxSize.height = lastY + _buttonToBoxBottomPadding;
+    
+    CGRect boxRect = CGRectZero;
+    boxRect.origin.x = (rect.size.width - boxSize.width) * 0.5;
+    boxRect.origin.y = (rect.size.height - boxSize.height) * 0.5;
+    boxRect.size = boxSize;
+    _boxBgImage.frame = boxRect;
+    
+    titleRect.origin.x += boxRect.origin.x;
+    titleRect.origin.y += boxRect.origin.y;
+    _titleLbl.frame = titleRect;
+    
+    contentRect.origin.x += boxRect.origin.x;
+    contentRect.origin.y += boxRect.origin.y;
+    _contentLbl.frame = contentRect;
+    
+    extraRect.origin.x += boxRect.origin.x;
+    extraRect.origin.y += boxRect.origin.y;
+    _extraView.frame = extraRect;
+    
+    //show Logic
     [self addSubview:_bgView];
+    [self addSubview:_boxBgImage];
+    [self addSubview:_titleLbl];
+    if (_extraView)
+    {
+        [self addSubview:_extraView];
+    }
+    [self addSubview:_contentLbl];
+    
+    for (CommonAnimationButton* btn in _btnArray)
+    {
+        CGRect btnRect = btn.frame;
+        btnRect.origin.x += boxRect.origin.x;
+        btnRect.origin.y += boxRect.origin.y;
+        btn.frame = btnRect;
+        [self addSubview:btn];
+    }
+    
+    [self showBoxWithAnimation:_btnArray];
 }
 
 - (void)hide
 {
-    [self removeFromSuperview];
+    [self hideBoxWithAnimation:_btnArray];
 }
 
 - (void)onPressedTextBtn:(int)index

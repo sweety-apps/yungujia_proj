@@ -752,7 +752,7 @@
 
 - (void)onQRCodePressed:(id)sender
 {
-    
+    [MessageBoxView showWithOnlyTextButtonForTitle:@"Test Box Title" content:@"test this ah-ha bla bla bla" withDelegate:self andTextButtonTexts:@"A",@"B",@"C",nil];
 }
 
 #pragma mark - AudioUtilityVolumeDetectDelegate
@@ -787,6 +787,22 @@
     //[[AudioUtility sharedInstance] ];
 }
 
+#pragma mark <BaseMessageBoxViewDelegate>
+
+- (void)onYesButtonPressedForMessageBox:(BaseMessageBoxView*)messageBox
+{
+    [messageBox hide];
+}
+- (void)onNoButtonPressedForMessageBox:(BaseMessageBoxView*)messageBox
+{
+    [messageBox hide];
+}
+
+- (void)onTextButtonPressedAt:(int)index
+                forMessageBox:(BaseMessageBoxView*)messageBox
+{
+    [messageBox hide];
+}
 
 #pragma mark Other
 

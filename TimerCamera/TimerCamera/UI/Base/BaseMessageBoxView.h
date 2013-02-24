@@ -44,7 +44,10 @@
     float _titleTopPadding;
     float _titleLeftRightPadding;
     float _titleContentExtraInterval;
+    float _buttonRowInterval;
     float _buttonToBoxBottomPadding;
+    CGRect _customTextButtonLabelRect;
+    NSMutableArray* _btnArray;
 }
 
 @property (nonatomic,retain) NSArray* textButtonTexts;
@@ -57,7 +60,9 @@
 @property (nonatomic,assign) float titleTopPadding;
 @property (nonatomic,assign) float titleLeftRightPadding;
 @property (nonatomic,assign) float titleContentExtraInterval;
+@property (nonatomic,assign) float buttonRowInterval;
 @property (nonatomic,assign) float buttonToBoxBottomPadding;
+@property (nonatomic,assign) CGRect customTextButtonLabelRect;
 @property (nonatomic,assign) id<BaseMessageBoxViewDelegate> messageBoxDelegate;
 
 + (BaseMessageBoxView*)baseMessageBoxWithBgView:(UIView*)bgView

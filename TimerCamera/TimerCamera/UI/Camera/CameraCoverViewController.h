@@ -21,8 +21,9 @@
 #import "ConfigButton.h"
 #import "EmiterCoverView.h"
 #import "CountView.h"
+#import "MessageBoxView.h"
 
-@interface CameraCoverViewController : BaseCameraLogicViewController <AudioUtilityPlaybackDelegate, AudioUtilityVolumeDetectDelegate>
+@interface CameraCoverViewController : BaseCameraLogicViewController <AudioUtilityPlaybackDelegate, AudioUtilityVolumeDetectDelegate, BaseMessageBoxViewDelegate>
 {
     //Animation Views
     ShotButton* _shotButton;

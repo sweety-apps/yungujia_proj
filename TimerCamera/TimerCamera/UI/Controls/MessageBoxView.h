@@ -29,17 +29,17 @@
 + (MessageBoxView*)showWithYesButtonForTitle:(NSString*)title
                                      content:(NSString*)content
                                 withDelegate:(id<BaseMessageBoxViewDelegate>) messageBoxDelegate
-                          andTextButtonTexts:(NSString*)first,...;
+                          andTextButtonTexts:(NSString*)first,... NS_REQUIRES_NIL_TERMINATION;
 
 + (MessageBoxView*)showWithNoButtonForTitle:(NSString*)title
                                     content:(NSString*)content
                                withDelegate:(id<BaseMessageBoxViewDelegate>) messageBoxDelegate
-                         andTextButtonTexts:(NSString*)first,...;
+                         andTextButtonTexts:(NSString*)first,... NS_REQUIRES_NIL_TERMINATION;
 
 + (MessageBoxView*)showWithOnlyTextButtonForTitle:(NSString*)title
                                           content:(NSString*)content
                                      withDelegate:(id<BaseMessageBoxViewDelegate>) messageBoxDelegate
-                               andTextButtonTexts:(NSString*)first,...;
+                               andTextButtonTexts:(NSString*)first,... NS_REQUIRES_NIL_TERMINATION;
 
 
 @end
