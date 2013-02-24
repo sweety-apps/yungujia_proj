@@ -32,6 +32,8 @@ static int number_of_buttons_in_row = 0;
 @synthesize buttonRowInterval = _buttonRowInterval;
 @synthesize buttonToBoxBottomPadding = _buttonToBoxBottomPadding;
 @synthesize customTextButtonLabelRect = _customTextButtonLabelRect;
+@synthesize boxBackTopIcon = _boxBackTopIcon;
+@synthesize boxBackTopIconTopPadding = _boxBackTopIconTopPadding;
 
 #pragma mark life-cycle
 
@@ -63,6 +65,9 @@ static int number_of_buttons_in_row = 0;
     ReleaseAndNil(_titleTextColor);
     ReleaseAndNil(_contentTextColor);
     ReleaseAndNil(_buttonTextColor);
+    
+    ReleaseAndNilView(_boxBackTopIconView);
+    ReleaseAndNil(_boxBackTopIcon);
     
     [self destroyTextButtons];
     [super dealloc];
@@ -223,6 +228,7 @@ static int number_of_buttons_in_row = 0;
 {
     int btnCount = [btnArray count];
     float bgAlpha = _bgView.alpha;
+    
     CGAffineTransform boxTrans = _boxBgImage.transform;
     CGAffineTransform boxBounceTrans = CGAffineTransformScale(boxTrans, 1.2, 1.2);
     
@@ -231,6 +237,11 @@ static int number_of_buttons_in_row = 0;
     CGAffineTransform* btnTransPtr = malloc(sizeof(CGAffineTransform) * btnCount);
     CGAffineTransform* btnBounceTransPtr = malloc(sizeof(CGAffineTransform) * btnCount);
     
+    CGRect backIconRawRect = _boxBackTopIconView.frame;
+    CGRect backIconStartRect = backIconRawRect;
+    backIconStartRect.origin.y += backIconRawRect.size.height;
+    CGRect backIconBounceRect = backIconRawRect;
+    backIconBounceRect.origin.y -= backIconBounceRect.size.height * 0.05;
     
     void (^freeBtnTrans)() = ^(){
         free(btnsPtr);
@@ -255,6 +266,8 @@ static int number_of_buttons_in_row = 0;
         _titleLbl.alpha = 0.0;
         _contentLbl.alpha = 0.0;
         _extraView.alpha = 0.0;
+        _boxBackTopIconView.alpha = 0.0;
+        _boxBackTopIconView.frame = backIconStartRect;
     };
     
     void (^showBG)() = ^(){
@@ -278,6 +291,15 @@ static int number_of_buttons_in_row = 0;
     
     void (^endBounceBtn)() = ^(){
         [self setTransformsForViews:btnsPtr trans:btnTransPtr count:btnCount];
+        _boxBackTopIconView.alpha = 1.0;
+    };
+    
+    void (^bounceBackIcon)() = ^(){
+        _boxBackTopIconView.frame = backIconBounceRect;
+    };
+    
+    void (^endBounceBackIcon)() = ^(){
+        _boxBackTopIconView.frame = backIconRawRect;
     };
     
     initAll();
@@ -301,7 +323,17 @@ static int number_of_buttons_in_row = 0;
                     animateWithDuration:0.05
                     animations:endBounceBtn
                     completion:^(BOOL finished){
-                        freeBtnTrans();
+                        [UIView
+                         animateWithDuration:0.1
+                         animations:bounceBackIcon
+                         completion:^(BOOL finished){
+                             [UIView
+                              animateWithDuration:0.05
+                              animations:endBounceBackIcon
+                              completion:^(BOOL finished){
+                                  freeBtnTrans();
+                              }];
+                         }];
                     }];
                }];
           }];
@@ -318,6 +350,9 @@ static int number_of_buttons_in_row = 0;
     CGAffineTransform* btnTransPtr = malloc(sizeof(CGAffineTransform) * btnCount);
     CGAffineTransform* btnBounceTransPtr = malloc(sizeof(CGAffineTransform) * btnCount);
     
+    CGRect backIconRawRect = _boxBackTopIconView.frame;
+    CGRect backIconStartRect = backIconRawRect;
+    backIconStartRect.origin.y += backIconRawRect.size.height;
     
     void (^freeBtnTrans)() = ^(){
         free(btnsPtr);
@@ -340,6 +375,7 @@ static int number_of_buttons_in_row = 0;
         _titleLbl.alpha = 0.0;
         _contentLbl.alpha = 0.0;
         _extraView.alpha = 0.0;
+        _boxBackTopIconView.frame = backIconStartRect;
     };
     
     void (^hideOther)() = ^(){
@@ -351,6 +387,7 @@ static int number_of_buttons_in_row = 0;
      animateWithDuration:0.15
      animations:hideBtns
      completion:^(BOOL finished){
+         _boxBackTopIconView.alpha = 0.0;
          [UIView
           animateWithDuration:0.15
           animations:hideOther
@@ -483,6 +520,8 @@ static int number_of_buttons_in_row = 0;
         _messageBoxDelegate = messageBoxDelegate;
         
         _customTextButtonLabelRect = CGRectZero;
+        
+        _boxBackTopIconView = [[UIImageView alloc] initWithFrame:CGRectZero];
     }
     return self;
 }
@@ -771,10 +810,22 @@ static int number_of_buttons_in_row = 0;
     extraRect.origin.y += boxRect.origin.y;
     _extraView.frame = extraRect;
     
+    if (_boxBackTopIcon)
+    {
+        CGRect backIconRect = CGRectZero;
+        backIconRect.size = _boxBackTopIcon.size;
+        backIconRect.origin.x = (float)((int)boxRect.origin.x + ((boxRect.size.width - _boxBackTopIcon.size.width) * 0.5));
+        backIconRect.origin.y = boxRect.origin.y + _boxBackTopIconTopPadding;
+        _boxBackTopIconView.frame = backIconRect;
+        _boxBackTopIconView.image = _boxBackTopIcon;
+    }
+    
     //show Logic
     [self addSubview:_bgView];
+    [self addSubview:_boxBackTopIconView];
     [self addSubview:_boxBgImage];
     [self addSubview:_titleLbl];
+    
     if (_extraView)
     {
         [self addSubview:_extraView];

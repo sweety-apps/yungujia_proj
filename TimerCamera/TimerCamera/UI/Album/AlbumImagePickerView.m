@@ -120,6 +120,7 @@
     [_carouselView scrollToItemAtIndex:index
                               animated:YES];
     AlbumImagePickerViewCell* cell = (AlbumImagePickerViewCell*)[_carouselView itemViewAtIndex:index];
+    cell.coverImage.image = _selectedImage;
     
     UIImageView* catHandView = [[[UIImageView alloc]
                              initWithImage:catHand] autorelease];
@@ -154,6 +155,7 @@
                              completion:^(BOOL finished){
                                  [catHandView removeFromSuperview];
                                  cell.containerView.frame = rectRaw;
+                                 cell.coverImage.image = _borderImage;
                                  if (block)
                                  {
                                      block();

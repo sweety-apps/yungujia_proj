@@ -48,6 +48,9 @@
     float _buttonToBoxBottomPadding;
     CGRect _customTextButtonLabelRect;
     NSMutableArray* _btnArray;
+    UIImage* _boxBackTopIcon;
+    float _boxBackTopIconTopPadding;
+    UIImageView* _boxBackTopIconView;
 }
 
 @property (nonatomic,retain) NSArray* textButtonTexts;
@@ -63,6 +66,8 @@
 @property (nonatomic,assign) float buttonRowInterval;
 @property (nonatomic,assign) float buttonToBoxBottomPadding;
 @property (nonatomic,assign) CGRect customTextButtonLabelRect;
+@property (nonatomic,retain) UIImage* boxBackTopIcon;
+@property (nonatomic,assign) float boxBackTopIconTopPadding;
 @property (nonatomic,assign) id<BaseMessageBoxViewDelegate> messageBoxDelegate;
 
 + (BaseMessageBoxView*)baseMessageBoxWithBgView:(UIView*)bgView

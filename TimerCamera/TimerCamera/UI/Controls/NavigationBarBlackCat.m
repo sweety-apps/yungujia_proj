@@ -22,6 +22,8 @@ forCatCloseEyeImage:(UIImage*)cc
     if (self)
     {
         _button.hidden = YES;
+        _button.userInteractionEnabled = NO;
+        _button.frame = CGRectZero;
         _hasStoped = YES;
     }
     return self;

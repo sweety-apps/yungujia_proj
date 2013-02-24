@@ -23,7 +23,9 @@
 #define BUTTON_TEXT_LEBEL_SHIFT_Y (60.0)
 #define BUTTON_TEXT_LEBEL_SHIFT_X (0.0)
 #define BUTTON_TEXT_PRESSED_BG_COLOR [UIColor colorWithRed:(252.0/255.0) green:(255.0/255.0) blue:(120.0/255.0) alpha:1.0]
+#define BOX_BACK_ICON_TOP_PADDING (-21.0)
 
+static int gBoxBackIconCounter = 0;
 
 @implementation MessageBoxView
 
@@ -118,6 +120,8 @@
     box.buttonTextColor = BUTTON_TEXT_COLOR_DEFAULT;
     box.titleContentExtraInterval = TITLE_CONTENT_EXTRA_INTERVAL_DEFAULT;
     box.customTextButtonLabelRect = BUTTON_LABEL_RECT;
+    box.boxBackTopIcon = [box changeBoxBackIconByStepping];
+    box.boxBackTopIconTopPadding = BOX_BACK_ICON_TOP_PADDING;
     
     [box showOnWindowWithYesButtonShowed:YES noButtonShowed:YES];
     return box;
@@ -151,6 +155,8 @@
     box.buttonTextColor = BUTTON_TEXT_COLOR_DEFAULT;
     box.titleContentExtraInterval = TITLE_CONTENT_EXTRA_INTERVAL_DEFAULT;
     box.customTextButtonLabelRect = BUTTON_LABEL_RECT;
+    box.boxBackTopIcon = [box changeBoxBackIconByStepping];
+    box.boxBackTopIconTopPadding = BOX_BACK_ICON_TOP_PADDING;
     
     [box showOnWindowWithYesButtonShowed:NO noButtonShowed:YES];
     return box;
@@ -184,6 +190,8 @@
     box.buttonTextColor = BUTTON_TEXT_COLOR_DEFAULT;
     box.titleContentExtraInterval = TITLE_CONTENT_EXTRA_INTERVAL_DEFAULT;
     box.customTextButtonLabelRect = BUTTON_LABEL_RECT;
+    box.boxBackTopIcon = [box changeBoxBackIconByStepping];
+    box.boxBackTopIconTopPadding = BOX_BACK_ICON_TOP_PADDING;
     
     [box showOnWindowWithYesButtonShowed:YES noButtonShowed:NO];
     return box;
@@ -235,6 +243,8 @@
     box.buttonTextColor = BUTTON_TEXT_COLOR_DEFAULT;
     box.titleContentExtraInterval = TITLE_CONTENT_EXTRA_INTERVAL_DEFAULT;
     box.customTextButtonLabelRect = BUTTON_LABEL_RECT;
+    box.boxBackTopIcon = [box changeBoxBackIconByStepping];
+    box.boxBackTopIconTopPadding = BOX_BACK_ICON_TOP_PADDING;
     
     [box showOnWindowWithYesButtonShowed:YES noButtonShowed:NO];
     return box;
@@ -286,6 +296,8 @@
     box.buttonTextColor = BUTTON_TEXT_COLOR_DEFAULT;
     box.titleContentExtraInterval = TITLE_CONTENT_EXTRA_INTERVAL_DEFAULT;
     box.customTextButtonLabelRect = BUTTON_LABEL_RECT;
+    box.boxBackTopIcon = [box changeBoxBackIconByStepping];
+    box.boxBackTopIconTopPadding = BOX_BACK_ICON_TOP_PADDING;
     
     [box showOnWindowWithYesButtonShowed:NO noButtonShowed:YES];
     return box;
@@ -337,6 +349,8 @@
     box.buttonTextColor = BUTTON_TEXT_COLOR_DEFAULT;
     box.titleContentExtraInterval = TITLE_CONTENT_EXTRA_INTERVAL_DEFAULT;
     box.customTextButtonLabelRect = BUTTON_LABEL_RECT;
+    box.boxBackTopIcon = [box changeBoxBackIconByStepping];
+    box.boxBackTopIconTopPadding = BOX_BACK_ICON_TOP_PADDING;
     
     [box showOnWindowWithYesButtonShowed:NO noButtonShowed:NO];
     return box;
@@ -464,6 +478,29 @@
             btn.button.frame = rect;
         }
     }
+}
+
+#pragma mark Private methods
+
+- (UIImage*)changeBoxBackIconByStepping
+{
+    UIImage* ret = nil;
+    switch (gBoxBackIconCounter)
+    {
+        case 0:
+            ret = [UIImage imageNamed:@"/Resource/Picture/messagebox/message_box_back_top_icon1"];
+            break;
+            
+        case 1:
+            ret = [UIImage imageNamed:@"/Resource/Picture/messagebox/message_box_back_top_icon2"];
+            break;
+            
+        default:
+            break;
+    }
+    gBoxBackIconCounter ++;
+    gBoxBackIconCounter %= 2;
+    return ret;
 }
 
 @end
