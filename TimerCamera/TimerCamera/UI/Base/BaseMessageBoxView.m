@@ -107,8 +107,9 @@ static int number_of_buttons_in_row = 0;
             UILabel* lbl = [[[UILabel alloc] initWithFrame:rect] autorelease];
             lbl.backgroundColor = [UIColor clearColor];
             lbl.textColor = _buttonTextColor;
-            lbl.numberOfLines = 0;
+            lbl.numberOfLines = 1;
             lbl.textAlignment = UITextAlignmentCenter;
+            lbl.adjustsFontSizeToFitWidth = YES;
             lbl.font = [UIFont systemFontOfSize:18.0];
             lbl.text = text;
             lbl.tag = BUTTON_LABEL_TAG;
@@ -789,6 +790,8 @@ static int number_of_buttons_in_row = 0;
         [self addSubview:btn];
     }
     
+    [self onFinishedSetUpSubView];
+    
     [self showBoxWithAnimation:_btnArray];
 }
 
@@ -825,6 +828,24 @@ static int number_of_buttons_in_row = 0;
 - (void)onReleaseYesNoBtn:(BOOL)isYes
 {
     
+}
+
+- (void)onFinishedSetUpSubView
+{
+    
+}
+
+- (UILabel*)getTextButtonLabelAtIndex:(int)index
+{
+    CommonAnimationButton* btn = [_textButtons objectAtIndex:index];
+    for (UIView* view in btn.button.subviews)
+    {
+        if ([view isKindOfClass:[UILabel class]] && view.tag == BUTTON_LABEL_TAG)
+        {
+            return (UILabel*)view;
+        }
+    }
+    return nil;
 }
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "MessageBoxView.h"
+#import <QuartzCore/QuartzCore.h>
 
 #define CONTENT_START_Y (35.0)
 
@@ -17,7 +18,12 @@
 #define TITLE_TEXT_COLOR_DEFAULT [UIColor whiteColor]
 #define TITLE_CONTENT_EXTRA_INTERVAL_DEFAULT (5.0)
 #define BUTTON_TEXT_COLOR_DEFAULT [UIColor blackColor]
-#define BUTTON_LABEL_RECT CGRectMake(17,35,69,30)
+#define BUTTON_TEXT_COLOR_PRESSED [UIColor redColor]
+#define BUTTON_LABEL_RECT CGRectMake(12,12,69,24)
+#define BUTTON_TEXT_LEBEL_SHIFT_Y (60.0)
+#define BUTTON_TEXT_LEBEL_SHIFT_X (0.0)
+#define BUTTON_TEXT_PRESSED_BG_COLOR [UIColor colorWithRed:(252.0/255.0) green:(255.0/255.0) blue:(120.0/255.0) alpha:1.0]
+
 
 @implementation MessageBoxView
 
@@ -341,17 +347,82 @@
 
 - (void)onPressedTextBtn:(int)index
 {
-    
+    UILabel* lbl = [self getTextButtonLabelAtIndex:index];
+    if (lbl)
+    {
+        CGRect rect = lbl.frame;
+        rect.origin.x += (-0.3 * rect.size.width) + BUTTON_TEXT_LEBEL_SHIFT_X;
+        rect.origin.y -= (0.3 * rect.size.height) + BUTTON_TEXT_LEBEL_SHIFT_Y;
+        rect.size.width *= 1.6;
+        rect.size.height *= 1.6;
+        lbl.frame = rect;
+        
+        lbl.textColor = BUTTON_TEXT_COLOR_PRESSED;
+        CGAffineTransform trans = lbl.transform;
+        trans = CGAffineTransformRotate(trans, -(M_PI * 0.15));
+        lbl.font = [lbl.font fontWithSize:(lbl.font.pointSize * 1.6)];
+        lbl.transform = trans;
+        
+        rect = lbl.bounds;
+        _textButtonTipBgView = [[UIView alloc] initWithFrame:rect];
+        _textButtonTipBgView.layer.cornerRadius = 8.0;
+        _textButtonTipBgView.layer.masksToBounds = YES;
+        rect = lbl.frame;
+        rect.origin.x -= 5.0;
+        rect.size.width += 10.0;
+        float newHeight = lbl.font.pointSize + 10.0;
+        rect.origin.y += (rect.size.height - newHeight) * 0.5;
+        rect.size.height = newHeight;
+        _textButtonTipBgView.frame = rect;
+        trans = CGAffineTransformRotate(_textButtonTipBgView.transform, -(M_PI * 0.15));
+        _textButtonTipBgView.transform = trans;
+        _textButtonTipBgView.backgroundColor = BUTTON_TEXT_PRESSED_BG_COLOR;
+        [lbl.superview insertSubview:_textButtonTipBgView belowSubview:lbl];
+    }
 }
 
 - (void)onRestoreTextBtn:(int)index
 {
-    
+    UILabel* lbl = [self getTextButtonLabelAtIndex:index];
+    if (lbl)
+    {
+        lbl.textColor = BUTTON_TEXT_COLOR_DEFAULT;
+        CGAffineTransform trans = lbl.transform;
+        trans = CGAffineTransformRotate(trans, (M_PI * 0.15));
+        lbl.font = [lbl.font fontWithSize:(lbl.font.pointSize * 0.625)];
+        lbl.transform = trans;
+        CGRect rect = lbl.frame;
+        rect.size.width *= 0.625;
+        rect.size.height *= 0.625;
+        rect.origin.x -= (-0.3 * rect.size.width) + BUTTON_TEXT_LEBEL_SHIFT_X;
+        rect.origin.y += (0.3 * rect.size.height) + BUTTON_TEXT_LEBEL_SHIFT_Y;
+        lbl.frame = rect;
+        lbl.backgroundColor = [UIColor clearColor];
+        
+        ReleaseAndNilView(_textButtonTipBgView);
+    }
 }
 
 - (void)onReleaseTextBtn:(int)index
 {
-    
+    UILabel* lbl = [self getTextButtonLabelAtIndex:index];
+    if (lbl)
+    {
+        lbl.textColor = BUTTON_TEXT_COLOR_DEFAULT;
+        CGAffineTransform trans = lbl.transform;
+        trans = CGAffineTransformRotate(trans, (M_PI * 0.15));
+        lbl.font = [lbl.font fontWithSize:(lbl.font.pointSize * 0.625)];
+        lbl.transform = trans;
+        CGRect rect = lbl.frame;
+        rect.size.width *= 0.625;
+        rect.size.height *= 0.625;
+        rect.origin.x -= (-0.3 * rect.size.width) + BUTTON_TEXT_LEBEL_SHIFT_X;
+        rect.origin.y += (0.3 * rect.size.height) + BUTTON_TEXT_LEBEL_SHIFT_Y;
+        lbl.frame = rect;
+        lbl.backgroundColor = [UIColor clearColor];
+        
+        ReleaseAndNilView(_textButtonTipBgView);
+    }
 }
 
 - (void)onPressedYesNoBtn:(BOOL)isYes
@@ -367,6 +438,32 @@
 - (void)onReleaseYesNoBtn:(BOOL)isYes
 {
     
+}
+
+- (void)onFinishedSetUpSubView
+{
+    [super onFinishedSetUpSubView];
+    for (CommonAnimationButton* btn in _btnArray)
+    {
+        CGRect rect = btn.frame;
+        rect.origin = CGPointZero;
+        if (btn == _yesButton || btn == _noButton)
+        {
+            rect.origin.x += 10;
+            rect.origin.y += 10;
+            rect.size.width -= 20;
+            rect.size.height -= 20;
+            btn.button.frame = rect;
+        }
+        else
+        {
+            rect.origin.x += 5;
+            rect.origin.y += 25;
+            rect.size.width -= 10;
+            rect.size.height -= 60;
+            btn.button.frame = rect;
+        }
+    }
 }
 
 @end

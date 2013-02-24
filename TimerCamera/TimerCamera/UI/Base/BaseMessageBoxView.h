@@ -113,4 +113,7 @@
 - (void)onRestoreYesNoBtn:(BOOL)isYes;
 - (void)onReleaseYesNoBtn:(BOOL)isYes;
 
+- (void)onFinishedSetUpSubView;
+- (UILabel*)getTextButtonLabelAtIndex:(int)index;
+
 @end

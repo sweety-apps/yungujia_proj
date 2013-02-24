@@ -752,7 +752,27 @@
 
 - (void)onQRCodePressed:(id)sender
 {
-    [MessageBoxView showWithOnlyTextButtonForTitle:@"Test Box Title" content:@"test this ah-ha bla bla bla" withDelegate:self andTextButtonTexts:@"A",@"B",@"C",nil];
+    static int testCount = 0;
+    testCount %= 3;
+    
+    switch (testCount)
+    {
+        case 0:
+            [MessageBoxView showWithOnlyTextButtonForTitle:@"Test Box Title0" content:@"test this ah-ha bla bla bla" withDelegate:self andTextButtonTexts:@"I'm Sure",@"Not Sure",@"Cancel From This",nil];
+            break;
+        case 1:
+            [MessageBoxView showWithYesNoButtonForTitle:@"Test Box Title1" content:@"test this ah-ha bla bla bla" withDelegate:self];
+            break;
+        case 2:
+            [MessageBoxView showWithYesButtonForTitle:@"Test Box Title2" content:@"test this ah-ha bla bla bla wahahahah dhaisdfoasdf sdfsahdfiuaos nouyasdf hasdfioasdf hfdisaodf kisefe" withDelegate:self andTextButtonTexts:@"I'm Sure",@"Not Sure",nil];
+            break;
+            
+        default:
+            break;
+    }
+    
+    
+    testCount ++;
 }
 
 #pragma mark - AudioUtilityVolumeDetectDelegate

@@ -11,7 +11,7 @@
 
 @interface MessageBoxView : BaseMessageBoxView
 {
-    
+    UIView* _textButtonTipBgView;
 }
 
 + (MessageBoxView*)showWithYesNoButtonForTitle:(NSString*)title
