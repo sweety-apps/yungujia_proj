@@ -341,11 +341,7 @@
 {
     if (_pickerDelegate && _target)
     {
-        UIImage* rawImage = [_target getRawImageAtIndex:index];
-        if (rawImage)
-        {
-            [_pickerDelegate onPickedImage:rawImage atIndex:index forView:self];
-        }
+        [_pickerDelegate onPickedImageAtIndex:index forView:self];
     }
 }
 
