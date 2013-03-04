@@ -138,7 +138,7 @@ static BOOL gTipsHasShown = NO;
 
 #pragma mark Album Showing Animations
 
-- (void)showCover:(BOOL)animated finishedBlock:(void (^)(void))callFinshed
+- (void)showCover:(BOOL)animated finishedBlock:(void (^)(void))callFinshed showedBlock:(void (^)(void))callShowed
 {
     if (_albumCoverImageView)
     {
@@ -159,6 +159,10 @@ static BOOL gTipsHasShown = NO;
     
     void (^showCover)() = ^(){
         _albumCoverImageView.frame = rect;
+        if (callShowed)
+        {
+            callShowed();
+        }
     };
     
     if (animated)
@@ -239,7 +243,7 @@ static BOOL gTipsHasShown = NO;
 
 - (void)showAlbumWithAnimationAndReleaseCaller:(UIViewController*)caller
 {
-    [self showCover:YES finishedBlock:nil];
+    [self showCover:YES finishedBlock:nil showedBlock:nil];
     _callerController = caller;
 }
 
@@ -261,7 +265,20 @@ static BOOL gTipsHasShown = NO;
         }
         [self hideCover:YES finishedBlock:transFinishBlock];
     };
-    [self showCover:YES finishedBlock:transBlock];
+    [self showCover:YES finishedBlock:transBlock showedBlock:nil];
+}
+
++ (void)startTrackTouchSlideForView:(UIView*)view
+                          startRect:(CGRect)sRect
+                         acceptRect:(CGRect)aRect
+                 onAcceptTrackBlock:(void (^)(void))block
+{
+    //UISwipeGestureRecognizer
+}
+
++ (void)stopTrackTouchSlide
+{
+    
 }
 
 - (void)assetFailedDelayHideCover

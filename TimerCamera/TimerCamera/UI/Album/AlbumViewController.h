@@ -29,4 +29,10 @@
 - (void)hideAlbumWithAnimationAndDoBlock:(void (^)(void))block
                          withFinishBlock:(void (^)(void))finishBlock;
 
++ (void)startTrackTouchSlideForView:(UIView*)view
+                          startRect:(CGRect)sRect
+                         acceptRect:(CGRect)aRect
+                 onAcceptTrackBlock:(void (^)(void))block;
++ (void)stopTrackTouchSlide;
+
 @end
