@@ -308,6 +308,15 @@
         _countView.frame = rect;
     };
     
+    void (^setAlbumSlideTracker)() = ^(){
+        [AlbumViewController startTrackTouchSlideForView:self.view
+                                               startRect:_albumButton.frame
+                                              acceptRect:CGRectMake(0, 0, 150, self.view.frame.size.height)
+                                      onAcceptTrackBlock:^(void){
+                                          [AlbumViewController stopTrackTouchSlide];
+                                      }];
+    };
+    
     void (^doHideSubViews)(BOOL) = ^(BOOL finished){
         _animationCatButton.hidden = YES;
         _shotButton.hidden = YES;
@@ -319,6 +328,7 @@
         _albumButton.hidden = YES;
         _QRCodeButton.hidden = YES;
         _configButton.enableRotation = NO;
+        setAlbumSlideTracker();
     };
     
     if (animated)

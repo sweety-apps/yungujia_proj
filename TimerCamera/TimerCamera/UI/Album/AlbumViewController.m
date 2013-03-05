@@ -13,7 +13,107 @@
 
 #define kAlbumThumbNailSize CGSizeMake(180, 180)
 
+@interface AlbumSwipeHandler : NSObject
+{
+    UIImageView* _albumView;
+    UISwipeGestureRecognizer* _swipeRecognizer;
+    UIView* _view;
+    CGRect _startRect;
+    CGRect _acceptRect;
+    void (^_onAcceptBlock)();
+}
+
+- (id)initWithView:(UIView*)view
+         startRect:(CGRect)sRect
+        acceptRect:(CGRect)aRect
+onAcceptTrackBlock:(void (^)(void))block;
+
+- (void)handleSwipe:(UISwipeGestureRecognizer*)recognizer;
+
+@end
+
+@implementation AlbumSwipeHandler
+
+- (id)initWithView:(UIView*)view
+         startRect:(CGRect)sRect
+        acceptRect:(CGRect)aRect
+onAcceptTrackBlock:(void (^)(void))block
+{
+    self = [super init];
+    if (self)
+    {
+        _swipeRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+        _swipeRecognizer.numberOfTouchesRequired = 1;
+        _swipeRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
+        
+        _startRect = sRect;
+        _acceptRect = aRect;
+        _onAcceptBlock = [block retain];
+        _view = view;
+        
+        CGRect rect = _view.frame;
+        rect.origin.x = rect.size.width;
+        
+        [_view addGestureRecognizer:_swipeRecognizer];
+        _albumView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"/Resource/Picture/main/album_cover"]];
+        rect.origin.y = (_view.frame.size.height - _albumView.frame.size.height) * 0.5;
+        rect.size = _albumView.frame.size;
+        _albumView.frame = rect;
+        [_view addSubview:_albumView];
+        _albumView.hidden = YES;
+    }
+    return self;
+}
+
+- (void)handleSwipe:(UISwipeGestureRecognizer*)recognizer
+{
+    if (_swipeRecognizer == recognizer)
+    {
+        CGPoint point = [recognizer locationInView:_view];
+        if (CGRectContainsPoint(_startRect, point))
+        {
+            _albumView.hidden = NO;
+            CGRect rect = _albumView.frame;
+            rect.origin.x = point.x;
+            _albumView.frame = rect;
+        }
+        if(CGRectContainsPoint(_acceptRect, point))
+        {
+            _albumView.hidden = NO;
+            CGRect rect = _albumView.frame;
+            rect.origin.x = (_view.frame.size.width - rect.size.width) * 0.5;;
+            _albumView.frame = rect;
+            if(_onAcceptBlock)
+            {
+                _onAcceptBlock();
+            }
+        }
+        else
+        {
+            _albumView.hidden = NO;
+            CGRect rect = _albumView.frame;
+            rect.origin.x = point.x;
+            _albumView.frame = rect;
+        }
+        [_view bringSubviewToFront:_albumView];
+    }
+}
+
+- (void)dealloc
+{
+    [_view removeGestureRecognizer:_swipeRecognizer];
+    ReleaseAndNilView(_albumView);
+    ReleaseAndNil(_swipeRecognizer);
+    ReleaseAndNil(_onAcceptBlock);
+    [super dealloc];
+}
+
+@end
+
+
 static BOOL gTipsHasShown = NO;
+
+static AlbumSwipeHandler* gSwipeHandler = nil;
 
 @interface AlbumViewController ()
 
@@ -273,12 +373,19 @@ static BOOL gTipsHasShown = NO;
                          acceptRect:(CGRect)aRect
                  onAcceptTrackBlock:(void (^)(void))block
 {
-    //UISwipeGestureRecognizer
+    if (gSwipeHandler == nil)
+    {
+        gSwipeHandler = [[AlbumSwipeHandler alloc] initWithView:view
+                                                      startRect:sRect
+                                                     acceptRect:aRect
+                                             onAcceptTrackBlock:block];
+    }
+    
 }
 
 + (void)stopTrackTouchSlide
 {
-    
+    ReleaseAndNil(gSwipeHandler);
 }
 
 - (void)assetFailedDelayHideCover
