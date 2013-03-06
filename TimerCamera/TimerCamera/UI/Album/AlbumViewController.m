@@ -12,99 +12,196 @@
 #define kBGColor()  [UIColor colorWithRed:(140.0/255.0) green:(200.0/255.0) blue:(0.0/255.0) alpha:1.0]
 
 #define kAlbumThumbNailSize CGSizeMake(180, 180)
+#define kAlbumToTouchPointOffset (30.0);
+
+@interface AlbumPunchAnimationData : NSObject
+{
+    UIView* _view;
+    CGRect _punchRect;
+}
+
+@property (nonatomic,assign) UIView* view;
+@property (nonatomic,assign) CGRect punchRect;
+
+@end
+
+@implementation AlbumPunchAnimationData
+
+@synthesize view = _view;
+@synthesize punchRect = _punchRect;
+
+@end
+
 
 @interface AlbumSwipeHandler : NSObject
 {
     UIImageView* _albumView;
-    UISwipeGestureRecognizer* _swipeRecognizer;
+    UIPanGestureRecognizer* _panRecognizer;
     UIView* _view;
     CGRect _startRect;
     CGRect _acceptRect;
-    void (^_onAcceptBlock)();
+    id _slideTarget;
+    SEL _slideSel;
+    id _cancelTarget;
+    SEL _cancelSel;
+    id _willTarget;
+    SEL _willSel;
+    id _acceptTarget;
+    SEL _acceptSel;
+    BOOL _isPanning;
 }
 
-- (id)initWithView:(UIView*)view
-         startRect:(CGRect)sRect
-        acceptRect:(CGRect)aRect
-onAcceptTrackBlock:(void (^)(void))block;
+- (id)      initWithView:(UIView*)view
+               startRect:(CGRect)sRect
+              acceptRect:(CGRect)aRect
+      onSlideBeginTarget:(id)slideTarget
+         onSlideBeginSel:(SEL)slideSel
+  onSlideCancelledTarget:(id)cancelledTarget
+     onSlideCancelledSel:(SEL)cancelledSel
+      onWillAcceptTarget:(id)willTarget
+         onWillAcceptSel:(SEL)willSel
+     onAcceptTrackTarget:(id)target
+        onAcceptTrackSel:(SEL)sel;
 
-- (void)handleSwipe:(UISwipeGestureRecognizer*)recognizer;
+- (void)handleSwipe:(UIPanGestureRecognizer*)recognizer;
 
 @end
 
 @implementation AlbumSwipeHandler
 
-- (id)initWithView:(UIView*)view
-         startRect:(CGRect)sRect
-        acceptRect:(CGRect)aRect
-onAcceptTrackBlock:(void (^)(void))block
+- (id)      initWithView:(UIView*)view
+               startRect:(CGRect)sRect
+              acceptRect:(CGRect)aRect
+      onSlideBeginTarget:(id)slideTarget
+         onSlideBeginSel:(SEL)slideSel
+  onSlideCancelledTarget:(id)cancelledTarget
+     onSlideCancelledSel:(SEL)cancelledSel
+      onWillAcceptTarget:(id)willTarget
+         onWillAcceptSel:(SEL)willSel
+     onAcceptTrackTarget:(id)target
+        onAcceptTrackSel:(SEL)sel
 {
     self = [super init];
     if (self)
     {
-        _swipeRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
-        _swipeRecognizer.numberOfTouchesRequired = 1;
-        _swipeRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
+        _panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+        _panRecognizer.maximumNumberOfTouches = 1;
+        _panRecognizer.cancelsTouchesInView = NO;
         
         _startRect = sRect;
         _acceptRect = aRect;
-        _onAcceptBlock = [block retain];
-        _view = view;
+        _slideTarget = slideTarget;
+        _slideSel = slideSel;
+        _cancelTarget = cancelledTarget;
+        _cancelSel = cancelledSel;
+        _willTarget = willTarget;
+        _willSel = willSel;
+        _acceptTarget = target;
+        _acceptSel = sel;
+        _view = [view retain];
         
         CGRect rect = _view.frame;
         rect.origin.x = rect.size.width;
         
-        [_view addGestureRecognizer:_swipeRecognizer];
+        [_view addGestureRecognizer:_panRecognizer];
         _albumView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"/Resource/Picture/main/album_cover"]];
         rect.origin.y = (_view.frame.size.height - _albumView.frame.size.height) * 0.5;
         rect.size = _albumView.frame.size;
         _albumView.frame = rect;
         [_view addSubview:_albumView];
         _albumView.hidden = YES;
+        _isPanning = NO;
     }
     return self;
 }
 
-- (void)handleSwipe:(UISwipeGestureRecognizer*)recognizer
+- (void)handleSwipe:(UIPanGestureRecognizer*)recognizer
 {
-    if (_swipeRecognizer == recognizer)
+    if (_panRecognizer == recognizer)
     {
         CGPoint point = [recognizer locationInView:_view];
-        if (CGRectContainsPoint(_startRect, point))
+        if(recognizer.state == UIGestureRecognizerStateBegan)
         {
-            _albumView.hidden = NO;
-            CGRect rect = _albumView.frame;
-            rect.origin.x = point.x;
-            _albumView.frame = rect;
-        }
-        if(CGRectContainsPoint(_acceptRect, point))
-        {
-            _albumView.hidden = NO;
-            CGRect rect = _albumView.frame;
-            rect.origin.x = (_view.frame.size.width - rect.size.width) * 0.5;;
-            _albumView.frame = rect;
-            if(_onAcceptBlock)
+            CGPoint offsetPoint = [recognizer translationInView:_view];
+            point.x = point.x - offsetPoint.x;
+            point.y = point.y - offsetPoint.y;
+            if (CGRectContainsPoint(_startRect, point))
             {
-                _onAcceptBlock();
+                [_view bringSubviewToFront:_albumView];
+                _albumView.hidden = NO;
+                CGRect rect = _albumView.frame;
+                rect.origin.x = point.x;
+                rect.origin.x -= kAlbumToTouchPointOffset;
+                _albumView.frame = rect;
+                _isPanning = YES;
+                if (_slideTarget && _slideSel)
+                {
+                    [_slideTarget performSelector:_slideSel];
+                }
             }
         }
-        else
+        if (recognizer.state == UIGestureRecognizerStateChanged)
         {
-            _albumView.hidden = NO;
-            CGRect rect = _albumView.frame;
-            rect.origin.x = point.x;
-            _albumView.frame = rect;
+            if (_isPanning)
+            {
+                [_view bringSubviewToFront:_albumView];
+                _albumView.hidden = NO;
+                CGRect rect = _albumView.frame;
+                rect.origin.x = point.x;
+                rect.origin.x -= kAlbumToTouchPointOffset;
+                _albumView.frame = rect;
+            }
         }
-        [_view bringSubviewToFront:_albumView];
+        if (recognizer.state == UIGestureRecognizerStateEnded || recognizer.state == UIGestureRecognizerStateCancelled)
+        {
+            if (_isPanning)
+            {
+                _isPanning = NO;
+                if(CGRectContainsPoint(_acceptRect, point))
+                {
+                    if (_willTarget && _willSel)
+                    {
+                        [_willTarget performSelector:_willSel];
+                    }
+                    [_view bringSubviewToFront:_albumView];
+                    _albumView.hidden = NO;
+                    CGRect rect = _albumView.frame;
+                    rect.origin.x = (_view.frame.size.width - rect.size.width) * 0.5;
+                    [UIView animateWithDuration:0.3 animations:^(){
+                        _albumView.frame = rect;
+                    } completion:^(BOOL finished){
+                        if(_acceptTarget && _acceptSel)
+                        {
+                            [_acceptTarget performSelector:_acceptSel];
+                        }
+                    }];
+                }
+                else
+                {
+                    CGRect rect = _albumView.frame;
+                    rect.origin.x = _view.frame.size.width;
+                    [UIView animateWithDuration:0.3 animations:^(){
+                        _albumView.frame = rect;
+                    } completion:^(BOOL finished){
+                        _albumView.hidden = YES;
+                        if (_cancelSel && _cancelTarget)
+                        {
+                            [_cancelTarget performSelector:_cancelSel];
+                        }
+                    }];
+                }
+            }
+        }
+        
     }
 }
 
 - (void)dealloc
 {
-    [_view removeGestureRecognizer:_swipeRecognizer];
+    [_view removeGestureRecognizer:_panRecognizer];
+    ReleaseAndNil(_view);
     ReleaseAndNilView(_albumView);
-    ReleaseAndNil(_swipeRecognizer);
-    ReleaseAndNil(_onAcceptBlock);
+    ReleaseAndNil(_panRecognizer);
     [super dealloc];
 }
 
@@ -114,6 +211,8 @@ onAcceptTrackBlock:(void (^)(void))block
 static BOOL gTipsHasShown = NO;
 
 static AlbumSwipeHandler* gSwipeHandler = nil;
+
+static AlbumPunchAnimationData* gPunchData = nil;
 
 @interface AlbumViewController ()
 
@@ -347,6 +446,12 @@ static AlbumSwipeHandler* gSwipeHandler = nil;
     _callerController = caller;
 }
 
+- (void)showAlbumWithoutAnimationAndReleaseCaller:(UIViewController*)caller
+{
+    [self showCover:NO finishedBlock:nil showedBlock:nil];
+    _callerController = caller;
+}
+
 - (void)hideAlbumWithAnimationAndDoBlock:(void (^)(void))block
                          withFinishBlock:(void (^)(void))finishBlock
 {
@@ -371,21 +476,55 @@ static AlbumSwipeHandler* gSwipeHandler = nil;
 + (void)startTrackTouchSlideForView:(UIView*)view
                           startRect:(CGRect)sRect
                          acceptRect:(CGRect)aRect
-                 onAcceptTrackBlock:(void (^)(void))block
+                 onSlideBeginTarget:(id)slideTarget
+                    onSlideBeginSel:(SEL)slideSel
+             onSlideCancelledTarget:(id)cancelledTarget
+                onSlideCancelledSel:(SEL)cancelledSel
+                 onWillAcceptTarget:(id)willTarget
+                    onWillAcceptSel:(SEL)willSel
+                onAcceptTrackTarget:(id)target
+                   onAcceptTrackSel:(SEL)sel
 {
-    if (gSwipeHandler == nil)
-    {
-        gSwipeHandler = [[AlbumSwipeHandler alloc] initWithView:view
-                                                      startRect:sRect
-                                                     acceptRect:aRect
-                                             onAcceptTrackBlock:block];
-    }
-    
+    ReleaseAndNil(gSwipeHandler);
+    gSwipeHandler = [[AlbumSwipeHandler alloc] initWithView:view
+                                                  startRect:sRect
+                                                 acceptRect:aRect
+                                         onSlideBeginTarget:slideTarget
+                                            onSlideBeginSel:slideSel
+                                     onSlideCancelledTarget:cancelledTarget
+                                        onSlideCancelledSel:cancelledSel
+                                         onWillAcceptTarget:willTarget
+                                            onWillAcceptSel:willSel
+                                        onAcceptTrackTarget:target
+                                           onAcceptTrackSel:sel];
 }
 
 + (void)stopTrackTouchSlide
 {
     ReleaseAndNil(gSwipeHandler);
+}
+
++ (void)enableAlbumPunchAnimationForView:(UIView*)view
+                                 catRect:(CGRect)rect
+{
+    ReleaseAndNil(gPunchData);
+    gPunchData = [[AlbumPunchAnimationData alloc] init];
+    gPunchData.view = view;
+    gPunchData.punchRect = rect;
+}
+
++ (void)removeAlbumPunchAnimation
+{
+    ReleaseAndNil(gPunchData);
+}
+
++ (BOOL)isAlbumPunchAnimationEnabled
+{
+    if (gPunchData)
+    {
+        return YES;
+    }
+    return NO;
 }
 
 - (void)assetFailedDelayHideCover

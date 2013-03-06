@@ -164,7 +164,7 @@
     [self showAlbumAndReleaseCaller:nil];
 }
 
-- (void)showAlbumAndReleaseCaller:(UIViewController*)caller
+- (void)showAlbumAndReleaseCaller:(UIViewController*)caller withAnimation:(BOOL)animated
 {
     if (!_albumController)
     {
@@ -174,9 +174,27 @@
     rect.origin = CGPointZero;
     _albumController.view.frame = rect;
     [self.view addSubview:_albumController.view];
-    [_albumController showAlbumWithAnimationAndReleaseCaller:caller];
+    
+    if (animated)
+    {
+        [_albumController showAlbumWithAnimationAndReleaseCaller:caller];
+    }
+    else
+    {
+        [_albumController showAlbumWithoutAnimationAndReleaseCaller:caller];
+    }
     
     [_currentControllers addObject:_albumController];
+}
+
+- (void)showAlbumAndReleaseCaller:(UIViewController*)caller
+{
+    [self showAlbumAndReleaseCaller:caller withAnimation:YES];
+}
+
+- (void)showAlbumNoAnimationAndReleaseCaller:(UIViewController *)caller
+{
+    [self showAlbumAndReleaseCaller:caller withAnimation:NO];
 }
 
 - (void)removeAlbum

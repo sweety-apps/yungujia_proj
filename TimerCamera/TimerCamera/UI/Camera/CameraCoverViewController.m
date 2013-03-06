@@ -12,6 +12,9 @@
 
 #define VOLUME_INIT_VAL (0.1)
 
+#define ALBUM_PUNCH_TRIGER_STEP (3)
+static int gAlbumPunchedTriger = 0;
+
 @interface CameraCoverViewController ()
 
 @end
@@ -178,8 +181,23 @@
         _QRCodeButton.frame = rect;
     };
     
+    void (^setAlbumSlideTracker)() = ^(){
+        [AlbumViewController startTrackTouchSlideForView:self.view
+                                               startRect:_albumButton.frame
+                                              acceptRect:CGRectMake(0, 0, 150, self.view.frame.size.height)
+                                      onSlideBeginTarget:self
+                                         onSlideBeginSel:@selector(onBeginSlideAlbum)
+                                  onSlideCancelledTarget:self
+                                     onSlideCancelledSel:@selector(onCancelledSlideAlbum)
+                                      onWillAcceptTarget:self
+                                         onWillAcceptSel:@selector(onWillAcceptSlideAlbum)
+                                     onAcceptTrackTarget:self
+                                        onAcceptTrackSel:@selector(onAcceptSlideAlbum)];
+    };
+    
     void (^setSubViewDone)(void) = ^(void){
         _configButton.enableRotation = YES;
+        setAlbumSlideTracker();
     };
     
     if (animated)
@@ -308,15 +326,6 @@
         _countView.frame = rect;
     };
     
-    void (^setAlbumSlideTracker)() = ^(){
-        [AlbumViewController startTrackTouchSlideForView:self.view
-                                               startRect:_albumButton.frame
-                                              acceptRect:CGRectMake(0, 0, 150, self.view.frame.size.height)
-                                      onAcceptTrackBlock:^(void){
-                                          [AlbumViewController stopTrackTouchSlide];
-                                      }];
-    };
-    
     void (^doHideSubViews)(BOOL) = ^(BOOL finished){
         _animationCatButton.hidden = YES;
         _shotButton.hidden = YES;
@@ -328,7 +337,6 @@
         _albumButton.hidden = YES;
         _QRCodeButton.hidden = YES;
         _configButton.enableRotation = NO;
-        setAlbumSlideTracker();
     };
     
     if (animated)
@@ -568,6 +576,8 @@
     [_countView removeFromSuperview];
     _countView = nil;
     ReleaseAndNilView(_tipsView);
+    
+    [AlbumViewController removeAlbumPunchAnimation];
 }
 
 - (void)resetStatus
@@ -756,8 +766,20 @@
 
 - (void)onAlbumPressed:(id)sender
 {
-    [self hideSubViews:YES];
-    [((AppDelegate*)([UIApplication sharedApplication].delegate)).viewController showAlbumAndReleaseCaller:self];
+    if (!_isSlidingAlbum)
+    {
+        if (gAlbumPunchedTriger == 0)
+        {
+            [AlbumViewController enableAlbumPunchAnimationForView:self.view
+                                                          catRect:_timerButton.frame];
+            _timerButton.hidden = YES;
+        }
+        gAlbumPunchedTriger++;
+        gAlbumPunchedTriger %= ALBUM_PUNCH_TRIGER_STEP;
+        
+        [self hideSubViews:YES];
+        [((AppDelegate*)([UIApplication sharedApplication].delegate)).viewController showAlbumAndReleaseCaller:self];
+    }
 }
 
 - (void)onQRCodePressed:(id)sender
@@ -835,6 +857,36 @@
 }
 
 #pragma mark Other
+
+- (void)onBeginSlideAlbum
+{
+    _isSlidingAlbum = YES;
+}
+
+- (void)onCancelledSlideAlbum
+{
+    _isSlidingAlbum = NO;
+}
+
+- (void)onWillAcceptSlideAlbum
+{
+    if (gAlbumPunchedTriger == 0)
+    {
+        [AlbumViewController enableAlbumPunchAnimationForView:self.view
+                                                      catRect:_timerButton.frame];
+        _timerButton.hidden = YES;
+    }
+    gAlbumPunchedTriger++;
+    gAlbumPunchedTriger %= ALBUM_PUNCH_TRIGER_STEP;
+}
+
+- (void)onAcceptSlideAlbum
+{
+    _isSlidingAlbum = NO;
+    [self hideSubViews:YES];
+    [((AppDelegate*)([UIApplication sharedApplication].delegate)).viewController showAlbumNoAnimationAndReleaseCaller:self];
+    [AlbumViewController stopTrackTouchSlide];
+}
 
 - (void)startTimerOnly
 {

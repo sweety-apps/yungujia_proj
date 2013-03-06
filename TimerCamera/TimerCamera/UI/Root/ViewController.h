@@ -34,6 +34,7 @@
 
 - (void)showAlbum;
 - (void)showAlbumAndReleaseCaller:(UIViewController*)caller;
+- (void)showAlbumNoAnimationAndReleaseCaller:(UIViewController *)caller;
 - (void)removeAlbum;
 
 - (void)showEditor:(UIImage*)originalImage andReleaseCaller:(UIViewController*)caller;

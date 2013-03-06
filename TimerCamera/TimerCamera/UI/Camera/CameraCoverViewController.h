@@ -44,6 +44,8 @@
     FocusAimer* _focusView;
     BOOL _isFlipingCamera;
     CGRect _albumRawRect;
+    
+    BOOL _isSlidingAlbum;
 }
 
 

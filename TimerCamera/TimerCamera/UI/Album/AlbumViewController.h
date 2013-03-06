@@ -25,6 +25,7 @@
 
 - (void)showAlbumWithAnimation;
 - (void)showAlbumWithAnimationAndReleaseCaller:(UIViewController*)caller;
+- (void)showAlbumWithoutAnimationAndReleaseCaller:(UIViewController*)caller;
 - (void)hideAlbumWithAnimation;
 - (void)hideAlbumWithAnimationAndDoBlock:(void (^)(void))block
                          withFinishBlock:(void (^)(void))finishBlock;
@@ -32,7 +33,18 @@
 + (void)startTrackTouchSlideForView:(UIView*)view
                           startRect:(CGRect)sRect
                          acceptRect:(CGRect)aRect
-                 onAcceptTrackBlock:(void (^)(void))block;
+                 onSlideBeginTarget:(id)slideTarget
+                    onSlideBeginSel:(SEL)slideSel
+             onSlideCancelledTarget:(id)cancelledTarget
+                onSlideCancelledSel:(SEL)cancelledSel
+                 onWillAcceptTarget:(id)willTarget
+                    onWillAcceptSel:(SEL)willSel
+                onAcceptTrackTarget:(id)target
+                   onAcceptTrackSel:(SEL)sel;
 + (void)stopTrackTouchSlide;
+
++ (void)enableAlbumPunchAnimationForView:(UIView*)view catRect:(CGRect)rect;
++ (void)removeAlbumPunchAnimation;
++ (BOOL)isAlbumPunchAnimationEnabled;
 
 @end
