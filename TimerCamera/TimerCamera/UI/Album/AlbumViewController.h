@@ -19,6 +19,9 @@
     UIViewController* _callerController;
     TipsView* _tipsView;
     
+    UIView* _viewToInsertBelow;
+    BOOL _waitForPunchAnimation;
+    
     CustomizedUIImagePickerController* _imagePickerController;
     BOOL _assetFailed;
 }
@@ -45,6 +48,7 @@
 
 + (void)enableAlbumPunchAnimationForView:(UIView*)view catRect:(CGRect)rect;
 + (void)removeAlbumPunchAnimation;
++ (BOOL)canPerformPunchAnimation;
 + (BOOL)isAlbumPunchAnimationEnabled;
 
 @end

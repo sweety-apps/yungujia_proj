@@ -12,7 +12,7 @@
 
 #define VOLUME_INIT_VAL (0.1)
 
-#define ALBUM_PUNCH_TRIGER_STEP (3)
+#define ALBUM_PUNCH_TRIGER_STEP (2)
 static int gAlbumPunchedTriger = 0;
 
 @interface CameraCoverViewController ()
@@ -870,14 +870,12 @@ static int gAlbumPunchedTriger = 0;
 
 - (void)onWillAcceptSlideAlbum
 {
-    if (gAlbumPunchedTriger == 0)
+    if ([AlbumViewController canPerformPunchAnimation])
     {
         [AlbumViewController enableAlbumPunchAnimationForView:self.view
                                                       catRect:_timerButton.frame];
         _timerButton.hidden = YES;
     }
-    gAlbumPunchedTriger++;
-    gAlbumPunchedTriger %= ALBUM_PUNCH_TRIGER_STEP;
 }
 
 - (void)onAcceptSlideAlbum

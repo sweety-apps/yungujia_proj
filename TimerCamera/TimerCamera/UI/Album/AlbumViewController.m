@@ -14,6 +14,8 @@
 #define kAlbumThumbNailSize CGSizeMake(180, 180)
 #define kAlbumToTouchPointOffset (30.0);
 
+#pragma mark - AlbumPunchAnimationData
+
 @interface AlbumPunchAnimationData : NSObject
 {
     UIView* _view;
@@ -32,6 +34,10 @@
 
 @end
 
+static AlbumPunchAnimationData* gPunchData = nil;
+
+
+#pragma mark - AlbumSwipeHandler
 
 @interface AlbumSwipeHandler : NSObject
 {
@@ -64,6 +70,7 @@
         onAcceptTrackSel:(SEL)sel;
 
 - (void)handleSwipe:(UIPanGestureRecognizer*)recognizer;
+- (BOOL)isSliderCoverredPunchedRect;
 
 @end
 
@@ -196,6 +203,20 @@
     }
 }
 
+- (BOOL)isSliderCoverredPunchedRect
+{
+    if (gPunchData == nil)
+    {
+        return NO;
+    }
+    CGRect albumRect = _albumView.frame;
+    if (albumRect.origin.x <= CGRectGetMaxX(gPunchData.punchRect))
+    {
+        return NO;
+    }
+    return YES;
+}
+
 - (void)dealloc
 {
     [_view removeGestureRecognizer:_panRecognizer];
@@ -207,12 +228,11 @@
 
 @end
 
+#pragma mark - AlbumViewController
 
 static BOOL gTipsHasShown = NO;
 
 static AlbumSwipeHandler* gSwipeHandler = nil;
-
-static AlbumPunchAnimationData* gPunchData = nil;
 
 @interface AlbumViewController ()
 
@@ -239,10 +259,8 @@ static AlbumPunchAnimationData* gPunchData = nil;
     return self;
 }
 
-- (void)viewDidLoad
+- (void)createSubViews
 {
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
     CommonAnimationButton* menuBtn = [CommonAnimationButton
                                       buttonWithPressedImageSizeforNormalImage1:[UIImage imageNamed:@"/Resource/Picture/picker/menu_button_normal"]
                                       forNormalImage2:[UIImage imageNamed:@"/Resource/Picture/picker/menu_button_normal"]
@@ -255,43 +273,50 @@ static AlbumPunchAnimationData* gPunchData = nil;
              forControlEvents:UIControlEventTouchUpInside];
     
     CommonAnimationButton* cameraBtn = [CommonAnimationButton
-                                      buttonWithPressedImageSizeforNormalImage1:[UIImage imageNamed:@"/Resource/Picture/picker/camera_button_normal"]
-                                      forNormalImage2:[UIImage imageNamed:@"/Resource/Picture/picker/camera_button_normal"]
-                                      forPressedImage:[UIImage imageNamed:@"/Resource/Picture/picker/camera_button_pressed"]
-                                      forEnabledImage1:nil
-                                      forEnabledImage2:nil];
+                                        buttonWithPressedImageSizeforNormalImage1:[UIImage imageNamed:@"/Resource/Picture/picker/camera_button_normal"]
+                                        forNormalImage2:[UIImage imageNamed:@"/Resource/Picture/picker/camera_button_normal"]
+                                        forPressedImage:[UIImage imageNamed:@"/Resource/Picture/picker/camera_button_pressed"]
+                                        forEnabledImage1:nil
+                                        forEnabledImage2:nil];
     
     [cameraBtn.button addTarget:self
-                       action:@selector(cameraButtonPressed:)
-             forControlEvents:UIControlEventTouchUpInside];
+                         action:@selector(cameraButtonPressed:)
+               forControlEvents:UIControlEventTouchUpInside];
     
     
     CommonAnimationButton* editorBtn = [CommonAnimationButton
-                                      buttonWithPressedImageSizeforNormalImage1:[UIImage imageNamed:@"/Resource/Picture/picker/editor_button_normal"]
-                                      forNormalImage2:[UIImage imageNamed:@"/Resource/Picture/picker/editor_button_normal"]
-                                      forPressedImage:[UIImage imageNamed:@"/Resource/Picture/picker/editor_button_pressed"]
-                                      forEnabledImage1:nil
-                                      forEnabledImage2:nil];
+                                        buttonWithPressedImageSizeforNormalImage1:[UIImage imageNamed:@"/Resource/Picture/picker/editor_button_normal"]
+                                        forNormalImage2:[UIImage imageNamed:@"/Resource/Picture/picker/editor_button_normal"]
+                                        forPressedImage:[UIImage imageNamed:@"/Resource/Picture/picker/editor_button_pressed"]
+                                        forEnabledImage1:nil
+                                        forEnabledImage2:nil];
     
     [editorBtn.button addTarget:self
-                       action:@selector(editorButtonPressed:)
-             forControlEvents:UIControlEventTouchUpInside];
+                         action:@selector(editorButtonPressed:)
+               forControlEvents:UIControlEventTouchUpInside];
     
     
     _target = [[AssetImagePickerTarget alloc] initWithDelegate:self];
     _assetPicker = [[AlbumImagePickerView
-                    albumImagePickerWitWithFrame:self.view.frame
-                    andTarget:_target
-                    andDelegate:self
-                    cameraButton:cameraBtn
-                    editorButton:editorBtn
-                    menuButton:menuBtn
-                    imageBorderImage:[[UIImage imageNamed:@"/Resource/Picture/picker/photo_boder_cover_light"] stretchableImageWithLeftCapWidth:15.0 topCapHeight:15.0]
-                    imageBorderSelectedImage:[[UIImage imageNamed:@"/Resource/Picture/picker/photo_boder_cover_unselected"] stretchableImageWithLeftCapWidth:15.0 topCapHeight:15.0]]
+                     albumImagePickerWitWithFrame:self.view.frame
+                     andTarget:_target
+                     andDelegate:self
+                     cameraButton:cameraBtn
+                     editorButton:editorBtn
+                     menuButton:menuBtn
+                     imageBorderImage:[[UIImage imageNamed:@"/Resource/Picture/picker/photo_boder_cover_light"] stretchableImageWithLeftCapWidth:15.0 topCapHeight:15.0]
+                     imageBorderSelectedImage:[[UIImage imageNamed:@"/Resource/Picture/picker/photo_boder_cover_unselected"] stretchableImageWithLeftCapWidth:15.0 topCapHeight:15.0]]
                     retain];
     _assetPicker.imageViewSize = kAlbumThumbNailSize;
     _assetPicker.imageViewUseBounds = YES;
-    [self.view addSubview:_assetPicker];
+    if (_viewToInsertBelow == nil)
+    {
+        [self.view addSubview:_assetPicker];
+    }
+    else
+    {
+        [self.view insertSubview:_assetPicker belowSubview:_viewToInsertBelow];
+    }
     self.view.backgroundColor = [UIColor clearColor];//kBGColor();
     
     _assetPicker.hidden = YES;
@@ -306,9 +331,21 @@ static AlbumPunchAnimationData* gPunchData = nil;
     _imagePickerController.delegate = self;
 }
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    _waitForPunchAnimation = gPunchData ? YES : NO;
+	// Do any additional setup after loading the view.
+    if (!_waitForPunchAnimation)
+    {
+        [self createSubViews];
+    }
+}
+
 - (void)viewDidUnload
 {
     [super viewDidUnload];
+    _viewToInsertBelow = nil;
     ReleaseAndNilView(_assetPicker);
     ReleaseAndNil(_target);
     ReleaseAndNilView(_albumCoverImageView);
@@ -326,6 +363,7 @@ static AlbumPunchAnimationData* gPunchData = nil;
 
 - (void)dealloc
 {
+    _viewToInsertBelow = nil;
     ReleaseAndNilView(_assetPicker);
     ReleaseAndNil(_target);
     ReleaseAndNilView(_albumCoverImageView);
@@ -354,6 +392,8 @@ static AlbumPunchAnimationData* gPunchData = nil;
     _albumCoverImageView.frame = rect;
     [self.view addSubview:_albumCoverImageView];
     
+    _viewToInsertBelow = _albumCoverImageView;
+    
     rect.origin.x = (self.view.frame.size.width - rect.size.width) * 0.5;
     
     void (^showCover)() = ^(){
@@ -363,17 +403,145 @@ static AlbumPunchAnimationData* gPunchData = nil;
             callShowed();
         }
     };
-    
+   
     if (animated)
     {
-        [UIView animateWithDuration:0.3
-                         animations:showCover
-                         completion:^(BOOL finished){
-                             if (callFinshed)
-                             {
-                                 callFinshed();
-                             }
-        }];
+        if (gPunchData)
+        {
+            //Punch Animation
+            UIImageView* catStartView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"/Resource/Picture/main/album_slide_punch_cat_start"]];
+            UIImageView* punchView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"/Resource/Picture/main/album_slide_punch_point"]];
+            UIImageView* catEndView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"/Resource/Picture/main/album_slide_punch_cat_end"]];
+            UIImageView* microphoneView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"/Resource/Picture/main/album_slide_punch_microphone"]];
+            
+            [self.view addSubview:punchView];
+            [self.view addSubview:catStartView];
+            [self.view addSubview:catEndView];
+            [self.view addSubview:microphoneView];
+            
+            CGRect rawRect = punchView.frame;
+            rawRect.origin.x = gPunchData.punchRect.origin.x;
+            rawRect.origin.y = CGRectGetMaxY(gPunchData.punchRect) - rawRect.size.height;
+            
+            CGRect fadeRect = rawRect;
+            fadeRect.origin.x -= fadeRect.size.width;
+            
+            CGRect stayRect = rawRect;
+            stayRect.origin.x -= 1.0;
+            
+            CGRect microPhoneFlayToRect = rawRect;
+            microPhoneFlayToRect.origin.x = CGRectGetMaxX(gPunchData.punchRect);
+            microPhoneFlayToRect.origin.y = CGRectGetMaxY(gPunchData.punchRect);
+            
+            catStartView.frame = rawRect;
+            catEndView.frame = fadeRect;
+            punchView.frame = rawRect;
+            microphoneView.frame = fadeRect;
+            
+            catEndView.hidden = NO;
+            punchView.hidden = NO;
+            microphoneView.hidden = NO;
+            catStartView.hidden = NO;
+            
+            CGAffineTransform punchTrans = punchView.transform;
+            CGAffineTransform punchStartTrans = CGAffineTransformScale(punchTrans, 0.001, 0.001);
+            CGAffineTransform punchEndTrans = CGAffineTransformScale(punchTrans, 0.001, 0.001);
+            
+            punchView.transform = punchStartTrans;
+            
+            void (^bouncePunchPointStart)() = ^()
+            {
+                punchView.transform = punchTrans;
+            };
+            
+            void (^bouncePunchPointEnd)() = ^()
+            {
+                punchView.transform = punchEndTrans;
+            };
+            
+            void (^slideOutCat)() = ^()
+            {
+                catStartView.frame = fadeRect;
+            };
+            
+            void (^throwMicroPhone)() = ^()
+            {
+                microphoneView.frame = microPhoneFlayToRect;
+            };
+            
+            void (^catReAppear)() = ^()
+            {
+                catEndView.frame = stayRect;
+            };
+            
+            void (^catReStay)() = ^()
+            {
+                catEndView.frame = rawRect;
+            };
+            
+            void (^catReDispear)() = ^()
+            {
+                catEndView.frame = fadeRect;
+            };
+            
+            void (^endAndRelease)() = ^()
+            {
+                [catStartView removeFromSuperview];
+                [catStartView release];
+                [punchView removeFromSuperview];
+                [punchView release];
+                [catEndView removeFromSuperview];
+                [catEndView release];
+                [microphoneView removeFromSuperview];
+                [microphoneView release];
+            };
+            
+            CGRect coverPunchRect = rect;
+            coverPunchRect.origin.x = CGRectGetMaxX(gPunchData.punchRect);
+            
+            [UIView animateWithDuration:0.15 animations:^(){
+                _albumCoverImageView.frame = coverPunchRect;
+            } completion:^(BOOL finished){
+                [UIView animateWithDuration:0.1 animations:bouncePunchPointStart
+                completion:^(BOOL finished){
+                    [UIView animateWithDuration:0.2 animations:^(){
+                        bouncePunchPointEnd();
+                        slideOutCat();
+                        _albumCoverImageView.frame = rect;
+                    } completion:^(BOOL finished){
+                        [UIView animateWithDuration:0.6 animations:throwMicroPhone
+                        completion:^(BOOL finished){
+                            [UIView animateWithDuration:0.05 animations:catReAppear
+                            completion:^(BOOL finished){
+                                [UIView animateWithDuration:0.35 animations:catReStay
+                                completion:^(BOOL finished){
+                                    [UIView animateWithDuration:0.05 animations:catReDispear
+                                    completion:^(BOOL finished){
+                                        endAndRelease();
+                                        if (callFinshed)
+                                        {
+                                            callFinshed();
+                                        }
+                                    }];
+                                }];
+                            }];
+                        }];
+                    }];
+                }];
+            }];
+        }
+        else
+        {
+            //normal animation
+            [UIView animateWithDuration:0.3
+                             animations:showCover
+                             completion:^(BOOL finished){
+                                 if (callFinshed)
+                                 {
+                                     callFinshed();
+                                 }
+                             }];
+        }
     }
     else
     {
@@ -442,13 +610,23 @@ static AlbumPunchAnimationData* gPunchData = nil;
 
 - (void)showAlbumWithAnimationAndReleaseCaller:(UIViewController*)caller
 {
-    [self showCover:YES finishedBlock:nil showedBlock:nil];
+    [self showCover:YES finishedBlock:^(){
+        if (_waitForPunchAnimation)
+        {
+            [self createSubViews];
+        }
+    } showedBlock:nil];
     _callerController = caller;
 }
 
 - (void)showAlbumWithoutAnimationAndReleaseCaller:(UIViewController*)caller
 {
-    [self showCover:NO finishedBlock:nil showedBlock:nil];
+    [self showCover:NO finishedBlock:^(){
+        if (_waitForPunchAnimation)
+        {
+            [self createSubViews];
+        }
+    } showedBlock:nil];
     _callerController = caller;
 }
 
@@ -516,6 +694,23 @@ static AlbumPunchAnimationData* gPunchData = nil;
 + (void)removeAlbumPunchAnimation
 {
     ReleaseAndNil(gPunchData);
+}
+
++ (BOOL)canPerformPunchAnimation
+{
+    if (gPunchData)
+    {
+        if (gSwipeHandler)
+        {
+            if (![gSwipeHandler isSliderCoverredPunchedRect])
+            {
+                return YES;
+            }
+            return NO;
+        }
+        return YES;
+    }
+    return NO;
 }
 
 + (BOOL)isAlbumPunchAnimationEnabled
