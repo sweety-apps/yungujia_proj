@@ -9,6 +9,16 @@
 #import <UIKit/UIKit.h>
 #import "AlphaAnimationView.h"
 
+@interface CommonAnimationButtonAnimationRecorder : NSObject
+{
+    NSMutableDictionary* _stateAnimationEnabledDict;
+}
+
+- (BOOL)isAnimationDisabledForState:(NSString*)state;
+- (void)setAnimationDisabled:(BOOL)isDisabled forState:(NSString*)state;
+
+@end
+
 @interface CommonAnimationButton : UIStateAnimationView
 {
     UIButton* _button;
@@ -18,11 +28,13 @@
     BOOL _buttonEnabled;
     BOOL _enableAnimations;
     BOOL _disableStateWhenInit;
+    CommonAnimationButtonAnimationRecorder* _stateAnimationRecorder;
 }
 
 @property (nonatomic,assign,readonly) UIButton* button;
 @property (nonatomic,assign) BOOL buttonEnabled;
 @property (nonatomic,assign) BOOL enableAnimations;
+@property (nonatomic,assign) CommonAnimationButtonAnimationRecorder* stateAnimationRecorder;
 
 - (id)initWithFrame:(CGRect)frame
     forNormalImage1:(UIImage*)ni1

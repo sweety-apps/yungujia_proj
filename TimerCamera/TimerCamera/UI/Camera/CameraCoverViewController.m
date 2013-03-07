@@ -11,9 +11,25 @@
 #import "CameraOptions.h"
 
 #define VOLUME_INIT_VAL (0.1)
+#define kAlbumSlideOffsetPercent (0.35)
 
-#define ALBUM_PUNCH_TRIGER_STEP (2)
+#define ALBUM_PUNCH_TRIGER_STEP (5)
+
+#pragma mark - ButtonAnimationStateRecorders
+
+static CommonAnimationButtonAnimationRecorder* gShotButtonRecorder = nil;
+static CommonAnimationButtonAnimationRecorder* gTimerButtonRecorder = nil;
+static CommonAnimationButtonAnimationRecorder*  gVolMonitorBarRecorder = nil;
+static CommonAnimationButtonAnimationRecorder* gConfigButtonRecorder = nil;
+static CommonAnimationButtonAnimationRecorder* gTorchButtonRecorder = nil;
+static CommonAnimationButtonAnimationRecorder* gFrontButtonRecorder = nil;
+static CommonAnimationButtonAnimationRecorder* gAlbumButtonRecorder = nil;
+
+#define CREATE_BUTTON_RECORDER(x) if((x) == nil){(x) = [[CommonAnimationButtonAnimationRecorder alloc] init];}
+
 static int gAlbumPunchedTriger = 0;
+
+#pragma mark - CameraCoverViewController
 
 @interface CameraCoverViewController ()
 
@@ -34,7 +50,15 @@ static int gAlbumPunchedTriger = 0;
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    //self.view.backgroundColor = [UIColor clearColor];
+    {
+        CREATE_BUTTON_RECORDER(gShotButtonRecorder);
+        CREATE_BUTTON_RECORDER(gTimerButtonRecorder);
+        CREATE_BUTTON_RECORDER(gVolMonitorBarRecorder);
+        CREATE_BUTTON_RECORDER(gConfigButtonRecorder);
+        CREATE_BUTTON_RECORDER(gTorchButtonRecorder);
+        CREATE_BUTTON_RECORDER(gFrontButtonRecorder);
+        CREATE_BUTTON_RECORDER(gAlbumButtonRecorder);
+    }
     [self createSubViews];
 }
 
@@ -184,7 +208,7 @@ static int gAlbumPunchedTriger = 0;
     void (^setAlbumSlideTracker)() = ^(){
         [AlbumViewController startTrackTouchSlideForView:self.view
                                                startRect:_albumButton.frame
-                                              acceptRect:CGRectMake(0, 0, 150, self.view.frame.size.height)
+                                              acceptRect:CGRectMake(0, 0, self.view.frame.size.width * (1.0 - kAlbumSlideOffsetPercent), self.view.frame.size.height)
                                       onSlideBeginTarget:self
                                          onSlideBeginSel:@selector(onBeginSlideAlbum)
                                   onSlideCancelledTarget:self
@@ -489,6 +513,15 @@ static int gAlbumPunchedTriger = 0;
     _tipsView = [[TipsView tipsViewWithPushHand:[UIImage imageNamed:@"/Resource/Picture/main/tips_cat_hand"]
                                 backGroundImage:[[UIImage imageNamed:@"/Resource/Picture/main/tips_fish_bg_strtechable"] stretchableImageWithLeftCapWidth:50 topCapHeight:28] ]
                  retain];
+    
+    //add recorders
+    _timerButton.stateAnimationRecorder = gTimerButtonRecorder;
+    _shotButton.stateAnimationRecorder = gShotButtonRecorder;
+    _configButton.stateAnimationRecorder = gConfigButtonRecorder;
+    _frontButton.stateAnimationRecorder = gFrontButtonRecorder;
+    _torchButton.stateAnimationRecorder = gTorchButtonRecorder;
+    _albumButton.stateAnimationRecorder = gAlbumButtonRecorder;
+    bar.stateAnimationRecorder = gVolMonitorBarRecorder;
     
     //add events
     [_animationCatButton.button addTarget:self
@@ -870,11 +903,15 @@ static int gAlbumPunchedTriger = 0;
 
 - (void)onWillAcceptSlideAlbum
 {
+    [AlbumViewController enableAlbumPunchAnimationForView:self.view
+                                                  catRect:_timerButton.frame];
     if ([AlbumViewController canPerformPunchAnimation])
     {
-        [AlbumViewController enableAlbumPunchAnimationForView:self.view
-                                                      catRect:_timerButton.frame];
         _timerButton.hidden = YES;
+    }
+    else
+    {
+        [AlbumViewController removeAlbumPunchAnimation];
     }
 }
 

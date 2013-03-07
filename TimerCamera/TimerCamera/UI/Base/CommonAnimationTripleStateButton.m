@@ -124,6 +124,10 @@ static NSString* pressedStateTable[kCountOfButtonTripleStates] = {@"pressed",@"p
 - (void)onReleased:(id)sender
 {
     //self.buttonEnabled = !_buttonEnabled;
+    if (_stateAnimationRecorder)
+    {
+        [_stateAnimationRecorder setAnimationDisabled:YES forState:stayStateTable[_currentButtonState]];
+    }
     _stayViewTable[_currentButtonState].disableAnimation = YES;
     [self setCurrentState:stayStateTable[_currentButtonState]];
     //self.buttonEnabled = _buttonEnabled;
@@ -143,6 +147,18 @@ static NSString* pressedStateTable[kCountOfButtonTripleStates] = {@"pressed",@"p
     {
         _currentButtonState = currentButtonState;
         [self setCurrentState:stayStateTable[currentButtonState]];
+    }
+}
+
+- (void)setStateAnimationRecorder:(CommonAnimationButtonAnimationRecorder *)stateAnimationRecorder
+{
+    _stateAnimationRecorder = stateAnimationRecorder;
+    if (_stateAnimationRecorder)
+    {
+        for (int i = kNormalButtonState; i < kCountOfButtonTripleStates; ++i)
+        {
+            _stayViewTable[i].disableAnimation = [_stateAnimationRecorder isAnimationDisabledForState:stayStateTable[i]];
+        }
     }
 }
 

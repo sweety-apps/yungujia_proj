@@ -8,6 +8,46 @@
 
 #import "CommonAnimationButton.h"
 
+#pragma mark - CommonAnimationButtonAnimationRecorder
+
+@implementation CommonAnimationButtonAnimationRecorder
+
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        _stateAnimationEnabledDict = [[NSMutableDictionary dictionary] retain];
+    }
+    return self;
+}
+
+- (BOOL)isAnimationDisabledForState:(NSString*)state
+{
+    BOOL ret = NO;
+    NSNumber* boolNum = [_stateAnimationEnabledDict objectForKey:state];
+    if (boolNum)
+    {
+        ret = [boolNum boolValue];
+    }
+    return ret;
+}
+
+- (void)setAnimationDisabled:(BOOL)isDisabled forState:(NSString*)state
+{
+    [_stateAnimationEnabledDict setObject:[NSNumber numberWithBool:isDisabled] forKey:state];
+}
+
+- (void)dealloc
+{
+    [_stateAnimationEnabledDict removeAllObjects];
+    ReleaseAndNil(_stateAnimationEnabledDict);
+    [super dealloc];
+}
+
+@end
+
+#pragma mark - CommonAnimationButton
+
 static BOOL gAllButtonEnabled = YES;
 
 #define kAllButtonEnableChanged @"AllButtonEnableChanged"
@@ -17,6 +57,7 @@ static BOOL gAllButtonEnabled = YES;
 @synthesize button = _button;
 @synthesize buttonEnabled = _buttonEnabled;
 @synthesize enableAnimations = _enableAnimations;
+@synthesize stateAnimationRecorder = _stateAnimationRecorder;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -70,10 +111,18 @@ static BOOL gAllButtonEnabled = YES;
     //self.buttonEnabled = !_buttonEnabled;
     if (!_buttonEnabled)
     {
+        if (_stateAnimationRecorder)
+        {
+            [_stateAnimationRecorder setAnimationDisabled:YES forState:@"normal"];
+        }
         _normalView.disableAnimation = YES;
     }
     else
     {
+        if (_stateAnimationRecorder)
+        {
+            [_stateAnimationRecorder setAnimationDisabled:YES forState:@"enabled"];
+        }
         _enabledView.disableAnimation = YES;
     }
     self.buttonEnabled = _buttonEnabled;
@@ -189,6 +238,19 @@ static BOOL gAllButtonEnabled = YES;
         }
     }
     _enableAnimations = enableAnimations;
+}
+
+- (void)setStateAnimationRecorder:(CommonAnimationButtonAnimationRecorder *)stateAnimationRecorder
+{
+    _stateAnimationRecorder = stateAnimationRecorder;
+    if (_stateAnimationRecorder)
+    {
+        _normalView.disableAnimation = [_stateAnimationRecorder isAnimationDisabledForState:@"normal"];
+        if (_enabledView != _normalView)
+        {
+            _enabledView.disableAnimation = [_stateAnimationRecorder isAnimationDisabledForState:@"enabled"];
+        }
+    }
 }
 
 + (void)setAllCommonButtonEnabled:(BOOL)enabled

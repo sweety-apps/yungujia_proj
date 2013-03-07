@@ -134,6 +134,7 @@ static AlbumPunchAnimationData* gPunchData = nil;
             point.y = point.y - offsetPoint.y;
             if (CGRectContainsPoint(_startRect, point))
             {
+                //slide start
                 [_view bringSubviewToFront:_albumView];
                 _albumView.hidden = NO;
                 CGRect rect = _albumView.frame;
@@ -151,6 +152,7 @@ static AlbumPunchAnimationData* gPunchData = nil;
         {
             if (_isPanning)
             {
+                //is sliding
                 [_view bringSubviewToFront:_albumView];
                 _albumView.hidden = NO;
                 CGRect rect = _albumView.frame;
@@ -166,6 +168,7 @@ static AlbumPunchAnimationData* gPunchData = nil;
                 _isPanning = NO;
                 if(CGRectContainsPoint(_acceptRect, point))
                 {
+                    //slide accepted
                     if (_willTarget && _willSel)
                     {
                         [_willTarget performSelector:_willSel];
@@ -174,17 +177,143 @@ static AlbumPunchAnimationData* gPunchData = nil;
                     _albumView.hidden = NO;
                     CGRect rect = _albumView.frame;
                     rect.origin.x = (_view.frame.size.width - rect.size.width) * 0.5;
-                    [UIView animateWithDuration:0.3 animations:^(){
-                        _albumView.frame = rect;
-                    } completion:^(BOOL finished){
-                        if(_acceptTarget && _acceptSel)
+                    
+                    if (gPunchData)
+                    {
+                        //Punch Animation
+                        UIImageView* catStartView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"/Resource/Picture/main/album_slide_punch_cat_start"]];
+                        UIImageView* punchView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"/Resource/Picture/main/album_slide_punch_point"]];
+                        UIImageView* catEndView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"/Resource/Picture/main/album_slide_punch_cat_end"]];
+                        UIImageView* microphoneView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"/Resource/Picture/main/album_slide_punch_microphone"]];
+                        
+                        [gPunchData.view addSubview:punchView];
+                        [gPunchData.view addSubview:catStartView];
+                        [gPunchData.view addSubview:catEndView];
+                        [gPunchData.view addSubview:microphoneView];
+                        
+                        CGRect rawRect = punchView.frame;
+                        rawRect.origin.x = gPunchData.punchRect.origin.x;
+                        rawRect.origin.y = CGRectGetMaxY(gPunchData.punchRect) - rawRect.size.height;
+                        
+                        CGRect fadeRect = rawRect;
+                        fadeRect.origin.x -= fadeRect.size.width;
+                        
+                        CGRect stayRect = rawRect;
+                        stayRect.origin.x -= 1.0;
+                        
+                        CGRect microPhoneFlayToRect = rawRect;
+                        microPhoneFlayToRect.origin.x = CGRectGetMaxX(gPunchData.punchRect);
+                        microPhoneFlayToRect.origin.y = CGRectGetMaxY(gPunchData.punchRect);
+                        
+                        catStartView.frame = rawRect;
+                        catEndView.frame = fadeRect;
+                        punchView.frame = rawRect;
+                        microphoneView.frame = fadeRect;
+                        
+                        catEndView.hidden = NO;
+                        punchView.hidden = NO;
+                        microphoneView.hidden = NO;
+                        catStartView.hidden = NO;
+                        
+                        CGAffineTransform punchTrans = punchView.transform;
+                        CGAffineTransform punchStartTrans = CGAffineTransformScale(punchTrans, 0.001, 0.001);
+                        CGAffineTransform punchEndTrans = CGAffineTransformScale(punchTrans, 0.001, 0.001);
+                        
+                        punchView.transform = punchStartTrans;
+                        
+                        void (^bouncePunchPointStart)() = ^()
                         {
-                            [_acceptTarget performSelector:_acceptSel];
-                        }
-                    }];
+                            punchView.transform = punchTrans;
+                        };
+                        
+                        void (^bouncePunchPointEnd)() = ^()
+                        {
+                            punchView.transform = punchEndTrans;
+                        };
+                        
+                        void (^slideOutCat)() = ^()
+                        {
+                            catStartView.frame = fadeRect;
+                        };
+                        
+                        void (^throwMicroPhone)() = ^()
+                        {
+                            microphoneView.frame = microPhoneFlayToRect;
+                        };
+                        
+                        void (^catReAppear)() = ^()
+                        {
+                            catEndView.frame = stayRect;
+                        };
+                        
+                        void (^catReStay)() = ^()
+                        {
+                            catEndView.frame = rawRect;
+                        };
+                        
+                        void (^catReDispear)() = ^()
+                        {
+                            catEndView.frame = fadeRect;
+                        };
+                        
+                        void (^endAndRelease)() = ^()
+                        {
+                            [catStartView removeFromSuperview];
+                            [catStartView release];
+                            [punchView removeFromSuperview];
+                            [punchView release];
+                            [catEndView removeFromSuperview];
+                            [catEndView release];
+                            [microphoneView removeFromSuperview];
+                            [microphoneView release];
+                            ReleaseAndNil(gPunchData);
+                        };
+                        
+                        CGRect coverPunchRect = rect;
+                        coverPunchRect.origin.x = CGRectGetMaxX(gPunchData.punchRect);
+                        
+                        [UIView animateWithDuration:0.15 animations:^(){
+                            _albumView.frame = coverPunchRect;
+                        } completion:^(BOOL finished){
+                            [UIView animateWithDuration:0.1 animations:bouncePunchPointStart completion:^(BOOL finished){
+                                [UIView animateWithDuration:0.2 animations:^(){
+                                    bouncePunchPointEnd();
+                                    slideOutCat();
+                                    _albumView.frame = rect;
+                                } completion:^(BOOL finished){
+                                    [UIView animateWithDuration:0.6 animations:throwMicroPhone completion:^(BOOL finished){
+                                        [UIView animateWithDuration:0.05 animations:catReAppear completion:^(BOOL finished){
+                                            [UIView animateWithDuration:0.35 animations:catReStay completion:^(BOOL finished){
+                                                [UIView animateWithDuration:0.05 animations:catReDispear completion:^(BOOL finished){
+                                                    endAndRelease();
+                                                    if(_acceptTarget && _acceptSel)
+                                                    {
+                                                        [_acceptTarget performSelector:_acceptSel];
+                                                    }
+                                                }];
+                                            }];
+                                        }];
+                                    }];
+                                }];
+                            }];
+                        }];
+                    }
+                    else
+                    {
+                        //normal close animation
+                        [UIView animateWithDuration:0.3 animations:^(){
+                            _albumView.frame = rect;
+                        } completion:^(BOOL finished){
+                            if(_acceptTarget && _acceptSel)
+                            {
+                                [_acceptTarget performSelector:_acceptSel];
+                            }
+                        }];
+                    }
                 }
                 else
                 {
+                    //slide cancelled
                     CGRect rect = _albumView.frame;
                     rect.origin.x = _view.frame.size.width;
                     [UIView animateWithDuration:0.3 animations:^(){
@@ -212,9 +341,9 @@ static AlbumPunchAnimationData* gPunchData = nil;
     CGRect albumRect = _albumView.frame;
     if (albumRect.origin.x <= CGRectGetMaxX(gPunchData.punchRect))
     {
-        return NO;
+        return YES;
     }
-    return YES;
+    return NO;
 }
 
 - (void)dealloc
@@ -494,6 +623,7 @@ static AlbumSwipeHandler* gSwipeHandler = nil;
                 [catEndView release];
                 [microphoneView removeFromSuperview];
                 [microphoneView release];
+                ReleaseAndNil(gPunchData);
             };
             
             CGRect coverPunchRect = rect;
@@ -614,6 +744,7 @@ static AlbumSwipeHandler* gSwipeHandler = nil;
         if (_waitForPunchAnimation)
         {
             [self createSubViews];
+            _waitForPunchAnimation = NO;
         }
     } showedBlock:nil];
     _callerController = caller;
@@ -625,6 +756,7 @@ static AlbumSwipeHandler* gSwipeHandler = nil;
         if (_waitForPunchAnimation)
         {
             [self createSubViews];
+            _waitForPunchAnimation = NO;
         }
     } showedBlock:nil];
     _callerController = caller;

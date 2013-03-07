@@ -37,6 +37,10 @@ static NSString* pressedStateTable[kCountOfButtonTripleStates] = {@"pressed",@"p
 
 - (void)onReleased:(id)sender
 {
+    if (_stateAnimationRecorder)
+    {
+        [_stateAnimationRecorder setAnimationDisabled:YES forState:stayStateTable[_currentButtonState]];
+    }
     _stayViewTable[_currentButtonState].disableAnimation = YES;
 }
 
