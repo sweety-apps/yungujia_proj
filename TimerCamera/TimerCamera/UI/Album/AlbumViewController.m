@@ -183,12 +183,10 @@ static AlbumPunchAnimationData* gPunchData = nil;
                         //Punch Animation
                         UIImageView* catStartView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"/Resource/Picture/main/album_slide_punch_cat_start"]];
                         UIImageView* punchView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"/Resource/Picture/main/album_slide_punch_point"]];
-                        UIImageView* catEndView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"/Resource/Picture/main/album_slide_punch_cat_end"]];
                         UIImageView* microphoneView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"/Resource/Picture/main/album_slide_punch_microphone"]];
                         
                         [gPunchData.view addSubview:punchView];
                         [gPunchData.view addSubview:catStartView];
-                        [gPunchData.view addSubview:catEndView];
                         [gPunchData.view addSubview:microphoneView];
                         
                         CGRect rawRect = punchView.frame;
@@ -198,19 +196,14 @@ static AlbumPunchAnimationData* gPunchData = nil;
                         CGRect fadeRect = rawRect;
                         fadeRect.origin.x -= fadeRect.size.width;
                         
-                        CGRect stayRect = rawRect;
-                        stayRect.origin.x -= 1.0;
-                        
                         CGRect microPhoneFlayToRect = rawRect;
                         microPhoneFlayToRect.origin.x = CGRectGetMaxX(gPunchData.punchRect);
                         microPhoneFlayToRect.origin.y = CGRectGetMaxY(gPunchData.punchRect);
                         
                         catStartView.frame = rawRect;
-                        catEndView.frame = fadeRect;
                         punchView.frame = rawRect;
                         microphoneView.frame = fadeRect;
                         
-                        catEndView.hidden = NO;
                         punchView.hidden = NO;
                         microphoneView.hidden = NO;
                         catStartView.hidden = NO;
@@ -241,29 +234,12 @@ static AlbumPunchAnimationData* gPunchData = nil;
                             microphoneView.frame = microPhoneFlayToRect;
                         };
                         
-                        void (^catReAppear)() = ^()
-                        {
-                            catEndView.frame = stayRect;
-                        };
-                        
-                        void (^catReStay)() = ^()
-                        {
-                            catEndView.frame = rawRect;
-                        };
-                        
-                        void (^catReDispear)() = ^()
-                        {
-                            catEndView.frame = fadeRect;
-                        };
-                        
                         void (^endAndRelease)() = ^()
                         {
                             [catStartView removeFromSuperview];
                             [catStartView release];
                             [punchView removeFromSuperview];
                             [punchView release];
-                            [catEndView removeFromSuperview];
-                            [catEndView release];
                             [microphoneView removeFromSuperview];
                             [microphoneView release];
                             ReleaseAndNil(gPunchData);
@@ -282,17 +258,11 @@ static AlbumPunchAnimationData* gPunchData = nil;
                                     _albumView.frame = rect;
                                 } completion:^(BOOL finished){
                                     [UIView animateWithDuration:0.6 animations:throwMicroPhone completion:^(BOOL finished){
-                                        [UIView animateWithDuration:0.05 animations:catReAppear completion:^(BOOL finished){
-                                            [UIView animateWithDuration:0.35 animations:catReStay completion:^(BOOL finished){
-                                                [UIView animateWithDuration:0.05 animations:catReDispear completion:^(BOOL finished){
-                                                    endAndRelease();
-                                                    if(_acceptTarget && _acceptSel)
-                                                    {
-                                                        [_acceptTarget performSelector:_acceptSel];
-                                                    }
-                                                }];
-                                            }];
-                                        }];
+                                        endAndRelease();
+                                        if(_acceptTarget && _acceptSel)
+                                        {
+                                            [_acceptTarget performSelector:_acceptSel];
+                                        }
                                     }];
                                 }];
                             }];
@@ -540,12 +510,10 @@ static AlbumSwipeHandler* gSwipeHandler = nil;
             //Punch Animation
             UIImageView* catStartView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"/Resource/Picture/main/album_slide_punch_cat_start"]];
             UIImageView* punchView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"/Resource/Picture/main/album_slide_punch_point"]];
-            UIImageView* catEndView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"/Resource/Picture/main/album_slide_punch_cat_end"]];
             UIImageView* microphoneView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"/Resource/Picture/main/album_slide_punch_microphone"]];
             
             [self.view addSubview:punchView];
             [self.view addSubview:catStartView];
-            [self.view addSubview:catEndView];
             [self.view addSubview:microphoneView];
             
             CGRect rawRect = punchView.frame;
@@ -555,19 +523,14 @@ static AlbumSwipeHandler* gSwipeHandler = nil;
             CGRect fadeRect = rawRect;
             fadeRect.origin.x -= fadeRect.size.width;
             
-            CGRect stayRect = rawRect;
-            stayRect.origin.x -= 1.0;
-            
             CGRect microPhoneFlayToRect = rawRect;
             microPhoneFlayToRect.origin.x = CGRectGetMaxX(gPunchData.punchRect);
             microPhoneFlayToRect.origin.y = CGRectGetMaxY(gPunchData.punchRect);
             
             catStartView.frame = rawRect;
-            catEndView.frame = fadeRect;
             punchView.frame = rawRect;
             microphoneView.frame = fadeRect;
             
-            catEndView.hidden = NO;
             punchView.hidden = NO;
             microphoneView.hidden = NO;
             catStartView.hidden = NO;
@@ -598,29 +561,12 @@ static AlbumSwipeHandler* gSwipeHandler = nil;
                 microphoneView.frame = microPhoneFlayToRect;
             };
             
-            void (^catReAppear)() = ^()
-            {
-                catEndView.frame = stayRect;
-            };
-            
-            void (^catReStay)() = ^()
-            {
-                catEndView.frame = rawRect;
-            };
-            
-            void (^catReDispear)() = ^()
-            {
-                catEndView.frame = fadeRect;
-            };
-            
             void (^endAndRelease)() = ^()
             {
                 [catStartView removeFromSuperview];
                 [catStartView release];
                 [punchView removeFromSuperview];
                 [punchView release];
-                [catEndView removeFromSuperview];
-                [catEndView release];
                 [microphoneView removeFromSuperview];
                 [microphoneView release];
                 ReleaseAndNil(gPunchData);
@@ -641,20 +587,11 @@ static AlbumSwipeHandler* gSwipeHandler = nil;
                     } completion:^(BOOL finished){
                         [UIView animateWithDuration:0.6 animations:throwMicroPhone
                         completion:^(BOOL finished){
-                            [UIView animateWithDuration:0.05 animations:catReAppear
-                            completion:^(BOOL finished){
-                                [UIView animateWithDuration:0.35 animations:catReStay
-                                completion:^(BOOL finished){
-                                    [UIView animateWithDuration:0.05 animations:catReDispear
-                                    completion:^(BOOL finished){
-                                        endAndRelease();
-                                        if (callFinshed)
-                                        {
-                                            callFinshed();
-                                        }
-                                    }];
-                                }];
-                            }];
+                            endAndRelease();
+                            if (callFinshed)
+                            {
+                                callFinshed();
+                            }
                         }];
                     }];
                 }];

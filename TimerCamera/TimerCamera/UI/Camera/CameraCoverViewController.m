@@ -13,7 +13,7 @@
 #define VOLUME_INIT_VAL (0.1)
 #define kAlbumSlideOffsetPercent (0.35)
 
-#define ALBUM_PUNCH_TRIGER_STEP (5)
+#define ALBUM_PUNCH_TRIGER_STEP (3)
 
 #pragma mark - ButtonAnimationStateRecorders
 
@@ -801,7 +801,7 @@ static int gAlbumPunchedTriger = 0;
 {
     if (!_isSlidingAlbum)
     {
-        if (gAlbumPunchedTriger == 0)
+        if (gAlbumPunchedTriger == 0 && _timerButton.currentButtonState == kNormalButtonState)
         {
             [AlbumViewController enableAlbumPunchAnimationForView:self.view
                                                           catRect:_timerButton.frame];
@@ -905,7 +905,7 @@ static int gAlbumPunchedTriger = 0;
 {
     [AlbumViewController enableAlbumPunchAnimationForView:self.view
                                                   catRect:_timerButton.frame];
-    if ([AlbumViewController canPerformPunchAnimation])
+    if ([AlbumViewController canPerformPunchAnimation] && _timerButton.currentButtonState == kNormalButtonState)
     {
         _timerButton.hidden = YES;
     }
