@@ -26,4 +26,6 @@
 + (UIImage *)scaleImage:(UIImage *)image toSize:(CGSize)targetSize;
 + (UIImage*)getSubImageFrom:(UIImage*)img WithRect:(CGRect)rect;
 + (UIImage*)scaleAndCropImage:(UIImage*)img CropSize:(CGSize)size;
++ (NSArray*)getRGBAsFromImage:(UIImage*)image atX:(int)xx andY:(int)yy count:(int)count;
++ (UIColor*)getColorFromImage:(UIImage*)img atPoint:(CGPoint)point;
 @end

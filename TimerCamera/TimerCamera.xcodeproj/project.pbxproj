@@ -15,6 +15,11 @@
 		BE2903CB16C7FE9E00E172CE /* CustomizedUIImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2903CA16C7FE9D00E172CE /* CustomizedUIImagePickerController.m */; };
 		BE2903CE16C8032900E172CE /* CustomizedUIImagePickerNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2903CD16C8032900E172CE /* CustomizedUIImagePickerNavigationBar.m */; };
 		BE2903D116C80B0500E172CE /* NavigationBarBlackCat.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2903D016C80B0500E172CE /* NavigationBarBlackCat.m */; };
+		BE2B9F0716EB821800FDD749 /* libZXingWidget.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2B9F0216EB81E100FDD749 /* libZXingWidget.a */; };
+		BE2B9F0B16EC510400FDD749 /* QRCodeScannerViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = BE2B9F0A16EC510400FDD749 /* QRCodeScannerViewController.mm */; };
+		BE2B9F1516ED009F00FDD749 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2B9F1416ED009F00FDD749 /* libiconv.dylib */; };
+		BE2B9F1716ED00C100FDD749 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2B9F1616ED00C100FDD749 /* CoreMedia.framework */; };
+		BE2B9F1916ED00CE00FDD749 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2B9F1816ED00CE00FDD749 /* CoreVideo.framework */; };
 		BE37AF0316CAB8F0005A98C8 /* EditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE37AF0216CAB8F0005A98C8 /* EditorViewController.m */; };
 		BE3BB1E516C40E4300E0E4BA /* AlbumImagePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3BB1E416C40E4300E0E4BA /* AlbumImagePickerView.m */; };
 		BE3BB1E816C40E6C00E0E4BA /* AlbumImagePickerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3BB1E716C40E6C00E0E4BA /* AlbumImagePickerViewCell.m */; };
@@ -84,6 +89,30 @@
 		F39891411648FE23006E0703 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F39891401648FE22006E0703 /* MediaPlayer.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		BE2B9F0116EB81E100FDD749 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BE2B9EFC16EB81E000FDD749 /* ZXingWidget.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC07E0554694100DB518D;
+			remoteInfo = ZXingWidget;
+		};
+		BE2B9F0316EB81E100FDD749 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BE2B9EFC16EB81E000FDD749 /* ZXingWidget.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1D60398D13DF7CAD006F4B51;
+			remoteInfo = ZXingTests;
+		};
+		BE2B9F0516EB821000FDD749 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BE2B9EFC16EB81E000FDD749 /* ZXingWidget.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC07D0554694100DB518D;
+			remoteInfo = ZXingWidget;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		BE19EBE915F359B800065448 /* TimerCamera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimerCamera.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE19EBED15F359B800065448 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -100,6 +129,12 @@
 		BE2903CD16C8032900E172CE /* CustomizedUIImagePickerNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomizedUIImagePickerNavigationBar.m; sourceTree = "<group>"; };
 		BE2903CF16C80B0500E172CE /* NavigationBarBlackCat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationBarBlackCat.h; sourceTree = "<group>"; };
 		BE2903D016C80B0500E172CE /* NavigationBarBlackCat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationBarBlackCat.m; sourceTree = "<group>"; };
+		BE2B9EFC16EB81E000FDD749 /* ZXingWidget.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ZXingWidget.xcodeproj; path = ZXingWidget/ZXingWidget.xcodeproj; sourceTree = "<group>"; };
+		BE2B9F0916EC510400FDD749 /* QRCodeScannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeScannerViewController.h; sourceTree = "<group>"; };
+		BE2B9F0A16EC510400FDD749 /* QRCodeScannerViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = QRCodeScannerViewController.mm; sourceTree = "<group>"; };
+		BE2B9F1416ED009F00FDD749 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
+		BE2B9F1616ED00C100FDD749 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		BE2B9F1816ED00CE00FDD749 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		BE37AF0116CAB8F0005A98C8 /* EditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditorViewController.h; sourceTree = "<group>"; };
 		BE37AF0216CAB8F0005A98C8 /* EditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditorViewController.m; sourceTree = "<group>"; };
 		BE3BB1E316C40E4300E0E4BA /* AlbumImagePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumImagePickerView.h; sourceTree = "<group>"; };
@@ -235,6 +270,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE2B9F0716EB821800FDD749 /* libZXingWidget.a in Frameworks */,
+				BE2B9F1916ED00CE00FDD749 /* CoreVideo.framework in Frameworks */,
+				BE2B9F1716ED00C100FDD749 /* CoreMedia.framework in Frameworks */,
+				BE2B9F1516ED009F00FDD749 /* libiconv.dylib in Frameworks */,
 				BEFB5CDD16BD9EC2000F378B /* ImageIO.framework in Frameworks */,
 				BED2606C16BD80CD0026EEDA /* AssetsLibrary.framework in Frameworks */,
 				BE46388D16B03BBC00227BA9 /* QuartzCore.framework in Frameworks */,
@@ -255,6 +294,10 @@
 		BE19EBDE15F359B700065448 = {
 			isa = PBXGroup;
 			children = (
+				BE2B9F1816ED00CE00FDD749 /* CoreVideo.framework */,
+				BE2B9F1616ED00C100FDD749 /* CoreMedia.framework */,
+				BE2B9F1416ED009F00FDD749 /* libiconv.dylib */,
+				BE2B9D1F16EB81AD00FDD749 /* OtherLibs */,
 				BEEFD52D16973267004B93F8 /* Strings */,
 				BEB8E44E1646D36800DC5800 /* Resource */,
 				BEB8E4471646D25700DC5800 /* Default.png */,
@@ -314,6 +357,32 @@
 				BE19EBFB15F359B800065448 /* TimerCamera-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BE2B9D1F16EB81AD00FDD749 /* OtherLibs */ = {
+			isa = PBXGroup;
+			children = (
+				BE2B9EFC16EB81E000FDD749 /* ZXingWidget.xcodeproj */,
+			);
+			path = OtherLibs;
+			sourceTree = "<group>";
+		};
+		BE2B9EFD16EB81E000FDD749 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BE2B9F0216EB81E100FDD749 /* libZXingWidget.a */,
+				BE2B9F0416EB81E100FDD749 /* ZXingTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BE2B9F0816EC50E100FDD749 /* QRCodeScanner */ = {
+			isa = PBXGroup;
+			children = (
+				BE2B9F0916EC510400FDD749 /* QRCodeScannerViewController.h */,
+				BE2B9F0A16EC510400FDD749 /* QRCodeScannerViewController.mm */,
+			);
+			path = QRCodeScanner;
 			sourceTree = "<group>";
 		};
 		BE37AF0016CAB8D7005A98C8 /* Editor */ = {
@@ -391,6 +460,7 @@
 		BED25FF416BD76200026EEDA /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				BE2B9F0816EC50E100FDD749 /* QRCodeScanner */,
 				BE37AF0016CAB8D7005A98C8 /* Editor */,
 				BEFB5CDE16BEB76F000F378B /* ImagePicker */,
 				BED25FF516BD76200026EEDA /* Album */,
@@ -599,6 +669,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				BE2B9F0616EB821000FDD749 /* PBXTargetDependency */,
 			);
 			name = TimerCamera;
 			productName = TimerCamera;
@@ -632,12 +703,35 @@
 			mainGroup = BE19EBDE15F359B700065448;
 			productRefGroup = BE19EBEA15F359B800065448 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = BE2B9EFD16EB81E000FDD749 /* Products */;
+					ProjectRef = BE2B9EFC16EB81E000FDD749 /* ZXingWidget.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				BE19EBE815F359B700065448 /* TimerCamera */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		BE2B9F0216EB81E100FDD749 /* libZXingWidget.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libZXingWidget.a;
+			remoteRef = BE2B9F0116EB81E100FDD749 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		BE2B9F0416EB81E100FDD749 /* ZXingTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ZXingTests.octest;
+			remoteRef = BE2B9F0316EB81E100FDD749 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		BE19EBE715F359B700065448 /* Resources */ = {
@@ -718,10 +812,19 @@
 				BE37AF0316CAB8F0005A98C8 /* EditorViewController.m in Sources */,
 				BEB4DBE716D3D22C0054F702 /* MessageBoxView.m in Sources */,
 				BEB4DBEA16D3D48E0054F702 /* BaseMessageBoxView.m in Sources */,
+				BE2B9F0B16EC510400FDD749 /* QRCodeScannerViewController.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BE2B9F0616EB821000FDD749 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ZXingWidget;
+			targetProxy = BE2B9F0516EB821000FDD749 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		BEEFD53216973270004B93F8 /* text.strings */ = {
@@ -764,7 +867,11 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				HEADER_SEARCH_PATHS = (
+					./OtherLibs/ZXingWidget/Classes,
+					./OtherLibs/ZXingWidget/CoreSrc,
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PROVISIONING_PROFILE = "D755C29F-9CCB-4582-BE91-806CB7EDAD4D";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D755C29F-9CCB-4582-BE91-806CB7EDAD4D";
 				SDKROOT = iphoneos;
@@ -785,7 +892,11 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				HEADER_SEARCH_PATHS = (
+					./OtherLibs/ZXingWidget/Classes,
+					./OtherLibs/ZXingWidget/CoreSrc,
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "D755C29F-9CCB-4582-BE91-806CB7EDAD4D";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D755C29F-9CCB-4582-BE91-806CB7EDAD4D";
@@ -803,7 +914,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TimerCamera/TimerCamera-Prefix.pch";
 				INFOPLIST_FILE = "TimerCamera/TimerCamera-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "C0F1B9AC-E6AE-46A2-AFD3-E195B5D9C8F3";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C0F1B9AC-E6AE-46A2-AFD3-E195B5D9C8F3";
@@ -819,7 +930,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TimerCamera/TimerCamera-Prefix.pch";
 				INFOPLIST_FILE = "TimerCamera/TimerCamera-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "C0F1B9AC-E6AE-46A2-AFD3-E195B5D9C8F3";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C0F1B9AC-E6AE-46A2-AFD3-E195B5D9C8F3";

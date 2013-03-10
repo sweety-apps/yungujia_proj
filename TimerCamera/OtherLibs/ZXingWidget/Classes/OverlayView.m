@@ -175,7 +175,7 @@ static const CGFloat kLicenseButtonPadding = 10;
 	CGFloat white[4] = {1.0f, 1.0f, 1.0f, 1.0f};
 	CGContextSetStrokeColor(c, white);
 	CGContextSetFillColor(c, white);
-	[self drawRect:cropRect inContext:c];
+//	[self drawRect:cropRect inContext:c];
 	
   //	CGContextSetStrokeColor(c, white);
 	//	CGContextSetStrokeColor(c, white);

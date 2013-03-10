@@ -22,7 +22,7 @@
 #import "ProductResultParser.h"
 #import "ProductParsedResult.h"
 #import "CBarcodeFormat.h"
-#include "../../../../cpp/core/src/zxing/oned/UPCEReader.h"
+#include <zxing/oned/UPCEReader.h>
 
 @implementation ProductResultParser
 
