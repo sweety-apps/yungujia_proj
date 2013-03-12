@@ -25,8 +25,12 @@
     UIView* _frameBackgroundUpFillView;
     UIView* _frameBackgroundDownFillView;
     UIView* _bottomGreenView;
+    UIViewController* _ctrlToReleaseAfterShowed;
+    
+    BOOL _resultIsURL;
 }
 
-
+- (void)showControlsWithAnimationAndReleaseController:(UIViewController*)caller;
+- (void)hideControlsWithAnimationAndCallCamera;
 
 @end

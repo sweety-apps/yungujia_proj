@@ -33,3 +33,9 @@
 //Album
 "No Photo" = "还没有照片";
 "Operate photos by slide and tap." = "通过左右滑动和点击来选中相片";
+
+//QR Code Scanner
+"Got Code" = "扫描成功";
+"Copy To Clipboard" = "拷贝倒剪贴板";
+"Open URL" = "打开URL连接";
+"Cancel" = "取消";

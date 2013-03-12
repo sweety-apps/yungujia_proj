@@ -14,6 +14,7 @@
 #import "CameraCoverViewController.h"
 #import "AlbumViewController.h"
 #import "EditorViewController.h"
+#import "QRCodeScannerViewController.h"
 
 @interface ViewController : UIViewController <LoadingAnimateImageViewDelegate>
 {
@@ -21,6 +22,7 @@
     CameraCoverViewController* _coverController;
     AlbumViewController* _albumController;
     EditorViewController* _editorController;
+    QRCodeScannerViewController* _qrcodeScannerController;
     
     NSMutableArray* _currentControllers;
 }
@@ -31,6 +33,9 @@
 
 - (void)showCamera;
 - (void)removeCamera;
+
+- (void)showQRCodeScannerAndReleaseCaller:(UIViewController*)caller;
+- (void)removeQRCodeScanner;
 
 - (void)showAlbum;
 - (void)showAlbumAndReleaseCaller:(UIViewController*)caller;

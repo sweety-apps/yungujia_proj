@@ -10,6 +10,7 @@
 #import "QRCodeReader.h"
 #import "AztecReader.h"
 #import "BaseUtilitiesFuncions.h"
+#import "AppDelegate.h"
 
 static CommonAnimationButtonAnimationRecorder* gBackButtonRecorder = nil;
 static CommonAnimationButtonAnimationRecorder* gTorchButtonRecorder = nil;
@@ -35,11 +36,13 @@ static CommonAnimationButtonAnimationRecorder* gTorchButtonRecorder = nil;
         [readers addObject:qrcodeReader];
         
         AztecReader *aztecReader = [[[AztecReader alloc] init] autorelease];
-        [readers addObject:aztecReader];
+        //[readers addObject:aztecReader];
         
         self.readers = readers;
         
         self.soundToPlay = [NSURL fileURLWithPath:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"/Resource/Sound/sms-beep-beep.caf"] isDirectory:NO];
+        
+        _resultIsURL = NO;
     }
     return self;
 }
@@ -129,8 +132,12 @@ static CommonAnimationButtonAnimationRecorder* gTorchButtonRecorder = nil;
     rectBottom.origin.y = self.view.frame.size.height - rectBottom.size.height;
     _bottomGreenView.frame = rectBottom;
     
+    //add events
+    [_backButton.button addTarget:self action:@selector(onPressedBack:) forControlEvents:UIControlEventTouchUpInside];
+    [_torchButton.button addTarget:self action:@selector(onPressedTorch:) forControlEvents:UIControlEventTouchUpInside];
+    
     //hide subViews
-    [self hideSubViews:NO];
+    [self hideSubViews:NO finishBlock:nil];
 }
 
 - (void)destroySubViews
@@ -145,9 +152,10 @@ static CommonAnimationButtonAnimationRecorder* gTorchButtonRecorder = nil;
     ReleaseAndNilView(_bottomGreenView);
 }
 
-- (void)showSubViews:(BOOL)animated
-{
 #define BOUNCE_OFFSET (3)
+
+- (void)showSubViews:(BOOL)animated finishBlock:(void (^)(void))callShowed
+{
     CGRect rectView = self.view.frame;
     
     CGRect rectTorchInit = _torchButton.frame;
@@ -182,84 +190,182 @@ static CommonAnimationButtonAnimationRecorder* gTorchButtonRecorder = nil;
     CGRect rectFrameFinished = rectFrameShow;
     rectFrameFinished.origin.y += BOUNCE_OFFSET;
     
-    CGRect rectFrameBgMidInit = _torchButton.frame;
-    rectFrameBgMidInit.origin.x = 0;
-    rectFrameBgMidInit.origin.y = 0 - rectTorchInit.size.height;
+    CGRect rectFrameBgMidInit = rectFrameInit;
     
-    CGRect rectFrameBgMidShow = _torchButton.frame;
-    rectFrameBgMidShow.origin.x = 0;
-    rectFrameBgMidShow.origin.y = 0 + BOUNCE_OFFSET;
+    CGRect rectFrameBgMidShow = rectFrameShow;
     
-    CGRect rectFrameBgMidFinished = _torchButton.frame;
-    rectFrameBgMidFinished.origin.x = 0;
-    rectFrameBgMidFinished.origin.y = 0;
+    CGRect rectFrameBgMidFinished = rectFrameFinished;
     
-    CGRect rectFrameBgUpInit = _torchButton.frame;
-    rectFrameBgUpInit.origin.x = 0;
-    rectFrameBgUpInit.origin.y = 0 - rectTorchInit.size.height;
+    CGRect rectFrameBgUpInit = CGRectZero;
+    rectFrameBgUpInit.size.width = rectFrameBgMidInit.size.width;
+    rectFrameBgUpInit.size.height = rectFrameBgMidInit.origin.y;
     
-    CGRect rectFrameBgUpShow = _torchButton.frame;
-    rectFrameBgUpShow.origin.x = 0;
-    rectFrameBgUpShow.origin.y = 0 + BOUNCE_OFFSET;
+    CGRect rectFrameBgUpShow = CGRectZero;
+    rectFrameBgUpShow.origin.x = rectFrameBgMidShow.size.width;
+    rectFrameBgUpShow.origin.y = rectFrameBgMidShow.origin.y;
     
-    CGRect rectFrameBgUpFinished = _torchButton.frame;
-    rectFrameBgUpFinished.origin.x = 0;
-    rectFrameBgUpFinished.origin.y = 0;
+    CGRect rectFrameBgUpFinished = CGRectZero;
+    rectFrameBgUpFinished.origin.x = rectFrameBgMidFinished.size.width;
+    rectFrameBgUpFinished.origin.y = rectFrameBgMidFinished.origin.y;
     
-    CGRect rectFrameBgDownInit = _torchButton.frame;
-    rectFrameBgDownInit.origin.x = 0;
-    rectFrameBgDownInit.origin.y = 0 - rectTorchInit.size.height;
+    CGRect rectFrameBgDownInit = CGRectZero;
+    rectFrameBgDownInit.origin.x = rectFrameBgMidInit.origin.x;
+    rectFrameBgDownInit.origin.y = CGRectGetMaxY(rectFrameBgMidInit);
+    rectFrameBgDownInit.size.width = rectFrameBgMidInit.size.width;
+    rectFrameBgDownInit.size.height = self.view.frame.size.height - rectFrameBgDownInit.origin.y;
+    rectFrameBgDownInit.size.height = rectFrameBgDownInit.size.height < 0.0 ? 0.0 : rectFrameBgDownInit.size.height;
     
-    CGRect rectFrameBgDownShow = _torchButton.frame;
-    rectFrameBgDownShow.origin.x = 0;
-    rectFrameBgDownShow.origin.y = 0 + BOUNCE_OFFSET;
+    CGRect rectFrameBgDownShow = CGRectZero;
+    rectFrameBgDownShow.origin.x = rectFrameBgMidShow.origin.x;
+    rectFrameBgDownShow.origin.y = CGRectGetMaxY(rectFrameBgMidShow);
+    rectFrameBgDownShow.size.width = rectFrameBgMidShow.size.width;
+    rectFrameBgDownShow.size.height = self.view.frame.size.height - rectFrameBgDownShow.origin.y;
+    rectFrameBgDownShow.size.height = rectFrameBgDownShow.size.height < 0.0 ? 0.0 : rectFrameBgDownShow.size.height;
     
-    CGRect rectFrameBgDownFinished = _torchButton.frame;
-    rectFrameBgDownFinished.origin.x = 0;
-    rectFrameBgDownFinished.origin.y = 0;
+    CGRect rectFrameBgDownFinished = CGRectZero;
+    rectFrameBgDownFinished.origin.x = rectFrameBgMidFinished.origin.x;
+    rectFrameBgDownFinished.origin.y = CGRectGetMaxY(rectFrameBgMidFinished);
+    rectFrameBgDownFinished.size.width = rectFrameBgMidFinished.size.width;
+    rectFrameBgDownFinished.size.height = self.view.frame.size.height - rectFrameBgDownFinished.origin.y;
+    rectFrameBgDownFinished.size.height = rectFrameBgDownFinished.size.height < 0.0 ? 0.0 : rectFrameBgDownInit.size.height;
     
     void (^initViews)() = ^(){
+        _torchButton.hidden = NO;
+        _backButton.hidden = NO;
+        _frameImageView.hidden = NO;
+        _frameBackgroundView.hidden = NO;
+        _frameBackgroundUpFillView.hidden = NO;
+        _frameBackgroundDownFillView.hidden = NO;
         
+        _torchButton.frame = rectTorchInit;
+        _backButton.frame = rectBackInit;
+        _frameImageView.frame = rectFrameInit;
+        _frameBackgroundView.frame = rectFrameBgMidInit;
+        _frameBackgroundUpFillView.frame = rectFrameBgUpInit;
+        _frameBackgroundDownFillView.frame = rectFrameBgDownInit;
+        
+        _frameBackgroundView.alpha = 0.0;
+        _frameBackgroundUpFillView.alpha = 0.0;
+        _frameBackgroundDownFillView.alpha = 0.0;
     };
     
     void (^showViews)() = ^(){
         
+        _torchButton.frame = rectTorchShow;
+        _backButton.frame = rectBackShow;
+        
+        _frameBackgroundView.alpha = 0.5;
+        _frameBackgroundUpFillView.alpha = 0.5;
+        _frameBackgroundDownFillView.alpha = 0.5;
     };
     
     void (^bounceViews)() = ^(){
         
+        _torchButton.frame = rectTorchFinished;
+        _backButton.frame = rectBackFinished;
+        
+        _frameImageView.frame = rectFrameFinished;
+        _frameBackgroundView.frame = rectFrameBgMidFinished;
+        _frameBackgroundUpFillView.frame = rectFrameBgUpFinished;
+        _frameBackgroundDownFillView.frame = rectFrameBgDownFinished;
+        
+        _frameBackgroundView.alpha = 1.0;
+        _frameBackgroundUpFillView.alpha = 1.0;
+        _frameBackgroundDownFillView.alpha = 1.0;
     };
     
     void (^onFinished)() = ^(){
-        
+        if (callShowed)
+        {
+            callShowed();
+        }
     };
+    
+    initViews();
     
     if (animated)
     {
-        
+        [UIView animateWithDuration:0.2
+                         animations:showViews
+                         completion:^(BOOL finished){
+                             [UIView animateWithDuration:0.15
+                                              animations:bounceViews
+                                              completion:^(BOOL finished){
+                                                  onFinished();
+                                              }];
+                         }];
     }
     else
     {
-        initViews();
         showViews();
         bounceViews();
         onFinished();
     }
 }
 
-- (void)hideSubViews:(BOOL)animated
+- (void)hideSubViews:(BOOL)animated finishBlock:(void (^)(void))callHidded
 {
+    CGRect rectView = self.view.frame;
+    
+    CGRect rectTorchInit = _torchButton.frame;
+    rectTorchInit.origin.x = 0;
+    rectTorchInit.origin.y = 0 - rectTorchInit.size.height;
+    
+    CGRect rectBackInit = _backButton.frame;
+    rectBackInit.origin.x = 126;
+    rectBackInit.origin.y = rectView.size.height;
+   
+    CGRect rectFrameInit = _frameImageView.frame;
+    rectFrameInit.origin.x = 0;
+    rectFrameInit.origin.y = rectView.size.height;
+   
+    CGRect rectFrameBgMidInit = rectFrameInit;
+    
+    CGRect rectFrameBgUpInit = CGRectZero;
+    rectFrameBgUpInit.size.width = rectFrameBgMidInit.size.width;
+    rectFrameBgUpInit.size.height = rectFrameBgMidInit.origin.y;
+   
+    CGRect rectFrameBgDownInit = CGRectZero;
+    rectFrameBgDownInit.origin.x = rectFrameBgMidInit.origin.x;
+    rectFrameBgDownInit.origin.y = CGRectGetMaxY(rectFrameBgMidInit);
+    rectFrameBgDownInit.size.width = rectFrameBgMidInit.size.width;
+    rectFrameBgDownInit.size.height = self.view.frame.size.height - rectFrameBgDownInit.origin.y;
+    rectFrameBgDownInit.size.height = rectFrameBgDownInit.size.height < 0.0 ? 0.0 : rectFrameBgDownInit.size.height;
+ 
     void (^hideViews)() = ^(){
+        _torchButton.frame = rectTorchInit;
+        _backButton.frame = rectBackInit;
+        _frameImageView.frame = rectFrameInit;
+        _frameBackgroundView.frame = rectFrameBgMidInit;
+        _frameBackgroundUpFillView.frame = rectFrameBgUpInit;
+        _frameBackgroundDownFillView.frame = rectFrameBgDownInit;
         
+        _frameBackgroundView.alpha = 0.0;
+        _frameBackgroundUpFillView.alpha = 0.0;
+        _frameBackgroundDownFillView.alpha = 0.0;
     };
     
     void (^onFinished)() = ^(){
+        _torchButton.hidden = YES;
+        _backButton.hidden = YES;
+        _frameImageView.hidden = YES;
+        _frameBackgroundView.hidden = YES;
+        _frameBackgroundUpFillView.hidden = YES;
+        _frameBackgroundDownFillView.hidden = YES;
         
+        if (callHidded)
+        {
+            callHidded();
+        }
     };
     
     if (animated)
     {
-        
+        [UIView animateWithDuration:0.2
+                         animations:hideViews
+                         completion:^(BOOL finished){
+                             onFinished();
+                         }];
     }
     else
     {
@@ -272,7 +378,11 @@ static CommonAnimationButtonAnimationRecorder* gTorchButtonRecorder = nil;
 
 - (void)zxingController:(ZXingWidgetController*)controller didScanResult:(NSString *)result
 {
-    
+    _resultIsURL = YES;
+    [MessageBoxView showWithYesButtonForTitle:LString(@"Got Code")
+                                      content:result
+                                 withDelegate:self
+                           andTextButtonTexts:LString(@"Copy To Clipboard"),LString(@"Open URL"),LString(@"Cancel"),nil];
 }
 
 - (void)zxingControllerDidCancel:(ZXingWidgetController*)controller
@@ -295,7 +405,66 @@ static CommonAnimationButtonAnimationRecorder* gTorchButtonRecorder = nil;
 - (void)onTextButtonPressedAt:(int)index
                 forMessageBox:(BaseMessageBoxView*)messageBox
 {
-    
+    if (_resultIsURL)
+    {
+        switch (index)
+        {
+            case 0:
+                //
+                break;
+            case 1:
+                //
+                break;
+            case 2:
+                [messageBox hide];
+                break;
+                
+            default:
+                break;
+        }
+    }
+    else
+    {
+        
+    }
+}
+
+
+#pragma mark Button Events
+
+- (void)onPressedTorch:(id)sender
+{
+    if ([self torchIsOn])
+    {
+        [self setTorch:NO];
+        _torchButton.buttonEnabled = NO;
+    }
+    else
+    {
+        [self setTorch:YES];
+        _torchButton.buttonEnabled = YES;
+    }
+}
+
+- (void)onPressedBack:(id)sender
+{
+    [self hideControlsWithAnimationAndCallCamera];
+}
+
+#pragma mark Public Methods
+
+- (void)showControlsWithAnimationAndReleaseController:(UIViewController*)caller
+{
+    [self showSubViews:YES finishBlock:^(){
+        [((AppDelegate*)([UIApplication sharedApplication].delegate)).viewController removeController:caller];
+    }];
+}
+
+- (void)hideControlsWithAnimationAndCallCamera
+{
+    [self hideSubViews:YES finishBlock:^(){
+        [((AppDelegate*)([UIApplication sharedApplication].delegate)).viewController showCamera];
+    }];
 }
 
 @end

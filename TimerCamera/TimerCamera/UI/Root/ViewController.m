@@ -59,9 +59,10 @@
     _laiv = [[LoadingAnimateImageView viewWithDelegate:self image:[UIImage imageNamed:@"/Resource/Picture/camera_open"] forTimeInterval:0.8 preLoadImage:[UIImage imageNamed:@"Default"] forPreloadAnimateInterval:0.2] retain];
     if (_laiv)
     {
-        if (_albumController)
+        NSArray* subViews = self.view.subviews;
+        if (subViews && [subViews indexOfObject:_coverController.view] != NSNotFound)
         {
-            [self.view insertSubview:_laiv belowSubview:_albumController.view];
+            [self.view insertSubview:_laiv aboveSubview:_coverController.view];
         }
         else
         {
@@ -85,9 +86,10 @@
 {
     if (_laiv)
     {
-        if (_albumController)
+        NSArray* subViews = self.view.subviews;
+        if (subViews && [subViews indexOfObject:_coverController.view] != NSNotFound)
         {
-            [self.view insertSubview:_laiv belowSubview:_albumController.view];
+            [self.view insertSubview:_laiv aboveSubview:_coverController.view];
         }
         else
         {
@@ -140,9 +142,20 @@
         _coverController = [[CameraCoverViewController alloc] init];
     }
     
+    UIView* belowView = nil;
+    
     if (_albumController)
     {
-        [self.view insertSubview:_coverController.view belowSubview:_albumController.view];
+        belowView = _albumController.view;
+    }
+    if (_qrcodeScannerController)
+    {
+        belowView = _qrcodeScannerController.view;
+    }
+    
+    if (belowView)
+    {
+        [self.view insertSubview:_coverController.view belowSubview:belowView];
     }
     else
     {
@@ -158,6 +171,29 @@
     [_coverController.view removeFromSuperview];
     ReleaseAndNil(_coverController);
 }
+
+- (void)showQRCodeScannerAndReleaseCaller:(UIViewController*)caller
+{
+    if (_qrcodeScannerController == nil)
+    {
+        _qrcodeScannerController = [[QRCodeScannerViewController alloc] init];
+    }
+    
+    CGRect rect = self.view.frame;
+    rect.origin = CGPointZero;
+    _qrcodeScannerController.view.frame = rect;
+    [self.view addSubview:_qrcodeScannerController.view];
+    
+    [_qrcodeScannerController showControlsWithAnimationAndReleaseController:caller];
+}
+
+- (void)removeQRCodeScanner
+{
+    [_currentControllers removeObject:_qrcodeScannerController];
+    [_qrcodeScannerController.view removeFromSuperview];
+    ReleaseAndNil(_qrcodeScannerController);
+}
+
 
 - (void)showAlbum
 {
@@ -242,6 +278,10 @@
 
 - (void)removeController:(UIViewController*)controller
 {
+    if (controller == _qrcodeScannerController)
+    {
+        [self removeQRCodeScanner];
+    }
     if (controller == _coverController)
     {
         [self removeCamera];
