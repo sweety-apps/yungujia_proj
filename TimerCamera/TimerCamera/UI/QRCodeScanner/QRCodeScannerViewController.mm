@@ -123,6 +123,14 @@ static CommonAnimationButtonAnimationRecorder* gTorchButtonRecorder = nil;
     //add recorders
     _backButton.stateAnimationRecorder = gBackButtonRecorder;
     _torchButton.stateAnimationRecorder = gTorchButtonRecorder;
+    
+    //set bottom first
+    CGRect rectBottom = CGRectMake(0,0,self.view.frame.size.width, self.view.frame.size.height - (self.view.frame.size.width * 4.0 / 3.0));
+    rectBottom.origin.y = self.view.frame.size.height - rectBottom.size.height;
+    _bottomGreenView.frame = rectBottom;
+    
+    //hide subViews
+    [self hideSubViews:NO];
 }
 
 - (void)destroySubViews
@@ -135,6 +143,129 @@ static CommonAnimationButtonAnimationRecorder* gTorchButtonRecorder = nil;
     ReleaseAndNilView(_frameBackgroundUpFillView);
     ReleaseAndNilView(_frameBackgroundDownFillView);
     ReleaseAndNilView(_bottomGreenView);
+}
+
+- (void)showSubViews:(BOOL)animated
+{
+#define BOUNCE_OFFSET (3)
+    CGRect rectView = self.view.frame;
+    
+    CGRect rectTorchInit = _torchButton.frame;
+    rectTorchInit.origin.x = 0;
+    rectTorchInit.origin.y = 0 - rectTorchInit.size.height;
+    
+    CGRect rectTorchShow = rectTorchInit;
+    rectTorchShow.origin.x = 0;
+    rectTorchShow.origin.y = 0 + BOUNCE_OFFSET;
+    
+    CGRect rectTorchFinished = rectTorchShow;
+    rectTorchFinished.origin.x = 0;
+    rectTorchFinished.origin.y = 0;
+    
+    CGRect rectBackInit = _backButton.frame;
+    rectBackInit.origin.x = 126;
+    rectBackInit.origin.y = rectView.size.height;
+    
+    CGRect rectBackShow = rectBackInit;
+    rectBackShow.origin.y -= rectTorchInit.size.height + BOUNCE_OFFSET;
+    
+    CGRect rectBackFinished = rectBackShow;
+    rectBackFinished.origin.y += BOUNCE_OFFSET;
+    
+    CGRect rectFrameInit = _frameImageView.frame;
+    rectFrameInit.origin.x = 0;
+    rectFrameInit.origin.y = rectView.size.height;
+    
+    CGRect rectFrameShow = rectFrameInit;
+    rectFrameShow.origin.y = 0 + BOUNCE_OFFSET;
+    
+    CGRect rectFrameFinished = _torchButton.frame;
+    rectFrameFinished.origin.y = 0;
+    
+    CGRect rectFrameBgMidInit = _torchButton.frame;
+    rectFrameBgMidInit.origin.x = 0;
+    rectFrameBgMidInit.origin.y = 0 - rectTorchInit.size.height;
+    
+    CGRect rectFrameBgMidShow = _torchButton.frame;
+    rectFrameBgMidShow.origin.x = 0;
+    rectFrameBgMidShow.origin.y = 0 + BOUNCE_OFFSET;
+    
+    CGRect rectFrameBgMidFinished = _torchButton.frame;
+    rectFrameBgMidFinished.origin.x = 0;
+    rectFrameBgMidFinished.origin.y = 0;
+    
+    CGRect rectFrameBgUpInit = _torchButton.frame;
+    rectFrameBgUpInit.origin.x = 0;
+    rectFrameBgUpInit.origin.y = 0 - rectTorchInit.size.height;
+    
+    CGRect rectFrameBgUpShow = _torchButton.frame;
+    rectFrameBgUpShow.origin.x = 0;
+    rectFrameBgUpShow.origin.y = 0 + BOUNCE_OFFSET;
+    
+    CGRect rectFrameBgUpFinished = _torchButton.frame;
+    rectFrameBgUpFinished.origin.x = 0;
+    rectFrameBgUpFinished.origin.y = 0;
+    
+    CGRect rectFrameBgDownInit = _torchButton.frame;
+    rectFrameBgDownInit.origin.x = 0;
+    rectFrameBgDownInit.origin.y = 0 - rectTorchInit.size.height;
+    
+    CGRect rectFrameBgDownShow = _torchButton.frame;
+    rectFrameBgDownShow.origin.x = 0;
+    rectFrameBgDownShow.origin.y = 0 + BOUNCE_OFFSET;
+    
+    CGRect rectFrameBgDownFinished = _torchButton.frame;
+    rectFrameBgDownFinished.origin.x = 0;
+    rectFrameBgDownFinished.origin.y = 0;
+    
+    void (^initViews)() = ^(){
+        
+    };
+    
+    void (^showViews)() = ^(){
+        
+    };
+    
+    void (^bounceViews)() = ^(){
+        
+    };
+    
+    void (^onFinished)() = ^(){
+        
+    };
+    
+    if (animated)
+    {
+        
+    }
+    else
+    {
+        initViews();
+        showViews();
+        bounceViews();
+        onFinished();
+    }
+}
+
+- (void)hideSubViews:(BOOL)animated
+{
+    void (^hideViews)() = ^(){
+        
+    };
+    
+    void (^onFinished)() = ^(){
+        
+    };
+    
+    if (animated)
+    {
+        
+    }
+    else
+    {
+        hideViews();
+        onFinished();
+    }
 }
 
 #pragma mark <ZXingDelegate>
