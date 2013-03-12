@@ -177,10 +177,10 @@ static CommonAnimationButtonAnimationRecorder* gTorchButtonRecorder = nil;
     rectFrameInit.origin.y = rectView.size.height;
     
     CGRect rectFrameShow = rectFrameInit;
-    rectFrameShow.origin.y = 0 + BOUNCE_OFFSET;
+    rectFrameShow.origin.y = 86 - BOUNCE_OFFSET;
     
-    CGRect rectFrameFinished = _torchButton.frame;
-    rectFrameFinished.origin.y = 0;
+    CGRect rectFrameFinished = rectFrameShow;
+    rectFrameFinished.origin.y += BOUNCE_OFFSET;
     
     CGRect rectFrameBgMidInit = _torchButton.frame;
     rectFrameBgMidInit.origin.x = 0;
