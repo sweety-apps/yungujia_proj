@@ -41,8 +41,6 @@ static CommonAnimationButtonAnimationRecorder* gTorchButtonRecorder = nil;
         self.readers = readers;
         
         self.soundToPlay = [NSURL fileURLWithPath:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"/Resource/Sound/sms-beep-beep.caf"] isDirectory:NO];
-        
-        _resultIsURL = NO;
     }
     return self;
 }
@@ -411,13 +409,64 @@ static CommonAnimationButtonAnimationRecorder* gTorchButtonRecorder = nil;
 
 #pragma mark <ZXingDelegate>
 
-- (void)zxingController:(ZXingWidgetController*)controller didScanResult:(NSString *)result
+- (void)zxingController:(ZXingWidgetController*)controller didScanResult:(NSString *)resultString
 {
-    _resultIsURL = YES;
-    [MessageBoxView showWithYesButtonForTitle:LString(@"Got Code")
-                                      content:result
-                                 withDelegate:self
-                           andTextButtonTexts:LString(@"Copy To Clipboard"),LString(@"Open URL"),LString(@"Cancel"),nil];
+    NSString* check = nil;
+    
+    //Email First
+    if (check == nil || [check length] == 0)
+    {
+        check = [BaseUtilitiesFuncions getFirstEmailSubString:resultString];
+        if (check && [check length] > 0)
+        {
+            _scanResultType = kQRRT_Email;
+        }
+    }
+    
+    //Url
+    if (check == nil || [check length] == 0)
+    {
+        check = [BaseUtilitiesFuncions getFirstUrlSubString:resultString];
+        if (check && [check length] > 0)
+        {
+            _scanResultType = kQRRT_Url;
+        }
+    }
+    
+    //Other
+    if (check == nil || [check length] == 0)
+    {
+        _scanResultType = kQRRT_NormalText;
+    }
+    
+    switch (_scanResultType)
+    {
+        case kQRRT_Url:
+            [MessageBoxView showWithOnlyTextButtonForTitle:LString(@"Got URL")
+                                                   content:resultString
+                                              withDelegate:self
+                                        andTextButtonTexts:LString(@"Open URL"),LString(@"Copy To Clipboard"),LString(@"Cancel"),nil];
+            break;
+        
+        case kQRRT_Email:
+            [MessageBoxView showWithOnlyTextButtonForTitle:LString(@"Got E-Mail")
+                                                   content:resultString
+                                              withDelegate:self
+                                        andTextButtonTexts:LString(@"Send Mail"),LString(@"Copy To Clipboard"),LString(@"Cancel"),nil];
+            break;
+            
+        case kQRRT_NormalText:
+            [MessageBoxView showWithOnlyTextButtonForTitle:LString(@"Got Text")
+                                                   content:resultString
+                                              withDelegate:self
+                                        andTextButtonTexts:LString(@"Copy To Clipboard"),LString(@"Cancel"),nil];
+            break;
+            
+        default:
+            break;
+    }
+    
+    
 }
 
 - (void)zxingControllerDidCancel:(ZXingWidgetController*)controller
@@ -429,39 +478,84 @@ static CommonAnimationButtonAnimationRecorder* gTorchButtonRecorder = nil;
 
 - (void)onYesButtonPressedForMessageBox:(BaseMessageBoxView*)messageBox
 {
-    
+    [messageBox hide];
 }
 
 - (void)onNoButtonPressedForMessageBox:(BaseMessageBoxView*)messageBox
 {
-    
+    [messageBox hide];
 }
 
 - (void)onTextButtonPressedAt:(int)index
                 forMessageBox:(BaseMessageBoxView*)messageBox
 {
-    if (_resultIsURL)
+    NSString* resultString = messageBox.content;
+    NSString* check = nil;
+    switch (_scanResultType)
     {
-        switch (index)
-        {
-            case 0:
-                //
-                break;
-            case 1:
-                //
-                break;
-            case 2:
-                [messageBox hide];
-                break;
-                
-            default:
-                break;
-        }
+        case kQRRT_Url:
+            check = [BaseUtilitiesFuncions getFirstUrlSubString:resultString];
+            break;
+        case kQRRT_Email:
+            check = [BaseUtilitiesFuncions getFirstEmailSubString:resultString];
+            break;
+        case kQRRT_NormalText:
+            check = resultString;
+            break;
+        default:
+            break;
     }
-    else
+    
+    BOOL clipBoardPasted = NO;
+    
+    switch (index)
     {
-        
+        case 0:
+            switch (_scanResultType)
+            {
+                case kQRRT_Url:
+                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:check]];
+                    break;
+                case kQRRT_Email:
+                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",@"mailto://",check]]];
+                    break;
+                case kQRRT_NormalText:
+                    [UIPasteboard generalPasteboard].string = resultString;
+                    clipBoardPasted = YES;
+                    break;
+                default:
+                    break;
+            }
+            break;
+        case 1:
+            
+            switch (_scanResultType)
+            {
+                case kQRRT_Url:
+                case kQRRT_Email:
+                    [UIPasteboard generalPasteboard].string = resultString;
+                    clipBoardPasted = YES;
+                    break;
+                case kQRRT_NormalText:
+                    [messageBox hide];
+                    break;
+                default:
+                    break;
+            }
+            break;
+        case 2:
+            [messageBox hide];
+            break;
+            
+        default:
+            break;
     }
+    
+    if (clipBoardPasted)
+    {
+        [_tipsView showOverWindowTips:LString(@"Copy Succeed!")];
+    }
+    
 }
 
 

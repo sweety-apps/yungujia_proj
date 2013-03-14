@@ -35,7 +35,11 @@
 "Operate photos by slide and tap." = "通过左右滑动和点击来选中相片";
 
 //QR Code Scanner
-"Got Code" = "扫描成功";
-"Copy To Clipboard" = "拷贝倒剪贴板";
+"Copy To Clipboard" = "复制到剪贴板";
 "Open URL" = "打开URL连接";
 "Cancel" = "取消";
+"Send Mail" = "发送邮件";
+"Got URL" = "扫到了URL";
+"Got E-Mail" = "扫到了邮箱地址";
+"Got Text" = "扫到了文字";
+"Copy Succeed!" = "复制成功!";

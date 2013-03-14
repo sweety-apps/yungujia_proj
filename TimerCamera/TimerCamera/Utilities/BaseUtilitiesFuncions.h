@@ -28,4 +28,7 @@
 + (UIImage*)scaleAndCropImage:(UIImage*)img CropSize:(CGSize)size;
 + (NSArray*)getRGBAsFromImage:(UIImage*)image atX:(int)xx andY:(int)yy count:(int)count;
 + (UIColor*)getColorFromImage:(UIImage*)img atPoint:(CGPoint)point;
++ (NSString*)getFirstUrlSubString:(NSString*)stringToTest;
++ (NSString*)getFirstEmailSubString:(NSString*)stringToTest;
+
 @end

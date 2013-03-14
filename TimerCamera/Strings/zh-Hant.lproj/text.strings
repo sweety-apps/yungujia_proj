@@ -35,7 +35,11 @@
 "Operate photos by slide and tap." = "Operate photos by slide and tap.";
 
 //QR Code Scanner
-"Got Code" = "Got Code";
 "Copy To Clipboard" = "Copy To Clipboard";
 "Open URL" = "Open URL";
 "Cancel" = "Cancel";
+"Send Mail" = "Send Mail";
+"Got URL" = "Got URL";
+"Got E-Mail" = "Got E-Mail";
+"Got Text" = "Got Text";
+"Copy Succeed!" = "Copy Succeed!";

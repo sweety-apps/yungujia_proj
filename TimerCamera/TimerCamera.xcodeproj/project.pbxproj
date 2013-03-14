@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE0B5ED116F23AE700AEB833 /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0B5ED016F23AE700AEB833 /* RegexKitLite.m */; };
+		BE0B5ED316F23C0B00AEB833 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BE0B5ED216F23C0B00AEB833 /* libicucore.dylib */; };
 		BE19EBEE15F359B800065448 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE19EBED15F359B800065448 /* UIKit.framework */; };
 		BE19EBF015F359B800065448 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE19EBEF15F359B800065448 /* Foundation.framework */; };
 		BE19EBF215F359B800065448 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE19EBF115F359B800065448 /* CoreGraphics.framework */; };
@@ -114,6 +116,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BE0B5ECF16F23AE700AEB833 /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
+		BE0B5ED016F23AE700AEB833 /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
+		BE0B5ED216F23C0B00AEB833 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		BE19EBE915F359B800065448 /* TimerCamera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimerCamera.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE19EBED15F359B800065448 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BE19EBEF15F359B800065448 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -270,6 +275,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE0B5ED316F23C0B00AEB833 /* libicucore.dylib in Frameworks */,
 				BE2B9F0716EB821800FDD749 /* libZXingWidget.a in Frameworks */,
 				BE2B9F1916ED00CE00FDD749 /* CoreVideo.framework in Frameworks */,
 				BE2B9F1716ED00C100FDD749 /* CoreMedia.framework in Frameworks */,
@@ -291,12 +297,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BE0B5ECE16F23AE700AEB833 /* RegexKitLite */ = {
+			isa = PBXGroup;
+			children = (
+				BE0B5ECF16F23AE700AEB833 /* RegexKitLite.h */,
+				BE0B5ED016F23AE700AEB833 /* RegexKitLite.m */,
+			);
+			path = RegexKitLite;
+			sourceTree = "<group>";
+		};
 		BE19EBDE15F359B700065448 = {
 			isa = PBXGroup;
 			children = (
-				BE2B9F1816ED00CE00FDD749 /* CoreVideo.framework */,
-				BE2B9F1616ED00C100FDD749 /* CoreMedia.framework */,
-				BE2B9F1416ED009F00FDD749 /* libiconv.dylib */,
 				BE2B9D1F16EB81AD00FDD749 /* OtherLibs */,
 				BEEFD52D16973267004B93F8 /* Strings */,
 				BEB8E44E1646D36800DC5800 /* Resource */,
@@ -321,6 +333,10 @@
 		BE19EBEC15F359B800065448 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BE0B5ED216F23C0B00AEB833 /* libicucore.dylib */,
+				BE2B9F1816ED00CE00FDD749 /* CoreVideo.framework */,
+				BE2B9F1616ED00C100FDD749 /* CoreMedia.framework */,
+				BE2B9F1416ED009F00FDD749 /* libiconv.dylib */,
 				BEFB5CDC16BD9EC2000F378B /* ImageIO.framework */,
 				BED2606B16BD80CD0026EEDA /* AssetsLibrary.framework */,
 				BE46388C16B03BBC00227BA9 /* QuartzCore.framework */,
@@ -397,6 +413,7 @@
 		BED25FDA16BD76200026EEDA /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				BE0B5ECE16F23AE700AEB833 /* RegexKitLite */,
 				BEFB5CE216BEB783000F378B /* ImagePicker */,
 				BED2606716BD7CD70026EEDA /* Album */,
 				BED2605A16BD76A40026EEDA /* QREncoder */,
@@ -813,6 +830,7 @@
 				BEB4DBE716D3D22C0054F702 /* MessageBoxView.m in Sources */,
 				BEB4DBEA16D3D48E0054F702 /* BaseMessageBoxView.m in Sources */,
 				BE2B9F0B16EC510400FDD749 /* QRCodeScannerViewController.mm in Sources */,
+				BE0B5ED116F23AE700AEB833 /* RegexKitLite.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

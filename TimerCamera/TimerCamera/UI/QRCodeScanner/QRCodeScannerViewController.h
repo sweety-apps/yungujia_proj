@@ -15,6 +15,13 @@
 
 #define kBGColor()  [UIColor colorWithRed:(140.0/255.0) green:(200.0/255.0) blue:(0.0/255.0) alpha:1.0]
 
+typedef enum eQRCodeResultStringType{
+    kQRRT_NormalText = 0,
+    kQRRT_Url = 1,
+    kQRRT_Email = 2,
+    kQRCodeResultStringTypeCount,
+}QRCodeResultStringType;
+
 @interface QRCodeScannerViewController : ZXingWidgetController <BaseMessageBoxViewDelegate, ZXingDelegate>
 {
     TipsView* _tipsView;
@@ -28,7 +35,7 @@
     UIViewController* _ctrlToReleaseAfterShowed;
     BOOL _shouldShowAfterAppear;
     
-    BOOL _resultIsURL;
+    QRCodeResultStringType _scanResultType;
 }
 
 - (void)showControlsWithAnimationAndReleaseController:(UIViewController*)caller;

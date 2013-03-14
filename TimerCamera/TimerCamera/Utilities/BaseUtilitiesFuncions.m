@@ -8,8 +8,9 @@
 
 #include <sys/time.h>
 #include <unistd.h>
-#import "BaseUtilitiesFuncions.h"
 #import <QuartzCore/QuartzCore.h>
+#import "BaseUtilitiesFuncions.h"
+#import "RegexKitLite.h"
 
 @implementation BaseUtilitiesFuncions
 
@@ -179,6 +180,18 @@
 {
     UIColor* color = [[BaseUtilitiesFuncions getRGBAsFromImage:img atX:point.x andY:point.y count:1] objectAtIndex:0];
     return color;
+}
+
++ (NSString*)getFirstUrlSubString:(NSString*)stringToTest
+{
+    return [stringToTest stringByMatching:
+            @"[a-zA-z]+://[^s]*"];
+}
+
++ (NSString*)getFirstEmailSubString:(NSString*)stringToTest
+{
+    return [stringToTest stringByMatching:
+            @"\\b([a-zA-Z0-9%_.+\\-]+)@([a-zA-Z0-9.\\-]+?\\.[a-zA-Z]{2,6})\\b"];
 }
 
 @end
