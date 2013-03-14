@@ -119,9 +119,11 @@
 
 - (void)removeCurrentControllers
 {
+    UIViewController* controller = nil;
+    
     for (int i = [_currentControllers count] - 1; i >= 0; --i)
     {
-        UIViewController* controller = [_currentControllers objectAtIndex:i];
+        controller = [_currentControllers objectAtIndex:i];
         [controller.view removeFromSuperview];
         ReleaseAndNil(controller);
     }
@@ -170,6 +172,15 @@
     [_currentControllers removeObject:_coverController];
     [_coverController.view removeFromSuperview];
     ReleaseAndNil(_coverController);
+}
+
+- (void)showCameraAndShowSubviews
+{
+    [self showCamera];
+    if (_coverController)
+    {
+        [_coverController setAutoShowSubViews:YES withAnimation:YES];
+    }
 }
 
 - (void)showQRCodeScannerAndReleaseCaller:(UIViewController*)caller

@@ -33,6 +33,7 @@
 
 - (void)showCamera;
 - (void)removeCamera;
+- (void)showCameraAndShowSubviews;
 
 - (void)showQRCodeScannerAndReleaseCaller:(UIViewController*)caller;
 - (void)removeQRCodeScanner;

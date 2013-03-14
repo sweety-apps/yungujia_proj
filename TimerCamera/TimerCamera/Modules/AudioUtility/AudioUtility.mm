@@ -202,7 +202,7 @@ static void OnPlaybackHasFinished(AQPlayer* player, void* context)
     AQPlayerWarper* ret = [_playWarperDict objectForKey:filePath];
     if (ret == nil)
     {
-        ret = [[AQPlayerWarper alloc] initWithFile:filePath];
+        ret = [[[AQPlayerWarper alloc] initWithFile:filePath] autorelease];
         ret.player->finishCallback = OnPlaybackHasFinished;
         ret.player->finishCallbackContext = self;
         [_playWarperDict setObject:ret forKey:filePath];

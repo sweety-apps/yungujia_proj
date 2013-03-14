@@ -37,13 +37,34 @@ static int gAlbumPunchedTriger = 0;
 
 @implementation CameraCoverViewController
 
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        _autoShowSubViews = NO;
+        _autoShowSubViewsWithAnimation = NO;
+    }
+    return self;
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        _autoShowSubViews = NO;
+        _autoShowSubViewsWithAnimation = NO;
     }
     return self;
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    if (_autoShowSubViews)
+    {
+        [self showSubViews:_autoShowSubViewsWithAnimation];
+    }
 }
 
 - (void)viewDidLoad
@@ -81,6 +102,12 @@ static int gAlbumPunchedTriger = 0;
 }
 
 #pragma mark - Animation Views
+
+- (void)setAutoShowSubViews:(BOOL)autoShow withAnimation:(BOOL)animated
+{
+    _autoShowSubViews = autoShow;
+    _autoShowSubViewsWithAnimation = animated;
+}
 
 - (void)showSubViews:(BOOL)animated delayed:(float)seconds
 {
@@ -817,7 +844,8 @@ static int gAlbumPunchedTriger = 0;
 
 - (void)onQRCodePressed:(id)sender
 {
-    [((AppDelegate*)([UIApplication sharedApplication].delegate)).viewController showQRCodeScannerAndReleaseCaller:self];
+    [((AppDelegate*)([UIApplication sharedApplication].delegate)).viewController removeCamera];
+    [((AppDelegate*)([UIApplication sharedApplication].delegate)).viewController showQRCodeScannerAndReleaseCaller:nil];
 }
 
 #pragma mark - AudioUtilityVolumeDetectDelegate

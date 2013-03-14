@@ -128,7 +128,7 @@
         //create new view if no view is available for recycling
         if (cell == nil)
         {
-            cell = [[ImagePickerViewCell alloc] initWithFrame:CGRectZero];
+            cell = [[[ImagePickerViewCell alloc] initWithFrame:CGRectZero] autorelease];
         }
         
         {

@@ -22,10 +22,11 @@
     ShotButton* _backButton;
     UIImageView* _frameImageView;
     UIImageView* _frameBackgroundView;
-    UIView* _frameBackgroundUpFillView;
-    UIView* _frameBackgroundDownFillView;
+    UIImageView* _frameBackgroundUpFillView;
+    UIImageView* _frameBackgroundDownFillView;
     UIView* _bottomGreenView;
     UIViewController* _ctrlToReleaseAfterShowed;
+    BOOL _shouldShowAfterAppear;
     
     BOOL _resultIsURL;
 }

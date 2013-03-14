@@ -6,7 +6,8 @@
 @implementation DataMatrix
 
 - (id)initWith:(int)dimension {
-    if ([super init]) {
+    self = [super init];
+    if (self) {
         self->dim = dimension;
         self->data = (bool**)malloc(sizeof(bool*) * self->dim);
         for (int y=0; y<self->dim; y++) {

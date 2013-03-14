@@ -730,7 +730,7 @@ static int number_of_buttons_in_row = 0;
     }
     
     //set buttons frame
-    int step = number_of_buttons_in_row;
+    int step = 0;
     float btnAll_width = boxSize.width + BUTTON_EXTENDS_WIDTH;
     
     for (int i = 0; i < [_btnArray count]; i += step)

@@ -36,7 +36,7 @@ static CommonAnimationButtonAnimationRecorder* gTorchButtonRecorder = nil;
         [readers addObject:qrcodeReader];
         
         AztecReader *aztecReader = [[[AztecReader alloc] init] autorelease];
-        //[readers addObject:aztecReader];
+        [readers addObject:aztecReader];
         
         self.readers = readers;
         
@@ -58,6 +58,28 @@ static CommonAnimationButtonAnimationRecorder* gTorchButtonRecorder = nil;
     [self createSubViews];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    void (^removeCallerController)() = ^(){
+        if (_ctrlToReleaseAfterShowed)
+        {
+            [((AppDelegate*)([UIApplication sharedApplication].delegate)).viewController removeController:_ctrlToReleaseAfterShowed];
+        }
+        _ctrlToReleaseAfterShowed = nil;
+    };
+    
+    if (_shouldShowAfterAppear)
+    {
+        [self showSubViews:animated finishBlock:removeCallerController];
+    }
+    else
+    {
+        removeCallerController();
+    }
+}
+    
 - (void)viewDidUnload
 {
     [self destroySubViews];
@@ -84,21 +106,15 @@ static CommonAnimationButtonAnimationRecorder* gTorchButtonRecorder = nil;
 {
     //create subviews
     _frameBackgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"/Resource/Picture/qrcode/qr_code_frame_bg"]];
-    [self.view addSubview:_frameBackgroundView];
     
-    UIColor* _frameBgColor = [BaseUtilitiesFuncions getColorFromImage:_frameBackgroundView.image atPoint:CGPointMake(4,4)];
+    _frameBackgroundUpFillView = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"/Resource/Picture/qrcode/qr_code_frame_bg_fill"] stretchableImageWithLeftCapWidth:1 topCapHeight:1]];
     
-    _frameBackgroundUpFillView = [[UIView alloc] initWithFrame:CGRectZero];
-    _frameBackgroundUpFillView.backgroundColor = _frameBgColor;
-    
-    _frameBackgroundDownFillView = [[UIView alloc] initWithFrame:CGRectZero];
-    _frameBackgroundDownFillView.backgroundColor = _frameBgColor;
+    _frameBackgroundDownFillView = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"/Resource/Picture/qrcode/qr_code_frame_bg_fill"] stretchableImageWithLeftCapWidth:1 topCapHeight:1]];
     
     _bottomGreenView = [[UIView alloc] initWithFrame:CGRectZero];
     _bottomGreenView.backgroundColor = kBGColor();
     
     _frameImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"/Resource/Picture/qrcode/qr_code_frame"]];
-    [self.view addSubview:_frameImageView];
     
     _backButton = [[ShotButton
                     buttonWithPressedImageSizeforNormalImage1:[UIImage imageNamed:@"/Resource/Picture/main/shot_btn_empty_normal1"]
@@ -107,9 +123,8 @@ static CommonAnimationButtonAnimationRecorder* gTorchButtonRecorder = nil;
                     forEnabledImage1:nil
                     forEnabledImage2:nil
                     forIcon:nil] retain];
-    [_backButton setIcon:[UIImage imageNamed:@"/Resource/Picture/main/shot_btn_icon_camera"]];
+    [_backButton setIcon:[UIImage imageNamed:@"/Resource/Picture/main/shot_btn_icon_back"]];
     [_backButton setLabelString:@""];
-    [self.view addSubview:_backButton];
     
     _torchButton = [[CommonAnimationButton
                      buttonWithPressedImageSizeforNormalImage1:[UIImage imageNamed:@"/Resource/Picture/main/torch_disable1"]
@@ -117,7 +132,6 @@ static CommonAnimationButtonAnimationRecorder* gTorchButtonRecorder = nil;
                      forPressedImage:[UIImage imageNamed:@"/Resource/Picture/main/torch_pressed"]
                      forEnabledImage1:[UIImage imageNamed:@"/Resource/Picture/main/torch_enable1"]
                      forEnabledImage2:[UIImage imageNamed:@"/Resource/Picture/main/torch_enable2"]] retain];
-    [self.view addSubview:_torchButton];
     
     _tipsView = [[TipsView tipsViewWithPushHand:[UIImage imageNamed:@"/Resource/Picture/main/tips_cat_hand"]
                                 backGroundImage:[[UIImage imageNamed:@"/Resource/Picture/main/tips_fish_bg_strtechable"] stretchableImageWithLeftCapWidth:50 topCapHeight:28] ]
@@ -138,6 +152,9 @@ static CommonAnimationButtonAnimationRecorder* gTorchButtonRecorder = nil;
     
     //hide subViews
     [self hideSubViews:NO finishBlock:nil];
+    
+    //setOverView hidden
+    self.overlayView.hidden = YES;
 }
 
 - (void)destroySubViews
@@ -156,6 +173,24 @@ static CommonAnimationButtonAnimationRecorder* gTorchButtonRecorder = nil;
 
 - (void)showSubViews:(BOOL)animated finishBlock:(void (^)(void))callShowed
 {
+    //add subviews
+    [_frameBackgroundUpFillView removeFromSuperview];
+    [_frameBackgroundDownFillView removeFromSuperview];
+    [_bottomGreenView removeFromSuperview];
+    [_frameBackgroundView removeFromSuperview];
+    [_frameImageView removeFromSuperview];
+    [_torchButton removeFromSuperview];
+    [_backButton removeFromSuperview];
+    
+    [self.view addSubview:_frameBackgroundUpFillView];
+    [self.view addSubview:_frameBackgroundDownFillView];
+    [self.view addSubview:_frameBackgroundView];
+    [self.view addSubview:_bottomGreenView];
+    [self.view addSubview:_frameImageView];
+    [self.view addSubview:_torchButton];
+    [self.view addSubview:_backButton];
+    
+    //really showing
     CGRect rectView = self.view.frame;
     
     CGRect rectTorchInit = _torchButton.frame;
@@ -175,7 +210,7 @@ static CommonAnimationButtonAnimationRecorder* gTorchButtonRecorder = nil;
     rectBackInit.origin.y = rectView.size.height;
     
     CGRect rectBackShow = rectBackInit;
-    rectBackShow.origin.y -= rectTorchInit.size.height + BOUNCE_OFFSET;
+    rectBackShow.origin.y -= rectBackInit.size.height + BOUNCE_OFFSET;
     
     CGRect rectBackFinished = rectBackShow;
     rectBackFinished.origin.y += BOUNCE_OFFSET;
@@ -201,12 +236,12 @@ static CommonAnimationButtonAnimationRecorder* gTorchButtonRecorder = nil;
     rectFrameBgUpInit.size.height = rectFrameBgMidInit.origin.y;
     
     CGRect rectFrameBgUpShow = CGRectZero;
-    rectFrameBgUpShow.origin.x = rectFrameBgMidShow.size.width;
-    rectFrameBgUpShow.origin.y = rectFrameBgMidShow.origin.y;
+    rectFrameBgUpShow.size.width = rectFrameBgMidShow.size.width;
+    rectFrameBgUpShow.size.height = rectFrameBgMidShow.origin.y;
     
     CGRect rectFrameBgUpFinished = CGRectZero;
-    rectFrameBgUpFinished.origin.x = rectFrameBgMidFinished.size.width;
-    rectFrameBgUpFinished.origin.y = rectFrameBgMidFinished.origin.y;
+    rectFrameBgUpFinished.size.width = rectFrameBgMidFinished.size.width;
+    rectFrameBgUpFinished.size.height = rectFrameBgMidFinished.origin.y;
     
     CGRect rectFrameBgDownInit = CGRectZero;
     rectFrameBgDownInit.origin.x = rectFrameBgMidInit.origin.x;
@@ -455,15 +490,15 @@ static CommonAnimationButtonAnimationRecorder* gTorchButtonRecorder = nil;
 
 - (void)showControlsWithAnimationAndReleaseController:(UIViewController*)caller
 {
-    [self showSubViews:YES finishBlock:^(){
-        [((AppDelegate*)([UIApplication sharedApplication].delegate)).viewController removeController:caller];
-    }];
+    _ctrlToReleaseAfterShowed = caller;
+    _shouldShowAfterAppear = YES;
 }
 
 - (void)hideControlsWithAnimationAndCallCamera
 {
     [self hideSubViews:YES finishBlock:^(){
-        [((AppDelegate*)([UIApplication sharedApplication].delegate)).viewController showCamera];
+        [((AppDelegate*)([UIApplication sharedApplication].delegate)).viewController removeQRCodeScanner];
+        [((AppDelegate*)([UIApplication sharedApplication].delegate)).viewController showCameraAndShowSubviews];
     }];
 }
 

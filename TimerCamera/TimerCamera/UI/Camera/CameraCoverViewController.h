@@ -46,9 +46,12 @@
     CGRect _albumRawRect;
     
     BOOL _isSlidingAlbum;
+    
+    BOOL _autoShowSubViews;
+    BOOL _autoShowSubViewsWithAnimation;
 }
 
-
+- (void)setAutoShowSubViews:(BOOL)autoShow withAnimation:(BOOL)animated;
 
 - (void)showSubViews:(BOOL)animated delayed:(float)seconds;
 - (void)showSubViews:(BOOL)animated;
