@@ -300,6 +300,11 @@ static int gAlbumPunchedTriger = 0;
 
 - (void)hideSubViews:(BOOL)animated
 {
+    [self hideSubViews:animated finishBlock:nil];
+}
+
+- (void)hideSubViews:(BOOL)animated finishBlock:(void (^)(void))callHided
+{
     void (^doMoveOutSubViews)(void) = ^(void){
         CGRect rect = CGRectZero;
         
@@ -388,6 +393,10 @@ static int gAlbumPunchedTriger = 0;
         _albumButton.hidden = YES;
         _QRCodeButton.hidden = YES;
         _configButton.enableRotation = NO;
+        if (callHided)
+        {
+            callHided();
+        }
     };
     
     if (animated)
@@ -844,8 +853,10 @@ static int gAlbumPunchedTriger = 0;
 
 - (void)onQRCodePressed:(id)sender
 {
-    [((AppDelegate*)([UIApplication sharedApplication].delegate)).viewController removeCamera];
-    [((AppDelegate*)([UIApplication sharedApplication].delegate)).viewController showQRCodeScannerAndReleaseCaller:nil];
+    [self hideSubViews:YES finishBlock:^(){
+        [((AppDelegate*)([UIApplication sharedApplication].delegate)).viewController removeCamera];
+        [((AppDelegate*)([UIApplication sharedApplication].delegate)).viewController showQRCodeScannerAndReleaseCaller:nil];
+    }];
 }
 
 #pragma mark - AudioUtilityVolumeDetectDelegate

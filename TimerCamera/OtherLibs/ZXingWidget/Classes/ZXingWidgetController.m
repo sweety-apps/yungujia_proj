@@ -38,9 +38,6 @@
 @property BOOL oneDMode;
 @property BOOL isStatusBarHidden;
 
-- (void)initCapture;
-- (void)stopCapture;
-
 @end
 
 @implementation ZXingWidgetController
@@ -53,7 +50,7 @@
 @synthesize overlayView;
 @synthesize oneDMode, showCancel, showLicense, isStatusBarHidden;
 @synthesize readers;
-
+@synthesize decodingSwitch = decoding;
 
 - (id)initWithDelegate:(id<ZXingDelegate>)scanDelegate showCancel:(BOOL)shouldShowCancel OneDMode:(BOOL)shouldUseoOneDMode {
   

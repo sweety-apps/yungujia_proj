@@ -25,6 +25,8 @@
     QRCodeScannerViewController* _qrcodeScannerController;
     
     NSMutableArray* _currentControllers;
+    
+    BOOL _isEnterBackGround;
 }
 
 //loading Animation
@@ -50,5 +52,14 @@
 - (void)removeSetting;
 
 - (void)removeController:(UIViewController*)controller;
+
+#pragma mark App Life-Cycle
+
+- (void)onApplicationDidFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
+- (void)onApplicationWillResignActive;
+- (void)onApplicationDidEnterBackground;
+- (void)onApplicationWillEnterForeground;
+- (void)onApplicationDidBecomeActive;
+- (void)onApplicationWillTerminate;
 
 @end

@@ -10,6 +10,7 @@
 #import "QRCodeReader.h"
 #import "AztecReader.h"
 #import "BaseUtilitiesFuncions.h"
+#import "AudioUtility.h"
 #import "AppDelegate.h"
 
 static CommonAnimationButtonAnimationRecorder* gBackButtonRecorder = nil;
@@ -40,7 +41,7 @@ static CommonAnimationButtonAnimationRecorder* gTorchButtonRecorder = nil;
         
         self.readers = readers;
         
-        self.soundToPlay = [NSURL fileURLWithPath:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"/Resource/Sound/sms-beep-beep.caf"] isDirectory:NO];
+        self.soundToPlay = nil;
     }
     return self;
 }
@@ -70,7 +71,7 @@ static CommonAnimationButtonAnimationRecorder* gTorchButtonRecorder = nil;
     
     if (_shouldShowAfterAppear)
     {
-        [self showSubViews:animated finishBlock:removeCallerController];
+        [self showSubViews:animated beginBlock:removeCallerController finishBlock:nil];
     }
     else
     {
@@ -169,7 +170,7 @@ static CommonAnimationButtonAnimationRecorder* gTorchButtonRecorder = nil;
 
 #define BOUNCE_OFFSET (3)
 
-- (void)showSubViews:(BOOL)animated finishBlock:(void (^)(void))callShowed
+- (void)showSubViews:(BOOL)animated beginBlock:(void (^)(void))callStart finishBlock:(void (^)(void))callShowed
 {
     //add subviews
     [_frameBackgroundUpFillView removeFromSuperview];
@@ -413,6 +414,12 @@ static CommonAnimationButtonAnimationRecorder* gTorchButtonRecorder = nil;
 {
     NSString* check = nil;
     
+    {
+        //notify sound
+        NSString* filePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"/Resource/Sound/beep-beep.caf"];
+        [[AudioUtility sharedInstance] playFile:filePath withDelegate:nil];
+    }
+    
     //Email First
     if (check == nil || [check length] == 0)
     {
@@ -439,6 +446,35 @@ static CommonAnimationButtonAnimationRecorder* gTorchButtonRecorder = nil;
         _scanResultType = kQRRT_NormalText;
     }
     
+    
+    switch (_scanResultType)
+    {
+        case kQRRT_Url:
+            [MessageBoxView showWithNoButtonForTitle:LString(@"Got URL")
+                                             content:resultString
+                                        withDelegate:self
+                                  andTextButtonTexts:LString(@"Open URL"),LString(@"Copy To Clipboard"),nil];
+            break;
+            
+        case kQRRT_Email:
+            [MessageBoxView showWithNoButtonForTitle:LString(@"Got E-Mail")
+                                             content:resultString
+                                        withDelegate:self
+                                  andTextButtonTexts:LString(@"Send Mail"),LString(@"Copy To Clipboard"),nil];
+            break;
+            
+        case kQRRT_NormalText:
+            [MessageBoxView showWithNoButtonForTitle:LString(@"Got Text")
+                                             content:resultString
+                                        withDelegate:self
+                                  andTextButtonTexts:LString(@"Copy To Clipboard"),nil];
+            break;
+            
+        default:
+            break;
+    }
+    
+    /*
     switch (_scanResultType)
     {
         case kQRRT_Url:
@@ -465,8 +501,7 @@ static CommonAnimationButtonAnimationRecorder* gTorchButtonRecorder = nil;
         default:
             break;
     }
-    
-    
+    */
 }
 
 - (void)zxingControllerDidCancel:(ZXingWidgetController*)controller
@@ -479,11 +514,13 @@ static CommonAnimationButtonAnimationRecorder* gTorchButtonRecorder = nil;
 - (void)onYesButtonPressedForMessageBox:(BaseMessageBoxView*)messageBox
 {
     [messageBox hide];
+    self.decodingSwitch = YES;
 }
 
 - (void)onNoButtonPressedForMessageBox:(BaseMessageBoxView*)messageBox
 {
     [messageBox hide];
+    self.decodingSwitch = YES;
 }
 
 - (void)onTextButtonPressedAt:(int)index
@@ -538,6 +575,7 @@ static CommonAnimationButtonAnimationRecorder* gTorchButtonRecorder = nil;
                     break;
                 case kQRRT_NormalText:
                     [messageBox hide];
+                    self.decodingSwitch = YES;
                     break;
                 default:
                     break;
@@ -545,6 +583,7 @@ static CommonAnimationButtonAnimationRecorder* gTorchButtonRecorder = nil;
             break;
         case 2:
             [messageBox hide];
+            self.decodingSwitch = YES;
             break;
             
         default:
@@ -591,6 +630,7 @@ static CommonAnimationButtonAnimationRecorder* gTorchButtonRecorder = nil;
 - (void)hideControlsWithAnimationAndCallCamera
 {
     [self hideSubViews:YES finishBlock:^(){
+        [self stopCapture];
         [((AppDelegate*)([UIApplication sharedApplication].delegate)).viewController removeQRCodeScanner];
         [((AppDelegate*)([UIApplication sharedApplication].delegate)).viewController showCameraAndShowSubviews];
     }];
