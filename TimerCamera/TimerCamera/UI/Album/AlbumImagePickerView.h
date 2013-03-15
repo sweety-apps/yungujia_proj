@@ -20,6 +20,8 @@
     UILabel* _noImageNotifyLbl;
 }
 
+@property (nonatomic,readonly,assign) CommonAnimationButton* cameraBtn;
+
 -       (id)initWithFrame:(CGRect)frame
                 andTarget:(id<IImagePickerTarget>)target
               andDelegate:(id<ImagePickerViewDelegate>)pickerDelegate

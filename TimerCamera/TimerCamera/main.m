@@ -10,18 +10,30 @@
 
 #import "AppDelegate.h"
 
+#if DEBUG
+#define ENABLE_PRINT_STACK 1
+#endif
+
 int main(int argc, char *argv[])
 {
-    //@try {
-        @autoreleasepool {
+    @autoreleasepool {
+#if ENABLE_PRINT_STACK
+        @try {
+#endif
             return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
+#if ENABLE_PRINT_STACK            
         }
-    //}
-    //@catch (NSException *exception) {
-        //NSLog(@"%@",exception.description);
-        //NSLog(@"%@",[exception.callStackSymbols description]);
-    //}
-    //@finally {
+        @catch (NSException *exception) {
+            NSLog(@"%@",exception.description);
+            NSLog(@"%@",[exception.callStackSymbols description]);
+        }
+        @finally {
+            
+        }
+#endif
+    }
+    
+    
         
-    //}
+    
 }

@@ -602,6 +602,7 @@ static CommonAnimationButtonAnimationRecorder* gTorchButtonRecorder = nil;
 
 - (void)onPressedTorch:(id)sender
 {
+    //[captureSession stopRunning];
     if ([self torchIsOn])
     {
         [self setTorch:NO];
@@ -612,6 +613,7 @@ static CommonAnimationButtonAnimationRecorder* gTorchButtonRecorder = nil;
         [self setTorch:YES];
         _torchButton.buttonEnabled = YES;
     }
+    //[captureSession startRunning];
 }
 
 - (void)onPressedBack:(id)sender

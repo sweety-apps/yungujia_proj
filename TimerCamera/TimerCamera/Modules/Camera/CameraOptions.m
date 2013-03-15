@@ -53,6 +53,8 @@ static CameraOptions* gSI = nil;
 
 - (void)dealloc
 {
+    [self removeAllObservers];
+    [self.imagePicker.view removeFromSuperview];
     self.imagePicker = nil;
     [super dealloc];
 }
@@ -67,6 +69,14 @@ static CameraOptions* gSI = nil;
         [gSI restoreState];
     }
     return gSI;
+}
+
++(void)resetSharedInstance
+{
+    if (gSI)
+    {
+        ReleaseAndNil(gSI);
+    }
 }
 
 -(void)restoreState
@@ -251,6 +261,11 @@ static CameraOptions* gSI = nil;
 {
     AVCaptureDevice* d = [self currentDevice];
     
+    if (_lastDeviceObserverForFocusMode)
+    {
+        [_lastDeviceObserverForFocusMode removeObserver:self forKeyPath:@"focusMode"];
+    }
+    _lastDeviceObserverForFocusMode = d;
     [d addObserver:self forKeyPath:@"focusMode" options:(NSKeyValueObservingOptionNew |
                                                          NSKeyValueObservingOptionOld) context:self];
     
@@ -276,6 +291,11 @@ static CameraOptions* gSI = nil;
 {
     AVCaptureDevice* d = [self currentDevice];
     
+    if (_lastDeviceObserverForExpoureMode)
+    {
+        [_lastDeviceObserverForExpoureMode removeObserver:self forKeyPath:@"exposureMode"];
+    }
+    _lastDeviceObserverForExpoureMode = d;
     [d addObserver:self forKeyPath:@"exposureMode" options:(NSKeyValueObservingOptionNew |
                                                             NSKeyValueObservingOptionOld) context:self];
     
@@ -373,6 +393,20 @@ static CameraOptions* gSI = nil;
 }
 
 #pragma mark Private Methods
+
+- (void)removeAllObservers
+{
+    if (_lastDeviceObserverForFocusMode)
+    {
+        [_lastDeviceObserverForFocusMode removeObserver:self forKeyPath:@"focusMode"];
+        _lastDeviceObserverForFocusMode = nil;
+    }
+    if (_lastDeviceObserverForExpoureMode)
+    {
+        [_lastDeviceObserverForExpoureMode removeObserver:self forKeyPath:@"exposureMode"];
+        _lastDeviceObserverForExpoureMode = nil;
+    }
+}
 
 - (void)setExporePointWithoutLock:(CGPoint)exporePoint device:(AVCaptureDevice*)d
 {

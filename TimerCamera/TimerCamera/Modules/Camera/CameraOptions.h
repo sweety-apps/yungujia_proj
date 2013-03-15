@@ -27,9 +27,13 @@
     
     BOOL _isFlashAndLightAvailible;
     BOOL _enableHDR;
+    
+    AVCaptureDevice* _lastDeviceObserverForExpoureMode;
+    AVCaptureDevice* _lastDeviceObserverForFocusMode;
 }
 
 +(CameraOptions*)sharedInstance;
++(void)resetSharedInstance;
 
 -(void)restoreState;
 

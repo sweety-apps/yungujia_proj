@@ -22,6 +22,8 @@
 
 @implementation AlbumImagePickerView
 
+@synthesize cameraBtn = _cameraBtn;
+
 #pragma mark life-cycle
 
 - (id)initWithFrame:(CGRect)frame

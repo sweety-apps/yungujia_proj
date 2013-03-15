@@ -56,6 +56,7 @@ static BOOL gIsFirstLoading = YES;
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    //[self showQRCodeScannerAndReleaseCaller:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -81,15 +82,17 @@ static BOOL gIsFirstLoading = YES;
     _laiv = [[LoadingAnimateImageView viewWithDelegate:self image:[UIImage imageNamed:@"/Resource/Picture/camera_open"] forTimeInterval:0.8 preLoadImage:[UIImage imageNamed:@"Default"] forPreloadAnimateInterval:0.2] retain];
     if (_laiv)
     {
+        UIView* viewToInsertAbove = nil;
         NSArray* subViews = self.view.subviews;
         if (subViews && [subViews indexOfObject:_coverController.view] != NSNotFound)
         {
-            [self.view insertSubview:_laiv aboveSubview:_coverController.view];
+            viewToInsertAbove = _coverController.view;
+            
         }
-        else
+        
+        if (viewToInsertAbove)
         {
-            [self.view addSubview:_laiv];
-            [self.view bringSubviewToFront:_laiv];
+            [self.view insertSubview:_laiv aboveSubview:viewToInsertAbove];
         }
     }
     
@@ -108,15 +111,18 @@ static BOOL gIsFirstLoading = YES;
 {
     if (_laiv)
     {
+        UIView* viewToInsertAbove = nil;
         NSArray* subViews = self.view.subviews;
         if (subViews && [subViews indexOfObject:_coverController.view] != NSNotFound)
         {
-            [self.view insertSubview:_laiv aboveSubview:_coverController.view];
+            viewToInsertAbove = _coverController.view;
         }
-        else
+        
+        if (viewToInsertAbove)
         {
-            [self.view bringSubviewToFront:_laiv];
+            [self.view insertSubview:_laiv aboveSubview:viewToInsertAbove];
         }
+        
         [_laiv startPreloadingAnimation];
         [_laiv startLoadingAnimation];
     }
@@ -194,6 +200,7 @@ static BOOL gIsFirstLoading = YES;
     [_currentControllers removeObject:_coverController];
     [_coverController.view removeFromSuperview];
     ReleaseAndNil(_coverController);
+    [CameraOptions resetSharedInstance];
 }
 
 - (void)showCameraAndShowSubviews
@@ -356,10 +363,6 @@ static BOOL gIsFirstLoading = YES;
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-    if (_qrcodeScannerController)
-    {
-        [_qrcodeScannerController stopCapture];
-    }
 }
 
 - (void)onApplicationDidEnterBackground
@@ -382,10 +385,6 @@ static BOOL gIsFirstLoading = YES;
 - (void)onApplicationDidBecomeActive
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    if (_qrcodeScannerController)
-    {
-        [_qrcodeScannerController initCapture];
-    }
     if (_isEnterBackGround)
     {
         [self conditionalShowLoadingAnimation];

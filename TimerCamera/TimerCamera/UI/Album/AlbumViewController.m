@@ -420,6 +420,9 @@ static AlbumSwipeHandler* gSwipeHandler = nil;
     
     _assetPicker.hidden = YES;
     
+    //disable camera button first
+    _assetPicker.cameraBtn.button.hidden = YES;
+    
     _tipsView = [[TipsView tipsViewWithPushHand:[UIImage imageNamed:@"/Resource/Picture/main/tips_cat_hand"]
                                 backGroundImage:[[UIImage imageNamed:@"/Resource/Picture/main/tips_fish_bg_strtechable"] stretchableImageWithLeftCapWidth:50 topCapHeight:28] ]
                  retain];
@@ -677,6 +680,7 @@ static AlbumSwipeHandler* gSwipeHandler = nil;
 
 - (void)showAlbumWithAnimationAndReleaseCaller:(UIViewController*)caller
 {
+    _callerController = caller;
     [self showCover:YES finishedBlock:^(){
         if (_waitForPunchAnimation)
         {
@@ -684,11 +688,12 @@ static AlbumSwipeHandler* gSwipeHandler = nil;
             _waitForPunchAnimation = NO;
         }
     } showedBlock:nil];
-    _callerController = caller;
+    
 }
 
 - (void)showAlbumWithoutAnimationAndReleaseCaller:(UIViewController*)caller
 {
+    _callerController = caller;
     [self showCover:NO finishedBlock:^(){
         if (_waitForPunchAnimation)
         {
@@ -696,7 +701,6 @@ static AlbumSwipeHandler* gSwipeHandler = nil;
             _waitForPunchAnimation = NO;
         }
     } showedBlock:nil];
-    _callerController = caller;
 }
 
 - (void)hideAlbumWithAnimationAndDoBlock:(void (^)(void))block
@@ -799,6 +803,9 @@ static AlbumSwipeHandler* gSwipeHandler = nil;
         {
             [((AppDelegate*)([UIApplication sharedApplication].delegate)).viewController removeController:_callerController];
             _callerController = nil;
+            
+            //now we can sefely enable camera button
+            _assetPicker.cameraBtn.button.hidden = NO;
         }
     };
     
@@ -820,6 +827,9 @@ static AlbumSwipeHandler* gSwipeHandler = nil;
         {
             [((AppDelegate*)([UIApplication sharedApplication].delegate)).viewController removeController:_callerController];
             _callerController = nil;
+            
+            //now we can sefely enable camera button
+            _assetPicker.cameraBtn.button.hidden = NO;
         }
         
         if (!gTipsHasShown && [_target getImageCount] > 0)

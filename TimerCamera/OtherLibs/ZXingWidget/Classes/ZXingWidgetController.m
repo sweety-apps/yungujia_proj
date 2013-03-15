@@ -524,13 +524,63 @@ dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 12000000000), dispatch_get_main_
 
 #pragma mark - Torch
 
+#if HAS_AVFF
+- (AVCaptureDevice*)configurableDevice
+{
+    AVCaptureDevice* d = nil;
+    NSArray* allDevices = [AVCaptureDevice devices];
+    for (AVCaptureDevice* currentDevice in allDevices) {
+        if (currentDevice.position == AVCaptureDevicePositionBack)
+        {
+            d = currentDevice;
+        }
+    }
+    
+    return d;
+}
+#endif
+
 - (void)setTorch:(BOOL)status {
 #if HAS_AVFF
   Class captureDeviceClass = NSClassFromString(@"AVCaptureDevice");
   if (captureDeviceClass != nil) {
+      
+#if 0
+      //AVCaptureDevice *device = [self configurableDevice];
+      AVCaptureDevice *device = [captureDeviceClass defaultDeviceWithMediaType:AVMediaTypeVideo];
+      
+      AVCaptureInput* input = [[captureSession.inputs objectAtIndex:0] retain];
+      AVCaptureVideoDataOutput* output = [(AVCaptureVideoDataOutput*)[captureSession.outputs objectAtIndex:0] retain];
+      
+      [captureSession removeInput:input];
+      [captureSession removeOutput:output];
+      
+      AVCaptureSession *session = [[[AVCaptureSession alloc] init] autorelease];
+      
+      
+      NSString* preset = 0;
+      if (NSClassFromString(@"NSOrderedSet") && // Proxy for "is this iOS 5" ...
+          [UIScreen mainScreen].scale > 1 &&
+          isIPad() &&
+          [device
+           supportsAVCaptureSessionPreset:AVCaptureSessionPresetiFrame960x540]) {
+              // NSLog(@"960");
+              preset = AVCaptureSessionPresetiFrame960x540;
+          }
+      if (!preset) {
+          // NSLog(@"MED");
+          preset = AVCaptureSessionPresetMedium;
+      }
+      session.sessionPreset = preset;
+      
+      [session addInput:input];
+      [session addOutput:output];
+      
+      [input release];
+      [output release];
     
-    AVCaptureDevice *device = [captureDeviceClass defaultDeviceWithMediaType:AVMediaTypeVideo];
-    
+      
+    [session beginConfiguration];
     [device lockForConfiguration:nil];
     if ( [device hasTorch] ) {
       if ( status ) {
@@ -540,6 +590,32 @@ dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 12000000000), dispatch_get_main_
       }
     }
     [device unlockForConfiguration];
+    [session commitConfiguration];
+      
+    [session startRunning];
+      
+      
+      prevLayer.session = session;
+      self.captureSession = session;
+      
+      
+#else
+      //AVCaptureDevice *device = [self configurableDevice];
+      AVCaptureDevice *device = [captureDeviceClass defaultDeviceWithMediaType:AVMediaTypeVideo];
+      [captureSession beginConfiguration];
+      [device lockForConfiguration:nil];
+      if ( [device hasTorch] ) {
+          if ( status ) {
+              [device setTorchMode:AVCaptureTorchModeOn];
+          } else {
+              [device setTorchMode:AVCaptureTorchModeOff];
+          }
+      }
+      [device unlockForConfiguration];
+      [captureSession commitConfiguration];
+      
+      //[captureSession startRunning];
+#endif
     
   }
 #endif
@@ -550,12 +626,18 @@ dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 12000000000), dispatch_get_main_
   Class captureDeviceClass = NSClassFromString(@"AVCaptureDevice");
   if (captureDeviceClass != nil) {
     
+    //AVCaptureDevice *device = [self configurableDevice];
     AVCaptureDevice *device = [captureDeviceClass defaultDeviceWithMediaType:AVMediaTypeVideo];
     
+      BOOL ret = NO;
+      
+    [device lockForConfiguration:nil];
     if ( [device hasTorch] ) {
-      return [device torchMode] == AVCaptureTorchModeOn;
+      ret = [device torchMode] == AVCaptureTorchModeOn;
     }
     [device unlockForConfiguration];
+      
+      return ret;
   }
 #endif
   return NO;
