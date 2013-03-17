@@ -366,7 +366,7 @@ static CommonAnimationButtonAnimationRecorder* gTorchButtonRecorder = nil;
     
     void (^onRemoveQRCodeAnimation)() = ^(){
         _torchButton.button.hidden = NO;
-        _backButton.hidden = NO;
+        _backButton.button.hidden = NO;
         [qrcodeAnimationBgView removeFromSuperview];
         [qrcodeAnimationCoverView removeFromSuperview];
         [qrcodeAnimationView removeFromSuperview];
@@ -476,7 +476,7 @@ static CommonAnimationButtonAnimationRecorder* gTorchButtonRecorder = nil;
         _frameBackgroundUpFillView.hidden = YES;
         _frameBackgroundDownFillView.hidden = YES;
         _torchButton.button.hidden = YES;
-        _backButton.hidden = YES;
+        _backButton.button.hidden = YES;
         
         if (preLoadingImage)
         {
