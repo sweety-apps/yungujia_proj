@@ -401,7 +401,7 @@ static int gAlbumPunchedTriger = 0;
     
     if (animated)
     {
-        [UIView animateWithDuration:0.7 animations:doMoveOutSubViews completion:doHideSubViews];
+        [UIView animateWithDuration:0.3 animations:doMoveOutSubViews completion:doHideSubViews];
     }
     else
     {
@@ -858,6 +858,7 @@ static int gAlbumPunchedTriger = 0;
         [((AppDelegate*)([UIApplication sharedApplication].delegate)).viewController showQRCodeScannerAndReleaseCaller:nil];
     }];
 }
+
 
 #pragma mark - AudioUtilityVolumeDetectDelegate
 

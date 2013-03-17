@@ -8,6 +8,32 @@
 
 #import "CameraOptions.h"
 
+#pragma mark - UIImagePickerController Debugger
+
+@interface DebugImagePickerController : UIImagePickerController
+
+@end
+
+@implementation DebugImagePickerController
+
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        //
+    }
+    return self;
+}
+
+- (void)dealloc
+{
+    [super dealloc];
+}
+
+@end
+
+#pragma mark - CameraOptions
+
 #define ConfigurableDevicePosition AVCaptureDevicePositionBack//AVCaptureDevicePositionFront
 
 static CameraOptions* gSI = nil;
@@ -36,7 +62,7 @@ static CameraOptions* gSI = nil;
         if ([UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceRear]
             || [UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceFront])
         {
-            UIImagePickerController *ipc = [[[UIImagePickerController alloc] init] autorelease];
+            UIImagePickerController *ipc = [[[DebugImagePickerController alloc] init] autorelease];
             ipc.sourceType = UIImagePickerControllerSourceTypeCamera;
             ipc.cameraCaptureMode = UIImagePickerControllerCameraCaptureModePhoto;
             ipc.showsCameraControls = NO;

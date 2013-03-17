@@ -139,6 +139,17 @@ static NSString* pressedStateTable[kCountOfButtonTripleStates] = {@"pressed",@"p
     [self setCurrentState:stayStateTable[_currentButtonState]];
 }
 
+- (void)reactiveAlphaAnimations
+{
+    for (int i = kNormalButtonState; i < kCountOfButtonTripleStates; ++i)
+    {
+        if (_stayViewTable[i])
+        {
+            [_stayViewTable[i] reactiveAlphaAnimation];
+        }
+    }
+}
+
 #pragma mark property re-defines
 
 - (void)setCurrentButtonState:(eButtonTripleState)currentButtonState

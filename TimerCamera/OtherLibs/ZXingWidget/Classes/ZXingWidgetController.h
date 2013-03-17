@@ -43,6 +43,7 @@
   id<ZXingDelegate> delegate;
   BOOL wasCancelled;
   BOOL oneDMode;
+                                                        UIView* prevLayerContainerView;
 #if HAS_AVFF
   AVCaptureSession *captureSession;
   AVCaptureVideoPreviewLayer *prevLayer;

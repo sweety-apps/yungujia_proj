@@ -67,13 +67,15 @@
     self.wantsFullScreenLayout = YES;
     beepSound = -1;
     decoding = NO;
-    OverlayView *theOverLayView = [[OverlayView alloc] initWithFrame:[UIScreen mainScreen].bounds 
+      
+      OverlayView *theOverLayView = [[OverlayView alloc] initWithFrame:[UIScreen mainScreen].bounds
                                                        cancelEnabled:showCancel 
                                                             oneDMode:oneDMode
                                                          showLicense:shouldShowLicense];
     [theOverLayView setDelegate:self];
     self.overlayView = theOverLayView;
     [theOverLayView release];
+      
   }
   
   return self;
@@ -95,8 +97,9 @@
 
 - (void)cancelled {
   [self stopCapture];
-  if (!self.isStatusBarHidden) {
-    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+  if (!self.isStatusBarHidden)
+  {
+    //[[UIApplication sharedApplication] setStatusBarHidden:NO];
   }
 
   wasCancelled = YES;
@@ -122,6 +125,19 @@
   return NO;
 }
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    [self.view addSubview:overlayView];
+    prevLayerContainerView = [[[UIView alloc] initWithFrame:self.view.bounds] autorelease];
+    [self.view addSubview:prevLayerContainerView];
+}
+
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+}
+
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
   self.wantsFullScreenLayout = YES;
@@ -137,12 +153,14 @@
   [super viewDidAppear:animated];
   self.isStatusBarHidden = [[UIApplication sharedApplication] isStatusBarHidden];
   if (!isStatusBarHidden)
-    [[UIApplication sharedApplication] setStatusBarHidden:YES];
+  {
+    //[[UIApplication sharedApplication] setStatusBarHidden:YES];
+  }
 
   decoding = YES;
+    
 
-  [self initCapture];
-  [self.view addSubview:overlayView];
+  //[self initCapture];
   
   [overlayView setPoints:nil];
   wasCancelled = NO;
@@ -154,6 +172,9 @@
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
   [self.overlayView removeFromSuperview];
   [self stopCapture];
+    
+    [prevLayerContainerView removeFromSuperview];
+    prevLayerContainerView = nil;
 }
 
 - (CGImageRef)CGImageRotated90:(CGImageRef)imgRef
@@ -399,7 +420,7 @@ static bool isIPad() {
   // NSLog(@"prev %p %@", self.prevLayer, self.prevLayer);
   self.prevLayer.frame = self.view.bounds;
   self.prevLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
-  [self.view.layer addSublayer: self.prevLayer];
+  [prevLayerContainerView.layer addSublayer: self.prevLayer];
 
   [self.captureSession startRunning];
 #endif
@@ -498,6 +519,10 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 - (void)stopCapture {
   decoding = NO;
 #if HAS_AVFF
+    if (captureSession == nil)
+    {
+        return;
+    }
   [captureSession stopRunning];
   AVCaptureInput* input = [captureSession.inputs objectAtIndex:0];
   [captureSession removeInput:input];

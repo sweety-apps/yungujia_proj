@@ -80,6 +80,14 @@
     return _imageView2.image;
 }
 
+- (void)reactiveAlphaAnimation
+{
+    if (!_animationStoped && !_animationStillAlive)
+    {
+        [self alphaAnimationSelector];
+    }
+}
+
 - (void)alphaAnimationSelector
 {
     if (_disableAnimation || _animationStoped)

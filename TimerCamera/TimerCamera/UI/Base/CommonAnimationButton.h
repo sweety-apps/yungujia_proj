@@ -53,6 +53,8 @@
 - (void)setButtonReleased;
 - (void)setButtonRestored;
 
+- (void)reactiveAlphaAnimations;
+
 + (void)setAllCommonButtonEnabled:(BOOL)enabled;
 + (BOOL)isAllCommonButtonEnabled;
 

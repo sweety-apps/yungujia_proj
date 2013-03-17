@@ -21,6 +21,7 @@ static BOOL gIsFirstLoading = YES;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.view.backgroundColor = kBGColor();
 	// Do any additional setup after loading the view, typically from a nib.
     _currentControllers = [[NSMutableArray array] retain];
     

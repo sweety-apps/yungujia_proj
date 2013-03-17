@@ -67,11 +67,12 @@ static CommonAnimationButtonAnimationRecorder* gTorchButtonRecorder = nil;
             [((AppDelegate*)([UIApplication sharedApplication].delegate)).viewController removeController:_ctrlToReleaseAfterShowed];
         }
         _ctrlToReleaseAfterShowed = nil;
+        [self initCapture];
     };
     
     if (_shouldShowAfterAppear)
     {
-        [self showSubViews:animated beginBlock:removeCallerController finishBlock:nil];
+        [self showSubViews:YES beginBlock:nil finishBlock:removeCallerController];
     }
     else
     {
@@ -149,8 +150,17 @@ static CommonAnimationButtonAnimationRecorder* gTorchButtonRecorder = nil;
     [_backButton.button addTarget:self action:@selector(onPressedBack:) forControlEvents:UIControlEventTouchUpInside];
     [_torchButton.button addTarget:self action:@selector(onPressedTorch:) forControlEvents:UIControlEventTouchUpInside];
     
+    //add subviews
+    [self.view addSubview:_frameBackgroundUpFillView];
+    [self.view addSubview:_frameBackgroundDownFillView];
+    [self.view addSubview:_frameBackgroundView];
+    [self.view addSubview:_bottomGreenView];
+    [self.view addSubview:_frameImageView];
+    [self.view addSubview:_torchButton];
+    [self.view addSubview:_backButton];
+    
     //hide subViews
-    [self hideSubViews:NO finishBlock:nil];
+    [self hideSubViews:NO finishBlock:nil withLoadingPreloaddingImage:NO];
     
     //setOverView hidden
     self.overlayView.hidden = YES;
@@ -172,23 +182,6 @@ static CommonAnimationButtonAnimationRecorder* gTorchButtonRecorder = nil;
 
 - (void)showSubViews:(BOOL)animated beginBlock:(void (^)(void))callStart finishBlock:(void (^)(void))callShowed
 {
-    //add subviews
-    [_frameBackgroundUpFillView removeFromSuperview];
-    [_frameBackgroundDownFillView removeFromSuperview];
-    [_bottomGreenView removeFromSuperview];
-    [_frameBackgroundView removeFromSuperview];
-    [_frameImageView removeFromSuperview];
-    [_torchButton removeFromSuperview];
-    [_backButton removeFromSuperview];
-    
-    [self.view addSubview:_frameBackgroundUpFillView];
-    [self.view addSubview:_frameBackgroundDownFillView];
-    [self.view addSubview:_frameBackgroundView];
-    [self.view addSubview:_bottomGreenView];
-    [self.view addSubview:_frameImageView];
-    [self.view addSubview:_torchButton];
-    [self.view addSubview:_backButton];
-    
     //really showing
     CGRect rectView = self.view.frame;
     
@@ -263,7 +256,36 @@ static CommonAnimationButtonAnimationRecorder* gTorchButtonRecorder = nil;
     rectFrameBgDownFinished.size.height = self.view.frame.size.height - rectFrameBgDownFinished.origin.y;
     rectFrameBgDownFinished.size.height = rectFrameBgDownFinished.size.height < 0.0 ? 0.0 : rectFrameBgDownInit.size.height;
     
+    
+    //for cover animations
+    CGRect rectQRCodeAnimationBg = self.view.frame;
+    rectQRCodeAnimationBg.origin = CGPointZero;
+    UIImageView* qrcodeAnimationView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"/Resource/Picture/qrcode/qr_code_animate_code"]] autorelease];
+    UIImageView* qrcodeAnimationCoverView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"/Resource/Picture/qrcode/qr_code_animate_cover"]] autorelease];
+    UIView* qrcodeAnimationBgView = [[UIView alloc] initWithFrame:rectQRCodeAnimationBg];
+    qrcodeAnimationBgView.backgroundColor = _bottomGreenView.backgroundColor;
+    
+    [self.view insertSubview:qrcodeAnimationBgView belowSubview:_bottomGreenView];
+    [self.view insertSubview:qrcodeAnimationView belowSubview:_frameImageView];
+    [self.view insertSubview:qrcodeAnimationCoverView aboveSubview:_frameImageView];
+    
+    CGRect rectQRCodeAnimationStart = rectFrameFinished;
+    rectQRCodeAnimationStart.origin.x = self.view.frame.size.width;
+    CGRect rectQRCodeAnimationStay = rectFrameFinished;
+    CGRect rectQRCodeAnimationFinished = rectFrameFinished;
+    rectQRCodeAnimationFinished.origin.x -= rectFrameFinished.size.width;
+    
+    CGRect rectQRCodeAnimationCoverStart = rectFrameFinished;
+    rectQRCodeAnimationCoverStart.origin.y += 20;
+    CGRect rectQRCodeAnimationCoverFinished = rectFrameFinished;
+    
     void (^initViews)() = ^(){
+        
+        if (callStart)
+        {
+            callStart();
+        }
+        
         _torchButton.hidden = NO;
         _backButton.hidden = NO;
         _frameImageView.hidden = NO;
@@ -278,66 +300,116 @@ static CommonAnimationButtonAnimationRecorder* gTorchButtonRecorder = nil;
         _frameBackgroundUpFillView.frame = rectFrameBgUpInit;
         _frameBackgroundDownFillView.frame = rectFrameBgDownInit;
         
+        qrcodeAnimationView.frame = rectQRCodeAnimationStart;
+        qrcodeAnimationCoverView.frame = rectQRCodeAnimationCoverStart;
+        
         _frameBackgroundView.alpha = 0.0;
         _frameBackgroundUpFillView.alpha = 0.0;
         _frameBackgroundDownFillView.alpha = 0.0;
+        
+        qrcodeAnimationCoverView.alpha = 0.0;
     };
     
     void (^showViews)() = ^(){
         
         _torchButton.frame = rectTorchShow;
         _backButton.frame = rectBackShow;
-        
-        _frameBackgroundView.alpha = 0.5;
-        _frameBackgroundUpFillView.alpha = 0.5;
-        _frameBackgroundDownFillView.alpha = 0.5;
     };
     
     void (^bounceViews)() = ^(){
-        
         _torchButton.frame = rectTorchFinished;
         _backButton.frame = rectBackFinished;
-        
+    };
+    
+    void (^showQRCodeAnimation)() = ^(){
+        qrcodeAnimationView.frame = rectQRCodeAnimationStay;
+    };
+    
+    void (^showFrame)() = ^(){
         _frameImageView.frame = rectFrameFinished;
         _frameBackgroundView.frame = rectFrameBgMidFinished;
         _frameBackgroundUpFillView.frame = rectFrameBgUpFinished;
         _frameBackgroundDownFillView.frame = rectFrameBgDownFinished;
-        
+    };
+    
+    void (^preShowQRCodeCoverAnimation)() = ^(){
+        qrcodeAnimationCoverView.alpha = 1.0;
+        [_tipsView showTips:LString(@"Place a barcode inside the rectangle") over:self.view autoCaculateLastTime:YES];
+    };
+    
+    void (^showQRCodeCoverAnimation)() = ^(){
+        qrcodeAnimationCoverView.frame = rectQRCodeAnimationCoverFinished;
+    };
+    
+    void (^hideQRCodeAnimation)() = ^(){
+        qrcodeAnimationCoverView.alpha = 0.0;
+        qrcodeAnimationView.frame = rectQRCodeAnimationFinished;
+    };
+    
+    void (^endAnimation)() = ^(){
+        qrcodeAnimationBgView.alpha = 0.0;
         _frameBackgroundView.alpha = 1.0;
         _frameBackgroundUpFillView.alpha = 1.0;
         _frameBackgroundDownFillView.alpha = 1.0;
     };
     
     void (^onFinished)() = ^(){
+        
+        //[_backButton reactiveAlphaAnimations];
+        //[_torchButton reactiveAlphaAnimations];
+        
         if (callShowed)
         {
             callShowed();
         }
     };
     
+    void (^onRemoveQRCodeAnimation)() = ^(){
+        _torchButton.button.hidden = NO;
+        _backButton.hidden = NO;
+        [qrcodeAnimationBgView removeFromSuperview];
+        [qrcodeAnimationCoverView removeFromSuperview];
+        [qrcodeAnimationView removeFromSuperview];
+    };
+    
     initViews();
     
     if (animated)
     {
-        [UIView animateWithDuration:0.2
-                         animations:showViews
-                         completion:^(BOOL finished){
-                             [UIView animateWithDuration:0.15
-                                              animations:bounceViews
-                                              completion:^(BOOL finished){
-                                                  onFinished();
-                                              }];
-                         }];
+        [UIView animateWithDuration:0.2 animations:showViews completion:^(BOOL finished){
+            [UIView animateWithDuration:0.1 animations:bounceViews completion:^(BOOL finished){
+                [UIView animateWithDuration:0.2 animations:showQRCodeAnimation completion:^(BOOL finished){
+                    [UIView animateWithDuration:0.3 animations:showFrame completion:^(BOOL finished){
+                        preShowQRCodeCoverAnimation();
+                        [UIView animateWithDuration:0.2 animations:showQRCodeCoverAnimation completion:^(BOOL finished){
+                            [UIView animateWithDuration:0.3 animations:hideQRCodeAnimation completion:^(BOOL finished){
+                                onFinished();
+                                [UIView animateWithDuration:0.3 animations:endAnimation completion:^(BOOL finished){
+                                    onRemoveQRCodeAnimation();
+                                }];
+                            }];
+                        }];
+                    }];
+                }];
+            }];
+        }];
     }
     else
     {
         showViews();
         bounceViews();
+        showQRCodeAnimation();
+        showFrame();
+        preShowQRCodeCoverAnimation();
+        showQRCodeCoverAnimation();
+        hideQRCodeAnimation();
         onFinished();
+        endAnimation();
+        onRemoveQRCodeAnimation();
     }
 }
 
-- (void)hideSubViews:(BOOL)animated finishBlock:(void (^)(void))callHidded
+- (void)hideSubViews:(BOOL)animated finishBlock:(void (^)(void))callHidded withLoadingPreloaddingImage:(BOOL)preLoadingImage
 {
     CGRect rectView = self.view.frame;
     
@@ -365,6 +437,18 @@ static CommonAnimationButtonAnimationRecorder* gTorchButtonRecorder = nil;
     rectFrameBgDownInit.size.width = rectFrameBgMidInit.size.width;
     rectFrameBgDownInit.size.height = self.view.frame.size.height - rectFrameBgDownInit.origin.y;
     rectFrameBgDownInit.size.height = rectFrameBgDownInit.size.height < 0.0 ? 0.0 : rectFrameBgDownInit.size.height;
+    
+    UIImageView* preLoadingView = nil;
+    
+    if (preLoadingImage)
+    {
+        preLoadingView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Default"]];
+        CGRect rectPreLoading = CGRectZero;
+        rectPreLoading.size = preLoadingView.image.size;
+        preLoadingView.frame = rectPreLoading;
+        preLoadingView.alpha = 0.0;
+        [self.view insertSubview:preLoadingView aboveSubview:_bottomGreenView];
+    }
  
     void (^hideViews)() = ^(){
         _torchButton.frame = rectTorchInit;
@@ -377,6 +461,11 @@ static CommonAnimationButtonAnimationRecorder* gTorchButtonRecorder = nil;
         _frameBackgroundView.alpha = 0.0;
         _frameBackgroundUpFillView.alpha = 0.0;
         _frameBackgroundDownFillView.alpha = 0.0;
+        
+        if (preLoadingImage)
+        {
+            preLoadingView.alpha = 1.0;
+        }
     };
     
     void (^onFinished)() = ^(){
@@ -386,10 +475,24 @@ static CommonAnimationButtonAnimationRecorder* gTorchButtonRecorder = nil;
         _frameBackgroundView.hidden = YES;
         _frameBackgroundUpFillView.hidden = YES;
         _frameBackgroundDownFillView.hidden = YES;
+        _torchButton.button.hidden = YES;
+        _backButton.hidden = YES;
+        
+        if (preLoadingImage)
+        {
+            [preLoadingView removeFromSuperview];
+            [((AppDelegate*)([UIApplication sharedApplication].delegate)).viewController.view addSubview:preLoadingView];
+        }
         
         if (callHidded)
         {
             callHidded();
+        }
+        
+        if (preLoadingImage)
+        {
+            [preLoadingView removeFromSuperview];
+            [preLoadingView release];
         }
     };
     
@@ -634,8 +737,11 @@ static CommonAnimationButtonAnimationRecorder* gTorchButtonRecorder = nil;
     [self hideSubViews:YES finishBlock:^(){
         [self stopCapture];
         [((AppDelegate*)([UIApplication sharedApplication].delegate)).viewController removeQRCodeScanner];
-        [((AppDelegate*)([UIApplication sharedApplication].delegate)).viewController showCameraAndShowSubviews];
-    }];
+        //[((AppDelegate*)([UIApplication sharedApplication].delegate)).viewController showCameraAndShowSubviews];
+        [((AppDelegate*)([UIApplication sharedApplication].delegate)).viewController showCamera];
+        [((AppDelegate*)([UIApplication sharedApplication].delegate)).viewController PrepareLoadingAnimation];
+        [((AppDelegate*)([UIApplication sharedApplication].delegate)).viewController ShowLoadingAnimation];
+    } withLoadingPreloaddingImage:YES];
 }
 
 @end

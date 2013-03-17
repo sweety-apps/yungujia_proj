@@ -30,4 +30,6 @@
 - (UIImage*)getImage1;
 - (UIImage*)getImage2;
 
+- (void)reactiveAlphaAnimation;
+
 @end

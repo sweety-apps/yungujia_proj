@@ -253,6 +253,18 @@ static BOOL gAllButtonEnabled = YES;
     }
 }
 
+- (void)reactiveAlphaAnimations
+{
+    if (_normalView)
+    {
+        [_normalView reactiveAlphaAnimation];
+    }
+    if (_enabledView)
+    {
+        [_enabledView reactiveAlphaAnimation];
+    }
+}
+
 + (void)setAllCommonButtonEnabled:(BOOL)enabled
 {
     gAllButtonEnabled = enabled;
