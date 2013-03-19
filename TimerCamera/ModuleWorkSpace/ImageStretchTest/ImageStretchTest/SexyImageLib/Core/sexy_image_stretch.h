@@ -17,7 +17,7 @@ typedef float (*SEXY_STRECTCH_FUNCTION_RETUREN_WIDTH_STRETCH_PERCENT) (int lineN
 
 typedef struct tagSexy_Img_Stretch{
     unsigned char* bmpBuffer;
-    int lineSize;
+    int width;
     int height;
     SEXY_STRECTCH_FUNCTION_RETUREN_WIDTH_STRETCH_PERCENT style;
     float* percentTable;
@@ -38,7 +38,7 @@ char Sexy_IS_is_inited();
 
 //stretch image life-cycle
 
-Sexy_Img_Stretch* Sexy_IS_create_no_copy(unsigned char* bmpBuffer, int lineSize, int height);
+Sexy_Img_Stretch* Sexy_IS_create_no_copy(unsigned char* bmpBuffer, int width, int height);
 void Sexy_IS_destory(Sexy_Img_Stretch* obj);
 
 //stretch working functions

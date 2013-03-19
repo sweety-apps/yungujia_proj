@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BEA8178716F8C9EF006653B8 /* sexy_image_base.c in Sources */ = {isa = PBXBuildFile; fileRef = BEA8178616F8C9EF006653B8 /* sexy_image_base.c */; };
+		BEA8178916F8CAEB006653B8 /* sexy_image_lib_core.c in Sources */ = {isa = PBXBuildFile; fileRef = BEA8178816F8CAEB006653B8 /* sexy_image_lib_core.c */; };
 		F33F5F8516F847AA00CE651D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F33F5F8416F847AA00CE651D /* UIKit.framework */; };
 		F33F5F8716F847AA00CE651D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F33F5F8616F847AA00CE651D /* Foundation.framework */; };
 		F33F5F8916F847AA00CE651D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F33F5F8816F847AA00CE651D /* CoreGraphics.framework */; };
@@ -27,6 +29,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BEA8178516F8C9E3006653B8 /* sexy_image_base.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sexy_image_base.h; sourceTree = "<group>"; };
+		BEA8178616F8C9EF006653B8 /* sexy_image_base.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sexy_image_base.c; sourceTree = "<group>"; };
+		BEA8178816F8CAEB006653B8 /* sexy_image_lib_core.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sexy_image_lib_core.c; sourceTree = "<group>"; };
 		F33F5F8116F847AA00CE651D /* ImageStretchTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageStretchTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F33F5F8416F847AA00CE651D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		F33F5F8616F847AA00CE651D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -154,6 +159,9 @@
 				F33F5FBE16F86E0200CE651D /* sexy_image_stretch.h */,
 				F33F5FBF16F86E0200CE651D /* sexy_image_stretch_presets.c */,
 				F33F5FC016F86E0200CE651D /* sexy_image_stretch_presets.h */,
+				BEA8178516F8C9E3006653B8 /* sexy_image_base.h */,
+				BEA8178616F8C9EF006653B8 /* sexy_image_base.c */,
+				BEA8178816F8CAEB006653B8 /* sexy_image_lib_core.c */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -242,6 +250,8 @@
 				F33F5FC316F86E0200CE651D /* sexy_image_stretch.c in Sources */,
 				F33F5FC416F86E0200CE651D /* sexy_image_stretch_presets.c in Sources */,
 				F33F5FC716F86F1500CE651D /* UIImage+SexyImageOperation.m in Sources */,
+				BEA8178716F8C9EF006653B8 /* sexy_image_base.c in Sources */,
+				BEA8178916F8CAEB006653B8 /* sexy_image_lib_core.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

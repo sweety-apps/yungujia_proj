@@ -33,7 +33,7 @@ char Sexy_IS_is_inited()
 
 //stretch image life-cycle
 
-Sexy_Img_Stretch* Sexy_IS_create_no_copy(unsigned char* bmpBuffer, int lineSize, int height)
+Sexy_Img_Stretch* Sexy_IS_create_no_copy(unsigned char* bmpBuffer, int width, int height)
 {
     return NULL;
 }
