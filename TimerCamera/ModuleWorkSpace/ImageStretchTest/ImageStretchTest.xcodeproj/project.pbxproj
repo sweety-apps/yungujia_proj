@@ -1,0 +1,380 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F33F5F8516F847AA00CE651D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F33F5F8416F847AA00CE651D /* UIKit.framework */; };
+		F33F5F8716F847AA00CE651D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F33F5F8616F847AA00CE651D /* Foundation.framework */; };
+		F33F5F8916F847AA00CE651D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F33F5F8816F847AA00CE651D /* CoreGraphics.framework */; };
+		F33F5F8F16F847AA00CE651D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F33F5F8D16F847AA00CE651D /* InfoPlist.strings */; };
+		F33F5F9116F847AA00CE651D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F33F5F9016F847AA00CE651D /* main.m */; };
+		F33F5F9516F847AA00CE651D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F33F5F9416F847AA00CE651D /* AppDelegate.m */; };
+		F33F5F9716F847AA00CE651D /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = F33F5F9616F847AA00CE651D /* Default.png */; };
+		F33F5F9916F847AA00CE651D /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F33F5F9816F847AA00CE651D /* Default@2x.png */; };
+		F33F5F9B16F847AA00CE651D /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F33F5F9A16F847AA00CE651D /* Default-568h@2x.png */; };
+		F33F5F9E16F847AA00CE651D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F33F5F9D16F847AA00CE651D /* ViewController.m */; };
+		F33F5FA116F847AB00CE651D /* ViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = F33F5F9F16F847AB00CE651D /* ViewController_iPhone.xib */; };
+		F33F5FA416F847AB00CE651D /* ViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = F33F5FA216F847AB00CE651D /* ViewController_iPad.xib */; };
+		F33F5FAB16F8483600CE651D /* fat_raw.png in Resources */ = {isa = PBXBuildFile; fileRef = F33F5FAA16F8483600CE651D /* fat_raw.png */; };
+		F33F5FC216F86E0200CE651D /* sexy_image_rotate.c in Sources */ = {isa = PBXBuildFile; fileRef = F33F5FBB16F86E0200CE651D /* sexy_image_rotate.c */; };
+		F33F5FC316F86E0200CE651D /* sexy_image_stretch.c in Sources */ = {isa = PBXBuildFile; fileRef = F33F5FBD16F86E0200CE651D /* sexy_image_stretch.c */; };
+		F33F5FC416F86E0200CE651D /* sexy_image_stretch_presets.c in Sources */ = {isa = PBXBuildFile; fileRef = F33F5FBF16F86E0200CE651D /* sexy_image_stretch_presets.c */; };
+		F33F5FC716F86F1500CE651D /* UIImage+SexyImageOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F33F5FC616F86F1500CE651D /* UIImage+SexyImageOperation.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		F33F5F8116F847AA00CE651D /* ImageStretchTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageStretchTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F33F5F8416F847AA00CE651D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		F33F5F8616F847AA00CE651D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		F33F5F8816F847AA00CE651D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		F33F5F8C16F847AA00CE651D /* ImageStretchTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ImageStretchTest-Info.plist"; sourceTree = "<group>"; };
+		F33F5F8E16F847AA00CE651D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F33F5F9016F847AA00CE651D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		F33F5F9216F847AA00CE651D /* ImageStretchTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ImageStretchTest-Prefix.pch"; sourceTree = "<group>"; };
+		F33F5F9316F847AA00CE651D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		F33F5F9416F847AA00CE651D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		F33F5F9616F847AA00CE651D /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		F33F5F9816F847AA00CE651D /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		F33F5F9A16F847AA00CE651D /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		F33F5F9C16F847AA00CE651D /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		F33F5F9D16F847AA00CE651D /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		F33F5FA016F847AB00CE651D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPhone.xib; sourceTree = "<group>"; };
+		F33F5FA316F847AB00CE651D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPad.xib; sourceTree = "<group>"; };
+		F33F5FAA16F8483600CE651D /* fat_raw.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fat_raw.png; path = ImageStretchTest/fat_raw.png; sourceTree = "<group>"; };
+		F33F5FBA16F86E0200CE651D /* sexy_image_lib_core.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sexy_image_lib_core.h; sourceTree = "<group>"; };
+		F33F5FBB16F86E0200CE651D /* sexy_image_rotate.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sexy_image_rotate.c; sourceTree = "<group>"; };
+		F33F5FBC16F86E0200CE651D /* sexy_image_rotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sexy_image_rotate.h; sourceTree = "<group>"; };
+		F33F5FBD16F86E0200CE651D /* sexy_image_stretch.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sexy_image_stretch.c; sourceTree = "<group>"; };
+		F33F5FBE16F86E0200CE651D /* sexy_image_stretch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sexy_image_stretch.h; sourceTree = "<group>"; };
+		F33F5FBF16F86E0200CE651D /* sexy_image_stretch_presets.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sexy_image_stretch_presets.c; sourceTree = "<group>"; };
+		F33F5FC016F86E0200CE651D /* sexy_image_stretch_presets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sexy_image_stretch_presets.h; sourceTree = "<group>"; };
+		F33F5FC516F86F1500CE651D /* UIImage+SexyImageOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+SexyImageOperation.h"; sourceTree = "<group>"; };
+		F33F5FC616F86F1500CE651D /* UIImage+SexyImageOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+SexyImageOperation.m"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F33F5F7E16F847AA00CE651D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F33F5F8516F847AA00CE651D /* UIKit.framework in Frameworks */,
+				F33F5F8716F847AA00CE651D /* Foundation.framework in Frameworks */,
+				F33F5F8916F847AA00CE651D /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F33F5F7816F847AA00CE651D = {
+			isa = PBXGroup;
+			children = (
+				F33F5FAA16F8483600CE651D /* fat_raw.png */,
+				F33F5F8A16F847AA00CE651D /* ImageStretchTest */,
+				F33F5F8316F847AA00CE651D /* Frameworks */,
+				F33F5F8216F847AA00CE651D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F33F5F8216F847AA00CE651D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F33F5F8116F847AA00CE651D /* ImageStretchTest.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F33F5F8316F847AA00CE651D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F33F5F8416F847AA00CE651D /* UIKit.framework */,
+				F33F5F8616F847AA00CE651D /* Foundation.framework */,
+				F33F5F8816F847AA00CE651D /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F33F5F8A16F847AA00CE651D /* ImageStretchTest */ = {
+			isa = PBXGroup;
+			children = (
+				F33F5FB716F86E0200CE651D /* SexyImageLib */,
+				F33F5F9316F847AA00CE651D /* AppDelegate.h */,
+				F33F5F9416F847AA00CE651D /* AppDelegate.m */,
+				F33F5F9C16F847AA00CE651D /* ViewController.h */,
+				F33F5F9D16F847AA00CE651D /* ViewController.m */,
+				F33F5F9F16F847AB00CE651D /* ViewController_iPhone.xib */,
+				F33F5FA216F847AB00CE651D /* ViewController_iPad.xib */,
+				F33F5F8B16F847AA00CE651D /* Supporting Files */,
+			);
+			path = ImageStretchTest;
+			sourceTree = "<group>";
+		};
+		F33F5F8B16F847AA00CE651D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F33F5F8C16F847AA00CE651D /* ImageStretchTest-Info.plist */,
+				F33F5F8D16F847AA00CE651D /* InfoPlist.strings */,
+				F33F5F9016F847AA00CE651D /* main.m */,
+				F33F5F9216F847AA00CE651D /* ImageStretchTest-Prefix.pch */,
+				F33F5F9616F847AA00CE651D /* Default.png */,
+				F33F5F9816F847AA00CE651D /* Default@2x.png */,
+				F33F5F9A16F847AA00CE651D /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F33F5FB716F86E0200CE651D /* SexyImageLib */ = {
+			isa = PBXGroup;
+			children = (
+				F33F5FB816F86E0200CE651D /* Android */,
+				F33F5FB916F86E0200CE651D /* Core */,
+				F33F5FC116F86E0200CE651D /* iOS */,
+			);
+			path = SexyImageLib;
+			sourceTree = "<group>";
+		};
+		F33F5FB816F86E0200CE651D /* Android */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Android;
+			sourceTree = "<group>";
+		};
+		F33F5FB916F86E0200CE651D /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				F33F5FBA16F86E0200CE651D /* sexy_image_lib_core.h */,
+				F33F5FBB16F86E0200CE651D /* sexy_image_rotate.c */,
+				F33F5FBC16F86E0200CE651D /* sexy_image_rotate.h */,
+				F33F5FBD16F86E0200CE651D /* sexy_image_stretch.c */,
+				F33F5FBE16F86E0200CE651D /* sexy_image_stretch.h */,
+				F33F5FBF16F86E0200CE651D /* sexy_image_stretch_presets.c */,
+				F33F5FC016F86E0200CE651D /* sexy_image_stretch_presets.h */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		F33F5FC116F86E0200CE651D /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				F33F5FC516F86F1500CE651D /* UIImage+SexyImageOperation.h */,
+				F33F5FC616F86F1500CE651D /* UIImage+SexyImageOperation.m */,
+			);
+			path = iOS;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F33F5F8016F847AA00CE651D /* ImageStretchTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F33F5FA716F847AB00CE651D /* Build configuration list for PBXNativeTarget "ImageStretchTest" */;
+			buildPhases = (
+				F33F5F7D16F847AA00CE651D /* Sources */,
+				F33F5F7E16F847AA00CE651D /* Frameworks */,
+				F33F5F7F16F847AA00CE651D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ImageStretchTest;
+			productName = ImageStretchTest;
+			productReference = F33F5F8116F847AA00CE651D /* ImageStretchTest.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F33F5F7916F847AA00CE651D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "Lee Justin";
+			};
+			buildConfigurationList = F33F5F7C16F847AA00CE651D /* Build configuration list for PBXProject "ImageStretchTest" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = F33F5F7816F847AA00CE651D;
+			productRefGroup = F33F5F8216F847AA00CE651D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F33F5F8016F847AA00CE651D /* ImageStretchTest */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F33F5F7F16F847AA00CE651D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F33F5F8F16F847AA00CE651D /* InfoPlist.strings in Resources */,
+				F33F5F9716F847AA00CE651D /* Default.png in Resources */,
+				F33F5F9916F847AA00CE651D /* Default@2x.png in Resources */,
+				F33F5F9B16F847AA00CE651D /* Default-568h@2x.png in Resources */,
+				F33F5FA116F847AB00CE651D /* ViewController_iPhone.xib in Resources */,
+				F33F5FA416F847AB00CE651D /* ViewController_iPad.xib in Resources */,
+				F33F5FAB16F8483600CE651D /* fat_raw.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F33F5F7D16F847AA00CE651D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F33F5F9116F847AA00CE651D /* main.m in Sources */,
+				F33F5F9516F847AA00CE651D /* AppDelegate.m in Sources */,
+				F33F5F9E16F847AA00CE651D /* ViewController.m in Sources */,
+				F33F5FC216F86E0200CE651D /* sexy_image_rotate.c in Sources */,
+				F33F5FC316F86E0200CE651D /* sexy_image_stretch.c in Sources */,
+				F33F5FC416F86E0200CE651D /* sexy_image_stretch_presets.c in Sources */,
+				F33F5FC716F86F1500CE651D /* UIImage+SexyImageOperation.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		F33F5F8D16F847AA00CE651D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F33F5F8E16F847AA00CE651D /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		F33F5F9F16F847AB00CE651D /* ViewController_iPhone.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F33F5FA016F847AB00CE651D /* en */,
+			);
+			name = ViewController_iPhone.xib;
+			sourceTree = "<group>";
+		};
+		F33F5FA216F847AB00CE651D /* ViewController_iPad.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F33F5FA316F847AB00CE651D /* en */,
+			);
+			name = ViewController_iPad.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F33F5FA516F847AB00CE651D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F33F5FA616F847AB00CE651D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F33F5FA816F847AB00CE651D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ImageStretchTest/ImageStretchTest-Prefix.pch";
+				INFOPLIST_FILE = "ImageStretchTest/ImageStretchTest-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		F33F5FA916F847AB00CE651D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ImageStretchTest/ImageStretchTest-Prefix.pch";
+				INFOPLIST_FILE = "ImageStretchTest/ImageStretchTest-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F33F5F7C16F847AA00CE651D /* Build configuration list for PBXProject "ImageStretchTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F33F5FA516F847AB00CE651D /* Debug */,
+				F33F5FA616F847AB00CE651D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F33F5FA716F847AB00CE651D /* Build configuration list for PBXNativeTarget "ImageStretchTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F33F5FA816F847AB00CE651D /* Debug */,
+				F33F5FA916F847AB00CE651D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F33F5F7916F847AA00CE651D /* Project object */;
+}
