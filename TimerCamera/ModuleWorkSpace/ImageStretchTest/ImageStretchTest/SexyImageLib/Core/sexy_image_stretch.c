@@ -10,25 +10,33 @@
 #include "sexy_image_stretch_presets.h"
 #include "sexy_image_stretch.h"
 
-//preset stretch styles
+typedef struct tagSexy_Stretch_Table_Cell{
+    struct tagLine{
+    } line;
+    struct tagRow{
+    } row;
+    
+}Sexy_Stretch_Table_Cell;
 
-SEXY_STRECTCH_FUNCTION_RETUREN_WIDTH_STRETCH_PERCENT Sexy_IS_get_preset_stretch_style(char* style_name, float stretch_percents);
+
 
 //module life-cycle
 
+static char gIsInited = 0;
+
 void Sexy_IS_init()
 {
-    
+    gIsInited = 1;
 }
 
 void Sexy_IS_uninit()
 {
-    
+    gIsInited = 0;
 }
 
 char Sexy_IS_is_inited()
 {
-    return 0;
+    return gIsInited;
 }
 
 //stretch image life-cycle
