@@ -13,14 +13,17 @@
 
 //structure defines
 
-typedef float (*SEXY_STRECTCH_FUNCTION_RETUREN_WIDTH_STRETCH_PERCENT) (int lineNum, int pixelX);
+typedef float (*SEXY_STRECTCH_FUNCTION_RETUREN_WIDTH_STRETCH_PERCENT) (int lineNum, float stretch_percents, int width, int height);
 
 typedef struct tagSexy_Img_Stretch{
     unsigned char* bmpBuffer;
     int width;
     int height;
-    SEXY_STRECTCH_FUNCTION_RETUREN_WIDTH_STRETCH_PERCENT style;
-    float* percentTable;
+    char isCopyied;
+    struct tagStretch {
+        SEXY_STRECTCH_FUNCTION_RETUREN_WIDTH_STRETCH_PERCENT style;
+        float stretch_percents;
+    } stretch;
 } Sexy_Img_Stretch;
 
 //preset stretch styles
@@ -28,7 +31,7 @@ typedef struct tagSexy_Img_Stretch{
 #define SEXY_IS_STRETCH_STYLE_LINEAR "sexy_is_style_linear"
 #define SEXY_IS_STRETCH_STYLE_LINEAR_CURVE "sexy_is_style_linear_curve"
 
-SEXY_STRECTCH_FUNCTION_RETUREN_WIDTH_STRETCH_PERCENT Sexy_IS_get_preset_stretch_style(char* style_name, float stretch_percents);
+SEXY_STRECTCH_FUNCTION_RETUREN_WIDTH_STRETCH_PERCENT Sexy_IS_get_preset_stretch_style(char* style_name);
 
 //module life-cycle
 
@@ -39,11 +42,12 @@ char Sexy_IS_is_inited();
 //stretch image life-cycle
 
 Sexy_Img_Stretch* Sexy_IS_create_no_copy(unsigned char* bmpBuffer, int width, int height);
+Sexy_Img_Stretch* Sexy_IS_create_copy(unsigned char* bmpBuffer, int width, int height);
 void Sexy_IS_destory(Sexy_Img_Stretch* obj);
 
 //stretch working functions
 
-void Sexy_IS_set_stretch_style(Sexy_Img_Stretch* obj, SEXY_STRECTCH_FUNCTION_RETUREN_WIDTH_STRETCH_PERCENT style);
+void Sexy_IS_set_stretch_style(Sexy_Img_Stretch* obj, SEXY_STRECTCH_FUNCTION_RETUREN_WIDTH_STRETCH_PERCENT style, float stretch_percents);
 
 void Sexy_IS_do_stretch(Sexy_Img_Stretch* obj);
 

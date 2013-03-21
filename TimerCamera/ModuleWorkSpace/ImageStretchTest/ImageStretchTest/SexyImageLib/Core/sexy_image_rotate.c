@@ -19,7 +19,7 @@ Sexy_Sub_Img_Rect_With_Rotation* Sexy_RT_create_rotated_sub_image(Sexy_Raw_Image
     ret->rect.width = width;
     ret->rect.height = height;
     ret->rotation = rotation;
-    ret->copiedNormalRectSubBmpBuffer = (unsigned char*)calloc(width, height);
+    ret->copiedNormalRectSubBmpBuffer = (unsigned char*)calloc(width * height, 4);
     //TODO: do grab and copy to a new buffer
     
     ////////////////////

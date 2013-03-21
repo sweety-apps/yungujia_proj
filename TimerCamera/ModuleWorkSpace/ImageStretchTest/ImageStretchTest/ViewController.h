@@ -10,6 +10,8 @@
 
 @interface ViewController : UIViewController
 
-- (void)onPressed:(id)sender;
+@property (nonatomic, retain) IBOutlet UIImageView* imageView;
+
+- (IBAction)onPressed:(id)sender;
 
 @end

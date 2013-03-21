@@ -15,6 +15,8 @@
 
 @implementation ViewController
 
+@synthesize imageView = _imageView;
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -27,9 +29,9 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)onPressed:(id)sender
+- (IBAction)onPressed:(id)sender
 {
-    
+    self.imageView.image = [_imageView.image testStretchedImage];
 }
 
 @end

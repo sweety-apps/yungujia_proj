@@ -6,18 +6,41 @@
 //  Copyright (c) 2013年 Lee Justin. All rights reserved.
 //
 
+#include <stdlib.h>
 #include <stdio.h>
 #include "sexy_image_stretch_presets.h"
 #include "sexy_image_stretch.h"
 
-typedef struct tagSexy_Stretch_Table_Cell{
+typedef struct tagSexy_Stretch_Pixel_Convert{
+    int x;
+    int y;
     struct tagLine{
-    } line;
+        int start_x;
+        int count;
+        float* percents;
+    } line_convert;
     struct tagRow{
-    } row;
-    
-}Sexy_Stretch_Table_Cell;
+        int up_x;
+        float up_percent;
+        int down_x;
+        float down_percent;
+    } row_convert;
+}Sexy_Stretch_Pixel_Convert;
 
+//preset stretch styles
+
+SEXY_STRECTCH_FUNCTION_RETUREN_WIDTH_STRETCH_PERCENT Sexy_IS_get_preset_stretch_style(char* style_name)
+{
+    if (strcmp(style_name, SEXY_IS_STRETCH_STYLE_LINEAR) == 0)
+    {
+        return Sexy_IS_preset_style_linear;
+    }
+    else if (strcmp(style_name, SEXY_IS_STRETCH_STYLE_LINEAR_CURVE) == 0)
+    {
+        return Sexy_IS_preset_style_linear_curve;
+    }
+    return NULL;
+}
 
 
 //module life-cycle
@@ -43,22 +66,205 @@ char Sexy_IS_is_inited()
 
 Sexy_Img_Stretch* Sexy_IS_create_no_copy(unsigned char* bmpBuffer, int width, int height)
 {
-    return NULL;
+    Sexy_Img_Stretch* ret = (Sexy_Img_Stretch*)calloc(sizeof(Sexy_Img_Stretch), 1);
+    ret->bmpBuffer = bmpBuffer;
+    ret->width = width;
+    ret->height = height;
+    return ret;
+}
+
+Sexy_Img_Stretch* Sexy_IS_create_copy(unsigned char* bmpBuffer, int width, int height)
+{
+    Sexy_Img_Stretch* ret = NULL;
+    ret = Sexy_IS_create_no_copy(bmpBuffer, width, height);
+    ret->bmpBuffer = (unsigned char*)calloc(width * height, 4);
+    ret->isCopyied = 1;
+    return ret;
 }
 
 void Sexy_IS_destory(Sexy_Img_Stretch* obj)
 {
-    
+    if (obj)
+    {
+        if (obj->isCopyied)
+        {
+            free(obj->bmpBuffer);
+        }
+        free(obj);
+    }
 }
 
 //stretch working functions
 
-void Sexy_IS_set_stretch_style(Sexy_Img_Stretch* obj, SEXY_STRECTCH_FUNCTION_RETUREN_WIDTH_STRETCH_PERCENT style)
+void Sexy_IS_set_stretch_style(Sexy_Img_Stretch* obj, SEXY_STRECTCH_FUNCTION_RETUREN_WIDTH_STRETCH_PERCENT style, float stretch_percents)
 {
+    if (obj)
+    {
+        obj->stretch.style = style;
+        stretch_percents = stretch_percents <= 0.0 ? 0.000000000001 : stretch_percents;
+        obj->stretch.stretch_percents = stretch_percents;
+    }
+}
+
+static void doStretchPixel(Sexy_Img_Stretch* obj, unsigned char* rawBuffer, unsigned char* destPixel, Sexy_Stretch_Pixel_Convert* pStretch)
+{
+    destPixel[0] = 0;//red
+    destPixel[1] = 0;//green
+    destPixel[2] = 0;//blue
     
+    //compute same line effectors
+    int index = 4 * (obj->width * pStretch->y + pStretch->line_convert.start_x);
+    for (int i = 0; i < pStretch->line_convert.count; ++i)
+    {
+        destPixel[0] += rawBuffer[index] * pStretch->line_convert.percents[i];
+        destPixel[1] += rawBuffer[index+1] * pStretch->line_convert.percents[i];
+        destPixel[2] += rawBuffer[index+2] * pStretch->line_convert.percents[i];
+        index += 4;
+    }
+    
+    //compute up line effectors
+    if (pStretch->y > 0)
+    {
+        index = 4 * (obj->width * (pStretch->y - 1) + pStretch->row_convert.up_x);
+        destPixel[0] += rawBuffer[index] * pStretch->row_convert.up_percent;
+        destPixel[1] += rawBuffer[index+1] * pStretch->row_convert.up_percent;
+        destPixel[2] += rawBuffer[index+2] * pStretch->row_convert.up_percent;
+    }
+    
+    //compute down line effectors
+    if (pStretch->y < (obj->height - 1))
+    {
+        index = 4 * (obj->width * (pStretch->y + 1) + pStretch->row_convert.down_x);
+        destPixel[0] += rawBuffer[index] * pStretch->row_convert.down_percent;
+        destPixel[1] += rawBuffer[index+1] * pStretch->row_convert.down_percent;
+        destPixel[2] += rawBuffer[index+2] * pStretch->row_convert.down_percent;
+    }
+    
+    //destPixel[0] = 0;//red
+    //destPixel[1] = 0;//green
+    //destPixel[2] = 0;//blue
+    destPixel[3] = 255;
+}
+
+static void caculateStretch(Sexy_Img_Stretch* obj, Sexy_Stretch_Pixel_Convert* pStretch, float linePercent, float upLinePercent, float downLinePercent, int dest_start_x, int dest_end_x, int dest_width, int x, int y)
+{
+    pStretch->x = x;
+    pStretch->y = y;
+    
+    if (x < dest_start_x)
+    {
+        //before dest
+        pStretch->line_convert.count = 1;
+        pStretch->line_convert.start_x = 0;
+        pStretch->line_convert.percents[0] = 1.0;
+        pStretch->row_convert.up_percent = 0.f;
+        pStretch->row_convert.down_percent = 0.f;
+        pStretch->row_convert.up_x = 0;
+        pStretch->row_convert.down_x = 0;
+    }
+    else if (x >= dest_end_x)
+    {
+        //after dest
+        pStretch->line_convert.count = 1;
+        pStretch->line_convert.start_x = obj->width - 2;
+        pStretch->line_convert.percents[0] = 1.0;
+        pStretch->row_convert.up_percent = 0.f;
+        pStretch->row_convert.down_percent = 0.f;
+        pStretch->row_convert.up_x = obj->width - 2;
+        pStretch->row_convert.down_x = obj->width - 2;
+    }
+    else
+    {
+        // in dest
+        float rowLeft = 1.0;
+        
+        //caculate row
+        pStretch->row_convert.up_percent = 0.f;
+        pStretch->row_convert.down_percent = 0.f;
+        pStretch->row_convert.up_x = 0;
+        pStretch->row_convert.down_x = 0;
+        
+        //caculate line
+        int count = (int)(1.0 / linePercent + 0.5);
+        int start_x = (x - dest_start_x) * count;
+        int end_x = start_x + count;
+        if (end_x > obj->width)
+        {
+            count = obj->width - start_x;
+            if (count < 1)
+            {
+                count = 1;
+                start_x = obj->width - 1;
+            }
+            end_x = obj->width;
+        }
+        float everyPercent = (rowLeft / (float) count);
+        
+        pStretch->line_convert.count = count;
+        pStretch->line_convert.start_x = start_x;
+        for (int i = 0; i < count; ++i)
+        {
+            pStretch->line_convert.percents[i] = everyPercent;
+        }
+    }
+}
+
+static void doStretchLine(Sexy_Img_Stretch* obj, Sexy_Stretch_Pixel_Convert* pStretch, int line, float linePercent, float upLinePercent, float downLinePercent, unsigned char* changedBuff)
+{
+    int offset = 4 * (obj->width * line);
+    
+    int dest_width = (int)(((float)obj->width) * linePercent + 0.5);
+    int dest_start_x = (int)((((float)obj->width) * (1.f - linePercent) * 0.5) + 0.5);
+    int dest_end_x = dest_start_x + dest_width;
+    
+    for (int x = 0; x < obj->width; ++x)
+    {
+        caculateStretch(obj, pStretch, linePercent, upLinePercent, downLinePercent, dest_start_x, dest_end_x, dest_width, x, line);
+        doStretchPixel(obj, obj->bmpBuffer, &changedBuff[offset], pStretch);
+        offset += 4;
+    }
 }
 
 void Sexy_IS_do_stretch(Sexy_Img_Stretch* obj)
 {
-    
+    if (obj->stretch.style)
+    {
+        //alloc tmp buffer
+        int bufflen = obj->width*obj->height*4;
+        unsigned char* changedBuff = (unsigned char*)malloc(bufflen);
+        
+        //do stretch for every pixels
+        float linePercent = 0.f;
+        float upLinePercent = 0.f;
+        float downLinePercent = 0.f;
+        Sexy_Stretch_Pixel_Convert stretch = {0};
+        stretch.line_convert.percents = malloc(obj->width * sizeof(float));
+        
+        for (int y = 0; y < obj->height; ++y)
+        {
+            if (y > 0)
+            {
+                linePercent = downLinePercent;
+            }
+            else
+            {
+                linePercent = obj->stretch.style(y,obj->stretch.stretch_percents,obj->width,obj->height);
+            }
+            
+            if (y + 1 < obj->height)
+            {
+                downLinePercent = obj->stretch.style(y + 1,obj->stretch.stretch_percents,obj->width,obj->height);
+            }
+            
+            doStretchLine(obj, &stretch, y, linePercent, upLinePercent, downLinePercent, changedBuff);
+            
+            upLinePercent = linePercent;
+        }
+        
+        free(stretch.line_convert.percents);
+        
+        //replace buffer by changed buffer
+        memcpy(obj->bmpBuffer,changedBuff,bufflen);
+        free(changedBuff);
+    }
 }

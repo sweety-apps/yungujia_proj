@@ -10,4 +10,6 @@
 
 @interface UIImage (SexyImageOperation)
 
+- (UIImage*) testStretchedImage;
+
 @end
