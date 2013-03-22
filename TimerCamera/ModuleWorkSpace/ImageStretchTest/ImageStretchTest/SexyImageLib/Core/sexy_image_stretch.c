@@ -146,7 +146,7 @@ static void doStretchPixel(Sexy_Img_Stretch* obj, unsigned char* rawBuffer, unsi
     destPixel[3] = 255;
 }
 
-static void caculateStretch(Sexy_Img_Stretch* obj, Sexy_Stretch_Pixel_Convert* pStretch, float linePercent, float upLinePercent, float downLinePercent, int dest_start_x, int dest_end_x, int dest_width, int x, int y)
+static void caculateStretch(Sexy_Img_Stretch* obj, Sexy_Stretch_Pixel_Convert* pStretch, float linePercent, float upLinePercent, float downLinePercent, float dest_start_x, float dest_end_x, float dest_width, int x, int y)
 {
     pStretch->x = x;
     pStretch->y = y;
@@ -185,27 +185,37 @@ static void caculateStretch(Sexy_Img_Stretch* obj, Sexy_Stretch_Pixel_Convert* p
         pStretch->row_convert.down_x = 0;
         
         //caculate line
-        int count = (int)(1.0 / linePercent + 0.5);
-        int start_x = (x - dest_start_x) * count;
-        int end_x = start_x + count;
-        if (end_x > obj->width)
+        float count = 1.0 / linePercent;
+        float start_x = (x - dest_start_x) * count;
+        float end_x = start_x + count;
+        if (end_x > ((float)obj->width))
         {
-            count = obj->width - start_x;
-            if (count < 1)
+            count = ((float)obj->width) - start_x;
+            if (count < 1.f)
             {
-                count = 1;
-                start_x = obj->width - 1;
+                count = 1.f;
+                start_x = ((float)obj->width) - 1.0;
             }
-            end_x = obj->width;
+            end_x = ((float)obj->width);
         }
-        float everyPercent = (rowLeft / (float) count);
         
-        pStretch->line_convert.count = count;
-        pStretch->line_convert.start_x = start_x;
-        for (int i = 0; i < count; ++i)
+        int real_count = ((int)(count + 0.99999999));
+        pStretch->line_convert.count = real_count;
+        pStretch->line_convert.start_x = (int)start_x;
+        pStretch->line_convert.percents[real_count - 1] = 0.f;
+        
+        float mid_points_percent = ;
+        float everyPercent = rowLeft / (count - 2.0);
+        float begin_point = ;
+        float end_point = ;
+        
+        for (float i = 1.f; i < count; i += 1.0)
         {
-            pStretch->line_convert.percents[i] = everyPercent;
+            pStretch->line_convert.percents[(int)i] = everyPercent;
+            rowLeft -= everyPercent;
         }
+        
+        pStretch->line_convert.percents[real_count - 1] += rowLeft;
     }
 }
 
@@ -213,9 +223,9 @@ static void doStretchLine(Sexy_Img_Stretch* obj, Sexy_Stretch_Pixel_Convert* pSt
 {
     int offset = 4 * (obj->width * line);
     
-    int dest_width = (int)(((float)obj->width) * linePercent + 0.5);
-    int dest_start_x = (int)((((float)obj->width) * (1.f - linePercent) * 0.5) + 0.5);
-    int dest_end_x = dest_start_x + dest_width;
+    float dest_width = (((float)obj->width) * linePercent);
+    float dest_start_x = ((((float)obj->width) * (1.f - linePercent) * 0.5));
+    float dest_end_x = dest_start_x + dest_width;
     
     for (int x = 0; x < obj->width; ++x)
     {

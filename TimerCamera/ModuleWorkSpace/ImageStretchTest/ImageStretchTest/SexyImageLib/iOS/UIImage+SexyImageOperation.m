@@ -28,7 +28,7 @@
     
     stretch = Sexy_IS_create_no_copy(buf, width, height);
     
-    Sexy_IS_set_stretch_style(stretch, Sexy_IS_get_preset_stretch_style(SEXY_IS_STRETCH_STYLE_LINEAR), 0.25);
+    Sexy_IS_set_stretch_style(stretch, Sexy_IS_get_preset_stretch_style(SEXY_IS_STRETCH_STYLE_LINEAR), 0.98);
     
     Sexy_IS_do_stretch(stretch);
     
