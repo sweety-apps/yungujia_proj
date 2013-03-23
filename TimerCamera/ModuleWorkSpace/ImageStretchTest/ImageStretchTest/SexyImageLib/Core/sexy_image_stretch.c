@@ -199,23 +199,36 @@ static void caculateStretch(Sexy_Img_Stretch* obj, Sexy_Stretch_Pixel_Convert* p
             end_x = ((float)obj->width);
         }
         
-        int real_count = ((int)(count + 0.99999999));
-        pStretch->line_convert.count = real_count;
-        pStretch->line_convert.start_x = (int)start_x;
-        pStretch->line_convert.percents[real_count - 1] = 0.f;
+        int real_count = 0;
         
-        float mid_points_percent = ;
-        float everyPercent = rowLeft / (count - 2.0);
-        float begin_point = ;
-        float end_point = ;
+        float idx = (int)start_x;
+        float current_width_effect = start_x;
+        float next_idx = idx + 1.0;
+        float real_left = rowLeft;
         
-        for (float i = 1.f; i < count; i += 1.0)
+        while (idx < end_x)
         {
-            pStretch->line_convert.percents[(int)i] = everyPercent;
-            rowLeft -= everyPercent;
+            next_idx = next_idx > end_x ? end_x : next_idx;
+            current_width_effect = current_width_effect > start_x ? current_width_effect : start_x;
+            current_width_effect = next_idx - current_width_effect;
+            pStretch->line_convert.percents[real_count] = rowLeft * current_width_effect / count;
+            real_left -= pStretch->line_convert.percents[real_count];
+            current_width_effect = next_idx;
+            next_idx += 1.0;
+            ++idx;
+            ++real_count;
         }
         
-        pStretch->line_convert.percents[real_count - 1] += rowLeft;
+        pStretch->line_convert.count = real_count;
+        pStretch->line_convert.start_x = (int)start_x;
+        if (real_count > 0)
+        {
+            pStretch->line_convert.percents[real_count - 1] += real_left;
+        }
+        else
+        {
+            pStretch->line_convert.percents[0] = real_left;
+        }
     }
 }
 
