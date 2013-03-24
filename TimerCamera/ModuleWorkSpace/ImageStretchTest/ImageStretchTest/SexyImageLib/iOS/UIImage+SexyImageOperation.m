@@ -22,19 +22,71 @@
     int width = self.size.width;
     int height = self.size.height;
     
-    Sexy_Img_Stretch* stretch = NULL;
+    
+    ////////do stretch test
+    Sexy_Raw_Image* raw = NULL;
+    Sexy_Img_Grab_Sub* subLeg = NULL;
+    Sexy_Img_Grab_Sub* subMid = NULL;
+    Sexy_Img_Stretch* stretchLeg = NULL;
+    Sexy_Img_Stretch* stretchMid = NULL;
+    Sexy_Img_Stretch* stretchBody = NULL;
     
     Sexy_init_all();
     
-    stretch = Sexy_IS_create_no_copy(buf, width, height);
+    //
+    raw = Sexy_Raw_create_no_copy(buf, width, width * RGBA, height);
     
-    Sexy_IS_set_stretch_style(stretch, Sexy_IS_get_preset_stretch_style(SEXY_IS_STRETCH_STYLE_LINEAR), 0.21);
     
-    Sexy_IS_do_stretch(stretch);
+    // leg stretch
+    subLeg = Sexy_GS_create_and_grab_sub_image(raw, 0, height * 0.5, width, height * 0.5, Sexy_GS_get_preset_grab_function(SEXY_GS_GRAB_FUNCTION_LINEAR), 0.0);
     
-    Sexy_IS_destory(stretch);
+    stretchLeg = Sexy_IS_create_no_copy(subLeg->grab.grabbedBmpBuffer, subLeg->grab.width, subLeg->grab.height);
+    
+    Sexy_IS_set_stretch_style(stretchLeg, Sexy_IS_get_preset_stretch_style(SEXY_IS_STRETCH_STYLE_LINEAR_CURVE), 0.7);
+    //Sexy_IS_set_stretch_style(stretchLeg, Sexy_IS_get_preset_stretch_style(SEXY_IS_STRETCH_STYLE_LINEAR), 0.8);
+    
+    Sexy_IS_do_stretch(stretchLeg);
+    
+    Sexy_IS_destory(stretchLeg);
+    
+    Sexy_GS_replace_grabbed_sub_image_to_raw_image(subLeg);
+    
+    Sexy_GS_destroy_grabbed_sub_image(subLeg);
+    
+    
+    // middle stretch
+    subMid = Sexy_GS_create_and_grab_sub_image(raw, 0, height * 0.32, width, height * 0.15, Sexy_GS_get_preset_grab_function(SEXY_GS_GRAB_FUNCTION_LINEAR), 0.32);
+    
+    stretchMid = Sexy_IS_create_no_copy(subMid->grab.grabbedBmpBuffer, subMid->grab.width, subMid->grab.height);
+    
+    Sexy_IS_set_stretch_style(stretchMid, Sexy_IS_get_preset_stretch_style(SEXY_IS_STRETCH_STYLE_LINEAR_CURVE), 0.92);
+    //Sexy_IS_set_stretch_style(stretchLeg, Sexy_IS_get_preset_stretch_style(SEXY_IS_STRETCH_STYLE_LINEAR), 0.8);
+    
+    Sexy_IS_do_stretch(stretchMid);
+    
+    Sexy_IS_destory(stretchMid);
+    
+    Sexy_GS_replace_grabbed_sub_image_to_raw_image(subMid);
+    
+    Sexy_GS_destroy_grabbed_sub_image(subMid);
+    
+    
+    
+    // body stretch
+    stretchBody = Sexy_IS_create_no_copy(raw->bmpBuffer, raw->width, raw->height);
+    
+    Sexy_IS_set_stretch_style(stretchBody, Sexy_IS_get_preset_stretch_style(SEXY_IS_STRETCH_STYLE_LINEAR), 0.7);
+    
+    Sexy_IS_do_stretch(stretchBody);
+    
+    Sexy_IS_destory(stretchBody);
+    
+    //
+    Sexy_Raw_destory(raw);
     
     Sexy_uninit_all();
+    ////////end of do stretch test
+    
     
     CGImageRef cgImage = CGBitmapContextCreateImage(context);
     

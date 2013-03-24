@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		BEA8178716F8C9EF006653B8 /* sexy_image_base.c in Sources */ = {isa = PBXBuildFile; fileRef = BEA8178616F8C9EF006653B8 /* sexy_image_base.c */; };
 		BEA8178916F8CAEB006653B8 /* sexy_image_lib_core.c in Sources */ = {isa = PBXBuildFile; fileRef = BEA8178816F8CAEB006653B8 /* sexy_image_lib_core.c */; };
+		BEA8178C16FF5A31006653B8 /* sexy_image_grab_sub.c in Sources */ = {isa = PBXBuildFile; fileRef = BEA8178B16FF5A30006653B8 /* sexy_image_grab_sub.c */; };
+		BEA8178F16FF5E69006653B8 /* sexy_image_grab_sub_presets.c in Sources */ = {isa = PBXBuildFile; fileRef = BEA8178E16FF5E68006653B8 /* sexy_image_grab_sub_presets.c */; };
 		F33F5F8516F847AA00CE651D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F33F5F8416F847AA00CE651D /* UIKit.framework */; };
 		F33F5F8716F847AA00CE651D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F33F5F8616F847AA00CE651D /* Foundation.framework */; };
 		F33F5F8916F847AA00CE651D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F33F5F8816F847AA00CE651D /* CoreGraphics.framework */; };
@@ -32,6 +34,10 @@
 		BEA8178516F8C9E3006653B8 /* sexy_image_base.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sexy_image_base.h; sourceTree = "<group>"; };
 		BEA8178616F8C9EF006653B8 /* sexy_image_base.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sexy_image_base.c; sourceTree = "<group>"; };
 		BEA8178816F8CAEB006653B8 /* sexy_image_lib_core.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sexy_image_lib_core.c; sourceTree = "<group>"; };
+		BEA8178A16FF5A23006653B8 /* sexy_image_grab_sub.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sexy_image_grab_sub.h; sourceTree = "<group>"; };
+		BEA8178B16FF5A30006653B8 /* sexy_image_grab_sub.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sexy_image_grab_sub.c; sourceTree = "<group>"; };
+		BEA8178D16FF5E5B006653B8 /* sexy_image_grab_sub_presets.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sexy_image_grab_sub_presets.h; sourceTree = "<group>"; };
+		BEA8178E16FF5E68006653B8 /* sexy_image_grab_sub_presets.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sexy_image_grab_sub_presets.c; sourceTree = "<group>"; };
 		F33F5F8116F847AA00CE651D /* ImageStretchTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageStretchTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F33F5F8416F847AA00CE651D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		F33F5F8616F847AA00CE651D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -162,6 +168,10 @@
 				BEA8178516F8C9E3006653B8 /* sexy_image_base.h */,
 				BEA8178616F8C9EF006653B8 /* sexy_image_base.c */,
 				BEA8178816F8CAEB006653B8 /* sexy_image_lib_core.c */,
+				BEA8178A16FF5A23006653B8 /* sexy_image_grab_sub.h */,
+				BEA8178B16FF5A30006653B8 /* sexy_image_grab_sub.c */,
+				BEA8178D16FF5E5B006653B8 /* sexy_image_grab_sub_presets.h */,
+				BEA8178E16FF5E68006653B8 /* sexy_image_grab_sub_presets.c */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -252,6 +262,8 @@
 				F33F5FC716F86F1500CE651D /* UIImage+SexyImageOperation.m in Sources */,
 				BEA8178716F8C9EF006653B8 /* sexy_image_base.c in Sources */,
 				BEA8178916F8CAEB006653B8 /* sexy_image_lib_core.c in Sources */,
+				BEA8178C16FF5A31006653B8 /* sexy_image_grab_sub.c in Sources */,
+				BEA8178F16FF5E69006653B8 /* sexy_image_grab_sub_presets.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

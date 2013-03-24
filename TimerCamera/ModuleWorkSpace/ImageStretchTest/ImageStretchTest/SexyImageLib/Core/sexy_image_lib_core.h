@@ -10,6 +10,7 @@
 #define ImageStretchTest_sexy_image_lib_h
 
 #include "sexy_image_base.h"
+#include "sexy_image_grab_sub.h"
 #include "sexy_image_rotate.h"
 #include "sexy_image_stretch.h"
 
