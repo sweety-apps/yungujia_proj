@@ -93,7 +93,10 @@ void Sexy_GS_replace_grabbed_sub_image_to_raw_image(Sexy_Img_Grab_Sub* grab)
                 len = ret->rawImage->width - x_off;
             }
             dst_off = (l * width) * 4;
-            memcpy(&ret->rawImage->bmpBuffer[raw_off], &ret->grab.grabbedBmpBuffer[dst_off], len * 4);
+            if (raw_off >= 0)
+            {
+                memcpy(&ret->rawImage->bmpBuffer[raw_off], &ret->grab.grabbedBmpBuffer[dst_off], len * 4);
+            }
         }
     }
 }
@@ -107,5 +110,55 @@ void Sexy_GS_destroy_grabbed_sub_image(Sexy_Img_Grab_Sub* grab)
             free(grab->grab.grabbedBmpBuffer);
         }
         free(grab);
+    }
+}
+
+void Sexy_GS_switch_width_height_for_sub_image(Sexy_Img_Grab_Sub* grab)
+{
+    if (grab)
+    {
+        int width = grab->grab.width;
+        int height = grab->grab.height;
+        unsigned char* srcBuffer = grab->grab.grabbedBmpBuffer;
+        unsigned char* tmpBuffer = (unsigned char*)calloc(width * height, 4);
+        int dstOff = 0;
+        int srcOff = 0;
+        for (int y = 0; y < height; ++y)
+        {
+            for (int x = 0; x < width; ++x)
+            {
+                dstOff = ((x * height) + y) * 4;
+                srcOff = ((y * width) + x) * 4;
+                tmpBuffer[dstOff + 0] = srcBuffer[srcOff + 0];
+                tmpBuffer[dstOff + 1] = srcBuffer[srcOff + 1];
+                tmpBuffer[dstOff + 2] = srcBuffer[srcOff + 2];
+                tmpBuffer[dstOff + 3] = srcBuffer[srcOff + 3];
+            }
+        }
+        memcpy(srcBuffer, tmpBuffer, width * height * 4);
+        grab->grab.height = width;
+        grab->grab.width = height;
+        free(tmpBuffer);
+    }
+}
+
+void Sexy_GS_do_test_mark_at_sub_image(Sexy_Img_Grab_Sub* grab)
+{
+    if (grab)
+    {
+        int width = grab->grab.width;
+        int height = grab->grab.height;
+        unsigned char* srcBuffer = grab->grab.grabbedBmpBuffer;
+        int srcOff = 0;
+        for (int y = 0; y < height; ++y)
+        {
+            for (int x = 0; x < width; ++x)
+            {
+                srcOff = ((y * width) + x) * 4;
+                srcBuffer[srcOff + 0] = 255 - srcBuffer[srcOff + 0];
+                srcBuffer[srcOff + 1] = 255 - srcBuffer[srcOff + 1];
+                srcBuffer[srcOff + 2] = 255 - srcBuffer[srcOff + 2];
+            }
+        }
     }
 }

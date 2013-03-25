@@ -47,4 +47,8 @@ void Sexy_GS_replace_grabbed_sub_image_to_raw_image(Sexy_Img_Grab_Sub* grab);
 
 void Sexy_GS_destroy_grabbed_sub_image(Sexy_Img_Grab_Sub* grab);
 
+void Sexy_GS_switch_width_height_for_sub_image(Sexy_Img_Grab_Sub* grab);
+
+void Sexy_GS_do_test_mark_at_sub_image(Sexy_Img_Grab_Sub* grab);
+
 #endif

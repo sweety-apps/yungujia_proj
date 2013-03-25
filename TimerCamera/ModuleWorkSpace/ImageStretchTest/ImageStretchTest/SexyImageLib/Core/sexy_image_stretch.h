@@ -13,6 +13,12 @@
 
 //structure defines
 
+typedef enum eSexy_Stretch_Side{
+    kSexy_Stretch_Both_Side = 0,
+    kSexy_Stretch_Only_Left_Side = 1,
+    kSexy_Stretch_Only_Right_Side = 2,
+} Sexy_Stretch_Side;
+
 typedef float (*SEXY_STRECTCH_FUNCTION_RETUREN_WIDTH_STRETCH_PERCENT) (int lineNum, float stretch_percents, int width, int height);
 
 typedef struct tagSexy_Img_Stretch{
@@ -23,6 +29,7 @@ typedef struct tagSexy_Img_Stretch{
     struct tagStretch {
         SEXY_STRECTCH_FUNCTION_RETUREN_WIDTH_STRETCH_PERCENT style;
         float stretch_percents;
+        Sexy_Stretch_Side stretchSide;
     } stretch;
 } Sexy_Img_Stretch;
 
@@ -47,7 +54,7 @@ void Sexy_IS_destory(Sexy_Img_Stretch* obj);
 
 //stretch working functions
 
-void Sexy_IS_set_stretch_style(Sexy_Img_Stretch* obj, SEXY_STRECTCH_FUNCTION_RETUREN_WIDTH_STRETCH_PERCENT style, float stretch_percents);
+void Sexy_IS_set_stretch_style(Sexy_Img_Stretch* obj, SEXY_STRECTCH_FUNCTION_RETUREN_WIDTH_STRETCH_PERCENT style, float stretch_percents, Sexy_Stretch_Side stretchSide);
 
 void Sexy_IS_do_stretch(Sexy_Img_Stretch* obj);
 

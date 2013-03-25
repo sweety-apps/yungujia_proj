@@ -96,13 +96,14 @@ void Sexy_IS_destory(Sexy_Img_Stretch* obj)
 
 //stretch working functions
 
-void Sexy_IS_set_stretch_style(Sexy_Img_Stretch* obj, SEXY_STRECTCH_FUNCTION_RETUREN_WIDTH_STRETCH_PERCENT style, float stretch_percents)
+void Sexy_IS_set_stretch_style(Sexy_Img_Stretch* obj, SEXY_STRECTCH_FUNCTION_RETUREN_WIDTH_STRETCH_PERCENT style, float stretch_percents, Sexy_Stretch_Side stretchSide)
 {
     if (obj)
     {
         obj->stretch.style = style;
         stretch_percents = stretch_percents <= 0.0 ? 0.000000000001 : stretch_percents;
         obj->stretch.stretch_percents = stretch_percents;
+        obj->stretch.stretchSide = stretchSide;
     }
 }
 
@@ -151,6 +152,38 @@ static void caculateStretch(Sexy_Img_Stretch* obj, Sexy_Stretch_Pixel_Convert* p
     pStretch->x = x;
     pStretch->y = y;
     
+    //handle un stretched part
+    if (obj->stretch.stretchSide == kSexy_Stretch_Only_Left_Side)
+    {
+        if (x * 2 >= obj->width)
+        {
+            pStretch->line_convert.count = 1;
+            pStretch->line_convert.start_x = x;
+            pStretch->line_convert.percents[0] = 1.0;
+            pStretch->row_convert.up_percent = 0.f;
+            pStretch->row_convert.down_percent = 0.f;
+            pStretch->row_convert.up_x = 0;
+            pStretch->row_convert.down_x = 0;
+            return;
+        }
+    }
+    
+    if (obj->stretch.stretchSide == kSexy_Stretch_Only_Right_Side)
+    {
+        if (x * 2 <= obj->width)
+        {
+            pStretch->line_convert.count = 1;
+            pStretch->line_convert.start_x = x;
+            pStretch->line_convert.percents[0] = 1.0;
+            pStretch->row_convert.up_percent = 0.f;
+            pStretch->row_convert.down_percent = 0.f;
+            pStretch->row_convert.up_x = 0;
+            pStretch->row_convert.down_x = 0;
+            return;
+        }
+    }
+    
+    //handle stretched part
     if (x < dest_start_x)
     {
         //before dest
@@ -250,7 +283,7 @@ static void doStretchLine(Sexy_Img_Stretch* obj, Sexy_Stretch_Pixel_Convert* pSt
 
 void Sexy_IS_do_stretch(Sexy_Img_Stretch* obj)
 {
-    if (obj->stretch.style)
+    if (obj && obj->stretch.style)
     {
         //alloc tmp buffer
         int bufflen = obj->width*obj->height*4;
