@@ -52,7 +52,7 @@
     
     stretchLeg = Sexy_IS_create_no_copy(subLeg->grab.grabbedBmpBuffer, subLeg->grab.width, subLeg->grab.height);
     
-    Sexy_IS_set_stretch_style(stretchLeg, Sexy_IS_get_preset_stretch_style(SEXY_IS_STRETCH_STYLE_LINEAR_CURVE), 0.75, kSexy_Stretch_Both_Side);
+    Sexy_IS_set_stretch_style(stretchLeg, Sexy_IS_get_preset_stretch_style(SEXY_IS_STRETCH_STYLE_LINEAR_CURVE), 0.85, kSexy_Stretch_Both_Side);
     //Sexy_IS_set_stretch_style(stretchLeg, Sexy_IS_get_preset_stretch_style(SEXY_IS_STRETCH_STYLE_LINEAR), 0.8);
     
     Sexy_IS_do_stretch(stretchLeg);
