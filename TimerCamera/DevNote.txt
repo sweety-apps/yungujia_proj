@@ -1,0 +1,9 @@
+opencv ios:
+
+1. opencv 引用必须是.mm文件
+2. 文档: http://docs.opencv.org/doc/tutorials/ios/table_of_content_ios/table_of_content_ios.html
+
+body detection
+1. http://forum.processing.org/topic/experience-with-opencv-for-body-detection
+2. http://www.edaboard.com/thread217494.html
+3. http://www.researchgate.net/post/Is_there_any_mature_open_source_human_detection_and_tracking_system_algorithm

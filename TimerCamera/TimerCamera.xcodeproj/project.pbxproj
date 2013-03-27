@@ -7,13 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE081F8C170365E3001F5BB6 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE081F8B170365E3001F5BB6 /* opencv2.framework */; };
+		BE081F8F17036B28001F5BB6 /* DevNote.txt in Resources */ = {isa = PBXBuildFile; fileRef = BE081F8E17036B28001F5BB6 /* DevNote.txt */; };
 		BE0B5ED116F23AE700AEB833 /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0B5ED016F23AE700AEB833 /* RegexKitLite.m */; };
 		BE0B5ED316F23C0B00AEB833 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BE0B5ED216F23C0B00AEB833 /* libicucore.dylib */; };
 		BE19EBEE15F359B800065448 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE19EBED15F359B800065448 /* UIKit.framework */; };
 		BE19EBF015F359B800065448 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE19EBEF15F359B800065448 /* Foundation.framework */; };
 		BE19EBF215F359B800065448 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE19EBF115F359B800065448 /* CoreGraphics.framework */; };
 		BE19EBFA15F359B800065448 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BE19EBF915F359B800065448 /* main.m */; };
-		BE19EBFE15F359B800065448 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BE19EBFD15F359B800065448 /* AppDelegate.m */; };
+		BE19EBFE15F359B800065448 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = BE19EBFD15F359B800065448 /* AppDelegate.mm */; };
 		BE2903CB16C7FE9E00E172CE /* CustomizedUIImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2903CA16C7FE9D00E172CE /* CustomizedUIImagePickerController.m */; };
 		BE2903CE16C8032900E172CE /* CustomizedUIImagePickerNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2903CD16C8032900E172CE /* CustomizedUIImagePickerNavigationBar.m */; };
 		BE2903D116C80B0500E172CE /* NavigationBarBlackCat.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2903D016C80B0500E172CE /* NavigationBarBlackCat.m */; };
@@ -116,6 +118,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BE081F8B170365E3001F5BB6 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = OtherLibs/opencv2.framework; sourceTree = "<group>"; };
+		BE081F8E17036B28001F5BB6 /* DevNote.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DevNote.txt; sourceTree = "<group>"; };
 		BE0B5ECF16F23AE700AEB833 /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
 		BE0B5ED016F23AE700AEB833 /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
 		BE0B5ED216F23C0B00AEB833 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
@@ -127,7 +131,7 @@
 		BE19EBF915F359B800065448 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		BE19EBFB15F359B800065448 /* TimerCamera-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TimerCamera-Prefix.pch"; sourceTree = "<group>"; };
 		BE19EBFC15F359B800065448 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		BE19EBFD15F359B800065448 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		BE19EBFD15F359B800065448 /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 		BE2903C916C7FE9D00E172CE /* CustomizedUIImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomizedUIImagePickerController.h; sourceTree = "<group>"; };
 		BE2903CA16C7FE9D00E172CE /* CustomizedUIImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomizedUIImagePickerController.m; sourceTree = "<group>"; };
 		BE2903CC16C8032800E172CE /* CustomizedUIImagePickerNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomizedUIImagePickerNavigationBar.h; sourceTree = "<group>"; };
@@ -275,6 +279,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE081F8C170365E3001F5BB6 /* opencv2.framework in Frameworks */,
 				BE0B5ED316F23C0B00AEB833 /* libicucore.dylib in Frameworks */,
 				BE2B9F0716EB821800FDD749 /* libZXingWidget.a in Frameworks */,
 				BE2B9F1916ED00CE00FDD749 /* CoreVideo.framework in Frameworks */,
@@ -309,6 +314,7 @@
 		BE19EBDE15F359B700065448 = {
 			isa = PBXGroup;
 			children = (
+				BE081F8E17036B28001F5BB6 /* DevNote.txt */,
 				BE2B9D1F16EB81AD00FDD749 /* OtherLibs */,
 				BEEFD52D16973267004B93F8 /* Strings */,
 				BEB8E44E1646D36800DC5800 /* Resource */,
@@ -334,6 +340,7 @@
 			isa = PBXGroup;
 			children = (
 				BE0B5ED216F23C0B00AEB833 /* libicucore.dylib */,
+				BE081F8B170365E3001F5BB6 /* opencv2.framework */,
 				BE2B9F1816ED00CE00FDD749 /* CoreVideo.framework */,
 				BE2B9F1616ED00C100FDD749 /* CoreMedia.framework */,
 				BE2B9F1416ED009F00FDD749 /* libiconv.dylib */,
@@ -359,7 +366,7 @@
 				BED25FF416BD76200026EEDA /* UI */,
 				BED2603016BD76200026EEDA /* Utilities */,
 				BE19EBFC15F359B800065448 /* AppDelegate.h */,
-				BE19EBFD15F359B800065448 /* AppDelegate.m */,
+				BE19EBFD15F359B800065448 /* AppDelegate.mm */,
 				BE19EBF415F359B800065448 /* Supporting Files */,
 			);
 			path = TimerCamera;
@@ -763,6 +770,7 @@
 				BEEFD53016973270004B93F8 /* text.strings in Resources */,
 				BED2605416BD76200026EEDA /* ViewController_iPad.xib in Resources */,
 				BED2605616BD76200026EEDA /* ViewController_iPhone.xib in Resources */,
+				BE081F8F17036B28001F5BB6 /* DevNote.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -774,7 +782,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE19EBFA15F359B800065448 /* main.m in Sources */,
-				BE19EBFE15F359B800065448 /* AppDelegate.m in Sources */,
+				BE19EBFE15F359B800065448 /* AppDelegate.mm in Sources */,
 				BED2603316BD76200026EEDA /* AQPlayer.mm in Sources */,
 				BED2603416BD76200026EEDA /* AQRecorder.mm in Sources */,
 				BED2603516BD76200026EEDA /* AudioUtility.mm in Sources */,
@@ -870,6 +878,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
 				CODE_SIGN_IDENTITY = "iPhone Developer: JINXIN LI (DJJ4XT349N)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: JINXIN LI (DJJ4XT349N)";
 				COPY_PHASE_STRIP = NO;
@@ -888,6 +898,7 @@
 				HEADER_SEARCH_PATHS = (
 					./OtherLibs/ZXingWidget/Classes,
 					./OtherLibs/ZXingWidget/CoreSrc,
+					./OtherLibs/opencv2.framework/Headers,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PROVISIONING_PROFILE = "D755C29F-9CCB-4582-BE91-806CB7EDAD4D";
@@ -902,6 +913,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
 				CODE_SIGN_IDENTITY = "iPhone Developer: JINXIN LI (DJJ4XT349N)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: JINXIN LI (DJJ4XT349N)";
 				COPY_PHASE_STRIP = YES;
@@ -913,6 +926,7 @@
 				HEADER_SEARCH_PATHS = (
 					./OtherLibs/ZXingWidget/Classes,
 					./OtherLibs/ZXingWidget/CoreSrc,
+					./OtherLibs/opencv2.framework/Headers,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
@@ -929,10 +943,14 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer: JINXIN LI (DJJ4XT349N)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: JINXIN LI (DJJ4XT349N)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/OtherLibs\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TimerCamera/TimerCamera-Prefix.pch";
 				INFOPLIST_FILE = "TimerCamera/TimerCamera-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "C0F1B9AC-E6AE-46A2-AFD3-E195B5D9C8F3";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C0F1B9AC-E6AE-46A2-AFD3-E195B5D9C8F3";
@@ -945,10 +963,14 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer: JINXIN LI (DJJ4XT349N)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: JINXIN LI (DJJ4XT349N)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/OtherLibs\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TimerCamera/TimerCamera-Prefix.pch";
 				INFOPLIST_FILE = "TimerCamera/TimerCamera-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "C0F1B9AC-E6AE-46A2-AFD3-E195B5D9C8F3";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C0F1B9AC-E6AE-46A2-AFD3-E195B5D9C8F3";

@@ -42,7 +42,7 @@ using std::string;
 namespace {
   void add(string& result, unsigned char character) {
 #ifndef NO_ICONV
-    char s[] = { character & 0xff };
+    char s[] = { static_cast<char>(character & 0xff) };
     char* ss = s;
     size_t sl = sizeof(s);
     char d[4];

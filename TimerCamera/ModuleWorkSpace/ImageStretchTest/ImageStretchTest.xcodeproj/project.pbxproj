@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE081F8917035A82001F5BB6 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE081F8817035A82001F5BB6 /* opencv2.framework */; };
 		BEA8178716F8C9EF006653B8 /* sexy_image_base.c in Sources */ = {isa = PBXBuildFile; fileRef = BEA8178616F8C9EF006653B8 /* sexy_image_base.c */; };
 		BEA8178916F8CAEB006653B8 /* sexy_image_lib_core.c in Sources */ = {isa = PBXBuildFile; fileRef = BEA8178816F8CAEB006653B8 /* sexy_image_lib_core.c */; };
 		BEA8178C16FF5A31006653B8 /* sexy_image_grab_sub.c in Sources */ = {isa = PBXBuildFile; fileRef = BEA8178B16FF5A30006653B8 /* sexy_image_grab_sub.c */; };
@@ -22,7 +23,7 @@
 		F33F5F9716F847AA00CE651D /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = F33F5F9616F847AA00CE651D /* Default.png */; };
 		F33F5F9916F847AA00CE651D /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F33F5F9816F847AA00CE651D /* Default@2x.png */; };
 		F33F5F9B16F847AA00CE651D /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F33F5F9A16F847AA00CE651D /* Default-568h@2x.png */; };
-		F33F5F9E16F847AA00CE651D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F33F5F9D16F847AA00CE651D /* ViewController.m */; };
+		F33F5F9E16F847AA00CE651D /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F33F5F9D16F847AA00CE651D /* ViewController.mm */; };
 		F33F5FA116F847AB00CE651D /* ViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = F33F5F9F16F847AB00CE651D /* ViewController_iPhone.xib */; };
 		F33F5FA416F847AB00CE651D /* ViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = F33F5FA216F847AB00CE651D /* ViewController_iPad.xib */; };
 		F33F5FAB16F8483600CE651D /* fat_raw.png in Resources */ = {isa = PBXBuildFile; fileRef = F33F5FAA16F8483600CE651D /* fat_raw.png */; };
@@ -33,6 +34,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BE081F8817035A82001F5BB6 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = ImageStretchTest/opencv2.framework; sourceTree = "<group>"; };
 		BEA8178516F8C9E3006653B8 /* sexy_image_base.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sexy_image_base.h; sourceTree = "<group>"; };
 		BEA8178616F8C9EF006653B8 /* sexy_image_base.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sexy_image_base.c; sourceTree = "<group>"; };
 		BEA8178816F8CAEB006653B8 /* sexy_image_lib_core.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sexy_image_lib_core.c; sourceTree = "<group>"; };
@@ -56,7 +58,7 @@
 		F33F5F9816F847AA00CE651D /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		F33F5F9A16F847AA00CE651D /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		F33F5F9C16F847AA00CE651D /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		F33F5F9D16F847AA00CE651D /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		F33F5F9D16F847AA00CE651D /* ViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
 		F33F5FA016F847AB00CE651D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPhone.xib; sourceTree = "<group>"; };
 		F33F5FA316F847AB00CE651D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPad.xib; sourceTree = "<group>"; };
 		F33F5FAA16F8483600CE651D /* fat_raw.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fat_raw.png; path = ImageStretchTest/fat_raw.png; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE081F8917035A82001F5BB6 /* opencv2.framework in Frameworks */,
 				F32A55011702ADB40044F7FA /* QuartzCore.framework in Frameworks */,
 				F32A54FF1702ADA70044F7FA /* CoreImage.framework in Frameworks */,
 				F33F5F8516F847AA00CE651D /* UIKit.framework in Frameworks */,
@@ -108,6 +111,7 @@
 		F33F5F8316F847AA00CE651D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BE081F8817035A82001F5BB6 /* opencv2.framework */,
 				F32A55001702ADB40044F7FA /* QuartzCore.framework */,
 				F32A54FE1702ADA70044F7FA /* CoreImage.framework */,
 				F33F5F8416F847AA00CE651D /* UIKit.framework */,
@@ -124,7 +128,7 @@
 				F33F5F9316F847AA00CE651D /* AppDelegate.h */,
 				F33F5F9416F847AA00CE651D /* AppDelegate.m */,
 				F33F5F9C16F847AA00CE651D /* ViewController.h */,
-				F33F5F9D16F847AA00CE651D /* ViewController.m */,
+				F33F5F9D16F847AA00CE651D /* ViewController.mm */,
 				F33F5F9F16F847AB00CE651D /* ViewController_iPhone.xib */,
 				F33F5FA216F847AB00CE651D /* ViewController_iPad.xib */,
 				F33F5F8B16F847AA00CE651D /* Supporting Files */,
@@ -263,7 +267,7 @@
 			files = (
 				F33F5F9116F847AA00CE651D /* main.m in Sources */,
 				F33F5F9516F847AA00CE651D /* AppDelegate.m in Sources */,
-				F33F5F9E16F847AA00CE651D /* ViewController.m in Sources */,
+				F33F5F9E16F847AA00CE651D /* ViewController.mm in Sources */,
 				F33F5FC216F86E0200CE651D /* sexy_image_rotate.c in Sources */,
 				F33F5FC316F86E0200CE651D /* sexy_image_stretch.c in Sources */,
 				F33F5FC416F86E0200CE651D /* sexy_image_stretch_presets.c in Sources */,
@@ -329,7 +333,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -353,7 +357,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -364,8 +368,14 @@
 		F33F5FA816F847AB00CE651D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/ImageStretchTest\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ImageStretchTest/ImageStretchTest-Prefix.pch";
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/ImageStretchTest/opencv2.framework/Headers\"";
 				INFOPLIST_FILE = "ImageStretchTest/ImageStretchTest-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -375,8 +385,14 @@
 		F33F5FA916F847AB00CE651D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/ImageStretchTest\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ImageStretchTest/ImageStretchTest-Prefix.pch";
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/ImageStretchTest/opencv2.framework/Headers\"";
 				INFOPLIST_FILE = "ImageStretchTest/ImageStretchTest-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
