@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		BE081F8917035A82001F5BB6 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE081F8817035A82001F5BB6 /* opencv2.framework */; };
+		BE081F9217054231001F5BB6 /* EyeDectionViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = BE081F9117054231001F5BB6 /* EyeDectionViewController.mm */; };
+		BE081F9717054C15001F5BB6 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE081F9317054C15001F5BB6 /* Accelerate.framework */; };
+		BE081F9817054C15001F5BB6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE081F9417054C15001F5BB6 /* AVFoundation.framework */; };
+		BE081F9917054C15001F5BB6 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE081F9517054C15001F5BB6 /* CoreMedia.framework */; };
+		BE081F9A17054C15001F5BB6 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE081F9617054C15001F5BB6 /* CoreVideo.framework */; };
+		BE081F9C17054D2A001F5BB6 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE081F9B17054D2A001F5BB6 /* AssetsLibrary.framework */; };
 		BEA8178716F8C9EF006653B8 /* sexy_image_base.c in Sources */ = {isa = PBXBuildFile; fileRef = BEA8178616F8C9EF006653B8 /* sexy_image_base.c */; };
 		BEA8178916F8CAEB006653B8 /* sexy_image_lib_core.c in Sources */ = {isa = PBXBuildFile; fileRef = BEA8178816F8CAEB006653B8 /* sexy_image_lib_core.c */; };
 		BEA8178C16FF5A31006653B8 /* sexy_image_grab_sub.c in Sources */ = {isa = PBXBuildFile; fileRef = BEA8178B16FF5A30006653B8 /* sexy_image_grab_sub.c */; };
@@ -35,6 +41,13 @@
 
 /* Begin PBXFileReference section */
 		BE081F8817035A82001F5BB6 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = ImageStretchTest/opencv2.framework; sourceTree = "<group>"; };
+		BE081F9017054231001F5BB6 /* EyeDectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EyeDectionViewController.h; path = ImageStretchTest/EyeDectionViewController.h; sourceTree = SOURCE_ROOT; };
+		BE081F9117054231001F5BB6 /* EyeDectionViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = EyeDectionViewController.mm; path = ImageStretchTest/EyeDectionViewController.mm; sourceTree = SOURCE_ROOT; };
+		BE081F9317054C15001F5BB6 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		BE081F9417054C15001F5BB6 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		BE081F9517054C15001F5BB6 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		BE081F9617054C15001F5BB6 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		BE081F9B17054D2A001F5BB6 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		BEA8178516F8C9E3006653B8 /* sexy_image_base.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sexy_image_base.h; sourceTree = "<group>"; };
 		BEA8178616F8C9EF006653B8 /* sexy_image_base.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sexy_image_base.c; sourceTree = "<group>"; };
 		BEA8178816F8CAEB006653B8 /* sexy_image_lib_core.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sexy_image_lib_core.c; sourceTree = "<group>"; };
@@ -78,6 +91,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE081F9C17054D2A001F5BB6 /* AssetsLibrary.framework in Frameworks */,
+				BE081F9717054C15001F5BB6 /* Accelerate.framework in Frameworks */,
+				BE081F9817054C15001F5BB6 /* AVFoundation.framework in Frameworks */,
+				BE081F9917054C15001F5BB6 /* CoreMedia.framework in Frameworks */,
+				BE081F9A17054C15001F5BB6 /* CoreVideo.framework in Frameworks */,
 				BE081F8917035A82001F5BB6 /* opencv2.framework in Frameworks */,
 				F32A55011702ADB40044F7FA /* QuartzCore.framework in Frameworks */,
 				F32A54FF1702ADA70044F7FA /* CoreImage.framework in Frameworks */,
@@ -111,6 +129,11 @@
 		F33F5F8316F847AA00CE651D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BE081F9B17054D2A001F5BB6 /* AssetsLibrary.framework */,
+				BE081F9317054C15001F5BB6 /* Accelerate.framework */,
+				BE081F9417054C15001F5BB6 /* AVFoundation.framework */,
+				BE081F9517054C15001F5BB6 /* CoreMedia.framework */,
+				BE081F9617054C15001F5BB6 /* CoreVideo.framework */,
 				BE081F8817035A82001F5BB6 /* opencv2.framework */,
 				F32A55001702ADB40044F7FA /* QuartzCore.framework */,
 				F32A54FE1702ADA70044F7FA /* CoreImage.framework */,
@@ -156,6 +179,8 @@
 				F33F5FB816F86E0200CE651D /* Android */,
 				F33F5FB916F86E0200CE651D /* Core */,
 				F33F5FC116F86E0200CE651D /* iOS */,
+				BE081F9017054231001F5BB6 /* EyeDectionViewController.h */,
+				BE081F9117054231001F5BB6 /* EyeDectionViewController.mm */,
 			);
 			path = SexyImageLib;
 			sourceTree = "<group>";
@@ -276,6 +301,7 @@
 				BEA8178916F8CAEB006653B8 /* sexy_image_lib_core.c in Sources */,
 				BEA8178C16FF5A31006653B8 /* sexy_image_grab_sub.c in Sources */,
 				BEA8178F16FF5E69006653B8 /* sexy_image_grab_sub_presets.c in Sources */,
+				BE081F9217054231001F5BB6 /* EyeDectionViewController.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

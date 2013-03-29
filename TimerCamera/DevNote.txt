@@ -2,6 +2,7 @@ opencv ios:
 
 1. opencv 引用必须是.mm文件
 2. 文档: http://docs.opencv.org/doc/tutorials/ios/table_of_content_ios/table_of_content_ios.html
+3. opencv摄像头iOS5崩溃: http://stackoverflow.com/questions/14206014/opencv-2-4-3-symbol-not-found-objc-setproperty-nonatomic-on-ios-5
 
 body detection
 1. http://forum.processing.org/topic/experience-with-opencv-for-body-detection

@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "UIImage+SexyImageOperation.h"
+#import "EyeDectionViewController.h"
 #import <CoreImage/CoreImage.h>
 #import <QuartzCore/QuartzCore.h>
 #import <highgui/highgui_c.h>
@@ -139,6 +140,12 @@
     //[beginImage setTransform:CGAffineTransformMakeScale(1, -1)];
 }
 
+- (void)testOpencvDetection
+{
+    EyeDectionViewController* eyeDtcCtrl = [[[EyeDectionViewController alloc] init] autorelease];
+    [self presentModalViewController:eyeDtcCtrl animated:YES];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -157,7 +164,8 @@
 {
     //self.imageView.image = [_imageView.image testStretchedImage];
     //[self testCI];
-    [self testDetection];
+    //[self testDetection];
+    [self testOpencvDetection];;
 }
 
 @end
