@@ -37,6 +37,9 @@
 		F33F5FC316F86E0200CE651D /* sexy_image_stretch.c in Sources */ = {isa = PBXBuildFile; fileRef = F33F5FBD16F86E0200CE651D /* sexy_image_stretch.c */; };
 		F33F5FC416F86E0200CE651D /* sexy_image_stretch_presets.c in Sources */ = {isa = PBXBuildFile; fileRef = F33F5FBF16F86E0200CE651D /* sexy_image_stretch_presets.c */; };
 		F33F5FC716F86F1500CE651D /* UIImage+SexyImageOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F33F5FC616F86F1500CE651D /* UIImage+SexyImageOperation.m */; };
+		F38CE76217056FF6005AB968 /* cap_ios_abstract_camera.mm in Sources */ = {isa = PBXBuildFile; fileRef = F38CE75F17056FF6005AB968 /* cap_ios_abstract_camera.mm */; };
+		F38CE76317056FF6005AB968 /* cap_ios_photo_camera.mm in Sources */ = {isa = PBXBuildFile; fileRef = F38CE76017056FF6005AB968 /* cap_ios_photo_camera.mm */; };
+		F38CE76417056FF6005AB968 /* cap_ios_video_camera.mm in Sources */ = {isa = PBXBuildFile; fileRef = F38CE76117056FF6005AB968 /* cap_ios_video_camera.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,6 +87,9 @@
 		F33F5FC016F86E0200CE651D /* sexy_image_stretch_presets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sexy_image_stretch_presets.h; sourceTree = "<group>"; };
 		F33F5FC516F86F1500CE651D /* UIImage+SexyImageOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+SexyImageOperation.h"; sourceTree = "<group>"; };
 		F33F5FC616F86F1500CE651D /* UIImage+SexyImageOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+SexyImageOperation.m"; sourceTree = "<group>"; };
+		F38CE75F17056FF6005AB968 /* cap_ios_abstract_camera.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = cap_ios_abstract_camera.mm; sourceTree = "<group>"; };
+		F38CE76017056FF6005AB968 /* cap_ios_photo_camera.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = cap_ios_photo_camera.mm; sourceTree = "<group>"; };
+		F38CE76117056FF6005AB968 /* cap_ios_video_camera.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = cap_ios_video_camera.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,7 +153,10 @@
 		F33F5F8A16F847AA00CE651D /* ImageStretchTest */ = {
 			isa = PBXGroup;
 			children = (
+				F38CE75E17056FF6005AB968 /* opencvIOScamExtra */,
 				F33F5FB716F86E0200CE651D /* SexyImageLib */,
+				BE081F9017054231001F5BB6 /* EyeDectionViewController.h */,
+				BE081F9117054231001F5BB6 /* EyeDectionViewController.mm */,
 				F33F5F9316F847AA00CE651D /* AppDelegate.h */,
 				F33F5F9416F847AA00CE651D /* AppDelegate.m */,
 				F33F5F9C16F847AA00CE651D /* ViewController.h */,
@@ -179,8 +188,6 @@
 				F33F5FB816F86E0200CE651D /* Android */,
 				F33F5FB916F86E0200CE651D /* Core */,
 				F33F5FC116F86E0200CE651D /* iOS */,
-				BE081F9017054231001F5BB6 /* EyeDectionViewController.h */,
-				BE081F9117054231001F5BB6 /* EyeDectionViewController.mm */,
 			);
 			path = SexyImageLib;
 			sourceTree = "<group>";
@@ -220,6 +227,16 @@
 				F33F5FC616F86F1500CE651D /* UIImage+SexyImageOperation.m */,
 			);
 			path = iOS;
+			sourceTree = "<group>";
+		};
+		F38CE75E17056FF6005AB968 /* opencvIOScamExtra */ = {
+			isa = PBXGroup;
+			children = (
+				F38CE75F17056FF6005AB968 /* cap_ios_abstract_camera.mm */,
+				F38CE76017056FF6005AB968 /* cap_ios_photo_camera.mm */,
+				F38CE76117056FF6005AB968 /* cap_ios_video_camera.mm */,
+			);
+			path = opencvIOScamExtra;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -302,6 +319,9 @@
 				BEA8178C16FF5A31006653B8 /* sexy_image_grab_sub.c in Sources */,
 				BEA8178F16FF5E69006653B8 /* sexy_image_grab_sub_presets.c in Sources */,
 				BE081F9217054231001F5BB6 /* EyeDectionViewController.mm in Sources */,
+				F38CE76217056FF6005AB968 /* cap_ios_abstract_camera.mm in Sources */,
+				F38CE76317056FF6005AB968 /* cap_ios_photo_camera.mm in Sources */,
+				F38CE76417056FF6005AB968 /* cap_ios_video_camera.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
