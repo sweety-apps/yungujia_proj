@@ -16,8 +16,11 @@
 
 @interface DemoVideoCaptureViewController : VideoCaptureViewController
 {
-    cv::CascadeClassifier _faceCascade;
+    NSMutableArray* _cascadeDetectors;
+    NSMutableArray* _featureLayers;
 }
+
+@property (nonatomic, retain) IBOutlet UIImageView* imageView;
 
 - (IBAction)toggleFps:(id)sender;
 - (IBAction)toggleTorch:(id)sender;

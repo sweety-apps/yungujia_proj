@@ -13,22 +13,74 @@
 //
 
 #import "UIImage+OpenCV.h"
-
 #import "DemoVideoCaptureViewController.h"
 
-// Name of face cascade resource file without xml extension
-NSString * const kFaceCascadeFilename = @"haarcascade_frontalface_alt2";
+#pragma mark - HaarDetectorWarrper
 
-// Options for cv::CascadeClassifier::detectMultiScale
-const int kHaarOptions =  CV_HAAR_FIND_BIGGEST_OBJECT | CV_HAAR_DO_ROUGH_SEARCH;
+@interface HaarDetectorWarpper : NSObject
+
+@property (nonatomic, retain) NSString * cascadeFileName;
+@property (nonatomic, assign) int haarOptions;
+@property (nonatomic, assign) cv::CascadeClassifier featureCascade;
+@property (nonatomic, assign, readonly) BOOL canDetect;
+@property (nonatomic, retain) UIColor* markedBorderColor;
+
+@end
+
+@implementation HaarDetectorWarpper
+
+@synthesize cascadeFileName = _cascadeFileName;
+@synthesize haarOptions = _haarOptions;
+@synthesize featureCascade = _featureCascade;
+@synthesize canDetect = _canDetect;
+@synthesize markedBorderColor = _markedBorderColor;
+
+- (id)initWith:(NSString*)fileName options:(int)haarOptions markedBorderColor:(UIColor*)color
+{
+    self = [super init];
+    if (self)
+    {
+        self.cascadeFileName = fileName;
+        self.haarOptions = haarOptions;
+        self.markedBorderColor = color;
+        
+        if (!_featureCascade.load([fileName UTF8String]))
+        {
+            _canDetect = NO;
+        }
+        else
+        {
+            _canDetect = YES;
+        }
+    }
+    return self;
+}
+
+- (void)dealloc
+{
+    self.cascadeFileName = nil;
+    self.markedBorderColor = nil;
+    [super dealloc];
+}
+
+@end
+
+#pragma mark - DemoVideoCaptureViewController
 
 @interface DemoVideoCaptureViewController ()
 - (void)displayFaces:(const std::vector<cv::Rect> &)faces 
        forVideoRect:(CGRect)rect 
     videoOrientation:(AVCaptureVideoOrientation)videoOrientation;
+- (void)displayFaces:(const std::vector<cv::Rect> &)features
+        forVideoRect:(CGRect)rect
+    videoOrientation:(AVCaptureVideoOrientation)videoOrientation
+   markedBorderColor:(UIColor*)color
+     layerStartIndex:(int)index;
 @end
 
 @implementation DemoVideoCaptureViewController
+
+@synthesize imageView = _imageView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -40,23 +92,71 @@ const int kHaarOptions =  CV_HAAR_FIND_BIGGEST_OBJECT | CV_HAAR_DO_ROUGH_SEARCH;
     return self;
 }
 
-#pragma mark - View lifecycle
+#pragma mark View lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    // Load the face Haar cascade from resources
-    NSString *faceCascadePath = [[NSBundle mainBundle] pathForResource:kFaceCascadeFilename ofType:@"xml"];
+    _featureLayers = [[NSMutableArray array] retain];
+    _cascadeDetectors = [[NSMutableArray array] retain];
     
-    if (!_faceCascade.load([faceCascadePath UTF8String])) {
-        NSLog(@"Could not load face cascade: %@", faceCascadePath);
+    // Name of face cascade resource file without xml extension
+    NSString* cascadeFilenames[] = {
+        @"haarcascade_fullbody",
+        @"haarcascade_lowerbody",
+        @"haarcascade_mcs_upperbody",
+        @"haarcascade_frontalface_alt2",
+        @"haarcascade_lefteye_2splits",
+        @"haarcascade_righteye_2splits",
+        @"haarcascade_mcs_nose",
+        @"haarcascade_mcs_mouth",
+    };
+    
+    // Options for cv::CascadeClassifier::detectMultiScale
+    int haarOptions[] = {
+        CV_HAAR_FIND_BIGGEST_OBJECT | CV_HAAR_DO_ROUGH_SEARCH,
+        CV_HAAR_FIND_BIGGEST_OBJECT | CV_HAAR_DO_ROUGH_SEARCH,
+        CV_HAAR_FIND_BIGGEST_OBJECT | CV_HAAR_DO_ROUGH_SEARCH,
+        CV_HAAR_FIND_BIGGEST_OBJECT | CV_HAAR_DO_ROUGH_SEARCH,
+        CV_HAAR_FIND_BIGGEST_OBJECT | CV_HAAR_DO_ROUGH_SEARCH,
+        CV_HAAR_FIND_BIGGEST_OBJECT | CV_HAAR_DO_ROUGH_SEARCH,
+        CV_HAAR_FIND_BIGGEST_OBJECT | CV_HAAR_DO_ROUGH_SEARCH,
+        CV_HAAR_FIND_BIGGEST_OBJECT | CV_HAAR_DO_ROUGH_SEARCH
+    };
+    
+    //Layer mark border color
+    UIColor* colors[] = {
+        [UIColor blueColor],
+        [UIColor greenColor],
+        [UIColor grayColor],
+        [UIColor redColor],
+        [UIColor yellowColor],
+        [UIColor orangeColor],
+        [UIColor cyanColor],
+        [UIColor purpleColor]
+    };
+    
+    // Load the face Haar cascade from resources
+    for (int i = 0; i < sizeof(cascadeFilenames)/sizeof(NSString*); ++i)
+    {
+        NSString *faceCascadePath = [[NSBundle mainBundle] pathForResource:cascadeFilenames[i] ofType:@"xml"];
+        HaarDetectorWarpper* warpper = [[[HaarDetectorWarpper alloc] initWith:faceCascadePath options:haarOptions[i] markedBorderColor:colors[i]] autorelease];
+        [_cascadeDetectors addObject:warpper];
     }
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
+}
+
+- (void)dealloc
+{
+    self.imageView = nil;
+    [_cascadeDetectors release];
+    [_featureLayers release];
+    [super dealloc];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -95,42 +195,124 @@ const int kHaarOptions =  CV_HAAR_FIND_BIGGEST_OBJECT | CV_HAAR_DO_ROUGH_SEARCH;
 
 - (void)processFrame:(cv::Mat &)mat videoRect:(CGRect)rect videoOrientation:(AVCaptureVideoOrientation)videOrientation
 {
-    // Shrink video frame to 320X240
-    cv::resize(mat, mat, cv::Size(), 0.5f, 0.5f, CV_INTER_LINEAR);
-    rect.size.width /= 2.0f;
-    rect.size.height /= 2.0f;
-    
-    // Rotate video frame by 90deg to portrait by combining a transpose and a flip
-    // Note that AVCaptureVideoDataOutput connection does NOT support hardware-accelerated
-    // rotation and mirroring via videoOrientation and setVideoMirrored properties so we
-    // need to do the rotation in software here.
-    cv::transpose(mat, mat);
-    CGFloat temp = rect.size.width;
-    rect.size.width = rect.size.height;
-    rect.size.height = temp;
-    
-    if (videOrientation == AVCaptureVideoOrientationLandscapeRight)
+    if (self.imageView.hidden)
     {
-        // flip around y axis for back camera
-        cv::flip(mat, mat, 1);
+        // Shrink video frame to 320X240
+        cv::resize(mat, mat, cv::Size(), 0.5f, 0.5f, CV_INTER_LINEAR);
+        rect.size.width /= 2.0f;
+        rect.size.height /= 2.0f;
+        
+        // Rotate video frame by 90deg to portrait by combining a transpose and a flip
+        // Note that AVCaptureVideoDataOutput connection does NOT support hardware-accelerated
+        // rotation and mirroring via videoOrientation and setVideoMirrored properties so we
+        // need to do the rotation in software here.
+        cv::transpose(mat, mat);
+        CGFloat temp = rect.size.width;
+        rect.size.width = rect.size.height;
+        rect.size.height = temp;
+        
+        if (videOrientation == AVCaptureVideoOrientationLandscapeRight)
+        {
+            // flip around y axis for back camera
+            cv::flip(mat, mat, 1);
+        }
+        else {
+            // Front camera output needs to be mirrored to match preview layer so no flip is required here
+        }
+        
+        videOrientation = AVCaptureVideoOrientationPortrait;
+        
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [self clearFeatureMarkedLayers];
+        });
+        
+        int index = 0;
+        
+        for (HaarDetectorWarpper* warpper in _cascadeDetectors)
+        {
+            if (warpper.canDetect)
+            {
+                // Detect faces
+                std::vector<cv::Rect> faces;
+                warpper.featureCascade.detectMultiScale(mat, faces, 1.1, 2, warpper.haarOptions, cv::Size(20, 20));
+                // Dispatch updating of face markers to main queue
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    [self displayFaces:faces
+                          forVideoRect:rect
+                      videoOrientation:videOrientation
+                     markedBorderColor:warpper.markedBorderColor
+                       layerStartIndex:index];
+                });
+                index += faces.size();
+            }
+        }
     }
-    else {
-        // Front camera output needs to be mirrored to match preview layer so no flip is required here
+    else
+    {
+        static BOOL gHasDetected = NO;
+        if (gHasDetected)
+        {
+            return;
+        }
+        
+        // Shrink video frame to 320X240
+        cv::Mat imageMat = self.imageView.image.CVMat;;
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            
+        });
+        rect.size = self.imageView.image.size;
+        
+//        // Rotate video frame by 90deg to portrait by combining a transpose and a flip
+//        // Note that AVCaptureVideoDataOutput connection does NOT support hardware-accelerated
+//        // rotation and mirroring via videoOrientation and setVideoMirrored properties so we
+//        // need to do the rotation in software here.
+//        cv::transpose(imageMat, imageMat);
+//        CGFloat temp = rect.size.width;
+//        rect.size.width = rect.size.height;
+//        rect.size.height = temp;
+//        
+//        if (videOrientation == AVCaptureVideoOrientationLandscapeRight)
+//        {
+//            // flip around y axis for back camera
+//            cv::flip(imageMat, imageMat, 1);
+//        }
+//        else {
+//            // Front camera output needs to be mirrored to match preview layer so no flip is required here
+//        }
+        
+        videOrientation = AVCaptureVideoOrientationPortrait;
+        
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [self clearFeatureMarkedLayers];
+        });
+        
+        int index = 0;
+        
+        for (HaarDetectorWarpper* warpper in _cascadeDetectors)
+        {
+            if (warpper.canDetect)
+            {
+                // Detect faces
+                std::vector<cv::Rect> faces;
+                warpper.featureCascade.detectMultiScale(imageMat, faces, 1.1, 2,warpper.haarOptions,cv::Size(6, 6));
+                // Dispatch updating of face markers to main queue
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    [self displayFaces:faces
+                          forVideoRect:rect
+                      videoOrientation:videOrientation
+                     markedBorderColor:warpper.markedBorderColor
+                       layerStartIndex:index
+                          resizeFactor:1.0];
+                });
+                index += faces.size();
+            }
+        }
+        gHasDetected = YES;
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            self.imageView.image = [UIImage imageWithCVMat:imageMat];
+        });
     }
-       
-    videOrientation = AVCaptureVideoOrientationPortrait;
     
-    // Detect faces
-    std::vector<cv::Rect> faces;
-    
-    _faceCascade.detectMultiScale(mat, faces, 1.1, 2, kHaarOptions, cv::Size(60, 60));
-    
-    // Dispatch updating of face markers to main queue
-    dispatch_sync(dispatch_get_main_queue(), ^{
-        [self displayFaces:faces
-             forVideoRect:rect
-          videoOrientation:videOrientation];    
-    });
 }
 
 // Update face markers given vector of face rectangles
@@ -138,18 +320,13 @@ const int kHaarOptions =  CV_HAAR_FIND_BIGGEST_OBJECT | CV_HAAR_DO_ROUGH_SEARCH;
        forVideoRect:(CGRect)rect 
     videoOrientation:(AVCaptureVideoOrientation)videoOrientation
 {
-    NSArray *sublayers = [NSArray arrayWithArray:[self.view.layer sublayers]];
-    int sublayersCount = [sublayers count];
-    int currentSublayer = 0;
-    
-	[CATransaction begin];
+    [CATransaction begin];
 	[CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
 	
 	// hide all the face layers
-	for (CALayer *layer in sublayers) {
-        NSString *layerName = [layer name];
-		if ([layerName isEqualToString:@"FaceLayer"])
-			[layer setHidden:YES];
+	for (CALayer *layer in _featureLayers)
+    {
+        [layer setHidden:YES];
 	}	
     
     // Create transform to convert from vide frame coordinate space to view coordinate space
@@ -167,23 +344,92 @@ const int kHaarOptions =  CV_HAAR_FIND_BIGGEST_OBJECT | CV_HAAR_DO_ROUGH_SEARCH;
         
         CALayer *featureLayer = nil;
         
-        while (!featureLayer && (currentSublayer < sublayersCount)) {
-			CALayer *currentLayer = [sublayers objectAtIndex:currentSublayer++];
-			if ([[currentLayer name] isEqualToString:@"FaceLayer"]) {
-				featureLayer = currentLayer;
-				[currentLayer setHidden:NO];
-			}
-		}
-        
-        if (!featureLayer) {
+        if ([_featureLayers count] <= i)
+        {
             // Create a new feature marker layer
 			featureLayer = [[CALayer alloc] init];
             featureLayer.name = @"FaceLayer";
             featureLayer.borderColor = [[UIColor redColor] CGColor];
             featureLayer.borderWidth = 10.0f;
+            [_featureLayers addObject:featureLayer];
 			[self.view.layer addSublayer:featureLayer];
 			[featureLayer release];
-		}
+        }
+        
+        featureLayer = [_featureLayers objectAtIndex:i];
+        
+        [featureLayer setHidden:NO];
+        
+        featureLayer.frame = faceRect;
+    }
+    
+    [CATransaction commit];
+}
+
+- (void)clearFeatureMarkedLayers
+{
+    // hide all the face layers
+	for (CALayer *layer in _featureLayers)
+    {
+        [layer setHidden:YES];
+	}
+}
+
+// Update face markers given vector of face rectangles
+- (void)displayFaces:(const std::vector<cv::Rect> &)features
+        forVideoRect:(CGRect)rect
+    videoOrientation:(AVCaptureVideoOrientation)videoOrientation
+   markedBorderColor:(UIColor*)color
+     layerStartIndex:(int)index
+{
+    [self displayFaces:features
+          forVideoRect:rect
+      videoOrientation:videoOrientation
+     markedBorderColor:color
+       layerStartIndex:index
+          resizeFactor:1.0];
+}
+
+// Update face markers given vector of face rectangles
+- (void)displayFaces:(const std::vector<cv::Rect> &)features
+        forVideoRect:(CGRect)rect
+    videoOrientation:(AVCaptureVideoOrientation)videoOrientation
+   markedBorderColor:(UIColor*)color
+     layerStartIndex:(int)index
+        resizeFactor:(float)resizeFactor;
+{
+    [CATransaction begin];
+	[CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
+    
+    // Create transform to convert from vide frame coordinate space to view coordinate space
+    CGAffineTransform t = [self affineTransformForVideoFrame:rect orientation:videoOrientation];
+    
+    for (int i = 0; i < features.size(); i++) {
+        
+        CGRect faceRect;
+        faceRect.origin.x = features[i].x * resizeFactor;
+        faceRect.origin.y = features[i].y * resizeFactor;
+        faceRect.size.width = features[i].width * resizeFactor;
+        faceRect.size.height = features[i].height * resizeFactor;
+        
+        faceRect = CGRectApplyAffineTransform(faceRect, t);
+        
+        CALayer *featureLayer = nil;
+        
+        if ([_featureLayers count] <= index + i)
+        {
+            // Create a new feature marker layer
+			featureLayer = [[CALayer alloc] init];
+            featureLayer.borderColor = [color CGColor];
+            featureLayer.borderWidth = 3.0f;
+            [_featureLayers addObject:featureLayer];
+			[self.view.layer addSublayer:featureLayer];
+			[featureLayer release];
+        }
+        
+        featureLayer = [_featureLayers objectAtIndex:index + i];
+        
+        [featureLayer setHidden:NO];
         
         featureLayer.frame = faceRect;
     }
