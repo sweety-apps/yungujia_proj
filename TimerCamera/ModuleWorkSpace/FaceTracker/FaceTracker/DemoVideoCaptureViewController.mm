@@ -14,6 +14,19 @@
 
 #import "UIImage+OpenCV.h"
 #import "DemoVideoCaptureViewController.h"
+#include <sys/time.h>
+#include <unistd.h>
+
+static long long getTimeInMicrosecond()
+{
+	long long timebysec = 0;
+	struct timeval tv;
+	if(gettimeofday(&tv,NULL)!=0)
+		return 0;
+	timebysec +=  (long long)tv.tv_sec * 1000000;
+	timebysec += tv.tv_usec ;
+	return timebysec;
+}
 
 static BOOL gHasDetected = NO;
 static int gImageIndex = 0;
@@ -22,6 +35,7 @@ static int gImageIndex = 0;
 
 @interface HaarDetectorWarpper : NSObject
 
+@property (nonatomic, retain) NSString * cascadeFilePath;
 @property (nonatomic, retain) NSString * cascadeFileName;
 @property (nonatomic, assign) int haarOptions;
 @property (nonatomic, assign) cv::CascadeClassifier featureCascade;
@@ -32,22 +46,24 @@ static int gImageIndex = 0;
 
 @implementation HaarDetectorWarpper
 
+@synthesize cascadeFilePath = _cascadeFilePath;
 @synthesize cascadeFileName = _cascadeFileName;
 @synthesize haarOptions = _haarOptions;
 @synthesize featureCascade = _featureCascade;
 @synthesize canDetect = _canDetect;
 @synthesize markedBorderColor = _markedBorderColor;
 
-- (id)initWith:(NSString*)fileName options:(int)haarOptions markedBorderColor:(UIColor*)color
+- (id)initWith:(NSString*)fileName filePath:(NSString*)filePath options:(int)haarOptions markedBorderColor:(UIColor*)color
 {
     self = [super init];
     if (self)
     {
+        self.cascadeFilePath = filePath;
         self.cascadeFileName = fileName;
         self.haarOptions = haarOptions;
         self.markedBorderColor = color;
         
-        if (!_featureCascade.load([fileName UTF8String]))
+        if (!_featureCascade.load([filePath UTF8String]))
         {
             _canDetect = NO;
         }
@@ -61,6 +77,7 @@ static int gImageIndex = 0;
 
 - (void)dealloc
 {
+    self.cascadeFilePath = nil;
     self.cascadeFileName = nil;
     self.markedBorderColor = nil;
     [super dealloc];
@@ -106,7 +123,7 @@ static int gImageIndex = 0;
     
     // Name of face cascade resource file without xml extension
     NSString* cascadeFilenames[] = {
-        @"haarcascade_fullbody",
+        //@"haarcascade_fullbody",
         @"haarcascade_lowerbody",
         @"haarcascade_frontalface_alt2",
         @"haarcascade_mcs_upperbody",
@@ -144,7 +161,7 @@ static int gImageIndex = 0;
     for (int i = 0; i < sizeof(cascadeFilenames)/sizeof(NSString*); ++i)
     {
         NSString *faceCascadePath = [[NSBundle mainBundle] pathForResource:cascadeFilenames[i] ofType:@"xml"];
-        HaarDetectorWarpper* warpper = [[[HaarDetectorWarpper alloc] initWith:faceCascadePath options:haarOptions[i] markedBorderColor:colors[i]] autorelease];
+        HaarDetectorWarpper* warpper = [[[HaarDetectorWarpper alloc] initWith:cascadeFilenames[i] filePath:faceCascadePath options:haarOptions[i] markedBorderColor:colors[i]] autorelease];
         [_cascadeDetectors addObject:warpper];
     }
 }
@@ -156,6 +173,7 @@ static int gImageIndex = 0;
 
 - (void)dealloc
 {
+    self.debugLabel = nil;
     self.changeButton = nil;
     self.imageView = nil;
     [_cascadeDetectors release];
@@ -268,9 +286,12 @@ static int gImageIndex = 0;
             return;
         }
         
+        NSString* debugLog = @"";
+        
         dispatch_sync(dispatch_get_main_queue(), ^{
             self.changeButton.userInteractionEnabled = NO;
             [self.changeButton setTitle:@"Detecting" forState:UIControlStateNormal];
+            self.debugLabel.text = debugLog;
         });
         
         // Shrink video frame to 320X240
@@ -345,15 +366,22 @@ static int gImageIndex = 0;
             [self clearFeatureMarkedLayers];
         });
         
+        long long debugTotalTs = getTimeInMicrosecond();
+        
         int index = 0;
         
         for (HaarDetectorWarpper* warpper in _cascadeDetectors)
         {
             if (warpper.canDetect)
             {
+                long long debugStepTs = getTimeInMicrosecond();
+                
                 // Detect faces
                 std::vector<cv::Rect> faces;
                 warpper.featureCascade.detectMultiScale(imageMat, faces, 1.1, 2,warpper.haarOptions,cv::Size(6, 6));
+                
+                debugLog = [debugLog stringByAppendingFormat:@"[step] %@ used %llu ms\n",warpper.cascadeFileName, (getTimeInMicrosecond() - debugStepTs)/1000];
+                
                 // Dispatch updating of face markers to main queue
                 dispatch_sync(dispatch_get_main_queue(), ^{
                     [self displayFaces:faces
@@ -365,15 +393,20 @@ static int gImageIndex = 0;
                shouldTransFormForVideo:NO
                                 startX:imageX*0.5
                                 startY:imageY*0.5];
+                    self.debugLabel.text = debugLog;
                 });
                 index += faces.size();
             }
         }
+        
+        debugLog = [debugLog stringByAppendingFormat:@"{{total}} all used %llu ms\n", (getTimeInMicrosecond() - debugTotalTs)/1000];
+        
         gHasDetected = YES;
         dispatch_sync(dispatch_get_main_queue(), ^{
             //self.imageView.image = [UIImage imageWithCVMat:imageMat];
             self.changeButton.userInteractionEnabled = YES;
             [self.changeButton setTitle:@"Change" forState:UIControlStateNormal];
+            self.debugLabel.text = debugLog;
         });
     }
     
@@ -493,7 +526,6 @@ shouldTransFormForVideo:(BOOL)trans
         {
             // Create a new feature marker layer
 			featureLayer = [[CALayer alloc] init];
-            featureLayer.borderColor = [color CGColor];
             featureLayer.borderWidth = 3.0f;
             [_featureLayers addObject:featureLayer];
 			[self.view.layer addSublayer:featureLayer];
@@ -504,6 +536,7 @@ shouldTransFormForVideo:(BOOL)trans
         
         [featureLayer setHidden:NO];
         
+        featureLayer.borderColor = [color CGColor];
         featureLayer.frame = faceRect;
     }
     

@@ -22,6 +22,7 @@
 
 @property (nonatomic, retain) IBOutlet UIImageView* imageView;
 @property (nonatomic, retain) IBOutlet UIButton* changeButton;
+@property (nonatomic, retain) IBOutlet UILabel* debugLabel;
 
 - (IBAction)toggleFps:(id)sender;
 - (IBAction)toggleTorch:(id)sender;
