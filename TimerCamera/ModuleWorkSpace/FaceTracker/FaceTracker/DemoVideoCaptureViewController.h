@@ -21,9 +21,11 @@
 }
 
 @property (nonatomic, retain) IBOutlet UIImageView* imageView;
+@property (nonatomic, retain) IBOutlet UIButton* changeButton;
 
 - (IBAction)toggleFps:(id)sender;
 - (IBAction)toggleTorch:(id)sender;
 - (IBAction)toggleCamera:(id)sender;
+- (IBAction)toggleChange:(id)sender;
 
 @end

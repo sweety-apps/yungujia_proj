@@ -15,6 +15,9 @@
 #import "UIImage+OpenCV.h"
 #import "DemoVideoCaptureViewController.h"
 
+static BOOL gHasDetected = NO;
+static int gImageIndex = 0;
+
 #pragma mark - HaarDetectorWarrper
 
 @interface HaarDetectorWarpper : NSObject
@@ -105,8 +108,8 @@
     NSString* cascadeFilenames[] = {
         @"haarcascade_fullbody",
         @"haarcascade_lowerbody",
-        @"haarcascade_mcs_upperbody",
         @"haarcascade_frontalface_alt2",
+        @"haarcascade_mcs_upperbody",
         @"haarcascade_lefteye_2splits",
         @"haarcascade_righteye_2splits",
         @"haarcascade_mcs_nose",
@@ -153,6 +156,7 @@
 
 - (void)dealloc
 {
+    self.changeButton = nil;
     self.imageView = nil;
     [_cascadeDetectors release];
     [_featureLayers release];
@@ -181,7 +185,7 @@
   
 // Switch between front and back camera
 - (IBAction)toggleCamera:(id)sender
-    {
+{
     if (self.camera == 1) {
         self.camera = 0;
     }
@@ -189,6 +193,16 @@
     {
         self.camera = 1;
     }
+}
+
+- (IBAction)toggleChange:(id)sender
+{
+    gImageIndex++;
+    gImageIndex %= 14;
+    
+    self.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"fat_%d",gImageIndex]];
+    
+    gHasDetected = NO;
 }
 
 // MARK: VideoCaptureViewController overrides
@@ -249,18 +263,63 @@
     }
     else
     {
-        static BOOL gHasDetected = NO;
         if (gHasDetected)
         {
             return;
         }
         
-        // Shrink video frame to 320X240
-        cv::Mat imageMat = self.imageView.image.CVMat;;
         dispatch_sync(dispatch_get_main_queue(), ^{
-            
+            self.changeButton.userInteractionEnabled = NO;
+            [self.changeButton setTitle:@"Detecting" forState:UIControlStateNormal];
         });
+        
+        // Shrink video frame to 320X240
+        cv::Mat imageMat = self.imageView.image.CVMat;
         rect.size = self.imageView.image.size;
+        
+        CGSize imageViewSize = self.imageView.frame.size;
+        imageViewSize.height *= 2.0;
+        imageViewSize.width *= 2.0;
+        CGSize imageSize = rect.size;
+        
+        BOOL alignForWidth = YES;
+        
+        CGFloat imageX = 0.0;
+        CGFloat imageY = 0.0;
+        CGFloat imageFactor = 1.0;
+        
+        if (imageViewSize.width / imageViewSize.height > imageSize.width / imageSize.height)
+        {
+            alignForWidth = NO;
+        }
+        
+        if (alignForWidth)
+        {
+            imageFactor = imageViewSize.width / imageSize.width;
+            imageX = 0.0;
+            if (imageSize.height * imageFactor > imageViewSize.height)
+            {
+                imageY = ((imageSize.height * imageFactor) - imageViewSize.height) * 0.5;
+            }
+            else
+            {
+                imageY = (imageViewSize.height - (imageSize.height * imageFactor)) * 0.5;
+            }
+        }
+        else
+        {
+            imageFactor = imageViewSize.height / imageSize.height;
+            if (imageSize.width * imageFactor > imageViewSize.width)
+            {
+                imageX = ((imageSize.width * imageFactor) - imageViewSize.width) * 0.5;
+            }
+            else
+            {
+                imageX = (imageViewSize.width - (imageSize.width * imageFactor)) * 0.5;
+            }
+            imageY = 0.0;
+        }
+        
         
 //        // Rotate video frame by 90deg to portrait by combining a transpose and a flip
 //        // Note that AVCaptureVideoDataOutput connection does NOT support hardware-accelerated
@@ -270,7 +329,7 @@
 //        CGFloat temp = rect.size.width;
 //        rect.size.width = rect.size.height;
 //        rect.size.height = temp;
-//        
+//
 //        if (videOrientation == AVCaptureVideoOrientationLandscapeRight)
 //        {
 //            // flip around y axis for back camera
@@ -302,14 +361,19 @@
                       videoOrientation:videOrientation
                      markedBorderColor:warpper.markedBorderColor
                        layerStartIndex:index
-                          resizeFactor:1.0];
+                          resizeFactor:imageFactor*0.5
+               shouldTransFormForVideo:NO
+                                startX:imageX*0.5
+                                startY:imageY*0.5];
                 });
                 index += faces.size();
             }
         }
         gHasDetected = YES;
         dispatch_sync(dispatch_get_main_queue(), ^{
-            self.imageView.image = [UIImage imageWithCVMat:imageMat];
+            //self.imageView.image = [UIImage imageWithCVMat:imageMat];
+            self.changeButton.userInteractionEnabled = YES;
+            [self.changeButton setTitle:@"Change" forState:UIControlStateNormal];
         });
     }
     
@@ -387,7 +451,10 @@
       videoOrientation:videoOrientation
      markedBorderColor:color
        layerStartIndex:index
-          resizeFactor:1.0];
+          resizeFactor:1.0
+shouldTransFormForVideo:YES
+                startX:0.0
+                startY:0.0];
 }
 
 // Update face markers given vector of face rectangles
@@ -396,7 +463,10 @@
     videoOrientation:(AVCaptureVideoOrientation)videoOrientation
    markedBorderColor:(UIColor*)color
      layerStartIndex:(int)index
-        resizeFactor:(float)resizeFactor;
+        resizeFactor:(float)resizeFactor
+shouldTransFormForVideo:(BOOL)trans
+              startX:(CGFloat)startX
+              startY:(CGFloat)startY;
 {
     [CATransaction begin];
 	[CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
@@ -407,12 +477,15 @@
     for (int i = 0; i < features.size(); i++) {
         
         CGRect faceRect;
-        faceRect.origin.x = features[i].x * resizeFactor;
-        faceRect.origin.y = features[i].y * resizeFactor;
+        faceRect.origin.x = features[i].x * resizeFactor + startX;
+        faceRect.origin.y = features[i].y * resizeFactor + startY;
         faceRect.size.width = features[i].width * resizeFactor;
         faceRect.size.height = features[i].height * resizeFactor;
         
-        faceRect = CGRectApplyAffineTransform(faceRect, t);
+        if (trans)
+        {
+            faceRect = CGRectApplyAffineTransform(faceRect, t);
+        }
         
         CALayer *featureLayer = nil;
         
