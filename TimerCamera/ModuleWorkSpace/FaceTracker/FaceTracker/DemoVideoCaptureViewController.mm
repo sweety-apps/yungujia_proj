@@ -123,12 +123,12 @@ static int gImageIndex = 0;
     
     // Name of face cascade resource file without xml extension
     NSString* cascadeFilenames[] = {
-        //@"haarcascade_fullbody",
-        @"haarcascade_lowerbody",
+        @"haarcascade_mcs_eyepair_small",
+        @"haarcascade_mcs_eyepair_big",
         @"haarcascade_frontalface_alt2",
         @"haarcascade_mcs_upperbody",
-        @"haarcascade_lefteye_2splits",
-        @"haarcascade_righteye_2splits",
+        //@"haarcascade_lefteye_2splits",
+        //@"haarcascade_righteye_2splits",
         @"haarcascade_mcs_nose",
         @"haarcascade_mcs_mouth",
     };
