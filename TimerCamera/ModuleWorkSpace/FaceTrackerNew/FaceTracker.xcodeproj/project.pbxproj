@@ -90,7 +90,7 @@
 		00E53784142BFEE600F30526 /* DemoVideoCaptureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoVideoCaptureViewController.h; sourceTree = "<group>"; };
 		00E53785142BFEE600F30526 /* DemoVideoCaptureViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DemoVideoCaptureViewController.mm; sourceTree = "<group>"; };
 		00E53786142BFEE600F30526 /* DemoVideoCaptureViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DemoVideoCaptureViewController.xib; sourceTree = "<group>"; };
-		BE63BB251710811500A41B90 /* HaarDetectorParam.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = HaarDetectorParam.hpp; sourceTree = "<group>"; };
+		BE63BB251710811500A41B90 /* HaarDetectorParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HaarDetectorParam.h; sourceTree = "<group>"; };
 		BE63BB261710811500A41B90 /* HaarDetectorParam.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HaarDetectorParam.mm; sourceTree = "<group>"; };
 		BEA5FF4B170E6B6200904DEA /* HumanFeatureDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HumanFeatureDetector.h; sourceTree = "<group>"; };
 		BEA5FF4C170E6B6200904DEA /* HumanFeatureDetector.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HumanFeatureDetector.mm; sourceTree = "<group>"; };
@@ -131,6 +131,7 @@
 		F3C2948F17092EC900003689 /* fat_7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fat_7.png; path = FaceTracker/fat_7.png; sourceTree = "<group>"; };
 		F3C2949017092EC900003689 /* fat_8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fat_8.png; path = FaceTracker/fat_8.png; sourceTree = "<group>"; };
 		F3C2949117092EC900003689 /* fat_9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fat_9.png; path = FaceTracker/fat_9.png; sourceTree = "<group>"; };
+		F3CB40D51711718700EF7280 /* HumanFeatureDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HumanFeatureDefines.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -275,8 +276,9 @@
 				BEA5FF4C170E6B6200904DEA /* HumanFeatureDetector.mm */,
 				BEA5FF4E170E6DFF00904DEA /* DetectedHumanFeatures.h */,
 				BEA5FF4F170E6DFF00904DEA /* DetectedHumanFeatures.mm */,
-				BE63BB251710811500A41B90 /* HaarDetectorParam.hpp */,
+				BE63BB251710811500A41B90 /* HaarDetectorParam.h */,
 				BE63BB261710811500A41B90 /* HaarDetectorParam.mm */,
+				F3CB40D51711718700EF7280 /* HumanFeatureDefines.h */,
 			);
 			path = HumanFeatureDetector;
 			sourceTree = "<group>";

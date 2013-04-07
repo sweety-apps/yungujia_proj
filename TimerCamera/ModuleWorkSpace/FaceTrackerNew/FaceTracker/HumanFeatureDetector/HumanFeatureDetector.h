@@ -6,7 +6,7 @@
 //
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import "DetectedHumanFeatures.h"
 
 @class HumanFeatureDetector;
@@ -26,7 +26,14 @@
 @interface HumanFeatureDetector : NSObject
 {
     NSOperationQueue* _queue;
+    BOOL _isDetecting;
+    NSString* _xmlDir;
     
+    id<HumanFeatureDetectorDelegate> _notifyDelegate;
+    UIImage* _rawImage;
+    BOOL _isAsync;
+    
+    NSMutableDictionary* _paramDict;
 }
 
 + (HumanFeatureDetector*)sharedInstance;

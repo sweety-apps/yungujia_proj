@@ -6,7 +6,7 @@
 //
 //
 
-#import "HaarDetectorParam.hpp"
+#import "HaarDetectorParam.h"
 
 @implementation HaarDetectorParam
 

@@ -7,26 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
-typedef enum {
-    kHumanFeatureFace = 0,
-    kHumanFeatureLeftEye,
-    kHumanFeatureRightEye,
-    kHumanFeatureEyePair,
-    kHumanFeatureNose,
-    kHumanFeatureMouth,
-    kHumanFeatureUpperBody,
-    kHumanFeatureLowerBody,
-    kHumanFeatureTypeCount
-} HumanFeatureType;
-
-typedef enum {
-    kBodyHeadUp = 0,
-    kBodyHeadLeft,
-    kBodyHeadRight,
-    kBodyHeadDown,
-    kBodyOrientationCount
-} HumanBodyOrientation;
+#import "HumanFeatureDefines.h"
 
 @interface HumanFeature : NSObject
 {
@@ -36,6 +17,8 @@ typedef enum {
 @property (nonatomic,assign) BOOL detected;
 @property (nonatomic,assign) CGRect rect;
 @property (nonatomic,assign) HumanFeatureType type;
+
+- (CGRect)scaledRectToUIImageView:(UIImageView*)imageView;
 
 @end
 
