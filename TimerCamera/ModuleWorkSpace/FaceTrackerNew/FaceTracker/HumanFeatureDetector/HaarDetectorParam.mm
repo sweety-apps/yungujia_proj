@@ -15,8 +15,7 @@
 @synthesize haarOptions = _haarOptions;
 @synthesize featureCascade = _featureCascade;
 @synthesize canDetect = _canDetect;
-@synthesize rawImageMat = _rawImageMat;
-@synthesize transformedImageMat = _transformedImageMat;
+@synthesize imageMat = _imageMat;
 
 - (id)initWith:(NSString*)fileName filePath:(NSString*)filePath options:(int)haarOptions
 {

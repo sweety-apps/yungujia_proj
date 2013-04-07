@@ -25,6 +25,8 @@
 		00E53787142BFEE600F30526 /* DemoVideoCaptureViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 00E53785142BFEE600F30526 /* DemoVideoCaptureViewController.mm */; };
 		00E53788142BFEE700F30526 /* DemoVideoCaptureViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00E53786142BFEE600F30526 /* DemoVideoCaptureViewController.xib */; };
 		BE63BB271710811500A41B90 /* HaarDetectorParam.mm in Sources */ = {isa = PBXBuildFile; fileRef = BE63BB261710811500A41B90 /* HaarDetectorParam.mm */; };
+		BE63BB2A1711D56600A41B90 /* CIDetectorParam.m in Sources */ = {isa = PBXBuildFile; fileRef = BE63BB291711D56500A41B90 /* CIDetectorParam.m */; };
+		BE63BB2D1711D9B600A41B90 /* BaseDetectorParam.m in Sources */ = {isa = PBXBuildFile; fileRef = BE63BB2C1711D9B600A41B90 /* BaseDetectorParam.m */; };
 		BEA5FF4D170E6B6200904DEA /* HumanFeatureDetector.mm in Sources */ = {isa = PBXBuildFile; fileRef = BEA5FF4C170E6B6200904DEA /* HumanFeatureDetector.mm */; };
 		BEA5FF50170E6DFF00904DEA /* DetectedHumanFeatures.mm in Sources */ = {isa = PBXBuildFile; fileRef = BEA5FF4F170E6DFF00904DEA /* DetectedHumanFeatures.mm */; };
 		BEFEFFB41707452B0024E9CF /* haarcascade_eye_tree_eyeglasses.xml in Resources */ = {isa = PBXBuildFile; fileRef = BEFEFF9F1707452B0024E9CF /* haarcascade_eye_tree_eyeglasses.xml */; };
@@ -92,6 +94,10 @@
 		00E53786142BFEE600F30526 /* DemoVideoCaptureViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DemoVideoCaptureViewController.xib; sourceTree = "<group>"; };
 		BE63BB251710811500A41B90 /* HaarDetectorParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HaarDetectorParam.h; sourceTree = "<group>"; };
 		BE63BB261710811500A41B90 /* HaarDetectorParam.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HaarDetectorParam.mm; sourceTree = "<group>"; };
+		BE63BB281711D56500A41B90 /* CIDetectorParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CIDetectorParam.h; sourceTree = "<group>"; };
+		BE63BB291711D56500A41B90 /* CIDetectorParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CIDetectorParam.m; sourceTree = "<group>"; };
+		BE63BB2B1711D9B600A41B90 /* BaseDetectorParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseDetectorParam.h; sourceTree = "<group>"; };
+		BE63BB2C1711D9B600A41B90 /* BaseDetectorParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseDetectorParam.m; sourceTree = "<group>"; };
 		BEA5FF4B170E6B6200904DEA /* HumanFeatureDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HumanFeatureDetector.h; sourceTree = "<group>"; };
 		BEA5FF4C170E6B6200904DEA /* HumanFeatureDetector.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HumanFeatureDetector.mm; sourceTree = "<group>"; };
 		BEA5FF4E170E6DFF00904DEA /* DetectedHumanFeatures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetectedHumanFeatures.h; sourceTree = "<group>"; };
@@ -276,9 +282,13 @@
 				BEA5FF4C170E6B6200904DEA /* HumanFeatureDetector.mm */,
 				BEA5FF4E170E6DFF00904DEA /* DetectedHumanFeatures.h */,
 				BEA5FF4F170E6DFF00904DEA /* DetectedHumanFeatures.mm */,
+				BE63BB2B1711D9B600A41B90 /* BaseDetectorParam.h */,
+				BE63BB2C1711D9B600A41B90 /* BaseDetectorParam.m */,
 				BE63BB251710811500A41B90 /* HaarDetectorParam.h */,
 				BE63BB261710811500A41B90 /* HaarDetectorParam.mm */,
 				F3CB40D51711718700EF7280 /* HumanFeatureDefines.h */,
+				BE63BB281711D56500A41B90 /* CIDetectorParam.h */,
+				BE63BB291711D56500A41B90 /* CIDetectorParam.m */,
 			);
 			path = HumanFeatureDetector;
 			sourceTree = "<group>";
@@ -389,6 +399,8 @@
 				BEA5FF4D170E6B6200904DEA /* HumanFeatureDetector.mm in Sources */,
 				BEA5FF50170E6DFF00904DEA /* DetectedHumanFeatures.mm in Sources */,
 				BE63BB271710811500A41B90 /* HaarDetectorParam.mm in Sources */,
+				BE63BB2A1711D56600A41B90 /* CIDetectorParam.m in Sources */,
+				BE63BB2D1711D9B600A41B90 /* BaseDetectorParam.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

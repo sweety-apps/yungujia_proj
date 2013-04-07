@@ -11,9 +11,10 @@
 #import <OpenCV/opencv2/opencv.hpp>
 #endif
 
+#import "BaseDetectorParam.h"
 #import "HumanFeatureDefines.h"
 
-@interface HaarDetectorParam : NSObject
+@interface HaarDetectorParam : BaseDetectorParam
 {
     
 }
@@ -24,8 +25,7 @@
 @property (nonatomic, assign) int haarOptions;
 @property (nonatomic, assign) cv::CascadeClassifier featureCascade;
 @property (nonatomic, assign, readonly) BOOL canDetect;
-@property (nonatomic, assign) cv::Mat rawImageMat;
-@property (nonatomic, assign) cv::Mat transformedImageMat;
+@property (nonatomic, assign) cv::Mat imageMat;
 
 - (id)initWith:(NSString*)fileName filePath:(NSString*)filePath options:(int)haarOptions;
 

@@ -34,6 +34,7 @@
     BOOL _isAsync;
     
     NSMutableDictionary* _paramDict;
+    UIImage* _scaledImage;
 }
 
 + (HumanFeatureDetector*)sharedInstance;

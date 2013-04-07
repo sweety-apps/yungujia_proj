@@ -6,17 +6,22 @@
 //
 //
 
+#import <CoreImage/CoreImage.h>
 #import "HumanFeatureDetector.h"
 #import "UIImage+OpenCV.h"
 #import "HaarDetectorParam.h"
+#import "CIDetectorParam.h"
 
 #define kHumanFeatureDetectionQueue @"HumanFeatureDetectionQueue"
+#define kFeatureKey(x) [NSString stringWithFormat:@"%d",(x)]
+#define kScaleToWidth (-1)
 
 @interface HumanFeatureDetector (Tasks)
 
 - (void)taskStart;
 - (void)taskInitHaarcascades;
-- (void)taskDoDetection;
+- (void)taskDoHaarDetection:(HaarDetectorParam*)param;
+- (void)taskDoCIDetectorDetection:(CIDetectorParam*)param;
 
 @end
 
@@ -40,7 +45,7 @@ static HumanFeatureDetector* gDetector = nil;
 {
     if (gDetector == nil)
     {
-        gDetector = [[HumanFeatureDetector alloc] initWithCascadeXmlsDir:@""];
+        gDetector = [[HumanFeatureDetector alloc] initWithCascadeXmlsDir:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"/"]];
     }
     return gDetector;
 }
@@ -61,9 +66,11 @@ static HumanFeatureDetector* gDetector = nil;
 - (void)dealloc
 {
     //
+    [self cancelAsyncDetection];
     ReleaseAndNil(_paramDict);
     ReleaseAndNil(_notifyDelegate);
     ReleaseAndNil(_rawImage);
+    ReleaseAndNil(_scaledImage);
     ReleaseAndNil(_queue);
     ReleaseAndNil(_xmlDir);
     [super dealloc];
@@ -103,13 +110,19 @@ static HumanFeatureDetector* gDetector = nil;
 - (void)taskStart
 {
     [self taskInitHaarcascades];
+    
+    HaarDetectorParam* param = [_paramDict objectForKey:kFeatureKey(kHumanFeatureFace)];
     if (_isAsync)
     {
-        
+        NSInvocationOperation* op = [[[NSInvocationOperation alloc] initWithTarget:self
+                                                                         selector:@selector(taskDoHaarDetection:)
+                                                                           object:param] autorelease];
+        param.asyncOperation = op;
+        [_queue addOperation:op];
     }
     else
     {
-        
+        [self taskDoHaarDetection:param];
     }
 }
 
@@ -117,6 +130,8 @@ static HumanFeatureDetector* gDetector = nil;
 {
     ReleaseAndNil(_paramDict);
     _paramDict = [NSMutableDictionary dictionary];
+    
+    cv::Mat imageMat = [_scaledImage CVMat];
     
     HumanFeatureType types[kHumanFeatureTypeCount] = {
         kHumanFeatureFace,
@@ -126,31 +141,31 @@ static HumanFeatureDetector* gDetector = nil;
         kHumanFeatureNose,
         kHumanFeatureMouth,
         kHumanFeatureUpperBody,
-        kHumanFeatureLowerBody,
+        kHumanFeatureLowerBody
     };
     
     // Name of face cascade resource file without xml extension
     NSString* cascadeFilenames[kHumanFeatureTypeCount] = {
-        @"haarcascade_mcs_eyepair_small",
-        @"haarcascade_mcs_eyepair_big",
         @"haarcascade_frontalface_alt2",
-        @"haarcascade_mcs_upperbody",
-        //@"haarcascade_lefteye_2splits",
-        //@"haarcascade_righteye_2splits",
+        @"haarcascade_lefteye_2splits",
+        @"haarcascade_righteye_2splits",
+        @"haarcascade_mcs_eyepair_big",
         @"haarcascade_mcs_nose",
         @"haarcascade_mcs_mouth",
+        @"haarcascade_mcs_upperbody",
+        @"haarcascade_lowerbody"
     };
     
     // Options for cv::CascadeClassifier::detectMultiScale
     int haarOptions[kHumanFeatureTypeCount] = {
-        CV_HAAR_FIND_BIGGEST_OBJECT | CV_HAAR_DO_ROUGH_SEARCH,
-        CV_HAAR_FIND_BIGGEST_OBJECT | CV_HAAR_DO_ROUGH_SEARCH,
-        CV_HAAR_FIND_BIGGEST_OBJECT | CV_HAAR_DO_ROUGH_SEARCH,
-        CV_HAAR_FIND_BIGGEST_OBJECT | CV_HAAR_DO_ROUGH_SEARCH,
-        CV_HAAR_FIND_BIGGEST_OBJECT | CV_HAAR_DO_ROUGH_SEARCH,
-        CV_HAAR_FIND_BIGGEST_OBJECT | CV_HAAR_DO_ROUGH_SEARCH,
-        CV_HAAR_FIND_BIGGEST_OBJECT | CV_HAAR_DO_ROUGH_SEARCH,
-        CV_HAAR_FIND_BIGGEST_OBJECT | CV_HAAR_DO_ROUGH_SEARCH
+        CV_HAAR_SCALE_IMAGE | CV_HAAR_FIND_BIGGEST_OBJECT | CV_HAAR_DO_ROUGH_SEARCH,
+        CV_HAAR_SCALE_IMAGE | CV_HAAR_FIND_BIGGEST_OBJECT | CV_HAAR_DO_ROUGH_SEARCH,
+        CV_HAAR_SCALE_IMAGE | CV_HAAR_FIND_BIGGEST_OBJECT | CV_HAAR_DO_ROUGH_SEARCH,
+        CV_HAAR_SCALE_IMAGE | CV_HAAR_FIND_BIGGEST_OBJECT | CV_HAAR_DO_ROUGH_SEARCH,
+        CV_HAAR_SCALE_IMAGE | CV_HAAR_FIND_BIGGEST_OBJECT | CV_HAAR_DO_ROUGH_SEARCH,
+        CV_HAAR_SCALE_IMAGE | CV_HAAR_FIND_BIGGEST_OBJECT | CV_HAAR_DO_ROUGH_SEARCH,
+        CV_HAAR_SCALE_IMAGE | CV_HAAR_FIND_BIGGEST_OBJECT | CV_HAAR_DO_ROUGH_SEARCH,
+        CV_HAAR_SCALE_IMAGE | CV_HAAR_FIND_BIGGEST_OBJECT | CV_HAAR_DO_ROUGH_SEARCH
     };
     
     // Load the face Haar cascade from resources
@@ -158,11 +173,17 @@ static HumanFeatureDetector* gDetector = nil;
     {
         NSString *faceCascadePath = [[NSBundle mainBundle] pathForResource:cascadeFilenames[i] ofType:@"xml"];
         HaarDetectorParam* param = [[[HaarDetectorParam alloc] initWith:cascadeFilenames[i] filePath:faceCascadePath options:haarOptions[i]] autorelease];
-        [_paramDict setObject:param forKey:[NSString stringWithFormat:@"%d",types[i]]];
+        param.imageMat = imageMat;
+        [_paramDict setObject:param forKey:kFeatureKey(types[i])];
     }
 }
 
-- (void)taskDoDetection
+- (void)taskDoHaarDetection:(HaarDetectorParam*)param
+{
+    
+}
+
+- (void)taskDoCIDetectorDetection:(CIDetectorParam*)param
 {
     
 }
@@ -179,17 +200,25 @@ static HumanFeatureDetector* gDetector = nil;
     }
     ReleaseAndNil(_notifyDelegate);
     ReleaseAndNil(_rawImage);
+    ReleaseAndNil(_scaledImage);
     _notifyDelegate = [delegate retain];
     _rawImage = [image retain];
+    
+    float scale = 1.0;
+    if (kScaleToWidth > 0.0)
+    {
+        scale = ((float)kScaleToWidth) / _rawImage.size.width;
+    }
+    _scaledImage = [[UIImage imageWithCGImage:_rawImage.CGImage scale:scale orientation:UIImageOrientationUp] retain];
     
     _isDetecting = YES;
     _isAsync = async;
     
     if (async)
     {
-        NSInvocationOperation* op = [[NSInvocationOperation alloc] initWithTarget:self
+        NSInvocationOperation* op = [[[NSInvocationOperation alloc] initWithTarget:self
                                                                          selector:@selector(taskStart)
-                                                                           object:nil];
+                                                                           object:nil] autorelease];
         
         [_queue addOperation:op];
     }
@@ -203,7 +232,7 @@ static HumanFeatureDetector* gDetector = nil;
 
 #pragma mark Handle Async Result
 
-- (void)onHandledOperation
+- (void)onHandledOperation:(DetectedHumanFeatures*)result
 {
     
 }
