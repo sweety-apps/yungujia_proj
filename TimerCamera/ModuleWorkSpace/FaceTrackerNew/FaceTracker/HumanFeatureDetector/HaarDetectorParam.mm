@@ -16,6 +16,7 @@
 @synthesize featureCascade = _featureCascade;
 @synthesize canDetect = _canDetect;
 @synthesize imageMat = _imageMat;
+@synthesize scale = _scale;
 
 - (id)initWith:(NSString*)fileName filePath:(NSString*)filePath options:(int)haarOptions
 {

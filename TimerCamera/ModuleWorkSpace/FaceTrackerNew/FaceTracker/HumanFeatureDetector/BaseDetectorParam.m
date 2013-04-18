@@ -10,6 +10,7 @@
 
 @implementation BaseDetectorParam
 
+@synthesize featureType = _featureType;
 @synthesize asyncOperation = _asyncOperation;
 
 - (void)dealloc

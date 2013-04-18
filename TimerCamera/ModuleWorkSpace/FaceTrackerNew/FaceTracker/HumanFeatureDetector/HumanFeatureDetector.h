@@ -30,6 +30,8 @@ typedef enum enumHumanFeatureDetectorStateType {
     kHFDStatusConfirmedFace,
     kHFDStatusConfirmedUpperBody,
     kHFDStatusConfirmedWholeBody,
+    kHFDStatusUnConfirmOriginal,
+    kHFDStatusUnConfirmRotated,
     kHFDStatusStopping,
     kHFDStatusCount
 }HumanFeatureDetectorStateType;
@@ -46,6 +48,7 @@ typedef enum enumHumanFeatureDetectorStateType {
     
     NSMutableDictionary* _paramDict;
     UIImage* _scaledImage;
+    float _imageScale;
     
     DetectedHumanFeatures* _humanFeatures;
     

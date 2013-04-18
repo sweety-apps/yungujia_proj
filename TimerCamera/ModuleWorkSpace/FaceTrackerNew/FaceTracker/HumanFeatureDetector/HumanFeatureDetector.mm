@@ -36,6 +36,7 @@ static long long getTimeInMicrosecond()
 - (void)taskInitHaarcascades;
 - (void)taskDoHaarDetection:(HaarDetectorParam*)param;
 - (void)taskDoCIDetectorDetection:(CIDetectorParam*)param;
+- (void)taskHandleDetectedResult;
 - (void)taskFinishedDetection;
 
 @end
@@ -177,7 +178,9 @@ static HumanFeatureDetector* gDetector = nil;
     {
         NSString *faceCascadePath = [[NSBundle mainBundle] pathForResource:cascadeFilenames[i] ofType:@"xml"];
         HaarDetectorParam* param = [[[HaarDetectorParam alloc] initWith:cascadeFilenames[i] filePath:faceCascadePath options:haarOptions[i]] autorelease];
+        param.type = types[i];
         param.imageMat = imageMat;
+        param.scale = _imageScale;
         [_paramDict setObject:param forKey:kFeatureKey(types[i])];
     }
 }
@@ -186,127 +189,103 @@ static HumanFeatureDetector* gDetector = nil;
 {
     NSString* debugLog = @"";
     
-    CGRect rect;
-    
     // Shrink video frame to 320X240
-    cv::Mat imageMat = param.;
-    rect.size = self.imageView.image.size;
-    
-    CGSize imageViewSize = self.imageView.frame.size;
-    imageViewSize.height *= 2.0;
-    imageViewSize.width *= 2.0;
-    CGSize imageSize = rect.size;
-    
-    BOOL alignForWidth = YES;
-    
-    CGFloat imageX = 0.0;
-    CGFloat imageY = 0.0;
-    CGFloat imageFactor = 1.0;
-    
-    if (imageViewSize.width / imageViewSize.height > imageSize.width / imageSize.height)
-    {
-        alignForWidth = NO;
-    }
-    
-    if (alignForWidth)
-    {
-        imageFactor = imageViewSize.width / imageSize.width;
-        imageX = 0.0;
-        if (imageSize.height * imageFactor > imageViewSize.height)
-        {
-            imageY = ((imageSize.height * imageFactor) - imageViewSize.height) * 0.5;
-        }
-        else
-        {
-            imageY = (imageViewSize.height - (imageSize.height * imageFactor)) * 0.5;
-        }
-    }
-    else
-    {
-        imageFactor = imageViewSize.height / imageSize.height;
-        if (imageSize.width * imageFactor > imageViewSize.width)
-        {
-            imageX = ((imageSize.width * imageFactor) - imageViewSize.width) * 0.5;
-        }
-        else
-        {
-            imageX = (imageViewSize.width - (imageSize.width * imageFactor)) * 0.5;
-        }
-        imageY = 0.0;
-    }
-    
-    
-    //        // Rotate video frame by 90deg to portrait by combining a transpose and a flip
-    //        // Note that AVCaptureVideoDataOutput connection does NOT support hardware-accelerated
-    //        // rotation and mirroring via videoOrientation and setVideoMirrored properties so we
-    //        // need to do the rotation in software here.
-    //        cv::transpose(imageMat, imageMat);
-    //        CGFloat temp = rect.size.width;
-    //        rect.size.width = rect.size.height;
-    //        rect.size.height = temp;
-    //
-    //        if (videOrientation == AVCaptureVideoOrientationLandscapeRight)
-    //        {
-    //            // flip around y axis for back camera
-    //            cv::flip(imageMat, imageMat, 1);
-    //        }
-    //        else {
-    //            // Front camera output needs to be mirrored to match preview layer so no flip is required here
-    //        }
-    
-    videOrientation = AVCaptureVideoOrientationPortrait;
-    
-    dispatch_sync(dispatch_get_main_queue(), ^{
-        [self clearFeatureMarkedLayers];
-    });
+    cv::Mat imageMat = param.imageMat;
     
     long long debugTotalTs = getTimeInMicrosecond();
     
-    int index = 0;
-    
-    for (HaarDetectorWarpper* warpper in _cascadeDetectors)
-    {
-        if (warpper.canDetect)
-        {
-            long long debugStepTs = getTimeInMicrosecond();
-            
-            // Detect faces
-            std::vector<cv::Rect> faces;
-            warpper.featureCascade.detectMultiScale(imageMat, faces, 1.1, 2,warpper.haarOptions,cv::Size(6, 6));
-            
-            debugLog = [debugLog stringByAppendingFormat:@"[step] %@ used %llu ms\n",warpper.cascadeFileName, (getTimeInMicrosecond() - debugStepTs)/1000];
-            
-            // Dispatch updating of face markers to main queue
-            dispatch_sync(dispatch_get_main_queue(), ^{
-                [self displayFaces:faces
-                      forVideoRect:rect
-                  videoOrientation:videOrientation
-                 markedBorderColor:warpper.markedBorderColor
-                   layerStartIndex:index
-                      resizeFactor:imageFactor*0.5
-           shouldTransFormForVideo:NO
-                            startX:imageX*0.5
-                            startY:imageY*0.5];
-                self.debugLabel.text = debugLog;
-            });
-            index += faces.size();
-        }
-    }
+    // Detect faces
+    std::vector<cv::Rect> faces;
+    param.featureCascade.detectMultiScale(imageMat, faces, 1.1, 2, param.haarOptions,cv::Size(6, 6));
     
     debugLog = [debugLog stringByAppendingFormat:@"{{total}} all used %llu ms\n", (getTimeInMicrosecond() - debugTotalTs)/1000];
     
-    gHasDetected = YES;
-    dispatch_sync(dispatch_get_main_queue(), ^{
-        //self.imageView.image = [UIImage imageWithCVMat:imageMat];
-        self.changeButton.userInteractionEnabled = YES;
-        [self.changeButton setTitle:@"Change" forState:UIControlStateNormal];
-        self.debugLabel.text = debugLog;
-    });
+    NSLog(@"%@",debugLog);
+    
+    HumanFeature* feature = nil;
+    
+    if (faces.size() > 0)
+    {
+        feature = [[[HumanFeature alloc] init] autorelease];
+        
+        CGRect rect = CGRectZero;
+        
+        for (int i = 0; i < faces.size(); i++) {
+            
+            CGRect faceRect;
+            faceRect.origin.x = faces[i].x;
+            faceRect.origin.y = faces[i].y;
+            faceRect.size.width = faces[i].width;
+            faceRect.size.height = faces[i].height;
+            
+            if (!CGSizeEqualToSize(faceRect.size,CGSizeZero))
+            {
+                rect = faceRect;
+                break;
+            }
+        }
+        
+        feature.rect = rect;
+        feature.detected = CGSizeEqualToSize(rect.size,CGSizeZero) ? NO : YES;
+        feature.type = param.type;
+        feature.rawImageSize = _rawImage.size;
+    }
+    
+    [_humanFeatures setFeature:feature forType:param.type];
+    
+    [self taskHandleDetectedResult];
+}
+
+- (void)taskHandleDetectedResult
+{
+    HumanFeature* feature = _humanFeatures.currentDetectedFeature;
+    
+    if (_humanFeatures.currentDetectedFeatureType == kHumanFeatureFace && _detectStatus == kHFDStatusTaskInited)
+    {
+        if (feature && feature.detected)
+        {
+            HaarDetectorParam* param = [_paramDict objectForKey:kFeatureKey(kHumanFeatureEyePair)];
+            if (_isAsync)
+            {
+                NSInvocationOperation* op = [[[NSInvocationOperation alloc] initWithTarget:self
+                                                                                  selector:@selector(taskDoHaarDetection:)
+                                                                                    object:param] autorelease];
+                param.asyncOperation = op;
+                [_queue addOperation:op];
+            }
+            else
+            {
+                [self taskDoHaarDetection:param];
+            }
+        }
+        else
+        {
+            
+        }
+    }
+    
+    if (feature.type == kHumanFeatureFace && _detectStatus == kHFDStatusTaskInited)
+    {
+        HaarDetectorParam* param = [_paramDict objectForKey:kFeatureKey(kHumanFeatureEyePair)];
+        if (_isAsync)
+        {
+            NSInvocationOperation* op = [[[NSInvocationOperation alloc] initWithTarget:self
+                                                                              selector:@selector(taskDoHaarDetection:)
+                                                                                object:param] autorelease];
+            param.asyncOperation = op;
+            [_queue addOperation:op];
+        }
+        else
+        {
+            [self taskDoHaarDetection:param];
+        }
+    }
 }
 
 - (void)taskDoCIDetectorDetection:(CIDetectorParam*)param
 {
-    
+    //TODO
+    [self taskHandleDetectedResult];
 }
 
 - (void)taskFinishedDetection
@@ -350,6 +329,8 @@ static HumanFeatureDetector* gDetector = nil;
     {
         scale = ((float)kScaleToWidth) / _rawImage.size.width;
     }
+    
+    _imageScale = scale;
     _scaledImage = [[UIImage imageWithCGImage:_rawImage.CGImage scale:scale orientation:UIImageOrientationUp] retain];
     
     _isDetecting = YES;
@@ -403,6 +384,16 @@ static HumanFeatureDetector* gDetector = nil;
         }
             break;
         case kHFDStatusConfirmedWholeBody:
+        {
+            
+        }
+            break;
+        case kHFDStatusUnConfirmOriginal:
+        {
+            
+        }
+            break;
+        case kHFDStatusUnConfirmRotated:
         {
             
         }

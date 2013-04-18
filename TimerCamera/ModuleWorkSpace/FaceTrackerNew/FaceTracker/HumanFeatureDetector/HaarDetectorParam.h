@@ -26,6 +26,7 @@
 @property (nonatomic, assign) cv::CascadeClassifier featureCascade;
 @property (nonatomic, assign, readonly) BOOL canDetect;
 @property (nonatomic, assign) cv::Mat imageMat;
+@property (nonatomic, assign) float scale;
 
 - (id)initWith:(NSString*)fileName filePath:(NSString*)filePath options:(int)haarOptions;
 
