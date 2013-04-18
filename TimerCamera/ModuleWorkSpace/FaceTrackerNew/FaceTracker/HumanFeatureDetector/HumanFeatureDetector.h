@@ -23,6 +23,17 @@
 
 @end
 
+typedef enum enumHumanFeatureDetectorStateType {
+    kHFDStatusStopped = 0,
+    kHFDStatusStarting,
+    kHFDStatusTaskInited,
+    kHFDStatusConfirmedFace,
+    kHFDStatusConfirmedUpperBody,
+    kHFDStatusConfirmedWholeBody,
+    kHFDStatusStopping,
+    kHFDStatusCount
+}HumanFeatureDetectorStateType;
+
 @interface HumanFeatureDetector : NSObject
 {
     NSOperationQueue* _queue;
@@ -35,6 +46,10 @@
     
     NSMutableDictionary* _paramDict;
     UIImage* _scaledImage;
+    
+    DetectedHumanFeatures* _humanFeatures;
+    
+    HumanFeatureDetectorStateType _detectStatus;
 }
 
 + (HumanFeatureDetector*)sharedInstance;
