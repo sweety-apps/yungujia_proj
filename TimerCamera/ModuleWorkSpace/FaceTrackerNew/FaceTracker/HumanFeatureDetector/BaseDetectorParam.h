@@ -12,6 +12,7 @@
 @interface BaseDetectorParam : NSObject
 
 @property (nonatomic, assign) HumanFeatureType featureType;
+@property (nonatomic, assign) HumanBodyOrientation imageOrientation;
 @property (nonatomic,retain) NSOperation* asyncOperation;
 
 @end

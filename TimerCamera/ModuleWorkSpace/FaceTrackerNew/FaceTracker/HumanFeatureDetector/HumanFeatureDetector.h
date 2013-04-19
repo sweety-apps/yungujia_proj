@@ -27,11 +27,13 @@ typedef enum enumHumanFeatureDetectorStateType {
     kHFDStatusStopped = 0,
     kHFDStatusStarting,
     kHFDStatusTaskInited,
+    kHFDStatusUnConfirmOriginal,
+    kHFDStatusUnConfirmRotated,
+    kHFDStatusUnConfirmFliped,
+    kHFDStatusUnConfirmFlipedRotated,
     kHFDStatusConfirmedFace,
     kHFDStatusConfirmedUpperBody,
     kHFDStatusConfirmedWholeBody,
-    kHFDStatusUnConfirmOriginal,
-    kHFDStatusUnConfirmRotated,
     kHFDStatusStopping,
     kHFDStatusCount
 }HumanFeatureDetectorStateType;
@@ -45,10 +47,13 @@ typedef enum enumHumanFeatureDetectorStateType {
     id<HumanFeatureDetectorDelegate> _notifyDelegate;
     UIImage* _rawImage;
     BOOL _isAsync;
+    BOOL _isCancelled;
     
     NSMutableDictionary* _paramDict;
     UIImage* _scaledImage;
     float _imageScale;
+    NSThread* _callerThread;
+    HumanBodyOrientation _lastOrientation;
     
     DetectedHumanFeatures* _humanFeatures;
     

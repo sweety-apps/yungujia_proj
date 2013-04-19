@@ -47,8 +47,6 @@ static long long getTimeInMicrosecond()
                forDelegate:(id<HumanFeatureDetectorDelegate>)delegate
                shouldAsync:(BOOL)async;
 
-- (void)doDetectOneHumanFeature;
-
 @end
 
 #pragma mark - HumanFeatureDetecor
@@ -75,6 +73,7 @@ static HumanFeatureDetector* gDetector = nil;
     {
         //
         _queue = [[NSOperationQueue alloc] init];
+        [_queue setMaxConcurrentOperationCount:1];
         [_queue setName:kHumanFeatureDetectionQueue];
         _xmlDir = [dir retain];
         _detectStatus = kHFDStatusStopped;
@@ -100,12 +99,12 @@ static HumanFeatureDetector* gDetector = nil;
 
 - (void)cancelAsyncDetection
 {
-    if (!_isDetecting)
+    if (!_isDetecting || _isCancelled)
     {
         return;
     }
+    _isCancelled = YES;
     [_queue cancelAllOperations];
-    _isDetecting = NO;
 }
 
 - (BOOL)isAsyncDetecting
@@ -124,11 +123,16 @@ static HumanFeatureDetector* gDetector = nil;
 
 - (void)taskStart
 {
+    [self performSelector:@selector(onHandledOperation:)
+                 onThread:_callerThread
+               withObject:_humanFeatures
+            waitUntilDone:YES];
+    
     [self taskInitHaarcascades];
     
     _detectStatus = kHFDStatusTaskInited;
     
-    [self doDetectOneHumanFeature];
+    [self detectFirstHumanFeature];
 }
 
 - (void)taskInitHaarcascades
@@ -181,6 +185,7 @@ static HumanFeatureDetector* gDetector = nil;
         param.type = types[i];
         param.imageMat = imageMat;
         param.scale = _imageScale;
+        param.imageOrientation = kBodyHeadUp;
         [_paramDict setObject:param forKey:kFeatureKey(types[i])];
     }
 }
@@ -238,48 +243,26 @@ static HumanFeatureDetector* gDetector = nil;
 
 - (void)taskHandleDetectedResult
 {
-    HumanFeature* feature = _humanFeatures.currentDetectedFeature;
-    
-    if (_humanFeatures.currentDetectedFeatureType == kHumanFeatureFace && _detectStatus == kHFDStatusTaskInited)
+    BOOL checked = NO;
+    SEL sels[] = {@selector(checkFaceFeature),@selector(checkUpperBodyFeature),@selector(checkWholeBodyFeature),@selector(checkFeatureIsEnd)};
+    for (int i = 0; i < (sizeof(sels)/sizeof(sels[0])); ++i)
     {
-        if (feature && feature.detected)
+        checked = [((NSNumber*)[self performSelector:sels[i] withObject:nil]) boolValue];
+        if (checked)
         {
-            HaarDetectorParam* param = [_paramDict objectForKey:kFeatureKey(kHumanFeatureEyePair)];
-            if (_isAsync)
-            {
-                NSInvocationOperation* op = [[[NSInvocationOperation alloc] initWithTarget:self
-                                                                                  selector:@selector(taskDoHaarDetection:)
-                                                                                    object:param] autorelease];
-                param.asyncOperation = op;
-                [_queue addOperation:op];
-            }
-            else
-            {
-                [self taskDoHaarDetection:param];
-            }
-        }
-        else
-        {
-            
+            break;
         }
     }
     
-    if (feature.type == kHumanFeatureFace && _detectStatus == kHFDStatusTaskInited)
+    if (!checked)
     {
-        HaarDetectorParam* param = [_paramDict objectForKey:kFeatureKey(kHumanFeatureEyePair)];
-        if (_isAsync)
-        {
-            NSInvocationOperation* op = [[[NSInvocationOperation alloc] initWithTarget:self
-                                                                              selector:@selector(taskDoHaarDetection:)
-                                                                                object:param] autorelease];
-            param.asyncOperation = op;
-            [_queue addOperation:op];
-        }
-        else
-        {
-            [self taskDoHaarDetection:param];
-        }
+        _detectStatus = kHFDStatusStopping;
     }
+    
+    [self performSelector:@selector(onHandledOperation:)
+                 onThread:_callerThread
+               withObject:_humanFeatures
+            waitUntilDone:YES];
 }
 
 - (void)taskDoCIDetectorDetection:(CIDetectorParam*)param
@@ -290,8 +273,60 @@ static HumanFeatureDetector* gDetector = nil;
 
 - (void)taskFinishedDetection
 {
-    [self releaseAllResources];
+    _detectStatus = kHFDStatusStopping;
+    [self performSelector:@selector(onHandledOperation:)
+                 onThread:_callerThread
+               withObject:_humanFeatures
+            waitUntilDone:YES];
     _detectStatus = kHFDStatusStopped;
+    _isDetecting = NO;
+}
+
+#pragma mark Handle Async Result
+
+- (void)onHandledOperation:(DetectedHumanFeatures*)result
+{
+    if (_isCancelled)
+    {
+        _detectStatus = kHFDStatusStopping;
+        [_queue waitUntilAllOperationsAreFinished];
+        _isCancelled = NO;
+        _isDetecting = NO;
+        _detectStatus = kHFDStatusStopped;
+        if (_notifyDelegate && [_notifyDelegate respondsToSelector:@selector(onCancelledWithFeature:forDetector:)])
+        {
+            [_notifyDelegate onCancelledWithFeature:_humanFeatures forDetector:self];
+        }
+        [self releaseAllResources];
+        return;
+    }
+    
+    
+    if (_detectStatus == kHFDStatusStarting)
+    {
+        if (_notifyDelegate && [_notifyDelegate respondsToSelector:@selector(onStarted:)])
+        {
+            [_notifyDelegate onStarted:self];
+        }
+        return;
+    }
+    
+    if (result.currentDetectedFeature && result.currentDetectedFeature.detected)
+    {
+        if (_notifyDelegate && [_notifyDelegate respondsToSelector:@selector(onDetectedFeature:forDetector:)])
+        {
+            [_notifyDelegate onDetectedFeature:result forDetector:self];
+        }
+    }
+    
+    if (_detectStatus == kHFDStatusStopping)
+    {
+        if (_notifyDelegate && [_notifyDelegate respondsToSelector:@selector(onFinishedWithFeature:forDetector:)])
+        {
+            [_notifyDelegate onFinishedWithFeature:_humanFeatures forDetector:self];
+        }
+        [self releaseAllResources];
+    }
 }
 
 #pragma mark Inner Methods
@@ -304,6 +339,7 @@ static HumanFeatureDetector* gDetector = nil;
     ReleaseAndNil(_scaledImage);
     ReleaseAndNil(_xmlDir);
     ReleaseAndNil(_humanFeatures);
+    ReleaseAndNil(_callerThread);
 }
 
 - (BOOL)detectHumanFeature:(UIImage*)image
@@ -315,14 +351,15 @@ static HumanFeatureDetector* gDetector = nil;
         return NO;
     }
     
-    [_queue waitUntilAllOperationsAreFinished];
-    [self taskFinishedDetection];
+    [self releaseAllResources];
     
+    _isCancelled = NO;
     _detectStatus = kHFDStatusStarting;
     
     _notifyDelegate = [delegate retain];
     _rawImage = [image retain];
     _humanFeatures = [[DetectedHumanFeatures alloc] init];
+    _callerThread = [[NSThread currentThread] retain];
     
     float scale = 1.0;
     if (kScaleToWidth > 0.0)
@@ -335,6 +372,7 @@ static HumanFeatureDetector* gDetector = nil;
     
     _isDetecting = YES;
     _isAsync = async;
+    _lastOrientation = kBodyHeadUp;
     
     if (async)
     {
@@ -352,13 +390,196 @@ static HumanFeatureDetector* gDetector = nil;
     return YES;
 }
 
-- (void)doDetectOneHumanFeature
+#pragma mark result checkouts
+
+- (void)setUnconfirmed
 {
-    switch (_detectStatus)
+    switch (_lastOrientation)
     {
-        case kHFDStatusTaskInited:
+        case kBodyHeadUp:
         {
-            HaarDetectorParam* param = [_paramDict objectForKey:kFeatureKey(kHumanFeatureFace)];
+            _detectStatus = kHFDStatusUnConfirmOriginal;
+        }
+            break;
+        case kBodyHeadLeft:
+        {
+            _detectStatus = kHFDStatusUnConfirmRotated;
+        }
+            break;
+        case kBodyHeadDown:
+        {
+            _detectStatus = kHFDStatusUnConfirmFliped;
+        }
+            break;
+        case kBodyHeadRight:
+        {
+            _detectStatus = kHFDStatusUnConfirmFlipedRotated;
+        }
+            break;
+        default:
+            break;
+    }
+}
+
+- (BOOL)checkAndDoFlipAndRotation
+{
+    BOOL ret = YES;
+    BOOL shouldRotate90Degree = NO;
+    
+    switch (_lastOrientation)
+    {
+        case kBodyHeadUp:
+        {
+            if (_detectStatus == kHFDStatusUnConfirmOriginal)
+            {
+                shouldRotate90Degree = YES;
+                _lastOrientation = kBodyHeadLeft;
+            }
+        }
+            break;
+        case kBodyHeadLeft:
+        {
+            if (_detectStatus == kHFDStatusUnConfirmRotated)
+            {
+                shouldRotate90Degree = YES;
+                _lastOrientation = kBodyHeadDown;
+            }
+        }
+            break;
+        case kBodyHeadDown:
+        {
+            if (_detectStatus == kHFDStatusUnConfirmFliped)
+            {
+                shouldRotate90Degree = YES;
+                _lastOrientation = kBodyHeadRight;
+            }
+        }
+            break;
+        default:
+        {
+            ret = NO;
+        }
+            break;
+    }
+    
+    if (shouldRotate90Degree)
+    {
+        cv::Mat imageMat = [_scaledImage CVMat];
+        cv::transpose(imageMat, imageMat);
+        for (HaarDetectorParam* param in _paramDict)
+        {
+            param.imageMat = imageMat;
+            param.imageOrientation = _lastOrientation;
+        }
+    }
+    
+    return ret;
+}
+
+- (BOOL)hasNeverDetectedFace
+{
+    if (_detectStatus == kHFDStatusTaskInited || _detectStatus == kHFDStatusUnConfirmOriginal || _detectStatus == kHFDStatusUnConfirmRotated || _detectStatus == kHFDStatusUnConfirmFliped)
+    {
+        return YES;
+    }
+    return NO;
+}
+
+- (BOOL)checkDetectedFeatureFaceDetailHaar
+{
+    BOOL ret = NO;
+    
+    HumanFeature* face = [_humanFeatures getFeatureByType:kHumanFeatureFace];
+    HumanFeature* eyePair = [_humanFeatures getFeatureByType:kHumanFeatureEyePair];
+    HumanFeature* nose = [_humanFeatures getFeatureByType:kHumanFeatureNose];
+    HumanFeature* mouth = [_humanFeatures getFeatureByType:kHumanFeatureMouth];
+    
+    if (face && face.detected)
+    {
+        BOOL eyesIsInside = NO;
+        BOOL noseIsInside = NO;
+        BOOL mouthIsInside = NO;
+        
+        if (eyePair && eyePair.detected)
+        {
+            if (CGRectContainsRect(face.rect,eyePair.rect) || CGRectIntersectsRect(face.rect,eyePair.rect))
+            {
+                eyesIsInside = YES;
+            }
+        }
+        
+        if (nose && nose.detected)
+        {
+            if (CGRectContainsRect(face.rect,nose.rect) || CGRectIntersectsRect(face.rect,nose.rect))
+            {
+                noseIsInside = YES;
+            }
+        }
+        
+        if (mouth && mouth.detected)
+        {
+            if (CGRectContainsRect(face.rect,mouth.rect) || CGRectIntersectsRect(face.rect,mouth.rect))
+            {
+                mouthIsInside = YES;
+            }
+        }
+        
+        if ((eyesIsInside && noseIsInside) || (eyesIsInside && noseIsInside) || (eyesIsInside && mouthIsInside) || (noseIsInside && mouthIsInside))
+        {
+            ret = YES;
+        }
+        
+    }
+    
+    return ret;
+}
+
+- (NSNumber*)checkFaceFeature
+{
+    BOOL ret = NO;
+    
+    if ([self hasNeverDetectedFace])
+    {
+        HaarDetectorParam* param = nil;
+        
+        if (_humanFeatures.currentDetectedFeatureType == kHumanFeatureFace)
+        {
+            HumanFeature* feature = _humanFeatures.currentDetectedFeature;
+            if (feature && feature.detected)
+            {
+                param = [_paramDict objectForKey:kFeatureKey(kHumanFeatureEyePair)];
+            }
+            else
+            {
+                [self setUnconfirmed];
+            }
+        }
+        
+        if (_humanFeatures.currentDetectedFeatureType == kHumanFeatureEyePair)
+        {
+            param = [_paramDict objectForKey:kFeatureKey(kHumanFeatureNose)];
+        }
+        
+        if (_humanFeatures.currentDetectedFeatureType == kHumanFeatureNose)
+        {
+            param = [_paramDict objectForKey:kFeatureKey(kHumanFeatureMouth)];
+        }
+        
+        if (_humanFeatures.currentDetectedFeatureType == kHumanFeatureMouth)
+        {
+            if ([self checkDetectedFeatureFaceDetailHaar])
+            {
+                param = [_paramDict objectForKey:kFeatureKey(kHumanFeatureUpperBody)];
+                _detectStatus = kHFDStatusConfirmedFace;
+            }
+            else
+            {
+                [self setUnconfirmed];
+            }
+        }
+        
+        if (param)
+        {
             if (_isAsync)
             {
                 NSInvocationOperation* op = [[[NSInvocationOperation alloc] initWithTarget:self
@@ -372,49 +593,128 @@ static HumanFeatureDetector* gDetector = nil;
                 [self taskDoHaarDetection:param];
             }
         }
-            break;
-        case kHFDStatusConfirmedFace:
-        {
-            
-        }
-            break;
-        case kHFDStatusConfirmedUpperBody:
-        {
-            
-        }
-            break;
-        case kHFDStatusConfirmedWholeBody:
-        {
-            
-        }
-            break;
-        case kHFDStatusUnConfirmOriginal:
-        {
-            
-        }
-            break;
-        case kHFDStatusUnConfirmRotated:
-        {
-            
-        }
-            break;
-        case kHFDStatusStopping:
-        {
-            
-        }
-            break;
-        default:
-            break;
+        
+        ret = YES;
     }
     
-    
+    return [NSNumber numberWithBool:ret];
 }
 
-#pragma mark Handle Async Result
-
-- (void)onHandledOperation:(DetectedHumanFeatures*)result
+- (NSNumber*)checkUpperBodyFeature
 {
+    BOOL ret = NO;
     
+    if (_detectStatus == kHFDStatusConfirmedFace)
+    {
+        HaarDetectorParam* param = nil;
+        
+        if (_humanFeatures.currentDetectedFeatureType == kHumanFeatureUpperBody)
+        {
+            HumanFeature* upperBody = [_humanFeatures getFeatureByType:kHumanFeatureUpperBody];
+            HumanFeature* face = [_humanFeatures getFeatureByType:kHumanFeatureFace];
+            if (upperBody && upperBody.detected &&
+                (CGRectContainsRect(upperBody.rect,face.rect) || CGRectIntersectsRect(upperBody.rect,face.rect)))
+            {
+                param = [_paramDict objectForKey:kFeatureKey(kHumanFeatureLowerBody)];
+                _detectStatus = kHFDStatusConfirmedUpperBody;
+            }
+            else
+            {
+                [self setUnconfirmed];
+            }
+        }
+        
+        if (param)
+        {
+            if (_isAsync)
+            {
+                NSInvocationOperation* op = [[[NSInvocationOperation alloc] initWithTarget:self
+                                                                                  selector:@selector(taskDoHaarDetection:)
+                                                                                    object:param] autorelease];
+                param.asyncOperation = op;
+                [_queue addOperation:op];
+            }
+            else
+            {
+                [self taskDoHaarDetection:param];
+            }
+        }
+        
+        ret = YES;
+    }
+    
+    return [NSNumber numberWithBool:ret];
 }
+
+- (NSNumber*)checkWholeBodyFeature
+{
+    BOOL ret = NO;
+    
+    if (_detectStatus == kHFDStatusConfirmedUpperBody)
+    {
+        HaarDetectorParam* param = nil;
+        
+        /*
+        if (_humanFeatures.currentDetectedFeatureType == kHumanFeatureUpperBody)
+        {
+            HumanFeature* upperBody = [_humanFeatures getFeatureByType:kHumanFeatureUpperBody];
+            HumanFeature* face = [_humanFeatures getFeatureByType:kHumanFeatureFace];
+            if (upperBody && upperBody.detected &&
+                (CGRectContainsRect(upperBody.rect,face.rect) || CGRectIntersectsRect(upperBody.rect,face.rect)))
+            {
+                param = [_paramDict objectForKey:kFeatureKey(kHumanFeatureLowerBody)];
+                _detectStatus = kHFDStatusConfirmedUpperBody;
+            }
+            else
+            {
+                [self setUnconfirmed];
+            }
+        }
+         */
+        
+        if (param)
+        {
+            if (_isAsync)
+            {
+                NSInvocationOperation* op = [[[NSInvocationOperation alloc] initWithTarget:self
+                                                                                  selector:@selector(taskDoHaarDetection:)
+                                                                                    object:param] autorelease];
+                param.asyncOperation = op;
+                [_queue addOperation:op];
+            }
+            else
+            {
+                [self taskDoHaarDetection:param];
+            }
+        }
+        
+        ret = YES;
+    }
+    
+    return [NSNumber numberWithBool:ret];
+}
+
+- (NSNumber*)checkFeatureIsEnd
+{
+    return [NSNumber numberWithBool:[self checkAndDoFlipAndRotation]];
+}
+
+- (void)detectFirstHumanFeature
+{
+    HaarDetectorParam* param = [_paramDict objectForKey:kFeatureKey(kHumanFeatureFace)];
+    if (_isAsync)
+    {
+        NSInvocationOperation* op = [[[NSInvocationOperation alloc] initWithTarget:self
+                                                                          selector:@selector(taskDoHaarDetection:)
+                                                                            object:param] autorelease];
+        param.asyncOperation = op;
+        [_queue addOperation:op];
+    }
+    else
+    {
+        [self taskDoHaarDetection:param];
+    }
+}
+
 
 @end

@@ -298,6 +298,16 @@ static int gImageIndex = 0;
         cv::Mat imageMat = self.imageView.image.CVMat;
         rect.size = self.imageView.image.size;
         
+        /*
+        cv::Mat rotateMat = self.imageView.image.CVMat;
+        cv::transpose(rotateMat, rotateMat);
+        UIImage* rotateImg = [UIImage imageWithCVMat:rotateMat];
+        
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            self.imageView.image = rotateImg;
+        });
+         */
+        
         CGSize imageViewSize = self.imageView.frame.size;
         imageViewSize.height *= 2.0;
         imageViewSize.width *= 2.0;
