@@ -18,8 +18,7 @@
 @property (nonatomic,assign) CGRect rect;
 @property (nonatomic,assign) HumanFeatureType type;
 @property (nonatomic,assign) CGSize rawImageSize;
-
-- (CGRect)scaledRectToUIImageView:(UIImageView*)imageView;
+@property (nonatomic,assign) CGRect rectToRawImageHeadUp;
 
 @end
 

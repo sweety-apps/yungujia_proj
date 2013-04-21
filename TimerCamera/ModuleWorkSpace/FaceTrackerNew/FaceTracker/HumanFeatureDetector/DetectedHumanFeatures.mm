@@ -17,11 +17,7 @@
 @synthesize rect = _rect;
 @synthesize type = _type;
 @synthesize rawImageSize = _rawImageSize;
-
-- (CGRect)scaledRectToUIImageView:(UIImageView*)imageView
-{
-    
-}
+@synthesize rectToRawImageHeadUp = _rectToRawImageHeadUp;
 
 - (void)dealloc
 {

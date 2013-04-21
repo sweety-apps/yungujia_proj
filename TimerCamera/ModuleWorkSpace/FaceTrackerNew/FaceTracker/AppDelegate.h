@@ -20,6 +20,6 @@
 
 @property (nonatomic, retain) UIWindow *window;
 
-@property (nonatomic, retain) VideoCaptureViewController *viewController;
+@property (nonatomic, retain) UIViewController *viewController;
 
 @end

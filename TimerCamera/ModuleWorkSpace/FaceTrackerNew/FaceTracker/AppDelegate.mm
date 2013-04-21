@@ -15,6 +15,7 @@
 #import "AppDelegate.h"
 
 #import "DemoVideoCaptureViewController.h"
+#import "DetectorTestViewController.h"
 
 @implementation AppDelegate
 
@@ -32,7 +33,8 @@
 {
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
-    self.viewController = [[[DemoVideoCaptureViewController alloc] initWithNibName:@"DemoVideoCaptureViewController" bundle:nil] autorelease];
+    //self.viewController = [[[DemoVideoCaptureViewController alloc] initWithNibName:@"DemoVideoCaptureViewController" bundle:nil] autorelease];
+    self.viewController = [[[DetectorTestViewController alloc] initWithNibName:@"DetectorTestViewController" bundle:nil] autorelease];
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     return YES;

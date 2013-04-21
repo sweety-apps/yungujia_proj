@@ -29,6 +29,8 @@
 		BE63BB2D1711D9B600A41B90 /* BaseDetectorParam.m in Sources */ = {isa = PBXBuildFile; fileRef = BE63BB2C1711D9B600A41B90 /* BaseDetectorParam.m */; };
 		BEA5FF4D170E6B6200904DEA /* HumanFeatureDetector.mm in Sources */ = {isa = PBXBuildFile; fileRef = BEA5FF4C170E6B6200904DEA /* HumanFeatureDetector.mm */; };
 		BEA5FF50170E6DFF00904DEA /* DetectedHumanFeatures.mm in Sources */ = {isa = PBXBuildFile; fileRef = BEA5FF4F170E6DFF00904DEA /* DetectedHumanFeatures.mm */; };
+		BEEF41BF1723DA6B003CFD74 /* DetectorTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEEF41BD1723DA6A003CFD74 /* DetectorTestViewController.m */; };
+		BEEF41C01723DA6B003CFD74 /* DetectorTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEEF41BE1723DA6A003CFD74 /* DetectorTestViewController.xib */; };
 		BEFEFFB41707452B0024E9CF /* haarcascade_eye_tree_eyeglasses.xml in Resources */ = {isa = PBXBuildFile; fileRef = BEFEFF9F1707452B0024E9CF /* haarcascade_eye_tree_eyeglasses.xml */; };
 		BEFEFFB51707452B0024E9CF /* haarcascade_eye.xml in Resources */ = {isa = PBXBuildFile; fileRef = BEFEFFA01707452B0024E9CF /* haarcascade_eye.xml */; };
 		BEFEFFB61707452B0024E9CF /* haarcascade_frontalface_alt_tree.xml in Resources */ = {isa = PBXBuildFile; fileRef = BEFEFFA11707452B0024E9CF /* haarcascade_frontalface_alt_tree.xml */; };
@@ -102,6 +104,9 @@
 		BEA5FF4C170E6B6200904DEA /* HumanFeatureDetector.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HumanFeatureDetector.mm; sourceTree = "<group>"; };
 		BEA5FF4E170E6DFF00904DEA /* DetectedHumanFeatures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetectedHumanFeatures.h; sourceTree = "<group>"; };
 		BEA5FF4F170E6DFF00904DEA /* DetectedHumanFeatures.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DetectedHumanFeatures.mm; sourceTree = "<group>"; };
+		BEEF41BC1723DA6A003CFD74 /* DetectorTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetectorTestViewController.h; sourceTree = "<group>"; };
+		BEEF41BD1723DA6A003CFD74 /* DetectorTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetectorTestViewController.m; sourceTree = "<group>"; };
+		BEEF41BE1723DA6A003CFD74 /* DetectorTestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetectorTestViewController.xib; sourceTree = "<group>"; };
 		BEFEFF9F1707452B0024E9CF /* haarcascade_eye_tree_eyeglasses.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = haarcascade_eye_tree_eyeglasses.xml; sourceTree = "<group>"; };
 		BEFEFFA01707452B0024E9CF /* haarcascade_eye.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = haarcascade_eye.xml; sourceTree = "<group>"; };
 		BEFEFFA11707452B0024E9CF /* haarcascade_frontalface_alt_tree.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = haarcascade_frontalface_alt_tree.xml; sourceTree = "<group>"; };
@@ -228,6 +233,9 @@
 				00E53784142BFEE600F30526 /* DemoVideoCaptureViewController.h */,
 				00E53785142BFEE600F30526 /* DemoVideoCaptureViewController.mm */,
 				00E53786142BFEE600F30526 /* DemoVideoCaptureViewController.xib */,
+				BEEF41BC1723DA6A003CFD74 /* DetectorTestViewController.h */,
+				BEEF41BD1723DA6A003CFD74 /* DetectorTestViewController.m */,
+				BEEF41BE1723DA6A003CFD74 /* DetectorTestViewController.xib */,
 				000B551014326D2F0076F5A1 /* UIImage Additions */,
 				00F85B05142D54020099F79C /* Resources */,
 				00427A4A142B956600E5019E /* Supporting Files */,
@@ -381,6 +389,7 @@
 				F39979B51709A20E00D5DA03 /* fat_11.png in Resources */,
 				F39979B61709A20E00D5DA03 /* fat_12.png in Resources */,
 				F39979B71709A20E00D5DA03 /* fat_13.png in Resources */,
+				BEEF41C01723DA6B003CFD74 /* DetectorTestViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,6 +410,7 @@
 				BE63BB271710811500A41B90 /* HaarDetectorParam.mm in Sources */,
 				BE63BB2A1711D56600A41B90 /* CIDetectorParam.m in Sources */,
 				BE63BB2D1711D9B600A41B90 /* BaseDetectorParam.m in Sources */,
+				BEEF41BF1723DA6B003CFD74 /* DetectorTestViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

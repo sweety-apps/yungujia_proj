@@ -138,7 +138,7 @@ static HumanFeatureDetector* gDetector = nil;
 - (void)taskInitHaarcascades
 {
     ReleaseAndNil(_paramDict);
-    _paramDict = [NSMutableDictionary dictionary];
+    _paramDict = [[NSMutableDictionary dictionary] retain];
     
     cv::Mat imageMat = [_scaledImage CVMat];
     
@@ -188,6 +188,7 @@ static HumanFeatureDetector* gDetector = nil;
         param.imageOrientation = kBodyHeadUp;
         [_paramDict setObject:param forKey:kFeatureKey(types[i])];
     }
+    _humanFeatures.bodyOrientation = kBodyHeadUp;
 }
 
 - (void)taskDoHaarDetection:(HaarDetectorParam*)param
@@ -215,8 +216,8 @@ static HumanFeatureDetector* gDetector = nil;
         
         CGRect rect = CGRectZero;
         
-        for (int i = 0; i < faces.size(); i++) {
-            
+        for (int i = 0; i < faces.size(); i++)
+        {
             CGRect faceRect;
             faceRect.origin.x = faces[i].x;
             faceRect.origin.y = faces[i].y;
@@ -234,6 +235,13 @@ static HumanFeatureDetector* gDetector = nil;
         feature.detected = CGSizeEqualToSize(rect.size,CGSizeZero) ? NO : YES;
         feature.type = param.type;
         feature.rawImageSize = _rawImage.size;
+        
+        rect.origin.x /= _imageScale;
+        rect.origin.y /= _imageScale;
+        rect.size.width /= _imageScale;
+        rect.size.height /= _imageScale;
+        
+        feature.rectToRawImageHeadUp = rect;
     }
     
     [_humanFeatures setFeature:feature forType:param.type];
@@ -471,6 +479,7 @@ static HumanFeatureDetector* gDetector = nil;
             param.imageMat = imageMat;
             param.imageOrientation = _lastOrientation;
         }
+        _humanFeatures.bodyOrientation = _lastOrientation;
     }
     
     return ret;
