@@ -37,7 +37,6 @@ static long long getTimeInMicrosecond()
 - (void)taskDoHaarDetection:(HaarDetectorParam*)param;
 - (void)taskDoCIDetectorDetection:(CIDetectorParam*)param;
 - (void)taskHandleDetectedResult;
-- (void)taskFinishedDetection;
 
 @end
 
@@ -279,17 +278,6 @@ static HumanFeatureDetector* gDetector = nil;
     [self taskHandleDetectedResult];
 }
 
-- (void)taskFinishedDetection
-{
-    _detectStatus = kHFDStatusStopping;
-    [self performSelector:@selector(onHandledOperation:)
-                 onThread:_callerThread
-               withObject:_humanFeatures
-            waitUntilDone:YES];
-    _detectStatus = kHFDStatusStopped;
-    _isDetecting = NO;
-}
-
 #pragma mark Handle Async Result
 
 - (void)onHandledOperation:(DetectedHumanFeatures*)result
@@ -329,6 +317,10 @@ static HumanFeatureDetector* gDetector = nil;
     
     if (_detectStatus == kHFDStatusStopping)
     {
+        [_queue waitUntilAllOperationsAreFinished];
+        _isCancelled = NO;
+        _isDetecting = NO;
+        _detectStatus = kHFDStatusStopped;
         if (_notifyDelegate && [_notifyDelegate respondsToSelector:@selector(onFinishedWithFeature:forDetector:)])
         {
             [_notifyDelegate onFinishedWithFeature:_humanFeatures forDetector:self];

@@ -191,9 +191,9 @@
         [self displayFeature:feature.currentDetectedFeature.rectToRawImageHeadUp
            markedBorderColor:[UIColor redColor]
              layerStartIndex:_displayIndex
-                resizeFactor:imageFactor
-                      startX:imageX
-                      startY:imageY];
+                resizeFactor:imageFactor*0.5
+                      startX:imageX*0.5
+                      startY:imageY*0.5];
     }
     
     _displayIndex++;
