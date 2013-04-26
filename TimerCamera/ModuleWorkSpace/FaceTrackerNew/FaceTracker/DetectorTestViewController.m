@@ -16,6 +16,7 @@
 @implementation DetectorTestViewController
 
 @synthesize imageView = _imageView;
+@synthesize statusLabel = _statusLabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -31,6 +32,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     _featureLayers = [[NSMutableArray array] retain];
+    
+    self.statusLabel.text = @"";
 }
 
 - (void)didReceiveMemoryWarning
@@ -60,6 +63,11 @@
     
     _imageIndex++;
     _imageIndex %= 14;
+}
+
+- (IBAction)onStatusDebug:(id)sender
+{
+    self.statusLabel.text = [[HumanFeatureDetector sharedInstance] getStatePathString];
 }
 
 #pragma mark Test Rect Drawer
@@ -213,7 +221,7 @@
 - (void)onFinishedWithFeature:(DetectedHumanFeatures*)feature
                   forDetector:(HumanFeatureDetector*)detector
 {
-    
+    NSLog(@"DETECTION FINISHED!!!");
 }
 
 @end

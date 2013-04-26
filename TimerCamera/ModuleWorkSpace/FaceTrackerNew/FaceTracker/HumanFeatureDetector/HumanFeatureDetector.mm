@@ -51,6 +51,7 @@ static long long getTimeInMicrosecond()
 #pragma mark - HumanFeatureDetecor
 
 static HumanFeatureDetector* gDetector = nil;
+static NSMutableArray* gStatusNameTable = nil;
 
 @implementation HumanFeatureDetector
 
@@ -75,7 +76,8 @@ static HumanFeatureDetector* gDetector = nil;
         [_queue setMaxConcurrentOperationCount:1];
         [_queue setName:kHumanFeatureDetectionQueue];
         _xmlDir = [dir retain];
-        _detectStatus = kHFDStatusStopped;
+        _statusRecords = [[NSMutableArray array] retain];
+        [self changeCurrentStatusTo:kHFDStatusStopped];
     }
     return self;
 }
@@ -86,6 +88,7 @@ static HumanFeatureDetector* gDetector = nil;
     [self cancelAsyncDetection];
     [self releaseAllResources];
     ReleaseAndNil(_queue);
+    ReleaseAndNil(_statusRecords);
     [super dealloc];
 }
 
@@ -118,6 +121,32 @@ static HumanFeatureDetector* gDetector = nil;
                         shouldAsync:NO];
 }
 
+- (NSString*)getStatePathString;
+{
+    if (gStatusNameTable == nil)
+    {
+#define TABLE_ADD_STATE(x) gStatusNameTable[x]=@"["#x"]"
+        gStatusNameTable = [[NSMutableArray array] retain];
+        TABLE_ADD_STATE(kHFDStatusStopped);
+        TABLE_ADD_STATE(kHFDStatusStarting);
+        TABLE_ADD_STATE(kHFDStatusTaskInited);
+        TABLE_ADD_STATE(kHFDStatusUnConfirmOriginal);
+        TABLE_ADD_STATE(kHFDStatusUnConfirmRotated);
+        TABLE_ADD_STATE(kHFDStatusUnConfirmFliped);
+        TABLE_ADD_STATE(kHFDStatusUnConfirmFlipedRotated);
+        TABLE_ADD_STATE(kHFDStatusConfirmedFace);
+        TABLE_ADD_STATE(kHFDStatusConfirmedUpperBody);
+        TABLE_ADD_STATE(kHFDStatusConfirmedWholeBody);
+        TABLE_ADD_STATE(kHFDStatusStopping);
+    }
+    NSString* log = @"[All begin]";
+    for (NSNumber* statusIndexNumber in _statusRecords)
+    {
+        log = [log stringByAppendingFormat:@" =>%@",gStatusNameTable[[statusIndexNumber intValue]]];
+    }
+    return log;
+}
+
 #pragma mark Async Task Methods
 
 - (void)taskStart
@@ -129,7 +158,7 @@ static HumanFeatureDetector* gDetector = nil;
     
     [self taskInitHaarcascades];
     
-    _detectStatus = kHFDStatusTaskInited;
+    [self changeCurrentStatusTo:kHFDStatusTaskInited];
     
     [self detectFirstHumanFeature];
 }
@@ -263,13 +292,13 @@ static HumanFeatureDetector* gDetector = nil;
     
     if (!checked)
     {
-        _detectStatus = kHFDStatusStopping;
+        [self changeCurrentStatusTo:kHFDStatusStopping];
     }
     
     [self performSelector:@selector(onHandledOperation:)
                  onThread:_callerThread
                withObject:_humanFeatures
-            waitUntilDone:YES];
+            waitUntilDone:checked];
 }
 
 - (void)taskDoCIDetectorDetection:(CIDetectorParam*)param
@@ -284,11 +313,11 @@ static HumanFeatureDetector* gDetector = nil;
 {
     if (_isCancelled)
     {
-        _detectStatus = kHFDStatusStopping;
+        [self changeCurrentStatusTo:kHFDStatusStopping];
         [_queue waitUntilAllOperationsAreFinished];
         _isCancelled = NO;
         _isDetecting = NO;
-        _detectStatus = kHFDStatusStopped;
+        [self changeCurrentStatusTo:kHFDStatusStopped];
         if (_notifyDelegate && [_notifyDelegate respondsToSelector:@selector(onCancelledWithFeature:forDetector:)])
         {
             [_notifyDelegate onCancelledWithFeature:_humanFeatures forDetector:self];
@@ -320,7 +349,7 @@ static HumanFeatureDetector* gDetector = nil;
         [_queue waitUntilAllOperationsAreFinished];
         _isCancelled = NO;
         _isDetecting = NO;
-        _detectStatus = kHFDStatusStopped;
+        [self changeCurrentStatusTo:kHFDStatusStopped];
         if (_notifyDelegate && [_notifyDelegate respondsToSelector:@selector(onFinishedWithFeature:forDetector:)])
         {
             [_notifyDelegate onFinishedWithFeature:_humanFeatures forDetector:self];
@@ -330,6 +359,12 @@ static HumanFeatureDetector* gDetector = nil;
 }
 
 #pragma mark Inner Methods
+
+- (void)changeCurrentStatusTo:(HumanFeatureDetectorStateType)status
+{
+    _detectStatus = status;
+    [_statusRecords addObject:[NSNumber numberWithInt:status]];
+}
 
 - (void)releaseAllResources
 {
@@ -354,7 +389,7 @@ static HumanFeatureDetector* gDetector = nil;
     [self releaseAllResources];
     
     _isCancelled = NO;
-    _detectStatus = kHFDStatusStarting;
+    [self changeCurrentStatusTo:kHFDStatusStarting];
     
     _notifyDelegate = [delegate retain];
     _rawImage = [image retain];
@@ -398,22 +433,22 @@ static HumanFeatureDetector* gDetector = nil;
     {
         case kBodyHeadUp:
         {
-            _detectStatus = kHFDStatusUnConfirmOriginal;
+            [self changeCurrentStatusTo:kHFDStatusUnConfirmOriginal];
         }
             break;
         case kBodyHeadLeft:
         {
-            _detectStatus = kHFDStatusUnConfirmRotated;
+            [self changeCurrentStatusTo:kHFDStatusUnConfirmRotated];
         }
             break;
         case kBodyHeadDown:
         {
-            _detectStatus = kHFDStatusUnConfirmFliped;
+            [self changeCurrentStatusTo:kHFDStatusUnConfirmFliped];
         }
             break;
         case kBodyHeadRight:
         {
-            _detectStatus = kHFDStatusUnConfirmFlipedRotated;
+            [self changeCurrentStatusTo:kHFDStatusUnConfirmFlipedRotated];
         }
             break;
         default:
@@ -426,40 +461,47 @@ static HumanFeatureDetector* gDetector = nil;
     BOOL ret = YES;
     BOOL shouldRotate90Degree = NO;
     
-    switch (_lastOrientation)
+    if (_detectStatus == kHFDStatusConfirmedWholeBody)
     {
-        case kBodyHeadUp:
+        ret = NO;
+    }
+    else
+    {
+        switch (_lastOrientation)
         {
-            if (_detectStatus == kHFDStatusUnConfirmOriginal)
+            case kBodyHeadUp:
             {
-                shouldRotate90Degree = YES;
-                _lastOrientation = kBodyHeadLeft;
+                if (_detectStatus == kHFDStatusUnConfirmOriginal)
+                {
+                    shouldRotate90Degree = YES;
+                    _lastOrientation = kBodyHeadLeft;
+                }
             }
-        }
-            break;
-        case kBodyHeadLeft:
-        {
-            if (_detectStatus == kHFDStatusUnConfirmRotated)
+                break;
+            case kBodyHeadLeft:
             {
-                shouldRotate90Degree = YES;
-                _lastOrientation = kBodyHeadDown;
+                if (_detectStatus == kHFDStatusUnConfirmRotated)
+                {
+                    shouldRotate90Degree = YES;
+                    _lastOrientation = kBodyHeadDown;
+                }
             }
-        }
-            break;
-        case kBodyHeadDown:
-        {
-            if (_detectStatus == kHFDStatusUnConfirmFliped)
+                break;
+            case kBodyHeadDown:
             {
-                shouldRotate90Degree = YES;
-                _lastOrientation = kBodyHeadRight;
+                if (_detectStatus == kHFDStatusUnConfirmFliped)
+                {
+                    shouldRotate90Degree = YES;
+                    _lastOrientation = kBodyHeadRight;
+                }
             }
+                break;
+            default:
+            {
+                ret = NO;
+            }
+                break;
         }
-            break;
-        default:
-        {
-            ret = NO;
-        }
-            break;
     }
     
     if (shouldRotate90Degree)
@@ -571,7 +613,7 @@ static HumanFeatureDetector* gDetector = nil;
             if ([self checkDetectedFeatureFaceDetailHaar])
             {
                 param = [_paramDict objectForKey:kFeatureKey(kHumanFeatureUpperBody)];
-                _detectStatus = kHFDStatusConfirmedFace;
+                [self changeCurrentStatusTo:kHFDStatusConfirmedFace];
             }
             else
             {
@@ -617,7 +659,7 @@ static HumanFeatureDetector* gDetector = nil;
                 (CGRectContainsRect(upperBody.rect,face.rect) || CGRectIntersectsRect(upperBody.rect,face.rect)))
             {
                 param = [_paramDict objectForKey:kFeatureKey(kHumanFeatureLowerBody)];
-                _detectStatus = kHFDStatusConfirmedUpperBody;
+                [self changeCurrentStatusTo:kHFDStatusConfirmedUpperBody];
             }
             else
             {
@@ -664,30 +706,44 @@ static HumanFeatureDetector* gDetector = nil;
                 (CGRectContainsRect(upperBody.rect,face.rect) || CGRectIntersectsRect(upperBody.rect,face.rect)))
             {
                 param = [_paramDict objectForKey:kFeatureKey(kHumanFeatureLowerBody)];
-                _detectStatus = kHFDStatusConfirmedUpperBody;
+                [self changeCurrentStatusTo:kHFDStatusConfirmedWholeBody];
             }
             else
             {
                 [self setUnconfirmed];
             }
         }
+         
+         if (param)
+         {
+         if (_isAsync)
+         {
+         NSInvocationOperation* op = [[[NSInvocationOperation alloc] initWithTarget:self
+         selector:@selector(taskDoHaarDetection:)
+         object:param] autorelease];
+         param.asyncOperation = op;
+         [_queue addOperation:op];
+         }
+         else
+         {
+         [self taskDoHaarDetection:param];
+         }
+         }
          */
-        
-        if (param)
+        [self changeCurrentStatusTo:kHFDStatusConfirmedWholeBody];
+        if (_isAsync)
         {
-            if (_isAsync)
-            {
-                NSInvocationOperation* op = [[[NSInvocationOperation alloc] initWithTarget:self
-                                                                                  selector:@selector(taskDoHaarDetection:)
-                                                                                    object:param] autorelease];
-                param.asyncOperation = op;
-                [_queue addOperation:op];
-            }
-            else
-            {
-                [self taskDoHaarDetection:param];
-            }
+            NSInvocationOperation* op = [[[NSInvocationOperation alloc] initWithTarget:self
+                                                                              selector:@selector(taskHandleDetectedResult)
+                                                                                object:nil] autorelease];
+            param.asyncOperation = op;
+            [_queue addOperation:op];
         }
+        else
+        {
+            [self taskHandleDetectedResult];
+        }
+        
         
         ret = YES;
     }

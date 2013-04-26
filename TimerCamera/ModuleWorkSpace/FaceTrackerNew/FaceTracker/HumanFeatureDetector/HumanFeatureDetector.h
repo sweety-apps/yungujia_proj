@@ -58,6 +58,8 @@ typedef enum enumHumanFeatureDetectorStateType {
     DetectedHumanFeatures* _humanFeatures;
     
     HumanFeatureDetectorStateType _detectStatus;
+    
+    NSMutableArray* _statusRecords;
 }
 
 + (HumanFeatureDetector*)sharedInstance;
@@ -66,5 +68,6 @@ typedef enum enumHumanFeatureDetectorStateType {
 - (void)cancelAsyncDetection;
 - (BOOL)isAsyncDetecting;
 - (BOOL)syncDetect:(UIImage*)image forDelegate:(id<HumanFeatureDetectorDelegate>)delegate;
+- (NSString*)getStatePathString;
 
 @end
