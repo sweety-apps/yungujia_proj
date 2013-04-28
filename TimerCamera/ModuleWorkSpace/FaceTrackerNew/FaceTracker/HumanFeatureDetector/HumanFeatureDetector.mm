@@ -508,12 +508,13 @@ static NSMutableArray* gStatusNameTable = nil;
     {
         cv::Mat imageMat = [_scaledImage CVMat];
         cv::transpose(imageMat, imageMat);
-        for (HaarDetectorParam* param in _paramDict)
+        for (HaarDetectorParam* param in _paramDict.allValues)
         {
             param.imageMat = imageMat;
             param.imageOrientation = _lastOrientation;
         }
         _humanFeatures.bodyOrientation = _lastOrientation;
+        [self detectFirstHumanFeature];
     }
     
     return ret;
@@ -580,6 +581,7 @@ static NSMutableArray* gStatusNameTable = nil;
 - (NSNumber*)checkFaceFeature
 {
     BOOL ret = NO;
+    BOOL needRedect = NO;
     
     if ([self hasNeverDetectedFace])
     {
@@ -595,6 +597,7 @@ static NSMutableArray* gStatusNameTable = nil;
             else
             {
                 [self setUnconfirmed];
+                needRedect = YES;
             }
         }
         
@@ -618,6 +621,7 @@ static NSMutableArray* gStatusNameTable = nil;
             else
             {
                 [self setUnconfirmed];
+                needRedect = YES;
             }
         }
         
@@ -638,6 +642,10 @@ static NSMutableArray* gStatusNameTable = nil;
         }
         
         ret = YES;
+        if (needRedect)
+        {
+            ret = NO;
+        }
     }
     
     return [NSNumber numberWithBool:ret];
@@ -646,6 +654,7 @@ static NSMutableArray* gStatusNameTable = nil;
 - (NSNumber*)checkUpperBodyFeature
 {
     BOOL ret = NO;
+    BOOL needRedect = NO;
     
     if (_detectStatus == kHFDStatusConfirmedFace)
     {
@@ -664,6 +673,7 @@ static NSMutableArray* gStatusNameTable = nil;
             else
             {
                 [self setUnconfirmed];
+                needRedect = YES;
             }
         }
         
@@ -684,6 +694,10 @@ static NSMutableArray* gStatusNameTable = nil;
         }
         
         ret = YES;
+        if (needRedect)
+        {
+            ret = NO;
+        }
     }
     
     return [NSNumber numberWithBool:ret];
