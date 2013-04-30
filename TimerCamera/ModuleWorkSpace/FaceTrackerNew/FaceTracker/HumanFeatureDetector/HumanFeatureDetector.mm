@@ -295,6 +295,11 @@ static NSMutableArray* gStatusNameTable = nil;
         [self changeCurrentStatusTo:kHFDStatusStopping];
     }
     
+    if (_isCancelled)
+    {
+        checked = NO;
+    }
+    
     [self performSelector:@selector(onHandledOperation:)
                  onThread:_callerThread
                withObject:_humanFeatures
