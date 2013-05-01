@@ -277,6 +277,108 @@ static NSMutableArray* gStatusNameTable = nil;
     [self taskHandleDetectedResult];
 }
 
+- (void)taskDoCIDetectorDetection:(CIDetectorParam*)param
+{
+    CIImage *beginImage = [CIImage imageWithCGImage:param.image.CGImage];
+    //CIContext *context = [CIContext contextWithOptions:nil];
+    
+    CIDetector* detector = [CIDetector detectorOfType:CIDetectorTypeFace
+                                              context:nil options:[NSDictionary dictionaryWithObject:CIDetectorAccuracyHigh forKey:CIDetectorAccuracy]];
+    
+    // create an array containing all the detected faces from the detector
+    NSArray* features = [detector featuresInImage:beginImage];
+    
+    HumanFeature* feature = nil;
+    
+    
+    // we'll iterate through every detected face. CIFaceFeature provides us
+    // with the width for the entire face, and the coordinates of each eye
+    // and the mouth if detected. Also provided are BOOL's for the eye's and
+    // mouth so we can check if they already exist.
+    if ([features count] > 0)
+    {
+        int maxScoreFeatureIndex = 0;
+        int maxScore = 0;
+        for(int i = 0; i < [features count]; ++i)
+        {
+            CIFaceFeature* faceFeature = [features objectAtIndex:i];
+            int score = 0;
+            if (faceFeature.hasLeftEyePosition)
+            {
+                score++;
+            }
+            if (faceFeature.hasRightEyePosition)
+            {
+                score++;
+            }
+            if (faceFeature.hasMouthPosition)
+            {
+                score++;
+            }
+            if (score > maxScore)
+            {
+                maxScore = score;
+                maxScoreFeatureIndex = i;
+            }
+        }
+        
+        CIFaceFeature* faceFeature = [features objectAtIndex:maxScoreFeatureIndex];
+        // get the width of the face
+        CGFloat faceWidth = faceFeature.bounds.size.width;
+        
+        if (faceWidth > 0.f)
+        {
+            feature = [[[HumanFeature alloc] init] autorelease];
+            feature.rect = faceFeature.bounds;
+            feature.detected = YES;
+            feature.type = kHumanFeatureFace;
+            feature.rawImageSize = _rawImage.size;
+        }
+        [_humanFeatures setFeature:feature forType:kHumanFeatureFace];
+        feature = nil;
+        
+        if (faceFeature.hasLeftEyePosition)
+        {
+            feature = [[[HumanFeature alloc] init] autorelease];
+            feature.rect = CGRectMake(faceFeature.leftEyePosition.x-faceWidth*0.15, faceFeature.leftEyePosition.y-faceWidth*0.15, faceWidth*0.3, faceWidth*0.3);
+            feature.detected = YES;
+            feature.type = kHumanFeatureLeftEye;
+            feature.rawImageSize = _rawImage.size;
+        }
+        [_humanFeatures setFeature:feature forType:kHumanFeatureLeftEye];
+        feature = nil;
+        
+        if (faceFeature.hasRightEyePosition)
+        {
+            feature = [[[HumanFeature alloc] init] autorelease];
+            feature.rect = CGRectMake(faceFeature.rightEyePosition.x-faceWidth*0.15, faceFeature.rightEyePosition.y-faceWidth*0.15, faceWidth*0.3, faceWidth*0.3);
+            feature.detected = YES;
+            feature.type = kHumanFeatureRightEye;
+            feature.rawImageSize = _rawImage.size;
+        }
+        [_humanFeatures setFeature:feature forType:kHumanFeatureRightEye];
+        feature = nil;
+        
+        if (faceFeature.hasMouthPosition)
+        {
+            feature = [[[HumanFeature alloc] init] autorelease];
+            feature.rect = CGRectMake(faceFeature.mouthPosition.x-faceWidth*0.2, faceFeature.mouthPosition.y-faceWidth*0.15, faceWidth*0.4, faceWidth*0.3);
+            feature.detected = YES;
+            feature.type = kHumanFeatureMouth;
+            feature.rawImageSize = _rawImage.size;
+        }
+        [_humanFeatures setFeature:feature forType:kHumanFeatureMouth];
+        feature = nil;
+    }
+    else
+    {
+        [_humanFeatures setFeature:nil forType:kHumanFeatureFace];
+    }
+    
+    
+    [self taskHandleDetectedResult];
+}
+
 - (void)taskHandleDetectedResult
 {
     BOOL checked = NO;
@@ -306,11 +408,6 @@ static NSMutableArray* gStatusNameTable = nil;
             waitUntilDone:checked];
 }
 
-- (void)taskDoCIDetectorDetection:(CIDetectorParam*)param
-{
-    //TODO
-    [self taskHandleDetectedResult];
-}
 
 #pragma mark Handle Async Result
 
