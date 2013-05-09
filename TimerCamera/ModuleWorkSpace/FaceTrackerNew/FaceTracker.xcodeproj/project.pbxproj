@@ -24,6 +24,7 @@
 		00E53783142BE6D600F30526 /* UIImage+OpenCV.mm in Sources */ = {isa = PBXBuildFile; fileRef = 00E53782142BE6D600F30526 /* UIImage+OpenCV.mm */; };
 		00E53787142BFEE600F30526 /* DemoVideoCaptureViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 00E53785142BFEE600F30526 /* DemoVideoCaptureViewController.mm */; };
 		00E53788142BFEE700F30526 /* DemoVideoCaptureViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00E53786142BFEE600F30526 /* DemoVideoCaptureViewController.xib */; };
+		4F5A37A4173B8C6700A13F22 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F5A37A3173B8C6700A13F22 /* CoreImage.framework */; };
 		BE63BB271710811500A41B90 /* HaarDetectorParam.mm in Sources */ = {isa = PBXBuildFile; fileRef = BE63BB261710811500A41B90 /* HaarDetectorParam.mm */; };
 		BE63BB2A1711D56600A41B90 /* CIDetectorParam.m in Sources */ = {isa = PBXBuildFile; fileRef = BE63BB291711D56500A41B90 /* CIDetectorParam.m */; };
 		BE63BB2D1711D9B600A41B90 /* BaseDetectorParam.m in Sources */ = {isa = PBXBuildFile; fileRef = BE63BB2C1711D9B600A41B90 /* BaseDetectorParam.m */; };
@@ -94,6 +95,7 @@
 		00E53784142BFEE600F30526 /* DemoVideoCaptureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoVideoCaptureViewController.h; sourceTree = "<group>"; };
 		00E53785142BFEE600F30526 /* DemoVideoCaptureViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DemoVideoCaptureViewController.mm; sourceTree = "<group>"; };
 		00E53786142BFEE600F30526 /* DemoVideoCaptureViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DemoVideoCaptureViewController.xib; sourceTree = "<group>"; };
+		4F5A37A3173B8C6700A13F22 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		BE63BB251710811500A41B90 /* HaarDetectorParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HaarDetectorParam.h; sourceTree = "<group>"; };
 		BE63BB261710811500A41B90 /* HaarDetectorParam.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HaarDetectorParam.mm; sourceTree = "<group>"; };
 		BE63BB281711D56500A41B90 /* CIDetectorParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CIDetectorParam.h; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F5A37A4173B8C6700A13F22 /* CoreImage.framework in Frameworks */,
 				00DE37361430E806004993CC /* QuartzCore.framework in Frameworks */,
 				00E53780142BE66400F30526 /* libz.dylib in Frameworks */,
 				00427A66142B9AEC00E5019E /* CoreVideo.framework in Frameworks */,
@@ -210,6 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				00E5377F142BE66300F30526 /* libz.dylib */,
+				4F5A37A3173B8C6700A13F22 /* CoreImage.framework */,
 				000B5500142FEA870076F5A1 /* OpenCV.framework */,
 				00DE37351430E806004993CC /* QuartzCore.framework */,
 				00427A65142B9AEC00E5019E /* CoreVideo.framework */,

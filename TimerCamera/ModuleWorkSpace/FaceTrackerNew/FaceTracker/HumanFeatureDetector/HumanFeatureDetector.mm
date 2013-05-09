@@ -165,8 +165,10 @@ static NSMutableArray* gStatusNameTable = nil;
 
 - (void)taskInitHaarcascades
 {
-    ReleaseAndNil(_paramDict);
-    _paramDict = [[NSMutableDictionary dictionary] retain];
+    ReleaseAndNil(_haarParamDict);
+    ReleaseAndNil(_ciParamDict);
+    _haarParamDict = [[NSMutableDictionary dictionary] retain];
+    _ciParamDict = [[NSMutableDictionary dictionary] retain];
     
     cv::Mat imageMat = [_scaledImage CVMat];
     
@@ -180,6 +182,8 @@ static NSMutableArray* gStatusNameTable = nil;
         kHumanFeatureUpperBody,
         kHumanFeatureLowerBody
     };
+    
+    //////Haarcascade Parameters Init//////
     
     // Name of face cascade resource file without xml extension
     NSString* cascadeFilenames[kHumanFeatureTypeCount] = {
@@ -214,8 +218,13 @@ static NSMutableArray* gStatusNameTable = nil;
         param.imageMat = imageMat;
         param.scale = _imageScale;
         param.imageOrientation = kBodyHeadUp;
-        [_paramDict setObject:param forKey:kFeatureKey(types[i])];
+        [_haarParamDict setObject:param forKey:kFeatureKey(types[i])];
     }
+    
+    //////Core Image Parameters Init//////
+    CIDetectorParam* faceCIParam = [[CIDetectorParam alloc] initWithImage:_scaledImage];
+    [_ciParamDict setObject:faceCIParam forKey:kFeatureKey(kHumanFeatureFace)];
+    
     _humanFeatures.bodyOrientation = kBodyHeadUp;
 }
 
@@ -470,7 +479,8 @@ static NSMutableArray* gStatusNameTable = nil;
 
 - (void)releaseAllResources
 {
-    ReleaseAndNil(_paramDict);
+    ReleaseAndNil(_haarParamDict);
+    ReleaseAndNil(_ciParamDict);
     ReleaseAndNil(_notifyDelegate);
     ReleaseAndNil(_rawImage);
     ReleaseAndNil(_scaledImage);
@@ -610,9 +620,15 @@ static NSMutableArray* gStatusNameTable = nil;
     {
         cv::Mat imageMat = [_scaledImage CVMat];
         cv::transpose(imageMat, imageMat);
-        for (HaarDetectorParam* param in _paramDict.allValues)
+        for (HaarDetectorParam* param in _haarParamDict.allValues)
         {
             param.imageMat = imageMat;
+            param.imageOrientation = _lastOrientation;
+        }
+        UIImage* rotatedUIImage = [UIImage imageWithCVMat:imageMat];
+        for (CIDetectorParam* param in _ciParamDict.allValues)
+        {
+            param.image = rotatedUIImage;
             param.imageOrientation = _lastOrientation;
         }
         _humanFeatures.bodyOrientation = _lastOrientation;
@@ -631,7 +647,7 @@ static NSMutableArray* gStatusNameTable = nil;
     return NO;
 }
 
-- (BOOL)checkDetectedFeatureFaceDetailHaar
+- (BOOL)checkDetectedFeatureFaceDetail
 {
     BOOL ret = NO;
     
@@ -639,6 +655,8 @@ static NSMutableArray* gStatusNameTable = nil;
     HumanFeature* eyePair = [_humanFeatures getFeatureByType:kHumanFeatureEyePair];
     HumanFeature* nose = [_humanFeatures getFeatureByType:kHumanFeatureNose];
     HumanFeature* mouth = [_humanFeatures getFeatureByType:kHumanFeatureMouth];
+    HumanFeature* leftEye = [_humanFeatures getFeatureByType:kHumanFeatureLeftEye];
+    HumanFeature* rightEye = [_humanFeatures getFeatureByType:kHumanFeatureRightEye];
     
     if (face && face.detected)
     {
@@ -649,6 +667,18 @@ static NSMutableArray* gStatusNameTable = nil;
         if (eyePair && eyePair.detected)
         {
             if (CGRectContainsRect(face.rect,eyePair.rect) || CGRectIntersectsRect(face.rect,eyePair.rect))
+            {
+                eyesIsInside = YES;
+            }
+        }
+        
+        if ((leftEye && leftEye.detected) || (rightEye && rightEye.detected))
+        {
+            if (CGRectContainsRect(face.rect,leftEye.rect) || CGRectIntersectsRect(face.rect,leftEye.rect))
+            {
+                eyesIsInside = YES;
+            }
+            if (CGRectContainsRect(face.rect,rightEye.rect) || CGRectIntersectsRect(face.rect,rightEye.rect))
             {
                 eyesIsInside = YES;
             }
@@ -694,7 +724,7 @@ static NSMutableArray* gStatusNameTable = nil;
             HumanFeature* feature = _humanFeatures.currentDetectedFeature;
             if (feature && feature.detected)
             {
-                param = [_paramDict objectForKey:kFeatureKey(kHumanFeatureEyePair)];
+                param = [_haarParamDict objectForKey:kFeatureKey(kHumanFeatureEyePair)];
             }
             else
             {
@@ -705,19 +735,19 @@ static NSMutableArray* gStatusNameTable = nil;
         
         if (_humanFeatures.currentDetectedFeatureType == kHumanFeatureEyePair)
         {
-            param = [_paramDict objectForKey:kFeatureKey(kHumanFeatureNose)];
+            param = [_haarParamDict objectForKey:kFeatureKey(kHumanFeatureNose)];
         }
         
         if (_humanFeatures.currentDetectedFeatureType == kHumanFeatureNose)
         {
-            param = [_paramDict objectForKey:kFeatureKey(kHumanFeatureMouth)];
+            param = [_haarParamDict objectForKey:kFeatureKey(kHumanFeatureMouth)];
         }
         
         if (_humanFeatures.currentDetectedFeatureType == kHumanFeatureMouth)
         {
-            if ([self checkDetectedFeatureFaceDetailHaar])
+            if ([self checkDetectedFeatureFaceDetail])
             {
-                param = [_paramDict objectForKey:kFeatureKey(kHumanFeatureUpperBody)];
+                param = [_haarParamDict objectForKey:kFeatureKey(kHumanFeatureUpperBody)];
                 [self changeCurrentStatusTo:kHFDStatusConfirmedFace];
             }
             else
@@ -769,7 +799,7 @@ static NSMutableArray* gStatusNameTable = nil;
             if (upperBody && upperBody.detected &&
                 (CGRectContainsRect(upperBody.rect,face.rect) || CGRectIntersectsRect(upperBody.rect,face.rect)))
             {
-                param = [_paramDict objectForKey:kFeatureKey(kHumanFeatureLowerBody)];
+                param = [_haarParamDict objectForKey:kFeatureKey(kHumanFeatureLowerBody)];
                 [self changeCurrentStatusTo:kHFDStatusConfirmedUpperBody];
             }
             else
@@ -821,7 +851,7 @@ static NSMutableArray* gStatusNameTable = nil;
             if (upperBody && upperBody.detected &&
                 (CGRectContainsRect(upperBody.rect,face.rect) || CGRectIntersectsRect(upperBody.rect,face.rect)))
             {
-                param = [_paramDict objectForKey:kFeatureKey(kHumanFeatureLowerBody)];
+                param = [_haarParamDict objectForKey:kFeatureKey(kHumanFeatureLowerBody)];
                 [self changeCurrentStatusTo:kHFDStatusConfirmedWholeBody];
             }
             else
@@ -874,18 +904,25 @@ static NSMutableArray* gStatusNameTable = nil;
 
 - (void)detectFirstHumanFeature
 {
-    HaarDetectorParam* param = [_paramDict objectForKey:kFeatureKey(kHumanFeatureFace)];
+#if 0
+    NSMutableDictionary* paramDict = _haarParamDict;
+    SEL taskDoDetectionSel = @selector(taskDoHaarDetection:);
+#else
+    NSMutableDictionary* paramDict = _ciParamDict;
+    SEL taskDoDetectionSel = @selector(taskDoCIDetectorDetection:);
+#endif
+    BaseDetectorParam* param = [paramDict objectForKey:kFeatureKey(kHumanFeatureFace)];
     if (_isAsync)
     {
         NSInvocationOperation* op = [[[NSInvocationOperation alloc] initWithTarget:self
-                                                                          selector:@selector(taskDoHaarDetection:)
+                                                                          selector:taskDoDetectionSel
                                                                             object:param] autorelease];
         param.asyncOperation = op;
         [_queue addOperation:op];
     }
     else
     {
-        [self taskDoHaarDetection:param];
+        [self performSelector:taskDoDetectionSel withObject:param];
     }
 }
 

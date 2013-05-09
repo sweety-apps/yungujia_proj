@@ -49,7 +49,8 @@ typedef enum enumHumanFeatureDetectorStateType {
     BOOL _isAsync;
     BOOL _isCancelled;
     
-    NSMutableDictionary* _paramDict;
+    NSMutableDictionary* _haarParamDict;
+    NSMutableDictionary* _ciParamDict;
     UIImage* _scaledImage;
     float _imageScale;
     NSThread* _callerThread;
