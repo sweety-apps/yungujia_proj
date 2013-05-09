@@ -57,8 +57,6 @@
     
     self.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"fat_%d",_imageIndex]];
     
-    _displayIndex = 0;
-    
     [[HumanFeatureDetector sharedInstance] startAsyncDetection:self.imageView.image forDelegate:self];
     
     _imageIndex++;
@@ -89,8 +87,8 @@
                     startX:(CGFloat)startX
                     startY:(CGFloat)startY;
 {
-    [CATransaction begin];
-	[CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
+    //[CATransaction begin];
+	//[CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
     
     CGRect faceRect;
     faceRect.origin.x = featureRect.origin.x * resizeFactor + startX;
@@ -117,7 +115,9 @@
     featureLayer.borderColor = [color CGColor];
     featureLayer.frame = faceRect;
     
-    [CATransaction commit];
+    //[CATransaction commit];
+    
+    [featureLayer setNeedsDisplay];
 }
 
 #pragma mark <HumanFeatureDetectorDelegate>
@@ -194,28 +194,35 @@
         imageY = 0.0;
     }
     
-    if (feature.currentDetectedFeature)
-    {
-        [self displayFeature:feature.currentDetectedFeature.rectToRawImageHeadUp
-           markedBorderColor:[UIColor redColor]
-             layerStartIndex:_displayIndex
-                resizeFactor:imageFactor*0.5
-                      startX:imageX*0.5
-                      startY:imageY*0.5];
-    }
+    [self clearFeatureMarkedLayers];
     
-    _displayIndex++;
+    _displayIndex = 0;
+    
+    for (int i = kHumanFeatureFace; i < kHumanFeatureTypeCount; i++)
+    {
+        HumanFeature* humanFeature = [feature getFeatureByType:i];
+        if (humanFeature.detected)
+        {
+            [self displayFeature:humanFeature.rectToRawImageHeadUp
+               markedBorderColor:[UIColor redColor]
+                 layerStartIndex:_displayIndex
+                    resizeFactor:imageFactor*0.5
+                          startX:imageX*0.5
+                          startY:imageY*0.5];
+            _displayIndex++;
+        }
+    }
 }
 
 - (void)onStarted:(HumanFeatureDetector*)detector
 {
-    [self clearFeatureMarkedLayers];
+    //[self clearFeatureMarkedLayers];
 }
 
 - (void)onCancelledWithFeature:(DetectedHumanFeatures*)feature
                    forDetector:(HumanFeatureDetector*)detector
 {
-    [self clearFeatureMarkedLayers];
+    //[self clearFeatureMarkedLayers];
 }
 
 - (void)onFinishedWithFeature:(DetectedHumanFeatures*)feature

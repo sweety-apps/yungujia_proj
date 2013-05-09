@@ -338,10 +338,11 @@ static NSMutableArray* gStatusNameTable = nil;
         if (faceWidth > 0.f)
         {
             feature = [[[HumanFeature alloc] init] autorelease];
-            feature.rect = faceFeature.bounds;
+            feature.rect = [self flipRectByY:faceFeature.bounds forSize:param.image.size];
             feature.detected = YES;
             feature.type = kHumanFeatureFace;
             feature.rawImageSize = _rawImage.size;
+            feature.rectToRawImageHeadUp = feature.rect;
         }
         [_humanFeatures setFeature:feature forType:kHumanFeatureFace];
         feature = nil;
@@ -349,10 +350,11 @@ static NSMutableArray* gStatusNameTable = nil;
         if (faceFeature.hasLeftEyePosition)
         {
             feature = [[[HumanFeature alloc] init] autorelease];
-            feature.rect = CGRectMake(faceFeature.leftEyePosition.x-faceWidth*0.15, faceFeature.leftEyePosition.y-faceWidth*0.15, faceWidth*0.3, faceWidth*0.3);
+            feature.rect = [self flipRectByY:CGRectMake(faceFeature.leftEyePosition.x-faceWidth*0.15, faceFeature.leftEyePosition.y-faceWidth*0.15, faceWidth*0.3, faceWidth*0.3) forSize:param.image.size];
             feature.detected = YES;
             feature.type = kHumanFeatureLeftEye;
             feature.rawImageSize = _rawImage.size;
+            feature.rectToRawImageHeadUp = feature.rect;
         }
         [_humanFeatures setFeature:feature forType:kHumanFeatureLeftEye];
         feature = nil;
@@ -360,10 +362,11 @@ static NSMutableArray* gStatusNameTable = nil;
         if (faceFeature.hasRightEyePosition)
         {
             feature = [[[HumanFeature alloc] init] autorelease];
-            feature.rect = CGRectMake(faceFeature.rightEyePosition.x-faceWidth*0.15, faceFeature.rightEyePosition.y-faceWidth*0.15, faceWidth*0.3, faceWidth*0.3);
+            feature.rect = [self flipRectByY:CGRectMake(faceFeature.rightEyePosition.x-faceWidth*0.15, faceFeature.rightEyePosition.y-faceWidth*0.15, faceWidth*0.3, faceWidth*0.3) forSize:param.image.size];
             feature.detected = YES;
             feature.type = kHumanFeatureRightEye;
             feature.rawImageSize = _rawImage.size;
+            feature.rectToRawImageHeadUp = feature.rect;
         }
         [_humanFeatures setFeature:feature forType:kHumanFeatureRightEye];
         feature = nil;
@@ -371,10 +374,11 @@ static NSMutableArray* gStatusNameTable = nil;
         if (faceFeature.hasMouthPosition)
         {
             feature = [[[HumanFeature alloc] init] autorelease];
-            feature.rect = CGRectMake(faceFeature.mouthPosition.x-faceWidth*0.2, faceFeature.mouthPosition.y-faceWidth*0.15, faceWidth*0.4, faceWidth*0.3);
+            feature.rect = [self flipRectByY:CGRectMake(faceFeature.mouthPosition.x-faceWidth*0.2, faceFeature.mouthPosition.y-faceWidth*0.15, faceWidth*0.4, faceWidth*0.3) forSize:param.image.size];
             feature.detected = YES;
             feature.type = kHumanFeatureMouth;
             feature.rawImageSize = _rawImage.size;
+            feature.rectToRawImageHeadUp = feature.rect;
         }
         [_humanFeatures setFeature:feature forType:kHumanFeatureMouth];
         feature = nil;
@@ -535,6 +539,21 @@ static NSMutableArray* gStatusNameTable = nil;
     }
     
     return YES;
+}
+
+- (CGRect)regulateRect:(CGRect)rect
+{
+    rect.origin.x = (CGFloat)((int)rect.origin.x);
+    rect.origin.y = (CGFloat)((int)rect.origin.y);
+    rect.size.width = (CGFloat)((int)rect.size.width);
+    rect.size.height = (CGFloat)((int)rect.size.height);
+    return rect;
+}
+
+- (CGRect)flipRectByY:(CGRect)rect forSize:(CGSize)size
+{
+    rect.origin.y = size.height - rect.origin.y - rect.size.height;
+    return rect;
 }
 
 #pragma mark result checkouts
