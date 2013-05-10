@@ -55,6 +55,8 @@
 {
     [[HumanFeatureDetector sharedInstance] cancelAsyncDetection];
     
+    //_imageIndex = 8;
+    
     self.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"fat_%d",_imageIndex]];
     
     [[HumanFeatureDetector sharedInstance] startAsyncDetection:self.imageView.image forDelegate:self];

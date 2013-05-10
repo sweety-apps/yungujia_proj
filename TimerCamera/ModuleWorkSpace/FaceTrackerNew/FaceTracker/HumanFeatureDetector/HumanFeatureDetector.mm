@@ -386,6 +386,9 @@ static NSMutableArray* gStatusNameTable = nil;
     else
     {
         [_humanFeatures setFeature:nil forType:kHumanFeatureFace];
+        [_humanFeatures setFeature:nil forType:kHumanFeatureLeftEye];
+        [_humanFeatures setFeature:nil forType:kHumanFeatureRightEye];
+        [_humanFeatures setFeature:nil forType:kHumanFeatureMouth];
     }
     
     
@@ -811,6 +814,7 @@ static NSMutableArray* gStatusNameTable = nil;
     {
         HaarDetectorParam* param = nil;
         
+#if 0
         if (_humanFeatures.currentDetectedFeatureType == kHumanFeatureUpperBody)
         {
             HumanFeature* upperBody = [_humanFeatures getFeatureByType:kHumanFeatureUpperBody];
@@ -827,6 +831,10 @@ static NSMutableArray* gStatusNameTable = nil;
                 needRedect = YES;
             }
         }
+#endif
+        
+        param = [_haarParamDict objectForKey:kFeatureKey(kHumanFeatureLowerBody)];
+        [self changeCurrentStatusTo:kHFDStatusConfirmedUpperBody];
         
         if (param)
         {
