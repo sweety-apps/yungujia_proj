@@ -114,6 +114,20 @@ static void ProviderReleaseDataNOP(void *info, const void *data, size_t size)
     return self;
 }
 
+static CIContext *gContext = nil;
 
+-(UIImage *)imageByApplyingTransform:(CGAffineTransform)matrix
+{
+    CIImage *ciImage = [CIImage imageWithCGImage:self.CGImage];
+    ciImage = [ciImage imageByApplyingTransform:matrix];
+    if (gContext == nil)
+    {
+        gContext = [[CIContext contextWithOptions: nil] retain];
+    }
+    CGImageRef cgImg = [gContext createCGImage:ciImage fromRect:[ciImage extent]];
+    UIImage* ret = [UIImage imageWithCGImage:cgImg];
+    CGImageRelease(cgImg);
+    return ret;
+}
 
 @end

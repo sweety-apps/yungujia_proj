@@ -22,4 +22,6 @@
 @property(nonatomic, readonly) cv::Mat CVMat;
 @property(nonatomic, readonly) cv::Mat CVGrayscaleMat;
 
+-(UIImage *)imageByApplyingTransform:(CGAffineTransform)matrix;
+
 @end
