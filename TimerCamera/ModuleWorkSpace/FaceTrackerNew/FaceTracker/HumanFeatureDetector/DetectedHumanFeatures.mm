@@ -32,7 +32,7 @@
 
 @synthesize currentDetectedFeature = _currentDetectedFeature;
 @synthesize isDetectionFinished = _isDetectionFinished;
-@synthesize bodyOrientation = _bodyOrientation;
+@synthesize bodyHeadOrientationAngle = _bodyHeadOrientationAngle;
 @synthesize currentDetectedFeatureType = _currentDetectedFeatureType;
 
 - (id)init

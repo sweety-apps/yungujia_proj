@@ -21,13 +21,4 @@ typedef enum {
     kHumanFeatureTypeCount
 } HumanFeatureType;
 
-typedef enum {
-    kBodyHeadUp = 0,
-    kBodyHeadLeft,
-    kBodyHeadRight,
-    kBodyHeadDown,
-    kBodyOrientationCount
-} HumanBodyOrientation;
-
-
 #endif

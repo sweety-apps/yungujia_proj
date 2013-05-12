@@ -54,7 +54,7 @@ typedef enum enumHumanFeatureDetectorStateType {
     UIImage* _scaledImage;
     float _imageScale;
     NSThread* _callerThread;
-    HumanBodyOrientation _lastOrientation;
+    float _lastOrientationAngle;
     
     DetectedHumanFeatures* _humanFeatures;
     

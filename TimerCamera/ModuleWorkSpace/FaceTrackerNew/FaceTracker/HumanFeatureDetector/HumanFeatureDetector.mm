@@ -217,7 +217,7 @@ static NSMutableArray* gStatusNameTable = nil;
         param.type = types[i];
         param.imageMat = imageMat;
         param.scale = _imageScale;
-        param.imageOrientation = kBodyHeadUp;
+        param.imageOrientationAngle = 0.0f;
         [_haarParamDict setObject:param forKey:kFeatureKey(types[i])];
     }
     
@@ -225,7 +225,7 @@ static NSMutableArray* gStatusNameTable = nil;
     CIDetectorParam* faceCIParam = [[CIDetectorParam alloc] initWithImage:_scaledImage];
     [_ciParamDict setObject:faceCIParam forKey:kFeatureKey(kHumanFeatureFace)];
     
-    _humanFeatures.bodyOrientation = kBodyHeadUp;
+    _humanFeatures.bodyHeadOrientationAngle = 0.0f;
 }
 
 - (void)taskDoHaarDetection:(HaarDetectorParam*)param
@@ -526,7 +526,7 @@ static NSMutableArray* gStatusNameTable = nil;
     
     _isDetecting = YES;
     _isAsync = async;
-    _lastOrientation = kBodyHeadUp;
+    _lastOrientationAngle = 0.0f;
     
     if (async)
     {
@@ -563,6 +563,14 @@ static NSMutableArray* gStatusNameTable = nil;
 
 - (void)setUnconfirmed
 {
+    if (_lastOrientationAngle < M_PI)
+    {
+        <#statements#>
+    }
+    else
+    {
+        
+    }
     switch (_lastOrientation)
     {
         case kBodyHeadUp:

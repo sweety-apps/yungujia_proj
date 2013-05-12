@@ -34,6 +34,6 @@
 @property (nonatomic,assign,readonly) HumanFeature* currentDetectedFeature;
 @property (nonatomic,assign,readonly) HumanFeatureType currentDetectedFeatureType;
 @property (nonatomic,assign) BOOL isDetectionFinished;
-@property (nonatomic,assign) HumanBodyOrientation bodyOrientation;
+@property (nonatomic,assign) float bodyHeadOrientationAngle;
 
 @end

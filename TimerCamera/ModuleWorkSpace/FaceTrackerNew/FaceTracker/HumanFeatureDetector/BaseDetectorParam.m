@@ -12,7 +12,7 @@
 
 @synthesize featureType = _featureType;
 @synthesize asyncOperation = _asyncOperation;
-@synthesize imageOrientation = _imageOrientation;
+@synthesize imageOrientationAngle = _imageOrientationAngle;
 
 - (void)dealloc
 {
