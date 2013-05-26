@@ -1,0 +1,62 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install', 'node_redis' ]
+2 info using npm@1.2.21
+3 info using node@v0.10.7
+4 verbose read json /Users/lijinxin/my_source_code/yungujia_proj/TimerCamera/ModuleWorkSpace/nodejsCode/redis.test/package.json
+5 warn package.json application-name@0.0.1 No repository field.
+6 warn package.json application-name@0.0.1 No readme data.
+7 verbose read json /Users/lijinxin/my_source_code/yungujia_proj/TimerCamera/ModuleWorkSpace/nodejsCode/redis.test/node_modules/connect-redis/package.json
+8 verbose read json /Users/lijinxin/my_source_code/yungujia_proj/TimerCamera/ModuleWorkSpace/nodejsCode/redis.test/node_modules/ejs/package.json
+9 verbose read json /Users/lijinxin/my_source_code/yungujia_proj/TimerCamera/ModuleWorkSpace/nodejsCode/redis.test/node_modules/express/package.json
+10 warn package.json connect-redis@1.4.5 No repository field.
+11 verbose from cache /Users/lijinxin/my_source_code/yungujia_proj/TimerCamera/ModuleWorkSpace/nodejsCode/redis.test/package.json
+12 verbose readDependencies using package.json deps
+13 verbose cache add [ 'node_redis', null ]
+14 verbose cache add name=undefined spec="node_redis" args=["node_redis",null]
+15 verbose parsed url { protocol: null,
+15 verbose parsed url   slashes: null,
+15 verbose parsed url   auth: null,
+15 verbose parsed url   host: null,
+15 verbose parsed url   port: null,
+15 verbose parsed url   hostname: null,
+15 verbose parsed url   hash: null,
+15 verbose parsed url   search: null,
+15 verbose parsed url   query: null,
+15 verbose parsed url   pathname: 'node_redis',
+15 verbose parsed url   path: 'node_redis',
+15 verbose parsed url   href: 'node_redis' }
+16 silly lockFile f4a38139-node-redis node_redis
+17 verbose lock node_redis /Users/lijinxin/.npm/f4a38139-node-redis.lock
+18 silly lockFile f4a38139-node-redis node_redis
+19 silly lockFile f4a38139-node-redis node_redis
+20 verbose addNamed [ 'node_redis', '' ]
+21 verbose addNamed [ null, '' ]
+22 silly lockFile f3744735-node-redis node_redis@
+23 verbose lock node_redis@ /Users/lijinxin/.npm/f3744735-node-redis.lock
+24 silly addNameRange { name: 'node_redis', range: '', hasData: false }
+25 verbose url raw node_redis
+26 verbose url resolving [ 'https://registry.npmjs.org/', './node_redis' ]
+27 verbose url resolved https://registry.npmjs.org/node_redis
+28 info trying registry request attempt 1 at 18:36:21
+29 http GET https://registry.npmjs.org/node_redis
+30 http 404 https://registry.npmjs.org/node_redis
+31 silly registry.get cb [ 404,
+31 silly registry.get   { server: 'CouchDB/1.3.0 (Erlang OTP/R15B03)',
+31 silly registry.get     date: 'Sat, 25 May 2013 10:36:23 GMT',
+31 silly registry.get     'content-type': 'application/json',
+31 silly registry.get     'content-length': '52',
+31 silly registry.get     'cache-control': 'must-revalidate' } ]
+32 silly lockFile f3744735-node-redis node_redis@
+33 silly lockFile f3744735-node-redis node_redis@
+34 error 404 'node_redis' is not in the npm registry.
+34 error 404 You should bug the author to publish it
+34 error 404
+34 error 404 Note that you can also install from a
+34 error 404 tarball, folder, or http url, or git url.
+35 error System Darwin 11.4.2
+36 error command "node" "/usr/local/bin/npm" "install" "node_redis"
+37 error cwd /Users/lijinxin/my_source_code/yungujia_proj/TimerCamera/ModuleWorkSpace/nodejsCode/redis.test
+38 error node -v v0.10.7
+39 error npm -v 1.2.21
+40 error code E404
+41 verbose exit [ 1, true ]
