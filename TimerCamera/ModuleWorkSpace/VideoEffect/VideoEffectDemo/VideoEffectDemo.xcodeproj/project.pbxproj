@@ -27,6 +27,7 @@
 		BE8986AF175A0304008A1B35 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE8986AE175A0304008A1B35 /* CoreMedia.framework */; };
 		BE8986B5175A3C27008A1B35 /* xiangkuang.png in Resources */ = {isa = PBXBuildFile; fileRef = BE8986B4175A3C27008A1B35 /* xiangkuang.png */; };
 		BE8986BA175B8E74008A1B35 /* sprite_heart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE8986B9175B8E74008A1B35 /* sprite_heart@2x.png */; };
+		F357DFF3175CF4C80092E087 /* xiangkuang@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F357DFF2175CF4C80092E087 /* xiangkuang@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,7 @@
 		BE8986AE175A0304008A1B35 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		BE8986B4175A3C27008A1B35 /* xiangkuang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xiangkuang.png; sourceTree = "<group>"; };
 		BE8986B9175B8E74008A1B35 /* sprite_heart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sprite_heart@2x.png"; sourceTree = "<group>"; };
+		F357DFF2175CF4C80092E087 /* xiangkuang@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xiangkuang@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +146,7 @@
 		BE8986791759FCE7008A1B35 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F357DFF2175CF4C80092E087 /* xiangkuang@2x.png */,
 				BE8986B9175B8E74008A1B35 /* sprite_heart@2x.png */,
 				BE8986B4175A3C27008A1B35 /* xiangkuang.png */,
 				BE89867A1759FCE7008A1B35 /* VideoEffectDemo-Info.plist */,
@@ -248,6 +251,7 @@
 				BE8986921759FCE7008A1B35 /* ViewController_iPad.xib in Resources */,
 				BE8986B5175A3C27008A1B35 /* xiangkuang.png in Resources */,
 				BE8986BA175B8E74008A1B35 /* sprite_heart@2x.png in Resources */,
+				F357DFF3175CF4C80092E087 /* xiangkuang@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -393,6 +397,7 @@
 				BE8986971759FCE7008A1B35 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

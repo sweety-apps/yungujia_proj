@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "GPUImage.h"
 
-#define ENABLE_VIDEO_RECORDING 0
+#define ENABLE_VIDEO_RECORDING 1
+
+@class EffectUIWarpper;
 
 @interface ViewController : UIViewController
 {
@@ -17,9 +19,10 @@
     GPUImageOutput<GPUImageInput> *overlayImageFilter;
     GPUImageOutput<GPUImageInput> *motionDetectorFilter;
     GPUImageOutput<GPUImageInput> *effectUIFilter;
+    GPUImageOutput<GPUImageInput> *startImageFilter;
+    EffectUIWarpper* effectUIWarpper;
+    GPUImageUIElement* uiElementInput;
     GPUImageAlphaBlendFilter *blendFilter;
-    NSMutableArray * effectUIArray;
-    NSUInteger effectHandlingIndex;
     GPUImageMovieWriter *movieWriter;
 }
 
