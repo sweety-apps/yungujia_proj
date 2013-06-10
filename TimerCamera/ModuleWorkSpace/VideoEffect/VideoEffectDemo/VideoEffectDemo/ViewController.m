@@ -32,8 +32,11 @@ static long long getCurrentTimeInMicroSeconds()
     int _currentHeart;
     int _currentLabel;
     UILabel* _label;
+    UIImageView* _earImageView;
+    GPUImageView* _superView;
 }
 
+@property (nonatomic, retain) GPUImageView* superView;
 @property (nonatomic, retain) UIView* view;
 @property (nonatomic, retain) GPUImageUIElement *uiElementInput;
 
@@ -45,6 +48,7 @@ static long long getCurrentTimeInMicroSeconds()
 
 @implementation EffectUIWarpper
 
+@synthesize superView = _superView;
 @synthesize view = _view;
 @synthesize uiElementInput = _uiElementInput;
 
@@ -61,6 +65,7 @@ static long long getCurrentTimeInMicroSeconds()
 - (void)dealloc
 {
     [_hearts release];
+    self.superView = nil;
     self.view = nil;
     self.uiElementInput = nil;
     [super dealloc];
@@ -99,8 +104,37 @@ static NSString* labelStrings[] = {@"呆呆",@"萌",@"YEAH",@"困"};
     _label.text = labelStrings[0];
     [_view addSubview:_label];
     
+    _earImageView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ear"]] autorelease];
+    _earImageView.hidden = YES;
+    [_view addSubview:_earImageView];
+    
+    UITapGestureRecognizer* singleOneTap = [[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTappedView:)] autorelease];
+    singleOneTap.numberOfTouchesRequired = 1;
+    singleOneTap.numberOfTapsRequired = 1;    //点击次数，另作：[singleOne setNumberOfTapsRequired:1];
+    [_superView addGestureRecognizer:singleOneTap];
+    
     //[self initEmiter:_view.frame emitterImage:[UIImage imageNamed:@"sprite_heart"]];
     
+}
+
+- (void)onTappedView:(UITapGestureRecognizer *)tap
+{
+    if (tap.state == UIGestureRecognizerStateEnded)
+    {
+        if (_earImageView.hidden)
+        {
+            CGPoint pt = [tap locationInView:_superView];
+            CGRect imageRect = _earImageView.frame;
+            imageRect.origin.x = (pt.x - imageRect.size.width) * 0.8f;
+            imageRect.origin.y = (pt.y - imageRect.size.height) * 0.1f;
+            _earImageView.frame = imageRect;
+            _earImageView.hidden = NO;
+        }
+        else
+        {
+            _earImageView.hidden = YES;
+        }
+    }
 }
 
 - (void)updateViewAtRect:(CGRect)rect
@@ -303,55 +337,78 @@ static NSString* labelStrings[] = {@"呆呆",@"萌",@"YEAH",@"困"};
     
     // Record a movie for 10 s and store it in /Documents, visible via iTunes file sharing
     
-    NSString *pathToMovie = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Movie.m4v"];
-    unlink([pathToMovie UTF8String]); // If a file already exists, AVAssetWriter won't let you record new frames, so delete the old movie
-    NSURL *movieURL = [NSURL fileURLWithPath:pathToMovie];
-    movieWriter = [[GPUImageMovieWriter alloc] initWithMovieURL:movieURL size:CGSizeMake(640.0, 480.0)];
-    
-    GPUImageOutput<GPUImageInput> *lastOutputFilter = effectUIFilter;//overlayImageFilter;//
+    lastOutputFilter = effectUIFilter;//overlayImageFilter;//
     
     [lastOutputFilter addTarget:filterView];
     
-#if ENABLE_VIDEO_RECORDING
-    
-    [lastOutputFilter addTarget:movieWriter];
-#endif
-    
     [videoCamera startCameraCapture];
     
-#if ENABLE_VIDEO_RECORDING
-    
-    double delayToStartRecording = 3.0;
-    dispatch_time_t startTime = dispatch_time(DISPATCH_TIME_NOW, delayToStartRecording * NSEC_PER_SEC);
-    dispatch_after(startTime, dispatch_get_main_queue(), ^(void){
+    [self buildControlUI];
+}
+
+- (void)buildControlUI
+{
+    _saveBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    _saveBtn.frame = CGRectMake(480 - 90, (320 - 40) / 2, 80, 40);
+    [_saveBtn setTitle:@"保存录像" forState:UIControlStateNormal];
+    [_saveBtn addTarget:self action:@selector(startSaveMovie:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_saveBtn];
+}
+
+- (IBAction)startSaveMovie:(id)sender
+{
+    if (!_isSavingMovie)
+    {
         NSLog(@"Start recording");
         
+        NSString *pathToMovie = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Movie.m4v"];
+        unlink([pathToMovie UTF8String]); // If a file already exists, AVAssetWriter won't let you record new frames, so delete the old movie
+        _movieDocPath = [pathToMovie retain];
+        
+        NSURL *movieURL = [NSURL fileURLWithPath:pathToMovie];
+        movieWriter = [[GPUImageMovieWriter alloc] initWithMovieURL:movieURL size:CGSizeMake(640.0, 480.0)];
+        
+        [lastOutputFilter addTarget:movieWriter];
         videoCamera.audioEncodingTarget = movieWriter;
         [movieWriter startRecording];
         
-        //        NSError *error = nil;
-        //        if (![videoCamera.inputCamera lockForConfiguration:&error])
-        //        {
-        //            NSLog(@"Error locking for configuration: %@", error);
-        //        }
-        //        [videoCamera.inputCamera setTorchMode:AVCaptureTorchModeOn];
-        //        [videoCamera.inputCamera unlockForConfiguration];
+        _isSavingMovie = YES;
+        [_saveBtn setTitle:@"正在保存" forState:UIControlStateNormal];
+        [_saveBtn removeTarget:self action:@selector(startSaveMovie:) forControlEvents:UIControlEventTouchUpInside];
+        [_saveBtn addTarget:self action:@selector(endSaveMovie:) forControlEvents:UIControlEventTouchUpInside];
+    }
+}
+
+- (IBAction)endSaveMovie:(id)sender
+{
+    if (_isSavingMovie)
+    {
+        videoCamera.audioEncodingTarget = nil;
+        [movieWriter finishRecording];
+        [lastOutputFilter removeTarget:movieWriter];
+        [movieWriter release];
+        NSLog(@"Movie completed");
         
-        double delayInSeconds = 18.0;
-        dispatch_time_t stopTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-        dispatch_after(stopTime, dispatch_get_main_queue(), ^(void){
-            
-            [lastOutputFilter removeTarget:movieWriter];
-            videoCamera.audioEncodingTarget = nil;
-            [movieWriter finishRecording];
-            NSLog(@"Movie completed");
-            
-            //            [videoCamera.inputCamera lockForConfiguration:nil];
-            //            [videoCamera.inputCamera setTorchMode:AVCaptureTorchModeOff];
-            //            [videoCamera.inputCamera unlockForConfiguration];
-        });
-    });
-#endif
+        
+        UISaveVideoAtPathToSavedPhotosAlbum(_movieDocPath, self, @selector(onFinishedSaveToAlbum:didFinishSavingWithError:contextInfo:), nil);
+        
+        _isSavingMovie = NO;
+        [_saveBtn setTitle:@"正在写入相册" forState:UIControlStateNormal];
+        [_saveBtn removeTarget:self action:@selector(endSaveMovie:) forControlEvents:UIControlEventTouchUpInside];
+    }
+}
+
+- (void)onFinishedSaveToAlbum:(NSString *)videoPath didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo;
+{
+    NSLog(@"Movie moved to Album completed");
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"保存完毕" message:@"录像已存入相册" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
+    [alert release];
+    
+    _isSavingMovie = NO;
+    [_saveBtn setTitle:@"保存录像" forState:UIControlStateNormal];
+    [_saveBtn addTarget:self action:@selector(startSaveMovie:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)setupMotionDetectorHandlerForView:(UIView*)view
@@ -388,10 +445,11 @@ static NSString* labelStrings[] = {@"呆呆",@"萌",@"YEAH",@"困"};
     UIView* containerView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 240)] autorelease];
     containerView.backgroundColor = [UIColor clearColor];
     
-    UIView* blankView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 240)] autorelease];
+    containerView.userInteractionEnabled = YES;
     containerView.backgroundColor = [UIColor clearColor];
     
     effectUIWarpper = [[EffectUIWarpper alloc] init];
+    effectUIWarpper.superView = filterView;
     effectUIWarpper.view = containerView;
     [effectUIWarpper createSubviews];
     

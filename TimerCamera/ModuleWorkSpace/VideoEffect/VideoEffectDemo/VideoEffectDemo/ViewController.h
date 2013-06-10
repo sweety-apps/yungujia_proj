@@ -9,8 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "GPUImage.h"
 
-#define ENABLE_VIDEO_RECORDING 1
-
 @class EffectUIWarpper;
 
 @interface ViewController : UIViewController
@@ -24,6 +22,14 @@
     GPUImageUIElement* uiElementInput;
     GPUImageAlphaBlendFilter *blendFilter;
     GPUImageMovieWriter *movieWriter;
+    GPUImageOutput<GPUImageInput> *lastOutputFilter;
+    
+    BOOL _isSavingMovie;
+    NSString* _movieDocPath;
+    UIButton* _saveBtn;
 }
+
+- (IBAction)startSaveMovie:(id)sender;
+- (IBAction)endSaveMovie:(id)sender;
 
 @end

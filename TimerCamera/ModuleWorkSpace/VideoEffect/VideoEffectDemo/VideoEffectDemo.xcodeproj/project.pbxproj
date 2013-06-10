@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE4DEC8B176640FD0057E183 /* ear@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE4DEC8A176640FD0057E183 /* ear@2x.png */; };
 		BE8986731759FCE7008A1B35 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE8986721759FCE7008A1B35 /* UIKit.framework */; };
 		BE8986751759FCE7008A1B35 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE8986741759FCE7008A1B35 /* Foundation.framework */; };
 		BE8986771759FCE7008A1B35 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE8986761759FCE7008A1B35 /* CoreGraphics.framework */; };
@@ -48,6 +49,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BE4DEC8A176640FD0057E183 /* ear@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ear@2x.png"; sourceTree = "<group>"; };
 		BE89866F1759FCE7008A1B35 /* VideoEffectDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VideoEffectDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE8986721759FCE7008A1B35 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BE8986741759FCE7008A1B35 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -146,6 +148,7 @@
 		BE8986791759FCE7008A1B35 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BE4DEC8A176640FD0057E183 /* ear@2x.png */,
 				F357DFF2175CF4C80092E087 /* xiangkuang@2x.png */,
 				BE8986B9175B8E74008A1B35 /* sprite_heart@2x.png */,
 				BE8986B4175A3C27008A1B35 /* xiangkuang.png */,
@@ -252,6 +255,7 @@
 				BE8986B5175A3C27008A1B35 /* xiangkuang.png in Resources */,
 				BE8986BA175B8E74008A1B35 /* sprite_heart@2x.png in Resources */,
 				F357DFF3175CF4C80092E087 /* xiangkuang@2x.png in Resources */,
+				BE4DEC8B176640FD0057E183 /* ear@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
