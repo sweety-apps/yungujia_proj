@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>5FE5DFA9-75F7-41FB-A5A6-00E62ADD0500</string>
+	<key>IDESourceControlProjectName</key>
+	<string>StringHashTest</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>51B210D0D41486D3ADD6940D57E4480BBD4DE4C5</key>
+		<string>git://github.com/ReactiveCocoa/ReactiveCocoa.git</string>
+		<key>BF0FC82909370732DBB0A4D7E69487F2EA641BB3</key>
+		<string>https://github.com/sweety-apps/yungujia_proj.git</string>
+		<key>E084C86B03F81D63323C9E7510697EA528A758C7</key>
+		<string>https://github.com/jspahrsummers/xcconfigs.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>StringHashTest/StringHashTest.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>51B210D0D41486D3ADD6940D57E4480BBD4DE4C5</key>
+		<string>../../..StringHashTest/StringHashTest/ReactiveCocoa</string>
+		<key>BF0FC82909370732DBB0A4D7E69487F2EA641BB3</key>
+		<string>../../..</string>
+		<key>E084C86B03F81D63323C9E7510697EA528A758C7</key>
+		<string>../../..StringHashTest/StringHashTest/ReactiveCocoa/Carthage/Checkouts/xcconfigs</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/sweety-apps/yungujia_proj.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>BF0FC82909370732DBB0A4D7E69487F2EA641BB3</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>51B210D0D41486D3ADD6940D57E4480BBD4DE4C5</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ReactiveCocoa</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>E084C86B03F81D63323C9E7510697EA528A758C7</string>
+			<key>IDESourceControlWCCName</key>
+			<string>xcconfigs</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>BF0FC82909370732DBB0A4D7E69487F2EA641BB3</string>
+			<key>IDESourceControlWCCName</key>
+			<string>yungujia_proj</string>
+		</dict>
+	</array>
+</dict>
+</plist>

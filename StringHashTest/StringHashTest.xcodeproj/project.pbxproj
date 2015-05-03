@@ -24,6 +24,41 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		F38DCF1B1AF6238B00171E03 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F38DCF141AF6238B00171E03 /* ReactiveCocoa.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D04725EA19E49ED7006002AA;
+			remoteInfo = "ReactiveCocoa-Mac";
+		};
+		F38DCF1D1AF6238B00171E03 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F38DCF141AF6238B00171E03 /* ReactiveCocoa.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D04725F519E49ED7006002AA;
+			remoteInfo = "ReactiveCocoa-MacTests";
+		};
+		F38DCF1F1AF6238B00171E03 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F38DCF141AF6238B00171E03 /* ReactiveCocoa.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D047260C19E49F82006002AA;
+			remoteInfo = "ReactiveCocoa-iOS";
+		};
+		F38DCF211AF6238B00171E03 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F38DCF141AF6238B00171E03 /* ReactiveCocoa.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D047261619E49F82006002AA;
+			remoteInfo = "ReactiveCocoa-iOSTests";
+		};
+		F38DCF261AF6241300171E03 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F38DCF141AF6238B00171E03 /* ReactiveCocoa.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D047260B19E49F82006002AA;
+			remoteInfo = "ReactiveCocoa-iOS";
+		};
 		F3AE36F015A18C7D006311B2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F3AE36BE15A18C7D006311B2 /* Project object */;
@@ -34,6 +69,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F38DCF141AF6238B00171E03 /* ReactiveCocoa.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactiveCocoa.xcodeproj; path = StringHashTest/ReactiveCocoa/ReactiveCocoa.xcodeproj; sourceTree = "<group>"; };
 		F3AE36C715A18C7D006311B2 /* StringHashTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StringHashTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3AE36CB15A18C7D006311B2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		F3AE36CD15A18C7D006311B2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -80,9 +116,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F38DCF151AF6238B00171E03 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F38DCF1C1AF6238B00171E03 /* ReactiveCocoa.framework */,
+				F38DCF1E1AF6238B00171E03 /* ReactiveCocoa-MacTests.xctest */,
+				F38DCF201AF6238B00171E03 /* ReactiveCocoa.framework */,
+				F38DCF221AF6238B00171E03 /* ReactiveCocoa-iOSTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		F3AE36BC15A18C7D006311B2 = {
 			isa = PBXGroup;
 			children = (
+				F38DCF141AF6238B00171E03 /* ReactiveCocoa.xcodeproj */,
 				F3AE36D115A18C7D006311B2 /* StringHashTest */,
 				F3AE36F215A18C7D006311B2 /* StringHashTestTests */,
 				F3AE36CA15A18C7D006311B2 /* Frameworks */,
@@ -168,6 +216,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				F38DCF271AF6241300171E03 /* PBXTargetDependency */,
 			);
 			name = StringHashTest;
 			productName = StringHashTest;
@@ -191,7 +240,7 @@
 			name = StringHashTestTests;
 			productName = StringHashTestTests;
 			productReference = F3AE36EB15A18C7D006311B2 /* StringHashTestTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.ocunit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -211,6 +260,12 @@
 			mainGroup = F3AE36BC15A18C7D006311B2;
 			productRefGroup = F3AE36C815A18C7D006311B2 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = F38DCF151AF6238B00171E03 /* Products */;
+					ProjectRef = F38DCF141AF6238B00171E03 /* ReactiveCocoa.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				F3AE36C615A18C7D006311B2 /* StringHashTest */,
@@ -218,6 +273,37 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		F38DCF1C1AF6238B00171E03 /* ReactiveCocoa.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ReactiveCocoa.framework;
+			remoteRef = F38DCF1B1AF6238B00171E03 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F38DCF1E1AF6238B00171E03 /* ReactiveCocoa-MacTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "ReactiveCocoa-MacTests.xctest";
+			remoteRef = F38DCF1D1AF6238B00171E03 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F38DCF201AF6238B00171E03 /* ReactiveCocoa.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ReactiveCocoa.framework;
+			remoteRef = F38DCF1F1AF6238B00171E03 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F38DCF221AF6238B00171E03 /* ReactiveCocoa-iOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "ReactiveCocoa-iOSTests.xctest";
+			remoteRef = F38DCF211AF6238B00171E03 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		F3AE36C515A18C7D006311B2 /* Resources */ = {
@@ -278,6 +364,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		F38DCF271AF6241300171E03 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "ReactiveCocoa-iOS";
+			targetProxy = F38DCF261AF6241300171E03 /* PBXContainerItemProxy */;
+		};
 		F3AE36F115A18C7D006311B2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = F3AE36C615A18C7D006311B2 /* StringHashTest */;
@@ -373,7 +464,14 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "StringHashTest/StringHashTest-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(BUILD_ROOT)/../IntermediateBuildFilesPath/UninstalledProducts/include\" $(inherited)",
+				);
 				INFOPLIST_FILE = "StringHashTest/StringHashTest-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				OTHER_CFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -384,7 +482,17 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "StringHashTest/StringHashTest-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(BUILD_ROOT)/../IntermediateBuildFilesPath/UninstalledProducts/include\" $(inherited)",
+				);
 				INFOPLIST_FILE = "StringHashTest/StringHashTest-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				OTHER_CFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -443,6 +551,7 @@
 				F3AE36FF15A18C7D006311B2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F3AE370015A18C7D006311B2 /* Build configuration list for PBXNativeTarget "StringHashTestTests" */ = {
 			isa = XCConfigurationList;
@@ -451,6 +560,7 @@
 				F3AE370215A18C7D006311B2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
