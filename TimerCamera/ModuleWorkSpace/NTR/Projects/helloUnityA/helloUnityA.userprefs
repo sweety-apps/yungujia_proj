@@ -1,12 +1,9 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/HPBar.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/ThirdPersonControllerIOS.js">
     <Files>
-      <File FileName="Assets/Standard Assets (Mobile)/Scripts/Joystick.js" Line="5" Column="21" />
-      <File FileName="Assets/ThirdPersonControllerIOS.js" Line="314" Column="67" />
-      <File FileName="Assets/ThirdPersonCameraIOS.js" Line="47" Column="61" />
-      <File FileName="Assets/Standard Assets/Character Controllers/Sources/Scripts/ThirdPersonController.js" Line="193" Column="54" />
-      <File FileName="Assets/JoyStickControl.js" Line="1" Column="1" />
+      <File FileName="Assets/Standard Assets (Mobile)/Scripts/Joystick.js" Line="1" Column="1" />
+      <File FileName="Assets/ThirdPersonControllerIOS.js" Line="2" Column="35" />
       <File FileName="Assets/HPBar.cs" Line="16" Column="34" />
     </Files>
   </MonoDevelop.Ide.Workbench>

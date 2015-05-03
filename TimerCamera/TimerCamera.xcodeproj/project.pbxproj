@@ -707,6 +707,11 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0430;
+				TargetAttributes = {
+					BE19EBE815F359B700065448 = {
+						DevelopmentTeam = 2B5V3KE6U9;
+					};
+				};
 			};
 			buildConfigurationList = BE19EBE315F359B700065448 /* Build configuration list for PBXProject "TimerCamera" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -941,7 +946,7 @@
 		BE19EC0B15F359B800065448 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: JINXIN LI (DJJ4XT349N)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: JINXIN LI (DJJ4XT349N)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -972,8 +977,8 @@
 				INFOPLIST_FILE = "TimerCamera/TimerCamera-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "C0F1B9AC-E6AE-46A2-AFD3-E195B5D9C8F3";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C0F1B9AC-E6AE-46A2-AFD3-E195B5D9C8F3";
+				PROVISIONING_PROFILE = "0D9A4BF6-6770-4DEB-BA77-28535623D0E3";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0D9A4BF6-6770-4DEB-BA77-28535623D0E3";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
