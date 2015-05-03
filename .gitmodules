@@ -1,3 +1,6 @@
 [submodule "TimerCamera/ModuleWorkSpace/VideoEffect/VideoEffectDemo/GPUImage"]
 	path = TimerCamera/ModuleWorkSpace/VideoEffect/VideoEffectDemo/GPUImage
 	url = git://github.com/BradLarson/GPUImage.git
+[submodule "StringHashTest/StringHashTest/ReactiveCocoa"]
+	path = StringHashTest/StringHashTest/ReactiveCocoa
+	url = https://github.com/ReactiveCocoa/ReactiveCocoa.git
